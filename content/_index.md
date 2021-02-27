@@ -1,6 +1,9 @@
-# Juice
++++
+title = "Juice"
+sort_by = "weight"
++++
 
-<img align="right" width="150" height="150" src="/content/juice.svg">
+# Juice
 
 **Juice** is an intuitive, elegant, and responsive Zola theme for product sites.
 
@@ -10,9 +13,9 @@
 - Responsive and mobile device compatible
 - Customize and extend friendly
 
-https://juice.huhu.io
-
 # Installation
+
+> **Zola** is a prerequisite. Please refer to the [Zola installation](https://www.getzola.org/documentation/getting-started/installation/) docs.
 
 First download this theme to your `themes` directory:
 
