@@ -7,10 +7,11 @@
     <title>{% block title %}{{ config.title }}{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% include "_variables.html" %}
-    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/normalize.css">
-    <link rel="stylesheet" href="{{ get_url(path="juice.css") }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
     {% block head %}
     {% endblock head %}
 </head>
@@ -27,23 +28,23 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <section class="text-center">
             <h1 class="heading-text" style="font-size: 50px">
-                Build your static website
+                Just Develop your Solution
             </h1>
             <h3 class="title-text">
-                <b>Juice</b> is an intuitive, elegant, and lightweight Zola theme for product websites.
+                Don't worry about platform specifics 
             </h3>
-            <div>
-                <a class="github-button" href="https://github.com/huhu/juice" data-size="large" data-show-count="true"
-                   aria-label="Star huhu/juice on GitHub">Star</a>
-                <a class="github-button" href="https://github.com/huhu/juice/fork" data-size="large"
-                   data-show-count="true" aria-label="Fork huhu/juice on GitHub">Fork</a>
-            </div>
+            <!-- <div>
+                <a class="github-button" href="https://github.com/angular-rust/ruex" data-size="large" data-show-count="true"
+                   aria-label="Star angular-rust/ruex on GitHub">Star</a>
+                <a class="github-button" href="https://github.com/angular-rust/ruex/fork" data-size="large"
+                   data-show-count="true" aria-label="Fork angular-rust/ruex on GitHub">Fork</a>
+            </div> -->
         </section>
-        <img class="hero-image" style="width: 50%" src="{{ get_url(path="juice.svg") }}">
+        <img class="hero-image" style="width: 50%" src="{{ get_url(path="angular-rust.svg") }}">
 
         <div class="explore-more text"
             onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
-            Explore More ⇩
+            Explore More <span class="material-icons">keyboard_arrow_down</span>
         </div>
         <style>
             .hero section {
@@ -63,7 +64,7 @@
     </div>
 
     {% endblock header %}
-
+ 
     <main>
         {% block toc %}
         {% if section.toc %}
@@ -105,7 +106,7 @@
     {% block footer %}
     <footer>
         <small class="subtext">
-            <a href="https://huhu.io">Huhu.io</a> © 2021
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
         </small>
     </footer>
     {% endblock footer %}

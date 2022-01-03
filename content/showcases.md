@@ -6,17 +6,17 @@ weight = 1
 
 # Pull request
 
-If you use **Juice** as your theme, feel free to make Pull request.
+If you use **Angular Rust** as your theme, feel free to make Pull request.
 
 Here are some steps to help you get started:
  
-- Change the [content/showcases.md](https://github.com/huhu/juice/blob/master/content/showcases.md) file, add your product site. Make sure the lexicographical order.
-- Add your screenshots to [content](https://github.com/huhu/juice/tree/master/static/showcases) directory, then link the screenshot in the markdown file.
+- Change the [content/showcases.md](https://github.com/angular-rust/ruex/blob/master/content/showcases.md) file, add your product site. Make sure the lexicographical order.
+- Add your screenshots to [content](https://github.com/angular-rust/ruex/tree/master/static/showcases) directory, then link the screenshot in the markdown file.
 - Add a link to your product site.
 
 # Gallery
 
-Here are some product websites which use **Juice** as the theme.
+Here are some product websites which use **Angular Rust** as the theme.
 Sort by lexicographical order. 
 
 ## C/C++ Search Extension

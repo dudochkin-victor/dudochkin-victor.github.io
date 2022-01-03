@@ -15,6 +15,8 @@
   color: #4a4a4a;
   font-size: .875em;
   font-family: monospace;
+  display: inherit;
+  white-space: pre-wrap;
 }
 
 .content code {
@@ -36,7 +38,19 @@
 
 .content blockquote {
   border-left: #e2dede 8px solid;
-  margin: 0;
+  margin: 0px 0px 12px 0px;
   background-color: #f2f1f0;
   padding: 0 20px;
+}
+
+// fix the mdl
+.content blockquote {
+  &:after, &:before {
+    content: none;
+  }
+  p {
+    &:first-child {
+      padding-top: 10px;
+    }
+  }
 }

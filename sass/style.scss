@@ -7,21 +7,28 @@ body {
   margin: 0;
   box-sizing: border-box;
   background-color: var(--secondary-color);
+  display: block;
+  position: relative;
+  min-height: 100%;
 }
 
 a {
   text-decoration: none;
 }
 
+b {
+  font-weight: 400;
+}
+
 ul {
   margin-top: 0.5rem;
 }
 
-ul > li {
+ul>li {
   padding: 0.3rem 0;
 }
 
-p > img {
+p>img {
   width: 100%;
   height: auto;
 }
@@ -36,12 +43,13 @@ header {
 }
 
 .logo {
-  font-family: "Alfa Slab One", serif;
+  font-family: 'Roboto', serif;
   font-size: 32px;
-  color: var(--primary-text-color);
+  color: #fcfcfc;
   display: flex;
   align-items: center;
   margin: 0 40px;
+  font-weight: 400;
 
   img {
     width: 60px;
@@ -53,12 +61,17 @@ header {
   margin: 0 10px;
   text-decoration: none;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 400;
+  color: #fcfcfc;
 
   &:hover {
-    color: #000;
-    text-decoration: underline;
+    color: var(--primary-link-color);
+    // text-decoration: underline;
   }
+}
+
+.material-icons {
+  vertical-align: middle;
 }
 
 .hero {
@@ -74,13 +87,19 @@ header {
     position: absolute;
     bottom: 20px;
     cursor: pointer;
+    color: #fcfcfc
+  }
+
+  .heading-text,
+  .title-text {
+    color: #fcfcfc;
   }
 }
 
 main {
   display: flex;
-  padding: 50px 100px;
-
+  padding: 50px 100px 120px;
+  // margin-bottom: 100px;
   .toc {
     max-width: 260px;
     min-width: 240px;
@@ -91,7 +110,8 @@ main {
     color: #424242;
   }
 
-  .toc-item a, .toc-item-child a {
+  .toc-item a,
+  .toc-item-child a {
     color: var(--secondary-text-color);
 
     &:hover {
@@ -100,7 +120,8 @@ main {
     }
   }
 
-  .toc-item a.active, .toc-item-child a.active {
+  .toc-item a.active,
+  .toc-item-child a.active {
     color: var(--toc-highlight-text-color);
   }
 
@@ -132,6 +153,12 @@ footer {
   align-items: center;
   background-color: #202020;
   color: #fcfcfc;
+
+  // width: 100%; // это только если футер не вложен во flex
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   a {
     color: #fcfcfc;
@@ -181,8 +208,8 @@ footer {
     padding: 0;
   }
 
-  .explore-more, .toc {
+  .explore-more,
+  .toc {
     display: none;
   }
-
 }
