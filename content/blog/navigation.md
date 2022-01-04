@@ -4,6 +4,15 @@ description = "Navigation"
 weight = 5
 +++
 
+## Youtube (zola built in)
+{{ youtube(id="IwPRu5FhfIQ", autoplay=true) }}
+
+## Asciinema
+{{ asciinema(id="pegRHrTsb4pRhkuBJE29kMMQ5") }}
+
+## Bilibili
+{{ bilibili(id="BV1tZ4y137qK") }}
+
 # Navigation
 Navigation focuses on solving the users' problems of where to go and how to get there. Generally it can be categorized into 'sidebar navigation' and 'top navigation'.
 

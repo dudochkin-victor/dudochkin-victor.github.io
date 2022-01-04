@@ -12,4 +12,7 @@
 {% block content %}
 <div class="heading-text">{{ page.description }}</div>
 {{ page.content | safe }}
+
+{% include "comments.html" %}
+
 {% endblock content %}
