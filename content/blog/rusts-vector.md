@@ -2,6 +2,7 @@
 title = "Вектор Rust"
 description = "Вектор Rust"
 weight = 1
+hash = "aaf9ac20"
 +++
 
 [Перевод](https://blog.frankel.ch/start-rust/9/) | Автор оригинала: xxxx
@@ -22,7 +23,7 @@ weight = 1
 
 Вот диаграмма, в которую мы углубимся:
 
-Изображение: векторная диаграмма классов Rust
+![векторная диаграмма классов Rust](/imgs/posts/aaf9ac20_01.svg)
 
 ## Основы вектора
 
@@ -155,7 +156,7 @@ for value in v {
 
 - std::alloc::Allocator
 
-Изображение: диаграмма классов Rust's Allocator
+![диаграмма классов Rust's Allocator](/imgs/posts/aaf9ac20_02.svg)
 
 Rust по умолчанию использует глобальный распределитель памяти. Он делегирует другому распределителю: это система, если вы не зарегистрируете его с атрибутом #[global_allocator].
 
