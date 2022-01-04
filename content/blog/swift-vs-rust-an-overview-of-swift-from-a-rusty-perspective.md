@@ -4,7 +4,7 @@ description = "Swift vs Rust - обзор Swift с Rust точки зрения"
 weight = 1
 +++
 
-[Перевод](https://dev.to/rhymu/swift-vs-rust-an-overview-of-swift-from-a-rusty-perspective-18c7)
+[Перевод](https://dev.to/rhymu/swift-vs-rust-an-overview-of-swift-from-a-rusty-perspective-18c7) | Автор оригинала: xxxx
 
 Я впервые изучил Swift в 2017 году, что для меня было много лет назад. Тогда это была версия 3.1. Я гораздо лучше знаком с Rust, изучаю и использую его уже около 8 месяцев. Поэтому, когда я вернулся, чтобы снова проверить Swift на этой неделе, я был действительно удивлен тремя вещами:
 

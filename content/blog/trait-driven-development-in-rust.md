@@ -4,7 +4,7 @@ description = "Разработка на основе трейтов в Rust"
 weight = 1
 +++
 
-[Перевод](https://deterministic.space/trait-driven-development-in-rust.html)
+[Перевод](https://deterministic.space/trait-driven-development-in-rust.html) | Автор оригинала: xxxx
 
 На самом деле, название - ложь: здесь мы просто сосредотачиваемся на трэйтах, но писать Rust также легко на основе тестирования, управления данными, управления документацией или [A-Z] [a-z] *.
 

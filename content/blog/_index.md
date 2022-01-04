@@ -54,7 +54,6 @@ weight = 1
 - [Свобода блокировки без сборки мусора](/blog/lockfreedom-without-garbage-collection)
 - [lolbench: автоматическое и эмпирическое обнаружение регрессии производительности Rust](/blog/lolbench-automagically-and-empirically-discovering-rust-performance-regressions)
 - [Подробные тексты по интересным деталям компьютеров](/blog/longform-texts-on-interesting-details-of-computers)
-- [Сделай выбор: Rust для разработчиков Python](/blog/making-a-case-rust-for-python-developers)
 - [Улучшение WebAssembly для Rust и для всех языков](/blog/making-webassembly-better-for-rust-and-for-all-languages)
 - [Изменяемые ссылки на 'self' в объектных методах Rust](/blog/mutable-references-to-self-in-rust-object-methods)
 - [Мой опыт переписывания Enjarify на Rust](/blog/my-experience-rewriting-enjarify-in-rust)

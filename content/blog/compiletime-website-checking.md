@@ -4,7 +4,7 @@ description = "Проверка веб-сайта во время компиля
 weight = 1
 +++
 
-[Перевод](https://deterministic.space/compile-time-website-checking.html)
+[Перевод](https://deterministic.space/compile-time-website-checking.html) | Автор оригинала: xxxx
 
 Мне нужен генератор статического сайта, который применяет кучу правил во время компиляции, чтобы не могли возникнуть целые классы ошибок. Подобно моим идеям из прошлого года.
 

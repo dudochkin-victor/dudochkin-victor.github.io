@@ -4,7 +4,7 @@ description = "Самый недооцененный, но полезный ти
 weight = 1
 +++
 
-[Перевод](https://dev.to/thepuzzlemaker/the-most-underrated-but-useful-rust-standard-library-type-59b1)
+[Перевод](https://dev.to/thepuzzlemaker/the-most-underrated-but-useful-rust-standard-library-type-59b1) | Автор оригинала: xxxx
 
 Стандартная библиотека Rust полна множества полезных типов, свойств и абстракций. Сегодня я расскажу об одном, который, на мой взгляд, недооценен, но весьма полезен. Это Корова.
 

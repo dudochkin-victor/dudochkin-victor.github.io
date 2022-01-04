@@ -4,7 +4,7 @@ description = "Стратегии решения ошибок заимствов
 weight = 1
 +++
 
-[Перевод](https://hermanradtke.com/2015/06/09/strategies-for-solving-cannot-move-out-of-borrowing-errors-in-rust.html)
+[Перевод](https://hermanradtke.com/2015/06/09/strategies-for-solving-cannot-move-out-of-borrowing-errors-in-rust.html) | Автор оригинала: xxxx
 
 Правила использования ссылок и заимствования в Rust довольно просты. Учитывая принадлежащую переменную, нам разрешено иметь столько неизменяемых ссылок на эту переменную, сколько мы хотим. По умолчанию в Rust используется неизменяемость, поэтому даже такие функции, как trim, написаны таким образом, что результатом является ссылка на исходную строку: 
 

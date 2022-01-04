@@ -4,7 +4,7 @@ description = "Понимание, а не догадки"
 weight = 1
 +++
 
-[Перевод](https://hoverbear.org/blog/understand-over-guesswork/)
+[Перевод](https://hoverbear.org/blog/understand-over-guesswork/) | Автор оригинала: xxxx
 
 ## Развитие того, как мы изучаем системы, на уроках программирования в целом
 

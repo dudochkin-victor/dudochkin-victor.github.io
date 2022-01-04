@@ -2,9 +2,10 @@
 title = "Rust для JavaScript-разработчиков - функции и поток управления"
 description = "Rust для JavaScript-разработчиков - функции и поток управления"
 weight = 1
+hash = "d4cb4f2a"
 +++
 
-[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-functions-and-control-flow/)
+[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-functions-and-control-flow/) | Автор оригинала: xxxx
 
 Это третья часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:
 
@@ -126,7 +127,7 @@ add(1, 2); // 3
 
 Вот шпаргалка:
 
-Картина: Некоторые
+![](/imgs/posts/d4cb4f2a_01.png)
 
 Замыкания в большинстве случаев не нуждаются в аннотациях типов, но я добавил их сюда для ясности. 
 

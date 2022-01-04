@@ -4,7 +4,7 @@ description = "Откуда ты::откуда"
 weight = 1
 +++
 
-[Перевод](https://llogiq.github.io/2015/11/27/from-into.html)
+[Перевод](https://llogiq.github.io/2015/11/27/from-into.html) | Автор оригинала: xxxx
 
 А во что ты превратился::во что?
 

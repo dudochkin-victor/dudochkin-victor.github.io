@@ -4,7 +4,7 @@ description = "Выбор Swift против Rust"
 weight = 1
 +++
 
-[Перевод](https://medium.com/@eonil/choosing-swift-vs-rust-237bcb45d97b)
+[Перевод](https://medium.com/@eonil/choosing-swift-vs-rust-237bcb45d97b) | Автор оригинала: xxxx
 
 И Swift, и Rust - хорошие инструменты, у них есть свои плюсы и минусы. Проблема в том, что мне нужно сосредоточиться на одном деле, потому что у меня нет бесконечных ресурсов. Поэтому мне нужно строить предположения о будущем.
 

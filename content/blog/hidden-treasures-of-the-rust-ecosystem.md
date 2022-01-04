@@ -4,7 +4,7 @@ description = "Скрытые сокровища экосистемы Rust"
 weight = 1
 +++
 
-[Перевод](https://deterministic.space/hidden-treasures-of-the-rust-ecosystems.html)
+[Перевод](https://deterministic.space/hidden-treasures-of-the-rust-ecosystems.html) | Автор оригинала: xxxx
 
 ## Тайная жизнь std
 

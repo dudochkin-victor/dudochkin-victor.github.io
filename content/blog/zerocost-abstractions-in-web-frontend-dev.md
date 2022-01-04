@@ -4,7 +4,7 @@ description = "Абстракции с нулевой стоимостью в р
 weight = 1
 +++
 
-[Перевод](https://deterministic.space/zero-cost-abstractions-in-web-fontend-dev.html)
+[Перевод](https://deterministic.space/zero-cost-abstractions-in-web-fontend-dev.html) | Автор оригинала: xxxx
 
 Одна из самых удивительных особенностей компиляторов - это их способность не только преобразовывать код в машиночитаемые объекты, но и оптимизировать абстракции.
 

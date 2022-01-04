@@ -4,7 +4,7 @@ description = "Rust для JavaScript-разработчиков - Обзор э
 weight = 1
 +++
 
-[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-tooling-ecosystem-overview/)
+[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-tooling-ecosystem-overview/) | Автор оригинала: xxxx
 
 Это первая часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:
 

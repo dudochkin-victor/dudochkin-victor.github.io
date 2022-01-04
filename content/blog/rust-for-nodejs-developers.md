@@ -4,7 +4,7 @@ description = "Rust для разработчиков на Node.js"
 weight = 1
 +++
 
-[Перевод](https://developer.ibm.com/articles/rust-for-nodejs-developers/)
+[Перевод](https://developer.ibm.com/articles/rust-for-nodejs-developers/) | Автор оригинала: xxxx
 
 Ключевые различия между JavaScript и Rust, объяснение
 

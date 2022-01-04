@@ -4,7 +4,7 @@ description = "Типы обертки в Rust: выбор гарантий"
 weight = 1
 +++
 
-[Перевод](https://manishearth.github.io/blog/2015/05/27/wrapper-types-in-rust-choosing-your-guarantees/)
+[Перевод](https://manishearth.github.io/blog/2015/05/27/wrapper-types-in-rust-choosing-your-guarantees/) | Автор оригинала: xxxx
 
 Этот пост стал частью официальной книги Rust
 

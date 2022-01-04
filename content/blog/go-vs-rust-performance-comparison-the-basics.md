@@ -2,11 +2,12 @@
 title = "Сравнение производительности Go и Rust: основы"
 description = "Сравнение производительности Go и Rust: основы"
 weight = 1
+hash = "4fffde14"
 +++
 
-[Перевод](https://www.getclockwise.com/blog/rust-vs-go)
+[Перевод](https://www.getclockwise.com/blog/rust-vs-go) | Автор оригинала: xxxx
 
-Картина: Rust-против-го
+![Rust vs Go](/imgs/posts/4fffde14_01.png)
 
 Это вопрос, который многие разработчики задавали раньше, а многие другие будут задавать еще долго после того, как вы примете собственное решение. Какой язык мне использовать - Go или Rust? Rust or Go?
 

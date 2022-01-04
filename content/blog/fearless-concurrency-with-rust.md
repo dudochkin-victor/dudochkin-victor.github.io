@@ -4,7 +4,7 @@ description = "Бесстрашный параллелизм с Rust"
 weight = 1
 +++
 
-[Перевод](https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html)
+[Перевод](https://blog.rust-lang.org/2015/04/10/Fearless-Concurrency.html) | Автор оригинала: xxxx
 
 Проект Rust был инициирован для решения двух сложных проблем:
 

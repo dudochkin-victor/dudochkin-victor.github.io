@@ -4,7 +4,7 @@ description = "Абстракция без накладных расходов: 
 weight = 1
 +++
 
-[Перевод](https://blog.rust-lang.org/2015/05/11/traits.html)
+[Перевод](https://blog.rust-lang.org/2015/05/11/traits.html) | Автор оригинала: xxxx
 
 Предыдущие статьи касались двух столпов дизайна Rust:
 

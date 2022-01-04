@@ -4,7 +4,7 @@ description = "String vs &str в функциях Rust"
 weight = 1
 +++
 
-[Перевод](https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html)
+[Перевод](https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) | Автор оригинала: xxxx
 
 Для всех людей, разочарованных необходимостью использовать to_string() для получения программ для компиляции, этот пост для вас. Для тех, кто не совсем понимает, почему в Rust есть два строковых типа String и &str, я надеюсь пролить немного света на этот вопрос.
 
