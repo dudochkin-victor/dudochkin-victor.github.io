@@ -18,7 +18,7 @@ weight = 1
 Вот версия tl;dr: 
 
  Tool 	                         | JavaScript               |	Rust
-|--------------------------------|--------------------------|------
+---------------------------------|--------------------------|------
 Version Manager                  |	nvm                     |	rustup
 Package Manager                  |	npm                     |	Cargo
 Package Registry                 |	npmjs.com               |	crates.io

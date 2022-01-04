@@ -117,7 +117,7 @@ weight = 1
 - [Понимание, а не догадки](/blog/understanding-over-guesswork)
 - [Использование комбинаторов and_then и map для типа результата Rust](/blog/using-and-then-and-map-combinators-on-the-rust-result-type)
 - [Использование универсальных типов в Rust](/blog/using-generic-types-in-rust)
-- [Использование потоков WebAssembly из C, C ++ и Rust](/blog/using-webassembly-threads-from-c-cpp-and-rust)
+- [Использование потоков WebAssembly из C, C++ и Rust](/blog/using-webassembly-threads-from-c-cpp-and-rust)
 - [Что такое типы данных в любом случае?](/blog/what-are-data-types-anyways)
 - [Когда использовать Rust, а когда - Go](/blog/when-to-use-rust-and-when-to-use-go)
 - [Откуда ты::откуда](/blog/where-are-you-from-from)

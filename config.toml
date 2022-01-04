@@ -40,16 +40,6 @@ generate_feed = false
 #
 taxonomies = []
 
-# The additional languages for the site.
-# Example:
-#     languages = [
-#       {code = "fr", feed = true}, # there will be a feed for French content
-#       {code = "fr", search = true}, # there will be a Search Index for French content
-#       {code = "it"}, # there won't be a feed for Italian content
-#     ]
-#
-languages = []
-
 # When set to "true", the Sass files in the `sass` directory in the site root are compiled.
 # Sass files in theme directories are always compiled.
 compile_sass = true
@@ -70,13 +60,72 @@ extra_syntaxes = []
 # You can override the default output directory `public` by setting an another value.
 # output_dir = "docs"
 
+# Additional languages definition
+# You can define language specific config values and translations: 
+# title, description, generate_feed, feed_filename, taxonomies, build_search_index
+# as well as its own search configuration and translations (see above for details on those)
+[languages]
+# For example
+# [languages.fr]
+# title = "Mon blog"
+# generate_feed = true
+# taxonomies = [
+#    {name = "auteurs"},
+#    {name = "tags"},
+# ]
+
 # Configuration of the Markdown rendering
 [markdown]
 # When set to "true", all code blocks are highlighted.
 highlight_code = true
 # The theme to use for code highlighting.
 # See below for list of allowed values.
-highlight_theme = "inspired-github"
+# highlight_theme = "inspired-github"
+
+highlight_theme = "ayu-dark"
+
+    # 1337
+    # ascetic-white
+    # axar
+    # ayu-dark
+    # ayu-light
+    # ayu-mirage
+    # base16-atelierdune-light
+    # base16-ocean-dark
+    # base16-ocean-light
+    # bbedit
+    # boron
+    # charcoal
+    # cheerfully-light
+    # classic-modified
+    # demain
+    # dimmed-fluid
+    # dracula
+    # gray-matter-dark
+    # green
+    # gruvbox-dark
+    # gruvbox-light
+    # idle
+    # inspired-github
+    # ir-white
+    # kronuz
+    # material-dark
+    # material-light
+    # monokai
+    # nord
+    # nyx-bold
+    # one-dark
+    # OneHalfDark
+    # OneHalfLight
+    # railsbase16-green-screen-dark
+    # solarized-dark
+    # solarized-light
+    # subway-madrid
+    # subway-moscow
+    # Tomorrow
+    # two-dark
+    # visual-studio-dark
+    # zenburn
 
 # When set to "true", emoji aliases translated to their corresponding
 # Unicode emoji equivalent in the rendered Markdown files. (e.g.: :smile: => 😄)
@@ -156,7 +205,7 @@ include_content = true
 
 [extra]
 logo_name = "Dudochkin Victor"
-logo_path = "angular-rust.svg"
+logo_path = "ferris.png"
 extra_menu = [
     { title = "Блог", link = "/blog" },
     { title = "Github", link = "https://github.com/dudochkin-victor" }
