@@ -4,7 +4,7 @@ description = "Руководство по Rust для новичков"
 weight = 1
 +++
 
-[Перевод](https://developer.ibm.com/articles/os-using-rust/) | Автор оригинала: xxxx
+[Перевод](https://developer.ibm.com/articles/os-using-rust/) | Автор оригинала: Dylan Hicks
 
 Используйте свои навыки Rust, создав простую игру в крестики-нолики.
 

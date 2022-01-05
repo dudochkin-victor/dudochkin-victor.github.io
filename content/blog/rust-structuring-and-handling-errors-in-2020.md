@@ -4,7 +4,7 @@ description = "Rust: структурирование и обработка ош
 weight = 1
 +++
 
-[Перевод](https://nick.groenen.me/posts/rust-error-handling/) | Автор оригинала: xxxx
+[Перевод](https://nick.groenen.me/posts/rust-error-handling/) | Автор оригинала: nick.groenen
 
 Недавно я начал изучать язык программирования Rust, прочитав «книгу», которая дает феноменальную работу по объяснению основ языка.
 

@@ -5,7 +5,7 @@ weight = 1
 hash = "0b5ea796"
 +++
 
-[Перевод](https://ricardomartins.cc/2016/06/08/interior-mutability) | Автор оригинала: xxxx
+[Перевод](https://ricardomartins.cc/2016/06/08/interior-mutability) | Автор оригинала: Ricardo Martins
 
 > Rust похожа на паркур, подвешенный на струнах и в защитном снаряжении. Да, иногда это будет выглядеть немного нелепо, но вы сможете делать всевозможные крутые движения, не причинив себе вреда. - llogiq на Reddit
 

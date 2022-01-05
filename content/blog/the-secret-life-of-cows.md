@@ -4,7 +4,7 @@ description = "Тайная жизнь коров"
 weight = 1
 +++
 
-[Перевод](https://deterministic.space/secret-life-of-cows.html) | Автор оригинала: xxxx
+[Перевод](https://deterministic.space/secret-life-of-cows.html) | Автор оригинала: Pascal Hertleif
 
 Многие на RustFest Paris упоминали коров - что может быть удивительно, если вы никогда не видели std::заимствовать::Cow!
 

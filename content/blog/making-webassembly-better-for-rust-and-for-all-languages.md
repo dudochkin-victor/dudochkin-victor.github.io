@@ -5,7 +5,7 @@ weight = 1
 hash = "ac9ca259"
 +++
 
-[Перевод](https://hacks.mozilla.org/2018/03/making-webassembly-better-for-rust-for-all-languages/) | Автор оригинала: xxxx
+[Перевод](https://hacks.mozilla.org/2018/03/making-webassembly-better-for-rust-for-all-languages/) | Автор оригинала: Lin Clark
 
 Одна из больших целей сообщества Rust на 2018 год - стать веб-языком. Ориентируясь на WebAssembly, Rust может работать в сети точно так же, как JavaScript. Но что это значит? Означает ли это, что Rust пытается заменить JavaScript?
 

@@ -5,7 +5,7 @@ weight = 1
 hash = "f82f7d6e"
 +++
 
-[Перевод](https://morioh.com/p/d4b5c0ca1174) | Автор оригинала: xxxx
+[Перевод](https://morioh.com/p/d4b5c0ca1174) | Автор оригинала: Alexey Kartsev
 
 ## Введение
 

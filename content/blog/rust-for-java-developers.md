@@ -4,7 +4,7 @@ description = "Rust для Java-разработчика"
 weight = 1
 +++
 
-[Перевод](https://blog.codecentric.de/en/2020/09/rust-for-java-developers/) | Автор оригинала: xxxx
+[Перевод](https://blog.codecentric.de/en/2020/09/rust-for-java-developers/) | Автор оригинала: Elisabeth Schulz
 
 ## Rust для Java-разработчиков - пошаговое введение
 

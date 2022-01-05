@@ -5,7 +5,7 @@ weight = 1
 hash = "3883ca42"
 +++
 
-[Перевод](https://serokell.io/blog/rust-in-production-qovery) | Автор оригинала: xxxx
+[Перевод](https://serokell.io/blog/rust-in-production-qovery) | Автор оригинала: Gints Dreimanis
 
 В этой статье из нашей серии статей о Rust in Production я беру интервью у Бенджамина Шастаньера, старшего инженера-программиста в Qovery.
 

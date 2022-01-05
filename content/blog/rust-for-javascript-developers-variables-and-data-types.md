@@ -4,7 +4,7 @@ description = "Rust для JavaScript-разработчиков - переме�
 weight = 1
 +++
 
-[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-variables-and-data-types/) | Автор оригинала: xxxx
+[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-variables-and-data-types/) | Автор оригинала: Shesh
 
 Это вторая часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:
 

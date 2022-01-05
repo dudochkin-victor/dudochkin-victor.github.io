@@ -4,7 +4,7 @@ description = "Силиконовые кабачки"
 weight = 1
 +++
 
-[Перевод](https://pascalhertleif.de/artikel/silicon-zucchini/) | Автор оригинала: xxxx
+[Перевод](https://pascalhertleif.de/artikel/silicon-zucchini/) | Автор оригинала: Pascal Hertleif
 
 Описание генератора статического сайта с использованием схемы JSON для проверки входных данных, создания примеров шаблонов и визуализации интерфейсов редактора.
 

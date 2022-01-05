@@ -4,7 +4,7 @@ description = "Rust: взгляд инженера Scala"
 weight = 1
 +++
 
-[Перевод](https://beachape.com/blog/2017/05/24/rust-from-scala/) | Автор оригинала: xxxx
+[Перевод](https://beachape.com/blog/2017/05/24/rust-from-scala/) | Автор оригинала: Lloyd
 
 Приближается 1-я годовщина моей первой строчки кода на Rust, и вот уже пять лет с тех пор, как я написал свою первую строчку кода на Scala. Я подумал, что было бы неплохо резюмировать мой окрашенный в Scala взгляд на The Rust Experience TM через год.
 

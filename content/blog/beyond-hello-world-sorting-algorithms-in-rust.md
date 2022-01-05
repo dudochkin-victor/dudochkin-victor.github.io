@@ -5,7 +5,7 @@ weight = 1
 hash = "1b47232f"
 +++
 
-[Перевод](https://oswalt.dev/2020/05/beyond-hello-world-sorting-algorithms-in-rust/) | Автор оригинала: xxxx
+[Перевод](https://oswalt.dev/2020/05/beyond-hello-world-sorting-algorithms-in-rust/) | Автор оригинала: Matt Oswalt
 
 В этом году я использовал Rust не только как новую возможность для обучения, но и как услугу для нескольких побочных проектов, в которых я принимал участие.
 

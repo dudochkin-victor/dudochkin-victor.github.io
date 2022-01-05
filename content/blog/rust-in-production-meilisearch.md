@@ -5,7 +5,7 @@ weight = 1
 hash = "9a335503"
 +++
 
-[Перевод](https://serokell.io/blog/rust-in-production-meilisearch) | Автор оригинала: xxxx
+[Перевод](https://serokell.io/blog/rust-in-production-meilisearch) | Автор оригинала: Gints Dreimanis
 
 В этом интервью я разговариваю с Томасом Пайетом, соучредителем и главным операционным директором MeiliSearch. MeiliSearch - это поисковая система с открытым исходным кодом, входящая в топ-20 самых популярных проектов Rust на GitHub на момент написания. Мы говорим о MeiliSearch и о том, как Rust и его экосистема помогли им в его создании.
 

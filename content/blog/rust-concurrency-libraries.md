@@ -4,7 +4,7 @@ description = "Библиотеки параллелизма Rust"
 weight = 1
 +++
 
-[Перевод](https://deterministic.space/rust-concurrency-libraries.html) | Автор оригинала: xxxx
+[Перевод](https://deterministic.space/rust-concurrency-libraries.html) | Автор оригинала: Pascal Hertleif
 
 Краткий обзор.
 

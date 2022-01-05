@@ -5,7 +5,7 @@ weight = 1
 hash = "34fffee8"
 +++
 
-[Перевод](https://opensource.com/article/20/5/rust-java) | Автор оригинала: xxxx
+[Перевод](https://opensource.com/article/20/5/rust-java) | Автор оригинала: Mike Bursell
 
 ![краб Феррис под морем, неофициальный логотип языка программирования Rust](/imgs/posts/34fffee8_01.png)
 

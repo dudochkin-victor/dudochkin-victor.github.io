@@ -5,7 +5,7 @@ weight = 1
 hash = "5407a787"
 +++
 
-[Перевод](https://medium.com/swlh/a-javascript-developers-view-of-rust-e702c11262c6) | Автор оригинала: xxxx
+[Перевод](https://medium.com/swlh/a-javascript-developers-view-of-rust-e702c11262c6) | Автор оригинала: Danny Denenberg
 
 Некоторое время назад я пытался найти что-нибудь интересное для чтения в Интернете, когда наткнулся на Rust. Rust - это…
   

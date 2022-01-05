@@ -5,7 +5,7 @@ weight = 1
 hash = "d4cb4f2a"
 +++
 
-[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-functions-and-control-flow/) | Автор оригинала: xxxx
+[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-functions-and-control-flow/) | Автор оригинала: Shesh
 
 Это третья часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:
 

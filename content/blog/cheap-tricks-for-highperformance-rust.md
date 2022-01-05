@@ -4,7 +4,7 @@ description = "Дешевые хитрости для высокопроизво
 weight = 1
 +++
 
-[Перевод](https://deterministic.space/high-performance-rust.html) | Автор оригинала: xxxx
+[Перевод](https://deterministic.space/high-performance-rust.html) | Автор оригинала: Pascal Hertleif
 
 Итак, вы пишете Rust, но этого недостаточно? Даже если вы используете Cargo build --release? Вот несколько небольших вещей, которые вы можете сделать, чтобы увеличить скорость выполнения проекта на Rust - практически без изменения кода!
 

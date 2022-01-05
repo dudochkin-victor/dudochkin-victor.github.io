@@ -4,7 +4,7 @@ description = "Чтение сигнатур функций Rust"
 weight = 1
 +++
 
-[Перевод](https://hoverbear.org/blog/reading-rust-function-signatures/) | Автор оригинала: xxxx
+[Перевод](https://hoverbear.org/blog/reading-rust-function-signatures/) | Автор оригинала: Ana Hoverbear
 
 В Rust сигнатуры функций рассказывают историю. Просто взглянув на сигнатуру функции, опытный пользователь Rust может сказать многое о ее поведении.
 

@@ -5,7 +5,7 @@ weight = 1
 hash = "0f5b5298"
 +++
 
-[Перевод](https://www.sitepoint.com/rust-tutorial-introduction-javascript-devs/) | Автор оригинала: xxxx
+[Перевод](https://www.sitepoint.com/rust-tutorial-introduction-javascript-devs/) | Автор оригинала: Nick Groenen
 
 __Rust - это язык программирования, созданный Mozilla Research в 2010 году. Сегодня он используется всеми крупными компаниями.__
 

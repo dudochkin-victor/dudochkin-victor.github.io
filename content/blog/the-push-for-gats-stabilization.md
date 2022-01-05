@@ -4,7 +4,7 @@ description = "Толчок к стабилизации GAT"
 weight = 1
 +++
 
-[Перевод](https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html) | Автор оригинала: xxxx
+[Перевод](https://blog.rust-lang.org/2021/08/03/GATs-stabilization-push.html) | Автор оригинала: Jack Huey
 
 ## Толчок к стабилизации GAT
 

@@ -5,7 +5,7 @@ weight = 1
 hash = "748ef6f2"
 +++
 
-[Перевод](https://medium.com/@robertgrosse/optimizing-rc-memory-usage-in-rust-6652de9e119e) | Автор оригинала: xxxx
+[Перевод](https://medium.com/@robertgrosse/optimizing-rc-memory-usage-in-rust-6652de9e119e) | Автор оригинала: Robert Grosse
 
 Недавно я попытался оптимизировать код Rust с интенсивным использованием памяти. Это оказалось сложнее, чем я ожидал, но по пути я узнал кое-что интересное об использовании памяти Rust, поэтому пишу свою историю на случай, если кто-то еще сочтет ее полезной.
 

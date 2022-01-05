@@ -4,7 +4,7 @@ description = "Эффективное экранирование строк с �
 weight = 1
 +++
 
-[Перевод](https://fullstackmilk.dev/efficiently_escaping_strings_using_cow_in_rust/) | Автор оригинала: xxxx
+[Перевод](https://fullstackmilk.dev/efficiently_escaping_strings_using_cow_in_rust/) | Автор оригинала: Full stack milk
 
 Это удобный шаблон для эффективного экранирования текста, а также хорошая демонстрация типа Cow в Rust.
 

@@ -4,7 +4,7 @@ description = "Внутренняя изменчивость в Rust, часть
 weight = 1
 +++
 
-[Перевод](https://ricardomartins.cc/2016/06/25/interior-mutability-thread-safety) | Автор оригинала: xxxx
+[Перевод](https://ricardomartins.cc/2016/06/25/interior-mutability-thread-safety) | Автор оригинала: Ricardo Martins
 
 Ключевые выводы
 

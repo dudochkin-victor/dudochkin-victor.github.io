@@ -5,7 +5,7 @@ weight = 1
 hash = "c55adcfb"
 +++
 
-[Перевод](https://dzone.com/articles/the-go-developers-quickstart-guide-to-rust) | Автор оригинала: xxxx
+[Перевод](https://dzone.com/articles/the-go-developers-quickstart-guide-to-rust) | Автор оригинала: Matt Butcher
 
 Вы писали на Go. Но вы чувствуете желание попробовать новое с помощью Rust. Это руководство, чтобы упростить этот переход.
 

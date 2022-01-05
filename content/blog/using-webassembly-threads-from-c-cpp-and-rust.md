@@ -4,7 +4,7 @@ description = "Использование потоков WebAssembly из C, C++
 weight = 1
 +++
 
-[Перевод](https://web.dev/webassembly-threads/) | Автор оригинала: xxxx
+[Перевод](https://web.dev/webassembly-threads/) | Автор оригинала: Ingvar Stepanyan
 
 Узнайте, как перенести в WebAssembly многопоточные приложения, написанные на других языках.
 

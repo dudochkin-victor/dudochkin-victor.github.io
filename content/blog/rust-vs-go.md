@@ -5,7 +5,7 @@ weight = 1
 hash = "e2f481ed"
 +++
 
-[Перевод](https://bitfieldconsulting.com/golang/rust-vs-go) | Автор оригинала: xxxx
+[Перевод](https://bitfieldconsulting.com/golang/rust-vs-go) | Автор оригинала: John Arundel
 
 ![Rust vs Go](/imgs/posts/e2f481ed_01.png)
 

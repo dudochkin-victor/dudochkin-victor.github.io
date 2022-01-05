@@ -5,7 +5,7 @@ weight = 1
 hash = "d15468a6"
 +++
 
-[Перевод](https://developer.ibm.com/articles/os-developers-know-rust/) | Автор оригинала: xxxx
+[Перевод](https://developer.ibm.com/articles/os-developers-know-rust/) | Автор оригинала: M. Tim Jones
 
 Откройте для себя историю, ключевые концепции и инструменты использования Rust
 

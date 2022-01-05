@@ -5,7 +5,7 @@ weight = 1
 hash = "35812975"
 +++
 
-[Перевод](https://serokell.io/blog/rust-guide) | Автор оригинала: xxxx
+[Перевод](https://serokell.io/blog/rust-guide) | Автор оригинала: Gints Dreimanis
 
 Согласно опросам StackOverflow, Rust был самым любимым языком программирования последние пять лет подряд.
 

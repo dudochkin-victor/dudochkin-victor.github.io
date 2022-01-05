@@ -5,7 +5,7 @@ weight = 1
 hash = "e2e4d13d"
 +++
 
-[Перевод](https://www.codegram.com/blog/rust-for-js-developers/) | Автор оригинала: xxxx
+[Перевод](https://www.codegram.com/blog/rust-for-js-developers/) | Автор оригинала: David Morcillo
 
 Хорошее введение в Rust с точки зрения разработчика JavaScript.
 

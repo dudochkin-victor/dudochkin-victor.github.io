@@ -4,7 +4,7 @@ description = "Необязательные аргументы в Rust"
 weight = 1
 +++
 
-[Перевод](https://hoverbear.org/blog/optional-arguments/) | Автор оригинала: xxxx
+[Перевод](https://hoverbear.org/blog/optional-arguments/) | Автор оригинала: Ana Hoverbear
 
 При разработке API для вашего крэйта может возникнуть одна тема - как обрабатывать необязательные аргументы. Давайте изучим наши возможности в Rust!
 

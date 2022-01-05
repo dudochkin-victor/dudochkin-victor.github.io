@@ -5,7 +5,7 @@ weight = 1
 hash = "4fffde14"
 +++
 
-[Перевод](https://www.getclockwise.com/blog/rust-vs-go) | Автор оригинала: xxxx
+[Перевод](https://www.getclockwise.com/blog/rust-vs-go) | Автор оригинала: Guest Author
 
 ![Rust vs Go](/imgs/posts/4fffde14_01.png)
 

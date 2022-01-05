@@ -5,7 +5,7 @@ weight = 1
 hash = "4074d9e9"
 +++
 
-[Перевод](https://aturon.github.io/blog/2015/08/27/epoch/) | Автор оригинала: xxxx
+[Перевод](https://aturon.github.io/blog/2015/08/27/epoch/) | Автор оригинала: Aaron Turon
 
 ## TL;DR
 

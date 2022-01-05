@@ -4,7 +4,7 @@ description = "Программирование на Rust для разрабо�
 weight = 1
 +++
 
-[Перевод](https://softwaresim.com/blog/rust-programming-for-python-developers/) | Автор оригинала: xxxx
+[Перевод](https://softwaresim.com/blog/rust-programming-for-python-developers/) | Автор оригинала: softwaresim
 
 ### Какой язык программирования выбрать для следующего бизнес-проекта?
 

@@ -5,7 +5,7 @@ weight = 1
 hash = "ebe0fe80"
 +++
 
-[Перевод](https://www.sheshbabu.com/posts/rust-wasm-yew-single-page-application/) | Автор оригинала: xxxx
+[Перевод](https://www.sheshbabu.com/posts/rust-wasm-yew-single-page-application/) | Автор оригинала: Shesh
 
 WebAssembly (wasm) позволяет запускать в браузерах код, написанный на языках, отличных от JavaScript. Если вы не обращали внимания, все основные браузеры поддерживают wasm, и во всем мире более 90% пользователей имеют браузеры, которые могут запускать wasm.
 

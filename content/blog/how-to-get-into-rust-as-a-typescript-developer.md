@@ -5,7 +5,7 @@ weight = 1
 hash = "64fde5fa"
 +++
 
-[Перевод](https://www.thisdot.co/blog/how-to-get-into-rust-as-a-typescript-developer) | Автор оригинала: xxxx
+[Перевод](https://www.thisdot.co/blog/how-to-get-into-rust-as-a-typescript-developer) | Автор оригинала: Matthew Pagan
 
 Rust - это язык моей мечты. Я работаю в основном как разработчик JavaScript, поэтому мой набор навыков в основном включает в себя Интернет, а также среды NodeJS. Я люблю JavaScript, но мне хотелось погрузиться в новый язык. На этом новом языке нужно было отметить несколько флажков:
 

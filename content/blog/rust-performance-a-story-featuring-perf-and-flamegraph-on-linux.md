@@ -5,7 +5,7 @@ weight = 1
 hash = "ae87c847"
 +++
 
-[Перевод](https://blog.anp.lol/rust/2016/07/24/profiling-rust-perf-flamegraph/) | Автор оригинала: xxxx
+[Перевод](https://blog.anp.lol/rust/2016/07/24/profiling-rust-perf-flamegraph/) | Автор оригинала: Adam Perry
 
 Получение некоторого выигрыша в производительности в программе Rust с 7-строчным diff, с использованием cargo bench, perf и flamegraph в Linux.
 

@@ -4,7 +4,7 @@ description = "Почему совместное использование WebA
 weight = 1
 +++
 
-[Перевод](https://developer.ibm.com/articles/why-webassembly-and-rust-together-improve-nodejs-performance/) | Автор оригинала: xxxx
+[Перевод](https://developer.ibm.com/articles/why-webassembly-and-rust-together-improve-nodejs-performance/) | Автор оригинала: Josh Hannaford
 
 Команда IBM добилась невероятных улучшений производительности с помощью WebAssembly и Rust.
 

@@ -4,7 +4,7 @@ description = "Ускорьте свой Python с помощью Rust"
 weight = 1
 +++
 
-[Перевод](https://developers.redhat.com/blog/2017/11/16/speed-python-using-rust) | Автор оригинала: xxxx
+[Перевод](https://developers.redhat.com/blog/2017/11/16/speed-python-using-rust) | Автор оригинала: Bruno Rocha
 
 ## Что такое Rust?
 Rust - это язык системного программирования, который работает невероятно быстро, предотвращает сбои и гарантирует безопасность потоков.

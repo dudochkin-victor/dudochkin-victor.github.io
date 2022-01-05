@@ -5,7 +5,7 @@ weight = 1
 hash = "d8ce9ce5"
 +++
 
-[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-pattern-matching-and-enums/) | Автор оригинала: xxxx
+[Перевод](https://www.sheshbabu.com/posts/rust-for-javascript-developers-pattern-matching-and-enums/) | Автор оригинала: Shesh
 
 Это четвертая часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:
 

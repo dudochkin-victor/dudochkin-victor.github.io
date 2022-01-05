@@ -4,7 +4,7 @@ description = "Изменяемые ссылки на 'self' в объектны
 weight = 1
 +++
 
-[Перевод](https://oswalt.dev/2020/05/mutable-references-to-self-in-rusts-object-methods/) | Автор оригинала: xxxx
+[Перевод](https://oswalt.dev/2020/05/mutable-references-to-self-in-rusts-object-methods/) | Автор оригинала: Matt Oswalt
 
 В последнее время я работаю над графическим программированием на Rust, как продолжение моих первых шагов с языком. В рамках этой работы я создал созданный мной тип Vec3f для хранения декартовых координат данного вектора: 
 

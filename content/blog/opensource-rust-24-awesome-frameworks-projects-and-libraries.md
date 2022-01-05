@@ -5,7 +5,7 @@ weight = 1
 hash = "e2351210"
 +++
 
-[Перевод](https://serokell.io/blog/open-source-rust) | Автор оригинала: xxxx
+[Перевод](https://serokell.io/blog/open-source-rust) | Автор оригинала: Gints Dreimanis
 
 У Rust очень живая и быстро развивающаяся экосистема с открытым исходным кодом, в которой множество участников работают над массой потрясающих проектов.
 

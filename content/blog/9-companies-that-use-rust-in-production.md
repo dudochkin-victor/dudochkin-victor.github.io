@@ -5,7 +5,7 @@ weight = 1
 hash = "4ec22149"
 +++
 
-[Перевод](https://serokell.io/blog/rust-companies) | Автор оригинала: xxxx
+[Перевод](https://serokell.io/blog/rust-companies) | Автор оригинала: Gints Dreimanis
 
 Если вы еще не слышали, Rust - один из самых многообещающих и любимых языков программирования.
 

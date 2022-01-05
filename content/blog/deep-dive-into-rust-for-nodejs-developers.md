@@ -4,7 +4,7 @@ description = "Глубокое погружение в Rust для разраб
 weight = 1
 +++
 
-[Перевод](https://itnext.io/deep-dive-into-rust-for-node-js-developers-5faace6dc71f) | Автор оригинала: xxxx
+[Перевод](https://itnext.io/deep-dive-into-rust-for-node-js-developers-5faace6dc71f) | Автор оригинала: Florian GOTO
 
 С появлением WebAssembly (главная) сейчас самое подходящее время для изучения Rust поверх имеющихся у вас знаний JavaScript и Node.js для высокопроизводительных вычислений в браузере, на сервере и на периферии.
 

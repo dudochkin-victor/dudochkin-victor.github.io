@@ -4,7 +4,7 @@ description = "Как реализовать трейт для &str и &[&str]"
 weight = 1
 +++
 
-[Перевод](https://deterministic.space/impl-a-trait-for-str-slices-and-slices-of-strs.html) | Автор оригинала: xxxx
+[Перевод](https://deterministic.space/impl-a-trait-for-str-slices-and-slices-of-strs.html) | Автор оригинала: Pascal Hertleif
 
 Rust имеет довольно мощную систему типов, но некоторые вещи не так-то просто выразить. Следуйте за мной в путешествие, в котором мы попытаемся реализовать небольшую перегрузку методов, используя трейты с забавными ограничениями, и обнаружим несколько интересных способов убедить Rust в том, что все в порядке.
 

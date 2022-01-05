@@ -4,7 +4,7 @@ description = "Путешествие в итераторы"
 weight = 1
 +++
 
-[Перевод](https://hoverbear.org/blog/a-journey-into-iterators/) | Автор оригинала: xxxx
+[Перевод](https://hoverbear.org/blog/a-journey-into-iterators/) | Автор оригинала: Ana Hoverbear
 
 Одна из моих любимых функций Rust - итераторы. Это быстрый, безопасный и «ленивый» способ работы со структурами данных, потоками и другими более творческими приложениями.
 

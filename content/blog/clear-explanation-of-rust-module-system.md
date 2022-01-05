@@ -5,7 +5,7 @@ weight = 1
 hash = "467e5b19"
 +++
 
-[Перевод](https://www.sheshbabu.com/posts/rust-module-system/) | Автор оригинала: xxxx
+[Перевод](https://www.sheshbabu.com/posts/rust-module-system/) | Автор оригинала: Shesh
 
 Модульная система Rust на удивление сбивает с толку и вызывает много разочарований у новичков.
 

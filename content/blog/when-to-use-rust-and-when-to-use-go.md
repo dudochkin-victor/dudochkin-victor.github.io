@@ -5,7 +5,7 @@ weight = 1
 hash = "41a4f110"
 +++
 
-[Перевод](https://blog.logrocket.com/when-to-use-rust-and-when-to-use-golang/) | Автор оригинала: xxxx
+[Перевод](https://blog.logrocket.com/when-to-use-rust-and-when-to-use-golang/) | Автор оригинала: Michiel Mulders
 
 ![когда использовать Rust, а когда - Golang](/imgs/posts/41a4f110_01.png)
 

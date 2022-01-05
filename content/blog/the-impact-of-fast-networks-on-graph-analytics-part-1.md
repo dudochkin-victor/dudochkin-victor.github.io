@@ -5,7 +5,7 @@ weight = 1
 hash = "1430f4d1"
 +++
 
-[Перевод](http://www.frankmcsherry.org/pagerank/distributed/performance/2015/07/08/pagerank.html) | Автор оригинала: xxxx
+[Перевод](http://www.frankmcsherry.org/pagerank/distributed/performance/2015/07/08/pagerank.html) | Автор оригинала: Frank McSherry
 
 tl;dr: В недавней статье NSDI утверждалось, что стеки аналитики данных не намного быстрее справляются с такими задачами, как PageRank, когда им предоставляется лучшая сеть, но это, скорее всего, просто свойство стека, которое они оценили (Spark и GraphX), а не в целом верно. Другая структура (своевременный поток данных) работает в 6 раз быстрее, чем GraphX в сети 1G, которая улучшается в 3–15-17 раз быстрее, чем GraphX в сети 10G.
 
