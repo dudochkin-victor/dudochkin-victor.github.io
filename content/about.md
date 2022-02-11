@@ -2,6 +2,7 @@
 title = "About"
 description = "About"
 weight = 3
+updated = 2022-10-02T15:00:00Z
 +++
 
 # Angular Rust
