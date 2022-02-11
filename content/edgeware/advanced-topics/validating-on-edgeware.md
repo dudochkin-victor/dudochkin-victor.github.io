@@ -16,7 +16,7 @@ updated = 2022-10-02T15:00:00Z
 
 1. У вас должны быть остатки на счетах `stash` (ed25519 или sr25519\) и `controller` (ed25519 или sr25519\).
 2. Инструкции по настройке узла находятся [здесь](https://github.com/hicommonwealth/edgeware-node/wiki/Setting-up-a-Node). Вам нужно будет дополнительно добавить флаг `--validator`, чтобы запустить узел проверки.
-3. У вас должен быть кошелек, например, расширение `polkadot-js`, установленное в вашем браузере с парами ключей тайника и контроллера. Если у вас его нет, получите [здесь] (https://github.com/polkadot-js/extension).
+3. У вас должен быть кошелек, например, расширение `polkadot-js`, установленное в вашем браузере с парами ключей тайника и контроллера. Если у вас его нет, получите [здесь](https://github.com/polkadot-js/extension).
 
 Если вам нужно запросить баланс тестовой сети EDG, просто спросите в [Discord](https://github.com/Edgeware-Network/edgeware-documentation/tree/815a72388a9df65c3db9f048eaed42ea8f645780/docs/advanced-topics/1/README.md).
 

@@ -10,11 +10,11 @@ Edgeware была запущена в феврале 2020 года как пер
 
 ## Живая полная среда выполнения контракта EVM + WASM
 
-Edgeware имеет [развернутый уровень полной совместимости EVM] (https://github.com/hicommonwealth/evm/blob/master/README.md) и поддержку инструментов. Кроме того, вы можете развернуть контракты WASM, написанные чернилами!, AssemblyScript. [Подробнее о развертывании контрактов EVM и WASM в Edgeware.](https://main.edgeware.wiki/contribute-and-engage/develop/edgeware-smart-contracts)
+Edgeware имеет [развернутый уровень полной совместимости EVM](https://github.com/hicommonwealth/evm/blob/master/README.md) и поддержку инструментов. Кроме того, вы можете развернуть контракты WASM, написанные чернилами!, AssemblyScript. [Подробнее о развертывании контрактов EVM и WASM в Edgeware.](https://main.edgeware.wiki/contribute-and-engage/develop/edgeware-smart-contracts)
 
 ## Часть экосистемы Polkadot
 
-[Edgeware планирует использовать парачейн на Kusama и Polkadot] (https://blog.edgewa.re/edgeware-2020/), вы можете прочитать [последний проект предложения по объединению Edgeware Parachain] (https://commonwealth.im/edgeware /proposal/discussion/830-draft-proposal-edgeware-parachain-bonding). Когда Edgeware станет парачейном, он сможет использовать DOT, KSM, ACA, Stafi Derivatives в проектах Edgeware DeFi, интегрироваться со слоями конфиденциальности и другими решениями Oracle.
+[Edgeware планирует использовать парачейн на Kusama и Polkadot](https://blog.edgewa.re/edgeware-2020/), вы можете прочитать [последний проект предложения по объединению Edgeware Parachain](https://commonwealth.im/edgeware /proposal/discussion/830-draft-proposal-edgeware-parachain-bonding). Когда Edgeware станет парачейном, он сможет использовать DOT, KSM, ACA, Stafi Derivatives в проектах Edgeware DeFi, интегрироваться со слоями конфиденциальности и другими решениями Oracle.
 
 ## Низкие комиссии за транзакции
 
@@ -31,10 +31,10 @@ Edgeware имеет [развернутый уровень полной совм
 ## Финансирование и стимулы
 
 - 5 миллионов долларов плюс финансирование в год в виде грантов, инвестиций и т. д.
-- Обычно [Edgeware имеет строительные проекты] (https://github.com/edgeware-builders/construction-projects) для казначейского финансирования, доступного для вашей идеи, инструментов или существующего проекта. Вы можете запросить сумму до 100 тысяч долларов за проект.
-  — BuildDAO — [стремится стать ончейн-инкубатором] (https://www.notion.so/hicommonwealth/BuilDAO-Incubator-Paper-35d451f814014f9cbff96b6c8ab443a4). Подайте заявку с идеей и получите 50 000 долларов США, чтобы запустить свой стартап или протокол на базе Edgeware.
-- [Экспериментальный майнинг для разработчиков] (https://commonwealth.im/edgeware/proposal/discussion/798-developer-incentive-dev-mining-by-uma) - Получайте вознаграждения за использование комиссий, генерируемых вашим смарт-контрактом. Потенциально 2% комиссий, генерируемых вашим смарт-контрактом.
-- [Программа Developer in Residence] (https://commonwealth.im/edgeware/proposal/discussion/864-recruiting-developers-in-residence-to-edgeware) - для лиц, которые хотят использовать свои навыки и владеть своими время и работа. Это включает в себя производство инструментов, продуктов или протоколов.
+- Обычно [Edgeware имеет строительные проекты](https://github.com/edgeware-builders/construction-projects) для казначейского финансирования, доступного для вашей идеи, инструментов или существующего проекта. Вы можете запросить сумму до 100 тысяч долларов за проект.
+  — BuildDAO — [стремится стать ончейн-инкубатором](https://www.notion.so/hicommonwealth/BuilDAO-Incubator-Paper-35d451f814014f9cbff96b6c8ab443a4). Подайте заявку с идеей и получите 50 000 долларов США, чтобы запустить свой стартап или протокол на базе Edgeware.
+- [Экспериментальный майнинг для разработчиков](https://commonwealth.im/edgeware/proposal/discussion/798-developer-incentive-dev-mining-by-uma) - Получайте вознаграждения за использование комиссий, генерируемых вашим смарт-контрактом. Потенциально 2% комиссий, генерируемых вашим смарт-контрактом.
+- [Программа Developer in Residence](https://commonwealth.im/edgeware/proposal/discussion/864-recruiting-developers-in-residence-to-edgeware) - для лиц, которые хотят использовать свои навыки и владеть своими время и работа. Это включает в себя производство инструментов, продуктов или протоколов.
 
 ## Растущая экосистема
 

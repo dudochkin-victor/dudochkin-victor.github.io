@@ -6,7 +6,7 @@ updated = 2022-10-02T15:00:00Z
 
 ## BitKeep
 
-[BitKeep] (https://bitkeep.com) — это кошелек цифровой валюты, который может отправлять и получать токены SOL/SPL.
+[BitKeep](https://bitkeep.com) — это кошелек цифровой валюты, который может отправлять и получать токены SOL/SPL.
 BitKeep также поддерживает DApps Solana с браузером BitKeep и BitKeep Chrome.
 
 ## MathWallet
@@ -41,7 +41,7 @@ Solflare доступен и прост в использовании, но та
 Solflare доступен в Интернете, как расширение для браузера и как мобильное приложение для Android и iOS.
 Расширение доступно для Chrome, Brave, Firefox, Opera и Edge.
 
-Ознакомьтесь с нашим [руководством по использованию SolFlare](solflare/).
+Ознакомьтесь с нашим [руководством по использованию SolFlare](../solflare/).
 
 ## Sollet
 

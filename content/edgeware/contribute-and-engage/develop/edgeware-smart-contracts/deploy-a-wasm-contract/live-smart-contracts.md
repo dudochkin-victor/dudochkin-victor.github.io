@@ -12,8 +12,8 @@ Edgeware обладает волшебной функциональностью:
 
 Мы развернули для вас несколько контрактов в [Beresheet — наша тестовая сеть \(open Apps\)](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fberesheet1.edgewa.re# /contracts), чтобы вам было легко играть. Вам просто нужно загрузить определенные метаданные \(ABI\) для конкретного контракта, чтобы ваш браузер их понял.
 
-- 📚 [Вы можете найти метаданные здесь] (https://docs.edgewa.re/contribute-and-engage/develop/edgeware-smart-contracts/wasm-advanced)
-- ⛽️ [Кран] (https://beresheet-faucet.vercel.app/)
+- 📚 [Вы можете найти метаданные здесь](https://docs.edgewa.re/contribute-and-engage/develop/edgeware-smart-contracts/wasm-advanced)
+- ⛽️ [Кран](https://beresheet-faucet.vercel.app/)
 - ⛽️ [Если кран не работает, посетите нас в Telegram](https://t.me/edg_developers)
 
 ## Хэши кода <a id="code-hashes"></a>

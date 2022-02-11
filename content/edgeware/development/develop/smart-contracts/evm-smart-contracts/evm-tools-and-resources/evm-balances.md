@@ -139,11 +139,11 @@ updated = 2022-10-02T15:00:00Z
   - Вызывающий должен указать \(20-байтовый\) адрес EVM, который соответствует его адресу субстрата — это проверяется здесь: [https://github.com/paritytech/substrate/blob/master/frame/evm/src/ lib.rs\#L148](https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L148).
   - Функция преобразует этот адрес EVM в «эквивалент субстрата-эфириума», с которого она переводит средства.
 
-* `free_balance` «эквивалента субстрата-эфириума» используется в качестве баланса учетной записи ethereum: [https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs\ # L471] (https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L471)
+* `free_balance` «эквивалента субстрата-эфириума» используется в качестве баланса учетной записи ethereum: [https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs\ # L471](https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L471)
 
 * Изменения в балансе учетной записи ethereum, например, после выполнения либо вызов `slash`, либо `deposit_creating` на «эквивалент субстрата-ethereum» в зависимости от того, был ли добавлен или удален баланс: [https://github.com/paritytech/ субстрат/blob/master/frame/evm/src/lib.rs\#L440](https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L440)
 
-* **Для примера балансов на Javascript в действии см. этот тестовый файл в frontier-tester:** [**https://github.com/hicommonwealth/frontier-tester/blob/master/web3tests/testSubstrateBalances.ts* *] (https://github.com/hicommonwealth/frontier-tester/blob/master/web3tests/testSubstrateBalances.ts)
+* **Для примера балансов на Javascript в действии см. этот тестовый файл в frontier-tester:** [**https://github.com/hicommonwealth/frontier-tester/blob/master/web3tests/testSubstrateBalances.ts* *](https://github.com/hicommonwealth/frontier-tester/blob/master/web3tests/testSubstrateBalances.ts)
 
 ### Gas:
 

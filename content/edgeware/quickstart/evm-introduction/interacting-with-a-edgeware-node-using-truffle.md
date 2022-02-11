@@ -6,13 +6,13 @@ updated = 2022-10-02T15:00:00Z
 
 ## Введение
 
-В этом руководстве рассматривается процесс развертывания смарт-контракта на основе Solidity на узле Edgeware с использованием [Truffle] (https://www.trufflesuite.com/docs). [Truffle](https://www.trufflesuite.com/docs) — один из часто используемых инструментов разработки смарт-контрактов на Ethereum. Учитывая возможности совместимости Edgeware с Ethereum, Truffle можно использовать напрямую с узлом Edgeware.
+В этом руководстве рассматривается процесс развертывания смарт-контракта на основе Solidity на узле Edgeware с использованием [Truffle](https://www.trufflesuite.com/docs). [Truffle](https://www.trufflesuite.com/docs) — один из часто используемых инструментов разработки смарт-контрактов на Ethereum. Учитывая возможности совместимости Edgeware с Ethereum, Truffle можно использовать напрямую с узлом Edgeware.
 
 В этом руководстве предполагается, что у вас есть [работающий локальный узел Edgeware EVM, работающий в режиме --dev].(https://github.com/hicommonwealth/edgeware-documentation/blob/master/docs/quickstart/evm-introduction/настройка локального узла.md).
 
 ## Условия среды
 
-Установлен [Nodejs](https://nodejs.org/en/) и конкретный менеджер пакетов, например [yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) или [npm] (https://www.npmjs.com/get-npm), остальные батареи включены в это руководство. Когда вы будете готовы, клонируйте наш учебный репозиторий с подготовленным стеком для вас.
+Установлен [Nodejs](https://nodejs.org/en/) и конкретный менеджер пакетов, например [yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) или [npm](https://www.npmjs.com/get-npm), остальные батареи включены в это руководство. Когда вы будете готовы, клонируйте наш учебный репозиторий с подготовленным стеком для вас.
 
 ```
 git clone https://github.com/edgeware-builders/tutorials tutorials;cd tutorials/truffle;yarn

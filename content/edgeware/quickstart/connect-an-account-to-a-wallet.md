@@ -101,13 +101,13 @@ Secret phrase `submit hotel naive plate among decorate ghost speak exchange mimi
 
 Есть несколько способов подключить существующую учетную запись из Lockdrop или других событий к менеджеру учетной записи или кошельку.
 
-Сначала установите [расширение браузера Polkadot.js] (https://github.com/polkadot-js/extension):
+Сначала установите [расширение браузера Polkadot.js](https://github.com/polkadot-js/extension):
 
 {% вкладок %}
 {% tab title="Расширение Polkadot.js" %}
 
 - В Chrome установите через [интернет-магазин Chrome](https://chrome.google.com/webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd)
-- В Firefox установите через [надстройки Firefox] (https://addons.mozilla.org/en-US/firefox/addon/polkadot-js-extension/)
+- В Firefox установите через [надстройки Firefox](https://addons.mozilla.org/en-US/firefox/addon/polkadot-js-extension/)
 - Вам понадобится ваша seed-фраза, набор слов.
 
 Затем щелкните значок Orange P в разделе расширения браузера.

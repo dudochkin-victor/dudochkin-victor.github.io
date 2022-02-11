@@ -17,7 +17,7 @@ updated = 2022-10-02T15:00:00Z
 ### Тестовая сеть Beresheet
 
 - Сетевое имя: Берешит
-- URL-адрес RPC: [https://beresheet2.edgewa.re/evm](https://beresheet2.edgewa.re/evm) \(В качестве альтернативы можно использовать [https://beresheetX.edgewa.re/evm] (https://beresheetX.edgewa.re/evm), где X может быть любым числом от 1 до 8.\)
+- URL-адрес RPC: [https://beresheet2.edgewa.re/evm](https://beresheet2.edgewa.re/evm) \(В качестве альтернативы можно использовать [https://beresheetX.edgewa.re/evm](https://beresheetX.edgewa.re/evm), где X может быть любым числом от 1 до 8.\)
 - ID цепи: 2022
 
 ### Локальный узел разработки Edgeware
@@ -29,14 +29,14 @@ updated = 2022-10-02T15:00:00Z
 ### Основная сеть Edgeware
 
 - Сетевое имя: Edgeware
-- URL-адрес RPC: [https://mainnet2.edgewa.re/evm](https://mainnet2.edgewa.re/evm) \(В качестве альтернативы можно использовать [https://mainnetX.edgewa.re/evm] (https://mainnetX.edgewa.re/evm), где X может быть любым числом от 1 до 20.\)
+- URL-адрес RPC: [https://mainnet2.edgewa.re/evm](https://mainnet2.edgewa.re/evm) \(В качестве альтернативы можно использовать [https://mainnetX.edgewa.re/evm](https://mainnetX.edgewa.re/evm), где X может быть любым числом от 1 до 20.\)
 - ID цепи: 2021
 
 ### Инструменты EDG EVM
 
 обозреватель блоков testnet [https://beresheet.edgscan.com/](https://beresheet.edgscan.com/)
 
-обозреватель блоков основной сети [https://mainnet.edgscan.com/] (https://mainnet.edgscan.com/)
+обозреватель блоков основной сети [https://mainnet.edgscan.com/](https://mainnet.edgscan.com/)
 
 Генератор ключей Edgeware [https://edgewa.re/keygen](https://edgewa.re/keygen)
 

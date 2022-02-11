@@ -220,7 +220,7 @@ console.log(`Valid Program Address: ${validProgramAddress}`);
 
 ### SystemProgram
 
-[Исходная документация] (https://solana-labs.github.io/solana-web3.js/classes/SystemProgram.html)
+[Исходная документация](https://solana-labs.github.io/solana-web3.js/classes/SystemProgram.html)
 
 SystemProgram предоставляет возможность создавать учетные записи, распределять данные учетных записей, назначать учетную запись программам, работать с одноразовыми учетными записями и передавать лампы. Вы можете использовать класс SystemInstruction, чтобы помочь с расшифровкой и чтением отдельных инструкций.
 
@@ -304,7 +304,7 @@ await web3.sendAndConfirmTransaction(connection, assignTransaction, [payer, assi
 
 ### Secp256k1Program
 
-[Исходная документация] (https://solana-labs.github.io/solana-web3.js/classes/Secp256k1Program.html)
+[Исходная документация](https://solana-labs.github.io/solana-web3.js/classes/Secp256k1Program.html)
 
 Secp256k1Program используется для проверки подписей Secp256k1, которые используются как Биткойном, так и Эфириумом.
 
@@ -362,7 +362,7 @@ await web3.sendAndConfirmTransaction(connection, transaction, [fromPublicKey]);
 
 ### Message
 
-[Исходная документация] (https://solana-labs.github.io/solana-web3.js/classes/Message.html)
+[Исходная документация](https://solana-labs.github.io/solana-web3.js/classes/Message.html)
 
 Сообщение используется как еще один способ построения транзакций. Вы можете создать сообщение, используя учетные записи, заголовок, инструкции и недавний блокхеш, которые являются частью транзакции. [Транзакция](javascript-api.md#Transaction) — это сообщение и список подписей, необходимых для выполнения транзакции.
 
@@ -641,7 +641,7 @@ VoteAccount {
 
 ### StakeProgram
 
-[Исходная документация] (https://solana-labs.github.io/solana-web3.js/classes/StakeProgram.html)
+[Исходная документация](https://solana-labs.github.io/solana-web3.js/classes/StakeProgram.html)
 
 StakeProgram упрощает размещение SOL и делегирование их любым валидаторам в сети. Вы можете использовать StakeProgram для создания стейк-аккаунта, ставки SOL, авторизации аккаунтов для снятия вашей ставки, деактивации вашей ставки и вывода средств. Класс StakeInstruction используется для декодирования и чтения дополнительных инструкций из транзакций, вызывающих StakeProgram.
 
@@ -721,7 +721,7 @@ await web3.sendAndConfirmTransaction(connection, withdrawTransaction, [fromPubli
 
 ### Authorized
 
-[Исходная документация] (https://solana-labs.github.io/solana-web3.js/classes/Authorized.html)
+[Исходная документация](https://solana-labs.github.io/solana-web3.js/classes/Authorized.html)
 
 Authorized — это объект, используемый при создании авторизованной учетной записи для ставок в Solana. Вы можете указать «стейкера» и «выводчика» отдельно, что позволит снимать средства с другой учетной записи, отличной от стейкера.
 

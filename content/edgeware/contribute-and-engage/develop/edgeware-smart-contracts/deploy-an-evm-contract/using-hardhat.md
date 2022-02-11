@@ -166,7 +166,7 @@ npm install @nomiclabs/hardhat-ethers ethers
 Внутри `module.exports` нам нужно указать версию Solidity \(`0.8.1` в соответствии с нашим файлом контракта\) и сведения о сети. Здесь мы используем сеть testnet\(Beresheet\) для следующего примера:
 
 - Сетевое имя: Берешит
-- URL-адрес RPC: [https://beresheet.edgewa.re/evm](https://beresheet.edgewa.re/evm) \(В качестве альтернативы можно использовать [https://beresheetX.edgewa.re/evm] (https://beresheetX.edgewa.re/evm), где X может быть любым числом от 1 до 8.\)
+- URL-адрес RPC: [https://beresheet.edgewa.re/evm](https://beresheet.edgewa.re/evm) \(В качестве альтернативы можно использовать [https://beresheetX.edgewa.re/evm](https://beresheetX.edgewa.re/evm), где X может быть любым числом от 1 до 8.\)
 - ID цепи: 2022
 
 Если вы хотите выполнить развертывание на локальном узле разработки Edgeware, вы можете использовать следующие сведения о сети:
@@ -178,7 +178,7 @@ npm install @nomiclabs/hardhat-ethers ethers
 Если вы хотите выполнить развертывание в основной сети Edgeware, вы можете использовать следующие сведения о сети:
 
 - Сетевое имя: Edgeware
-- URL RPC: [https://mainnet.edgewa.re/evm](https://mainnet.edgewa.re/evm) \(В качестве альтернативы можно использовать [https://mainnetX.edgewa.re/evm] (https://mainnetX.edgewa.re/evm), где X может быть любым числом от 1 до 20.\)
+- URL RPC: [https://mainnet.edgewa.re/evm](https://mainnet.edgewa.re/evm) \(В качестве альтернативы можно использовать [https://mainnetX.edgewa.re/evm](https://mainnetX.edgewa.re/evm), где X может быть любым числом от 1 до 20.\)
 - ID цепи: 2021
 
 Файл конфигурации Hardhat должен выглядеть так:

@@ -93,7 +93,7 @@ Divide     9   219
 
 ## Загрузчики
 
-Программы развертываются и выполняются с помощью загрузчиков времени выполнения, в настоящее время существует два поддерживаемых загрузчика [BPF Loader] (https://github.com/solana-labs/solana/blob/7ddf10e602d2ed87a9e3737aa8c32f1db9f909d8/sdk/program/src/bpf_loader.rs#L17 ) и [загрузчик BPF устарел] (https://github.com/solana-labs/solana/blob/7ddf10e602d2ed87a9e3737aa8c32f1db9f909d8/sdk/program/src/bpf_loader_deprecated.rs#L14)
+Программы развертываются и выполняются с помощью загрузчиков времени выполнения, в настоящее время существует два поддерживаемых загрузчика [BPF Loader](https://github.com/solana-labs/solana/blob/7ddf10e602d2ed87a9e3737aa8c32f1db9f909d8/sdk/program/src/bpf_loader.rs#L17 ) и [загрузчик BPF устарел](https://github.com/solana-labs/solana/blob/7ddf10e602d2ed87a9e3737aa8c32f1db9f909d8/sdk/program/src/bpf_loader_deprecated.rs#L14)
 
 Загрузчики могут поддерживать разные бинарные интерфейсы приложений, поэтому разработчики должны писать свои программы и развертывать их для одного и того же загрузчика. Если программа, написанная для одного загрузчика, развертывается на другом, результатом обычно является ошибка AccessViolation из-за несоответствующей десериализации входных параметров программы.
 

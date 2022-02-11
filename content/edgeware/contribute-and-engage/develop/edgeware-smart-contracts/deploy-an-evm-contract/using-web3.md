@@ -12,7 +12,7 @@ updated = 2022-10-02T15:00:00Z
 
 ### Проверка предпосылок <a id="checking-prerequisities"></a>
 
-Установлен [Nodejs](https://nodejs.org/en/) и конкретный менеджер пакетов, например [yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) или [npm] (https://www.npmjs.com/get-npm), остальные батареи включены в это руководство. В этом руководстве предполагается, что у вас есть [работающий локальный узел Edgeware EVM, работающий в режиме --dev]. контракт-evm/настройка-узла-edgeware-evm).
+Установлен [Nodejs](https://nodejs.org/en/) и конкретный менеджер пакетов, например [yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable) или [npm](https://www.npmjs.com/get-npm), остальные батареи включены в это руководство. В этом руководстве предполагается, что у вас есть [работающий локальный узел Edgeware EVM, работающий в режиме --dev]. контракт-evm/настройка-узла-edgeware-evm).
 
 ```
 git clone https://github.com/edgeware-builders/tutorials tutorials;cd tutorials/web3;yarn

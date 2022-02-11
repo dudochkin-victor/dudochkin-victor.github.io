@@ -96,7 +96,7 @@ solana-watchtower --validator-identity <YOUR VALIDATOR IDENTITY>
 
 Мы рекомендуем использовать уникальный депозитный счет для каждого из ваших пользователей.
 
-Аккаунты Solana должны быть освобождены от арендной платы за счет содержания [арендной платы] (developing/programming-model/accounts.md#rent) за 2 года в SOL. Чтобы найти минимальный безвозмездный баланс для ваших депозитных счетов, запросите конечную точку [`getMinimumBalanceForRentExemption`](developing/clients/jsonrpc-api.md#getminimumbalanceforrentexemption):
+Аккаунты Solana должны быть освобождены от арендной платы за счет содержания [арендной платы](developing/programming-model/accounts.md#rent) за 2 года в SOL. Чтобы найти минимальный безвозмездный баланс для ваших депозитных счетов, запросите конечную точку [`getMinimumBalanceForRentExemption`](developing/clients/jsonrpc-api.md#getminimumbalanceforrentexemption):
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc": "2.0","id":1,"method":"getMinimumBalanceForRentExemption","params":[0]}' localhost:8899
@@ -325,12 +325,12 @@ solana fees --url http://localhost:8899
 solana transfer <USER_ADDRESS> <AMOUNT> --no-wait --allow-unfunded-recipient --blockhash <RECENT_BLOCKHASH> --keypair <KEYPAIR> --url http://localhost:8899
 ```
 
-Вы также можете создать, подписать и сериализовать транзакцию вручную и отправить ее в кластер с помощью JSON-RPC [конечная точка sendTransaction] (developing/clients/jsonrpc-api.md#sendtransaction).
+Вы также можете создать, подписать и сериализовать транзакцию вручную и отправить ее в кластер с помощью JSON-RPC [конечная точка sendTransaction](developing/clients/jsonrpc-api.md#sendtransaction).
 
 #### Подтверждение транзакции и завершенность
 
 Получите статус пакета транзакций, используя конечную точку [`getSignatureStatuses` JSON-RPC](developing/clients/jsonrpc-api.md#getsignaturestatuses).
-Поле «подтверждения» сообщает, сколько [подтвержденных блоков] (../terminology.md#confirmed-block) прошло с момента обработки транзакции. Если `confirmations: null`, это [finalized](../terminology.md#finality).
+Поле «подтверждения» сообщает, сколько [подтвержденных блоков](../terminology.md#confirmed-block) прошло с момента обработки транзакции. Если `confirmations: null`, это [finalized](../terminology.md#finality).
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0", "id":1, "method":"getSignatureStatuses", "params":[["5VERv8NMvzbJMEkV8xnrLkEaWRtSz9CosKDYjCJjBRnbJLgp8uirBgmQpjKhoR4tjF3ZpRzrFmBV6UjKdiSZkQUW", "5j7s6NiJS3JAkvgkoc18WVAsiSaci2pxB2A6ueCJP4tprA2TFg9wSyTLeYouxPBJEMzJinENTkpA52YStRW5Dia7"]]}' http://localhost:8899
@@ -461,7 +461,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc": "2.0","id":1,"m
 
 ## Поддержка стандарта токенов SPL
 
-[Токен SPL] (https://spl.solana.com/token) — это стандарт для создания и обмена обернутых/синтетических токенов в блокчейне Solana.
+[Токен SPL](https://spl.solana.com/token) — это стандарт для создания и обмена обернутых/синтетических токенов в блокчейне Solana.
 
 Рабочий процесс токена SPL похож на рабочий процесс собственных токенов SOL, но есть несколько отличий, которые будут обсуждаться в этом разделе.
 

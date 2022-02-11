@@ -36,7 +36,7 @@ let clock = Clock::from_account_info(&clock_sysvar_info)?;
 
 - Адрес: `SysvarC1ock11111111111111111111111111111111`
 
-- Макет: [Часы] (https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/clock/struct.Clock.html)
+- Макет: [Часы](https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/clock/struct.Clock.html)
 
 - Поля:
   
@@ -52,7 +52,7 @@ let clock = Clock::from_account_info(&clock_sysvar_info)?;
 
 ## Расписание эпох
 
-Системная переменная EpochSchedule содержит константы планирования эпохи, которые устанавливаются в генезисе, и позволяет вычислять количество слотов в данной эпохе, эпоху для данного слота и т. д. (Примечание: расписание эпохи отличается от [`лидерного расписания`] (terminology.md#лидер-расписание))
+Системная переменная EpochSchedule содержит константы планирования эпохи, которые устанавливаются в генезисе, и позволяет вычислять количество слотов в данной эпохе, эпоху для данного слота и т. д. (Примечание: расписание эпохи отличается от [`лидерного расписания`](terminology.md#лидер-расписание))
 
 - Адрес: `SysvarEpochSchedu1e111111111111111111111111`
 - Макет: [EpochSchedule](https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/epoch_schedule/struct.EpochSchedule.html)

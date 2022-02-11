@@ -6,14 +6,14 @@ updated = 2022-10-02T15:00:00Z
 
 ### Цепные интерфейсы
 
-- [Содружество] (https://Commonwealth.im)
-- [Пользовательский интерфейс Polkadot] (https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fmainnet1.edgewa.re#/explorer)
+- [Содружество](https://Commonwealth.im)
+- [Пользовательский интерфейс Polkadot](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fmainnet1.edgewa.re#/explorer)
 
 ## Пользовательский интерфейс в горошек
 
 [Пользовательский интерфейс Polkadot](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fmainnet1.edgewa.re#/explorer) — это важный интерфейс для выполнения различных действий с Edgeware и Цепи на основе субстрата. Это будет основной способ вашего взаимодействия с сетью Edgeware, будь то стейкинг, операции с учетными записями, некоторые функции управления или многое другое.
 
-Вторичным по отношению к пользовательскому интерфейсу Polkadot является [Commonwealth.im] (http://Commonwealth.im), который сочетает в себе обсуждения и опросы в сети с функциями управления и учетной записи. Поскольку Commonwealth все еще находится в стадии разработки, многие инструкции на этом сайте будут написаны для пользовательского интерфейса Polkadot.
+Вторичным по отношению к пользовательскому интерфейсу Polkadot является [Commonwealth.im](http://Commonwealth.im), который сочетает в себе обсуждения и опросы в сети с функциями управления и учетной записи. Поскольку Commonwealth все еще находится в стадии разработки, многие инструкции на этом сайте будут написаны для пользовательского интерфейса Polkadot.
 
 **Функции**
 
@@ -31,7 +31,7 @@ updated = 2022-10-02T15:00:00Z
   - В настоящее время **кошелек находится в разработке**. Он поддерживает просмотр балансов, отправку и получение транзакций, а также действия по управлению через пользовательский интерфейс Commonwealth.im. Показанные общедоступные адреса не отображают версию с кодировкой сетевого идентификатора Edgeware в настоящее время, но эта функция должна появиться к концу недели запуска. Вы должны восстановить свой публичный адрес, используя ссылку ниже.
 - [**Расширение браузера Polkadot JS**](https://github.com/polkadot-js/extension)**\(**[**Chrome**](https://chrome.google.com/ webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd) **и** [**Firefox**](https://addons.mozilla.org/en-US/firefox/addon/polkadot-js-extension /)**\)**
   - Может использоваться для подключения адресов EDG к Commonwealth.im. \(Это официальное расширение кошелька Polkadot\)
-  - Поддерживает большинство функций через [пользовательский интерфейс Polkadot] (https://polkadot.js.org/apps/#/explorer).
+  - Поддерживает большинство функций через [пользовательский интерфейс Polkadot](https://polkadot.js.org/apps/#/explorer).
   - Расширение браузера Polkadot.js ** не отображает идентификатор сети Edgeware, закодированный в настоящее время. ** Публичный адрес вашего кошелька EDG, показанный в расширении, закодирован с использованием «идентификатора сети по умолчанию» Subkey, программы, которая генерирует пары ключей для цепочек на основе субстрата. В результате отображаемые общедоступные адреса могут оказаться бесполезными для использования обозревателей блоков. Вы должны повторно сгенерировать свой открытый ключ, чтобы получить общедоступный адрес, закодированный в идентификаторе сети Edgeware, см. выше.
 * [MathWallet Browser Extension](https://www.mathwallet.org/en/)
 * [Polkawallet](https://polkawallet.io/) -Мобильный кошелек для Polkadot на iOS и Android. В настоящее время находится в разработке, но бета-версия доступна для скачивания. Следите за развитием на [GitHub](https://github.com/polkawallet-io/polkawallet-RN).
@@ -75,13 +75,13 @@ updated = 2022-10-02T15:00:00Z
 
 ### Узлы и развертывание
 
-- [Набор инструментов инфраструктуры Gantree для субстрата] (https://github.com/flex-dapps/gantree-lib-nodejs)
-- [Polkalert: мониторинг узлов] (https://polkalert.com/)
-- [Телеметрия: статистика узлов] (https://telemetry.polkadot.io/)
+- [Набор инструментов инфраструктуры Gantree для субстрата](https://github.com/flex-dapps/gantree-lib-nodejs)
+- [Polkalert: мониторинг узлов](https://polkalert.com/)
+- [Телеметрия: статистика узлов](https://telemetry.polkadot.io/)
 
 ### Обозреватели блоков
 
-- [Проводник приложений Polkadot-JS] (https://polkadot.js.org/apps/#/explorer) - блок панели инструментов Polkadot
+- [Проводник приложений Polkadot-JS](https://polkadot.js.org/apps/#/explorer) - блок панели инструментов Polkadot
   
   исследователь. В настоящее время подключается к Kusama по умолчанию, но может быть настроен для подключения к другим
   
@@ -89,11 +89,11 @@ updated = 2022-10-02T15:00:00Z
 
 - [Polkascan](https://polkascan.io/) - Обозреватель блокчейна для Polkadot, Kusama и других связанных
   
-  цепи. [Репозиторий] (https://github.com/polkascan/polkascan-os).
+  цепи. [Репозиторий](https://github.com/polkascan/polkascan-os).
 
 - [Subscan](https://subscan.io) - Обозреватель блокчейнов для цепочек субстратов.
   
-  [Репозиторий] (https://github.com/itering/subscan-essentials).
+  [Репозиторий](https://github.com/itering/subscan-essentials).
 
 ### ВАСМ
 
@@ -115,20 +115,20 @@ updated = 2022-10-02T15:00:00Z
 
 ### Инструменты смарт-контракта
 
-- [Halva] (https://github.com/halva-suite/halva) - локальная среда разработки, вдохновленная трюфелем.
+- [Halva](https://github.com/halva-suite/halva) - локальная среда разработки, вдохновленная трюфелем.
   
   для подложки.
 
-- [Красное пятно] (https://github.com/patractlabs/redspot)
+- [Красное пятно](https://github.com/patractlabs/redspot)
 
 ### Смесители
 
-- [BlockX Labs testEDG Faucet] (https://faucets.blockxlabs.com/)
+- [BlockX Labs testEDG Faucet](https://faucets.blockxlabs.com/)
 
 ### Программы грантов
 
-- [Программа грантов Edgeware] (https://commonwealth.im/edgeware/proposal/discussion/466-creating-edgeware-grants)
-- [Программа грантов Web3Foundation] (https://web3.foundation/grants/)
+- [Программа грантов Edgeware](https://commonwealth.im/edgeware/proposal/discussion/466-creating-edgeware-grants)
+- [Программа грантов Web3Foundation](https://web3.foundation/grants/)
 
 ### Фиды API
 
@@ -136,8 +136,8 @@ updated = 2022-10-02T15:00:00Z
 
 ### Генерация и преобразование ключей
 
-- [Оригинальный генератор ключей Edgeware для преобразователя ключей Lockdrop и Pub] (https://edgewa.re/keygen/)
-- [Подключ: Генерация ключей для цепочек субстратов] (https://substrate.dev/docs/en/ecosystem/subkey)
+- [Оригинальный генератор ключей Edgeware для преобразователя ключей Lockdrop и Pub](https://edgewa.re/keygen/)
+- [Подключ: Генерация ключей для цепочек субстратов](https://substrate.dev/docs/en/ecosystem/subkey)
 
 ### Поставщики услуг «Узел как услуга»
 
@@ -151,29 +151,29 @@ _Следующие объявили о своем намерении разра
 
 - Ankr.com
 - Ставка.Рыба
-- [https://deploy.radar.tech/] (https://deploy.radar.tech/)
+- [https://deploy.radar.tech/](https://deploy.radar.tech/)
 
 ## Сетевой мониторинг и отчетность
 
-- [Служба телеметрии Polkadot] (https://telemetry.polkadot.io/) - Сетевая информация, включая то, что
+- [Служба телеметрии Polkadot](https://telemetry.polkadot.io/) - Сетевая информация, включая то, что
   
   узлы работают в цепочке, какие версии программного обеспечения они используют, состояние синхронизации и местоположение.
 
 - Polkabot - мониторинг сети Polkadot и отчеты с использованием чата Matrix \(Riot / Element\). Пользователи могут
   
-  создавать собственные плагины для ботов. [Сообщение в блоге] (https://medium.com/polkadot-network/polkabot-a3dba18c20c8).
+  создавать собственные плагины для ботов. [Сообщение в блоге](https://medium.com/polkadot-network/polkabot-a3dba18c20c8).
 
 - [Telegram Bot Рябиной](https://github.com/Ryabina-io/substratebot) - Telegram бот для
   
   мониторинг событий в цепочке цепочек Substrate.
   
-  [Репозиторий Github] (https://gitlab.com/Polkabot/polkabot)
+  [Репозиторий Github](https://gitlab.com/Polkabot/polkabot)
 
 - [PolkaStats](https://polkastats.io/) - Статистика сети Polkadot \(включая Kusama\). Шоу
   
   сетевая информация и детали стейкинга от валидаторов и намерений.
   
-  [Репозиторий Github] (https://github.com/Colm3na/polkastats-v2/).
+  [Репозиторий Github](https://github.com/Colm3na/polkastats-v2/).
 
 - [Panic](https://github.com/SimplyVC/panic_polkadot) - сервер мониторинга и оповещения узлов для
   
@@ -185,19 +185,19 @@ _Следующие объявили о своем намерении разра
 
 ## Клиенты
 
-— [Polkadot] (https://github.com/paritytech/polkadot) — Rust-реализация хоста Polkadot.
+— [Polkadot](https://github.com/paritytech/polkadot) — Rust-реализация хоста Polkadot.
 
-- [Kagome] (https://github.com/soramitsu/kagome) - клиент C++ Polkadot, разработанный
+- [Kagome](https://github.com/soramitsu/kagome) - клиент C++ Polkadot, разработанный
   
-  [Сорамицу] (https://github.com/soramitsu).
+  [Сорамицу](https://github.com/soramitsu).
 
-— [Gossamer] (https://github.com/ChainSafe/gossamer) — Go-реализация хоста Polkadot.
+— [Gossamer](https://github.com/ChainSafe/gossamer) — Go-реализация хоста Polkadot.
 
 - [Клиент Polkadot-JS](https://github.com/polkadot-js/client) - Альтернативный клиент для JavaScript
   
   энтузиасты.
 
-- [TX Wrapper] (https://github.com/paritytech/txwrapper) - Вспомогательные функции для офлайн-транзакций.
+- [TX Wrapper](https://github.com/paritytech/txwrapper) - Вспомогательные функции для офлайн-транзакций.
   
   поколение.
 
@@ -207,13 +207,13 @@ _Следующие объявили о своем намерении разра
   
   Ржавчина. Polkadot строится поверх Substrate.
 
-- [База знаний по субстрату] (https://substrate.dev/docs/en/) - Полная документация и
+- [База знаний по субстрату](https://substrate.dev/docs/en/) - Полная документация и
   
   учебные пособия по созданию блокчейна с использованием Substrate.
 
-- [Плагин Substrate VSCode] (https://github.com/paritytech/vscode-substrate).
+- [Плагин Substrate VSCode](https://github.com/paritytech/vscode-substrate).
 
-- [Substrate Debug Kit] (https://github.com/paritytech/substrate-debug-kit) - Коллекция отладочных
+- [Substrate Debug Kit](https://github.com/paritytech/substrate-debug-kit) - Коллекция отладочных
   
   инструменты и библиотеки вокруг цепочек субстратов. Включает инструменты для расчета выборов NPoS в автономном режиме,
   
@@ -223,11 +223,11 @@ _Следующие объявили о своем намерении разра
   
   версии зависимостей.
 
-- [Запуск Polkadot] (https://github.com/shawntabrizi/polkadot-launch) - инструмент для легкого запуска
+- [Запуск Polkadot](https://github.com/shawntabrizi/polkadot-launch) - инструмент для легкого запуска
   
   настраиваемые локальные версии Polkadot с поддержкой парачейна.
 
-- [Halva] (https://github.com/halva-suite/halva) - локальная среда разработки, вдохновленная трюфелем.
+- [Halva](https://github.com/halva-suite/halva) - локальная среда разработки, вдохновленная трюфелем.
   
   для подложки.
 
@@ -249,19 +249,19 @@ _Следующие объявили о своем намерении разра
 
 ## интерфейс
 
-- [Polkadash] (https://github.com/Swader/polkadash) - стартовый набор на основе VueJS для пользовательского пользователя.
+- [Polkadash](https://github.com/Swader/polkadash) - стартовый набор на основе VueJS для пользовательского пользователя.
   
   интерфейсы для цепочек субстратов. [Учебники](https://dotleap.com/tag/tutorial/).
 
-- [Пользовательский интерфейс приложений Polkadot JS] (https://github.com/polkadot-js/apps) - Репозиторий
+- [Пользовательский интерфейс приложений Polkadot JS](https://github.com/polkadot-js/apps) - Репозиторий
   
   [polkadot.js.org/apps](https://polkadot.js.org/apps) Пользовательский интерфейс.
 
-- [Шаблон внешнего интерфейса Substrate] (https://github.com/substrate-developer-hub/substrate-front-end-template) -
+- [Шаблон внешнего интерфейса Substrate](https://github.com/substrate-developer-hub/substrate-front-end-template) -
   
   Начальный пользовательский интерфейс на основе ReactJS для настраиваемых пользовательских интерфейсов для цепочек субстратов.
 
-- [Расширение браузера Polkadot JS] (https://github.com/polkadot-js/extension) - управление ключами в
+- [Расширение браузера Polkadot JS](https://github.com/polkadot-js/extension) - управление ключами в
   
   расширение для хрома.
 
@@ -275,7 +275,7 @@ Polkadot-JS Common предоставляет различные служебн�
   
   JavaScript, полезный для создания кошельков или любого приложения, которое потребует от пользователя записи в
   
-  цепь. [Примеры] (https://polkadot.js.org/docs/keyring/start/create).
+  цепь. [Примеры](https://polkadot.js.org/docs/keyring/start/create).
 
 - [@polkadot/util](https://polkadot.js.org/common/util/) Функции утилиты, такие как проверка строки
   
@@ -289,7 +289,7 @@ Polkadot-JS Common предоставляет различные служебн�
 
 - Команда [@polkadot/api-cli](https://github.com/polkadot-js/tools/tree/master/packages/api-cli)
   
-  линейный интерфейс для API polkadot. [Документация] (https://polkadot.js.org/docs/api/start).
+  линейный интерфейс для API polkadot. [Документация](https://polkadot.js.org/docs/api/start).
 
 - [@polkadot/monitor-rpc](https://github.com/polkadot-js/tools/tree/master/packages/monitor-rpc) RPC
   
@@ -327,29 +327,29 @@ Polkadot-JS Common предоставляет различные служебн�
   
   Демонстрирует, как инструменты JS взаимодействуют с узлом через RPC.
 
-- [Документация по RPC] (https://polkadot.js.org/docs/substrate/rpc).
+- [Документация по RPC](https://polkadot.js.org/docs/substrate/rpc).
 
-- [Сервер API Polkadot от SimplyVC] (https://github.com/SimplyVC/polkadot_api_server).
+- [Сервер API Polkadot от SimplyVC](https://github.com/SimplyVC/polkadot_api_server).
 
-- [Перейти: Subscan API] (https://github.com/itering/substrate-api-rpc).
+- [Перейти: Subscan API](https://github.com/itering/substrate-api-rpc).
 
 - [C++ Polkadot API](https://github.com/usetech-llc/polkadot_api_cpp) - С++ API для Polkadot.
 
-- [.NET Polkadot API] (https://github.com/usetech-llc/polkadot_api_dotnet) - Polkadot Substrate API
+- [.NET Polkadot API](https://github.com/usetech-llc/polkadot_api_dotnet) - Polkadot Substrate API
   
   для .NET.
 
-- [Python Polkadot API] (https://github.com/polkascan/py-substrate-interface).
+- [Python Polkadot API](https://github.com/polkascan/py-substrate-interface).
 
-- [GSRPC] (https://github.com/centrifuge/go-substrate-rpc-client/) - Подложка RPC-клиента в Go,
+- [GSRPC](https://github.com/centrifuge/go-substrate-rpc-client/) - Подложка RPC-клиента в Go,
   
   он же GSRPC.
 
-- [Substrate API Sidecar] (https://github.com/paritytech/substrate-api-sidecar) — HTTP-оболочка для
+- [Substrate API Sidecar](https://github.com/paritytech/substrate-api-sidecar) — HTTP-оболочка для
 
   Подложка, абстрагирующая некоторые сложные вызовы RPC в простые вызовы REST.
 
-- [Subxt] (https://github.com/paritytech/substrate-subxt) — библиотека Rust для отправки внешних данных в Узел субстрата через RPC.
+- [Subxt](https://github.com/paritytech/substrate-subxt) — библиотека Rust для отправки внешних данных в Узел субстрата через RPC.
 
 ### SCALE Codec
 
@@ -359,38 +359,38 @@ Polkadot-JS Common предоставляет различные служебн�
 
 Он используется почти во всех сообщениях с узлами Substrate и с ними, поэтому существуют реализации на разных языках:
 
-- [Рубин] (https://github.com/itering/scale.rb)
-- [Ржавчина] (https://github.com/paritytech/parity-scale-codec)
-- [Перейти] (https://github.com/itering/scale.go)
-- [С++] (https://github.com/soramitsu/kagome/tree/master/core/scale)
-- [TypeScript] (https://github.com/polkadot-js/api)
-- [AssemblyScript] (https://github.com/LimeChain/as-scale-codec)
-- [Хаскелл] (https://github.com/airalab/hs-web3/tree/master/src/Codec)
-- [Java] (https://github.com/emeraldpay/polkaj)
-- [Питон] (https://github.com/polkascan/py-scale-codec)
+- [Рубин](https://github.com/itering/scale.rb)
+- [Ржавчина](https://github.com/paritytech/parity-scale-codec)
+- [Перейти](https://github.com/itering/scale.go)
+- [С++](https://github.com/soramitsu/kagome/tree/master/core/scale)
+- [TypeScript](https://github.com/polkadot-js/api)
+- [AssemblyScript](https://github.com/LimeChain/as-scale-codec)
+- [Хаскелл](https://github.com/airalab/hs-web3/tree/master/src/Codec)
+- [Java](https://github.com/emeraldpay/polkaj)
+- [Питон](https://github.com/polkascan/py-scale-codec)
 
 ## Сканирование и преобразование данных
 
 Следующие инструменты помогут вам извлечь и структурировать данные из узла Substrate.
 
-- [Комбайн Polkascan PRE] (https://github.com/polkascan/polkascan-pre-harvester)
+- [Комбайн Polkascan PRE](https://github.com/polkascan/polkascan-pre-harvester)
   
   \([соответствующий проводник для собранных данных](https://github.com/polkascan/polkascan-pre-explorer-gui)\).
 
-- [Архив субстратов Parity] (https://github.com/paritytech/substrate-archive).
+- [Архив субстратов Parity](https://github.com/paritytech/substrate-archive).
 
-- [Гидра: конструктор GraphQL] (https://github.com/Joystream/joystream).
+- [Гидра: конструктор GraphQL](https://github.com/Joystream/joystream).
 
 - [Polka-store](https://github.com/TheGoldenEye/polka-store) - инструмент, который сканирует цепочку Substrate.
   
   и сохраняет транзакции, относящиеся к балансу, в базе данных SQLite.
 
-— [Substrate-graph] (https://github.com/playzero/substrate-graph) — компактный индексатор для узлов на основе субстрата, предоставляющий интерфейс GraphQL.
+— [Substrate-graph](https://github.com/playzero/substrate-graph) — компактный индексатор для узлов на основе субстрата, предоставляющий интерфейс GraphQL.
 
   **Разное**
 
-- [GSRPC: Substrate RPC Client в Go] (https://github.com/centrifuge/go-substrate-rpc-client)
+- [GSRPC: Substrate RPC Client в Go](https://github.com/centrifuge/go-substrate-rpc-client)
 
-- [Хронологический планировщик транзакций] (https://blog.chronologic.network/how-to-schedule-edgeware-edg-transactions-ed4bae4c5648)
+- [Хронологический планировщик транзакций](https://blog.chronologic.network/how-to-schedule-edgeware-edg-transactions-ed4bae4c5648)
 
-- [Генератор безопасных мнемонических фраз Edgeware для Lockdrop] (https://github.com/luboremo/Edgeware-seed-generating-script-SSSS)
+- [Генератор безопасных мнемонических фраз Edgeware для Lockdrop](https://github.com/luboremo/Edgeware-seed-generating-script-SSSS)

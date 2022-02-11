@@ -12,7 +12,7 @@ updated = 2022-10-02T15:00:00Z
 
 Эта ошибка означает, что этот межпрограммный вызов превысил допустимую глубину вызова вызова.
 
-См. [Глубина вызовов между программами] (developing/programming-model/calling-between-programs.md#call-depth).
+См. [Глубина вызовов между программами](developing/programming-model/calling-between-programs.md#call-depth).
 
 ## Ошибка `CallDepthExceeded`
 
@@ -30,7 +30,7 @@ updated = 2022-10-02T15:00:00Z
 
 ## Размер кучи
 
-См. [куча] (overview.md#heap)
+См. [куча](overview.md#heap)
 
 ## Неверные данные учетной записи
 

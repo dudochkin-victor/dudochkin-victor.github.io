@@ -12,7 +12,7 @@ Ledger Device — это аппаратный кошелек, который с�
 
 ## Прежде чем начать, убедитесь,
 
-1. Вы [инициализировали] (https://support.ledger.com/hc/en-us/articles/360000613793?docs=true) свое устройство Ledger.
+1. Вы [инициализировали](https://support.ledger.com/hc/en-us/articles/360000613793?docs=true) свое устройство Ledger.
 2. Последняя прошивка [установлена](https://support.ledger.com/hc/en-us/articles/360002731113?docs=true)
 3. Ledger Live _готов к использованию_
 4. Установите последнюю версию приложения Edgeware.
@@ -97,4 +97,4 @@ Ledger Device — это аппаратный кошелек, который с�
 
 - Раздор: [https://discord.gg/tDxgyxym](https://discord.gg/tDxgyxym)
 - Телеграмма: [https://t.me/heyedgeware](https://t.me/heyedgeware)
-- Reddit: [https://www.reddit.com/r/edgeware/] (https://www.reddit.com/r/edgeware/)
+- Reddit: [https://www.reddit.com/r/edgeware/](https://www.reddit.com/r/edgeware/)

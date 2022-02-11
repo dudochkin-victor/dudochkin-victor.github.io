@@ -10,7 +10,7 @@ updated = 2022-10-02T15:00:00Z
 
 Edgeware имеет набор рабочих групп, открытых для всех, кто хочет принять участие — doocracy!
 
-[https://commonwealth.im/edgeware/proposal/discussion/373-introduction-edgeware-working-groups] (https://commonwealth.im/edgeware/proposal/discussion/373-introduction-edgeware-working-groups)
+[https://commonwealth.im/edgeware/proposal/discussion/373-introduction-edgeware-working-groups](https://commonwealth.im/edgeware/proposal/discussion/373-introduction-edgeware-working-groups)
 
 ### Как просмотреть статистику участия и результаты блокировки?
 
@@ -92,7 +92,7 @@ Edgeware запущен с ранней версией Substrate, которая
 
 [Кошелек расширения Clover](https://chrome.google.com/webstore/detail/clover-wallet/nhnkbkgjikgcigadomkphalanndcapjk)\(beta\) также можно использовать в качестве альтернативы расширению Polkadot JS.
 
-Если вы ищете мобильные кошельки, [Polkawallet] (https://polkawallet.io/) и [Math wallet] (https://mathwallet.xyz) — это варианты, которые поддерживают EDG и некоторые функции web3 в сети Edgeware.
+Если вы ищете мобильные кошельки, [Polkawallet](https://polkawallet.io/) и [Math wallet](https://mathwallet.xyz) — это варианты, которые поддерживают EDG и некоторые функции web3 в сети Edgeware.
 
 Кроме того, Zondax в настоящее время разрабатывает поддержку Ledger.
 

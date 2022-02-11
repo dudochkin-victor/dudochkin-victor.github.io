@@ -41,7 +41,7 @@ _Идентификатор встречи: 345 881 968_
 [** Google Событие для ежемесячного вызова **](https://calendar.google.com/event?action=TEMPLATE&tmeid=YnQzMDFxNnFibGVoZ2Z0OHJ1cjVsbW03aGNfMjAyMDAzMThUMTgwMDAwWiBjb21tb253ZWFsdGguaW1faWhiczg5MnBxdWJ2b2d0b2ltNmMxaGY3Y2tAZw&tmsrc=commonwealth.im_ihbs892pqubvogtoim6c1hf7ck%40group.calendar.google.com&scp=ALL)
 [ **Посмотреть весь календарь мероприятий сообщества Edgeware на**](https://calendar.google.com/calendar?cid=Y29tbW9ud2VhbHRoLmltX2loYnM4OTJwcXVidm9ndG9pbTZjMWhmN2NrQGdyb3VwLmNhbGVuZGFyLmdvb2dscalZS5jb20)[**Google Appsendar.google.com**](https:///Google Appsendar.com**] календарь?cid=Y29tbW9ud2VhbHRoLmltX2loYnM4OTJwcXVidm9ndG9pbTZjMWhmN2NrQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
 
-[**Просмотр всего календаря сообщества**](https://calendar.google.com/calendar/embed?src=commonwealth.im_ihbs892pqubvogtoim6c1hf7ck%40group.calendar.google.com&ctz=America%2FDetroit) [через любой веб-браузер] (https://calendar.google.com/calendar/embed?src=commonwealth.im_ihbs892pqubvogtoim6c1hf7ck%40group.calendar.google.com&ctz=America%2FDetroit)
+[**Просмотр всего календаря сообщества**](https://calendar.google.com/calendar/embed?src=commonwealth.im_ihbs892pqubvogtoim6c1hf7ck%40group.calendar.google.com&ctz=America%2FDetroit) [через любой веб-браузер](https://calendar.google.com/calendar/embed?src=commonwealth.im_ihbs892pqubvogtoim6c1hf7ck%40group.calendar.google.com&ctz=America%2FDetroit)
 
 [**Просмотр календаря в других** ](https://calendar.google.com/calendar/ical/commonwealth.im_ihbs892pqubvogtoim6c1hf7ck%40group.calendar.google.com/public/basic.ics)[**Приложения, использующие iCal / ics**](https://calendar.google.com/calendar/ical/commonwealth.im_ihbs892pqubvogtoim6c1hf7ck%40group.calendar.google.com/public/basic.ics)
 

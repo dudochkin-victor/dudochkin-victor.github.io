@@ -4,20 +4,20 @@ sort_by = "weight"
 updated = 2022-10-02T15:00:00Z
 +++
 
-В этом документе описывается, как настроить [Ledger Nano S](https://shop.ledger.com/products/ledger-nano-s) или [Ledger Nano X](https://shop.ledger.com/pages). /ledger-nano-x) с помощью программного обеспечения [Ledger Live] (https://www.ledger.com/ledger-live).
+В этом документе описывается, как настроить [Ledger Nano S](https://shop.ledger.com/products/ledger-nano-s) или [Ledger Nano X](https://shop.ledger.com/pages). /ledger-nano-x) с помощью программного обеспечения [Ledger Live](https://www.ledger.com/ledger-live).
 
 После того, как этапы настройки, показанные ниже, выполнены и приложение Solana установлено на вашем устройстве Nano, у пользователей есть несколько вариантов того, как использовать Nano для взаимодействия с сетью Solana
 
 ## Начиная
 
 - Закажите [Nano S](https://shop.ledger.com/products/ledger-nano-s) или [Nano X](https://shop.ledger.com/pages/ledger-nano-x) из Леджера.
-- Следуйте инструкциям по настройке устройства, включенным в пакет, или [Начальная страница Ledger] (https://www.ledger.com/start/)
-- Установите [программное обеспечение Ledger Live для настольных ПК] (https://www.ledger.com/ledger-live/)
+- Следуйте инструкциям по настройке устройства, включенным в пакет, или [Начальная страница Ledger](https://www.ledger.com/start/)
+- Установите [программное обеспечение Ledger Live для настольных ПК](https://www.ledger.com/ledger-live/)
   - Если у вас уже установлен Ledger Live, обновите Ledger Live до последней версии, которая позволяет устанавливать новейшие прошивки и обновления приложений.
 - Подключите Nano к компьютеру и следуйте инструкциям на экране.
 - Обновите прошивку вашего нового Nano. Это необходимо, чтобы убедиться, что вы можете установить последнюю версию приложения Solana.
-  - [Обновление прошивки Nano S] (https://support.ledger.com/hc/en-us/articles/360002731113-Update-Ledger-Nano-S-firmware)
-  - [Обновление прошивки Nano X] (https://support.ledger.com/hc/en-us/articles/360013349800)
+  - [Обновление прошивки Nano S](https://support.ledger.com/hc/en-us/articles/360002731113-Update-Ledger-Nano-S-firmware)
+  - [Обновление прошивки Nano X](https://support.ledger.com/hc/en-us/articles/360013349800)
 
 ## Установите приложение Solana на свой Nano
 
@@ -35,8 +35,8 @@ updated = 2022-10-02T15:00:00Z
 - Убедитесь, что у вас есть Ledger Live версии 2.10.0 или новее.
   - Чтобы проверить свою версию Ledger Live, нажмите кнопку «Настройки» в правом верхнем углу, затем нажмите «О программе». Если доступна более новая версия Ledger Live, вы должны увидеть баннер с предложением выполнить обновление при первом открытии Ledger Live.
 - Обновите прошивку на вашем Nano
-  - [Обновление прошивки Nano S] (https://support.ledger.com/hc/en-us/articles/360002731113-Update-Ledger-Nano-S-firmware)
-  - [Обновление прошивки Nano X] (https://support.ledger.com/hc/en-us/articles/360013349800)
+  - [Обновление прошивки Nano S](https://support.ledger.com/hc/en-us/articles/360002731113-Update-Ledger-Nano-S-firmware)
+  - [Обновление прошивки Nano X](https://support.ledger.com/hc/en-us/articles/360013349800)
 - После успешного обновления прошивки приложение Solana должно быть автоматически переустановлено с последней версией приложения.
 
 ## Взаимодействуйте с сетью Solana

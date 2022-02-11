@@ -8,7 +8,7 @@ Git-репозиторий Solana содержит все сценарии, ко
 
 Для всех четырех вариантов вам понадобится последняя версия набора инструментов Rust и исходный код Solana:
 
-Сначала настройте Rust, Cargo и системные пакеты, как описано в Solana [README] (https://github.com/solana-labs/solana#1-install-rustc-cargo-and-rustfmt).
+Сначала настройте Rust, Cargo и системные пакеты, как описано в Solana [README](https://github.com/solana-labs/solana#1-install-rustc-cargo-and-rustfmt).
 
 Теперь проверьте код с github:
 

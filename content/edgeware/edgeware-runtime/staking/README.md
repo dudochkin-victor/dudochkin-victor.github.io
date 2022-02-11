@@ -35,6 +35,6 @@ Edgeware использует версию Proof-of-Stake, которая наз
 
 - Валидаторы при запуске: 10
 - Слоты валидатора при запуске: 60
-- Продолжительность связывания: [14 дней] (https://github.com/hicommonwealth/edgeware-node/blob/7405463cfecbe1aa2b185f365d7b0eec57f094f2/node/runtime/src/lib.rs#L420)
+- Продолжительность связывания: [14 дней](https://github.com/hicommonwealth/edgeware-node/blob/7405463cfecbe1aa2b185f365d7b0eec57f094f2/node/runtime/src/lib.rs#L420)
 - Продолжительность отложенной косой черты: 7 дней
 - Отмена косой черты: требуется 3/4 совета - нужно пересмотреть это

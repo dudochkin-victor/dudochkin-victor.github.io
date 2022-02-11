@@ -6,7 +6,7 @@ updated = 2022-10-02T15:00:00Z
 
 ![](../../../../../../../.gitbook/assets/wafflelogo.png)
 
-[Waffle] (https://www.getwaffle.io) — популярная среда разработки для тестирования смарт-контрактов Solidity. Поскольку Edgeware совместим с Ethereum, с несколькими дополнительными строками конфигурации вы можете использовать Edgeware, как обычно, с Ethereum для разработки на Edgeware.
+[Waffle](https://www.getwaffle.io) — популярная среда разработки для тестирования смарт-контрактов Solidity. Поскольку Edgeware совместим с Ethereum, с несколькими дополнительными строками конфигурации вы можете использовать Edgeware, как обычно, с Ethereum для разработки на Edgeware.
 
 ### Настройте Waffle для подключения к Edgware <a href="configure-waffle-to-connect-to-moonbeam" id="configure-waffle-to-connect-to-moonbeam"></a>
 

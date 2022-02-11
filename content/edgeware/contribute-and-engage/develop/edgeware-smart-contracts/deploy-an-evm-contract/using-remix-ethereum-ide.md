@@ -6,7 +6,7 @@ updated = 2022-10-02T15:00:00Z
 
 ## Введение <a id="introduction"></a>
 
-В этом руководстве рассматривается процесс создания и развертывания смарт-контракта на основе Solidity на узле разработки Edgeware с помощью [Remix IDE] (https://remix.ethereum.org/). Remix — одна из наиболее часто используемых сред разработки смарт-контрактов на Ethereum. Учитывая возможности совместимости Edgeware с Ethereum, Remix можно использовать напрямую с узлом Edgeware.
+В этом руководстве рассматривается процесс создания и развертывания смарт-контракта на основе Solidity на узле разработки Edgeware с помощью [Remix IDE](https://remix.ethereum.org/). Remix — одна из наиболее часто используемых сред разработки смарт-контрактов на Ethereum. Учитывая возможности совместимости Edgeware с Ethereum, Remix можно использовать напрямую с узлом Edgeware.
 
 В этом руководстве предполагается, что у вас есть работающий локальный узел Edgeware, работающий в режиме `--dev`, и что у вас есть установка MetaMask, настроенная на использование этого локального узла. [Вы можете найти инструкции по запуску локального узла Edgeware EVM](https://main.edgeware.wiki/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/setting-up- a-edgeware-evm-node) и [настроить MetaMask для Edgeware](https://main.edgeware.wiki/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using -метамаска).
 

@@ -30,7 +30,7 @@ Visit a block explorer like [Etherscan.io](http://etherscan.io) or others.
 
 {% tab title="Lockdrop Stats Tool" %}
 Посетите страницу статистики блокировки на Commonwealth.im:\
-[https://commonwealth.im/edgeware/stats] (https://commonwealth.im/edgeware/stats)
+[https://commonwealth.im/edgeware/stats](https://commonwealth.im/edgeware/stats)
 
 **Если эта страница недоступна или не работает, переключитесь на вкладку метода Block Explorer.**
 
