@@ -1,6 +1,6 @@
 +++
-title = "Созданеи Solana dApp c нуля"
-description = "Созданеи Solana dApp c нуля"
+title = "Создание Solana dApp c нуля"
+description = "Создание Solana dApp c нуля"
 weight = 1
 +++
 

@@ -74,7 +74,7 @@ weight = 1
 - [Политика обратной совместимости](developing/backwards-compatibility/)
 - [Плагины](developing/plugins/accountsdb-plugin/)
 - Учебники
-    - [Созданеи Solana dApp c нуля](from-scratch/)
+    - [Создание Solana dApp c нуля](from-scratch/)
 
 ## Интеграция
 
