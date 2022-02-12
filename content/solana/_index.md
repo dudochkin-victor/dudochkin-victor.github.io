@@ -4,13 +4,13 @@ description = "Документация Solana"
 weight = 1
 +++
 
-## About
+## Общая информация
 
 - [Введение](introduction/)
 - [Терминология](terminology/)
 - [История](history/)
 
-## Wallets
+## Кошельки
 
 - [Руководство по кошельку Solana](wallet-guide/)
 - [Кошельки для мобильных приложений](wallet-guide/apps/)
@@ -28,12 +28,12 @@ weight = 1
     - [Кошелек файловой системы](wallet-guide/file-system-wallet/)
 - [Поддержка / устранение неполадок](wallet-guide/support/)
 
-## Staking
+## Стэйкинг
 
 - [Стэйкинг на Solana](staking/)
 - [Структура стейкинг-счета](staking/stake-accounts/)
 
-## Command Line
+## Интерфейс командной строки
 
 - [Руководство по командной строке](cli/)
 - [Установка набора инструментов Solana](cli/install-solana-cli-tools/)
@@ -46,7 +46,7 @@ weight = 1
 - [Одноразовые номера устойчивых транзакций](offline-signing/durable-nonce/)
 - [CLI Usage Reference](cli/usage/)
 
-## Developing
+## Разработка
 
 - Programming Model
     - [Обзор](developing/programming-model/overview/)
@@ -73,12 +73,14 @@ weight = 1
 - [Тестовый валидатор Solana](developing/test-validator/)
 - [Политика обратной совместимости](developing/backwards-compatibility/)
 - [Плагины](developing/plugins/accountsdb-plugin/)
+- Учебники
+    - [Созданеи Solana dApp c нуля](from-scratch/)
 
-## Integrating
+## Интеграция
 
 - [Добавьте Солану на свою биржу](integrations/exchange/)
 
-## Validating
+## Валидация
 
 - [Работа валидатора](running-validator/)
 - [Требования к валидатору](running-validator/validator-reqs/)
@@ -90,14 +92,14 @@ weight = 1
 - [Настройка аварийного переключения](running-validator/validator-failover/)
 - [Исправление проблем](running-validator/validator-troubleshoot/)
 
-## Clusters
+## Кластеры
 
 - [Кластеры Solana](clusters/)
 - [Конечные точки RPC кластера Solana](cluster/rpc-endpoints/)
 - [Бенчмарк кластера](cluster/bench-tps/)
 - [Показатели эффективности](cluster/performance-metrics/)
 
-## Architecture
+## Архитектура
 
 - Cluster
     - [Кластер Solana](cluster/overview/)
@@ -116,7 +118,7 @@ weight = 1
     - [Сервис Gossip](validator/gossip/)
     - [Runtime](validator/runtime/)
 
-## Economics
+## Экономика
 
 - [Обзор экономики Соланы](economics-overview/)
 - Inflation Design
