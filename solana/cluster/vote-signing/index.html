@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Безопасное подписание голосов | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/vote-signing/#validatory-litsa-podpisyvaiushchie-golosa-i-zainteresovannye-storony">Валидаторы, лица, подписывающие голоса, и заинтересованные стороны</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/vote-signing/#sluzhba-podpisi">Служба подписи</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/vote-signing/#golosovanie-validatora">Голосование валидатора</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/vote-signing/#konfiguratsiia"><small>- Конфигурация</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/vote-signing/#registratsiia"><small>- Регистрация</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/vote-signing/#sbor-golosov"><small>- Сбор голосов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/vote-signing/#novoe-podpisanie-golosovaniia"><small>- Новое подписание голосования</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Безопасное подписание голосов</h1>
+
+<p>Валидатор получает записи от текущего лидера и отправляет голоса, подтверждающие, что эти записи действительны. Это представление голосования представляет собой проблему безопасности, поскольку поддельные голоса, нарушающие правила консенсуса, могут быть использованы для сокращения доли валидатора.</p>
+<p>Валидатор голосует за выбранную им вилку, отправляя транзакцию, которая использует асимметричный ключ для подписи результата своей проверки. Другие объекты могут проверить эту подпись, используя открытый ключ валидатора. Если ключ валидатора используется для подписи неверных данных (например, голосов на нескольких ответвлениях реестра), доля узла или его ресурсы могут быть скомпрометированы.</p>
+<p>Solana устраняет этот риск, выделяя отдельный сервис <em>vote signer</em>, который оценивает каждый голос, чтобы убедиться, что он не нарушает условие косой черты.</p>
+<h2 id="validatory-litsa-podpisyvaiushchie-golosa-i-zainteresovannye-storony">Валидаторы, лица, подписывающие голоса, и заинтересованные стороны</h2>
+<p>Когда валидатор получает несколько блоков для одного и того же слота, он отслеживает все возможные форки, пока не сможет определить «лучший». Валидатор выбирает лучший форк, отправляя ему голосование, используя подписавшего голос, чтобы свести к минимуму вероятность того, что его голос непреднамеренно нарушит правило консенсуса и урежет ставку.</p>
+<p>Подписавший голос оценивает голос, предложенный валидатором, и подписывает голос, только если он не нарушает условия косой черты. Подписавшемуся голосующему нужно только поддерживать минимальное состояние в отношении голосов, которые он подписал, и голосов, подписанных остальной частью кластера. Ему не нужно обрабатывать полный набор транзакций.</p>
+<p>Заинтересованная сторона — это личность, которая имеет контроль над поставленным капиталом. Заинтересованная сторона может делегировать свою долю лицу, подписавшему голос. После делегирования доли голоса лица, подписавшего голосование, представляют собой вес голосов всех делегированных ставок и дают вознаграждение за все делегированные доли.</p>
+<p>В настоящее время существует отношение 1:1 между валидаторами и лицами, подписавшими голос, и заинтересованные стороны делегируют всю свою долю одному лицу, подписывающему голос.</p>
+<h2 id="sluzhba-podpisi">Служба подписи</h2>
+<p>Служба подписи голосов состоит из сервера JSON RPC и обработчика запросов. При запуске служба запускает сервер RPC на настроенном порту и ожидает запросов валидатора. Он ожидает следующего типа запросов:</p>
+<ol>
+<li>
+<p>Зарегистрируйте новый узел валидатора</p>
+<ul>
+<li>Запрос должен содержать личность валидатора (открытый ключ)</li>
+<li>Запрос должен быть подписан закрытым ключом валидатора.</li>
+<li>Служба отбрасывает запрос, если подпись запроса не может быть проверена</li>
+<li>Сервис создает новый асимметричный ключ голосования для валидатора и возвращает открытый ключ в качестве ответа</li>
+<li>Если валидатор пытается зарегистрироваться снова, сервис возвращает открытый ключ из ранее существовавшей пары ключей.</li>
+</ul>
+</li>
+<li>
+<p>Подпишите голосование</p>
+<ul>
+<li>Запрос должен содержать транзакцию голосования и все данные проверки</li>
+<li>Запрос должен быть подписан закрытым ключом валидатора.</li>
+<li>Служба отбрасывает запрос, если подпись запроса не может быть проверена</li>
+<li>Сервис проверяет данные голосования</li>
+<li>Сервис возвращает подпись для транзакции</li>
+</ul>
+</li>
+</ol>
+<h2 id="golosovanie-validatora">Голосование валидатора</h2>
+<p>Узел проверки при запуске создает новую учетную запись для голосования и регистрирует ее в кластере, отправляя новую транзакцию «регистра голосования». Другие узлы в кластере обрабатывают эту транзакцию и включают новый валидатор в активный набор. Впоследствии валидатор отправляет транзакцию «нового голосования», подписанную закрытым ключом валидатора для голосования при каждом событии голосования.</p>
+<h3 id="konfiguratsiia">Конфигурация</h3>
+<p>Узел валидатора настроен с сетевой конечной точкой службы подписи (IP/Port).</p>
+<h3 id="registratsiia">Регистрация</h3>
+<p>При запуске валидатор регистрируется в своей службе подписи с помощью JSON RPC. Вызов RPC возвращает открытый ключ голосования для узла проверки. Валидатор создает новую транзакцию «регистра голосования», включающую этот открытый ключ, и отправляет ее в кластер.</p>
+<h3 id="sbor-golosov">Сбор голосов</h3>
+<p>Валидатор ищет голоса, отправленные всеми узлами в кластере за последний период голосования. Эта информация передается службе подписи вместе с новым запросом на подпись голосования.</p>
+<h3 id="novoe-podpisanie-golosovaniia">Новое подписание голосования</h3>
+<p>Валидатор создает транзакцию «нового голосования» и отправляет ее в службу подписи с помощью JSON RPC. Запрос RPC также включает данные проверки голосования. В случае успеха вызов RPC возвращает подпись для голосования. В случае сбоя вызов RPC возвращает код сбоя.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

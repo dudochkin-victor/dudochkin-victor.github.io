@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Возврат данных из программ BPF | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#problema">Проблема</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#sushchestvuiushchee-reshenie">Существующее решение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#trebovaniia-k-resheniiu">Требования к решению</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#obzor-drugikh-setei">Обзор других сетей</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#efirium-evm"><small>- Эфириум (EVM)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#parity-substrate"><small>- Parity Substrate</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#otkloneno-reshenie">Отклонено Решение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#predlozhennoe-reshenie">Предложенное решение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/return-data/#primechanie-o-vozvrate-oshibok">Примечание о возврате ошибок</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Возврат данных из программ BPF</h1>
+
+<h2 id="problema">Проблема</h2>
+<p>В языке Solidity разрешено возвращать любое количество значений из функции, например, может быть возвращена строка переменной длины:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>function foo1() public returns (string) {
+</span><span>    return &quot;Hello, world!\n&quot;;
+</span><span>}
+</span></code></pre>
+<p>Допускаются также множественные значения, массивы и структуры.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>struct S {
+</span><span>    int f1;
+</span><span>    bool f2
+</span><span>};
+</span><span>
+</span><span>function foo2() public returns (string, int[], S) {
+</span><span>    return (a, b, c);
+</span><span>}
+</span></code></pre>
+<p>Все возвращаемые значения кодируются eth abi в массив байтов переменной длины.</p>
+<p>В Эфириуме тоже могут быть возвращены ошибки:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>function withdraw() public {
+</span><span>    require(msg.sender == owner, &quot;Permission denied&quot;);
+</span><span>}
+</span><span>
+</span><span>function failure() public {
+</span><span>    revert(&quot;I afraid I can&#39;t do that dave&quot;);
+</span><span>}
+</span></code></pre>
+<p>Эти ошибки помогают разработчику отладить любую проблему, с которой они столкнулись, а также могут быть обнаружены в блоке <code>try</code> .. <code>catch</code> Solidity. Вне блока <code>try</code> .. <code>catch</code> любой из них приведет к сбою транзакции или rpc.</p>
+<h2 id="sushchestvuiushchee-reshenie">Существующее решение</h2>
+<p>Существующее решение, которое использует Solang, записывает возвращаемые данные в данные учетной записи вызываемого абонента.
+Учетная запись вызывающего абонента не может быть использована, так как вызываемый объект может быть не той же программой BPF, поэтому у него не будет разрешения на запись данных учетной записи вызываемого абонента.</p>
+<p>Другим решением было бы иметь единую учетную запись данных возврата, которая передается через CPI. Опять же, это не работает для CPI, поскольку вызываемый объект может не иметь разрешения на запись в него.</p>
+<p>Проблема с этим решением заключается в следующем:</p>
+<ul>
+<li>Не работает для вызовов RPC</li>
+<li>Это очень гоночный; клиент должен отправить Tx, а затем получить данные учетной записи. Это не атомарно, поэтому возвращаемые данные могут быть перезаписаны другой транзакцией.</li>
+</ul>
+<h2 id="trebovaniia-k-resheniiu">Требования к решению</h2>
+<p>Он должен работать для:</p>
+<ul>
+<li>RPC: RPC должен иметь возможность возвращать любое количество значений без записи данных учетной записи.</li>
+<li>Транзакция: транзакция должна иметь возможность возвращать любое количество значений без необходимости записи в них данных учетной записи.</li>
+<li>CPI: вызываемый объект должен &quot;установить&quot; возвращаемое значение, а вызывающий должен иметь возможность получить его.</li>
+</ul>
+<h2 id="obzor-drugikh-setei">Обзор других сетей</h2>
+<h3 id="efirium-evm">Эфириум (EVM)</h3>
+<p>Код операции <code>RETURN</code> позволяет контракту установить буфер в качестве возвращаемых данных. Этот код операции принимает указатель на память и размер. Опкод <code>REVERT</code> работает аналогично, но сигнализирует о том, что вызов не удался, и все изменения данных учетной записи должны быть отменены.</p>
+<p>Для CPI вызывающая сторона может получить возвращенные данные вызываемого объекта с помощью кода операции <code>RETURNDATASIZE</code>, который возвращает длину, и кода операции <code>RETURNDATACOPY</code>, который принимает указатель места назначения в памяти, смещение в возвращаемых данных и аргумент длины.</p>
+<p>Ethereum хранит возвращаемые данные в блоках.</p>
+<h3 id="parity-substrate">Parity Substrate</h3>
+<p>Возвращаемые данные можно установить с помощью системного вызова <code>seal_return (флаги u32, указатель u32, размер u32)</code>.</p>
+<ul>
+<li>Флаги могут быть 1 для возврата, 0 для успеха (больше ничего не определено)</li>
+<li>Функция не возвращается</li>
+</ul>
+<p>CPI: системный вызов <code>seal_call()</code> принимает указатель на буфер и указатель на размер буфера, куда возвращаются данные.</p>
+<ul>
+<li>Существует ограничение в 32 КБ для возвращаемых данных.</li>
+</ul>
+<p>Parity Substrate не записывает возвращаемые данные в блоки.</p>
+<h2 id="otkloneno-reshenie">Отклонено Решение</h2>
+<p>Для решения этой проблемы была предложена концепция эфемерных счетов. Это определенно сработает для случая CPI, но не сработает для случая RPC или транзакции.</p>
+<h2 id="predlozhennoe-reshenie">Предложенное решение</h2>
+<p>Вызываемая сторона может установить возвращаемые данные с помощью нового системного вызова sol_set_return_data(buf: *const u8, length: u64)`.
+Для возвращаемых данных существует ограничение в 1024 байта. Эту функцию можно вызывать несколько раз, и
+просто перезапишет то, что было написано при последнем вызове.</p>
+<p>Возвращаемые данные можно получить с помощью <code>sol_get_return_data(buf: *mut u8, length: u64, program_id: *mut Pubkey) -&gt; u64</code>.
+Эта функция копирует буфер возврата и идентификатор программы, который устанавливает возвращаемые данные, и возвращает длину возвращаемых данных или <code>0</code>, если возвращаемые данные не установлены. В этом случае program_id не устанавливается.</p>
+<p>Когда инструкция вызывает sol_invoke(), возвращаемые данные вызываемого объекта копируются в возвращаемые данные текущей инструкции. Это означает, что любые возвращаемые данные автоматически передаются вверх по стеку вызовов вызываемому объекту текущей инструкции (или вызову RPC).</p>
+<p>Обратите внимание, что sol_invoke() очищает возвращаемые данные перед вызовом вызываемого, так что любые возвращаемые данные из предыдущего вызова не используются повторно, если вызываемый не может установить возвращаемые данные. Например:</p>
+<ul>
+<li>А вызывает Б</li>
+<li>Перед входом в B данные возврата очищаются.0</li>
+<li>B устанавливает некоторые возвращаемые данные и возвращает</li>
+<li>А вызывает С</li>
+<li>Перед входом в C возвращаемые данные очищаются.</li>
+<li>C не устанавливает возвращаемые данные и возвращает</li>
+<li>A проверяет возвращаемые данные и находит их пустыми</li>
+</ul>
+<p>Другой сценарий для рассмотрения:</p>
+<ul>
+<li>А вызывает Б</li>
+<li>B вызывает C</li>
+<li>C устанавливает возвращаемые данные и возвращает</li>
+<li>B не трогает возвращаемые данные и возвращает</li>
+<li>A получает возвращаемые данные от C</li>
+<li>A не касается возвращаемых данных</li>
+<li>Возврат данных из транзакции - это то, что установил C.</li>
+</ul>
+<p>Затраты на вычисления рассчитываются для получения и установки возвращаемых данных с помощью системных вызовов.</p>
+<p>Для обычного RPC или транзакции возвращаемые данные имеют кодировку base64 и хранятся вместе со строками sol_log в [стабильном журнале](https://github.com/solana-labs/solana/blob/95292841947763bdd47ef116b40fc34d0585bca8/sdk/src/process_instruction .rs#L275-L281).</p>
+<h2 id="primechanie-o-vozvrate-oshibok">Примечание о возврате ошибок</h2>
+<p>Solidity на Ethereum позволяет контракту возвращать ошибку в возвращаемых данных. В этом случае все изменения данных учетной записи для учетной записи должны быть отменены. В Solana любой ненулевой код выхода для программы BPF означает сбой всей транзакции. Мы не хотим поддерживать возврат ошибки, возвращая успех, а затем возвращая ошибку в возвращаемых данных. Это означало бы, что нам придется поддерживать отмену изменений данных учетной записи; это слишком дорого как на стороне VM, так и на стороне контракта BPF.</p>
+<p>Об ошибках будет сообщаться через sol_log.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

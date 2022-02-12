@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust: взгляд инженера Scala | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#nemnogo-obo-mne">Немного обо мне</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#preduprezhdenie"><small>- Предупреждение</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#veshchi-kotorymi-ia-dovolen">Вещи, которыми я доволен</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#batareiki-v-komplekte"><small>- Батарейки в комплекте</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#sistema-tipov"><small>- Система типов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#makrosy"><small>- Макросы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#optimizatsiia-vo-vremia-kompiliatsii"><small>- Оптимизация во время компиляции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#sintaksis"><small>- Синтаксис</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#vzaimodeistvie-s-c"><small>- Взаимодействие с C</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#tekushchii-dukh-vremeni"><small>- Текущий дух времени</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#to-k-chemu-ia-privyk">То, к чему я привык</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#tochka-s-zapiatoi"><small>- Точка с запятой</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#model-vladeniia-stek-protiv-kuchi"><small>- Модель владения: стек против кучи</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#veshchi-kotorye-ia-khotel-by-byli-raznymi">Вещи, которые я хотел бы, были разными</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#asinkhronnyi-vvod-vyvod"><small>- Асинхронный ввод-вывод</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#stroki"><small>- Строки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#kross-kompiliatsiia"><small>- Кросс-компиляция</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#strannye-golovnye-ubory"><small>- Странные головные уборы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#dai-mne"><small>- Дай мне</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-a-scala-engineers-perspective/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust: взгляд инженера Scala</h1>
+
+<p><a href="https://beachape.com/blog/2017/05/24/rust-from-scala/">Перевод</a> | Автор оригинала: Lloyd</p>
+<p>Приближается 1-я годовщина моей первой строчки кода на Rust, и вот уже пять лет с тех пор, как я написал свою первую строчку кода на Scala. Я подумал, что было бы неплохо резюмировать мой окрашенный в Scala взгляд на The Rust Experience TM через год.</p>
+<p>Rust винтовая лестница - Яно де Чезаре</p>
+<p>Это не объективное сравнение языка и языка. Я написал этот пост как отчасти для дампа опыта, отчасти как ориентир для других разработчиков Scala, которые изучают или думают об изучении Rust.</p>
+<h2 id="nemnogo-obo-mne">Немного обо мне</h2>
+<p>Я написал несколько библиотек / инструментов для Rust, а также для Scala. Во всех смыслах я инженер Scala: мне платят за это, и это, безусловно, мой самый сильный язык. Я использовал Rust в нескольких своих побочных проектах (библиотеки и небольшие утилиты).</p>
+<p>Что касается Scala, то я являюсь автором enumeratum, который привносит гибкие перечисления и перечисления значений в Scala в виде библиотеки. Я также пробовал писать библиотеки на основе макросов, чтобы сделать такие вещи, как Free Monads и Tagless Final, более удобными в использовании.</p>
+<p>Что касается Rust, я написал frunk, набор инструментов для функционального программирования на Rust, который представляет собой примерно порт Shapeless с добавлением котов / скаляза, который делает некоторые довольно забавные вещи с системой типов, о которой я писал в блоге ( 1, 2, 3, 4). Я также написал порт requestb.in на Rust под названием rusqbin на основе Hyper и небольшой асинхронный клиент WIP для служб Microsoft Cognitive под названием cogs.</p>
+<h3 id="preduprezhdenie">Предупреждение</h3>
+<blockquote>
+<p>Я предвзято отношусь к Scala, и я в основном привык к особенностям Scala. Тем не менее, я стараюсь оставаться как можно более нейтральным.     Когда я говорю о Rust, я имею в виду стабильную версию Rust. Это потому, что я использую только стабильную версию Scala. Некоторые вещи, о которых я пишу в отношении Rust, могли измениться к тому времени, когда вы это прочитали. В конце концов, существует постоянная инициатива в области эргономики.</p>
+</blockquote>
+<h2 id="veshchi-kotorymi-ia-dovolen">Вещи, которыми я доволен</h2>
+<h3 id="batareiki-v-komplekte">Батарейки в комплекте</h3>
+<p>Опыт настройки среды разработки с Rust просто потрясающий. Сообщество Rust постаралось максимально упростить начало работы с Rust, и это видно. Буквально одна команда оболочки установит все, что вам нужно.</p>
+<ul>
+<li>rustup для управления вашими инструментами Rust (разные версии / каналы Rust)</li>
+<li>Cargo для управления вашей сборкой и для публикации на crates.io, который, среди прочего, включает:
+<ul>
+<li>Подкоманда test для запуска тестов</li>
+<li>Подкоманда Bench для запуска тестов</li>
+</ul>
+</li>
+<li>rustfmt для форматирования вашего кода (запускается в cargo проектах через Cargo fmt)</li>
+<li>rustdoc для создания красивых сайтов документации.
+<ul>
+<li>Этот инструмент поддерживает тесты документации без дополнительной настройки / настройки (запускается как часть cargo теста)</li>
+</ul>
+</li>
+</ul>
+<p>Исходя из Scala, то, что все это настроено без суеты прямо на пороге, - это глоток свежего воздуха и большой выигрыш для производительности. Я знаю, что есть причины для более модульного подхода Scala, но я думаю, было бы неплохо, если бы часть этого была перенесена на Scala на других языках. </p>
+<h4 id="redaktor-ide">Редактор / IDE</h4>
+<p>Когда я впервые начал работать с Rust, я использовал IntelliJ и его плагин Rust, но позже переключился на Microsoft Studio Code с плагином Rust, который очень хорошо взаимодействует с Rust Language Server (устанавливается как компонент инструментальной цепочки rustup). Он кажется очень легким и предлагает всю необходимую мне помощь.</p>
+<h3 id="sistema-tipov">Система типов</h3>
+<p>Если вы больше склоняетесь к парадигме функционального программирования Scala, то вам, вероятно, понравится следующее о системе типов Rust:</p>
+<ul>
+<li>Нет наследования для типов данных (есть нижний тип, но он используется гораздо экономнее)</li>
+<li>Нет всеобщего равенства</li>
+<li>Нет нулей</li>
+<li>Трэйты - это в основном классы типов Haskell.</li>
+<li>Еще много основных типов (вместо Int есть i8, i16, i32, i64, isize, а также u8, u16…)</li>
+</ul>
+<p>По сути, Rust имеет много хороших черт в системе типов Scala. Одна вещь, которой сейчас не хватает в Rust, - это первоклассная поддержка высокодородных типов (HKT), которую, честно говоря, я не упускаю слишком много, потому что:</p>
+<ol>
+<li>Есть способы до некоторой степени подражать этому.</li>
+<li>Модель владения / памяти Rust имеет тенденцию подталкивать вас к более детальному размышлению о ваших ценностях / ссылках, что, возможно, противоречит типу программирования, обычно использующему абстракции на основе HKT.</li>
+</ol>
+<p>Если это все еще звучит неприемлемо, просто знайте, что вы можете довольно далеко продвинуться в создании повторно используемых абстракций, используя трэйты Rust + связанные типы, а порт быстрой проверки BurnSushi доступен для написания и применения законов.</p>
+<p>Также в разработке есть несколько интересных вещей:</p>
+<ol>
+<li>Высший родственный полиморфизм</li>
+<li>Пи (значения) типы</li>
+</ol>
+<p>Добавление функциональности с использованием свойств Rust должно быть привычной областью, если вы писали на Scala вещи, похожие на классы типов. Фактически, система свойств Rust намного больше похожа на систему классов типов Haskell, чем на Scala, что имеет свои плюсы и минусы (например, отсутствие определения реализаций для данного типа). Я написал введение / руководство по системе трейтов Rust в другом посте.</p>
+<h4 id="vyvod-tipa">Вывод типа</h4>
+<p>И Rust, и Scala имеют локальный вывод типов, и в целом они работают примерно одинаково. В обоих из них вам нужно написать типы для параметров вашей функции. В Scala вы можете оставить возвращаемый тип отключенным и позволить компилятору вывести его за вас, в Rust вы не можете этого сделать (если вы его не укажете, предполагается, что это(), unit).</p>
+<h3 id="makrosy">Макросы</h3>
+<p>Макросистема Rust, хотя и менее мощная, чем Scala, весьма полезна для сохранения СУХОГО кода и, что немаловажно, очень хорошо интегрируется с остальным языком. Фактически, он включен и доступен из коробки без каких-либо дополнительных зависимостей / флагов.</p>
+<p>По сравнению с макросами Scala макросы Rust кажутся очень естественной частью языка, и вы довольно часто будете сталкиваться с ними при чтении / использовании библиотек Rust. В базах кода Rust вы часто будете видеть макросы, объявленные и немедленно используемые для генерации кода (например, получение реализаций трэйтов для списка числовых типов или для кортежей до N элементов), что обычно делают пользователи Scala. внеполосный », подключившись к SBT и используя другой шаблонизатор или инструмент на основе AST.</p>
+<p>С другой стороны, в Scala обычно звучит рефрен «не пишите макросы, если вам не нужно». Когда я сравниваю подходы, выбранные двумя языками, я чувствую, что Scala, возможно, был чрезмерно амбициозным с точки зрения предоставления разработчикам возможностей, что привело к устареванию API-интерфейсов, которые нельзя поддерживать из-за сложности. Действительно, набор инструментов для метапрограммирования Scala переживает еще одну реформу с переходом на Scalameta.</p>
+<p>Из-за своей простоты (макросы работают на основе ряда шаблонов) API макросов Rust сначала может показаться ограничивающим, но если вы будете его придерживаться, вы, вероятно, обнаружите, что можете добиться большего, чем вы изначально думали. Например, тот факт, что вы можете рекурсивно создавать / реструктурировать аргументы макроса (!) И снова вызывать макрос (или даже вызывать другой макрос), является довольно мощным инструментом.</p>
+<p>При этом, в дополнение к устаревшей системе макросов, Rust скоро получит процедурные макросы, которые больше похожи на то, что разработчики Scala привыкли видеть. Вы можете получить представление о том, на что похожи процедурные макросы, посмотрев на настраиваемые производные, которые я использовал для реализации производных для LabelledGeneric в Rust. </p>
+<h3 id="optimizatsiia-vo-vremia-kompiliatsii">Оптимизация во время компиляции</h3>
+<p>Думаю, ни для кого не новость, что Rust быстр и эффективен. На домашней странице официального сайта говорится, что он работает «невероятно быстро» и содержит «абстракции с нулевой стоимостью», а сторонники Rust громко опровергли поражение Rust над GCC-C в k-нуклеотиде несколько месяцев назад. Даже если вы не полностью согласны с частью «быстрее, чем C», не будет большим скачком сказать, что производительность Rust находится на том же уровне, что и C, или, по крайней мере, нет причин, по которым это не так (да , язык и реализация разные, компиляторы имеют значение и т.д.).</p>
+<p>Меня особенно впечатлила способность компилятора Rust (хотя я не уверен, что это LLVM?) Возможность компилировать абстракции, так что выполняемые ими операции не имеют накладных расходов. В качестве личного анекдота, когда я писал LabelledGeneric на frunk, я ожидал, что будет некоторая разница в производительности между использованием этой абстракции для преобразований между структурами и записью преобразований вручную (с использованием From). В конце концов, есть немаловажные различия в его версии Shapeless в мире Scala (тестовый код): </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>// JMH benchmark results
+</span><span>
+</span><span>[info] Benchmark                               Mode  Cnt     Score     Error  Units
+</span><span>[info] Benchmarks.from24FieldsManual           avgt   30    33.626 ±   1.032  ns/op
+</span><span>[info] Benchmarks.from24FieldsShapeless        avgt   30  4443.018 ± 101.612  ns/op
+</span><span>[info] Benchmarks.from25FieldsManual           avgt   30    33.066 ±   0.650  ns/op
+</span><span>[info] Benchmarks.from25FieldsShapeless        avgt   30  4859.432 ± 104.763  ns/op
+</span></code></pre>
+<p>К моему удивлению, Rust сумел скомпилировать основанное на LabelledGeneric, нетривиальное, многошаговое, неоптимизированное (кроме использования стека, никаких усилий) преобразование структур между структурами в абстракцию с нулевой стоимостью. То есть использование LabelledGeneric для преобразования добавляет нулевые накладные расходы по сравнению с записью преобразования вручную (тестовый код): </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>// Cargo benchmark results
+</span><span>
+</span><span>test from_24fields_manual           ... bench:         109 ns/iter (+/- 49)
+</span><span>test from_24fields_labelledgeneric  ... bench:         104 ns/iter (+/- 24)
+</span><span>test from_25fields_manual           ... bench:         129 ns/iter (+/- 9)
+</span><span>test from_25fields_labelledgeneric  ... bench:         131 ns/iter (+/- 13)
+</span></code></pre>
+<p>Picture: ['Mind Blown']</p>
+<p>Примечание: тесты Rust и Scala LabelledGeneric не являются полностью однозначными (версия Rust должна создавать экземпляры новых исходных объектов при каждом запуске из-за семантики перемещения), но они иллюстрируют разницу в производительности между преобразованием на основе LabelledGeneric и рукописным преобразованием в двух языков.</p>
+<h3 id="sintaksis">Синтаксис</h3>
+<p>В целом синтаксис Rust очень похож на синтаксис Scala. Конечно, кое-где есть небольшие корректировки (пусть и пусть mut vs var и val, вы будете использовать угловые скобки вместо квадратных и т.д.), Но в целом языки кажутся очень похожими, потому что они оба являются C-подобными языками. которые в значительной степени вдохновлены машинным обучением.</p>
+<p>Люди Scala, вероятно, будут радоваться таким вещам, как доступность перечисления (скоро появится в Scala через Dotty), а также частичное деструктурирование (например, при условии, что структура Point {x: i32, y: 32}, вы можете позволить Point {x, .. } = p;).</p>
+<p>Есть несколько вещей, которые вначале вы упустите только из-за мышечной памяти, но они либо реализованы в виде библиотек, либо немного по-другому, например, ленивые значения (Rust-ленивый или ленивый-статический) и такие методы, как опция foreach. (попробуйте if let Some(x) = myOption {/ * вместо этого используйте x * /}). Другие просто отсутствуют, такие как параметры по имени (для меня не слишком большая проблема), для понимания / do и аргументы ключевого слова (последние два вредны).</p>
+<p>О, в Rust типы и трейты называются так же, как в Scala, в CamelCase, но идентификаторы (привязки и методы) используют snake_case, который, как мне кажется, заставляет код выглядеть длиннее, но это не большая проблема. Вы найдете ссылки, которые могут помочь, если вы не уверены, и, скорее всего, вы все равно почерпнете это из чтения кода библиотеки.</p>
+<p>Как и в случае со Swift, мне не удалось найти убедительных доказательств или признания того, что Scala оказала какое-либо влияние на Rust ...</p>
+<h3 id="vzaimodeistvie-s-c">Взаимодействие с C</h3>
+<p>Rust максимально упрощает работу с C, придерживаясь при этом своей мантры - обеспечивать безопасность. Для справки взгляните на раздел в книге Rust, посвященный FFI. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Taken from the Rust book
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">link</span><span>(name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;snappy&quot;</span><span>)]
+</span><span style="color:#ff7733;">extern </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">snappy_max_compressed_length</span><span>(</span><span style="color:#f29718;">source_length</span><span style="color:#bfbab0cc;">:</span><span> size_t) </span><span style="color:#bfbab0cc;">-&gt;</span><span> size_t</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">unsafe </span><span>{ </span><span style="color:#f07178;">snappy_max_compressed_length</span><span>(</span><span style="color:#f29718;">100</span><span>) }</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Синтаксис может показаться знакомым тем, кто играл со Scala.Native. </p>
+<pre data-lang="scala" style="background-color:#0f1419;color:#bfbab0;" class="language-scala "><code class="language-scala" data-lang="scala"><span style="font-style:italic;color:#5c6773;">// Taken from Scala Native homepage
+</span><span style="color:#bfbab0cc;">@</span><span style="color:#ffb454;">extern </span><span style="color:#ff7733;">object</span><span style="color:#59c2ff;"> stdlib </span><span>{
+</span><span>  </span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">malloc</span><span>(</span><span style="color:#f29718;">size</span><span>: </span><span style="font-style:italic;color:#39bae6;">CSize</span><span>): </span><span style="font-style:italic;color:#39bae6;">Ptr</span><span>[</span><span style="color:#ff7733;">Byte</span><span>] </span><span style="color:#f29668;">=</span><span> extern
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">val </span><span>ptr </span><span style="color:#f29668;">=</span><span> stdlib</span><span style="color:#f29668;">.</span><span>malloc(</span><span style="color:#f29718;">32</span><span>)
+</span></code></pre>
+<p>Поскольку вызов C-кода может быть небезопасным (с учетом памяти, потокобезопасности), Rust требует, чтобы вы обернули ваши C-вызовы в небезопасные. Если вы хотите скрыть это от пользователей, вы можете обернуть эти вызовы в другую функцию. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Taken from the Rust book
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">validate_compressed_buffer</span><span>(</span><span style="color:#f29718;">src</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">u8</span><span>]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>    </span><span style="color:#ff7733;">unsafe </span><span>{
+</span><span>        </span><span style="color:#f07178;">snappy_validate_compressed_buffer</span><span>(src</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ptr</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">size_t</span><span>) </span><span style="color:#f29668;">== </span><span style="color:#f29718;">0
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Вызов кода Rust из C также очень удобен, что в Scala Native еще предстоит реализовать.</p>
+<h3 id="tekushchii-dukh-vremeni">Текущий дух времени</h3>
+<p>Текущее «ощущение» Rust и его сообщества (или сообществ, поскольку библиотеки / фреймворки могут иметь свои собственные) очень гостеприимны и полезны. Кроме того, это очень сложно дать количественную оценку, поэтому я просто перечислю несколько наблюдений:</p>
+<ul>
+<li>Стабилке Rust всего 2 года, и все же существует официальная инициатива по эргономике для уменьшения трения</li>
+<li>Я задавал несколько вопросов о StackOverflow и каждый раз получал быстрые и полезные ответы.</li>
+<li>Rust - язык №1 «самый любимый» в опросе StackOverflow за 2017 год.</li>
+<li>Rust чувствует себя очень управляемым сообществом: у него очень живое репозиторий RFC, и с тех пор, как я начал возиться с ним, я увидел, как минимум 3 RFC, встроенных в язык (макросы типа, пользовательские производные и синтаксис? Для Trys).</li>
+</ul>
+<h2 id="to-k-chemu-ia-privyk">То, к чему я привык</h2>
+<h3 id="tochka-s-zapiatoi">Точка с запятой</h3>
+<p>В Scala точки с запятой не обязательны, и почти все является выражением и, следовательно, возвращает значения. </p>
+<pre data-lang="scala" style="background-color:#0f1419;color:#bfbab0;" class="language-scala "><code class="language-scala" data-lang="scala"><span style="color:#f29718;">3 </span><span style="font-style:italic;color:#5c6773;">// returns 3
+</span><span>
+</span><span style="color:#ff7733;">val </span><span>x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">3 </span><span style="font-style:italic;color:#5c6773;">// assignment, returns unit
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// certain things don&#39;t return anything though, such as import
+</span><span style="font-style:italic;color:#5c6773;">// statements, and blocks
+</span><span>
+</span><span style="color:#ff7733;">import</span><span> com</span><span style="color:#f29668;">.</span><span>beachape</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">_ </span><span style="font-style:italic;color:#5c6773;">// returns nothing
+</span><span style="color:#ff7733;">object</span><span style="color:#59c2ff;"> Hello </span><span>{} </span><span style="font-style:italic;color:#5c6773;">// returns nothing
+</span></code></pre>
+<p>В Rust точки с запятой не являются обязательными и важны. Операторы, которые заканчиваются точкой с запятой return() (unit), и те, которые не превращаются в выражения и, таким образом, возвращают значение. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// taken from the Rust book
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#ff7733;">u32</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// this is a statement
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> y </span><span style="color:#f29668;">= </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x_squared </span><span style="color:#f29668;">=</span><span> x </span><span style="color:#f29668;">*</span><span> x</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x_cube </span><span style="color:#f29668;">=</span><span> x_squared </span><span style="color:#f29668;">*</span><span> x</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// This expression will be assigned to `y`
+</span><span>    x_cube </span><span style="color:#f29668;">+</span><span> x_squared </span><span style="color:#f29668;">+</span><span> x
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> z </span><span style="color:#f29668;">= </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The semicolon suppresses this expression and `()` is assigned to `z`
+</span><span>    </span><span style="color:#f29718;">2 </span><span style="color:#f29668;">*</span><span> x</span><span style="color:#bfbab0cc;">;
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="model-vladeniia-stek-protiv-kuchi">Модель владения: стек против кучи</h3>
+<p>Модель памяти / владения Rust для меня - его главная фишка-убийца; это дает вам более жесткий контроль над тем, как ваша программа потребляет память, сохраняя при этом безопасность памяти, и все это без необходимости поставлять сборщик мусора со средой выполнения. Вы сами решаете, передавать ли вещи по значению или по ссылке, а также изменяемость привязок (в том числе при сопоставлении с образцом).</p>
+<p>Существует также вопрос о том, где размещаются вещи. В Scala (и, возможно, в большинстве языков на основе JVM) существует набор правил, которые определяют, будет ли что-то помещено в стек или в кучу (и, таким образом, повлечет за собой будущие затраты на сборку мусора). В общем, единственный раз, когда что-то выделяется в стеке, - это примитивы, которые не экранируют методы как поля объектов, и ссылки на объекты, которые сами выделяются в куче. В среде выполнения могут быть забавные уловки, такие как анализ экранирования, но в целом вы не можете выбирать.</p>
+<p>В Rust вы можете размещать объекты в куче, создавая их экземпляры внутри (или передавая право собственности) структурам данных, таким как Boxes, Vecs и т.д. Или вы можете работать с простыми значениями. Вы можете выбрать свою абстракцию в зависимости от стоимости, которую вы хотите заплатить за функции, и гарантий, которые они предлагают, таких как безопасный многопоточный доступ (эта страница является отличным ориентиром). В любом случае система владения Rust во время компиляции будет следить за тем, чтобы у вас не возникало скачков данных, вызванных, например, изменением голых значений в разных потоках без контроля доступа.</p>
+<p>Scala не предоставляет пользователям такой же уровень контроля, поэтому, естественно, необходимо внести некоторые изменения. Однако, вопреки опыту некоторых других, я не обнаружил, что вопросы владения слишком сложны для понимания и привыкания. Опыт работы с системой богатых типов Scala означал, что с аннотациями времени жизни было довольно легко справиться. Может быть, изучение C и C++ на курсах Comsci в университете тоже помогло.</p>
+<ul>
+<li>Примечание: если вы человек наполовину налитый стаканом, я думаю, вы можете сказать, что Rust вынуждает вас взять на себя управление, а не дает вам контроль. Все дело в перспективе ...</li>
+<li>Примечание 2: если вы обнаружите, что делаете много .clone(), чтобы избавиться от компилятора, возможно, вы делаете что-то не совсем правильно.</li>
+</ul>
+<h4 id="izmenchivost">Изменчивость</h4>
+<p>Отдельно стоит упомянуть мутабильность. Если вы пришли из многолетнего использования Scala (или почти любого другого языка, который подчеркивает неизменность и ссылочную прозрачность как путь к просветлению), написание вашего первого let mut или &amp;mut self может показаться грязным.</p>
+<p>Мне потребовалось время, чтобы привыкнуть к этой идее, но эй, когда в Риме, верно? Если это помогает, помните, что Rust ориентирован на скорость и эффективность за счет (почти или фактически) абстракций с нулевой стоимостью и что благодаря его строгой модели владения гонка данных из-за изменчивости не является проблемой. </p>
+<h2 id="veshchi-kotorye-ia-khotel-by-byli-raznymi">Вещи, которые я хотел бы, были разными</h2>
+<h3 id="asinkhronnyi-vvod-vyvod">Асинхронный ввод-вывод</h3>
+<p>В Scala большинство фреймворков, которые имеют дело с любым типом ввода-вывода, включают неблокирующий ввод-вывод, используя какой-то тип данных оболочки, такой как Future [A], Task [A] или IO [A](обычно монада), который отделяет описание вашей программы от ее выполнения и определяет по типу эффект общения с пугающим и грязным внешним миром. Это позволяет вам не блокировать выполняющийся поток в ожидании каких-либо событий (например, возврата данных), выбирая подходящую стратегию выполнения.</p>
+<p>В стране Rust большинство широко используемых библиотек, которые я видел, таких как клиент Redis и Hyper (и все различные вещи, построенные на нем, такие как Rusoto, Rocket и т.д.), Все блокируют. Хотя это нормально работает для таких вещей, как однопользовательские утилиты, это неоптимально для приложений, которые требуют большого количества операций ввода-вывода и должны обслуживать большое количество одновременных пользователей, потому что потоки вашего приложения могут быть связаны, просто ожидая данных, что делает его неспособным обслуживать другие Запросы. Или вы получите потенциально огромные пулы потоков (в стиле старых приложений Java Servlet ...), что, похоже, идет вразрез с духом эффективности Rust.</p>
+<p>При этом я знаю, что в этой области делаются успехи:</p>
+<ul>
+<li>Tokio, «токенизированный ввод-вывод», фреймворк асинхронного ввода-вывода, который предоставляет API на основе будущего, добивается большого прогресса. Выглядит готовым к производству.</li>
+<li>Hyper, структура HTTP-клиент-сервер по умолчанию, скоро вырастет до 0.11, что принесет с собой Futures-based API, основанный на Tokio. Это, скорее всего, (я надеюсь) перейдет к любым библиотекам, основанным на Hyper.</li>
+</ul>
+<p>Кроме того, на данный момент трудно преобразовывать и возвращать Futures из функций, потому что каждое преобразование приводит к тому, что конкретный тип вашего объекта связывается и помечается произвольным типом замыкания. Поскольку запись типа результата не является необязательной в Rust, текущее решение состоит в том, чтобы объявить ваш возвращаемый тип как Box&lt;Future <A>&gt;, но он менее эффективен во время выполнения, поскольку упакованные в штучные объекты типажи требуют динамической отправки и распределения кучи. Надеюсь, что скоро будет выпущен «impl Trait» для решения этой проблемы (отслеживание RFC)</p>
+<h3 id="stroki">Строки</h3>
+<p>В Rust есть несколько способов представления строк. Вот несколько:</p>
+<ul>
+<li>Строковое значение строки времени выполнения, содержимое которого размещено в куче</li>
+<li>&amp;'строка с временем жизни
+<ul>
+<li>&amp;'статическая строка str со статическим временем жизни (запеченная в вашем двоичном файле)</li>
+</ul>
+</li>
+<li>Vec<u8></li>
+</ul>
+<p>Хотя к настоящему времени я в основном привык к этому и понимаю цель наличия каждого из них, я надеюсь, что инициатива в области эргономики поможет лучше понять эту ситуацию, поскольку строки настолько распространены. Как? Понятия не имею ... может, я просто разглагольствую.</p>
+<h3 id="kross-kompiliatsiia">Кросс-компиляция</h3>
+<p>Очевидно, что разработчики Scala привыкли один раз компилировать и запускать одни и те же двоичные файлы повсюду благодаря JVM (в основном: p). Хотя я не ожидаю того же от Rust, потому что он компилируется в собственный машинный код, я бы хотел, чтобы инструменты кросс-компиляции были лучше из коробки (например, как в Golang).</p>
+<p>На данный момент, в зависимости от целевой платформы, кросс-компиляция для Rust немного задействована, и есть несколько вариантов:</p>
+<ol>
+<li>Добавление целевой цепочки инструментов через Rustup и, возможно, установка еще нескольких пакетов специально для вашей целевой платформы (как в этом руководстве)</li>
+<li>Использование предварительно созданного контейнера Docker, который содержит все настройки / переменные среды / установки, необходимые для компиляции на вашу целевую платформу (см. Rust-on-raspberry-docker)</li>
+<li>Использование кросс-грузового инструмента, который, кажется, автоматизирует 2.</li>
+</ol>
+<p>Мой вариант использования строится для моего Raspberry Pi, и я пробовал только первые два, но последний выглядит здесь победителем, и было бы здорово увидеть что-то подобное, включенное по умолчанию как часть rustup или cargo. </p>
+<h3 id="strannye-golovnye-ubory">Странные головные уборы</h3>
+<p>Вот несколько вещей, которые я до сих пор не совсем понимаю:</p>
+<h4 id="nuzhen-li-ref">Нужен ли реф?</h4>
+<p>На мой взгляд, ref излишне сбивает с толку. Насколько я могу судить, он в основном используется для привязки указателей во время сопоставления с образцом. </p>
+<pre data-lang="scala" style="background-color:#0f1419;color:#bfbab0;" class="language-scala "><code class="language-scala" data-lang="scala"><span style="color:#ff7733;">match</span><span> some_int {
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// Why not Some(&amp;s) =&gt; ... ???
+</span><span>  </span><span style="font-style:italic;color:#f29668;">Some</span><span>(ref s) </span><span style="color:#f29668;">=</span><span>&gt; println!(</span><span style="color:#c2d94c;">&quot;{}&quot;</span><span style="color:#bfbab0cc;">,</span><span>s)</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="color:#f29718;">None </span><span style="color:#ff7733;">=&gt;</span><span> unreachable!()
+</span><span>}
+</span></code></pre>
+<h4 id="mut">&amp;mut</h4>
+<p>Почему мне нужно делать &amp;mut вместо просто &amp;? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// This uses mut for no reason other than to prove a point.
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">non_empty</span><span>(</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> String) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{ s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">0 </span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let mut</span><span> string </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;hello&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">hello</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> string)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// why can&#39;t this just be hello(&amp;string) ??
+</span></code></pre>
+<h4 id="opredelenie-prodolzhitel-nosti-zhizni-s-breketami">Определение продолжительности жизни с брекетами</h4>
+<p>Мне каким-то образом удалось закодировать свой путь в тупик при использовании RWLock, потому что поведение фигурных скобок {} при использовании фигурных скобок {} при использовании с сопоставлением с образцом, на мой взгляд, не является интуитивно понятным. Если интересно, подробнее в этом выпуске.</p>
+<h3 id="dai-mne">Дай мне</h3>
+<p>Я знаю, что эти вещи находятся в разработке, но я бы хотел, чтобы они были в Rust вчера:</p>
+<ol>
+<li>Высшие родственные типы</li>
+<li>«Специализация», то есть поиск наиболее конкретной реализации трэйта в соответствии с типом значения в месте вызова. Прямо сейчас, если вы реализуете типаж Rust для A, он конфликтует с любой другой реализацией, которую вы пишете. Специализация должна исправить это (отслеживание RFC)</li>
+<li>REPL. Есть Русти, но я думаю, что Rust упускает хитрость, не поставляя ни одной готовой игры, особенно когда у нее такая сильная игра для разработки и настройки.</li>
+<li>Что-то вроде do или для понимания работы с типами контейнеров (есть библиотеки, но встроенные было бы неплохо)</li>
+</ol>
+<h2 id="vyvod">Вывод</h2>
+<p>На этом я завершаю свой взгляд на использование Rust с точки зрения разработчика Scala через год, в 2017 году. В целом я очень рад, что год назад я решил изучить Rust. Это была веселая и захватывающая поездка: какое-то время мне казалось, что каждые несколько месяцев я получал новые игрушки, которые я мог немедленно использовать: макросы типов и настраиваемые производные изменили правила игры, потому что они сделали эргономичным писать типы Hlist вручную и сделали Generic / LabelledGeneric Practical соответственно.</p>
+<p>В целом, я считаю, что в Rust есть много чего, что может понравиться инженерам Scala. Сообщество дружелюбное и разнообразное, так что вы можете легко найти библиотеку, которая вам интересна и в которой можно поучаствовать (бесстыдный плагин: вклад в frunk всегда приветствуется). Или вы можете создать свой собственный побочный проект и написать небольшую системную утилиту или запрограммировать микроконтроллер; онлайн-ресурсы очень легко найти. В любом случае, с Rust действительно сложно начать! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

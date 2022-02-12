@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Четкое объяснение модульной системы Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/clear-explanation-of-rust-module-system/#primer-1">Пример 1</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/clear-explanation-of-rust-module-system/#primer-2">Пример 2</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/clear-explanation-of-rust-module-system/#primer-3">Пример 3</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/clear-explanation-of-rust-module-system/#super">супер</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/clear-explanation-of-rust-module-system/#use">use</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/clear-explanation-of-rust-module-system/#vneshnie-moduli">Внешние модули</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/clear-explanation-of-rust-module-system/#reziume">Резюме</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Четкое объяснение модульной системы Rust</h1>
+
+<p><a href="https://www.sheshbabu.com/posts/rust-module-system/">Перевод</a> | Автор оригинала: Shesh</p>
+<p>Модульная система Rust на удивление сбивает с толку и вызывает много разочарований у новичков.</p>
+<p>В этом посте я объясню модульную систему на практических примерах, чтобы вы получили четкое представление о том, как она работает, и сразу же применили ее в своих проектах.</p>
+<p>Поскольку модульная система Rust довольно уникальна, я прошу читателя прочитать этот пост непредвзято и не сравнивать его с тем, как модули работают на других языках.</p>
+<p>Давайте воспользуемся этой файловой структурой для моделирования реального проекта: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>my_project
+</span><span>├── Cargo.toml
+</span><span>└─┬ src
+</span><span>  ├── main.rs
+</span><span>  ├── config.rs
+</span><span>  ├─┬ routes
+</span><span>  │ ├── health_route.rs
+</span><span>  │ └── user_route.rs
+</span><span>  └─┬ models
+</span><span>    └── user_model.rs
+</span></code></pre>
+<p>Вот как мы можем использовать наши модули:</p>
+<p><img src="/imgs/posts/467e5b19_01.png" alt="" /></p>
+<p>Этих трех примеров должно быть достаточно, чтобы объяснить, как работает модульная система Rust.</p>
+<h2 id="primer-1">Пример 1</h2>
+<p>Начнем с первого примера - импорта config.rs в main.rs. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;main&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// config.rs
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_config</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;config&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Первая ошибка, которую делают все, - это потому, что у нас есть такие файлы, как config.rs, health_route.rs и т.д., Мы думаем, что эти файлы являются модулями, и можем импортировать их из других файлов.</p>
+<p>Вот что мы видим (дерево файловой системы) и то, что видит компилятор (дерево модулей):</p>
+<p><img src="/imgs/posts/467e5b19_02.png" alt="" /></p>
+<p>Удивительно, но компилятор видит только модуль crate, которым является наш файл main.rs. Это связано с тем, что нам нужно явно построить дерево модулей в Rust - не существует неявного сопоставления между деревом файловой системы и деревом модулей.</p>
+<blockquote>
+<p>Нам нужно явно построить дерево модулей в Rust, здесь нет неявного сопоставления с файловой системой</p>
+</blockquote>
+<p>Чтобы добавить файл в дерево модулей, нам нужно объявить этот файл как подмодуль, используя ключевое слово mod. Следующее, что смущает людей, это то, что вы предполагаете, что мы объявляем файл как модуль в том же файле. Но нам нужно объявить это в другом файле! Поскольку в дереве модулей есть только main.rs, давайте объявим config.rs как подмодуль в main.rs.</p>
+<blockquote>
+<p>Ключевое слово mod объявляет подмодуль</p>
+</blockquote>
+<p>Ключевое слово mod имеет следующий синтаксис: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">my_module</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Здесь компилятор ищет my_module.rs или my_module / mod.rs в том же каталоге. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>my_project
+</span><span>├── Cargo.toml
+</span><span>└─┬ src
+</span><span>  ├── main.rs
+</span><span>  └── my_module.rs
+</span></code></pre>
+<p>or</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>my_project
+</span><span>├── Cargo.toml
+</span><span>└─┬ src
+</span><span>  ├── main.rs
+</span><span>  └─┬ my_module
+</span><span>    └── mod.rs
+</span></code></pre>
+<p>Поскольку main.rs и config.rs находятся в одном каталоге, давайте объявим модуль config следующим образом:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">config</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span style="color:#f29668;">+ </span><span>config</span><span style="color:#f29668;">::</span><span>print_config()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;main&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// config.rs
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_config</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;config&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Мы обращаемся к функции print_config с помощью синтаксиса ::.</p>
+<p>Вот как выглядит дерево модулей:</p>
+<p><img src="/imgs/posts/467e5b19_03.png" alt="" /></p>
+<p>Мы успешно объявили модуль конфигурации! Но этого недостаточно для вызова функции print_config внутри config.rs. Почти все в Rust по умолчанию является закрытым, нам нужно сделать функцию общедоступной с помощью ключевого слова pub:</p>
+<blockquote>
+<p>Ключевое слово pub делает информацию общедоступной </p>
+</blockquote>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">config</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  config</span><span style="color:#f29668;">::</span><span>print_config()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;main&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// config.rs
+</span><span style="color:#f29668;">- </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_config</span><span>() {
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_config</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;config&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Теперь это работает. Мы успешно вызвали функцию, определенную в другом файле!</p>
+<h2 id="primer-2">Пример 2</h2>
+<p>Давайте попробуем вызвать функцию print_health_route, определенную в routes / health_route.rs из main.rs.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">config</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  config</span><span style="color:#f29668;">::</span><span>print_config()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;main&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// routes/health_route.rs
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_health_route</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;health_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Как мы обсуждали ранее, мы можем использовать ключевое слово mod только для my_module.rs или my_module / mod.rs в том же каталоге.</p>
+<p>Итак, чтобы вызывать функции внутри routes / health_route.rs из main.rs, нам нужно сделать следующее:</p>
+<ul>
+<li>Создайте файл с именем routes / mod.rs и объявите подмодуль маршрутов в main.rs</li>
+<li>Объявите подмодуль health_route в routes / mod.rs и сделайте его общедоступным</li>
+<li>Сделайте функции внутри health_route.rs общедоступными </li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>my_project
+</span><span>├── Cargo.toml
+</span><span>└─┬ src
+</span><span>  ├── main.rs
+</span><span>  ├── config.rs
+</span><span>  ├─┬ routes
+</span><span>+ │ ├── mod.rs
+</span><span>  │ ├── health_route.rs
+</span><span>  │ └── user_route.rs
+</span><span>  └─┬ models
+</span><span>    └── user_model.rs
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">config</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">routes</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span style="color:#f29668;">+ </span><span>routes</span><span style="color:#f29668;">::</span><span>health_route</span><span style="color:#f29668;">::</span><span>print_health_route()</span><span style="color:#bfbab0cc;">;
+</span><span>  config</span><span style="color:#f29668;">::</span><span>print_config()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;main&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// routes/mod.rs
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">pub mod </span><span style="color:#59c2ff;">health_route</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// routes/health_route.rs
+</span><span style="color:#f29668;">- </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_health_route</span><span>() {
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_health_route</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;health_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вот как выглядит дерево модулей:</p>
+<p><img src="/imgs/posts/467e5b19_04.png" alt="" /></p>
+<p>Теперь мы можем вызвать функцию, определенную в файле внутри папки.</p>
+<h2 id="primer-3">Пример 3</h2>
+<p>Давайте попробуем позвонить из main.rs =&gt; routes / user_route.rs =&gt; models / user_model.rs </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">config</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">routes</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  routes</span><span style="color:#f29668;">::</span><span>health_route</span><span style="color:#f29668;">::</span><span>print_health_route()</span><span style="color:#bfbab0cc;">;
+</span><span>  config</span><span style="color:#f29668;">::</span><span>print_config()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;main&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// routes/user_route.rs
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_user_route</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// models/user_model.rs
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_user_model</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_model&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Мы хотим вызвать функцию print_user_model из print_user_route из main.</p>
+<p>Давайте внесем те же изменения, что и раньше - объявим подмодули, сделаем функции общедоступными и добавим файл mod.rs. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>my_project
+</span><span>├── Cargo.toml
+</span><span>└─┬ src
+</span><span>  ├── main.rs
+</span><span>  ├── config.rs
+</span><span>  ├─┬ routes
+</span><span>  │ ├── mod.rs
+</span><span>  │ ├── health_route.rs
+</span><span>  │ └── user_route.rs
+</span><span>  └─┬ models
+</span><span>+   ├── mod.rs
+</span><span>    └── user_model.rs
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">config</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">routes</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">models</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  routes</span><span style="color:#f29668;">::</span><span>health_route</span><span style="color:#f29668;">::</span><span>print_health_route()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+ </span><span>routes</span><span style="color:#f29668;">::</span><span>user_route</span><span style="color:#f29668;">::</span><span>print_user_route()</span><span style="color:#bfbab0cc;">;
+</span><span>  config</span><span style="color:#f29668;">::</span><span>print_config()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;main&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// routes/mod.rs
+</span><span style="color:#ff7733;">pub mod </span><span style="color:#59c2ff;">health_route</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">pub mod </span><span style="color:#59c2ff;">user_route</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// routes/user_route.rs
+</span><span style="color:#f29668;">- </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_user_route</span><span>() {
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_user_route</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// models/mod.rs
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">pub mod </span><span style="color:#59c2ff;">user_model</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// models/user_model.rs
+</span><span style="color:#f29668;">- </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_user_model</span><span>() {
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_user_model</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_model&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вот как выглядит дерево модулей:</p>
+<p><img src="/imgs/posts/467e5b19_05.png" alt="" /></p>
+<p>Подождите, на самом деле мы не вызывали print_user_model из print_user_route! До сих пор мы вызывали только функции, определенные в других модулях из main.rs, как это сделать из других файлов?</p>
+<p>Если мы посмотрим на наше дерево модулей, функция print_user_model находится в пути crate::models::user_model. Итак, чтобы использовать модуль в файлах, которые не являются main.rs, мы должны думать о пути, необходимом для достижения этого модуля в дереве модулей. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// routes/user_route.rs
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_user_route</span><span>() {
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">crate</span><span style="color:#f29668;">::</span><span>models</span><span style="color:#f29668;">::</span><span>user_model</span><span style="color:#f29668;">::</span><span>print_user_model()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Мы успешно вызвали функцию, определенную в файле, из файла, который не является main.rs.</p>
+<h2 id="super">супер</h2>
+<p>Полное имя становится слишком длинным, если наша файловая организация состоит из нескольких каталогов. Допустим, по какой-то причине мы хотим вызвать print_health_route из print_user_route. Они находятся по путям crate::routes::health_route и crate::routes::user_route соответственно.</p>
+<p>Мы можем вызвать его, используя полное имя crate::routes::health_route::print_health_route(), но мы также можем использовать относительный путь super::health_route::print_health_route() ;. Обратите внимание, что мы использовали super для обозначения родительской области.</p>
+<blockquote>
+<p>Ключевое слово super в пути к модулю относится к родительской области </p>
+</blockquote>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_user_route</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">crate</span><span style="color:#f29668;">::</span><span>routes</span><span style="color:#f29668;">::</span><span>health_route</span><span style="color:#f29668;">::</span><span>print_health_route()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// can also be called using
+</span><span>  </span><span style="color:#ff7733;">super</span><span style="color:#f29668;">::</span><span>health_route</span><span style="color:#f29668;">::</span><span>print_health_route()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="use">use</h2>
+<p>Было бы утомительно использовать полное имя или даже относительное имя в приведенных выше примерах. Чтобы сократить имена, мы можем использовать ключевое слово use для привязки пути к новому имени или псевдониму.</p>
+<blockquote>
+<p>Ключевое слово use используется для сокращения пути к модулю </p>
+</blockquote>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_user_route</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">crate</span><span style="color:#f29668;">::</span><span>models</span><span style="color:#f29668;">::</span><span>user_model</span><span style="color:#f29668;">::</span><span>print_user_model()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Приведенный выше код можно реорганизовать как: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use crate</span><span style="color:#f29668;">::</span><span>models</span><span style="color:#f29668;">::</span><span>user_model</span><span style="color:#f29668;">::</span><span>print_user_model</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_user_route</span><span>() {
+</span><span>  </span><span style="color:#f07178;">print_user_model</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вместо использования имени print_user_model мы также можем присвоить ему псевдоним другого: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use crate</span><span style="color:#f29668;">::</span><span>models</span><span style="color:#f29668;">::</span><span>user_model</span><span style="color:#f29668;">::</span><span>print_user_model </span><span style="color:#f29668;">as</span><span> log_user_model</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_user_route</span><span>() {
+</span><span>  </span><span style="color:#f07178;">log_user_model</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;user_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="vneshnie-moduli">Внешние модули</h2>
+<p>Зависимости, добавленные в Cargo.toml, доступны глобально для всех модулей внутри проекта. Нам не нужно явно импортировать или объявлять что-либо, чтобы использовать зависимость.</p>
+<blockquote>
+<p>Внешние зависимости глобально доступны для всех модулей внутри проекта.</p>
+</blockquote>
+<p>Например, предположим, что мы добавили крэйт rand в наш проект. Мы можем использовать его в нашем коде напрямую как: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_health_route</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> random_number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">= </span><span>rand</span><span style="color:#f29668;">::</span><span>random()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> random_number)</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;health_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Мы также можем использовать use для сокращения пути:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>rand</span><span style="color:#f29668;">::</span><span>random</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">print_health_route</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> random_number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">random</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> random_number)</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;health_route&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="reziume">Резюме</h2>
+<ul>
+<li>Модульная система явная - нет сопоставления 1: 1 с файловой системой.</li>
+<li>Мы объявляем файл как модуль в его родительском элементе, а не сам по себе</li>
+<li>Ключевое слово mod используется для объявления подмодулей</li>
+<li>Нам нужно явно объявить функции, структуры и т.д. Как общедоступные, чтобы их можно было использовать в других модулях.</li>
+<li>Ключевое слово pub делает информацию общедоступной.</li>
+<li>Ключевое слово use используется для сокращения пути к модулю</li>
+<li>Нам не нужно явно объявлять сторонние модули.</li>
+</ul>
+<p>Спасибо за чтение! Не стесняйтесь подписываться на меня в Twitter, чтобы увидеть больше подобных сообщений :) </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Валидация на Edgeware | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/validating-on-edgeware/#trebovaniia">Требования</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/validating-on-edgeware/#"><small>- </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/validating-on-edgeware/#2-podkliuchaemsia-cherez-interfeis"><small>- 2. Подключаемся через интерфейс</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/validating-on-edgeware/#3-sozdaite-stavku"><small>- 3. Создайте ставку</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/validating-on-edgeware/#4-ustanovite-kliuchi-seansa-s-pomoshch-iu-rotatekeys"><small>- 4. Установите ключи сеанса с помощью rotateKeys</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/validating-on-edgeware/#5-nachnite-proverku"><small>- 5. Начните проверку</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/validating-on-edgeware/#6-prekratite-proverku"><small>- 6. Прекратите проверку</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Валидация на Edgeware</h1>
+
+<p>Добро пожаловать в официальное подробное руководство Edgeware по проверке. Мы рады, что вы заинтересованы в проверке Edgeware, и мы сделаем все возможное, чтобы предоставить подробную документацию по описанному ниже процессу. Как всегда, обращайтесь в <a href="https://discord.gg/CJRfb3">Discord</a> или <a href="https://t.me/heyedgeware">Telegram</a>, если у вас есть вопросы о проекте.</p>
+<p>Этот документ содержит всю информацию, необходимую для начала проверки в Edgeware с использованием <a href="https://polkadot.js.org/apps/#/"><strong>пользовательского интерфейса polkadot-js/apps</strong></a>. Мы начнем с настройки своего узла и перейдем к управлению ключами и мониторингу. Для начала мы будем использовать следующую терминологию ключей для руководства:</p>
+<ul>
+<li><em><strong>stash</strong></em> - пара ключей тайника, где должна находиться большая часть ваших средств. При необходимости его можно хранить в холодильнике.</li>
+<li><em><strong>controller</strong></em> — контроллер — это пара ключей, которая будет управлять настройками вашего валидатора. Он должен иметь меньший баланс, например. 10-100 ЭДГ</li>
+<li><em><strong>session</strong></em> — 3 пары ключей сеанса — это горячие клавиши, которые хранятся на вашем узле валидатора. Им не нужны балансы.</li>
+</ul>
+<h2 id="trebovaniia">Требования</h2>
+<ol>
+<li>У вас должны быть остатки на счетах <code>stash</code> (ed25519 или sr25519) и <code>controller</code> (ed25519 или sr25519).</li>
+<li>Инструкции по настройке узла находятся <a href="https://github.com/hicommonwealth/edgeware-node/wiki/Setting-up-a-Node">здесь</a>. Вам нужно будет дополнительно добавить флаг <code>--validator</code>, чтобы запустить узел проверки.</li>
+<li>У вас должен быть кошелек, например, расширение <code>polkadot-js</code>, установленное в вашем браузере с парами ключей тайника и контроллера. Если у вас его нет, получите <a href="https://github.com/polkadot-js/extension">здесь</a>.</li>
+</ol>
+<p>Если вам нужно запросить баланс тестовой сети EDG, просто спросите в <a href="https://github.com/Edgeware-Network/edgeware-documentation/tree/815a72388a9df65c3db9f048eaed42ea8f645780/docs/advanced-topics/1/README.md">Discord</a>.</p>
+<h3 id=""></h3>
+<ol>
+<li>Установите узел Edgeware</li>
+</ol>
+<p>Если вы запускаете узел валидатора, который должен работать, мы рекомендуем <a href="https://github.com/hicommonwealth/edgeware-node/wiki/Setting-up-a-Node">следовать инструкциям по умолчанию</a> и <a href="https://github.com/hicommonwealth/edgeware-node/wiki/Setting-up-monitoring">настроить мониторинг</a>.</p>
+<p>Затем вы должны перейти к строке, где вызывается <code>target/release/edgeware</code> в <code>/etc/systemd/system/edgeware.service</code>, и добавить флаг <code>--validator</code>. Перезагрузите конфигурацию службы и проверьте, правильно ли запущен узел:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>systemctl daemon-reload
+</span><span>systemctl restart edgeware
+</span><span>systemctl status edgeware
+</span></code></pre>
+<p>Вы должны увидеть этот вывод:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>2019-10-03 10:28:59 Edgeware
+</span><span>2019-10-03 10:28:59   version 1.0.0-3f34fba-x86_64-macos
+</span><span>2019-10-03 10:28:59   by Commonwealth Labs, 2018-2019
+</span><span>2019-10-03 10:28:59 Chain specification: Edgeware
+</span><span>2019-10-03 10:28:59 Node name: naughty-light-7646
+</span><span>2019-10-03 10:28:59 Roles: AUTHORITY
+</span></code></pre>
+<p><strong>Убедитесь, что спецификация цепочки верна, и узел работает с <code>Roles: AUTHORITY</code>.</strong> Если вы не видите правильную цепочку, вы должны указать правильный параметр <code>--chain</code>, а если вы не Если вы не видите роли Authority, вам следует убедиться, что вы действительно используете Edgeware с флагом <code>--validator</code>.</p>
+<p><strong>Убедитесь, что вы можете получить доступ к узлу через командную строку.</strong> Если вы введете команду <code>curl</code> ниже, вы должны увидеть этот вывод:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl --include --no-buffer --header &quot;Connection: Upgrade&quot; --header &quot;Upgrade: websocket&quot; --header &quot;Sec-WebSocket-Key: SGVsbG8sIHdvcmxkIQ==&quot; --header &quot;Sec-WebSocket-Version: 13&quot; localhost:9944
+</span><span>
+</span><span>HTTP/1.1 101 Switching Protocols
+</span><span>Connection: Upgrade
+</span><span>Sec-WebSocket-Accept: qGEgH3En71di5rrssAZTmtRTyFk=
+</span><span>Upgrade: websocket
+</span></code></pre>
+<p><strong>Проверьте</strong> <a href="https://github.com/hicommonwealth/edgeware-node/wiki"><strong>панель телеметрии</strong></a>** и убедитесь, что ваш узел синхронизируется с последним блоком.** Если какой-либо из эти шаги не проверяются, остановитесь сейчас; вы не сможете проверить, пока они не будут исправлены.</p>
+<h3 id="2-podkliuchaemsia-cherez-interfeis">2. Подключаемся через интерфейс</h3>
+<p>Перейдите в <a href="https://polkadot.js.org/apps/#/settings">веб-интерфейс polkadot-js</a> и подключитесь к пользовательскому узлу, например. testnet1.edgewa.re, testnet2.edgewa.re или testnet3.edgewa.re.</p>
+<p>Интерфейс должен показывать правильный последний блок.</p>
+<h3 id="3-sozdaite-stavku">3. Создайте ставку</h3>
+<p>Перейдите на вкладку <strong>Стейкинг</strong> и выберите <strong>Действия с аккаунтом</strong> вверху. Нажмите <strong>Новая ставка</strong>.</p>
+<p>Выберите свой контроллер и тайник. Укажите, какую часть вашего кошелька вы хотите поставить. Оставьте несколько EDG свободными, иначе вы не сможете отправлять транзакции со счета.</p>
+<p>Вы также можете выбрать, куда будут депонированы ваши вознаграждения валидатора (в тайник или контроллер) и должны ли вознагражденные EDG автоматически повторно размещаться.</p>
+<p><img src="https://user-images.githubusercontent.com/1273926/66247046-d5227480-e6cd-11e9-9ddf-45af83a102d4.png" alt="Enter stake amount" /></p>
+<p>Подпишите и отправьте транзакцию.</p>
+<h3 id="4-ustanovite-kliuchi-seansa-s-pomoshch-iu-rotatekeys">4. Установите ключи сеанса с помощью <code>rotateKeys</code></h3>
+<p>Нажмите <strong>Установить сеансовые ключи</strong> на ставке, которую вы только что создали выше.</p>
+<p>Перейдите в командную строку, где работает ваш валидатор (например, SSH на сервер и т. д.) и введите эту команду. Он скажет вашему валидатору сгенерировать новый набор сеансовых ключей:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl -H &#39;Content-Type: application/json&#39; --data &#39;{ &quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;method&quot;:&quot;author_rotateKeys&quot;, &quot;id&quot;:1 }&#39; localhost:9933
+</span></code></pre>
+<p>Вывод должен выглядеть так:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;result&quot;:&quot;0x0ca0fbf245e4abca3328f8bba4a286d6cb1796516fcc68864cab580f175e6abd2b9107003014fc6baab7fd8caf4607b34222df62f606248a8a592bcba86ff9eec6e838ae8eb757eb77dffc748f1443e60c4f7617c9ea7905f0dd09ab758a8063&quot;,&quot;id&quot;:1}
+</span></code></pre>
+<p>Скопируйте шестнадцатеричный ключ из объекта JSON и вставьте его в веб-интерфейс.</p>
+<p><img src="https://user-images.githubusercontent.com/1273926/66247154-ca1c1400-e6ce-11e9-9a50-11b9a6734867.png" alt="rotateKeys input" /></p>
+<p>Подпишите и отправьте транзакцию.</p>
+<h3 id="5-nachnite-proverku">5. Начните проверку</h3>
+<p><img src="https://user-images.githubusercontent.com/1273926/66247159-cf795e80-e6ce-11e9-888b-63f870c301e9.png" alt="Validate or nominate" /></p>
+<p>Теперь вы должны увидеть кнопку <strong>Подтвердить</strong> на ставке. Нажмите на нее и введите комиссию, которую вы хотите взимать в качестве валидатора. Подпишите и отправьте транзакцию.</p>
+<p>Теперь вы должны увидеть свой валидатор в разделе <strong>Далее</strong> на вкладке ставок.</p>
+<p>В начале следующей <strong>эры</strong>, если есть открытые слоты и ваш валидатор имеет адекватную поддержку, ваш валидатор присоединится к набору активных валидаторов и автоматически начнет производить блоки. (В тестовой сети сеансы длятся 100 блоков или 10 минут, а эры - 300 блоков или 30 минут.)</p>
+<p>Активные валидаторы получают вознаграждение в конце каждой эпохи. Слэшинг также происходит в конце каждой эпохи:</p>
+<p><img src="https://user-images.githubusercontent.com/1273926/66247183-e455f200-e6ce-11e9-93ba-5eee38b7c606.png" alt="Reward" /></p>
+<p>Ваш валидатор не производит блоки?</p>
+<ul>
+<li>Убедитесь, что он является частью активного набора валидаторов. Вам нужно будет подождать, пока ваш валидатор не сменится; это может занять больше времени в зависимости от наличия свободных слотов.</li>
+<li>Убедитесь, что он запущен с флагом <code>--validator</code>.</li>
+<li>Убедитесь, что ваши сеансовые ключи установлены правильно. Используйте <code>curl</code>, чтобы снова сменить сеансовые ключи, а затем отправьте еще одну транзакцию в сеть, чтобы установить новые ключи.</li>
+</ul>
+<h3 id="6-prekratite-proverku">6. Прекратите проверку</h3>
+<p>Если вы хотите прекратить проверку, вы должны использовать кнопку <strong>Остановить проверку</strong> на своей ставке, чтобы отправить «холодную» транзакцию. Это вступит в силу, когда произойдет следующая ротация валидатора, после чего вы можете закрыть свой валидатор.</p>
+<p>После того, как вы прекратите проверку, вы можете отправить транзакцию, чтобы разблокировать свои средства. Затем вы можете <strong>погасить</strong> свои несвязанные средства после того, как период развязки прошел.</p>
+<p><img src="https://user-images.githubusercontent.com/1273926/66247294-ee2c2500-e6cf-11e9-93a1-89e9fa532367.png" alt="Unbond" /></p>
+<p><img src="https://user-images.githubusercontent.com/1273926/66247295-eec4bb80-e6cf-11e9-96a8-92ecbdc932d1.png" alt="Redeem unbonded funds" /></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>String vs &amp;str в функциях Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/string-vs-str-in-rust-functions/#funktsii-prinimaiushchie-stroku">Функции, принимающие строку</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/string-vs-str-in-rust-functions/#primer-prinuzhdeniia-deref">Пример принуждения Deref</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/string-vs-str-in-rust-functions/#vvedenie-v-strukturu"><small>- Введение в структуру</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/string-vs-str-in-rust-functions/#stroka-ili-str-v-strukture"><small>- Строка или &amp;str в структуре</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/string-vs-str-in-rust-functions/#a-kak-naschet-staticheskogo">А как насчет &quot;статического&quot;</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/string-vs-str-in-rust-functions/#sviazannyi">Связанный</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>String vs &amp;str в функциях Rust</h1>
+
+<p><a href="https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html">Перевод</a> | Автор оригинала: Herman J. Radtke III</p>
+<p>Для всех людей, разочарованных необходимостью использовать to_string() для получения программ для компиляции, этот пост для вас. Для тех, кто не совсем понимает, почему в Rust есть два строковых типа String и &amp;str, я надеюсь пролить немного света на этот вопрос.</p>
+<h2 id="funktsii-prinimaiushchie-stroku">Функции, принимающие строку</h2>
+<p>Я хочу обсудить, как создавать интерфейсы, принимающие строки. Я заядлый фанат гипермедиа и одержим созданием простых в использовании интерфейсов. Начнем с метода, который принимает String. Наш поиск подсказывает, что std::string::String - здесь хороший выбор. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_me</span><span>(</span><span style="color:#f29718;">msg</span><span style="color:#bfbab0cc;">:</span><span> String) {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;the message is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> msg)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> msg </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;hello world&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">print_me</span><span>(msg)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это дает ошибку компилятора: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>expected `collections::string::String`,
+</span><span>    found `&amp;&#39;static str`
+</span></code></pre>
+<p>Таким образом, строковый литерал имеет тип &amp;str и несовместим с типом String. Мы можем изменить тип сообщения на String и успешно скомпилировать: let message = &quot;hello world&quot; .to_string() ;. Это работает, но аналогично использованию clone() для обхода ошибок владения / заимствования. Вот три причины изменить print_me, чтобы вместо этого принимать &amp;str:</p>
+<ul>
+<li>Символ &amp; является ссылочным типом и означает, что мы заимствуем переменную. Когда print_me завершит работу с переменной, право собственности вернется к первоначальному владельцу. Если у нас нет веской причины передать владение переменной сообщения нашей функции, мы должны выбрать заимствование.</li>
+<li>Использование ссылки более эффективно. Использование String для сообщения означает, что программа должна скопировать значение. При использовании ссылки, такой как &amp;str, копирование не производится.</li>
+<li>Тип String можно волшебным образом превратить в тип &amp;str, используя свойство Deref и приведение типа. Это станет более понятным на примере.</li>
+</ul>
+<h2 id="primer-prinuzhdeniia-deref">Пример принуждения Deref</h2>
+<p>В этом примере строки создаются четырьмя различными способами, которые работают с функцией print_me. Ключом к тому, чтобы все это работало, является передача значений по ссылке. Вместо того, чтобы передавать own_string как String в print_me, мы передаем его как &amp;string. Когда компилятор видит, что &amp;string передается функции, которая принимает &amp;str, он переводит &amp;string в &amp;str. Такое же принуждение имеет место для строк с подсчетом ссылок и строк с атомарными ссылками. Строковая переменная уже является ссылкой, поэтому нет необходимости использовать &amp; при вызове print_me (string). Зная это, нам больше не нужно, чтобы вызовы .to_string() засоряли наш код. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_me</span><span>(</span><span style="color:#f29718;">msg</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) { </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;msg = </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> msg)</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> string </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;hello world&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">print_me</span><span>(string)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> owned_string </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;hello world&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// or String::from_str(&quot;hello world&quot;)
+</span><span>    </span><span style="color:#f07178;">print_me</span><span>(</span><span style="color:#f29668;">&amp;</span><span>owned_string)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> counted_string </span><span style="color:#f29668;">= </span><span>std</span><span style="color:#f29668;">::</span><span>rc</span><span style="color:#f29668;">::</span><span>Rc</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;hello world&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">print_me</span><span>(</span><span style="color:#f29668;">&amp;</span><span>counted_string)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> atomically_counted_string </span><span style="color:#f29668;">= </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>Arc</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;hello world&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">print_me</span><span>(</span><span style="color:#f29668;">&amp;</span><span>atomically_counted_string)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вы также можете использовать приведение Deref с другими типами, такими как Vector. В конце концов, String - это просто вектор из 8-байтовых символов. Подробнее о приведении Deref читайте в книге Rust lang.</p>
+<h3 id="vvedenie-v-strukturu">Введение в структуру</h3>
+<p>На этом этапе у нас не должно быть посторонних вызовов to_string() для наших функций. Однако мы сталкиваемся с некоторыми проблемами, когда пытаемся ввести структуру. Используя то, что мы только что узнали, мы могли бы создать такую структуру: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> _person </span><span style="color:#f29668;">=</span><span> Person { name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Herman&quot; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Получаем ошибку: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&lt;anon&gt;:2:11: 2:15 error: missing lifetime specifier [E0106]
+</span><span>&lt;anon&gt;:2     name: &amp;str,
+</span></code></pre>
+<p>Rust пытается сделать так, чтобы Person не пережил ссылку на name. Если Person все-таки удалось пережить имя, мы рискуем вывести нашу программу из строя. Вся суть Rust в том, чтобы предотвратить это. Итак, давайте начнем пытаться скомпилировать этот код. Нам нужно указать время жизни или область действия, чтобы Rust мог нас обезопасить. Стандартный спецификатор срока службы - a. Я не знаю, почему это было выбрано, но давайте продолжим. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> _person </span><span style="color:#f29668;">=</span><span> Person { name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Herman&quot; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Скомпилируйте снова, и мы получим еще одну ошибку: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&lt;anon&gt;:2:12: 2:14 error: use of undeclared lifetime name `&#39;a` [E0261]
+</span><span>&lt;anon&gt;:2     name: &amp;&#39;a str,
+</span></code></pre>
+<p>Давай подумаем об этом. Мы знаем, что хотим намекнуть компилятору Rust, что наша структура Person не должна пережить имя. Итак, нам нужно позаботиться о нашей жизни в структуре Person. Некоторый поиск укажет нам на &lt;'a&gt; - это синтаксис для объявления времени жизни. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> _person </span><span style="color:#f29668;">=</span><span> Person { name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Herman&quot; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это компилируется! Однако мы обычно реализуем методы в наших структурах. Давайте добавим функцию приветствия в наш класс Person. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">greet</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello, my name is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> person </span><span style="color:#f29668;">=</span><span> Person { name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Herman&quot; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    person</span><span style="color:#f29668;">.</span><span style="color:#f07178;">greet</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Теперь мы получаем ошибку: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&lt;anon&gt;:5:6: 5:12 error: wrong number of lifetime parameters: expected 1, found 0 [E0107]
+</span><span>&lt;anon&gt;:5 impl Person {
+</span></code></pre>
+<p>Наша структура Person имеет параметр времени жизни, поэтому он должен быть и в нашей реализации. Давайте объявим нашу жизнь реализацией Person, например impl Person &lt;'a&gt; {. К сожалению, это дает нам сбивающую с толку ошибку при компиляции: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&lt;anon&gt;:5:13: 5:15 error: use of undeclared lifetime name `&#39;a` [E0261]
+</span><span>&lt;anon&gt;:5 impl Person&lt;&#39;a&gt; {
+</span></code></pre>
+<p>Чтобы мы могли объявить время жизни, нам нужно указать время жизни сразу после impl, например impl &lt;'a&gt; Person {. Снова компилируем и получаем ошибку: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&lt;anon&gt;:5:10: 5:16 error: wrong number of lifetime parameters: expected 1, found 0 [E0107]
+</span><span>&lt;anon&gt;:5 impl&lt;&#39;a&gt; Person {
+</span></code></pre>
+<p>Теперь мы вернулись в нужное русло. Давайте вернем наш параметр времени жизни обратно в реализацию Person, например impl &lt;'a&gt; Person &lt;' a&gt; {. Теперь наша программа компилируется. Вот полный рабочий код: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; </span><span style="color:#59c2ff;">Person</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">greet</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello, my name is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> person </span><span style="color:#f29668;">=</span><span> Person { name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Herman&quot; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    person</span><span style="color:#f29668;">.</span><span style="color:#f07178;">greet</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h3 id="stroka-ili-str-v-strukture">Строка или &amp;str в структуре</h3>
+<p>Теперь вопрос в том, использовать ли в вашей структуре String или &amp;str. Другими словами, когда мы должны использовать ссылку на другой тип в структуре? Мы должны использовать ссылку, если нашей структуре не требуется владение переменной. Эта концепция может быть немного расплывчатой, но есть несколько правил, которые я использую, чтобы получить ответ.</p>
+<ul>
+<li>Нужно ли мне использовать переменную вне моей структуры? Вот надуманный пример: </li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">greet</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello, my name is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from_str(</span><span style="color:#c2d94c;">&quot;Herman&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> person </span><span style="color:#f29668;">=</span><span> Person { name</span><span style="color:#bfbab0cc;">:</span><span> name }</span><span style="color:#bfbab0cc;">;
+</span><span>    person</span><span style="color:#f29668;">.</span><span style="color:#f07178;">greet</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;My name is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> name)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// move error
+</span><span>}
+</span></code></pre>
+<p>Я должен использовать здесь ссылку, так как мне нужно будет использовать переменную позже. Вот реальный пример в rustc_serialize. Структуре Encoder не нужно владеть записывающей переменной, которая реализует std::fmt::Write, просто используйте (заимствуйте) на некоторое время. Фактически String реализует Write. В этом примере с использованием функции кодирования переменная типа String передается в кодировщик, а затем возвращается вызывающей стороне кодирования.</p>
+<ul>
+<li>Мой шрифт большой? Если тип большой, то передача его по ссылке сэкономит ненужное использование памяти. Помните, что передача по ссылке не вызывает копии переменной. Рассмотрим строковый буфер, содержащий большой объем данных. Копирование всего этого приведет к тому, что программа будет работать намного медленнее.</li>
+</ul>
+<p>Теперь мы должны иметь возможность создавать функции, которые принимают строки, независимо от того, являются ли они &amp;str, String или подсчитываются ссылки на событие. Мы также можем создавать структуры, которые могут иметь переменные, являющиеся ссылками. Время жизни структуры связано с этими ссылочными переменными, чтобы гарантировать, что структура не переживет указанную переменную и не приведет к плохим вещам в нашей программе. У нас также есть начальное понимание того, должны ли переменные в нашей структуре быть типами или ссылками на типы.</p>
+<h2 id="a-kak-naschet-staticheskogo">А как насчет &quot;статического&quot;</h2>
+<p>Случайным образом, но я подумал, что стоит упомянуть. Мы можем использовать статическое время жизни для компиляции нашего исходного примера, но я предостерегаю от этого: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">greet</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello, my name is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> person </span><span style="color:#f29668;">=</span><span> Person { name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Herman&quot; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    person</span><span style="color:#f29668;">.</span><span style="color:#f07178;">greet</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Статическое время жизни действительно для всей программы. Возможно, вам не понадобится Человек или имя, чтобы прожить так долго.</p>
+<h2 id="sviazannyi">Связанный</h2>
+<ul>
+<li>Создание функции Rust, которая принимает String или &amp;str </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

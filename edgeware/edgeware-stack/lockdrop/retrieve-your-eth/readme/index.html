@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Получение заблокированного ETH | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/lockdrop/retrieve-your-eth/readme/#description-a-guide-on-retrieving-eth-locked-in-the-edgeware-lockdrop-event">description: A guide on retrieving ETH locked in the Edgeware lockdrop event.</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/lockdrop/retrieve-your-eth/readme/#srok-blokirovki-istek">Срок блокировки истек?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/lockdrop/retrieve-your-eth/readme/#predposylki"><small>- Предпосылки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/lockdrop/retrieve-your-eth/readme/#predposylki-1"><small>- Предпосылки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/lockdrop/retrieve-your-eth/readme/#shagi"><small>- Шаги</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Получение заблокированного ETH</h1>
+
+<hr />
+<h2 id="description-a-guide-on-retrieving-eth-locked-in-the-edgeware-lockdrop-event">description: A guide on retrieving ETH locked in the Edgeware lockdrop event.</h2>
+<p>Есть два способа получить ваш ETH из пользовательского контракта блокировки:</p>
+<ul>
+<li>Использование инструмента разблокировки Содружества. (Этот инструмент иногда недоступен.)</li>
+<li>Отправка ручной транзакции.</li>
+</ul>
+<p>Во-первых, обратите внимание на разницу между LUC и MLC:</p>
+<ul>
+<li>
+<p><strong>Мастер-контракт блокировки (MLC) (v1 и v2)</strong></p>
+<p>Координационный контракт, на который вы отправили свой ETH — он создает и отправляет этот ETH в ваш личный пользовательский контракт Lockdrop, который удерживает ваш ETH до момента разблокировки. <strong>Не отправляйте транзакцию разблокировки в MLC — это не удастся.</strong></p>
+</li>
+<li>
+<p>MLC v1 (старый) <code>0x1b75b90e60070d37cfa9d87affd124bb345bf70a</code></p>
+</li>
+<li>
+<p>MLC v2 (новый) <code>0xFEC6F679e32D45E22736aD09dFdF6E3368704e31</code></p>
+</li>
+<li>
+<p><strong>Контракт пользователя Lockdrop (LUC)</strong> Ваш индивидуальный контракт Lockdrop. Это содержит ETH и является контрактом, который вы будете использовать, чтобы разблокировать и получить свой ETH. ** Сюда мы отправим транзакцию разблокировки. См. ссылку ниже, чтобы найти свой адрес LUC.**</p>
+</li>
+</ul>
+<h2 id="srok-blokirovki-istek">Срок блокировки истек?</h2>
+<p>Чтобы получить ваш ETH, ваша блокировка должна быть завершена, иначе транзакция не будет выполнена. Прежде чем продолжить работу с этим руководством, убедитесь, что ваша продолжительность закончилась:</p>
+<p>{% content-ref url=&quot;../check-the-status-of-your-lock-duration-and-unlock-date.md&quot; %}
+<a href="../check-the-status-of-your-lock-duration-and-unlock-date/">check-the-status-of-your-lock-duration-and-unlock-date.md</a>
+{% endcontent-ref %}</p>
+<p>{% tabs %}
+{% tab title=&quot;Send a Transaction Manually&quot; %}</p>
+<h3 id="predposylki">Предпосылки</h3>
+<ul>
+<li>Доступ и контроль над <em>исходной</em> учетной записью, с которой вы отправили при создании LUC из MLC - сюда будут возвращены ETH.</li>
+<li><a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn">Metamask</a> или кошелек с возможностью транзакций с <em>любой</em> учетной записью, он <em>не должен</em> быть оригинальным, но он <strong>должен</strong> нужно достаточно ETH для оплаты «газа» (комиссии за транзакцию) за транзакцию — вероятно, равной или меньше 0,00042 ETH.</li>
+<li><em>contract</em> адрес вашего LUC. См. выше, чтобы узнать, как найти это.</li>
+<li>Время разблокировки должно пройти для вашего LUC.</li>
+</ul>
+<p><strong>Шаги</strong></p>
+<ol>
+<li>Откройте Metamask или кошелек и выберите счет, с которого вы хотите оплатить комиссию за транзакцию.</li>
+<li>Нажмите кнопку «Отправить».</li>
+<li>Подтвердите, что на счете, выбранном вверху, достаточно ETH для оплаты комиссии за транзакцию.</li>
+<li>Внимательно введите адрес контракта LUC в поле «Адрес получателя».</li>
+<li>Введите ноль в качестве суммы отправки.</li>
+<li>Увеличьте лимит газа на транзакцию до 40к.</li>
+<li>Подтвердите, что скорость вашей транзакции (и, следовательно, стоимость комиссии за транзакцию) удовлетворительна. (Большая плата означает более быструю обработку в сети.)</li>
+<li>Нажмите «Далее»</li>
+</ol>
+<blockquote>
+<p>Попытки разблокировки терпят неудачу по трем основным причинам:</p>
+<ul>
+<li>LUC еще не прошел дату разблокировки 3, 6 или 12 месяцев.</li>
+<li>Лимит газа нужно увеличить до 40к.</li>
+<li>Вы пытаетесь отправить транзакцию в MLC, а не в LUC.</li>
+</ul>
+</blockquote>
+<p>Теперь следите за завершением транзакции и подтвердите, что ваш ETH благополучно прибыл домой.
+{% endtab %}</p>
+<p>{% tab title=&quot;Commonwealth Unlock Tool &quot; %}</p>
+<h3 id="predposylki-1">Предпосылки</h3>
+<ul>
+<li>ETH-адрес учетной записи, с которой вы участвовали в блокировке.</li>
+<li>Контроль над учетной записью, с которой вы первоначально участвовали в блокировке - ETH вернется сюда.</li>
+<li>Кошелек web3 с учетной записью с достаточным количеством ETH, чтобы покрыть затраты на транзакцию разблокировки (газ).</li>
+<li>Время разблокировки истекло.</li>
+</ul>
+<blockquote>
+<p>Этот инструмент может быть отключен или отображать ошибки из-за Infura — если это так, переключитесь на ручной процесс в этом руководстве.</p>
+</blockquote>
+<h3 id="shagi">Шаги</h3>
+<p>Посетите <a href="https://commonwealth.im/edgeware/unlock">инструмент разблокировки на сайте Commonwealth.im</a></p>
+<p>Выберите версию основного контракта Lockdrop, которую вы использовали для участия в мероприятии Lockdrop.</p>
+<ul>
+<li>MLC v1 (старый) <code>0x1b75b90e60070d37cfa9d87affd124bb345bf70a</code></li>
+<li>MLC v2 (новый) <code>0xFEC6F679e32D45E22736aD09dFdF6E3368704e31</code></li>
+</ul>
+<p>Если вы не уверены, какой из них вы использовали, проверьте транзакции на вашем участвующем адресе ETH, используя обозреватель блоков для блокирующих транзакций.</p>
+<p>Введите свой участвующий адрес ETH и нажмите кнопку «Получить блокировки».</p>
+<p>Просмотрите экземпляры LUC и выберите разблокировать, чтобы указать транзакцию кошелька Metamask или web3. Отправить транзакцию.</p>
+<blockquote>
+<p>Попытки разблокировки терпят неудачу по двум основным причинам:</p>
+<ul>
+<li>LUC еще не прошел дату разблокировки 3, 6 или 12 месяцев.</li>
+<li>Лимит газа нужно увеличить до 40к.</li>
+</ul>
+</blockquote>
+<p>{% endtab %}
+{% endtabs %}</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

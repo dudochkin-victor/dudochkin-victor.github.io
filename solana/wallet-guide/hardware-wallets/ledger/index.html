@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ledger Nano | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#prezhde-chem-vy-nachnete">Прежде чем вы начнете</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#ispol-zuite-ledger-nano-s-solana-cli">Используйте Ledger Nano с Solana CLI</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#prosmotr-identifikatora-koshel-ka"><small>- Просмотр идентификатора кошелька</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#prosmotr-adresov-vashego-koshel-ka"><small>- Просмотр адресов вашего кошелька</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#prosmotr-vashego-balansa"><small>- Просмотр вашего баланса</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#otpravit-sol-s-nano"><small>- Отправить SOL с Nano</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#rasshirennye-operatsii">Расширенные операции</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#upravlenie-neskol-kimi-apparatnymi-koshel-kami"><small>- Управление несколькими аппаратными кошельками</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#ispravlenie-problem">Исправление проблем</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#parametry-url-pary-kliuchei-ignoriruiutsia-v-zsh"><small>- Параметры URL пары ключей игнорируются в zsh</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/hardware-wallets/ledger/#sluzhba-podderzhki">Служба поддержки</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Ledger Nano</h1>
+
+<p>На этой странице описывается, как использовать Ledger Nano S или Nano X для взаимодействия с Solana с помощью инструментов командной строки. Чтобы увидеть другие решения для взаимодействия с Solana с вашим Nano, <a href="../ledger-live.md#interact-with-the-solana-network">нажмите здесь</a>.</p>
+<h2 id="prezhde-chem-vy-nachnete">Прежде чем вы начнете</h2>
+<ul>
+<li><a href="../ledger-live/">Настройте Nano с помощью приложения Solana</a></li>
+<li><a href="../../cli/install-solana-cli-tools/">Установить инструменты командной строки Solana</a></li>
+</ul>
+<h2 id="ispol-zuite-ledger-nano-s-solana-cli">Используйте Ledger Nano с Solana CLI</h2>
+<ol>
+<li>Убедитесь, что приложение Ledger Live закрыто.</li>
+<li>Подключите Nano к USB-порту вашего компьютера.</li>
+<li>Введите свой пин-код и запустите приложение Solana на Nano.</li>
+<li>Убедитесь, что на экране отображается сообщение «Приложение готово».</li>
+</ol>
+<h3 id="prosmotr-identifikatora-koshel-ka">Просмотр идентификатора кошелька</h3>
+<p>На вашем компьютере запустите:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> pubkey usb://ledger
+</span></code></pre>
+<p>Это подтверждает, что ваше устройство Ledger правильно подключено и находится в правильном состоянии для взаимодействия с интерфейсом командной строки Solana. Команда возвращает уникальный <em>идентификатор кошелька</em> вашего Ledger. Если у вас есть несколько устройств Nano, подключенных к одному компьютеру, вы можете использовать свой идентификатор кошелька, чтобы указать, какой аппаратный кошелек Ledger вы хотите использовать. Если вы планируете использовать только один Nano на своем компьютере одновременно, вам не нужно указывать идентификатор кошелька. Информацию об использовании идентификатора кошелька для использования определенного Ledger см. в разделе Управление несколькими аппаратными кошельками.</p>
+<h3 id="prosmotr-adresov-vashego-koshel-ka">Просмотр адресов вашего кошелька</h3>
+<p>Ваш Nano поддерживает произвольное количество действительных адресов кошельков и подписантов.
+Чтобы просмотреть любой адрес, используйте команду <code>solana-keygen pubkey</code>, как показано ниже, за которой следует действительный <a href="../hardware-wallets.md#specify-a-keypair-url">URL-адрес пары ключей</a>.</p>
+<p>Несколько адресов кошелька могут быть полезны, если вы хотите передавать токены между своими учетными записями для разных целей или использовать разные пары ключей на устройстве в качестве полномочий для подписи, например, для учетной записи доли.</p>
+<p>Все следующие команды будут отображать разные адреса, связанные с заданным путем пары ключей. Попробуйте их!</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> pubkey usb://ledger
+</span><span style="color:#ffb454;">solana-keygen</span><span> pubkey usb://ledger</span><span style="color:#f29668;">?</span><span>key=0
+</span><span style="color:#ffb454;">solana-keygen</span><span> pubkey usb://ledger</span><span style="color:#f29668;">?</span><span>key=1
+</span><span style="color:#ffb454;">solana-keygen</span><span> pubkey usb://ledger</span><span style="color:#f29668;">?</span><span>key=2
+</span></code></pre>
+<ul>
+<li>ПРИМЕЧАНИЕ: параметры URL пары ключей игнорируются в <strong>zsh</strong>
+ см. раздел «Устранение неполадок» для получения дополнительной информации</li>
+</ul>
+<p>Вы также можете использовать другие значения для числа после <code>key=</code>.
+Любой из адресов, отображаемых этими командами, является действительным адресом кошелька Solana. Частная часть, связанная с каждым адресом, надежно хранится в Nano и используется для подписи транзакций с этого адреса.
+Просто запишите, какой URL пары ключей вы использовали для получения любого адреса, который вы будете использовать для получения токенов.</p>
+<p>Если вы планируете использовать только один адрес/пару ключей на своем устройстве, хорошим легко запоминающимся путем может быть использование адреса <code>key=0</code>. Посмотреть этот адрес с помощью:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> pubkey usb://ledger</span><span style="color:#f29668;">?</span><span>key=0
+</span></code></pre>
+<p>Теперь у вас есть адрес кошелька (или несколько адресов), вы можете опубликовать любой из этих адресов, чтобы он действовал как адрес получателя, и вы можете использовать связанный URL-адрес пары ключей в качестве подписывающей стороны для транзакций с этого адреса.</p>
+<h3 id="prosmotr-vashego-balansa">Просмотр вашего баланса</h3>
+<p>Для просмотра баланса любого аккаунта, независимо от того, какой кошелек он использует, используйте команду <code>solana balance</code>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> balance SOME_WALLET_ADDRESS
+</span></code></pre>
+<p>Например, если ваш адрес <code>7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri</code>, введите следующую команду для просмотра баланса:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> balance 7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri
+</span></code></pre>
+<p>Вы также можете просмотреть баланс любого адреса учетной записи на вкладке «Учетные записи» в <a href="https://explorer.solana.com/accounts">Проводнике</a> и вставить адрес в поле для просмотра баланса в своем веб-браузере.</p>
+<p>Примечание. Любой адрес с балансом 0 SOL, например, только что созданный в вашем Ledger, будет отображаться в проводнике как «Не найден». Пустые учетные записи и несуществующие учетные записи обрабатываются в Solana одинаково. Это изменится, когда в адресе вашей учетной записи будет указано SOL.</p>
+<h3 id="otpravit-sol-s-nano">Отправить SOL с Nano</h3>
+<p>Чтобы отправить несколько токенов с адреса, контролируемого вашим Nano, вам нужно будет использовать устройство для подписи транзакции, используя тот же URL-адрес пары ключей, который вы использовали для получения адреса. Для этого убедитесь, что ваш Nano подключен, разблокирован с помощью PIN-кода, Ledger Live не запущен, а приложение Solana открыто на устройстве с надписью «Приложение готово».</p>
+<p>Команда solana transfer используется, чтобы указать, на какой адрес отправлять токены, сколько токенов отправлять, и использует аргумент <code>--keypair</code>, чтобы указать, какая пара ключей отправляет токены, которая будет подписывать транзакцию, и баланс. с ассоциированного адреса будет уменьшаться.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> transfer RECIPIENT_ADDRESS AMOUNT</span><span style="color:#f29718;"> --keypair</span><span> KEYPAIR_URL_OF_SENDER
+</span></code></pre>
+<p>Ниже приведен полный пример. Сначала просматривается адрес по определенной паре ключей URL.
+Во-вторых, проверяется баланс этого адреса. Наконец, вводится транзакция перевода для отправки «1» SOL на адрес получателя «7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri».
+Когда вы нажмете Enter для команды перевода, вам будет предложено подтвердить детали транзакции на вашем устройстве Ledger. На устройстве используйте правую и левую кнопки для просмотра сведений о транзакции. Если они выглядят правильно, нажмите обе кнопки на экране «Утвердить», в противном случае нажмите обе кнопки на экране «Отклонить».</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#39bae6;">~</span><span style="color:#ffb454;">$</span><span> solana-keygen pubkey usb://ledger</span><span style="color:#f29668;">?</span><span>key=42
+</span><span style="color:#ffb454;">CjeqzArkZt6xwdnZ9NZSf8D1CNJN1rjeFiyd8q7iLWAV
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">~</span><span style="color:#ffb454;">$</span><span> solana balance CjeqzArkZt6xwdnZ9NZSf8D1CNJN1rjeFiyd8q7iLWAV
+</span><span style="color:#ffb454;">1.000005</span><span> SOL
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">~</span><span style="color:#ffb454;">$</span><span> solana transfer 7cvkjYAkUYs4W8XcXsca7cBrEGFeSUjeZmKoNBvEwyri 1</span><span style="color:#f29718;"> --keypair</span><span> usb://ledger</span><span style="color:#f29668;">?</span><span>key=42
+</span><span style="color:#ffb454;">Waiting</span><span> for your approval on Ledger hardware wallet usb://ledger/2JT2Xvy6T8hSmT8g6WdeDbHUgoeGdj6bE2VueCZUJmyN
+</span><span style="color:#ffb454;">✅</span><span> Approved
+</span><span>
+</span><span style="color:#ffb454;">Signature:</span><span> kemu9jDEuPirKNRKiHan7ycybYsZp7pFefAdvWZRq5VRHCLgXTXaFVw3pfh87MQcWX4kQY4TjSBmESrwMApom1V
+</span></code></pre>
+<p>После одобрения транзакции на вашем устройстве программа отобразит подпись транзакции и дождется максимального количества подтверждений (32) перед возвратом. Это занимает всего несколько секунд, а затем транзакция завершается в сети Solana. Вы можете просмотреть подробности этой или любой другой транзакции, перейдя на вкладку «Транзакция» в <a href="https://explorer.solana.com/transactions">Проводнике</a> и вставив подпись транзакции.</p>
+<h2 id="rasshirennye-operatsii">Расширенные операции</h2>
+<h3 id="upravlenie-neskol-kimi-apparatnymi-koshel-kami">Управление несколькими аппаратными кошельками</h3>
+<p>Иногда бывает полезно подписать транзакцию ключами от нескольких аппаратных кошельков. Для подписи с использованием нескольких кошельков требуются <em>полные URL-адреса пары ключей</em>.
+Если URL-адрес не является полным, интерфейс командной строки Solana предложит вам указать полные URL-адреса всех подключенных аппаратных кошельков и попросит вас выбрать, какой кошелек использовать для каждой подписи.</p>
+<p>Вместо использования интерактивных подсказок вы можете генерировать полные URL-адреса с помощью команды Solana CLI <code>resolve-signer</code>. Например, попробуйте подключить Nano к USB, разблокировать его с помощью пин-кода и выполнить следующую команду:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana resolve-signer usb://ledger?key=0/0
+</span></code></pre>
+<p>Вы увидите вывод, похожий на:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>usb://ledger/BsNsvfXqQTtJnagwFWdBS7FBXgnsK8VZ5CmuznN85swK?key=0/0
+</span></code></pre>
+<p>но где <code>BsNsvfXqQTtJnagwFWdBS7FBXgnsK8VZ5CmuznN85swK</code> — это ваш <code>WALLET_ID</code>.</p>
+<p>С вашим полным URL-адресом вы можете подключить несколько аппаратных кошельков к одному компьютеру и однозначно идентифицировать пару ключей от любого из них.
+Используйте вывод команды <code>resolve-signer</code> везде, где команда <code>solana</code> ожидает, что запись <code>&lt;KEYPAIR&gt;</code> будет использовать разрешенный путь в качестве подписавшего для этой части данной транзакции.</p>
+<h2 id="ispravlenie-problem">Исправление проблем</h2>
+<h3 id="parametry-url-pary-kliuchei-ignoriruiutsia-v-zsh">Параметры URL пары ключей игнорируются в zsh</h3>
+<p>Знак вопроса — это специальный символ в zsh. Если вы не используете эту функцию, добавьте следующую строку в ваш файл <code>~/.zshrc</code>, чтобы рассматривать его как обычный символ:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">unsetopt</span><span> nomatch
+</span></code></pre>
+<p>Затем либо перезапустите окно оболочки, либо запустите <code>~/.zshrc</code>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#f07178;">source </span><span style="font-style:italic;color:#39bae6;">~</span><span>/.zshrc
+</span></code></pre>
+<p>Если вы предпочитаете не отключать специальную обработку zsh символа вопросительного знака, вы можете явно отключить ее с помощью обратной косой черты в URL-адресах вашей пары ключей.
+Например:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> pubkey usb://ledger</span><span style="color:#95e6cb;">\?</span><span>key=0
+</span></code></pre>
+<h2 id="sluzhba-podderzhki">Служба поддержки</h2>
+<p>Посетите нашу <a href="../support/">Страницу поддержки Кошелька</a>, чтобы узнать, как получить помощь.</p>
+<p>Подробнее об <a href="../../cli/transfer-tokens/">отправке и получении токенов</a> и <a href="../../cli/delegate-stake/">делегировании доли</a>. Вы можете использовать URL-адрес пары ключей Ledger везде, где вы видите параметр или аргумент, который принимает <code>&lt;KEYPAIR&gt;</code>.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

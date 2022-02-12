@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Оптимальные соединения в наихудшем случае в потоке данных | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#reliatsionnye-soedineniia">Реляционные соединения</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#primer"><small>- Пример</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#starye-metodologi"><small>- Старые методологи</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#bolee-svezhie-raboty"><small>- Более свежие работы</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#obshchee-soedinenie">Общее соединение</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#konkretnoe-soedinenie"><small>- Конкретное соединение</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#umnoe-obedinenie"><small>- Умное объединение</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#realizatsiia-na-rust">Реализация на Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#nekotorye-abstraktsii"><small>- Некоторые абстракции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#raspredelennaia-realizatsiia"><small>- Распределенная реализация</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#konkretnoe-obedinenie-v-rust"><small>- Конкретное объединение в Rust</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#perechislitel-treugol-nikov-s-maloi-zaderzhkoi">Перечислитель треугольников с малой задержкой</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#opredelenie-prefixextender"><small>- Определение PrefixExtender</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#postroenie-zaprosa-treugol-nikov"><small>- Построение запроса треугольников</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#razve-vy-ne-skazali-nizkaia-zaderzhka"><small>- Разве вы не сказали «низкая задержка»?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#treugol-niki-takie-uzh-otstoinye"><small>- Треугольники такие уж отстойные.</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#zavorachivat">Заворачивать</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#snoska-perekos">Сноска: перекос</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/worstcase-optimal-joins-in-dataflow/#kredity-i-tekushchaia-rabota">Кредиты и текущая работа</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Оптимальные соединения в наихудшем случае в потоке данных</h1>
+
+<p><a href="http://www.frankmcsherry.org/dataflow/relational/join/2015/04/11/genericjoin.html">Перевод</a> | Автор оригинала: Frank McSherry</p>
+<p>Я получил своевременный поток данных в Rust и выполняю захватывающие вычисления! Я собираюсь объяснить один, который я считаю особенно крутым, и который я собираюсь попробовать использовать для некоторого анализа производительности базовой системы (система до сих пор подвергалась только микротестам задержки ...).</p>
+<p>Код всего, о чем я расскажу, доступен в Интернете. Это пока не особенно красиво, но погоди.</p>
+<p>Серьезно, вы действительно можете подождать. А пока вы можете прочитать этот отличный пост!</p>
+<h2 id="reliatsionnye-soedineniia">Реляционные соединения</h2>
+<p>Реляционное соединение - вещь довольно хорошо изученная, и я просто собираюсь дать здесь небольшое описание, чтобы у нас была общая терминология. Проблема начинается с набора отношений, мысленных таблиц; назовем эти отношения. Также есть несколько атрибутов, которые мы будем называть. Каждое отношение именует некоторое подмножество этих атрибутов, и каждый элемент в отношении имеет значение для каждого именованного атрибута. Не все отношения должны использовать один и тот же набор атрибутов.</p>
+<p>Проблема реляционного соединения состоит в том, что для нескольких отношений определяется набор кортежей по всему пространству атрибутов, так что для каждого кортежа его проекция на атрибуты каждого отношения существует в этом отношении.</p>
+<h3 id="primer">Пример</h3>
+<p>Рассмотрим первые записи трех отношений по трем атрибутам:</p>
+<p><img src="/imgs/posts/3fb41df9_01.png" alt="Мой полезный скриншот" /></p>
+<p>Реляционное соединение между тремя отношениями должно содержать по крайней мере тройки и, поскольку мы можем видеть в первом отношении пары и, во втором отношении пары и, а в третьем отношении пары и.</p>
+<p>Конечно, в полном соединении может быть больше записей, поскольку мы видим больше записей из каждого отношения.</p>
+<h3 id="starye-metodologi">Старые методологи</h3>
+<p>Есть много способов выполнить двоичное соединение между двумя отношениями, но самый простой - это хэш-соединение, когда вы просматриваете общие атрибуты между двумя отношениями и хешируете каждый кортеж в зависимости от их ограничения на эти атрибуты. Для каждой пары совпадающих кортежей (по одному от каждого отношения) вы формируете расширенный кортеж, который принимает объединение атрибутов отношений.</p>
+<p>В приведенном выше примере мы могли бы объединить первые два отношения путем хеширования записей с помощью атрибута. Это соответствует и из первого отношения, и из второго отношения. Выходными данными в этом случае являются четыре тройки:,, и. Запись ничему не соответствует во втором отношении и не дает результата.</p>
+<p>Чтобы выполнить многостороннее соединение, можно просто захватить отношения и присоединиться к ним, пока не будут использованы все отношения. Это дает правильный ответ, но может быть очень медленным. Более разумный способ - сформировать «план», который представляет собой двоичное дерево, в котором листья являются отношениями, а внутренние узлы соответствуют соединениям отношений. Корнем этого дерева является объединение всех отношений, но древовидная структура подсказывает, какие отношения лучше всего начать объединять.</p>
+<p>В приведенном выше примере мы могли бы предпочесть объединить три отношения путем первого объединения и, что приведет к созданию только двух записей перед объединением с. Составление разумного плана присоединения - это то, о чем исследователи баз данных любят говорить на своих необычных встречах, и это хороший способ завязать разговор. </p>
+<h3 id="bolee-svezhie-raboty">Более свежие работы</h3>
+<p>Реляционные соединения существуют так давно, что вы можете быть немного удивлены, узнав, что здесь все еще ведется новая работа. Вы можете быть еще более удивлены, узнав, что в некоторых отношениях люди довольно давно делали это неправильно. Это именно то, что наблюдают Нго и др. В потрясающей работе:</p>
+<ol>
+<li>
+<p>Стандартный подход к вычислению реляционных объединений, при котором один многократно выполняет двоичные объединения, может выполнять асимптотически больше работы, чем объединение могло бы когда-либо создавать выходные кортежи.</p>
+<p>В примере трехстороннего соединения, если каждое отношение имеет размер, может быть не больше выходных кортежей, поскольку math. Однако существуют входные данные, так что любой план, основанный на бинарных соединениях, будет работать.</p>
+</li>
+<li>
+<p>Существуют алгоритмы, которые никогда не выполняют больше работы (асимптотически), чем объединение могло бы для некоторых входных данных того же размера произвести выходные кортежи. Для трехстороннего соединения они будут выполнять вычисления.</p>
+</li>
+</ol>
+<p>Этот второй пункт не означает, что они будут выполнять ровно столько работы, сколько они будут создавать выходные кортежи, а только то, что, когда они выполняют много работы, у них, по крайней мере, есть оправдание, что они, возможно, должны были это сделать.</p>
+<p>Вы знаете, у кого нет даже такого оправдания? Стандартные подходы к вычислению реляционных объединений.</p>
+<h2 id="obshchee-soedinenie">Общее соединение</h2>
+<p>Алгоритм, который подробно описывают Нго и др., На самом деле довольно общий. Они даже называют алгоритм GenericJoin.</p>
+<p>Я собираюсь сосредоточиться на конкретной реализации этого. Я должен сказать здесь, что конкретное осознание произошло благодаря другим людям, а не мне. Я не совсем уверен, кто заслуживает доверия, но Семих Салихоглу и Крис Ре - те, кто научил меня обработке соединений в наихудшем случае, и именно с Семих, Крисом и Майклом Айсардом мы разработали первую версию этого в Наяда.</p>
+<h3 id="konkretnoe-soedinenie">Конкретное соединение</h3>
+<p>Вместо того, чтобы думать о добавлении отношений по одному, как при классической обработке соединений, мы будем думать о добавлении атрибутов по одному.</p>
+<p>Представьте, что у нас есть соединение по атрибутам, и мы хотим вывести соединение по атрибутам. Для каждого мы хотим создать набор поддерживаемых каждым отношением.</p>
+<p>Самый простой способ сделать это - просто спросить каждого: «Какие расширения вы поддерживаете?» Для каждого мы пересекаем их результаты и возвращаемся для каждого на пересечении.</p>
+<p>Конечно, чтобы запросить отношения для расширений и быстро получить ответ, каждое отношение необходимо проиндексировать по каждому префиксу атрибутов. Это вводит избыточность, но мы собираемся с ней работать.</p>
+<h3 id="umnoe-obedinenie">Умное объединение</h3>
+<p>В этом алгоритме пока нет ничего разумного, но Нго и др. Наблюдают, что если вы сделаете это пересечение осторожно, вы получите алгоритм оптимального соединения наихудшего случая. Особое внимание, которое вы должны проявить к каждому из них, заключается в том, чтобы выполнять работу только пропорционально наименьшему набору возможных расширений из любого отношения. Вместо того, чтобы просто пересекать все волей-неволей, мы должны начать с самого малого и продвигаться вверх.</p>
+<p>К счастью, вычисление пересечения небольшого набора с большим набором - это то, что может занять время, примерно линейное по размеру меньшего набора. Вы можете либо хешировать все повсюду, либо использовать логарифмический коэффициент (они согласны с этим), используя различные методы двоичного поиска.</p>
+<p>Но давайте посмотрим на секунду и убедимся, что мы это понимаем. Для каждого из них мы должны попросить зависящее от данных отношение предложить некоторые расширения, а затем попросить другие отношения подтвердить их. Не существует статичного плана «сначала все спрашивают, потом…»; мы собираемся обмениваться ими повсюду, вместо того, чтобы передавать записи через отношения, как при традиционном плане объединения.</p>
+<p>«Обмен», говорите вы? Надеюсь, вы понимаете, к чему все идет.</p>
+<h2 id="realizatsiia-na-rust">Реализация на Rust</h2>
+<p>Очевидно, мы собирались это сделать. Не удивляйся.</p>
+<h3 id="nekotorye-abstraktsii">Некоторые абстракции</h3>
+<p>Действительно ли нам нужны отношения и кортежи повсюду в нашем коде? Нет! Давайте займемся абстракцией.</p>
+<p>Из приведенного выше обсуждения мы видим, что нам действительно нужно лишь несколько вещей из отношения:</p>
+<ol>
+<li>Он должен иметь возможность сообщать, сколько расширений он предлагает.</li>
+<li>Он должен иметь возможность предлагать конкретные расширения для.</li>
+<li>Он должен иметь возможность пересекать предлагаемые расширения со своими расширениями.</li>
+</ol>
+<p>Итак, давайте напишем трэйту, которая делает это. Я назову задачи выше «подсчитать», «предложить» и «пересечь». </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">PrefixExtender</span><span>&lt;Prefix, Extension&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29668;">&amp;</span><span>Prefix) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">propose</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29668;">&amp;</span><span>Prefix) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Extension&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">intersect</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29668;">&amp;</span><span>Prefix, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Extension&gt;)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Я думаю, это как и было обещано. Это то, что необходимо реализовать в отношении, чтобы мы могли расширить элемент типа Prefix (think кортежи) с помощью элемента типа Extension (think).</p>
+<h3 id="raspredelennaia-realizatsiia">Распределенная реализация</h3>
+<p>Конечно, мы действительно хотели бы расширить каждый из префиксов параллельно для множества рабочих процессов. По крайней мере, я этого хочу. Если вам все равно, вы должны полностью пропустить эту часть.</p>
+<p>Чтобы это произошло, я собираюсь использовать библиотеку своевременных потоков данных, которая использует тип Stream &lt;G, Prefix&gt; для представления распределенного потока записей типа Prefix. Параметр типа G описывает, как распределяется поток и как будут выполняться вычисления, и пока мы просто проигнорируем его.</p>
+<p>Нам нужно поднять реализацию PrefixExtender &lt;P, E&gt; для работы с потоками Stream &lt;G, P&gt;. К счастью, я собираюсь сделать это за нас, реализовав следующий трейт для любого типа, реализующего PrefixExtender &lt;P, E&gt; (плюс некоторая информация о том, как распределять префиксы среди рабочих). </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">StreamPrefixExtender</span><span>&lt;G, P, E&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Stream&lt;G, (P, </span><span style="color:#ff7733;">u64</span><span>, </span><span style="color:#ff7733;">u64</span><span>)&gt;, </span><span style="color:#ff7733;">u64</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Stream&lt;G, (P, </span><span style="color:#ff7733;">u64</span><span>, </span><span style="color:#ff7733;">u64</span><span>)&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">propose</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Stream&lt;G, P&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Stream&lt;G, (P, </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt;)&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">intersect</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Stream&lt;G, (P, </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt;)&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Stream&lt;G, (P, </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt;)&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Записи несут с собой больше информации; информация, которая раньше была в стеке, теперь должна быть помещена в сами записи. Например, мы указываем отношение с наименьшим счетом тройкой (префикс: P, счетчик: u64, индекс: u64), данные, которые в противном случае были бы в локальных переменных. Сигнатура счетчика также изменяется, чтобы принимать и производить тройки, как при обновлении переменных стека.</p>
+<p>Хотя мы собираемся использовать этот интерфейс, вам не нужно много об этом знать. Главное, что нужно знать, это то, что существует около пятидесяти довольно предсказуемых строк кода, которые реализуют StreamPrefixExtender &lt;G, P, E&gt; для любого типа, реализующего PrefixExtender &lt;P, E&gt;. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;G, P, E, PE&gt; StreamPrefixExtender&lt;G, P, E&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Rc</span><span>&lt;RefCell&lt;PE&gt;&gt;
+</span><span style="color:#ff7733;">where</span><span> PE</span><span style="color:#bfbab0cc;">: </span><span>PrefixExtender&lt;P, E&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// the library does this for you, you just implement PrefixExtender.
+</span><span>}
+</span></code></pre>
+<p>Технически говоря, вам также нужно будет своевременно сообщить потоку данных, как распределять префиксы. Это будет зависеть от того, как вы распространяете свои отношения, и об этом я расскажу подробнее в одном из следующих постов.</p>
+<h3 id="konkretnoe-obedinenie-v-rust">Конкретное объединение в Rust</h3>
+<p>С этими абстракциями мы теперь готовы построить слой конкретного алгоритма соединения. Прежде чем мы это сделаем, давайте посмотрим, что это будет значить. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">SpecificJoinExt</span><span>&lt;G, P, E&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">extend</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">extenders</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;StreamPrefixExtender&lt;G, P, E&gt;&gt;&gt;)
+</span><span>        </span><span style="color:#bfbab0cc;">-&gt; </span><span>Stream&lt;G, (P, </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt;)&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Нам нужно написать метод для Stream &lt;G, P&gt;, который с учетом вектора произвольных вещей, реализующих трэйт StreamPrefixExtender &lt;G, P, E&gt;, генерирует поток пар (P, Vec<E>). Кроме того, мы должны делать это с умом, описанным выше, иначе мы будем работать медленно, как все скрипучие системы баз данных.</p>
+<p>Я просто покажу вам код, но комментарии должны вас проинформировать. Все как мы сказали. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;G, P, E&gt; SpecificJoinExt&lt;G, P, E&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Stream</span><span>&lt;G, P&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">extend</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">extenders</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;StreamPrefixExtender&lt;G, P, E&gt;&gt;&gt;)
+</span><span>            </span><span style="color:#bfbab0cc;">-&gt; </span><span>Stream&lt;G, (P, </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt;)&gt; {
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// start with horrible proposals from a non-relation
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// ask each extender to try to improve each proposal
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> counts </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">select</span><span>(|</span><span style="color:#f29718;">p</span><span>| (p</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">63</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">63</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">for</span><span> index </span><span style="color:#f29668;">in </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>extenders</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()) {
+</span><span>            counts </span><span style="color:#f29668;">=</span><span> extenders[index]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">count</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> counts</span><span style="color:#bfbab0cc;">,</span><span> index </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// for each of the extenders ...
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> results </span><span style="color:#f29668;">= </span><span>Stream</span><span style="color:#f29668;">::</span><span>empty()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">for</span><span> index </span><span style="color:#f29668;">in </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>extenders</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()) {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// find the prefixes the extender &quot;won&quot; the right to extend
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> nominations </span><span style="color:#f29668;">=</span><span> counts</span><span style="color:#f29668;">.</span><span style="color:#f07178;">filter</span><span>(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|</span><span>p</span><span style="color:#f29668;">|</span><span> p</span><span style="color:#f29668;">.</span><span style="color:#f29718;">2 </span><span style="color:#f29668;">==</span><span> index </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64</span><span>)
+</span><span>                                        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">select</span><span>(|(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">,</span><span> _</span><span style="color:#bfbab0cc;">,</span><span> _)| x)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// get the extensions and ask each other extender to validate
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> extensions </span><span style="color:#f29668;">=</span><span> extenders[index]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">propose</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> nominations)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">for</span><span> other </span><span style="color:#f29668;">in </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>extenders</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">filter</span><span>(|</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">x</span><span>| x </span><span style="color:#f29668;">!=</span><span> index) {
+</span><span>                extensions </span><span style="color:#f29668;">=</span><span> extenders[other]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">intersect</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> extensions)</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// fold surviving extensions into the output
+</span><span>            results </span><span style="color:#f29668;">=</span><span> results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">concat</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> extensions)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">return</span><span> results</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>В этом весь алгоритм. Это действительно не очень сложно. Скорее, это один уровень алгоритма. Чтобы заполнить полное реляционное соединение, нам нужно вызывать расширение несколько раз, с разными объектами PrefixExtender, которые обертывают одни и те же отношения, только для разной длины префикса. Приведем пример.</p>
+<h2 id="perechislitel-treugol-nikov-s-maloi-zaderzhkoi">Перечислитель треугольников с малой задержкой</h2>
+<p>Если мы определяем граф как набор пар (src, dst), треугольник определяется как тройка (a, b, c), где (a, b), (b, c) и (a, c) - каждый в наборе пар. Мы можем думать о запросе треугольников как о реляционном соединении трех отношений, которые представляют собой одни и те же данные, только привязанные к разным парам атрибутов.</p>
+<h3 id="opredelenie-prefixextender">Определение PrefixExtender</h3>
+<p>Мы представим фрагмент графа списком назначений и смещений в этот список для каждой вершины. Для каждого интервала мы будем отсортировать пункты назначения, чтобы упростить проверку пересечений. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">GraphFragment</span><span>&lt;E</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Ord</span><span>&gt; {
+</span><span>    nodes</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>&gt;,
+</span><span>    edges</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt;,
+</span><span>}
+</span></code></pre>
+<p>Мы просто напишем быструю вспомогательную функцию, позволяющую использовать get на краях, связанных с узлом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;E</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Ord</span><span>&gt; </span><span style="color:#59c2ff;">GraphFragment</span><span>&lt;E&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">edges</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">node</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span>[E] {
+</span><span>        </span><span style="color:#ff7733;">if</span><span> node </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">&lt; </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>nodes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() {
+</span><span>            </span><span style="color:#f29668;">&amp;</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>edges[</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>nodes[node]</span><span style="color:#f29668;">..</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>nodes[node</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span>]]
+</span><span>        }
+</span><span>        </span><span style="color:#ff7733;">else </span><span>{ </span><span style="color:#f29668;">&amp;</span><span>[] }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Стоит отметить, что Rust делает здесь несколько очень умных вещей. Он замечает, что мы возвращаем ссылку на некоторую память типа &amp;[E], и единственное, на что она может ссылаться, - это &amp;self. Затем Rust устанавливает ограничение времени жизни для вывода как &amp;self и гарантирует, что, когда мы используем результат, ему не разрешено переживать себя.</p>
+<p>Я собираюсь немного соврать и представить упрощенный набросок PrefixExtender для GraphFragment. В упрощенной версии используется GraphFragment с подсчетом ссылок, все это Rc &lt;RefCell &lt;... &gt;&gt;. Это позволяет нам иметь только одну загруженную копию графика и делиться ею между людьми, которые в ней нуждаются. Нам также понадобится вспомогательная функция типа L: Fn (&amp; P) -&gt; u64 для извлечения идентификатора узла из типа P. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;P, E, L&gt; PrefixExtender&lt;P, E&gt; </span><span style="color:#ff7733;">for</span><span> (</span><span style="color:#59c2ff;">Rc</span><span>&lt;RefCell&lt;GraphFragment&lt;E&gt;&gt;&gt;, </span><span style="color:#59c2ff;">L</span><span>)
+</span><span style="color:#ff7733;">where</span><span> E</span><span style="color:#bfbab0cc;">:</span><span> Ord, L</span><span style="color:#bfbab0cc;">:</span><span> Fn(</span><span style="color:#f29668;">&amp;</span><span>P)-&gt;</span><span style="color:#ff7733;">u64 </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// counting is just looking up the edges
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">prefix</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>P) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u64 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let </span><span style="color:#f29668;">&amp;</span><span>(</span><span style="color:#ff7733;">ref</span><span> graph</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">ref</span><span> logic) </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> node </span><span style="color:#f29668;">= </span><span style="color:#f07178;">logic</span><span>(</span><span style="color:#f29668;">&amp;</span><span>prev</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0</span><span>) </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>        graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">edges</span><span>(node)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// proposing is just reporting the slice back
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">propose</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">prefix</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>P) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt; {
+</span><span>        </span><span style="color:#ff7733;">let </span><span style="color:#f29668;">&amp;</span><span>(</span><span style="color:#ff7733;">ref</span><span> graph</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">ref</span><span> logic) </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> node </span><span style="color:#f29668;">= </span><span style="color:#f07178;">logic</span><span>(prefix) </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>        graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">edges</span><span>(node)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_vec</span><span>()
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// intersection &#39;gallops&#39; through a sorted list to find matches
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// what is &quot;galloping&quot;, you ask? details coming in just a moment
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">intersect</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">prefix</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>P, </span><span style="color:#f29718;">list</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt;) {
+</span><span>        </span><span style="color:#ff7733;">let </span><span style="color:#f29668;">&amp;</span><span>(</span><span style="color:#ff7733;">ref</span><span> graph</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">ref</span><span> logic) </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> node </span><span style="color:#f29668;">= </span><span style="color:#f07178;">logic</span><span>(prefix) </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> slice </span><span style="color:#f29668;">=</span><span> graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">edges</span><span>(node)</span><span style="color:#bfbab0cc;">;
+</span><span>        list</span><span style="color:#f29668;">.</span><span style="color:#f07178;">retain</span><span>(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|</span><span>value</span><span style="color:#f29668;">| </span><span>{
+</span><span>            slice </span><span style="color:#f29668;">= </span><span style="color:#f07178;">gallop</span><span>(slice</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// skips past elements &lt; value
+</span><span>            slice</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">0 </span><span style="color:#f29668;">&amp;&amp; &amp;</span><span>slice[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">==</span><span> value
+</span><span>        })</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Это было довольно просто, да? Конечно, до того, как я написал этот вспомогательный метод Edge (node), все было намного сложнее. Также немного грустнее, когда я не лгу о том, как все работает, но давайте не будем допустить, чтобы это встало между нами.</p>
+<p>В интересах полноты (и для того, чтобы не упустить мой код), давайте посмотрим на реализацию gallop. От входного среза и значения он перескакивает вперед с экспоненциально увеличивающимися шагами, а затем, как только он превысит целевое значение, он продвигается вперед с экспоненциально уменьшающимися шагами. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// advances slice to the first element not less than value.
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">gallop</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Ord</span><span>&gt;(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">slice</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> [T], </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>T) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[T] {
+</span><span>    </span><span style="color:#ff7733;">if</span><span> slice</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">0 </span><span style="color:#f29668;">&amp;&amp; &amp;</span><span>slice[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> step </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">while</span><span> step </span><span style="color:#f29668;">&lt;</span><span> slice</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&amp;&amp; &amp;</span><span>slice[step] </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>            slice </span><span style="color:#f29668;">= &amp;</span><span>slice[step</span><span style="color:#f29668;">..</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>            step </span><span style="color:#f29668;">=</span><span> step </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        step </span><span style="color:#f29668;">=</span><span> step </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">while</span><span> step </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">0 </span><span>{
+</span><span>            </span><span style="color:#ff7733;">if</span><span> step </span><span style="color:#f29668;">&lt;</span><span> slice</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&amp;&amp; &amp;</span><span>slice[step] </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>                slice </span><span style="color:#f29668;">= &amp;</span><span>slice[step</span><span style="color:#f29668;">..</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>            step </span><span style="color:#f29668;">=</span><span> step </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#f29668;">&amp;</span><span>slice[</span><span style="color:#f29718;">1</span><span style="color:#f29668;">..</span><span>]   </span><span style="font-style:italic;color:#5c6773;">// this shouldn&#39;t explode... right?
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">else </span><span>{ slice }
+</span><span>}
+</span></code></pre>
+<p>Метод gallop может использовать любой фрагмент в качестве входных данных, и мы даем ему фрагмент, вырезанный из списка ребер графа. Если мы неправильно используем срез результата, может возникнуть ужасный риск сглаживания, скачка данных, де- или перераспределения. Rust может подтвердить, что ничего из этого не происходит, и просто позволяет нам использовать ту же самую память. Это достигается за счет закрытия удержания, написанного мною метода (галоп) и множества странных логик. Отлично!</p>
+<h3 id="postroenie-zaprosa-treugol-nikov">Построение запроса треугольников</h3>
+<p>Итак, напомним, у нас есть реализация PrefixExtender &lt;P, E&gt; всякий раз, когда у нас есть комбинация GraphFragment <E> и L: Fn (&amp;P) -&gt; u64. Эта вторая часть, функция, сообщает нам, как превратить префикс P в целое число, которое мы можем использовать для поиска расширений на графике. Мы везде используем одни и те же данные графа, но имитируем множественные отношения, позволяя функции от префикса к атрибуту варьироваться.</p>
+<p>При этом давайте посчитаем несколько треугольников! Мы будем делать это по частям. Я снова немного совру и представлю несколько упрощений. Ничего ужасного, просто возможно загадочные вещи, которые потребуют отвлечения внимания для рационализации (и, возможно, просто плохой дизайн с моей стороны).</p>
+<p>Сначала мы просто пишем код, который из Коммуникатора, который указывает индекс рабочего и количество его пиров, выясняет, какой фрагмент графа этот рабочий будет загружать и за который будет отвечать. Затем код подготавливает вычисление потока данных и ввод, в который мы будем вводить значения a: u32. Все это - шаблон своевременного потока данных, и это не очень интересно с алгоритмической точки зрения. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">triangles</span><span>&lt;C, F&gt;(</span><span style="color:#f29718;">communicator</span><span style="color:#bfbab0cc;">:</span><span> C, </span><span style="color:#f29718;">graph_source</span><span style="color:#bfbab0cc;">:</span><span> F)
+</span><span style="color:#ff7733;">where</span><span> C</span><span style="color:#bfbab0cc;">:</span><span> Communicator,
+</span><span>      F</span><span style="color:#bfbab0cc;">:</span><span> Fn(</span><span style="color:#ff7733;">u64</span><span>,</span><span style="color:#ff7733;">u64</span><span>)-&gt;GraphFragment&lt;</span><span style="color:#ff7733;">u32</span><span>&gt; {
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// load up the slice of graph corresponding to our index out of peers.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> graph </span><span style="color:#f29668;">= </span><span style="color:#f07178;">graph_source</span><span>(communicator</span><span style="color:#f29668;">.</span><span style="color:#f07178;">index</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> communicator</span><span style="color:#f29668;">.</span><span style="color:#f07178;">peers</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> graph </span><span style="color:#f29668;">= </span><span>Rc</span><span style="color:#f29668;">::</span><span>new(RefCell</span><span style="color:#f29668;">::</span><span>new(graph))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// prepare a new computation with one input.
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> computation </span><span style="color:#f29668;">= </span><span style="color:#f07178;">new_computation</span><span>(communicator)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(</span><span style="color:#ff7733;">mut</span><span> input</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">mut</span><span> stream) </span><span style="color:#f29668;">=</span><span> computation</span><span style="color:#f29668;">.</span><span style="color:#f07178;">new_input</span><span>()</span><span style="color:#bfbab0cc;">;   
+</span></code></pre>
+<p>Следующим шагом будет создание расширителя от a до (a, b). Нам просто нужно связать копию графика с функцией, которая преобразует a в идентификатор узла графа, и она предложит соседние значения b. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">//  // define an extender that uses &#39;a&#39; to suggest x: &#39;(a,x)&#39; extensions
+</span><span>    </span><span style="color:#ff7733;">let</span><span> ext_b </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new((graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">a</span><span>| { a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>}))]</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> pairs </span><span style="color:#f29668;">=</span><span> stream</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(ext_b)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">flatten</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Этот метод flatten() просто преобразует Stream &lt;G, (P, Vec<E>)&gt; в Stream &lt;G, (P, E)&gt;. Это где-то всего 17 строк кода, так что ура, чтобы своевременный поток данных был прост в использовании (по крайней мере, кратко).</p>
+<p>Следующим шагом будет создание расширителей от пар (a, b) до троек ((a, b), c). Будет два расширителя, так как мы хотим, чтобы значения c были такими, чтобы оба (a, c) и (b, c) присутствовали на графике. Каждый расширитель должен взять (a, b) и идентифицировать источник края, и есть только два варианта. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">//  // define extenders using &#39;a&#39; and &#39;b&#39; to suggest x: (a,x) and x:(b,x)
+</span><span>    </span><span style="color:#ff7733;">let</span><span> ext_c </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new((graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29668;">&amp;</span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">,</span><span>_)| { a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>}))</span><span style="color:#bfbab0cc;">,
+</span><span>                     </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new((graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29668;">&amp;</span><span>(_</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">b</span><span>)| { b </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>}))]
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> triangles </span><span style="color:#f29668;">=</span><span> pairs</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(ext_c)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">flatten</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Давайте также посмотрим на то, что мы видим, распечатав треугольники (обратите внимание на еще 16 строк кода). </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">//  // take a peek at what gets produced.
+</span><span>    triangles</span><span style="color:#f29668;">.</span><span style="color:#f07178;">observe</span><span>(|</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">tri</span><span>| </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;triangle: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> tri))</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Ok, we’ve got the data loaded up, the computation defined, and are ready to go. Let’s triangularate!</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">//  // finalize dataflow structure
+</span><span>    computation</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">borrow_mut</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_internal_summary</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    computation</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">borrow_mut</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set_external_summary</span><span>(</span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// introduce u32s to find triangles rooted from them
+</span><span>    </span><span style="color:#ff7733;">for</span><span> node </span><span style="color:#f29668;">in </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#f29668;">.</span><span>nodes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()) {
+</span><span>        input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send_messages</span><span>(</span><span style="color:#f29668;">&amp;</span><span>(()</span><span style="color:#bfbab0cc;">,</span><span> node </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">vec!</span><span>[node </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u32</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>        input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">advance</span><span>(</span><span style="color:#f29668;">&amp;</span><span>(()</span><span style="color:#bfbab0cc;">,</span><span> node </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>(()</span><span style="color:#bfbab0cc;">,</span><span> node </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        computation</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">borrow_mut</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">step</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// close input and finish any computation
+</span><span>    input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">close_at</span><span>(</span><span style="color:#f29668;">&amp;</span><span>(()</span><span style="color:#bfbab0cc;">,</span><span> graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#f29668;">.</span><span>nodes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">while</span><span> computation</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">borrow_mut</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">step</span><span>() { }
+</span><span>}
+</span></code></pre>
+<p>Это проходит через каждый возможный исходный узел и создает все треугольники, начиная с этой вершины.</p>
+<h3 id="razve-vy-ne-skazali-nizkaia-zaderzhka">Разве вы не сказали «низкая задержка»?</h3>
+<p>Хорошая точка зрения. Хотя мы прошли все узлы по порядку, чтобы перечислить все треугольники, нам это не потребовалось. Мы могли бы так же легко написать основной цикл, как: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">for</span><span> epoch </span><span style="color:#f29668;">in </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>) {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> node </span><span style="color:#f29668;">= </span><span style="color:#f07178;">read_u32_from_console</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// not a real function!
+</span><span>    input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send_messages</span><span>(</span><span style="color:#f29668;">&amp;</span><span>(()</span><span style="color:#bfbab0cc;">,</span><span> epoch)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">vec!</span><span>[node])</span><span style="color:#bfbab0cc;">;
+</span><span>    input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">advance</span><span>(</span><span style="color:#f29668;">&amp;</span><span>(()</span><span style="color:#bfbab0cc;">,</span><span> epoch)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>(()</span><span style="color:#bfbab0cc;">,</span><span> epoch </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    computation</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">borrow_mut</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">step</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это считывает ввод от пользователя, запускает его в поток данных, который распечатывает наблюдаемые треугольники как можно скорее. Чтобы понять, насколько быстро, давайте включим таймер в стандартном цикле выше и запустим процесс в однопоточном режиме на довольно стандартном наборе данных LiveJournal:</p>
+<p>Предостережение: код практически не протестирован и может ошибаться; не покупайте / не продавайте ничего на основании этих данных. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>enumerated triangles from (0..1) in 67947ns
+</span><span>enumerated triangles from (1..2) in 42738ns
+</span><span>enumerated triangles from (2..3) in 26064ns
+</span><span>enumerated triangles from (3..4) in 48006ns
+</span><span>enumerated triangles from (4..5) in 19921ns
+</span><span>...
+</span></code></pre>
+<p>Таким образом, время между введением идентификатора узла и возвращением всех треугольников составляет несколько десятков микросекунд. Эти числа немного улучшаются с пакетированием, сокращая некоторые накладные расходы: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>enumerated triangles from (0..10) in 231301ns
+</span><span>enumerated triangles from (10..20) in 276721ns
+</span><span>enumerated triangles from (20..30) in 149940ns
+</span><span>enumerated triangles from (30..40) in 137285ns
+</span><span>enumerated triangles from (40..50) in 155781ns
+</span><span>...
+</span></code></pre>
+<p>И даже лучше с еще большим количеством пакетов, так как он начинает больше походить на 10-15 мкс амортизированных на вершину. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>enumerated triangles from (0..1000) in 10129064ns
+</span><span>enumerated triangles from (1000..2000) in 12018695ns
+</span><span>enumerated triangles from (2000..3000) in 11323832ns
+</span><span>enumerated triangles from (3000..4000) in 11224684ns
+</span><span>enumerated triangles from (4000..5000) in 14810182ns
+</span><span>...
+</span></code></pre>
+<p>Эта программа предназначена для выявления нескольких компонентов и выявления того, что работает медленно и требует некоторой доработки. Базовая система все еще имеет много возможностей для улучшения (я думаю). Цифры должны только улучшаться.</p>
+<h3 id="treugol-niki-takie-uzh-otstoinye">Треугольники такие уж отстойные.</h3>
+<p>Треугольники такие 2014! Все делают треугольники! Сделайте что-нибудь круче! </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// define extenders to add a &#39;d&#39; coordinate connected to each of a, b, c.
+</span><span style="color:#ff7733;">let</span><span> ext_d </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new((graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29668;">&amp;</span><span>((</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">,</span><span>_)</span><span style="color:#bfbab0cc;">,</span><span>_)</span><span style="color:#f29668;">| </span><span>{ a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>}))</span><span style="color:#bfbab0cc;">,
+</span><span>                 </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new((graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29668;">&amp;</span><span>((_</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">b</span><span>)</span><span style="color:#bfbab0cc;">,</span><span>_)</span><span style="color:#f29668;">| </span><span>{ b </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>}))</span><span style="color:#bfbab0cc;">,
+</span><span>                 </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new((graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29668;">&amp;</span><span>((_</span><span style="color:#bfbab0cc;">,</span><span>_)</span><span style="color:#bfbab0cc;">,</span><span>c)</span><span style="color:#f29668;">| </span><span>{ c </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>}))]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let mut</span><span> quads </span><span style="color:#f29668;">=</span><span> triangles</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(ext_d)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">flatten</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Если вы пропустили это, мы определяли вычисление потока данных для перечисления 4-х кликов. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>enumerated 4-cliques from (0..1) in 164474ns
+</span><span>enumerated 4-cliques from (1..2) in 230093ns
+</span><span>enumerated 4-cliques from (2..3) in 40667ns
+</span><span>enumerated 4-cliques from (3..4) in 154921ns
+</span><span>enumerated 4-cliques from (4..5) in 67344ns
+</span><span>...
+</span></code></pre>
+<p>Не впечатлен? Как насчет: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>enumerated 5-cliques from (0..1) in 115570ns
+</span><span>enumerated 5-cliques from (1..2) in 311967ns
+</span><span>enumerated 5-cliques from (2..3) in 110915ns
+</span><span>enumerated 5-cliques from (3..4) in 126838ns
+</span><span>enumerated 5-cliques from (4..5) in 104806ns
+</span><span>...
+</span></code></pre>
+<p>Как насчет: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>enumerated 6-cliques from (0..1) in 107292ns
+</span><span>enumerated 6-cliques from (1..2) in 342537ns
+</span><span>enumerated 6-cliques from (2..3) in 93778ns
+</span><span>enumerated 6-cliques from (3..4) in 134948ns
+</span><span>enumerated 6-cliques from (4..5) in 87148ns
+</span><span>...
+</span></code></pre>
+<p>Я могу продолжать (серьезно, я написал программу для этого).</p>
+<p>Поиск мотивов произвольного графа (маленькие подграфы, которые вы хотите найти в большом графе) действительно легко написать. Я уверен, что есть много более разумных исследований о том, как это сделать, но, по крайней мере, это оптимально в худшем случае.</p>
+<h2 id="zavorachivat">Заворачивать</h2>
+<p>В совместных исследованиях ведется серьезная классная работа. Он совсем не такой устаревший, как я думал. Но, что важно, эти новые алгоритмы нуждаются в более совершенных системах, чем ваши стандартные пакетные процессоры.</p>
+<p>Сколько ваших любимых графических процессоров способны начать обработку 6 кликов менее чем за миллисекунду, при этом объем памяти, примерно равный самому графу? Не тот, которым пользуетесь? Почему нет? Плохие вещи перестали быть крутыми в старшей школе ...</p>
+<p>С положительной стороны, в дополнение к этому коду, Naiad может все это делать, и Flink тоже должен это делать.</p>
+<p>С моей точки зрения, теперь у меня есть классная проблема, которую я могу использовать для настройки своевременного потока данных. Я ожидал, что он станет лучше и удобнее (и, вероятно, сейчас я тоже попробую его в большем количестве конфигураций).</p>
+<h2 id="snoska-perekos">Сноска: перекос</h2>
+<p>Одна из теоретических проблем, связанных с подобным подходом, заключается в том, насколько хорошо он распределяется при наличии перекоса. Каждый из наших операторов подсчета, предложения и пересечения является «параллельным с данными», но действительно ли это полезно, когда сами данные неравномерно распределяются между рабочими.</p>
+<p>Реализация, о которой я говорил, не является устойчивой к перекосам. Если вершина имеет действительно высокую степень, все ребра могут быть размещены на одной машине. Добавление большего количества машин не приведет к ускорению предложения и не предотвратит отправку всех предложений на этот единственный механизм для пересечения.</p>
+<p>Однако вы можете скомпоновать устойчивую версию каждой из этих операций.</p>
+<ol>
+<li>count, естественно, устойчив к перекосам, потому что нам просто нужно число для каждого префикса. Они могут быть распределены (равномерно) с помощью хеша на префиксе.</li>
+<li>propose можно сделать асимметричным путем распространения расширений для каждого префикса на машины последовательно с машины, идентифицированной хешем префикса. Нам нужно знать, сколько машин запрашивать продление, но каждое предложение должно сопровождаться подсчетом (я его отбросил; упс).</li>
+<li>Пересечение можно сделать асимметричным путем распределения записей (P, E) по хешам и доставки предложений в известное место для каждого отношения.</li>
+</ol>
+<p>Я недостаточно разбираюсь в работе в этой области, чтобы точно знать, что это соответствует всем желаемым параметрам. Например, желательно, чтобы вычисления занимали несколько «циклов» в смысле MapReduce. Учитывая, что я не использую MapReduce и все еще выполняю вычисления, меня это не особо беспокоит.</p>
+<p>Отбросив комментарии в сторону, было бы хорошо понять, действительно ли этот подход представляет собой масштабируемый, устойчивый к перекосам алгоритм оптимального соединения в худшем случае. Мне сказали, что это было бы круто.</p>
+<h2 id="kredity-i-tekushchaia-rabota">Кредиты и текущая работа</h2>
+<p>Эта область (оптимальная обработка соединений в наихудшем случае) очень крутая, и я в долгу перед Семихом Салихоглу и Крисом Ре за то, что они представили нас двоих. Эти люди и их коллеги по-прежнему очень активны, раздвигая границы того, что можно сделать, чтобы ускорить и ускорить обработку соединений.</p>
+<p>У Семи, Криса и других есть подход, позволяющий сделать еще более сложные соединения эффективными с помощью декомпозиции запросов по гипердереву. «Древовидные» ациклические запросы знают способы их оптимальной обработки (в стиле Витерби). Как только вы получаете циклы, они ломаются, но если вы можете разложить запрос на дерево небольших циклических запросов и использовать наихудшие оптимальные методы для циклических запросов, вы получите хорошие результаты.</p>
+<p>У Криса Абергера, Криса и других есть изящный способ сделать тестирование пересечений намного более эффективным с помощью инструкций SIMD и показать, что они могут получить ускорение на порядки, используя эти методы. Различные «неназванные» проприетарные поставщики, кажется, выздоравливают и полностью проигрывают.</p>
+<p>Есть много других работ, с которыми я не так хорошо знаком (пока), но, похоже, они продолжают появляться. Быть возбужденным! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

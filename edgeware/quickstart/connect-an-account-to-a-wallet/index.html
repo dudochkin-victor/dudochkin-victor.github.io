@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Подключиение к кошельку и проверка баланса | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/connect-an-account-to-a-wallet/#preobrazovanie-adresa-blokirovki-v-novyi-format">Преобразование адреса блокировки в новый формат</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/connect-an-account-to-a-wallet/#zadnii-plan"><small>- Задний план</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/connect-an-account-to-a-wallet/#primery"><small>- Примеры</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/connect-an-account-to-a-wallet/#podkliuchit-svoiu-uchetnuiu-zapis">Подключить свою учетную запись</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/connect-an-account-to-a-wallet/#prover-te-svoi-balans-cherez-obozrevatel-blokov">Проверьте свой баланс через обозреватель блоков</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Подключиение к кошельку и проверка баланса</h1>
+
+<p>Следуйте этому руководству, чтобы подключить свой адрес Edgeware к кошельку и начать работу в сети, предварительно проверив свой баланс. Обратите внимание: если вы получили EDG от биржи, вам не нужно будет выполнять шаг «преобразование адреса блокировки» в этом руководстве, вместо этого вы можете напрямую подключить свою учетную запись на втором шаге.</p>
+<h2 id="preobrazovanie-adresa-blokirovki-v-novyi-format">Преобразование адреса блокировки в новый формат</h2>
+<p>Адреса Lockdrop имеют устаревший формат и должны быть преобразованы, чтобы найти ваши учетные записи в обозревателях блоков, таких как Subscan.io. У Subscan есть отличный инструмент для этого, вы можете ввести свой публичный адрес, чтобы увидеть полный список сетевых преобразований вашего адреса. Вы захотите скопировать один для Edgeware. Прокрутите вниз, чтобы увидеть фон или другие способы сделать это.</p>
+<p><a href="https://edgeware.subscan.io/tools/ss58_transform">https://edgeware.subscan.io/tools/ss58_transform</a></p>
+<p><img src="../../.gitbook/assets/screen-shot-2020-07-22-at-5.47.26-pm%20(2)%20(1)%20(1)%20(1).png" alt="" /></p>
+<h3 id="zadnii-plan">Задний план</h3>
+<p>Во время блокировки пары ключей, сгенерированные с помощью Subkey, были закодированы с использованием идентификатора сети Subkey по умолчанию. Это влияет на публичный адрес (формат адреса SS58), который в некоторых случаях выводит подключ. Это изменение не затрагивает секретную фразу/начальное число и открытый ключ.</p>
+<ol>
+<li>Вы всегда можете использовать общедоступный адрес с кодировкой Default-Network-ID для безопасного <strong>получения</strong> средств.</li>
+<li>Однако рекомендуется использовать версию _new Edgeware-_network-ID вашего адреса при взаимодействии с сетью Edgeware, включая отправку средств.</li>
+<li>Вам нужно будет повторно сгенерировать свой публичный адрес, чтобы использовать некоторые инструменты Block Explorer. В настоящее время Polkascan использует новую кодировку сетевого идентификатора Edgeware.</li>
+</ol>
+<p>Вы также можете получить новую версию своего адреса двумя другими способами — с помощью пользовательского интерфейса Polkadot или инструмента Subkey.</p>
+<blockquote>
+<p>В настоящее время <strong>расширение для браузера</strong> Polkadot.js не отображает закодированный идентификатор сети Edgeware, <strong>но пользовательский интерфейс Polkadot отображает</strong>.</p>
+</blockquote>
+<p>{% tabs %}
+{% tab title=&quot;Easy Mode: Subscan Tool&quot; %}
+<a href="https://edgeware.subscan.io/tools/ss58_transform">Посетите этот инструмент Subscan Tool</a> и введите свой адрес или открытый ключ, чтобы создать список многих закодированных в сети версий вашего адреса. Сохраните файл с пометкой Edgeware.</p>
+<p><img src="../../.gitbook/assets/image%20(14)%20(4)%20(4)%20(4)%20(4).png" alt="" />
+{% endtab %}</p>
+<p>{% tab title=&quot;Using Polkadot UI&quot; %}
+Самый простой способ получить версию общедоступного адреса для сетевого идентификатора Edgeware — использовать инструмент «Учетная запись» или «Адресная книга» <a href="https://polkadot.js.org/apps/#/explorer">интерфейса Polkadot</a>.</p>
+<p>Введите свой старый адрес в строку поиска в инструменте «Адресная книга», а затем щелкните значок слева, как показано на изображении ниже. Он скопирует ваш текущий сетевой закодированный адрес Edgeware. Храните это безопасно.</p>
+<p>Кроме того, вы можете использовать вкладку «Учетные записи», чтобы сделать то же самое, если вы подключились через расширение браузера Polkadot UI.</p>
+<p><img src="../../.gitbook/assets/screen-shot-2020-03-06-at-3.25.07-pm%20(2)%20(2)%20(2)%20(2).png" alt="" />
+{% endtab %}</p>
+<p>{% tab title=&quot;Using Subkey CLI&quot; %}
+&gt;Для этого процесса требуется последняя версия программы Subkey, чтобы выбрать Edgeware в качестве сети.</p>
+<p>Вы можете сгенерировать новый ключ с идентификатором сети Edgeware, используя</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>subkey -n edgeware generate
+</span></code></pre>
+<p>Вы также можете получить адрес SS58 из <strong>существующего ключа ИЛИ адреса</strong> с идентификатором сети Edgeware, используя</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>subkey -n edgeware inspect &quot;INSERT MNEMONIC/EXISTING ADDRESS HERE&quot;
+</span></code></pre>
+<h3 id="primery">Примеры</h3>
+<p>В порядке примеров:</p>
+<ol>
+<li>Создайте новый ключ с помощью <code>subkey -n edgeware</code></li>
+<li>Проверьте ключ с идентификатором сети по умолчанию (как вы можете видеть, SS58 отличается)</li>
+<li>Проверьте ключ с <strong>сетевым идентификатором Edgeware</strong> (как видите, он полностью соответствует первому примеру)</li>
+</ol>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>➜ subkey -n edgeware generate
+</span><span>
+</span><span>Secret phrase `submit hotel naive plate among decorate ghost speak exchange mimic sentence bar` is account:
+</span><span>  Secret seed:      0xbe59988b1ad6e93325766b9ca8713db866538f75b578f714cffa3583f9978a23
+</span><span>  Public key (hex): 0x0045d45397c474d6a4fddb00e314637c8970be097f5a9a2b950dc2ea74a00849
+</span><span>  Account ID:       0x0045d45397c474d6a4fddb00e314637c8970be097f5a9a2b950dc2ea74a00849
+</span><span>  SS58 Address:     hWyZ5UkvkrPpmiD3MJ7htdhEigxFe34pUH3Dy9Pq71QeZg4
+</span><span>
+</span><span>  ➜ subkey inspect &quot;submit hotel naive plate among decorate ghost speak exchange mimic sentence bar&quot;
+</span><span>
+</span><span>Secret phrase `submit hotel naive plate among decorate ghost speak exchange mimic sentence bar` is account:
+</span><span>  Secret seed:      0xbe59988b1ad6e93325766b9ca8713db866538f75b578f714cffa3583f9978a23
+</span><span>  Public key (hex): 0x0045d45397c474d6a4fddb00e314637c8970be097f5a9a2b950dc2ea74a00849
+</span><span>  Account ID:       0x0045d45397c474d6a4fddb00e314637c8970be097f5a9a2b950dc2ea74a00849
+</span><span>  SS58 Address:     5C54boRsNwTqHpsSjz5wvRwZrhhFB45HRPfdktew32pUW8CZ
+</span><span>
+</span><span>  ➜ subkey -n edgeware inspect &quot;submit hotel naive plate among decorate ghost speak exchange mimic sentence bar&quot;
+</span><span>
+</span><span>Secret phrase `submit hotel naive plate among decorate ghost speak exchange mimic sentence bar` is account:
+</span><span>  Secret seed:      0xbe59988b1ad6e93325766b9ca8713db866538f75b578f714cffa3583f9978a23
+</span><span>  Public key (hex): 0x0045d45397c474d6a4fddb00e314637c8970be097f5a9a2b950dc2ea74a00849
+</span><span>  Account ID:       0x0045d45397c474d6a4fddb00e314637c8970be097f5a9a2b950dc2ea74a00849
+</span><span>  SS58 Address:     hWyZ5UkvkrPpmiD3MJ7htdhEigxFe34pUH3Dy9Pq71QeZg4
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<blockquote>
+<p>На Commonwealth.im, когда основная сеть Edgeware включена, входные данные будут автоматически получать SS58 с правильным идентификатором сети, однако использование default-ID-ss58 за пределами Commonwealth.im, вероятно, приведет к ошибкам, которые могут поставить под угрозу средства. В целях безопасности всегда используйте адрес Edgeware Network ID SS58.</p>
+</blockquote>
+<h2 id="podkliuchit-svoiu-uchetnuiu-zapis">Подключить свою учетную запись</h2>
+<p>Есть несколько способов подключить существующую учетную запись из Lockdrop или других событий к менеджеру учетной записи или кошельку.</p>
+<p>Сначала установите <a href="https://github.com/polkadot-js/extension">расширение браузера Polkadot.js</a>:</p>
+<p>{% вкладок %}
+{% tab title=&quot;Расширение Polkadot.js&quot; %}</p>
+<ul>
+<li>В Chrome установите через <a href="https://chrome.google.com/webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd">интернет-магазин Chrome</a></li>
+<li>В Firefox установите через <a href="https://addons.mozilla.org/en-US/firefox/addon/polkadot-js-extension/">надстройки Firefox</a></li>
+<li>Вам понадобится ваша seed-фраза, набор слов.</li>
+</ul>
+<p>Затем щелкните значок Orange P в разделе расширения браузера.</p>
+<p>Нажмите кнопку с надписью «У меня уже есть семя, импортируйте учетную запись».</p>
+<p>Введите мнемоническую фразу и нажмите кнопку подтверждения.</p>
+<p>Затем посетите <a href="https://polkadot.js.org/apps/#/explorer">https://polkadot.js.org/apps/#/explorer</a>, убедитесь, что вы подключены к [сети Edgeware](https ://github.com/hicommonwealth/edgeware-documentation/blob/master/docs/other-resources/networks.md), щелкнув логотип сети в верхнем левом углу и выбрав сеть, к которой вы хотите подключиться.</p>
+<p>После подключения расширение предложит вам разрешить подключение локального кошелька к сервису. Выберите свою учетную запись, введите пароль кошелька и разрешите взаимодействие.</p>
+<p>Теперь вы можете изучить сеть и свою учетную запись в Edgeware.</p>
+<p><img src="../../.gitbook/assets/screen-shot-2020-02-10-at-3.03.43-am%20(2)%20(2)%20(2)%20(2).png" alt="" />
+{% endtab %}</p>
+<p>{% tab title=&quot;Commonwealth.im&quot; %}
+Наконец, дважды введите имя и пароль для вновь подключенной учетной записи. После подключения вы можете посетить <a href="https://polkadot.js.org/apps/#/explorer">https://polkadot.js.org/apps/#/explorer</a>, подключиться к тестовой сети Edgeware и просмотреть свои балансировать и взаимодействовать с цепью.
+{% endtab %}
+{% endtabs %}</p>
+<h2 id="prover-te-svoi-balans-cherez-obozrevatel-blokov">Проверьте свой баланс через обозреватель блоков</h2>
+<p>В настоящее время два основных исследователя блоков</p>
+<ul>
+<li><a href="https://polkascan.io/pre/edgeware-berlin">Полькаскан</a></li>
+<li><a href="https://edgeware.subscan.io">Подсканирование</a></li>
+</ul>
+<p>Оба этих проводника будут работать только с общедоступными адресами (SS58), в которых закодирован сетевой идентификатор Edgeware.</p>
+<p>{% подсказка стиль = &quot;информация&quot; %}
+Если вы не перекодировали свой общедоступный адрес из пары ключей, созданной Lockdrop, с новым сетевым идентификатором Edgeware, вы <strong>должны сделать это</strong>, чтобы использовать обозреватели блоков для поиска вашей учетной записи. Следуйте инструкциям, указанным ниже.
+{% конец%}</p>
+<p>Получив перекодированный общедоступный адрес, вы можете ввести его в строку поиска в обозревателе блоков, чтобы открыть свою учетную запись и просмотреть баланс.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

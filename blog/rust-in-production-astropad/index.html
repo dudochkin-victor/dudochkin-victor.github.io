@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust в производстве: Astropad | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#interv-iu-s-dzheremi-noupom">Интервью с Джереми Ноупом</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#ne-mogli-by-vy-nemnogo-rasskazat-ob-astropad-proektakh-nad-kotorymi-rabotaet-kompaniia-i-vashei-roli-v-nikh"><small>- Не могли бы вы немного рассказать об Astropad, проектах, над которыми работает компания, и вашей роли в них?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#mozhete-li-vy-rasskazat-o-steke-tekhnologii-astropad-i-meste-v-nem-rust"><small>- Можете ли вы рассказать о стеке технологий Astropad и месте в нем Rust?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#kak-i-pochemu-vy-reshili-vybrat-rust"><small>- Как и почему вы решили выбрать Rust?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#kakie-konkretnye-biblioteki-rust-vy-khotite-dobavit"><small>- Какие конкретные библиотеки Rust вы хотите добавить?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#gde-luchshe-vsego-ispol-zovat-rust-i-gde-emu-ne-khvataet-v-vashem-steke"><small>- Где лучше всего использовать Rust и где ему не хватает в вашем стеке?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#chto-bylo-samym-bol-shim-vyzovom-pri-razrabotke-vashego-proekta-s-pomoshch-iu-rust"><small>- Что было самым большим вызовом при разработке вашего проекта с помощью Rust?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#dovol-ny-rezul-tatom"><small>- Довольны результатом?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-astropad/#kakie-vazhnye-vyvody-vy-khoteli-by-podelit-sia-s-nashei-auditoriei"><small>- Какие важные выводы вы хотели бы поделиться с нашей аудиторией?</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust в производстве: Astropad</h1>
+
+<p><a href="https://serokell.io/blog/rust-in-production-astropad">Перевод</a> | Автор оригинала: Ellina Poponnikova</p>
+<p>В этом интервью я разговариваю с Джереми Ноупом, штатным инженером-программистом в Astropad, компании, которая разрабатывает продукты для творческих людей. Читайте дальше, чтобы узнать, где они используют Rust, почему они выбрали его, и с какими проблемами они столкнулись при использовании этого языка.</p>
+<h2 id="interv-iu-s-dzheremi-noupom">Интервью с Джереми Ноупом</h2>
+<h3 id="ne-mogli-by-vy-nemnogo-rasskazat-ob-astropad-proektakh-nad-kotorymi-rabotaet-kompaniia-i-vashei-roli-v-nikh">Не могли бы вы немного рассказать об Astropad, проектах, над которыми работает компания, и вашей роли в них?</h3>
+<p>Astropad создает продукты для расширения возможностей творческих людей, особенно профессиональных креативщиков, поскольку мы начали с продукта, предназначенного для художников.</p>
+<p>Теперь у нас есть два продукта. Первая - это Astropad Studio, которая превращает ваш iPad в планшет для рисования на вашем компьютере. Второй - Luna Display, который превращает ваш iPad в портативный второй дисплей для вашего компьютера.</p>
+<p>Изначально моя роль начиналась как помощь в создании программного обеспечения для macOS и iPadOS, но затем переросла в помощь Rust в переводе наших продуктов на Windows и самостоятельную разработку Windows.</p>
+<p><img src="/imgs/posts/20714a37_01.png" alt="Джереми Ноуп" /></p>
+<h3 id="mozhete-li-vy-rasskazat-o-steke-tekhnologii-astropad-i-meste-v-nem-rust">Можете ли вы рассказать о стеке технологий Astropad и месте в нем Rust?</h3>
+<p>Мы называем наш основной стек LIQUID, и это ядро наших приложений, которые мы перенесли на Rust. Он охватывает сети, видеокодек и многое другое. Это большая часть Rust для Windows, и, в конечном итоге, в будущем она станет большей частью Rust для macOS и iPadOS, поскольку мы начинаем заменять на эти платформы больше, чем просто сеть, на версию Rust.</p>
+<p>Мы используем Rust в качестве нашей базовой библиотеки, обеспечивая кроссплатформенный движок для всех наших приложений. Мы также написали несколько внутренних инструментов для решения различных задач в Rust.</p>
+<h3 id="kak-i-pochemu-vy-reshili-vybrat-rust">Как и почему вы решили выбрать Rust?</h3>
+<p>Мы выбрали Rust после того, как другие способы переноса наших продуктов на Windows не увенчались успехом. Мы хотели иметь возможность совместно использовать кодовую базу на разных платформах и не поддерживать отдельные, помимо собственного кода графического интерфейса. Нам также требовалась возможность сохранить часть нашего хорошо настроенного кода C++ и ассемблера.</p>
+<p>Rust хорошо подходил для этого, и я лично изучал его и получал удовольствие от этого, поэтому я предложил поэтапное переписывание в Rust в качестве пути вперед. Знание, что переписывание в Rust, скорее всего, не приведет к потере производительности, но, возможно, повысит ее, также было большой победой.</p>
+<h3 id="kakie-konkretnye-biblioteki-rust-vy-khotite-dobavit">Какие конкретные библиотеки Rust вы хотите добавить?</h3>
+<p>crossbeam_channel и serde - две библиотеки, которые мы используем и ценим. Мы также открыли исходный код нескольких наших собственных, например peertalk-rs и astro-dnssd.</p>
+<h3 id="gde-luchshe-vsego-ispol-zovat-rust-i-gde-emu-ne-khvataet-v-vashem-steke">Где лучше всего использовать Rust и где ему не хватает в вашем стеке?</h3>
+<p>Я бы сказал, что он отлично подходит для того, для чего мы его используем, - для основной библиотеки наших приложений. Мы определенно считаем, что знакомство с графическим интерфейсом в Rust немного грубо.</p>
+<p>Есть несколько вариантов, которые мы использовали для графических интерфейсов Windows, но наши основные приложения остаются собственными графическими интерфейсами с Rust FFI для доступа к нашей библиотеке. FFI определенно не так идеален, как нам хотелось бы, поскольку возможность оставаться в чистом Rust намного приятнее и безопаснее.</p>
+<h3 id="chto-bylo-samym-bol-shim-vyzovom-pri-razrabotke-vashego-proekta-s-pomoshch-iu-rust">Что было самым большим вызовом при разработке вашего проекта с помощью Rust?</h3>
+<p>Соединение частей нашей кодовой базы Rust с FFI было одной из самых больших проблем. Это, несомненно, напоминание о том, что мы получаем в Rust, и его сложно адаптировать к C API.</p>
+<h3 id="dovol-ny-rezul-tatom">Довольны результатом?</h3>
+<p>Наш Rust C FFI API для наших интерфейсов, отличных от Rust, неплох, но мы предпочли бы сохранить максимальное количество кода на Rust. В настоящее время у нас не было графических интерфейсов на основе Rust, за исключением некоторых ограниченных инструментов.</p>
+<h3 id="kakie-vazhnye-vyvody-vy-khoteli-by-podelit-sia-s-nashei-auditoriei">Какие важные выводы вы хотели бы поделиться с нашей аудиторией?</h3>
+<p>Определенно постарайтесь сделать свой Rust FFI как можно более простым, так как это риск для безопасности и часто проблема API. Существует множество многообещающих инструментов и библиотек, которые могут помочь улучшить и снизить риски FFI. Всегда больше, чтобы исследовать и учиться!
+Какие планы на будущее у Astropad?</p>
+<p>Наша следующая большая задача - получить Astropad Studio, наше ориентированное на художников решение, выпущенное для Windows. Это будет здорово для различных художников, использующих Windows и желающих использовать iPad + Apple Pencil со своим различным программным обеспечением для творчества.</p>
+<p>Я хотел бы поблагодарить Джереми за интервью и пожелать Astropad удачи в создании их удивительных продуктов для художников.</p>
+<p>Если вы хотите прочитать больше статей о Rust, не забудьте подписаться на нас в Twitter, Medium и DEV. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

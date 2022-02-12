@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Учетные записи (Аккаунты) | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#sokhranenie-sostoianiia-mezhdu-tranzaktsiiami">Сохранение состояния между транзакциями</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#podpisanty">Подписанты</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#tol-ko-dlia-chteniia">Только для чтения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#ispolniaemyi-fail">Исполняемый файл</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#sozdanie">Создание</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#pravo-sobstvennosti-i-prisvoenie-programm">Право собственности и присвоение программ</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#proverka-dostovernosti-nemodifitsirovannykh-uchetnykh-zapisei-tol-ko-dlia-spravki">Проверка достоверности немодифицированных учетных записей только для справки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#arenda">Аренда</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/accounts/#osvobozhdenie-ot-arendnoi-platy"><small>- Освобождение от арендной платы</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Учетные записи (Аккаунты)</h1>
+
+<h2 id="sokhranenie-sostoianiia-mezhdu-tranzaktsiiami">Сохранение состояния между транзакциями</h2>
+<p>Если программе необходимо сохранить состояние между транзакциями, она делает это с помощью <em>accounts</em>. Учетные записи аналогичны файлам в таких операционных системах, как Linux, в том смысле, что они могут содержать произвольные данные, которые сохраняются после завершения жизненного цикла программы. Как и файл, учетная запись включает метаданные, которые сообщают среде выполнения, кому и как разрешен доступ к данным.</p>
+<p>В отличие от файла учетная запись включает метаданные на протяжении всего времени существования файла. Это время жизни выражается количеством дробных нативных токенов, называемых <em>lampports</em>. Аккаунты хранятся в памяти валидатора и платят &quot;rent&quot;, чтобы оставаться там. Каждый валидатор периодически сканирует все аккаунты и взимает арендную плату. Любая учетная запись, которая падает до нуля, очищается. Аккаунты также могут быть помечены как rent-exempt, если они содержат достаточное количество лампортов.</p>
+<p>Точно так же, как пользователь Linux использует путь для поиска файла, клиент Solana использует <em>адрес</em> для поиска учетной записи. Адрес представляет собой 256-битный открытый ключ.</p>
+<h2 id="podpisanty">Подписанты</h2>
+<p>Транзакции могут включать цифровые <a href="terminology.md#signature">подписи</a>, соответствующие открытым ключам учетных записей, на которые ссылается транзакция. Такие подписи означают, что владелец закрытого ключа учетной записи подписал и, таким образом, «санкционировал» транзакцию. В этом случае учетная запись называется <em>signer</em>. Информация о том, является ли учетная запись подписывающей стороной, передается программе как часть метаданных учетной записи. Затем программы могут использовать эту информацию для принятия авторитетных решений.</p>
+<h2 id="tol-ko-dlia-chteniia">Только для чтения</h2>
+<p>Транзакции могут <a href="transactions.md#message-header-format">указывать</a>, что некоторые учетные записи, на которые она ссылается, должны рассматриваться как учетные записи <em>только для чтения</em>, чтобы обеспечить параллельную обработку учетных записей между транзакциями. Среда выполнения позволяет нескольким программам одновременно читать учетные записи только для чтения. Если программа пытается изменить учетную запись только для чтения, транзакция отклоняется средой выполнения.</p>
+<h2 id="ispolniaemyi-fail">Исполняемый файл</h2>
+<p>Если учетная запись помечена как «исполняемая» в своих метаданных, то она считается программой, которую можно запустить, включив открытый ключ учетной записи в инструкцию <a href="transactions.md#program-id">идентификатор программы</a>. Учетные записи помечаются как исполняемые во время успешного процесса развертывания программы загрузчиком, которому принадлежит учетная запись. Когда программа развертывается в механизме выполнения (развертывание BPF), загрузчик определяет, что байт-код в данных учетной записи является допустимым. Если это так, загрузчик постоянно помечает учетную запись программы как исполняемый файл.</p>
+<p>Если программа помечена как окончательная (не подлежащая обновлению), среда выполнения обеспечивает неизменяемость данных учетной записи (программы). С помощью обновляемого загрузчика можно загрузить совершенно новую программу на существующий программный адрес.</p>
+<h2 id="sozdanie">Создание</h2>
+<p>Чтобы создать учетную запись, клиент создает <em>keypair</em> и регистрирует свой открытый ключ с помощью инструкции <code>SystemProgram::CreateAccount</code> с предварительно выделенным фиксированным размером хранилища в байтах. Текущий максимальный размер данных учетной записи составляет 10 мегабайт.</p>
+<p>Адрес учетной записи может быть любым произвольным 256-битным значением, и для опытных пользователей существуют механизмы для создания производных адресов (<code>SystemProgram::CreateAccountWithSeed</code>, [<code>Pubkey::CreateProgramAddress</code>](calling-between-programs.md#program-derived -адреса)).</p>
+<p>Учетные записи, которые никогда не создавались с помощью системной программы, также могут быть переданы программам. Когда инструкция ссылается на учетную запись, которая не была создана ранее, программе будет передана учетная запись без данных и с нулевыми лампами, которая принадлежит системной программе.</p>
+<p>Такие вновь созданные учетные записи отражают, подписывают ли они транзакцию, и поэтому могут использоваться в качестве полномочий. В этом контексте власти сообщают программе, что владелец закрытого ключа, связанного с открытым ключом учетной записи, подписал транзакцию. Открытый ключ учетной записи может быть известен программе или записан в другой учетной записи, что означает какое-то владение или полномочия в отношении актива или операции, которую программа контролирует или выполняет.</p>
+<h2 id="pravo-sobstvennosti-i-prisvoenie-programm">Право собственности и присвоение программ</h2>
+<p>Созданная учетная запись инициализируется встроенной программой, называемой Системной программой, и называется <em>системной учетной записью</em>. Учетная запись включает метаданные «владельца». Владелец - это идентификатор программы. Среда выполнения предоставляет программе доступ на запись к учетной записи, если ее идентификатор совпадает с владельцем. В случае системной программы среда выполнения позволяет клиентам передавать лампы и, что важно, <em>назначать</em> владельца учетной записи, что означает смену владельца на другой идентификатор программы. Если учетная запись не принадлежит программе, программе разрешено только считывать ее данные и кредитовать учетную запись.</p>
+<h2 id="proverka-dostovernosti-nemodifitsirovannykh-uchetnykh-zapisei-tol-ko-dlia-spravki">Проверка достоверности немодифицированных учетных записей только для справки</h2>
+<p>В целях безопасности рекомендуется, чтобы программы проверяли действительность любой учетной записи, которую они считывают, но не изменяют.</p>
+<p>Это связано с тем, что злоумышленник может создавать учетные записи с произвольными данными, а затем передавать эти учетные записи программе вместо действительных учетных записей. Произвольные данные могут быть созданы таким образом, что это приведет к неожиданному или вредному поведению программы.</p>
+<p>Модель безопасности предусматривает, что данные учетной записи могут быть изменены только программой «Владелец» учетной записи. Это позволяет программе доверять тому, что данные передаются им через принадлежащие им учетные записи. Среда выполнения обеспечивает это, отклоняя любую транзакцию, содержащую программу, пытающуюся выполнить запись в учетную запись, которой она не владеет.</p>
+<p>Если бы программа не проверяла достоверность учетной записи, она могла бы прочитать учетную запись, которая, по ее мнению, принадлежит ей, но на самом деле это не так. Любой может давать инструкции программе, и среда выполнения не знает, что эти учетные записи должны принадлежать программе.</p>
+<p>Чтобы проверить действительность учетной записи, программа должна либо сверить адрес учетной записи с известным значением, либо убедиться, что учетная запись действительно принадлежит правильно (обычно принадлежит самой программе).</p>
+<p>Например, когда программы используют учетную запись sysvar. Если программа не проверит адрес или владельца учетной записи, невозможно быть уверенным, что это настоящая и действительная учетная запись sysvar, просто путем успешной десериализации данных учетной записи.</p>
+<p>Соответственно, Solana SDK <a href="https://github.com/solana-labs/solana/blob/a95675a7ce1651f7b59443eb146b356bc4b3f374/sdk/program/src/sysvar/mod.rs#L65">проверяет действительность учетной записи sysvar во время десериализации</a>.
+Альтернативный и более безопасный способ прочитать sysvar — использовать функцию sysvar [<code>get()</code>](https://github.com/solana-labs/solana/blob/64bfc14a75671e4ec3fe969ded01a599645080eb/sdk/program/src/sysvar/mod. rs#L73), который не требует этих проверок.</p>
+<p>Если программа всегда изменяет рассматриваемую учетную запись, проверка адреса/владельца не требуется, потому что изменение не принадлежащей учетной записи будет отклонено средой выполнения, а содержащая транзакция будет отброшена.</p>
+<h2 id="arenda">Аренда</h2>
+<p>Поддержание учетных записей в Solana требует затрат на хранение, называемых <em>rent</em>, поскольку кластер блокчейна должен активно поддерживать данные для обработки любых будущих транзакций. Это отличается от Биткойна и Эфириума, где хранение учетных записей не требует никаких затрат.</p>
+<p>В настоящее время все новые аккаунты должны быть освобождены от арендной платы.</p>
+<h3 id="osvobozhdenie-ot-arendnoi-platy">Освобождение от арендной платы</h3>
+<p>Аккаунт считается освобожденным от арендной платы, если он содержит арендную плату не менее 2 лет. Это проверяется каждый раз, когда баланс счета уменьшается, и транзакции, которые уменьшат баланс ниже минимальной суммы, не пройдут.</p>
+<p>Среда выполнения требует, чтобы исполняемые учетные записи программы были освобождены от арендной платы, чтобы избежать очистки.</p>
+<p>Примечание. Используйте конечную точку RPC <a href="developing/clients/jsonrpc-api.md#getminimumbalanceforrentexemption"><code>getMinimumBalanceForRentExemption</code></a> для расчета минимального баланса для определенного размера учетной записи. Следующий расчет является иллюстративным.</p>
+<p>Например, исполняемый файл программы размером 15 000 байт требует баланса в 105 290 880 лэмпортов (=~ 0,105 SOL), чтобы быть освобожденным от арендной платы:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>105,290,880 = 19.055441478439427 (fee rate) * (128 + 15_000)(account size including metadata) * ((365.25/2) * 2)(epochs in 2 years)
+</span></code></pre>
+<p>Арендную плату также можно оценить с помощью <a href="cli/usage.md#solana-rent">подкоманды командной строки <code>solana rent</code></a></p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ solana rent 15000
+</span><span>Rent per byte-year: 0.00000348 SOL
+</span><span>Rent per epoch: 0.000288276 SOL
+</span><span>Rent-exempt minimum: 0.10529088 SOL
+</span></code></pre>
+<p>Примечание. Будьте уверены, что, если в какой-то момент в будущем арендная ставка потребуется увеличить, будут предприняты шаги для обеспечения того, чтобы учетные записи, освобожденные от арендной платы до повышения, оставались освобожденными от арендной платы впоследствии.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

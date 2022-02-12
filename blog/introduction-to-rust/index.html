@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Введение в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#chto-takoe-rust">Что такое Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#net-oshibok"><small>- Нет ошибок</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#bolee-prostoi-parallelizm"><small>- Более простой параллелизм</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#abstraktsii-s-nulevoi-stoimost-iu"><small>- Абстракции с нулевой стоимостью</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#dlia-chego-ispol-zuetsia-rust"><small>- Для чего используется Rust?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#iavliaetsia-li-rust-obektno-orientirovannym"><small>- Является ли Rust объектно-ориентированным?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#rust-eto-funktsional-nyi-iazyk-programmirovaniia"><small>- Rust - это функциональный язык программирования?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#podkhodit-li-rust-dlia-razrabotki-igr"><small>- Подходит ли Rust для разработки игр?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#podkhodit-li-rust-dlia-veb-razrabotki"><small>- Подходит ли Rust для веб-разработки?</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#model-vladeniia-dannymi">Модель владения данными</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#dvizhushchiisia"><small>- Движущийся</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#zaimstvovanie"><small>- Заимствование</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#rust-protiv-c">Rust против C++</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#pochemu-vybiraiut-rust-vmesto-c"><small>- Почему выбирают Rust вместо C++</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#pochemu-vybiraiut-c-vmesto-rust"><small>- Почему выбирают C++ вместо Rust</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#rust-i-webassembly">Rust и WebAssembly</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#nachalo-raboty-s-rust">Начало работы с Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/introduction-to-rust/#dal-neishee-obuchenie">Дальнейшее обучение</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Введение в Rust</h1>
+
+<p><a href="https://serokell.io/blog/rust-guide">Перевод</a> | Автор оригинала: Gints Dreimanis</p>
+<p>Согласно опросам StackOverflow, Rust был самым любимым языком программирования последние пять лет подряд.</p>
+<p>Большинство людей, попробовавших Rust, хотели бы продолжать его использовать. Но если вы не использовали его, вы можете задаться вопросом - что такое Rust, почему он такой особенный и что делает его таким популярным среди разработчиков?</p>
+<p>В этом руководстве я постараюсь дать краткое введение и ответить на все ваши вопросы о Rust.</p>
+<p>Вот некоторые моменты, о которых я расскажу:</p>
+<ul>
+<li>Что такое Rust?</li>
+<li>счетчик займов Rust</li>
+<li>Rust против C++</li>
+<li>Rust и WebAssembly</li>
+<li>Начало работы с Rust</li>
+<li>Дальнейшее обучение</li>
+</ul>
+<h2 id="chto-takoe-rust">Что такое Rust?</h2>
+<p>Rust - это низкоуровневый многопарадигмальный язык программирования со статической типизацией, ориентированный на безопасность и производительность.</p>
+<p>Rust решает проблемы, с которыми C/C++ боролся долгое время, такие как ошибки памяти и создание параллельных программ.</p>
+<p>У него три основных преимущества:</p>
+<ul>
+<li>лучшая безопасность памяти за счет компилятора;</li>
+<li>более легкий параллелизм за счет модели владения данными, предотвращающей скачки данных;</li>
+<li>Абстракции с нулевой стоимостью.</li>
+</ul>
+<p>Давайте рассмотрим каждый из них по очереди.</p>
+<h3 id="net-oshibok">Нет ошибок</h3>
+<p>Если вы хотите заниматься системным программированием, вам нужен низкоуровневый контроль, который обеспечивает управление памятью. К сожалению, ручное управление сопряжено с множеством проблем на таких языках, как C. Несмотря на наличие таких инструментов, как Valgrind, выявить проблемы с управлением памятью сложно.</p>
+<p>Rust предотвращает эти проблемы. Система владения Rust анализирует управление памятью программы во время компиляции, убеждаясь, что ошибки из-за плохого управления памятью не могут произойти и что сборка мусора не нужна.</p>
+<p>Более того, если вы хотите сделать супероптимизированные реализации в стиле C, вы можете сделать это, явно отделяя их от остальной части кода с помощью ключевого слова unsafe.</p>
+<h3 id="bolee-prostoi-parallelizm">Более простой параллелизм</h3>
+<p>Благодаря проверке заимствований, Rust может предотвратить скачки данных во время компиляции.</p>
+<p>Гонки данных возникают, когда два потока обращаются к одной и той же памяти одновременно, и могут привести к неприятному, непредсказуемому поведению. К счастью, предотвращение неопределенного поведения - это все, что нужно для Rust.</p>
+<h3 id="abstraktsii-s-nulevoi-stoimost-iu">Абстракции с нулевой стоимостью</h3>
+<p>Абстракции с нулевой стоимостью гарантируют, что фактически нет накладных расходов времени выполнения для используемых вами абстракций. Проще говоря: нет разницы в скорости между низкоуровневым кодом и кодом, написанным с помощью абстракций.</p>
+<p>Эти вещи важны? да. Например, около 70% проблем, решаемых Microsoft за последние 12 лет, связаны с ошибками памяти. То же самое и с Google Chrome.</p>
+<h3 id="dlia-chego-ispol-zuetsia-rust">Для чего используется Rust?</h3>
+<p>Rust - язык довольно низкого уровня, он полезен, когда вам нужно выжать больше из имеющихся у вас ресурсов. Поскольку она статически типизирована, система типов помогает предотвратить определенные классы ошибок во время компиляции. Следовательно, вы будете склонны использовать его, когда ваши ресурсы ограничены, и когда важно, чтобы ваше программное обеспечение работало без сбоев. Напротив, высокоуровневые языки с динамической типизацией, такие как Python и JavaScript, лучше подходят для таких вещей, как быстрые прототипы.</p>
+<p>Вот несколько примеров использования Rust:</p>
+<ul>
+<li>Мощные кроссплатформенные инструменты командной строки.</li>
+<li>Распределенные онлайн-сервисы.</li>
+<li>Встраиваемые устройства.</li>
+<li>В любом другом месте вам понадобится системное программирование, например движки браузера и, возможно, ядро Linux.</li>
+</ul>
+<p>Например, вот несколько операционных систем, написанных на Rust: Redox, intermezzOS, QuiltOS, Rux, Tock.</p>
+<h3 id="iavliaetsia-li-rust-obektno-orientirovannym">Является ли Rust объектно-ориентированным?</h3>
+<p>Кто знает, что в наши дни означает объектно-ориентированный подход?</p>
+<p>Ответ нет. Rust имеет некоторые объектно-ориентированные функции: вы можете создавать структуры, и они могут содержать как данные, так и связанные с ними методы, что в некотором роде похоже на классы без наследования. Но в отличие от таких языков, как Java, Rust не имеет наследования и вместо этого использует трэйты для достижения полиморфизма.</p>
+<h3 id="rust-eto-funktsional-nyi-iazyk-programmirovaniia">Rust - это функциональный язык программирования?</h3>
+<p>Несмотря на то, что Rust внешне очень похож на C, он находится под сильным влиянием семейства языков ML. (В это семейство входят такие языки, как OCaml, F # и Haskell.) Например, трэйты Rust - это в основном классы типов Haskell, а Rust имеет очень мощные возможности сопоставления с образцом.</p>
+<p>Rust действительно обладает большей изменчивостью, чем обычно привыкли функциональные программисты. Мы можем думать об этом так: и Rust, и FP стараются избегать разделяемого изменяемого состояния. В то время как FP ориентирован на предотвращение изменяемого состояния, Rust пытается избежать общей части опасности. В Rust также отсутствует много вещей, которые сделали бы функциональное программирование выполнимым в нем, таких как оптимизация хвостовых вызовов и хорошая поддержка функциональных структур данных.</p>
+<p>В общем, поддержки функционального программирования в Rust достаточно, чтобы кто-то написал об этом книгу.</p>
+<h3 id="podkhodit-li-rust-dlia-razrabotki-igr">Подходит ли Rust для разработки игр?</h3>
+<p>Теоретически да. Поскольку Rust ориентирован на производительность и не использует сборщик мусора, игры, написанные на нем, должны быть производительными и предсказуемо быстрыми.</p>
+<p>К сожалению, экосистема все еще молода, и на Rust нет ничего, что могло бы сравниться, например, с Unreal Engine. Тем не менее, части есть, и у Rust живое сообщество. Если вы хотите увидеть примеры игр, написанных на Rust, вы можете перейти на сабреддит разработчиков игр Rust.</p>
+<p>Подробнее о разработчике игр на Rust: мы уже в игре?</p>
+<h3 id="podkhodit-li-rust-dlia-veb-razrabotki">Подходит ли Rust для веб-разработки?</h3>
+<p>В Rust есть несколько фреймворков для веб-разработки, таких как Actix Web и Rocket, которые очень удобны и хорошо созданы. В частности, если вам нужна чистая скорость, Actix Web является одним из лучших тестов фреймворка.</p>
+<p>Однако в Rust нет ничего, что могло бы конкурировать с экосистемой таких фреймворков, как Django и Rails. Поскольку Rust - довольно молодой язык, отсутствуют многие удобные служебные библиотеки, а это означает, что процесс разработки не такой простой и легкий.</p>
+<p>Подробнее о веб-разработке на Rust: мы уже в сети?</p>
+<p>TL;DR Rust - мощный инструмент для написания безопасных для памяти и поточно-ориентированных приложений, сохраняя при этом скорость. Хотя у него большой потенциал, неясно, оправдан ли выбор Rust в тех областях, где значительная поддержка библиотеки необходима прямо сейчас.</p>
+<h2 id="model-vladeniia-dannymi">Модель владения данными</h2>
+<p>Давайте углубимся в одну из особенностей Rust - его проверку заимствований.</p>
+<p>Чтобы начать объяснение владения данными в Rust, мне нужно познакомить вас с двумя видами памяти в низкоуровневом программировании: стеком и кучей.</p>
+<p>Стек используется для распределения статической памяти, а куча - для распределения динамической памяти. Проще говоря: стек предназначен для вещей, размер памяти которых нам известен (например, целые числа или str, который в Rust является строкой в памяти), а куча - для вещей, размер которых может значительно измениться (обычная строка). Чтобы работать с этими изменяемыми объектами, мы выделяем для них место в куче и помещаем указатель на это пространство в стеке.</p>
+<p><img src="/imgs/posts/35812975_01.png" alt="Владение данными в Rust" /></p>
+<h3 id="dvizhushchiisia">Движущийся</h3>
+<p>Но возникает проблема: что делать, если двум переменным назначен указатель на одни и те же данные в куче?
+<img src="/imgs/posts/35812975_02.png" alt="двум переменным назначается указатель на одни и те же данные" /></p>
+<p>Если мы попытаемся изменить одну из переменных, изменив данные внизу, другая тоже изменится, что часто не является тем, чего мы хотим.</p>
+<p>Такая же (и даже хуже) ситуация возникает, если два потока работают с одними и теми же данными.</p>
+<p><img src="/imgs/posts/35812975_03.png" alt="два потока, работающие с одними и теми же данными" /></p>
+<p>Представьте, что один из этих потоков изменяет данные в куче, пока другой читает их. О, какой жуткий ужас может выйти из этого! Мы называем это гонкой за данные.</p>
+<p>Следовательно, в Rust только одна переменная может владеть определенным фрагментом данных. Как только вы назначаете эти данные другой переменной, они либо перемещаются, либо копируются.</p>
+<p>Приведу пример: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> s1 </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;All men who repeat a line from Shakespeare are William Shakespeare.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let mut</span><span> s2 </span><span style="color:#f29668;">=</span><span> s1</span><span style="color:#bfbab0cc;">;
+</span><span>s1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push_str</span><span>(</span><span style="color:#c2d94c;">&quot;― Jorge Luis Borges&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это не будет компилироваться, потому что право собственности на данные перемещается в s2, а s1 больше не может быть доступен после перемещения.</p>
+<h3 id="zaimstvovanie">Заимствование</h3>
+<p>Теперь перенос собственности вручную довольно проблематичен, так как вам всегда нужно возвращать ее обратно.</p>
+<p>Чтобы решить эту проблему, мы можем заимствовать переменные, создавая на них ссылки. Использование этих ссылок не передает права собственности, но позволяет нам либо прочитать переменную (неизменяемая ссылка или &amp;), либо даже изменить ее (изменяемая ссылка или mut &amp;).</p>
+<p>Но существуют ограничения на ссылки, поскольку наличие нескольких изменяемых ссылок равносильно наличию нескольких владельцев.</p>
+<p>Вот почему компилятор применяет правило для ссылок на вещи.</p>
+<p>Вы можете сделать либо:</p>
+<ul>
+<li>несколько неизменяемых ссылок (только для чтения),</li>
+<li>одна изменяемая ссылка (чтение и запись).</li>
+</ul>
+<p>Вот интуитивная метафора, которую я беззастенчиво заимствую у Rust, объяснил на простом английском.</p>
+<p>Думайте о данных, на которые ссылаются, как о презентации Powerpoint. Вы можете либо отредактировать презентацию (изменяемая ссылка), либо представить ее любому количеству людей (неизменяемая ссылка), но если она представлена во время редактирования, головы могут катиться в соответствующем отделе.</p>
+<h2 id="rust-protiv-c">Rust против C++</h2>
+<p>Теперь, когда мы знаем, что делает Rust особенным, мы можем сравнить его с другим основным языком системного программирования - C++.</p>
+<p><img src="/imgs/posts/35812975_04.png" alt="Сравнение Rust и C++" /></p>
+<h3 id="pochemu-vybiraiut-rust-vmesto-c">Почему выбирают Rust вместо C++</h3>
+<p>В C++ у разработчиков больше проблем, когда они пытаются избежать неопределенного поведения. В Rust программа проверки заимствований позволяет заранее избежать небезопасного поведения. Это устраняет целый класс ошибок, и это очень важно.</p>
+<p>Кроме того, Rust намного более современный и в некоторых аспектах лучше спроектированный язык. В частности, мощная система типов поможет вам, даже если ее основная цель - не отловить ошибки памяти, и, будучи новой, она может создавать свои инструменты с учетом передовых практик, не беспокоясь об устаревших кодовых базах.</p>
+<p>Если вы не хотите отказываться от старого кода C, у Rust есть решение. Вы можете легко вызывать свои функции через FFI (интерфейс внешних функций). Конечно, компилятор не может гарантировать безопасность этого кода, но это хорошее последнее средство.</p>
+<h3 id="pochemu-vybiraiut-c-vmesto-rust">Почему выбирают C++ вместо Rust</h3>
+<p>C и C++ существуют уже несколько десятилетий. Какую бы проблему вы ни хотели решить, скорее всего, существует масса библиотек, созданных людьми, которые сталкивались с одной и той же проблемой.</p>
+<p>Иногда это означает, что использовать Rust невозможно, потому что практически невозможно воспроизвести поддержку экосистемы. В частности, в C++ есть игровые движки и фреймворки, которых мы не увидим в Rust в течение довольно долгого времени.</p>
+<p>Те же проблемы, что решает Rust, современный C++ решил (несколько окольными) способами, поэтому доверие опытным разработчикам C++ - разумно безопасный вариант, если вы не хотите рисковать в Rust.</p>
+<p>И, конечно же, чтобы написать Rust, иногда приходится ломать голову над компилятором. Это не для всех.</p>
+<p>В конце концов, девизом Rust является «Язык, дающий каждому возможность создавать надежное и эффективное программное обеспечение».</p>
+<p>Хотя Rust изначально начинался как замена C++, ясно, что они стремятся еще больше, пытаясь сделать программирование более низкого уровня доступным для все большего и большего числа людей, которые, возможно, не смогли бы справиться с C++.</p>
+<p>Это делает сравнение несколько спорным. Rust - это не замена, а язык, открывающий новые возможности, одно из которых мы обсудим в следующем разделе. </p>
+<h2 id="rust-i-webassembly">Rust и WebAssembly</h2>
+<p>Если вы еще не слышали об этом, WebAssembly похож на… сборку для Интернета.</p>
+<p>Исторически браузеры могли запускать HTML, CSS и JavaScript, причем HTML отвечал за структуру, CSS - за внешний вид, а JavaScript - за взаимодействия. Если вам не нравится писать простой JavaScript, вы можете перенести его с других языков, которые добавляли типы, код, подобный Haskell или OCaml, и другие вещи.</p>
+<p>Но у JavaScript нет предсказуемо высокой производительности, необходимой для запуска ресурсоемких приложений, таких как игры. (Это связано со сборщиком мусора и динамической типизацией.)</p>
+<p>WebAssembly помогает в этом. Это язык для браузера, который может служить целью компиляции для любого языка, такого как Rust, Python, C++. Это означает, что вы можете взять код практически на любом современном языке программирования и поместить его в браузер.</p>
+<p>По сравнению с другими языками, Rust идеально подходит для написания кода для компиляции в WebAssembly.</p>
+<ul>
+<li>Минимальное время работы. У WebAssembly нет собственной среды выполнения, поэтому ее нужно поставлять вместе с кодом. Чем меньше время выполнения, тем меньше данных нужно загружать пользователю.</li>
+<li>Статически типизированный. Поскольку Rust имеет статическую типизацию, он может компилироваться в более эффективную WebAssembly, поскольку компилятор может использовать типы для оптимизации кода.</li>
+<li>У нас есть преимущество. Что наиболее важно, Rust всем сердцем принял WebAssembly. У Rust уже есть фантастическое сообщество и инструменты для компиляции в WebAssembly, что, честно говоря, является самым значительным преимуществом из этих трех.</li>
+</ul>
+<p>Чтобы узнать больше о Rust и WebAssembly, посмотрите этот доклад Стива Клабника или посмотрите книгу rustwasm.</p>
+<h2 id="nachalo-raboty-s-rust">Начало работы с Rust</h2>
+<p>Чтобы начать работу с кодом Rust, вы можете либо скачать rustup здесь, либо использовать Rust Playground, онлайн-инструмент, который позволяет вам запустить некоторый код Rust и увидеть последствия.</p>
+<p>Когда ваша среда Rust будет готова, давайте займемся кодом. Здесь мы будем делать версию fizzbuzz для Rust, чтобы вкратце понять, на что способен Rust.</p>
+<p>Чтобы создать новый проект, перейдите в каталог, в котором должен находиться проект, и загрузите новый fizzbuzz. Это даст указание менеджеру сборки Rust создать новый проект. Как только вы это сделаете, перейдите в папку / src и откройте main.rs.</p>
+<p>Сначала давайте напишем что-нибудь, что принимает число и возвращает:</p>
+<ul>
+<li>«шипение» для чисел, которые делятся на 3,</li>
+<li>«гудение» для чисел, которые делятся на 5,</li>
+<li>«fizzbuzz» для чисел, которые делятся как на 3, так и на 5,
+число в виде строки, если оно не делится ни на что.</li>
+</ul>
+<p>В Rust есть очень мощный инструмент для этого: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">fizzbuzz </span><span>(</span><span style="color:#f29718;">number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String {
+</span><span>    </span><span style="color:#ff7733;">match </span><span>(number </span><span style="color:#f29668;">% </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">,</span><span> number </span><span style="color:#f29668;">% </span><span style="color:#f29718;">5</span><span>) {
+</span><span>        (</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;fizzbuzz&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        (</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;fizz&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        (</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;buzz&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        (</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt;</span><span> number</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Поскольку текст в кавычках - это строка в памяти или str в Rust, нам нужно преобразовать ее в String.</p>
+<p>Теперь нам нужен способ считать до определенного числа от 1. Мы напишем новую функцию, которая принимает число в качестве аргумента, создает диапазон от 1 до числа, применяет функцию fizzbuzz и печатает результат. В Rust мы можем добиться этого с помощью простого цикла for. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_up_to </span><span>(</span><span style="color:#f29718;">number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">for</span><span> i </span><span style="color:#f29668;">in </span><span style="color:#f29718;">1</span><span style="color:#f29668;">..=</span><span>number {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">fizzbuzz</span><span>(i))
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Чтобы добиться какого-либо результата в терминале, нам нужна функция main. Давайте заменим hello_world следующим: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">count_up_to</span><span>(</span><span style="color:#f29718;">100</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Теперь мы можем использовать команду cargo run main.rs и, скорее всего, увидим на нашем терминале поток гудков и гудков.</p>
+<p>Но эй! Может быть, fizzbuzz - не единственная игра, в которую мы играем? Может быть, новая горячность - вуббалубба? Давайте быстро изменим наш код подсчета, чтобы убедиться, что мы сможем принять участие в любой игре со счетом в городе.</p>
+<p>Для этого нам понадобится наша функция Rust, которая принимает другую функцию, которая принимает 32-битное целое число без знака и возвращает String. После добавления к сигнатуре типа того, что называется указателем на функцию, худшее прошло. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_up_to_with </span><span>(</span><span style="color:#f29718;">number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>, </span><span style="color:#f29718;">function</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">fn</span><span>(</span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span>() {
+</span><span>}
+</span></code></pre>
+<p>Внутри нам просто нужно заменить fizzbuzz на функциональную переменную.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_up_to_with </span><span>(</span><span style="color:#f29718;">number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>, </span><span style="color:#f29718;">function</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">fn</span><span>(</span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">for</span><span> i </span><span style="color:#f29668;">in </span><span style="color:#f29718;">1</span><span style="color:#f29668;">..=</span><span>number {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">function</span><span>(i))
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Если мы добавим новую игру, которая каким-то образом преобразует целые числа в строки, наша функция сможет с этим справиться.</p>
+<p>Для удобства вот вуббалубба, вряд ли творческое изобретение: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">wubbalubba </span><span>(</span><span style="color:#f29718;">number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String {
+</span><span>    </span><span style="color:#ff7733;">match </span><span>(number </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2 </span><span style="color:#f29668;">% </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">,</span><span> number </span><span style="color:#f29668;">% </span><span style="color:#f29718;">4</span><span>) {
+</span><span>        (</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;dub dub&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        (</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;wubba&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        (</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;lubba&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        (</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt;</span><span> number</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>И необходимая функция для его вызова: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">count_up_to_with</span><span>(</span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,</span><span> wubbalubba)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="dal-neishee-obuchenie">Дальнейшее обучение</h2>
+<p>Сообщество Rust потрясающее. Куда бы вы ни пошли, вы найдете множество четко объясненных, ориентированных на новичков материалов для обучения и людей, готовых вам помочь.</p>
+<ul>
+<li>Tour of Rust. Интерактивное руководство по основам Rust, вплоть до обобщений и интеллектуальных указателей.</li>
+<li>The Rust Programming Language. Лучшая книга Rust, доступная онлайн бесплатно.</li>
+<li>Exercism Rust track. Если вы хотите получить больше опыта работы с языком и его синтаксисом, Exercism - хороший вариант. К сожалению, похоже, что трек Rust сейчас немного перенаселен, поэтому не рассчитывайте на внимание наставников.</li>
+<li>Rust by example. Коллекция примеров идиоматического кода на Rust.</li>
+<li>Rust cheat sheet. Если вы хотите вкратце познакомиться с наиболее важными концепциями Rust, это для вас.</li>
+<li>Rustlings. Сборник упражнений на Rust, которые позволят вам бороться с компилятором в контролируемой среде. </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

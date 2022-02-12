@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Балансы EVM | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/evm/evm-balances/#preobrazovanie-balansa">Преобразование баланса</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/evm/evm-balances/#upravlenie-balansami-ethereum-na-substrate">Управление балансами Ethereum на Substrate</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/evm/evm-balances/#depozity"><small>- Депозиты</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/evm/evm-balances/#sniatie"><small>- Снятие</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/evm/evm-balances/#balansy-efiriuma"><small>- Балансы Эфириума</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/evm/evm-balances/#adresa"><small>- Адреса:</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/evm/evm-balances/#balansy"><small>- Балансы:</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/evm/evm-balances/#gas"><small>- Gas:</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Балансы EVM</h1>
+
+<p>Модуль «EVM» в Substrate обеспечивает поддержку выполнения контрактов Ethereum в цепочке субстратов. Чтобы выполнять какие-либо действия, связанные с газом или балансом на EVM, на вызывающем счете должен быть баланс. Как работают эти балансы?</p>
+<h2 id="preobrazovanie-balansa">Преобразование баланса</h2>
+<p>Чтобы использовать контракты Ethereum в цепочке Substrate, цепочка должна иметь протокол, поддерживающий следующие предположения:</p>
+<ol>
+<li>(32-байтовый) адрес субстрата должен иметь соответствующий (20-байтовый) адрес Ethereum.</li>
+<li>Каждый (20-байтовый) адрес Ethereum должен иметь свой баланс.</li>
+</ol>
+<p>Модуль EVM выполняет шаг 1, просто усекая исходный адрес субстрата в адрес Ethereum, взяв первые 20 байтов. Чтобы выполнить шаг 2, цепочка использует ранее существовавший модуль балансов Substrate для управления каждым адресом Ethereum путем преобразования адресов Ethereum обратно в «адреса EVM», которые представляют собой 32-байтовые адреса Substrate. <strong>Обратите внимание, что эти адреса EVM не имеют внутренней связи с исходным усеченным адресом субстрата.</strong></p>
+<p>Возьмем пример:</p>
+<ul>
+<li>Рассмотрим 32-байтовый адрес субстрата: <code>0x1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF</code>.</li>
+<li>Усеките это, чтобы создать 20-байтовый адрес Ethereum: <code>0x1234567890ABCDEF1234567890ABCDEF12345678</code></li>
+<li>Баланс этого адреса Ethereum исходит из состояния модуля баланса субстрата для соответствующего адреса EVM, полученного путем хэширования вышеуказанных байтов с префиксом evm:<code>\(</code>0x65766D3A<code>\). Поэтому мы выполняем </code>Hash(0x65766D3A1234567890ABCDEF1234567890ABCDEF1234)<code>=</code>0xAF8536395A1EEC8EDA6FB9CF36739ECF75BECF6FEA04CEEC108BBB6AA15B7CB3`, чей баланс в модуле Balances будет использоваться для операций, связанных с EVM.
+<ul>
+<li>Точная используемая хеш-функция определяется в файле времени выполнения цепочки субстратов. В случае с Edgeware используется алгоритм хеширования Blake2, но возможен и Keccak.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Обратите внимание, что эти действия необратимы: мы не можем преобразовать адрес EVM обратно в его адрес Ethereum, а также мы не можем преобразовать адрес Ethereum обратно в его «исходный» адрес субстрата.</strong></p>
+<h2 id="upravlenie-balansami-ethereum-na-substrate">Управление балансами Ethereum на Substrate</h2>
+<p>Возможны две операции: мы можем «внести» средства с учетной записи Substrate на соответствующую учетную запись Ethereum, и мы можем «снять» средства со учетной записи Ethereum обратно на исходную учетную запись Substrate.</p>
+<h3 id="depozity">Депозиты</h3>
+<p>Поскольку адрес EVM, поддерживающий адрес Ethereum, вычисляется детерминировано, как указано выше, мы можем выполнить стандартный перевод баланса с нашей исходной учетной записи Substrate на адрес EVM, чтобы пополнить счет Ethereum средствами.</p>
+<p>Это можно выполнить, вызвав <code>balances::transfer(prefixAndHash(truncate(account)).signAndSend(account)</code>, где <code>account</code> — исходная учетная запись субстрата, <code>truncate</code> берет первые 20 байтов в качестве адреса Ethereum, а <code>prefixAndHash</code> применяет префикс <code>evm:</code> и берет хэш as для преобразования обратно в 32-байтовый адрес субстрата.</p>
+<h3 id="sniatie">Снятие</h3>
+<p>Поскольку адрес EVM вычисляется детерминистически, у нас нет для него приватного ключа, поэтому мы не можем выполнить перенос баланса с него обычными способами. В результате модуль EVM предоставляет специальную функцию «вывод» для перевода средств обратно с учетной записи Ethereum на исходную учетную запись Substrate.</p>
+<p>Это можно выполнить, вызвав evm::withdraw(truncate(account), value).signAndSend(account)<code>, где </code>account<code>— исходная учетная запись Substrate, а</code>truncate` берет первые 20 байтов в качестве адреса Ethereum.</p>
+<h3 id="balansy-efiriuma">Балансы Эфириума</h3>
+<p>Балансы Ethereum обрабатываются так, как если бы они работали в любой цепочке Ethereum: газ вычитается из баланса (количество использованного газа можно узнать из квитанции транзакции, возвращаемой модулем EVM через web3 или truffle), а переводы работают как ожидал.</p>
+<p>Баланс 20-байтового адреса Ethereum и 32-байтового адреса EVM должен быть идентичен при сравнении: <code>web3.eth.getBalance(ethAddress)</code> должен равняться <code>system::balances(prefixAndHash(ethAddress)).freeBalance</code>, где ethAddress — это 20-байтовый адрес Ethereum, а prefixAndHash применяет префикс evm: и берет хеш, как описано выше.</p>
+<p><strong>Обратите внимание, что коэффициент преобразования газа EVM в токены субстрата определяется в среде выполнения субстрата как «FeeCalculator», который в случае Edgeware настроен на сопоставление токена wei-to-Substrate 1-к-1.</strong></p>
+<p>При преобразовании также обратите внимание, что в вызове EVM указывается <code>gasPrice</code>, как коэффициент преобразования из поля <code>gasUsed</code> в квитанции в wei.</p>
+<p>(ниже оригинальная техническая запись)</p>
+<h3 id="adresa">Адреса:</h3>
+<ul>
+<li>
+<p>Преобразование адреса субстрата в адрес EVM: <code>address[0..20]</code> — взять первые 20 байт.</p>
+</li>
+<li>
+<p>Преобразование адреса EVM в адрес субстрата: добавьте к данным префикс evm: и возьмите хэш. <strong>ЭТО НЕОБРАТИМО</strong>.</p>
+<ul>
+<li>Видеть:<a href="https://gitlab.parity.io/parity/substrate/-/blob/16fdfc4a80a14a26221d17b8a1b9a95421a1576c/frame/evm/src/lib.rs#L167">https://gitlab.parity.io/parity/substrate/-/blob/16fdfc4a80a14a26221d17b8a1b9a95421a1576c/frame/evm/src/lib.rs#L167</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<ul>
+<li><pre style="background-color:#0f1419;color:#bfbab0;"><code><span>fn into_account_id(address: H160) -&gt; AccountId32 {
+</span><span>    let mut data = [0u8; 24];
+</span><span>    data[0..4].copy_from_slice(b&quot;evm:&quot;);
+</span><span>    data[4..24].copy_from_slice(&amp;address[..]);
+</span><span>    let hash = H::hash(&amp;data);
+</span><span>
+</span><span>    AccountId32::from(Into::&lt;[u8; 32]&gt;::into(hash))
+</span><span>}
+</span></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Эффективно: каждый адрес субстрата сопоставляется с конкретным адресом EVM, который</strong> <em>** поддерживается так, как если бы он был адресом субстрата**</em> **(см. ниже)<strong>_</strong>.<strong>_ ** Я называю (32-байтовый) адрес субстрата, созданный из (20-байтового) адреса EVM, &quot;эквивалентом субстрата-эфириума&quot;.</strong></p>
+<ul>
+<li>В качестве примера рассмотрим (фальшивый) 32-байтовый адрес субстрата(он использует <code>AccountId32</code>, который представляет собой массив <code>[u8, 32]</code>, представленный здесь как 64-символьная шестнадцатеричная строка): <code>0x1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF </code></li>
+<li>Сначала мы преобразуем это в 20-байтовый адрес EVM \ (представленный здесь как шестнадцатеричная строка из 40 символов ): <code>0x1234567890ABCDEF1234567890ABCDEF1234</code>
+Затем мы конвертируем его в новый адрес субстрата: <code>Hash('evm:'+0x1234567890ABCDEF1234567890ABCDEF1234)</code> = <code>Hash(0x65766D3A1234567890ABCDEF1234567890ABCDEF1234)</code>, где <code>Hash</code> определяется во время выполнения как Blake или Keccak. Edgeware использует Blake (см.: [https://github.com/hicommonwealth/edgeware-node/blob/edg-frontier-up-1/node/runtime/src/lib.rs#L857](https:// github.com/hicommonwealth/edgeware-node/blob/edg-frontier-up-1/node/runtime/src/lib.rs#L857)), поэтому окончательный вывод будет в шестнадцатеричном формате: <code>0xAF8536395A1EEC8EDA6FB9CF36739ECF75BECF6FEA04CEEC108BBB6AA15B7CB3</code></li>
+<li>Таким образом, 32-байтовая «субстратная учетная запись» <code>0x12345...</code> сопоставляется с 20-байтовой «учетной записью эфириума» <code>0x12345...1234</code>, которая сопоставляется с 32-байтовым «эквивалентом субстрата-эфириума» <code>0xAF8536. ..</code>, который функционирует как действительный адрес субстрата. <strong>Это основной адрес, используемый для поддержания остатков на счетах для соответствующей учетной записи EVM.</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="balansy">Балансы:</h3>
+<ul>
+<li>
+<p>Адресу EVM может быть предоставлен баланс при генезисе или путем отправки баланса непосредственно на «эквивалент субстрата-эфириума», как обычно отправляет баланс между учетными записями.</p>
+<blockquote>
+<p>«Кажется, нельзя использовать собственные адреса субстрата по умолчанию для взаимодействия с EVM, можете ли вы рассказать об этом подробнее? Что должен делать пользователь, если у него нулевой баланс при генезисе»</p>
+</blockquote>
+<ul>
+<li>
+<p>Каждый адрес субстрата детерминированно сопоставляется с адресом EVM.</p>
+<ul>
+<li>В границе evm-address.js есть утилита, которая предназначена для выполнения этого преобразования, но, похоже, делает это неправильно на основе обновленной палитры evm (утилита не обновлялась 4 месяца).</li>
+<li>См. реализации следующих утилит в проекте frontier-tester: [https://github.com/hicommonwealth/frontier-tester/blob/master/utils.js#L46](https://github.com/hicommonwealth /frontier-tester/blob/master/utils.js#L46)</li>
+<li>Это выполнимо следующим образом:</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<ul>
+<li><pre style="background-color:#0f1419;color:#bfbab0;"><code><span>import { decodeAddress } from &#39;@polkadot/util-crypto&#39;;
+</span><span>
+</span><span>const convertToEvmAddress = (substrateAddress) =&gt; {
+</span><span>  const addressBytes = decodeAddress(substrateAddress);
+</span><span>  return &#39;0x&#39; + Buffer.from(addressBytes.subarray(0, 20)).toString(&#39;hex&#39;);
+</span><span>}
+</span></code></pre>
+<ul>
+<li>В Rust (вероятно, есть более простой способ сделать это с помощью refs):</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>fn convertToEvmAddress(address: H256) -&gt; H160 {
+</span><span>  let mut evmAddress: [u8; 20] = Default::default();
+</span><span>    evmAddress[0..20].copy_from_slice(&amp;address[0..20]);
+</span><span>    evmAddress
+</span><span>}
+</span></code></pre>
+<ul>
+<li><strong>Исходный адрес подложки не может быть восстановлен только по адресу EVM.</strong></li>
+</ul>
+</li>
+<li>
+<p>Каждый адрес EVM детерминистически сопоставляется с другим адресом-субстратом, который поддерживает свой баланс и на который можно отправлять средства напрямую через базовый перевод. Этот адрес субстрата вычисляется следующим образом:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>import { encodeAddress, blake2AsHex } from &#39;@polkadot/util-crypto&#39;;
+</span><span>
+</span><span>const convertToSubstrateAddress = (evmAddress, prefix = 42) =&gt; {
+</span><span>  const addressBytes = Buffer.from(evmAddress.slice(2), &#39;hex&#39;);
+</span><span>  const prefixBytes = Buffer.from(&#39;evm:&#39;);
+</span><span>  const convertBytes = Uint8Array.from(Buffer.concat([ prefixBytes, addressBytes ]));
+</span><span>  const finalAddressHex = blake2AsHex(convertBytes, 256);
+</span><span>  return encodeAddress(finalAddressHex, prefix);
+</span><span>}
+</span></code></pre>
+<ul>
+<li>В Rust:</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>fn convertToSubstrateAddress(address: H160) -&gt; AccountId32 {
+</span><span>    HashedAddressMapping&lt;BlakeTwo256&gt;::into_account_id(address)
+</span><span>}
+</span></code></pre>
+</li>
+<li>
+<p><strong>Этот сгенерированный адрес подложки эквивалентен адресу EVM во всех смыслах и целях и является детерминированным вычислением исходного адреса подложки — его можно свободно использовать в других поддонах в качестве «прокси» для адреса EVM. Однако у него нет закрытого ключа, поэтому он не может подписывать.</strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Средства должны быть сняты со счета EVM с помощью функции <code>pallet_evm::withdraw</code>, поскольку «эквивалент субстрата-эфириума» не имеет известного закрытого ключа для отправки транзакций.</p>
+<ul>
+<li>[https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L304](https://github.com/paritytech/substrate/blob/master/frame/ evm/src/lib.rs#L304)</li>
+<li>Вызывающий должен указать (20-байтовый) адрес EVM, который соответствует его адресу субстрата — это проверяется здесь: <a href="https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L148">https://github.com/paritytech/substrate/blob/master/frame/evm/src/ lib.rs#L148</a>.</li>
+<li>Функция преобразует этот адрес EVM в «эквивалент субстрата-эфириума», с которого она переводит средства.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p><code>free_balance</code> «эквивалента субстрата-эфириума» используется в качестве баланса учетной записи ethereum: <a href="https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L471">https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs\ # L471</a></p>
+</li>
+<li>
+<p>Изменения в балансе учетной записи ethereum, например, после выполнения либо вызов <code>slash</code>, либо <code>deposit_creating</code> на «эквивалент субстрата-ethereum» в зависимости от того, был ли добавлен или удален баланс: <a href="https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L440">https://github.com/paritytech/ субстрат/blob/master/frame/evm/src/lib.rs#L440</a></p>
+</li>
+<li>
+<p><strong>Для примера балансов в действии на Javascript см. этот тестовый файл в frontier-tester:</strong> <a href="https://github.com/hicommonwealth/frontier-tester/blob/master/web3tests/testSubstrateBalances.ts">*<em>https://github.com/hicommonwealth/frontier-tester/blob/master/web3tests/testSubstrateBalances.ts</em> *</a></p>
+</li>
+</ul>
+<h3 id="gas">Gas:</h3>
+<ul>
+<li>Цены на различные функции в газе определяются в <code>EVM_CONFIG</code> во время выполнения.
+<ul>
+<li>Текущая конфигурация Edgeware использует клон конфигурации ISTANBUL с повышенным значением CreateContractLimit.</li>
+<li>См.: [https://github.com/rust-blockchain/evm/blob/master/runtime/src/lib.rs#L245](https://github.com/rust-blockchain/evm/blob/ мастер/среда выполнения/источник/lib.rs#L245)</li>
+</ul>
+</li>
+<li>Скорость преобразования газа в токены субстрата определяется во время выполнения как FeeCalculator, который в случае Edgeware настроен на сопоставление 1-к-1.</li>
+<li>Газ &quot;изымается&quot; из StackExecutor перед выполнением: [https://github.com/paritytech/substrate/blob/master/frame/evm/src/lib.rs#L608](https://github.com /paritytech/substrate/blob/master/frame/evm/src/lib.rs#L608)</li>
+<li>Изменения баланса, включая газ (выполненные вышеуказанным выводом), записываются обратно на баланс «эквивалента субстрата-эфириума» после того, как выполнение EVM было применено к серверной части: <a href="https://github.com/paritytech/substrate/blob/master/frame/evm/src/backend.rs#L144">https://github.com /paritytech/substrate/blob/master/frame/evm/src/backend.rs#L144</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Управление учетными записями для голосования | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#sozdat-uchetnuiu-zapis-dlia-golosovaniia">Создать учетную запись для голосования</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#nastroika-sushchestvuiushchei-uchetnoi-zapisi-dlia-golosovaniia"><small>- Настройка существующей учетной записи для голосования</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#struktura-scheta-dlia-golosovaniia">Структура счета для голосования</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#adres-akkaunta-dlia-golosovaniia"><small>- Адрес аккаунта для голосования</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#identifikator-validatora"><small>- Идентификатор валидатора</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#pravo-golosa"><small>- Право голоса</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#avtorizovannyi-otzyv"><small>- Авторизованный отзыв</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#komissiia"><small>- Комиссия</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#kliuchevoe-vrashchenie">Ключевое вращение</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#identifikatsiia-validatora-akkaunta-dlia-golosovaniia"><small>- Идентификация валидатора аккаунта для голосования</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#akkaunt-dlia-golosovaniia-avtorizovannyi-izbiratel"><small>- Аккаунт для голосования Авторизованный избиратель</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#akkaunt-dlia-golosovaniia-avtorizovannyi-otzyv"><small>- Аккаунт для голосования Авторизованный отзыв</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#rassmotrite-ustoichivye-odnorazovye-nomera-dlia-nenadezhnoi-peredachi-upolnomochennogo-izbiratelia-ili-otzyvaiushchego-litsa"><small>- Рассмотрите устойчивые одноразовые номера для ненадежной передачи уполномоченного избирателя или отзывающего лица</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/vote-accounts/#zakryt-uchetnuiu-zapis-dlia-golosovaniia">Закрыть учетную запись для голосования</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Управление учетными записями для голосования</h1>
+
+<p>На этой странице описывается, как настроить <em>учетную запись для голосования</em> в сети. Создание учетной записи для голосования необходимо, если вы планируете запустить ноду валидатора на Солане.</p>
+<h2 id="sozdat-uchetnuiu-zapis-dlia-golosovaniia">Создать учетную запись для голосования</h2>
+<p>Учетная запись для голосования может быть создана с помощью команды <a href="../cli/usage.md#solana-create-vote-account">create-vote-account</a>.
+Учетную запись для голосования можно настроить при первом создании или после запуска валидатора. Все аспекты учетной записи для голосования можно изменить, кроме адреса учетной записи для голосования, который фиксируется на весь срок действия учетной записи.</p>
+<h3 id="nastroika-sushchestvuiushchei-uchetnoi-zapisi-dlia-golosovaniia">Настройка существующей учетной записи для голосования</h3>
+<ul>
+<li>Чтобы изменить удостоверение валидатора, используйте
+<a href="../cli/usage.md#solana-vote-update-validator">vote-update-validator</a>.</li>
+<li>Чтобы изменить право голоса, используйте
+<a href="../cli/usage.md#solana-vote-%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%BE-%D0%B8%D0%B7%D0%B1%D0%B8%D1%80%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BE">голосование-авторизация-избирательно-проверено</a>.</li>
+<li>Чтобы изменить авторизованный отзыватель, используйте
+<a href="../cli/usage.md#solana-vote-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D0%BD%D1%8F%D1%82%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BE">голосование-авторизация-снятие-проверено</a>.</li>
+<li>Чтобы изменить комиссия, используйте
+<a href="../cli/usage.md#solana-%D0%B3%D0%BE%D0%BB%D0%BE%D1%81%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BC%D0%B8%D1%81%D1%81%D0%B8%D1%8F">голосование-обновления-комиссия</a>.</li>
+</ul>
+<h2 id="struktura-scheta-dlia-golosovaniia">Структура счета для голосования</h2>
+<h3 id="adres-akkaunta-dlia-golosovaniia">Адрес аккаунта для голосования</h3>
+<p>Учетная запись для голосования создается по адресу, который является либо открытым ключом файла пары ключей, либо производным адресом на основе открытого ключа файла пары ключей и исходной строки.</p>
+<p>Адрес учетной записи для голосования никогда не требуется для подписания каких-либо транзакций, а просто используется для поиска информации об учетной записи.</p>
+<p>Когда кто-то хочет <a href="../staking/">делегировать токены в учетной записи доли</a>, команда делегирования указывает на адрес учетной записи для голосования валидатора, которому владелец токена хочет делегировать.</p>
+<h3 id="identifikator-validatora">Идентификатор валидатора</h3>
+<p>Идентификатор <em>валидатора</em> — это системная учетная запись, которая используется для оплаты всех комиссий за транзакцию голосования, отправляемых на учетную запись для голосования.
+Поскольку ожидается, что валидатор будет голосовать за большинство действительных блоков, которые он получает, учетная запись удостоверения валидатора часто (возможно, несколько раз в секунду) подписывает транзакции и платит комиссионные. По этой причине пара ключей идентификации валидатора должна храниться как «горячий кошелек» в файле пары ключей в той же системе, где запущен процесс валидатора.</p>
+<p>Поскольку горячий кошелек, как правило, менее безопасен, чем автономный или «холодный» кошелек, оператор валидатора может хранить в учетной записи удостоверения только количество SOL, достаточное для покрытия платы за голосование в течение ограниченного периода времени, например нескольких недель или месяцев. Учетная запись валидатора может периодически пополняться из более безопасного кошелька.</p>
+<p>Эта практика может снизить риск потери средств, если диск или файловая система узла валидации будут скомпрометированы или повреждены.</p>
+<p>Идентификатор валидатора необходимо указать при создании учетной записи для голосования.
+Идентификатор валидатора также можно изменить после создания учетной записи с помощью команды <a href="../cli/usage.md#solana-vote-update-validator">vote-update-validator</a>.</p>
+<h3 id="pravo-golosa">Право голоса</h3>
+<p>Пара ключей <em>vote Authority</em> используется для подписи каждой транзакции голосования, которую узел валидатора хочет отправить в кластер. Это не обязательно должно быть уникальным идентификатором валидатора, как вы увидите позже в этом документе. Поскольку орган голосования, как и удостоверение валидатора, часто подписывает транзакции, это также должна быть пара горячих ключей в той же файловой системе, что и процесс валидатора.</p>
+<p>Полномочия голосования могут быть установлены на тот же адрес, что и удостоверение валидатора.
+Если личность валидатора также является органом голосования, требуется только одна подпись на транзакцию голосования, чтобы как подписать голосование, так и оплатить комиссию за транзакцию. Поскольку транзакционные сборы в Solana оцениваются за каждую подпись, наличие одного подписывающего лица вместо двух приведет к уплате половины комиссии за транзакцию по сравнению с установкой права голоса и удостоверения валидатора для двух разных учетных записей.</p>
+<p>Права голоса можно установить при создании учетной записи для голосования. Если он не указан, по умолчанию он назначается так же, как идентификатор валидатора.
+Права голоса можно изменить позже с помощью команды <a href="../cli/usage.md#solana-vote-authorize-voter-checked">vote-authorize-voter-checked</a>.</p>
+<p>Право голоса может быть изменено не более одного раза за эпоху. Если полномочия изменены с помощью <a href="../cli/usage.md#solana-vote-authorize-voter-checked">vote-authorize-voter-checked</a>, это не вступит в силу до начала следующей эпохи.
+Для поддержки плавного перехода подписи голосования <code>solana-validator</code> позволяет указать аргумент <code>--authorized-voter</code> несколько раз. Это позволяет процессу валидатора продолжать успешное голосование, когда сеть достигает границы эпохи, при которой меняется учетная запись полномочий валидатора.</p>
+<h3 id="avtorizovannyi-otzyv">Авторизованный отзыв</h3>
+<p>Пара ключей <em>authorized remover</em> используется для снятия средств со счета для голосования с помощью команды <a href="../cli/usage.md#solana-withdraw-from-vote-account">снятие-с-счета-голосования</a>. Любые сетевые вознаграждения, которые зарабатывает валидатор, зачисляются на счет для голосования и могут быть получены только путем подписания с авторизованной парой ключей для снятия средств.</p>
+<p>Авторизованный снимающий также должен подписать любую транзакцию для изменения комиссии учетной записи для голосования и для изменения личности валидатора на учетной записи для голосования.</p>
+<p>Поскольку кража авторизованной пары ключей для снятия средств может дать злоумышленнику полный контроль над работой валидатора, рекомендуется хранить пару ключей для полномочий на снятие средств в автономном/холодном кошельке в безопасном месте. Пара ключей полномочий на отзыв не требуется во время работы валидатора и не должна храниться на самом валидаторе.</p>
+<p>Авторизованный отзыватель должен быть установлен при создании учетной записи для голосования. Он не должен быть установлен на пару ключей, совпадающую с парой ключей удостоверения валидатора или с парой ключей органа голосования.</p>
+<p>Авторизованный отзыватель может быть изменен позже с помощью команды <a href="../cli/usage.md#solana-vote-authorize-withdrawer-checked">vote-authorize-withdrawer-checked</a>.</p>
+<h3 id="komissiia">Комиссия</h3>
+<p><em>Комиссия</em> — это процент сетевых вознаграждений, заработанных валидатором, которые зачисляются на счет голосования валидатора. Оставшаяся часть вознаграждения распределяется между всеми учетными записями доли, делегированными этой учетной записи для голосования, пропорционально активному весу ставки каждой учетной записи доли.</p>
+<p>Например, если учетная запись для голосования имеет комиссию в размере 10%, для всех вознаграждений, полученных этим валидатором в данную эпоху, 10% этих вознаграждений будут зачислены на учетную запись для голосования в первом блоке следующей эпохи. Остальные 90% будут переведены на делегированные счета ставок в качестве немедленно активной ставки.</p>
+<p>Валидатор может установить низкую комиссию, чтобы попытаться привлечь больше делегаций ставок, поскольку более низкая комиссия приводит к тому, что делегатору передается больший процент вознаграждений. Поскольку существуют расходы, связанные с настройкой и эксплуатацией узла валидатора, в идеале валидатор должен установить достаточно высокую комиссию, чтобы по крайней мере покрыть свои расходы.</p>
+<p>Комиссию можно установить при создании учетной записи для голосования с помощью опции <code>--commission</code>.
+Если он не указан, по умолчанию он будет равен 100%, что приведет к тому, что все вознаграждения будут зачислены на счет для голосования, и ни одно из них не будет передано каким-либо делегированным счетам ставок.</p>
+<p>Комиссию также можно изменить позже с помощью команды <a href="../cli/usage.md#solana-vote-update-commission">vote-update-commission</a>.</p>
+<p>При установке комиссии принимаются только целые значения из набора [0-100].
+Целое число представляет собой количество процентных пунктов для комиссии, поэтому создание учетной записи с <code>--commission 10</code> установит комиссию в размере 10%.</p>
+<h2 id="kliuchevoe-vrashchenie">Ключевое вращение</h2>
+<p>Смена ключей полномочий учетной записи для голосования требует специальной обработки при работе с действующим валидатором.</p>
+<p>Обратите внимание, что смена ключа учетной записи для голосования не влияет на учетные записи ставок, которые были делегированы учетной записи для голосования. Например, можно использовать ротацию ключей, чтобы передать все полномочия учетной записи для голосования от одной организации к другой без какого-либо влияния на вознаграждение за стекинг.</p>
+<h3 id="identifikatsiia-validatora-akkaunta-dlia-golosovaniia">Идентификация валидатора аккаунта для голосования</h3>
+<p>Вам потребуется доступ к паре ключей <em>authorized remover</em> для учетной записи для голосования, чтобы изменить личность валидатора. Следующие шаги предполагают, что <code>~/authorized_withdrawer.json</code> является этой парой ключей.</p>
+<ol>
+<li>Создайте новую пару ключей идентификации валидатора, <code>solana-keygen new -o ~/new-validator-keypair.json</code>.</li>
+<li>Убедитесь, что новая учетная запись удостоверения была профинансирована, <code>solana transfer ~/new-validator-keypair.json 500</code>.</li>
+<li>Запустите <code>solana voice-update-validator ~/vote-account-keypair.json ~/new-validator-keypair.json ~/authorized_withdrawer.json</code>, чтобы изменить идентификатор валидатора в вашей учетной записи для голосования.</li>
+<li>Перезапустите валидатор с новой парой идентификационных ключей для аргумента --identity.</li>
+</ol>
+<p><strong>Если у вашего валидатора есть доля, потребуются дополнительные шаги.</strong> График лидера рассчитывается на две эпохи вперед. Поэтому, если ваш старый идентификатор валидатора был в расписании лидера, он останется в расписании лидера в течение двух эпох после изменения идентификатора валидатора. Если дополнительные шаги не будут предприняты, ваш валидатор не будет производить блоки, пока ваша новая личность валидатора не будет добавлена ​​в расписание лидера.</p>
+<p>После перезапуска вашего валидатора с новой парой ключей удостоверения на шаге 4 запустите второй валидатор без права голоса на другом компьютере со старой парой ключей удостоверения без указания аргумента <code>--vote-account</code>.</p>
+<p>Этот временный валидатор должен работать в течение двух полных эпох. За это время будет:</p>
+<ul>
+<li>Создайте блоки для оставшихся слотов, которые назначены вашей старой личности валидатора.</li>
+<li>Получайте комиссию за транзакцию и вознаграждение за аренду для вашей старой личности валидатора</li>
+</ul>
+<p>Безопасно остановить этот временный валидатор, когда ваш старый идентификатор валидатора больше не указан в выводе <code>solana Leader-schedule</code>.</p>
+<h3 id="akkaunt-dlia-golosovaniia-avtorizovannyi-izbiratel">Аккаунт для голосования Авторизованный избиратель</h3>
+<p>Пара ключей <em>vote Authority</em> может быть изменена только на границах эпох и требует некоторых дополнительных аргументов для <code>solana-validator</code> для плавной миграции.</p>
+<ol>
+<li>Запустите <code>solana epoch-info</code>. Если в текущей эпохе осталось немного времени, подумайте о том, чтобы дождаться следующей эпохи, чтобы дать вашему валидатору достаточно времени для перезапуска и наверстать упущенное.</li>
+<li>Создайте новую пару ключей полномочий для голосования: solana-keygen new -o ~/new-vote-authority.json.</li>
+<li>Определите текущую пару ключей <em>vote Authority</em>, запустив <code>solana voice-account ~/vote-account-keypair.json</code>. Это может быть учетная запись удостоверения валидатора (по умолчанию) или какая-то другая пара ключей. Следующие шаги предполагают, что этой парой ключей является <code>~/validator-keypair.json</code>.</li>
+<li>Запустите <code>solana voice-authorize-voter-checked ~/vote-account-keypair.json ~/validator-keypair.json ~/new-vote-authority.json</code>. Планируется, что новое право голоса станет активным, начиная со следующей эпохи.</li>
+<li>solana-validator теперь необходимо перезапустить со старой и новой парой ключей полномочий для голосования, чтобы он мог плавно перейти в следующую эпоху. Добавьте два аргумента при перезапуске: <code>--authorized-voter ~/validator-keypair.json --authorized-voter ~/new-vote-authority.json</code></li>
+<li>После того, как кластер достигнет следующей эпохи, удалите аргумент --authorized-voter ~/validator-keypair.json и перезапустите solana-validator, так как старая пара ключей полномочий для голосования больше не требуется.</li>
+</ol>
+<h3 id="akkaunt-dlia-golosovaniia-avtorizovannyi-otzyv">Аккаунт для голосования Авторизованный отзыв</h3>
+<p>Никакого специального обращения или временных соображений не требуется.
+При необходимости используйте команду solana voice-authorize-withdrawer-checked.</p>
+<h3 id="rassmotrite-ustoichivye-odnorazovye-nomera-dlia-nenadezhnoi-peredachi-upolnomochennogo-izbiratelia-ili-otzyvaiushchego-litsa">Рассмотрите устойчивые одноразовые номера для ненадежной передачи уполномоченного избирателя или отзывающего лица</h3>
+<p>Если уполномоченный избиратель или отзыватель должен быть передан другому юридическому лицу
+затем рекомендуется двухэтапный процесс подписания с использованием <a href="../offline-signing/durable-nonce">Durable Nonce</a>.</p>
+<ol>
+<li>Объект B создает устойчивый одноразовый номер, используя solana create-nonce-account.</li>
+<li>Затем объект B запускает команду solana voice-authorize-voter-checked или solana voice-authorize-withdrawer-checked, включая:
+<ul>
+<li>аргумент <code>--sign-only</code></li>
+<li>аргументы <code>--nonce</code>, <code>--nonce-authority</code> и <code>--blockhash</code> для указания деталей одноразового номера</li>
+<li>адрес существующих полномочий Объекта А и пара ключей для новых полномочий Объекта Б.</li>
+</ul>
+</li>
+<li>Когда команда solana voice-authorize-...-checked успешно выполняется, она выводит подписи транзакций, которые объект B должен передать объекту A.</li>
+<li>Затем объект A запускает аналогичную команду solana voice-authorize-voter-checked или solana voice-authorize-withdrawer-checked со следующими изменениями:
+<ul>
+<li>аргумент <code>--sign-only</code> удален и заменен аргументом <code>--signer</code> для каждой из подписей, предоставленных объектом B.</li>
+<li>адрес существующих полномочий объекта А заменяется соответствующей парой ключей, а пара ключей для новых полномочий объекта Б заменяется соответствующим адресом</li>
+</ul>
+</li>
+</ol>
+<p>В случае успеха полномочия теперь меняются без необходимости раскрытия пары ключей другому объекту A или B, даже если оба объекта подписали транзакцию.</p>
+<h2 id="zakryt-uchetnuiu-zapis-dlia-golosovaniia">Закрыть учетную запись для голосования</h2>
+<p>Учетная запись для голосования может быть закрыта с помощью команды <a href="../cli/usage.md#solana-close-vote-account">close-vote-account</a>.
+Закрытие счета для голосования приводит к выводу всех оставшихся средств SOL на указанный адрес получателя и делает его недействительным в качестве счета для голосования.
+Невозможно закрыть счет для голосования с активной ставкой.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

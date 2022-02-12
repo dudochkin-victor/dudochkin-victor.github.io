@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Скорректированная доходность по стейкингу | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/inflation/adjusted-staking-yield/#razvedenie-tokenov">Разведение токенов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/inflation/adjusted-staking-yield/#raschetnaia-skorrektirovannaia-dokhodnost-po-steikingu">Расчетная скорректированная доходность по стейкингу</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Скорректированная доходность по стейкингу</h1>
+
+<h3 id="razvedenie-tokenov">Разведение токенов</h3>
+<p>Точно так же мы можем посмотреть на ожидаемое разбавление ставок (т. е. скорректированный доход разбивки_) и разбавление без ставок, как определено ранее. Опять же, <em>dilution</em> в этом контексте определяется как изменение дробного представления (т.е. права собственности) набора токенов в более крупном наборе. В этом смысле разбавление может быть положительным значением: увеличение долевой собственности (разбавление доли / <em>Скорректированная доходность доли</em>) или отрицательным значением: уменьшение долевой собственности (разбавление без разбивки).</p>
+<p>Нас интересует относительное изменение прав собственности на размещенные по сравнению с незащищенными токенами, поскольку общий пул токенов увеличивается с выпуском инфляции. Как уже говорилось, эта эмиссия распределяется только между держателями токенов, которые делают ставки, увеличивая дробное представление токенов стейкинга от <em>Total Current Supply</em>.</p>
+<p>Продолжая использовать те же параметры <em>Графика инфляции</em>, что и выше, мы видим, как доля поставленного предложения растет, как показано ниже.</p>
+<p><img src="/img/p_ex_staked_supply_w_range_initial_stake.png" alt="" /></p>
+<p>Из-за этого относительного изменения в представлении пропорция доли любого держателя токенов также изменится в зависимости от <em>Графика инфляции</em> и доли всех токенов, которые поставлены на карту.</p>
+<p>Однако первоначальный интерес представляет <em>разбавление <strong>неразмещенных</strong> токенов</em>, или $D_{us}$. В случае неразмещенных токенов их разбавление является функцией только <em>Графика инфляции</em>, поскольку количество неразмещенных токенов не меняется со временем.</p>
+<p>Это можно увидеть, явно рассчитав разбавление без ставки как $D_{us}$. Неразмещенная доля пула токенов на момент времени $t$ это $P_{us}(t_{N})$ и $I_{t}$ это добавочный уровень инфляции, применяемый между любыми двумя последовательными моментами времени. $SOL_{us}(t)$ и $SOL_{total}(t)$ это количество неразмещенных и общих SOL в сети, соответственно, в момент времени $t$. Следовательно $P_{us}(t) = SOL_{us}(t)/SOL_{total}(t)$.</p>
+<p>$$
+\begin{aligned}
+D_{us} &amp;= \left( \frac{P_{us}(t_{1}) - P_{us}(t_{0})}{P_{us}(t_{0})} \right)\
+&amp;= \left( \frac{ \left( \frac{SOL_{us}(t_{2})}{SOL_{total}(t_{2})} \right) - \left( \frac{SOL_{us}(t_{1})}{SOL_{total}(t_{1})} \right)}{ \left( \frac{SOL_{us}(t_{1})}{SOL_{total}(t_{1})} \right) } \right)\</p>
+<p>\end{aligned}
+$$</p>
+<p>Однако, поскольку инфляционная эмиссия только увеличивает общую сумму, а неразмещенное предложение не меняется:</p>
+<p>$$
+\begin{aligned}
+SOL_{us}(t_2) &amp;= SOL_{us}(t_1)\
+SOL_{total}(t_2) &amp;= SOL_{total}(t_1)\times (1 + I_{t_1})\
+\end{aligned}
+$$</p>
+<p>So $D_{us}$ становится:</p>
+<p>$$
+\begin{aligned}
+D_{us} &amp;= \left( \frac{ \left( \frac{SOL_{us}(t_{1})}{SOL_{total}(t_{1})\times (1 + I_{1})} \right) - \left( \frac{SOL_{us}(t_{1})}{SOL_{total}(t_{1})} \right)}{ \left( \frac{SOL_{us}(t_{1})}{SOL_{total}(t_{1})} \right) } \right)\
+D_{us} &amp;= \frac{1}{(1 + I_{1})} - 1\
+\end{aligned}
+$$</p>
+<p>Или, как правило, разбавление неразмещенных токенов в течение любого периода времени, подвергающегося инфляции $I$:</p>
+<p>$$
+D_{us} = -\frac{I}{I + 1} \
+$$</p>
+<p>Как можно догадаться, это разбавление не зависит от общей доли токенов, находящихся в стекинге, и зависит только от уровня инфляции. Это можно увидеть на нашем примере <em>График инфляции</em> здесь:</p>
+<p><img src="/img/p_ex_unstaked_dilution.png" alt="p_ex_unstaked_dilution" /></p>
+<h3 id="raschetnaia-skorrektirovannaia-dokhodnost-po-steikingu">Расчетная скорректированная доходность по стейкингу</h3>
+<p>Мы можем выполнить аналогичный расчет, чтобы определить <em>разбавление</em> держателей токенов, находящихся в стейкинге, или, как мы определили здесь, как <strong><em>Скорректированный стейкинговый доход</em></strong>, имея в виду, что разбавление в этом контексте представляет собой <em>увеличение</em> пропорционального владения с течением времени. Мы будем использовать термин «скорректированная доходность по ставкам», чтобы избежать путаницы в дальнейшем.</p>
+<p>Чтобы увидеть функциональную форму, мы вычисляем, $Y_{adj}$, или <em>Скорректированная доходность ставок</em> (сравниваться с <em>D_{us}</em> разбавление неразмещенных токенов выше), где $P_{s}(t)$ это доля пула токенов, застейканная на момент времени $t$ и $I_{t}$ это дополнительный уровень инфляции, применяемый между любыми двумя последовательными моментами времени. Определение $Y_{adj}$ следовательно является:</p>
+<p>$$
+Y_{adj} = \frac{P_s(t_2) - P_s(t_1)}{P_s(t_1)}\
+$$</p>
+<p>Как видно на графике выше, доля токенов, находящихся в стейкинге, увеличивается с выпуском инфляции. Сдача $SOL_s(t)$ и $SOL_{\text{total}}(t)$ представляют собой сумму ставок и общее SOL в момент времени $t$ соответственно:</p>
+<p>$$
+P_s(t_2) = \frac{SOL_s(t_1) + SOL_{\text{total}}(t_1)\times I(t_1)}{SOL_{\text{total}}(t_1)\times (1 + I(t_1))}\
+$$</p>
+<p>Где $SOL_{\text{total}}(t_1)\times I(t_1)$ это дополнительная инфляционная эмиссия, добавленная к пулу токенов. Теперь мы можем написать $Y_{adj}$ в общих чертах $t_1 = t$:</p>
+<p>$$
+\begin{aligned}
+Y_{adj} &amp;= \frac{\frac{SOL_s(t) + SOL_{\text{total}}(t)\times I(t)}{SOL_{\text{total}}(t)\times (1 + I(t))} - \frac{SOL_s(t)}{SOL_{\text{total}}(t)} }{ \frac{SOL_s(t)}{SOL_{\text{total}}(t)} }  \
+&amp;= \frac{ SOL_{\text{total}}(t)\times (SOL_s(t) + SOL_{\text{total}}(t)\times I(t)) }{ SOL_s(t)\times SOL_{\text{total}}\times (1 + I(t)) } -1 \
+\end{aligned}
+$$</p>
+<p>что упрощает до:</p>
+<p>$$
+Y_{adj} =  \frac{ 1 + I(t)/P_s(t) }{ 1 + I(t) } - 1\
+$$</p>
+<p>Итак, мы видим, что <em>Adjusted Staked Yield</em> является функцией уровня инфляции и процента размещенных токенов в сети. Мы можем увидеть это на графике для различных фракций ставок здесь:</p>
+<p><img src="/img/p_ex_adjusted_staked_yields.png" alt="p_ex_adjusted_staked_yields" /></p>
+<p>Также ясно, что во всех случаях разбавление токенов без стейкинга $&gt;$ скорректировало доходность стейкинга (т.е. разбавление токенов, поставленных на стейкинг). В явном виде мы можем посмотреть на <em>относительное разбавление токенов, не размещенных на стейкинге, на токены, на которые стейкинг:</em> $D_{us}/Y_{adj}$. Здесь связь с инфляцией выпадает, и относительное разбавление, т. е. влияние размещения токенов по сравнению с отсутствием размещения токенов, является исключительно функцией % от общего количества размещенных токенов. Сверху</p>
+<p>$$
+\begin{aligned}
+Y_{adj} &amp;=  \frac{ 1 + I/P_s }{ 1 + I } - 1,~\text{and}\
+D_{us} &amp;= -\frac{I}{I + 1},~\text{so} \
+\frac{D_{us}}{Y_{adj}} &amp;= \frac{ \frac{I}{I + 1} }{ \frac{ 1 + I/P_s }{ 1 + I } - 1 } \
+\end{aligned}
+$$</p>
+<p>что упрощает как,</p>
+<p>$$
+\begin{aligned}
+\frac{D_{us}}{Y_{adj}} &amp;= \frac{ I }{ 1 + \frac{I}{P_s} - (1 + I)}\
+&amp;= \frac{ I }{ \frac{I}{P_s} - I}\
+\frac{D_{us}}{Y_{adj}}&amp;= \frac{ P_s }{ 1 - P_s}\
+\end{aligned}
+$$</p>
+<p>Где мы можем увидеть основную зависимость относительного разбавления токенов, не размещенных в стейкинге, по сравнению с токенами, находящимися в стейкинге, так это от функции доли общего количества поставленных токенов. Как показано выше, пропорция общего количества токенов меняется со временем (т.е. $P_s = P_s(t)$ таким образом, из-за пересчета инфляционных выпусков мы видим, что относительное разбавление со временем растет, как:</p>
+<p><img src="/img/p_ex_relative_dilution.png" alt="p_ex_relative_dilution" /></p>
+<p>Как может быть интуитивно понятно, по мере увеличения общей доли токенов, находящихся в стейкинге, резко возрастает относительное разбавление токенов, не поставленных на стейкинг. Например. с участием $80%$ застейканных сетевых токенов, владелец токенов без стейкинга испытает ~$400%$ больше разбавления, чем держателя.</p>
+<p>Опять же, это представляет собой изменение частичного изменения права собственности на поставленные токены и иллюстрирует встроенный стимул для владельцев токенов размещать свои токены, чтобы заработать <em>Стейкинговый доход</em> и избежать <em>Неразмываемого разбавления</em>.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

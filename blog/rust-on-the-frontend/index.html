@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust на стороне web-интерфейса | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-on-the-frontend/#rust-i-webassembly">Rust и WebAssembly</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-on-the-frontend/#proekt-na-rust">Проект на Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-on-the-frontend/#integratsiia-vneshnego-interfeisa">Интеграция внешнего интерфейса</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-on-the-frontend/#vyzov-rust-iz-javascript">Вызов Rust из JavaScript</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-on-the-frontend/#vyzov-javascript-iz-rust">Вызов JavaScript из Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-on-the-frontend/#vyzov-api-brauzera-iz-rust">Вызов API браузера из Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-on-the-frontend/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust на стороне web-интерфейса</h1>
+
+<p><a href="https://blog.frankel.ch/start-rust/5/">Перевод</a> | Автор оригинала: Nicolas Fränkel</p>
+<p>До сих пор JavaScript был единственным широко распространенным языком, доступным в браузерах. Он сделал JavaScript намного более популярным, чем позволял его дизайн (и связанные с ним недостатки). Следовательно:</p>
+<ul>
+<li>Количество JavaScript-разработчиков стремительно и неуклонно росло.</li>
+<li>Экосистема интерфейсного JavaScript стала более обширной и сложной.</li>
+<li>Темп изменений увеличился, так что разработчики жалуются на усталость от JavaScript.</li>
+<li>Что интересно, JavaScript проник на серверную часть через Node.js.</li>
+<li>и т.д.</li>
+</ul>
+<p>Я не хочу начинать священную войну по поводу достоинств JavaScript, но ИМХО, он выжил так далеко только благодаря своей роли в браузерах. В частности, в современных архитектурах ответственность за выполнение кода передается с сервера на клиента. Это создает большую нагрузку на последних. Существует не так много способов повысить производительность: либо купить более мощные (и дорогие!) Клиентские машины, либо улучшить движки JavaScript.</p>
+<p>Приходит WebAssembly.</p>
+<blockquote>
+<p>WebAssembly (сокращенно Wasm) - это двоичный формат инструкций для виртуальной машины на основе стека. Wasm разработан как переносимая цель компиляции для языков программирования, позволяющая развертывать в Интернете клиентские и серверные приложения.</p>
+</blockquote>
+<p>Wasm предназначен не для полной замены JavaScript в браузере (пока?), А для повышения общей производительности. Хотя Rust предназначен для системного программирования, он предлагает компиляцию для WebAssembly.</p>
+<p>Это 5-й пост в серии статей о Start Rust.</p>
+<ol>
+<li>Моя первая чашка Rust</li>
+<li>Моя вторая чашка Rust</li>
+<li>Упражнения &quot;Рустлингс&quot; - часть 1.</li>
+<li>Упражнения &quot;Рустлингс&quot; - часть 2.</li>
+<li>Rust на интерфейсе (этот пост)</li>
+<li>Контроллер Rust для Kubernetes</li>
+<li>Rust и JVM</li>
+<li>diceroller, образец проекта на Rust.</li>
+<li>Вектор Rust</li>
+</ol>
+<h2 id="rust-i-webassembly">Rust и WebAssembly</h2>
+<p>Изучение Rust - долгий процесс; изучение Rust и WebAssembly тем более. К счастью, люди доброй воли уже немного облегчили этот путь. Они написали полностью бесплатное интерактивное учебное пособие, посвященное исключительно этой теме, доступное по дружественной лицензии с открытым исходным кодом.</p>
+<p>Как ученик и тренер, я знаю, как сложно создать хороший учебник:</p>
+<ol>
+<li>Либо вы предоставляете пошаговый путь продвижения с решениями на этом пути, и это становится просто вопросом копирования и вставки.</li>
+<li>Или вы предоставляете что-то менее подробное, но вы рискуете, что некоторые учащиеся будут заблокированы и не смогут закончить.</li>
+</ol>
+<p>Книга избегает обеих ловушек, поскольку следует первой схеме, но содержит дополнительные задачи в конце каждой главы. Чтобы не блокировать учащегося, в каждой проблеме содержится общая подсказка, которая поможет учащимся найти решение. Если вы не можете (или не хотите) решить конкретную проблему, вы все равно можете перейти к следующей главе. Обратите внимание, что в связанном репозитории Git каждая фиксация ссылается либо на стандартный шаг копирования и вставки, либо на проблему, которую необходимо решить.</p>
+<p>Кроме того, в книге есть два раздела: собственное руководство и справочная часть. Таким образом, вы можете проверить соответствующие фрагменты документации во время обучения и углубить свое понимание после него.</p>
+<h2 id="proekt-na-rust">Проект на Rust</h2>
+<p>Первый шаг руководства посвящен настройке. Он короткий и самый &quot;копипастейный&quot; из всех. Причина в том, что он использует Cargo-generate, плагин Cargo, который позволяет создавать новый проект, используя существующий репозиторий Git в качестве шаблона. В нашем случае шаблон представляет собой проект Rust, готовый к компиляции в Wasm. Структура проекта: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>wasm-game-of-life/
+</span><span>├── Cargo.toml
+</span><span>└── src
+</span><span>    ├── lib.rs
+</span><span>    └── utils.rs
+</span></code></pre>
+<p>Это структура «стандартных» проектов на Rust. Сейчас отличное время для просмотра файла Cargo.toml. Он играет роль pom.xml, перечисляя метаинформацию о пакете, зависимостях, подсказках компиляции и т.д.
+Cargo.toml </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">package</span><span>]                                              
+</span><span style="color:#59c2ff;">name </span><span>= </span><span style="color:#c2d94c;">&quot;wasm-game-of-life&quot;
+</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.1.0&quot;
+</span><span style="color:#59c2ff;">authors </span><span>= [</span><span style="color:#c2d94c;">&quot;Nicolas Frankel &lt;nicolas@frankel.ch&gt;&quot;</span><span>]
+</span><span style="color:#59c2ff;">edition </span><span>= </span><span style="color:#c2d94c;">&quot;2018&quot;
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">lib</span><span>]                                                  
+</span><span style="color:#59c2ff;">crate-type </span><span>= [</span><span style="color:#c2d94c;">&quot;cdylib&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;rlib&quot;</span><span>]                        
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">features</span><span>]
+</span><span style="color:#59c2ff;">default </span><span>= [</span><span style="color:#c2d94c;">&quot;console_error_panic_hook&quot;</span><span>]
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">wasm-bindgen </span><span>= </span><span style="color:#c2d94c;">&quot;0.2.63&quot;                                
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Rest of the file omitted for clarity purposes
+</span></code></pre>
+<ol>
+<li>Мета-информация о пакете</li>
+<li>Создайте библиотеку, а не двоичный файл</li>
+<li>Создайте как библиотеку Rust, так и динамическую системную библиотеку.</li>
+<li>Зависимость от производства Wasm</li>
+</ol>
+<h2 id="integratsiia-vneshnego-interfeisa">Интеграция внешнего интерфейса</h2>
+<p>Проект в нынешнем виде не очень интересен: волшебство не видно. Следующим шагом в руководстве является добавление веб-интерфейса для взаимодействия с кодом Rust, скомпилированным в Wasm.</p>
+<p>Как и на предыдущем шаге, команда позволяет скопировать код из GitHub. Здесь команда - npm, а шаблон - create-wasm-app. Запустим команду: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npm init wasm-app www
+</span></code></pre>
+<p>Предыдущая команда выводит следующую структуру: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>wasm-game-of-life/
+</span><span>└── www/
+</span><span>    ├── package.json                   
+</span><span>    ├── webpack.config.js               
+</span><span>    ├── index.js                       
+</span><span>    ├── bootstrap.js                   
+</span><span>    └── index.html
+</span></code></pre>
+<ol>
+<li>Зеркальное отображение Cargo.toml для проектов NPM, настроенных для Wasm</li>
+<li>Конфигурация Webpack</li>
+<li>Основная точка входа в «приложение»: вызов кода Wasm.</li>
+<li>Оболочка асинхронного загрузчика для index.js</li>
+</ol>
+<p>На этом этапе можно выполнить всю цепочку кода, если мы пройдем необходимые шаги сборки:</p>
+<ol>
+<li>Скомпилируйте код Rust в Wasm</li>
+<li>Сгенерируйте код адаптера JavaScript. Вы можете запустить этот и предыдущий этапы с помощью одного вызова wasm-pack. Проверьте сгенерированные файлы в папке pkg.</li>
+<li>Получите зависимости NPM с помощью npm install.</li>
+<li>Запустите локальный веб-сервер с npm run start.</li>
+</ol>
+<p>При просмотре http: // localhost: 8080 должно отображаться простое сообщение alert().</p>
+<p>В конце этого раздела упражнение предписывает вам заменить alert() на prompt(), чтобы обеспечить параметризацию. Вам следует соответствующим образом изменить код Rust и перекомпилировать его. Веб-сервер должен перезагружать новый код на лету, чтобы при обновлении страницы отображался обновленный код.</p>
+<p>Моя идея, лежащая в основе этого поста, состоит не в том, чтобы переделывать весь урок, а в том, чтобы сосредоточиться на наиболее интересных частях. С Rust на интерфейсе все сводится к:</p>
+<ol>
+<li>Вызов Rust из JavaScript</li>
+<li>Вызов JavaScript из Rust</li>
+<li>Вызов API браузера из Rust</li>
+</ol>
+<h2 id="vyzov-rust-iz-javascript">Вызов Rust из JavaScript</h2>
+<p>Чтобы вызвать Rust из JavaScript, вам нужно скомпилировать код Rust в Wasm и предоставить тонкую оболочку JavaScript. В шаблоне проекта он уже настроен. Вам нужно использовать макрос wasm-bindgen только для тех функций Rust, которые вы хотите сделать доступными. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]           
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">foo</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// do something
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Волшебный макрос!</li>
+</ol>
+<p>Со стороны JavaScript: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">as </span><span>wasm </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&quot;hello-wasm-pack&quot;</span><span style="color:#bfbab0cc;">;       
+</span><span>
+</span><span>wasm</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">foo</span><span>()</span><span style="color:#bfbab0cc;">;                                    
+</span></code></pre>
+<ol>
+<li>Импортируйте все из пакета hello-wasm-pack в пространство имен wasm.</li>
+<li>Теперь вы можете вызвать foo()</li>
+</ol>
+<h2 id="vyzov-javascript-iz-rust">Вызов JavaScript из Rust</h2>
+<p>Руководящий принцип, лежащий в основе учебника, - это «Игра жизни» Конвея. Один из способов инициализировать плату - это случайным образом установить каждую ячейку в мертвую или живую. Поскольку рандомизация должна происходить во время выполнения, нам нужно использовать JavaScript Math.random(). Следовательно, нам также необходимо вызывать функции JavaScript из Rust.</p>
+<p>Базовая установка использует интерфейс внешних функций через ключевое слово extern: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">extern </span><span style="color:#c2d94c;">&quot;C&quot; </span><span>{                                 
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>(js_namespace </span><span style="color:#f29668;">=</span><span> Math)]     
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">random</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">random_boolean</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>    </span><span style="color:#f07178;">random</span><span>() </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">0.5                           
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Это не код C, но в любом случае это правильный синтаксис</li>
+<li>Сгенерируйте интерфейс Rust, чтобы он мог компилироваться.</li>
+<li>Используйте это</li>
+</ol>
+<p>Хотя это работает, оно очень подвержено ошибкам. В качестве альтернативы крэйт js-sys предоставляет все доступные привязки прямо из коробки:</p>
+<blockquote>
+<p>Привязки к стандартным встроенным объектам JavaScript, включая их методы и свойства.Сюда не входят Web, Node или любые другие API-интерфейсы среды JS. Только то, что гарантировано стандартом ECMAScript в глобальной области видимости. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects</p>
+</blockquote>
+<ul>
+<li>крэйт js_sys</li>
+</ul>
+<p>Чтобы настроить крэйт, вам нужно только добавить его в соответствующий раздел манифеста:
+Cargo.toml </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">js-sys </span><span>= { </span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.3.50&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">optional </span><span>= </span><span style="color:#f29718;">true </span><span>}  
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">features</span><span>]
+</span><span style="color:#59c2ff;">default </span><span>= [</span><span style="color:#c2d94c;">&quot;js-sys&quot;</span><span>]                              
+</span></code></pre>
+<ol>
+<li>Add the dependency as optional</li>
+<li>Activate the optional feature</li>
+</ol>
+<p>Должен признать, что не понимаю, зачем устанавливать зависимость как необязательную и активировать ее в другой строке. Я пока оставлю это как есть.</p>
+<p>Предыдущая конфигурация допускает следующий код:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>js_sys</span><span style="color:#f29668;">::</span><span>Math</span><span style="color:#bfbab0cc;">;               
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">random_boolean</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>    Math</span><span style="color:#f29668;">::</span><span>random() </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">0.5        
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Используйте математику из крэйта js_sys</li>
+<li>Выполните компиляцию с помощью компилятора Rust и вызовите метод Math.random() JavaScript во время выполнения.</li>
+</ol>
+<h2 id="vyzov-api-brauzera-iz-rust">Вызов API браузера из Rust</h2>
+<p>крэйт js-sys позволяет нам вызывать API-интерфейсы JavaScript внутри кода Rust. Однако для вызова клиентских API, например console.log(), необходим крэйт web_sys.</p>
+<p>Необработанные привязки API для веб-API. </p>
+<blockquote>
+<p>Это процедурно сгенерированный крэйт из браузера WebIDL, который обеспечивает привязку ко всем API, которые браузеры предоставляют в Интернете. Этот крэйт по умолчанию содержит очень мало при компиляции, поскольку почти все его открытые API закрываются функциями Cargo. Исчерпывающий список функций можно найти в crates / web-sys / Cargo.toml, но практическое правило для web-sys состоит в том, что каждый тип имеет свою собственную функцию (названную в честь типа). Использование API требует включения функций для всех типов, используемых в API, и API должны указывать в документации, какие функции им требуются.</p>
+</blockquote>
+<ul>
+<li>крэйт web_sys</li>
+</ul>
+<p>Вот как это настроить:
+Cargo.toml </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">web-sys </span><span>= { </span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.3&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">features </span><span>= [</span><span style="color:#c2d94c;">&quot;console&quot;</span><span>] }
+</span></code></pre>
+<p>Мы можем использовать крэйт так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// wasm.rs
+</span><span style="color:#ff7733;">use </span><span>web_sys</span><span style="color:#f29668;">::</span><span>console</span><span style="color:#bfbab0cc;">;                                 
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Foo </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> Foo {
+</span><span>        utils</span><span style="color:#f29668;">::</span><span>set_panic_hook()</span><span style="color:#bfbab0cc;">;
+</span><span>        Universe {}
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">log</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) {
+</span><span>        console</span><span style="color:#f29668;">::</span><span>log_1(</span><span style="color:#c2d94c;">&quot;Hello from console&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())</span><span style="color:#bfbab0cc;">;  
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Требовать создания веб-системы. Я не уверен, нужен ли (или почему) extern.</li>
+<li>Воспользуйтесь консольным пакетом.</li>
+<li>console::log_1() преобразуется в console.log() с одним параметром во время выполнения</li>
+</ol>
+<h2 id="vyvod">Вывод</h2>
+<p>В этом посте мы подробно описали три основных момента использования Rust в браузере: вызов Rust из JavaScript, вызов JavaScript из Rust и вызов API-интерфейсов браузера из Rust.</p>
+<p>Следующее видео дает вам представление о конечном результате; Я могу только посоветовать вам попробовать это руководство самостоятельно.
+Полный исходный код этого поста можно найти на Github.
+Чтобы пойти дальше:</p>
+<ul>
+<li>Книга по Rust и WebAssembly</li>
+<li>Ссылка на формат манифеста</li>
+<li>Связь</li>
+<li>Руководство wasm-bindgen </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

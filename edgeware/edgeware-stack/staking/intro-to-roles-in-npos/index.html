@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Введение в роли в NPoS | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/intro-to-roles-in-npos/#validatory-i-nominatory">Валидаторы и номинаторы </a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/intro-to-roles-in-npos/#validatory"><small>- Валидаторы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/intro-to-roles-in-npos/#nominatory"><small>- Номинаторы</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Введение в роли в NPoS</h1>
+
+<p><a href="https://wiki.polkadot.network/docs/en/learn-staking#validators-and-nominators">Подробнее о стейкинге, валидаторах и номинаторах</a></p>
+<h2 id="validatory-i-nominatory">Валидаторы и номинаторы <a id="validators-and-nominators"></a></h2>
+<p>Поскольку количество слотов валидаторов будет ограничено, большинство тех, кто хочет поставить свои EDG и внести вклад в экономическую безопасность сети, будут номинаторами. <strong>Валидаторы</strong> выполняют большую часть тяжелой работы: они производят новые кандидаты в блоки, голосуют и приходят к консенсусу, проверяют блоки цепочки.</p>
+<p><strong>Номинаторам</strong>, с другой стороны, не нужно ничего делать после того, как они привязали свои EDG. Опыт номинатора аналогичен «установил и забыл», в то время как валидатор будет активно обслуживать сеть, выполняя критические операции.</p>
+<blockquote>
+<p>Как более активный участник, валидатор имеет определенные привилегии в отношении выплат механизма ставок и сможет объявить о своем распределении до того, как доля будет разделена между номинаторами.</p>
+</blockquote>
+<h3 id="validatory">Валидаторы</h3>
+<p>Пару раз в день система выбирает группу сущностей, называемых <strong>валидаторами</strong>, которые в ближайшие несколько часов будут играть ключевую роль в высокочувствительных протоколах, таких как завершение производства блоков. Их работа требует больших затрат, поскольку им необходимо выполнять дорогостоящие операции, обеспечивать высокую скорость отклика на связь и создавать долгосрочную репутацию надежного предприятия.</p>
+<p>Они также должны ставить свой EDG, родной токен Edgeware, в качестве гарантии хорошего поведения, и эта ставка сокращается всякий раз, когда они отклоняются от своего протокола. Напротив, им хорошо платят, когда они играют по правилам. Любой узел, отвечающий этой задаче, может публично предложить себя в качестве кандидата в валидаторы. Однако по операционным причинам может быть избрано только ограниченное число валидаторов, которое, как ожидается, будет составлять сотни или тысячи.</p>
+<blockquote>
+<p><strong>Примечание к параметру.</strong> Edgeware изначально допускает 60 слотов валидатора, но это число может измениться в результате действий по управлению.</p>
+</blockquote>
+<p>{% page-ref page=&quot;slashing-consequences.md&quot; %}</p>
+<h3 id="nominatory">Номинаторы</h3>
+<p>Система также поощряет <strong>любого</strong> владельца EDG к участию в качестве <strong>номинатора</strong>. Номинатор публикует список кандидатов в валидаторы, которым он доверяет, и ставит на карту сумму EDG, чтобы поддержать их. Если некоторые из этих кандидатов выбираются в качестве валидаторов, она делится с ними платежами или санкциями в зависимости от каждого стейкинга EDG.</p>
+<p>В отличие от валидаторов, в качестве номинаторов может участвовать <em>неограниченное</em> количество сторон. Пока номинатор усердно подходит к своему выбору и поддерживает только кандидатов в валидаторы с хорошей практикой безопасности, эта роль сопряжена с низким риском и обеспечивает постоянный источник дохода.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

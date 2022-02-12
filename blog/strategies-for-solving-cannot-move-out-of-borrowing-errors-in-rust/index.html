@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Стратегии решения ошибок заимствования, из которых невозможно выйти, в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/strategies-for-solving-cannot-move-out-of-borrowing-errors-in-rust/#strategii">Стратегии</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/strategies-for-solving-cannot-move-out-of-borrowing-errors-in-rust/#primer-iz-real-nogo-mira">Пример из реального мира</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Стратегии решения ошибок заимствования, из которых невозможно выйти, в Rust</h1>
+
+<p><a href="https://hermanradtke.com/2015/06/09/strategies-for-solving-cannot-move-out-of-borrowing-errors-in-rust.html">Перевод</a> | Автор оригинала: Herman J. Radtke III</p>
+<p>Правила использования ссылок и заимствования в Rust довольно просты. Учитывая принадлежащую переменную, нам разрешено иметь столько неизменяемых ссылок на эту переменную, сколько мы хотим. По умолчанию в Rust используется неизменяемость, поэтому даже такие функции, как trim, написаны таким образом, что результатом является ссылка на исходную строку: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot; Herman &quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> trimmed_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// == &amp;[1..n-1]
+</span><span>}
+</span></code></pre>
+<p>Единственное предостережение: я больше не могу перемещать переменную имени. Если я попытаюсь переместить имя, компилятор выдаст мне ошибку: невозможно переместить имя, потому что оно заимствовано. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot; Herman &quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> trimmed_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let</span><span> owned_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// move error
+</span><span>}
+</span></code></pre>
+<p>Компилятор знает, что trimmed_name - это ссылка на name. Пока trimmed_name все еще находится в области видимости, компилятор не позволит нам передать имя функции, переназначить ее или выполнить любую другую операцию перемещения. Мы могли бы clone() имя переменной, а затем обрезать ее, но на самом деле мы просто хотим, чтобы компилятор знал, когда мы закончили заимствовать имя. Ключевое слово здесь - масштаб. Если ссылка на имя выходит за пределы области видимости, компилятор позволит нам переместить имя, потому что оно больше не заимствуется. Давайте заключим вызов trim() в фигурные скобки, чтобы обозначить другую область видимости. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot; Herman &quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   {
+</span><span>      </span><span style="color:#ff7733;">let</span><span> trimmed_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let</span><span> owned_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это достаточно просто, но давайте сделаем еще один шаг. Предположим, мы хотим вернуть длину обрезанной строки из нашей области видимости. Если мы сделаем это внутри фигурных скобок, то trimmed_name_len больше не будет существовать, как только мы выйдем из этой области видимости. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot; Herman &quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   {
+</span><span>      </span><span style="color:#ff7733;">let</span><span> trimmed_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">let</span><span> trimmed_name_len </span><span style="color:#f29668;">=</span><span> trimmed_name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>
+</span><span>   </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Length of trimmed string is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> trimmed_name_len)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// no such variable error
+</span><span>   </span><span style="color:#ff7733;">let</span><span> owned_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="strategii">Стратегии</h2>
+<p>Есть несколько способов справиться с этим. Все они выглядят очень похоже, но имеют разные компромиссы. Мы можем вернуть значение из блока кода с ограниченной областью видимости: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot; Herman &quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let</span><span> trimmed_name_len </span><span style="color:#f29668;">= </span><span>{
+</span><span>      </span><span style="color:#ff7733;">let</span><span> trimmed_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>      trimmed_name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()
+</span><span>   }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Length of trimmed string is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> trimmed_name_len)</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> owned_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это дешевый и быстрый способ вывести ссылку за пределы области видимости. При этом не требуется указывать параметры или их типы, а также не требуется указывать тип возвращаемого значения. Однако его нельзя использовать повторно. Мы можем получить больше повторного использования, если воспользуемся анонимной функцией (или закрытием): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot; Herman &quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">f </span><span style="color:#f29668;">= </span><span>|</span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>| {
+</span><span>      </span><span style="color:#ff7733;">let</span><span> trimmed_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>      trimmed_name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()
+</span><span>   }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let</span><span> trimmed_name_len </span><span style="color:#f29668;">= </span><span style="color:#f07178;">f</span><span>(</span><span style="color:#f29668;">&amp;</span><span>name)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Length of trimmed string is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> trimmed_name_len)</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> owned_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Замыкание требует, чтобы мы указали параметры и их типы, но делает указание типа возвращаемого значения необязательным. Как это написано, анонимная функция f может использоваться только в пределах функции. Если нам нужна полная возможность повторного использования, мы можем использовать обычную функцию: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">len_of_trimmed_string</span><span>(</span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>      </span><span style="color:#ff7733;">let</span><span> trimmed_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>      trimmed_name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot; Herman &quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let</span><span> trimmed_name_len </span><span style="color:#f29668;">= </span><span style="color:#f07178;">len_of_trimmed_string</span><span>(name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Length of trimmed string is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> trimmed_name_len)</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> owned_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Эти стратегии работают, только если мы вызываем неизменяемые функции. Мы временно сохраняем ссылку, чтобы получить другую информацию. Это действительно хорошо работает, поскольку информация как бы реализует трэйту Copy, например числа или логические значения. Если мы хотим сделать что-то вроде удаления всех пробелов в строке, например «H e r m a n», то мы изменяем строку. Нам пришлось бы вызвать name.clone(), чтобы позже переместить исходную переменную имени.
+Замыкания без параметров</p>
+<p>Вы могли задаться вопросом, действительно ли нам нужно было указывать параметры при использовании замыкания. Если мы попытаемся получить доступ к переменной name из замыкания, она создаст ссылку во время компиляции. Эта ссылка будет продолжать существовать, даже если мы попытаемся удалить замыкание f из области видимости. Пример: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot; Herman &quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">f </span><span style="color:#f29668;">= </span><span>|| {
+</span><span>      </span><span style="color:#ff7733;">let</span><span> trimmed_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>      trimmed_name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()
+</span><span>   }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let</span><span> trimmed_name_len </span><span style="color:#f29668;">= </span><span style="color:#f07178;">f</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Length of trimmed string is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> trimmed_name_len)</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> owned_name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// move error
+</span><span>}
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error: cannot move out of `name` because it is borrowed
+</span><span>   let owned_name = name;
+</span><span>               ^~~~~~~~~~
+</span><span>note: borrow of `name` occurs here
+</span><span>    let f = || {
+</span><span>       let trimmed_name = name.trim();
+</span><span>       trimmed_name.len()
+</span><span>    };
+</span><span>note: in expansion of closure expansion
+</span></code></pre>
+<h2 id="primer-iz-real-nogo-mira">Пример из реального мира</h2>
+<p>Приведенные выше примеры довольно надуманы. Однако вы столкнетесь с этим, когда разбиваете функции на более мелкие части. В этом примере ниже я использовал функцию find_matches, которая требовала ввода типа &amp;str. Учитывая PathBuf, мне нужно было вызвать на нем неизменяемый метод file_name(), а затем преобразовать его в &amp;str, вызвав to_str() перед вызовом find_matches (file_name). Чтобы вернуть кортеж из (p, match), мне нужно было убедиться, что ссылка, созданная с помощью file_name, выходит за рамки. Я решил использовать функцию, но мог бы использовать фигурные скобки или закрытие, как мы обсуждали выше. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">find_matches</span><span>(</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64 </span><span>{
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_filename_matches</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Path) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> file_name </span><span style="color:#f29668;">=</span><span> path</span><span style="color:#f29668;">.</span><span style="color:#f07178;">file_name</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">f</span><span>| f</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_str</span><span>())
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or_else</span><span>(|| {
+</span><span>            </span><span style="color:#f07178;">debug!</span><span>(</span><span style="color:#c2d94c;">&quot;Unable to determine filename for {:?}&quot;</span><span style="color:#bfbab0cc;">,</span><span> path)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#c2d94c;">&quot;&quot;
+</span><span>        })</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">find_matches</span><span>(file_name)
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">find_filename_matches_in_path</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;(PathBuf, </span><span style="color:#ff7733;">f64</span><span>)&gt; {
+</span><span>    fs</span><span style="color:#f29668;">::</span><span>read_dir(path)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">p</span><span>| p</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">path</span><span>())
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">p</span><span>| {
+</span><span>            </span><span style="color:#ff7733;">let</span><span> matches </span><span style="color:#f29668;">= </span><span style="color:#f07178;">count_filename_matches</span><span>(p</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> cmd)</span><span style="color:#bfbab0cc;">;
+</span><span>            (p</span><span style="color:#bfbab0cc;">,</span><span> matches)
+</span><span>        })
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">filter</span><span>(|</span><span style="color:#f29668;">&amp;</span><span>(</span><span style="color:#f29718;">ref _p</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">matches</span><span>)| {
+</span><span>            matches </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">0.0
+</span><span>        })
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()
+</span><span>}
+</span><span>
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

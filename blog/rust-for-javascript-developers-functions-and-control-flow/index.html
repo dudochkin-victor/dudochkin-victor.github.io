@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust для JavaScript-разработчиков - функции и поток управления | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-functions-and-control-flow/#funktsii">Функции</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-functions-and-control-flow/#strelochnye-funktsii">Стрелочные функции</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-functions-and-control-flow/#if-else">If Else</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-functions-and-control-flow/#loops">Loops</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-functions-and-control-flow/#iteratory">Итераторы</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust для JavaScript-разработчиков - функции и поток управления</h1>
+
+<p><a href="https://www.sheshbabu.com/posts/rust-for-javascript-developers-functions-and-control-flow/">Перевод</a> | Автор оригинала: Shesh</p>
+<p>Это третья часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:</p>
+<ol>
+<li>Обзор инструментальной экосистемы</li>
+<li>Переменные и типы данных</li>
+<li>Функции и поток управления</li>
+<li>Сопоставление с образцом и перечисления</li>
+</ol>
+<h2 id="funktsii">Функции</h2>
+<p>Синтаксис функций в Rust очень похож на синтаксис JavaScript.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> income </span><span style="color:#f29668;">= </span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let</span><span> tax </span><span style="color:#f29668;">= </span><span style="color:#f07178;">calculate_tax</span><span>(income)</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> tax)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">calculate_tax</span><span>(</span><span style="color:#f29718;">income</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>  </span><span style="color:#ff7733;">return</span><span> income </span><span style="color:#f29668;">* </span><span style="color:#f29718;">90 </span><span style="color:#f29668;">/ </span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Единственное различие, которое вы можете увидеть выше, - это аннотации типов для аргументов и возвращаемых значений.</p>
+<p>Ключевое слово return можно пропустить, и очень часто можно увидеть код без явного возврата. Если вы возвращаете неявно, не забудьте удалить точку с запятой из этой строки. Вышеупомянутую функцию можно реорганизовать как: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> income </span><span style="color:#f29668;">= </span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let</span><span> tax </span><span style="color:#f29668;">= </span><span style="color:#f07178;">calculate_tax</span><span>(income)</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> tax)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">calculate_tax</span><span>(</span><span style="color:#f29718;">income</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span style="color:#f29668;">- </span><span style="color:#ff7733;">return</span><span> income </span><span style="color:#f29668;">* </span><span style="color:#f29718;">90 </span><span style="color:#f29668;">/ </span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+</span><span> income </span><span style="color:#f29668;">* </span><span style="color:#f29718;">90 </span><span style="color:#f29668;">/ </span><span style="color:#f29718;">100
+</span><span>}
+</span></code></pre>
+<h2 id="strelochnye-funktsii">Стрелочные функции</h2>
+<p>Стрелочные функции - популярная функция в современном JavaScript - они позволяют писать функциональный код в сжатой форме.</p>
+<p>В Rust есть нечто подобное, и они называются «замыканиями». Название может немного сбивать с толку, и к нему нужно привыкнуть, потому что в JavaScript замыкания могут быть созданы с использованием как обычных, так и стрелочных функций.</p>
+<p>Синтаксис замыкания Rust очень похож на стрелочные функции JavaScript:</p>
+<p>Без аргументов: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// JavaScript
+</span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">greet </span><span style="color:#f29668;">=</span><span>() </span><span style="color:#ff7733;">=&gt; </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;hello&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">greet</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &quot;hello&quot;
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Rust
+</span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">greet </span><span style="color:#f29668;">= </span><span>|| </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;hello&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">greet</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &quot;hello&quot;
+</span></code></pre>
+<p>С аргументами: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// JavaScript
+</span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">greet </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">msg</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(msg)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">greet</span><span>(</span><span style="color:#c2d94c;">&quot;good morning!&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &quot;good morning!&quot;
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Rust
+</span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">greet </span><span style="color:#f29668;">= </span><span>|</span><span style="color:#f29718;">msg</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>| </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> msg)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">greet</span><span>(</span><span style="color:#c2d94c;">&quot;good morning!&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &quot;good morning!&quot;
+</span></code></pre>
+<p>Возвращаемые значения: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// JavaScript
+</span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">add </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">b</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>a </span><span style="color:#f29668;">+ </span><span>b</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">add</span><span>(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 3
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Rust
+</span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">add </span><span style="color:#f29668;">= </span><span>|</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>| </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{ a </span><span style="color:#f29668;">+</span><span> b }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">add</span><span>(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 3
+</span></code></pre>
+<p>Многострочный: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// JavaScript
+</span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">add </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">b</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>  </span><span style="color:#ff7733;">let </span><span>sum </span><span style="color:#f29668;">= </span><span>a </span><span style="color:#f29668;">+ </span><span>b</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">return </span><span>sum</span><span style="color:#bfbab0cc;">;
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">add</span><span>(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 3
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Rust
+</span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">add </span><span style="color:#f29668;">= </span><span>|</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>| </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>  </span><span style="color:#ff7733;">let</span><span> sum </span><span style="color:#f29668;">=</span><span> a </span><span style="color:#f29668;">+</span><span> b</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">return</span><span> sum</span><span style="color:#bfbab0cc;">;
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">add</span><span>(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 3
+</span></code></pre>
+<p>Вот шпаргалка:</p>
+<p><img src="/imgs/posts/d4cb4f2a_01.png" alt="" /></p>
+<p>Замыкания в большинстве случаев не нуждаются в аннотациях типов, но я добавил их сюда для ясности. </p>
+<h2 id="if-else">If Else</h2>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> income </span><span style="color:#f29668;">= </span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let</span><span> tax </span><span style="color:#f29668;">= </span><span style="color:#f07178;">calculate_tax</span><span>(income)</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> tax)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">calculate_tax</span><span>(</span><span style="color:#f29718;">income</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>  </span><span style="color:#ff7733;">if</span><span> income </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">10 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>  } </span><span style="color:#ff7733;">else if</span><span> income </span><span style="color:#f29668;">&gt;= </span><span style="color:#f29718;">10 </span><span style="color:#f29668;">&amp;&amp;</span><span> income </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">50 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">20</span><span style="color:#bfbab0cc;">;
+</span><span>  } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">50</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<h2 id="loops">Loops</h2>
+<p>While loops:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let mut</span><span> count </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">while</span><span> count </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">10 </span><span>{
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> count)</span><span style="color:#bfbab0cc;">;
+</span><span>    count </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Обычных циклов for в Rust не существует, нам нужно использовать циклы while или for..in. Циклы for..in похожи на циклы for..of в JavaScript, и они перебирают итератор. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> numbers </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">for</span><span> n </span><span style="color:#f29668;">in</span><span> numbers</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> n)</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, что мы не выполняем итерацию непосредственно по массиву, а вместо этого используем метод iter массива.</p>
+<p>Мы также можем перебирать диапазоны: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">for</span><span> n </span><span style="color:#f29668;">in </span><span style="color:#f29718;">1</span><span style="color:#f29668;">..</span><span style="color:#f29718;">5 </span><span>{
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> n)</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<h2 id="iteratory">Итераторы</h2>
+<p>В JavaScript мы можем использовать методы массива, такие как map / filter / reduce / etc, вместо циклов for для выполнения вычислений или преобразований в массиве.</p>
+<p>Например, здесь мы берем массив чисел, удваиваем их и отфильтровываем элементы меньше 10: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">function </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let </span><span>numbers </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">double </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">n</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">less_than_ten </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">n</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>n </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let </span><span>result </span><span style="color:#f29668;">= </span><span>numbers</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">map</span><span>(double)</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">filter</span><span>(less_than_ten)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(result)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// [2, 4, 6, 8]
+</span><span>}
+</span></code></pre>
+<p>В Rust мы не можем напрямую использовать map / filter / etc для векторов, нам нужно выполнить следующие шаги:</p>
+<ol>
+<li>Преобразуйте вектор в итератор с помощью методов iter, into_iter или iter_mut.</li>
+<li>Цепочка адаптеров, таких как map / filter / и т.д. На итераторе.</li>
+<li>Наконец преобразуйте итератор обратно в вектор, используя такие потребители, как сбор, поиск, суммирование и т.д.</li>
+</ol>
+<p>Вот эквивалентный код на Rust: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> numbers </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">double </span><span style="color:#f29668;">= </span><span>|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">i32</span><span>| </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{ n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">less_than_10 </span><span style="color:#f29668;">= </span><span>|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">i32</span><span>| </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{ </span><span style="color:#f29668;">*</span><span>n </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">10 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let</span><span> result</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt; </span><span style="color:#f29668;">=</span><span> numbers</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(double)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">filter</span><span>(less_than_10)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> result)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// [2, 4, 6, 8]
+</span><span>}
+</span></code></pre>
+<p>Вы должны понимать большую часть приведенного выше кода, но можете заметить здесь несколько вещей:</p>
+<ul>
+<li>Использование &amp; и * в закрытии</li>
+<li>Аннотация типа Vec<i32> для переменной результата</li>
+</ul>
+<p>&amp; - это оператор ссылки, а * - оператор разыменования. Метод iter вместо того, чтобы копировать элементы в векторе, передает их как ссылки на следующий адаптер в цепочке. Вот почему мы используем &amp; i32 в закрытии карты (двойное). Это закрытие возвращает i32, но фильтр вызывает его закрытие (less_than_10) со ссылкой, поэтому нам нужно снова использовать &amp; i32. Чтобы разыменовать аргумент, мы используем оператор *. Мы рассмотрим это более подробно в следующих главах.</p>
+<p>Что касается Vec<i32>, до сих пор мы не добавляли аннотации типов к переменным, поскольку Rust может автоматически определять типы, но для сбора нам нужно явно сообщить Rust, что мы ожидаем вывода Vec<i32>.</p>
+<p>Помимо карты и фильтра, есть масса других полезных адаптеров, которые мы можем использовать в итераторах.</p>
+<p>Спасибо за чтение! Не стесняйтесь подписываться на меня в Твиттере, чтобы увидеть больше подобных сообщений :) </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

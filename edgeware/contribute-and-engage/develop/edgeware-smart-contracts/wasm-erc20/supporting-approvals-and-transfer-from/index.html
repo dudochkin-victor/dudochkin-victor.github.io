@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Поддержка подтверждений и передачи от (Transfer From) | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/supporting-approvals-and-transfer-from/#peredacha-tret-ei-storone">Передача третьей стороне </a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/supporting-approvals-and-transfer-from/#odobrit"><small>- Одобрить </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/supporting-approvals-and-transfer-from/#perevod-iz"><small>- Перевод из </small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/supporting-approvals-and-transfer-from/#bud-ostorozhen">Будь осторожен! </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/supporting-approvals-and-transfer-from/#tvoia-ochered">Твоя очередь! </a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Поддержка подтверждений и передачи от (Transfer From)</h1>
+
+<p>Мы почти на месте! Наш токен-контракт теперь может переводить средства от пользователя к пользователю и сообщать внешнему миру, что происходит, когда это происходит. Все, что осталось сделать, это ввести функции <code>approve</code> и <code>transfer_from</code>.</p>
+<h2 id="peredacha-tret-ei-storone">Передача третьей стороне <a id="third-parity-transfers"></a></h2>
+<p>Этот раздел посвящен добавлению возможности для других учетных записей безопасно тратить некоторое количество ваших токенов.</p>
+<p>Немедленный вопрос должен звучать так: «Какого черта мне это нужно?»</p>
+<p>Одним из таких сценариев является поддержка децентрализованных бирж. По сути, другие смарт-контракты могут позволить вам обмениваться токенами с другими пользователями, обычно токенами одного типа на другой. Однако эти «заявки» не всегда выполняются сразу. Может быть, вы хотите получить действительно хорошую сделку по обмену токенами и продержитесь до тех пор, пока эта сделка не будет удовлетворена.</p>
+<p>Что ж, вместо того, чтобы передавать свои токены напрямую в контракт (депонирование), вы можете просто «одобрить» их, чтобы они потратили часть ваших токенов от вашего имени! Это означает, что в то время, пока вы ожидаете исполнения сделки, вы все еще можете контролировать и тратить свои средства, если это необходимо. Более того, вы можете одобрить несколько разных контрактов или пользователей для доступа к вашим средствам, поэтому, если один контракт предлагает лучшую сделку, вам не нужно извлекать средства из другого и перемещать их, что иногда является дорогостоящим и трудоемким процессом.</p>
+<p>Итак, надеюсь, вы понимаете, почему подобная функция была бы полезна, но как мы можем сделать это безопасно?</p>
+<p>Мы используем двухэтапный процесс: <strong>Утвердить</strong> и <strong>Перенести из</strong>.</p>
+<h3 id="odobrit">Одобрить <a id="approve"></a></h3>
+<p>Утверждение другой учетной записи для расходования ваших средств — это первый шаг в процессе передачи третьей стороне. Владелец токена может указать другую учетную запись и любое произвольное количество токенов, которое он может потратить от имени владельца. Владельцу не нужно, чтобы все его средства были одобрены для использования другими; в ситуации, когда средств недостаточно, утвержденный счет может потратить до утвержденной суммы с баланса владельца.</p>
+<p>Когда учетная запись несколько раз вызывает «утвердить», утвержденное значение просто перезаписывает любое существующее значение, которое было утверждено в прошлом. По умолчанию утвержденное значение между любыми двумя учетными записями равно «0», и пользователь всегда может вызвать подтверждение для «0», чтобы отозвать доступ к своим средствам с другой учетной записи.</p>
+<p>Чтобы хранить утверждения в нашем контракте, нам нужно использовать немного причудливую <code>HashMap</code>.</p>
+<p>Поскольку каждая учетная запись может иметь разную сумму, одобренную для использования любой другой учетной записью, нам нужно использовать кортеж в качестве нашего ключа, который просто указывает на значение баланса. Вот пример того, как это будет выглядеть:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Balances that are spendable by non-owners: (owner, spender) -&gt; allowed
+</span><span>    allowances</span><span style="color:#bfbab0cc;">: </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap&lt;(AccountId, AccountId), Balance&gt;,
+</span><span>}
+</span></code></pre>
+<p>Здесь мы определили кортеж для представления <code>(владелец, транжира)</code>, чтобы мы могли посмотреть, сколько «расходующий» может потратить из баланса «владельца», используя <code>AccountId</code> в этом кортеже. Помните, что нам нужно будет снова создать функцию <code>allowance_of_or_zero</code>, которая поможет нам получить разрешение учетной записи, когда она не инициализирована, и функцию-получатель, называемую <code>allowance</code>, для поиска текущего значения для любой пары учетных записей.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">/// Approve the passed AccountId to spend the specified amount of tokens
+</span><span style="font-style:italic;color:#5c6773;">/// on the behalf of the message&#39;s sender.
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)] 
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">approve</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">spender</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{</span><span style="font-style:italic;color:#5c6773;">/* --snip-- */</span><span>}
+</span></code></pre>
+<p>Когда вы вызываете функцию «одобрить», вы просто вставляете указанное «значение» в хранилище. «Владелец» всегда является «self.env().caller()», гарантируя, что вызов функции всегда авторизован.</p>
+<h3 id="perevod-iz">Перевод из <a id="transfer-from"></a></h3>
+<p>Наконец, после того как мы настроили одобрение для одной учетной записи расходов от имени другой, нам нужно создать специальную функцию «transfer_from», которая позволяет утвержденному пользователю переводить эти средства.</p>
+<p>Как упоминалось ранее, мы воспользуемся частной функцией <code>transfer_from_to</code>, чтобы выполнить большую часть нашей логики передачи. Все, что нам нужно, это снова представить логику <em>authorization</em>.</p>
+<p>Так что же значит иметь право вызывать эту функцию?</p>
+<ol>
+<li>У <code>self.env().caller()</code> должны быть определенные возможности для расходования средств со счета <code>from</code>.</li>
+<li>Надбавка не должна быть меньше стоимости, которую пытаются перевести.</li>
+</ol>
+<p>В коде это легко представить так:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> allowance </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">allowance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>from</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">if</span><span> allowance </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false
+</span><span>}
+</span><span style="font-style:italic;color:#5c6773;">/* --snip-- */
+</span><span style="color:#f29718;">true
+</span></code></pre>
+<p>Опять же, мы выходим раньше и возвращаем false, если наша авторизация не проходит.</p>
+<p>Однако, если все выглядит хорошо, мы просто «вставляем» обновленный допуск в HashMap «разрешения» (<code>let new_allowance = Allowance - value</code>) и вызываем «transfer_from_to» между указанными учетными записями «from» и «to». .</p>
+<h2 id="bud-ostorozhen">Будь осторожен! <a id="be-careful"></a></h2>
+<p>Если вы слишком быстро проясните логику этой функции, вы можете внести ошибку в свой смарт-контракт. Помните, что при вызове <code>transfer_from</code>, <code>self.env().caller()</code> и учетная запись <code>from</code> используются для поиска текущего пособия, но функция <code>transfer_from</code> вызывается между <code>from</code> и <code>to </code>учетная запись указана.</p>
+<p>При вызове <code>transfer_from</code> в игре задействованы три переменные учетной записи, и вы должны убедиться, что используете их правильно! Надеюсь, наш тест уловит любую вашу ошибку.</p>
+<h2 id="tvoia-ochered">Твоя очередь! <a id="your-turn"></a></h2>
+<p>Вы почти там! Это последняя часть контракта токена ERC20.</p>
+<p>Следуйте «ДЕЙСТВИЯМ» в шаблоне контракта, чтобы завершить внедрение ERC20.</p>
+<p>Не забудьте запустить <code>cargo +nightly test</code>, чтобы проверить свою работу.</p>
+<p>{% tabs %}
+{% tab title=&quot;🔨Starting Point&quot; %}</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">cfg_attr</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;std&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> no_std)]
+</span><span>
+</span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">contract</span><span>]
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">erc20 </span><span>{
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;ink-as-dependency&quot;</span><span>))]
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// The total supply.
+</span><span>        total_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// The balance of each user.
+</span><span>        balances</span><span style="color:#bfbab0cc;">: </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap&lt;AccountId, Balance&gt;,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// Approval spender on behalf of the message&#39;s sender.
+</span><span>        allowances</span><span style="color:#bfbab0cc;">: </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap&lt;(AccountId, AccountId), Balance&gt;,
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(event)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Transfer </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        from</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;AccountId&gt;,
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        to</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;AccountId&gt;,
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        value</span><span style="color:#bfbab0cc;">:</span><span> Balance,
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(event)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Approval </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        owner</span><span style="color:#bfbab0cc;">:</span><span> AccountId,
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        spender</span><span style="color:#bfbab0cc;">:</span><span> AccountId,
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        value</span><span style="color:#bfbab0cc;">:</span><span> Balance,
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">initial_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> caller </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>env()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> balances </span><span style="color:#f29668;">= </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(caller</span><span style="color:#bfbab0cc;">,</span><span> initial_supply)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>env()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">emit_event</span><span>(Transfer {
+</span><span>                from</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>                to</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(caller)</span><span style="color:#bfbab0cc;">,
+</span><span>                value</span><span style="color:#bfbab0cc;">:</span><span> initial_supply</span><span style="color:#bfbab0cc;">,
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>                total_supply</span><span style="color:#bfbab0cc;">:</span><span> initial_supply</span><span style="color:#bfbab0cc;">,
+</span><span>                balances</span><span style="color:#bfbab0cc;">,
+</span><span>                allowances</span><span style="color:#bfbab0cc;">: </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">total_supply</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>total_supply
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">balance_of</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>owner)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">approve</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">spender</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Record the new allowance.
+</span><span>            </span><span style="color:#ff7733;">let</span><span> owner </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>allowances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>((owner</span><span style="color:#bfbab0cc;">,</span><span> spender)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Notify offchain users of the approval and report success.
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">emit_event</span><span>(Approval {
+</span><span>                owner</span><span style="color:#bfbab0cc;">,
+</span><span>                spender</span><span style="color:#bfbab0cc;">,
+</span><span>                value</span><span style="color:#bfbab0cc;">,
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f29718;">true
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">allowance</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">spender</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">allowance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>owner</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>spender)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">transfer_from</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">from</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Ensure that a sufficient allowance exists.
+</span><span>            </span><span style="color:#ff7733;">let</span><span> caller </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let</span><span> allowance </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">allowance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>from</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>caller)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">if</span><span> allowance </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>                </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Decrease the value of the allowance and transfer the tokens.
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>allowances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>((from</span><span style="color:#bfbab0cc;">,</span><span> caller)</span><span style="color:#bfbab0cc;">,</span><span> allowance </span><span style="color:#f29668;">-</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">transfer_from_to</span><span>(from</span><span style="color:#bfbab0cc;">,</span><span> to</span><span style="color:#bfbab0cc;">,</span><span> value)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">transfer</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">transfer_from_to</span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> to</span><span style="color:#bfbab0cc;">,</span><span> value)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer_from_to</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">from</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> from_balance </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>from)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">if</span><span> from_balance </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>                </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Update the sender&#39;s balance.
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(from</span><span style="color:#bfbab0cc;">,</span><span> from_balance </span><span style="color:#f29668;">-</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Update the receiver&#39;s balance.
+</span></code></pre>
+<p>{% endtab %}</p>
+<p>{% tab title=&quot;✅Potential Solution&quot; %}</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">cfg_attr</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;std&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> no_std)]
+</span><span>
+</span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">contract</span><span>(version </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;0.1.0&quot;</span><span>)]
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">erc20 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">use </span><span>ink_core</span><span style="color:#f29668;">::</span><span>storage</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// The total supply.
+</span><span>        total_supply</span><span style="color:#bfbab0cc;">: </span><span>storage</span><span style="color:#f29668;">::</span><span>Value&lt;Balance&gt;,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// The balance of each user.
+</span><span>        balances</span><span style="color:#bfbab0cc;">: </span><span>storage</span><span style="color:#f29668;">::</span><span>HashMap&lt;AccountId, Balance&gt;,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// Approval spender on behalf of the message&#39;s sender.
+</span><span>        allowances</span><span style="color:#bfbab0cc;">: </span><span>storage</span><span style="color:#f29668;">::</span><span>HashMap&lt;(AccountId, AccountId), Balance&gt;,
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(event)]
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Transfer </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        from</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;AccountId&gt;,
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        to</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;AccountId&gt;,
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        value</span><span style="color:#bfbab0cc;">:</span><span> Balance,
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(event)]
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Approval </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        owner</span><span style="color:#bfbab0cc;">:</span><span> AccountId,
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        spender</span><span style="color:#bfbab0cc;">:</span><span> AccountId,
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(topic)]
+</span><span>        value</span><span style="color:#bfbab0cc;">:</span><span> Balance,
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">initial_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance) {
+</span><span>            </span><span style="color:#ff7733;">let</span><span> caller </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>total_supply</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(initial_supply)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(caller</span><span style="color:#bfbab0cc;">,</span><span> initial_supply)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">emit_event</span><span>(Transfer {
+</span><span>                from</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>                to</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(caller)</span><span style="color:#bfbab0cc;">,
+</span><span>                value</span><span style="color:#bfbab0cc;">:</span><span> initial_supply</span><span style="color:#bfbab0cc;">,
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">total_supply</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="color:#f29668;">*</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>total_supply
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">balance_of</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>owner)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">approve</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">spender</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> owner </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>allowances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>((owner</span><span style="color:#bfbab0cc;">,</span><span> spender)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">emit_event</span><span>(Approval {
+</span><span>                owner</span><span style="color:#bfbab0cc;">,
+</span><span>                spender</span><span style="color:#bfbab0cc;">,
+</span><span>                value</span><span style="color:#bfbab0cc;">,
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f29718;">true
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">allowance</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">spender</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">allowance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>owner</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>spender)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer_from</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">from</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> caller </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let</span><span> allowance </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">allowance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>from</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>caller)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">if</span><span> allowance </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>                </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false
+</span><span>            }
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>allowances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>((from</span><span style="color:#bfbab0cc;">,</span><span> caller)</span><span style="color:#bfbab0cc;">,</span><span> allowance </span><span style="color:#f29668;">-</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">transfer_from_to</span><span>(from</span><span style="color:#bfbab0cc;">,</span><span> to</span><span style="color:#bfbab0cc;">,</span><span> value)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> from </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">transfer_from_to</span><span>(from</span><span style="color:#bfbab0cc;">,</span><span> to</span><span style="color:#bfbab0cc;">,</span><span> value)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer_from_to</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">from</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> from_balance </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>from)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">if</span><span> from_balance </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>                </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false
+</span><span>            }
+</span><span>            </span><span style="color:#ff7733;">let</span><span> to_balance </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>to)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(from</span><span style="color:#bfbab0cc;">,</span><span> from_balance </span><span style="color:#f29668;">-</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(to</span><span style="color:#bfbab0cc;">,</span><span> to_balance </span><span style="color:#f29668;">+</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">emit_event</span><span>(Transfer {
+</span><span>                from</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(from)</span><span style="color:#bfbab0cc;">,
+</span><span>                to</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(to)</span><span style="color:#bfbab0cc;">,
+</span><span>                value</span><span style="color:#bfbab0cc;">,
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f29718;">true
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="color:#f29668;">*</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(owner)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">0</span><span>)
+</span><span>        }
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

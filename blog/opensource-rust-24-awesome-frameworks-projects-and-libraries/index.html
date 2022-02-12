@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust с открытым исходным кодом: 24 потрясающих фреймворка, проектов и библиотек | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#freimvorki-veb-razrabotki-dlia-rust">Фреймворки веб-разработки для Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#rocket"><small>- Rocket</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#actix-web"><small>- Actix Web</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#tis"><small>- Тис</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#zolia"><small>- Золя</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#deformatsiia"><small>- Деформация</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#razrabotka-igr">Разработка игр</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#bevi"><small>- Беви</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#ametist"><small>- Аметист</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#ggez"><small>- ggez</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#operatsionnye-sistemy">Операционные системы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#redoks"><small>- Редокс</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#intermezzos"><small>- intermezzOS</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#tesei"><small>- Тесей</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#razrabotka-graficheskogo-interfeisa">Разработка графического интерфейса</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#druid"><small>- Друид</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#zamorozhennyi"><small>- Замороженный</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#nabor-instrumentov-dlia-orbital-nykh-vidzhetov"><small>- Набор инструментов для орбитальных виджетов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#tel-tsa"><small>- Тельца</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#blokchein">Блокчейн</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#openethereum"><small>- OpenEthereum</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#maiak"><small>- Маяк</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#parity-technologies-polkadot-i-substrate"><small>- Parity Technologies: Polkadot и Substrate</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#drugie-proekty">Другие проекты</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#servoprivod"><small>- Сервопривод</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#swc"><small>- swc</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#riushi"><small>- Рюши</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#sumasshedshii"><small>- Сумасшедший</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#zvezdolet"><small>- Звездолет</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#meilisearch"><small>- MeiliSearch</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/opensource-rust-24-awesome-frameworks-projects-and-libraries/#est-chto-dobavit">Есть что добавить?</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust с открытым исходным кодом: 24 потрясающих фреймворка, проектов и библиотек</h1>
+
+<p><a href="https://serokell.io/blog/open-source-rust">Перевод</a> | Автор оригинала: Gints Dreimanis</p>
+<p>У Rust очень живая и быстро развивающаяся экосистема с открытым исходным кодом, в которой множество участников работают над массой потрясающих проектов.</p>
+<p>И если вы спрашиваете - что я могу построить в Rust? Ответ почти на все.</p>
+<p>В этой статье будут представлены некоторые библиотеки, фреймворки и репозитории Rust с открытым исходным кодом, которые могут быть полезны для изучения или использования в вашем собственном проекте.</p>
+<p>Для вашего удобства я разделил их на такие области, как веб-разработка, разработка игр, блокчейн и другие. Давайте копаться!</p>
+<h2 id="freimvorki-veb-razrabotki-dlia-rust">Фреймворки веб-разработки для Rust</h2>
+<p><img src="/imgs/posts/e2351210_01.jpg" alt="Веб-разработка на Rust" /></p>
+<p>Можете ли вы создать веб-приложение на Rust? Определенно!</p>
+<p>Rust имеет несколько чрезвычайно быстрых веб-фреймворков - Rocket, Actix Web и Yew - и вы можете использовать ту, которая соответствует вашим потребностям и предпочтениям. </p>
+<h3 id="rocket">Rocket</h3>
+<p>Rocket - самый доступный веб-фреймворк в экосистеме Rust для новичков. Он легко настраивается и помогает быстро запустить новое приложение. В то же время он позволяет избежать множества ненужных шаблонов. Rocket также имеет множество включенных функций, а это означает, что вам не нужно уходить далеко от фреймворка, чтобы создать все, что вам нужно.</p>
+<p>В отличие от Actix Web, фреймворк работает на ночном Rust - «экспериментальной» версии языка. </p>
+<h3 id="actix-web">Actix Web</h3>
+<p>Actix Web обычно считается более производительным и стабильным, чем Rocket. Внизу он работает с моделью актера, используемой в Erlang и Akka.</p>
+<p>В отличие от Rocket, в нем меньше «батарей в комплекте», а это означает, что вам, скорее всего, придется использовать сторонние библиотеки для дополнительной функциональности.</p>
+<h3 id="tis">Тис</h3>
+<p>Yew - это фреймворк Rust для создания веб-приложений с помощью WebAssembly. Среди его основных преимуществ он перечисляет компонентную структуру, такую как React и Elm, выдающуюся производительность благодаря поддержке многопоточности и совместимость с JavaScript.</p>
+<p>На данный момент он не готов к производству, но должен быть отличным выбором для сторонних проектов и внутреннего инструментария, особенно если вы хотите работать с WASM.</p>
+<h3 id="zolia">Золя</h3>
+<p>Если вам нужно что-то быстрое и простое для обслуживания статического веб-сайта, Zola - фантастический инструмент для создания быстрых и масштабируемых веб-страниц без каких-либо других зависимостей или раздувания JS.</p>
+<h3 id="deformatsiia">Деформация</h3>
+<p>Warp - это фреймворк для веб-серверов, написанный на Rust. По сравнению с Rocket и Actix, он довольно тонкий для веб-фреймворка и предоставит вам только базовую функциональность из коробки.</p>
+<h2 id="razrabotka-igr">Разработка игр</h2>
+<p><img src="/imgs/posts/e2351210_02.jpg" alt="Разработка игры на Rust" /></p>
+<p>Rust уникален для разработки игр по той же причине, что и C++: он предсказуемо высокопроизводителен. Вот некоторые из движков, которые вы можете использовать для создания собственной игры на Rust.</p>
+<h3 id="bevi">Беви</h3>
+<p>Два основных игровых движка Rust - это Bevy и Amethyst. Среди них Беви новее и круче. Это простой движок, управляемый данными, и по сути его можно назвать Amethyst 2.0, поскольку он во многом вдохновлен им.</p>
+<p>Чтобы узнать больше о Беви, вы можете почитать книгу Беви.</p>
+<h3 id="ametist">Аметист</h3>
+<p>Аметист является более зрелым из двух, и поэтому он имеет больше функций, которые могут вам понадобиться для крупномасштабного проекта, и лучшую интеграцию со сторонними библиотеками. Но Беви быстро догоняет. Если вы ищете движок для своего нового проекта, я бы порекомендовал изучить их оба и посмотреть, какой из них вам больше нравится.</p>
+<h3 id="ggez">ggez</h3>
+<p>Если вы ищете что-то простое для начала, ggez - это легкая кроссплатформенная игровая платформа для создания 2D-игр с минимальным трением.</p>
+<p>Если вы хотите узнать больше о разработке игр на Rust, ознакомьтесь с разделом «Мы уже играем?»</p>
+<h2 id="operatsionnye-sistemy">Операционные системы</h2>
+<p><img src="/imgs/posts/e2351210_03.jpg" alt="Операционные системы Rust" /></p>
+<p>Rust - отличная альтернатива C при разработке операционных систем, поскольку он предлагает тот же уровень производительности, заботясь о безопасности памяти. Собственно, разработчики изучают возможность добавления Rust в ядро Linux, и Microsoft тоже экспериментирует с этим.</p>
+<p>Вот несколько операционных систем с открытым исходным кодом, написанных исключительно на Rust:</p>
+<h3 id="redoks">Редокс</h3>
+<p>Redox - это операционная система, написанная на Rust, которая использует инновации Rust для создания современного микроядра.</p>
+<h3 id="intermezzos">intermezzOS</h3>
+<p>intermezzOS - это обучающая операционная система, специально ориентированная на знакомство с концепциями системного программирования опытных разработчиков из других областей программирования.</p>
+<h3 id="tesei">Тесей</h3>
+<p>Тесей - это новая ОС, написанная на Rust, которая представляет новую структуру ОС и утверждает, что предотвращает явление разлива состояния, которое происходит, когда состояние одного объекта постоянно изменяется в результате взаимодействия с другим.</p>
+<p>Здесь есть о чем почитать - вот статья по проекту. </p>
+<h2 id="razrabotka-graficheskogo-interfeisa">Разработка графического интерфейса</h2>
+<p><img src="/imgs/posts/e2351210_04.jpg" alt="Разработка графического интерфейса на Rust" /></p>
+<p>Хотя Rust не слишком известен своей способностью создавать увлекательные пользовательские интерфейсы, все же существует множество хороших библиотек для создания графических интерфейсов.</p>
+<h3 id="druid">Друид</h3>
+<p>Druid - это экспериментальный набор инструментов пользовательского интерфейса для Rust, ориентированный на создание простого и безупречного пользовательского интерфейса. Он ориентирован на данные и вдохновлен современными фреймворками, такими как Flutter, SwiftUI и другими.</p>
+<p>Чтобы узнать больше об этом, вы можете почитать книгу Друидов.</p>
+<h3 id="zamorozhennyi">Замороженный</h3>
+<p>Iced - это кроссплатформенная библиотека графического интерфейса, ориентированная на простоту и безопасность типов. Он во многом вдохновлен Вязом. Хотя сейчас это все еще экспериментально, это отличный вариант для создания графического интерфейса прямо в Rust для вашего стороннего проекта.</p>
+<h3 id="nabor-instrumentov-dlia-orbital-nykh-vidzhetov">Набор инструментов для орбитальных виджетов</h3>
+<p>Orbital Widget Toolkit - это кроссплатформенный набор инструментов для создания масштабируемых пользовательских интерфейсов с помощью Rust. Он ориентирован на скорость, простоту использования и кроссплатформенную совместимость.</p>
+<h3 id="tel-tsa">Тельца</h3>
+<p>Tauri - это фреймворк для создания настольных приложений для Windows, Linux и macOS. С его помощью вы можете использовать любую интерфейсную платформу, которая компилируется в HTML / CSS / JS для создания пользовательского интерфейса, и Rust в качестве бэкэнда.</p>
+<p>Если вы хотите узнать больше о возможностях разработки графического интерфейса в Rust, вот большой пост, посвященный большинству библиотек.</p>
+<h2 id="blokchein">Блокчейн</h2>
+<p><img src="/imgs/posts/e2351210_05.jpg" alt="Блокчейн Rust" /></p>
+<h3 id="openethereum">OpenEthereum</h3>
+<p>Основная цель OpenEthereum - быть самым быстрым, легким и безопасным клиентом Ethereum. Он разработан на Rust и утверждает, что предоставляет базовую инфраструктуру, которая необходима для быстрых и надежных сервисов.</p>
+<h3 id="maiak">Маяк</h3>
+<p>Lighthouse - это клиент Ethereum 2.0 с открытым исходным кодом, написанный на Rust и поддерживаемый Sigma Prime.</p>
+<h3 id="parity-technologies-polkadot-i-substrate">Parity Technologies: Polkadot и Substrate</h3>
+<p>Parity Technologies работает над созданием блокчейн-инфраструктуры для децентрализованной сети.</p>
+<p>Среди его проектов - Substrate, модульная структура для разработки блокчейнов, и Polkadot, сеть блокчейнов. Оба этих проекта активно используют Rust в своих реализациях.</p>
+<h2 id="drugie-proekty">Другие проекты</h2>
+<p><img src="/imgs/posts/e2351210_06.jpg" alt="Другие проекты Rust" /></p>
+<p>Вот некоторые из проектов, которые не попадают ни в одну из категорий. Надеюсь, вы найдете что-то классное в этой коллекции «вещей». :)</p>
+<h3 id="servoprivod">Сервопривод</h3>
+<p>Servo - это прототип веб-движка, написанный на Rust. Это результат работы Mozilla над созданием нового движка браузера с открытым исходным кодом. В 2020 году Servo перешла от Mozilla к Linux Foundation.</p>
+<p>Предполагается, что Servo более безопасен, чем браузеры, написанные на C++, из-за гарантий безопасности памяти Rust, которые уменьшают количество уязвимостей.</p>
+<h3 id="swc">swc</h3>
+<p>swc - это сверхбыстрый компилятор JavaScript / TypeScript. По сравнению с Babel, он был протестирован на увеличение скорости компиляции как минимум в 18 раз.</p>
+<h3 id="riushi">Рюши</h3>
+<p>Хотите запускать все крутые Flash-игры, для которых Adobe недавно отключила поддержку? Вы можете использовать Ruffle, эмулятор Flash-плеера, написанный на Rust.</p>
+<p>Вы можете попробовать это на ruffle.rs.</p>
+<h3 id="sumasshedshii">Сумасшедший</h3>
+<p>Lunatic - экспериментальная платформа, которая использует экземпляры WASM в качестве субъектов для структурирования выполнения. Он во многом вдохновлен Erlang.</p>
+<p>Предполагается, что он объединяет хорошие стороны WASM и Erlang, позволяя создавать системы на основе акторов, которые одновременно являются отказоустойчивыми и невероятно быстрыми.</p>
+<h3 id="zvezdolet">Звездолет</h3>
+<p>Starship - это быстрая, настраиваемая и интеллектуальная подсказка для тех, кто хочет сделать свою оболочку круче.</p>
+<h3 id="meilisearch">MeiliSearch</h3>
+<p>MeiliSearch - это мощная, быстрая, простая в использовании и настраиваемая поисковая система, которая также допускает опечатки. А теперь много прилагательных! Вы можете настроить его для своего собственного проекта вместо нестандартного и, возможно, менее производительного решения.</p>
+<h2 id="est-chto-dobavit">Есть что добавить?</h2>
+<p>Как видите, экосистема огромна, и есть что исследовать. Я определенно не мог охватить все. Если вы знаете о проекте, который заслуживает быть здесь, не бойтесь сообщить нам об этом в Твиттере!</p>
+<p>Если вы хотите узнать больше о Rust, я предлагаю перейти в раздел нашего блога, посвященный Rust. Развлекайся! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

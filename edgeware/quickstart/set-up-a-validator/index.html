@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Настройка валидатора | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-validator/#trebovaniia">Требования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-validator/#predposylki">Предпосылки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-validator/#onbording">Онбординг</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-validator/#nizhe-privedeny-primery-vsekh-komand"><small>- Ниже приведены примеры всех команд:</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-validator/#proverka">Проверка</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Настройка валидатора</h1>
+
+<p>Добро пожаловать в официальное подробное руководство Edgeware по проверке. Мы рады, что вы заинтересованы в проверке Edgeware, и мы сделаем все возможное, чтобы предоставить подробную документацию по описанному ниже процессу. Как всегда, обращайтесь в <a href="https://discord.gg/CJRfb3">Discord</a> или <a href="https://t.me/heyedgeware">Telegram</a>, если у вас есть вопросы о проекте.</p>
+<p>Этот документ содержит всю информацию, необходимую для начала проверки в Edgeware с использованием <strong>интерфейса командной строки</strong>. Мы начнем с настройки своего узла и перейдем к управлению ключами и мониторингу. Для начала мы будем использовать следующую терминологию ключей для руководства:</p>
+<ul>
+<li><em><strong>stash</strong></em> - пара ключей тайника, где должна находиться большая часть ваших средств. При необходимости его можно хранить в холодильнике.</li>
+<li><em><strong>controller</strong></em> — контроллер — это пара ключей, которая будет управлять настройками вашего валидатора. Он должен иметь меньший баланс, например. 10-100 ЭДГ</li>
+<li><em><strong>session</strong></em> — 4 пары ключей сеанса — это горячие клавиши, которые хранятся на вашем узле валидатора. Им не нужны балансы.</li>
+</ul>
+<h2 id="trebovaniia">Требования</h2>
+<ol>
+<li>Вам понадобится 6 пар ключей: «тайник» (ed25519 или sr25519), «контроллер» (ed25519 или sr25519) и 4 «сеанса» (3 ed25519 и 1 sr25519). Вы можете сгенерировать их с помощью утилиты <code>subkey</code>. В примерах мы будем использовать производные ключи. Если вы не используете производные ключи, просто введите начальное число/мнемонику, необходимые для подписи этих учетных записей.</li>
+<li>Ключи ауры (ed25519)</li>
+<li>Дедушкины ключи (ed25519)</li>
+<li>Ключи ImOnline (ed25519)</li>
+<li>Ключи обнаружения полномочий (sr25519)</li>
+<li>Вам потребуется как минимум экзистенциальный баланс (1 000 000 000 000 000 единиц токенов, т.е. 0,0001 EDG) как на счете «тайник», так и на счете «контроллер», а также баланс, необходимый для отправки транзакций с этих счетов.</li>
+<li>Вам понадобится активный, полностью синхронизированный узел Edgeware, работающий с флагом <code>--validator</code>, который установил ключи сеанса до или после завершения процесса подключения.</li>
+</ol>
+<h2 id="predposylki">Предпосылки</h2>
+<ul>
+<li>
+<p>Сначала следуйте инструкциям в <a href="https://github.com/hicommonwealth/edgeware-node/blob/master/README.md">README.md</a> по установке и запуску <code>edgeware-node</code>.</p>
+</li>
+<li>
+<p>Загрузите из исходного кода или из реестра <code>npm</code> <code>edgeware-cli</code>, расположенный <a href="https://github.com/hicommonwealth/edgeware-cli/">здесь</a>.</p>
+<p>Примечание. <code>edgeware-cli</code> имеет несколько зависимостей <a href="https://www.npmjs.com/package/edgeware-cli">просмотреть здесь</a></p>
+</li>
+<li>
+<p>Также установите <code>subkey</code>, если вам нужно сгенерировать новые пары ключей:</p>
+<p>Cargo install --force --git <a href="https://github.com/paritytech/substrate">https://github.com/paritytech/substrate</a> подраздел</p>
+</li>
+</ul>
+<p>С этого момента мы предполагаем, что вы знакомы с использованием <code>subkey</code>, если это не так, вы можете прочитать о командах <code>subkey</code> [здесь](https://github.com/paritytech/substrate/blob /master/bin/utils/subkey/README.adoc).</p>
+<h2 id="onbording">Онбординг</h2>
+<ol>
+<li>
+<p>Сначала создайте пары ключей <em><strong>stash</strong></em> и <em><strong>controller</strong></em>, используя <code>subkey</code>. Вы также можете <strong>опционально</strong> ***создать 4 сеансовых ключа. Создайте пары ключей ED25519, используя флаг <code>-e</code> с подразделом.</p>
+</li>
+<li>
+<p>Затем вам нужно будет связать пару ключей <em><strong>stash</strong></em> с парой ключей <em><strong>controller</strong></em>. Используя CLI и локальный узел, вы запустите:</p>
+</li>
+<li><pre style="background-color:#0f1419;color:#bfbab0;"><code><span>edge -s &lt;STASH_SEED&gt; staking bond &lt;CONTROLLER_B58_ADDRESS&gt; &lt;AMOUNT&gt; &lt;REWARD_DESTINATION&gt;
+</span></code></pre>
+</li>
+<li>
+<p>Семя <em><strong>stash</strong></em> должно быть мнемоническим кодом + путем вывода для вашей пары ключей <em><strong>stash</strong></em>.</p>
+</li>
+<li>
+<p>Адрес <em><strong>контроллера</strong></em> должен быть открытым ключом в кодировке Base58 (начинается с 5)</p>
+</li>
+<li>
+<p>Баланс <em><strong>сумма</strong></em> должен быть целым числом в единицах EDG.</p>
+</li>
+<li>
+<p><em><strong>место назначения вознаграждения</strong></em> — это место, куда будут направляться вознаграждения; варианты: <code>тайник</code>, <code>контроллер</code> и <code>стейкинг</code> (где ставка добавляет вознаграждение к сумме ставки)</p>
+</li>
+<li>
+<p>Затем вам нужно будет установить настройки валидатора из вашей учетной записи <em><strong>controller</strong></em>. Используя CLI и локальный узел, вы запустите:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>edge -s &lt;CONTROLLER_SEED&gt; staking validate &lt;COMMISSION_PERCENTAGE&gt;
+</span></code></pre>
+</li>
+<li>
+<p>Семя <em><strong>controller</strong></em> должно быть мнемоническим кодом + путем вывода для вашей пары ключей <em><strong>controller</strong></em></p>
+</li>
+<li>
+<p><em><strong>Порог отмены ставок</strong></em> – это количество раз, когда ваш узел отключался от сети, прежде чем он отключился.</p>
+</li>
+<li>
+<p><em><strong>процент комиссии</strong></em> – это процент вознаграждения, который вы</p>
+</li>
+<li>
+<p>Затем вам нужно будет установить ключи <em><strong>session</strong></em> из пары ключей <em><strong>controller</strong></em>. Используя CLI и локальный узел, вы запустите:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>edge -s &lt;CONTROLLER_SEED&gt; session setKeys &lt;OUTPUT_FROM_ROTATE_KEYS&gt; 0x
+</span></code></pre>
+</li>
+<li>
+<p>Семя <em><strong>controller</strong></em> должно быть мнемоническим кодом + путем вывода для вашей пары ключей <em><strong>controller</strong></em></p>
+</li>
+<li>
+<p>Открытые ключи <em><strong>session</strong></em> должны быть объединены из выходных данных команды rotate keys rpc.</p>
+</li>
+</ol>
+<h3 id="nizhe-privedeny-primery-vsekh-komand">Ниже приведены примеры всех команд:</h3>
+<p>Далее мы загрузили и скомпилировали <code>edgeware-cli</code> из исходного кода, чтобы получить двоичный файл <code>/bin/edge</code>. Вы можете использовать <code>tsc</code>, если вы компилируете из исходников.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>edge -s &quot;axis service this custom because top clap sock weekend tenant vehicle merge&quot; staking bond 10 stash // bond 10 EDG (10 * 10^18 currency units)
+</span><span>
+</span><span>edge -s &quot;axis service this custom because top clap sock weekend tenant vehicle merge&quot; session setKeys 0fea2a18acbd19e4a21c3ae29ecefee61d32d46dc4b9a9c5ccecbbbdff7b0a7e8e55bd3035d18f40d8dd1b5d940c47066ddb6f37ec7261d69121e8353d612d1410f7b7f954b3225b148c5de650e0bc3c941ae65e1557c3805c3b0df37285c3892cc2f99d97254ffdf1640c29dff2c6272dbf4dc8dedb46e43ba0bd12ab269b3c 0x // set session keys to the 4 concatentated keys submitted
+</span><span>
+</span><span>edge -s &quot;axis service this custom because top clap sock weekend tenant vehicle merge&quot; staking validate 10 // set validator preferences to 10% commission
+</span></code></pre>
+<h2 id="proverka">Проверка</h2>
+<p>Тестовая сеть v099 требует, чтобы валидаторы управляли 4 ключами проверки для модулей Aura, Grandpa, ImOnline и AuthorityDiscovery.</p>
+<ol>
+<li>Ключи ауры (ed25519)</li>
+<li>Дедушкины ключи (ed25519)</li>
+<li>Ключи ImOnline (ed25519)</li>
+<li>Ключи обнаружения полномочий (sr25519)</li>
+</ol>
+<p>Теперь во время запуска полной ноды для синхронизации или после нее вы можете приступить к настройке сеансовых ключей для ноды. Команда для вставки ключей и поворота ключей такая же, как и раньше. Чтобы чередовать новые ключи сеанса, выполните следующее, пока работает ваш узел:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl -H &#39;Content-Type: application/json&#39; --data &#39;{ &quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;method&quot;:&quot;author_rotateKeys&quot;, &quot;id&quot;:1 }&#39; 127.0.0.1:9933
+</span></code></pre>
+<p>Чтобы вставить существующие ключи сеанса, вы можете запустить для каждого ключа следующую команду во время работы вашего узла:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl -H &#39;Content-Type: application/json&#39; --data &#39;{ &quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;method&quot;:&quot;author_insertKey&quot;, &quot;params&quot;:[&quot;KEY_TYPE&quot;, &quot;SEED&quot;, &quot;PUBKEY_HEX&quot;],&quot;id&quot;:1 }&#39; localhost:9933
+</span></code></pre>
+<p>Четыре ключевых типа, которые вы будете вводить:</p>
+<ul>
+<li><code>аура</code> для ключей ауры</li>
+<li><code>гран</code> для дедушкиных ключей</li>
+<li><code>imon</code> для ключей ImOnline</li>
+<li><code>audi</code> для ключей AuthorityDiscovery</li>
+</ul>
+<p>После выполнения этих команд <code>curl</code> вы должны получить в качестве вывода из <code>stdout</code> открытые ключи, которые вы предоставили (или не предоставили) в строке JSON. Это также означает, что процесс был успешным! Теперь вы должны увидеть себя в списке новых/ожидающих проверки валидаторов, которые вступят в силу в будущих сеансах. В следующей эре (до 1 часа), если есть свободный слот, ваша нода станет активным валидатором. 
+Chetyre klyuchevykh tipa, kotoryye vy budete vvodit':</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

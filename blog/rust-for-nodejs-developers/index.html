@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust для разработчиков на Node.js | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-nodejs-developers/#sistema-tipov">Система типов</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-nodejs-developers/#staticheskaia-i-dinamicheskaia-tipizatsiia"><small>- Статическая и динамическая типизация</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-nodejs-developers/#sil-naia-i-slabaia-tipizatsiia"><small>- Сильная и слабая типизация</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-nodejs-developers/#izmenchivost">Изменчивость</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-nodejs-developers/#vozmozhnost-obnuleniia">Возможность обнуления</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-nodejs-developers/#otvet-rust-na-dopustimost-pustykh-znachenii"><small>- Ответ Rust на допустимость пустых значений</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-nodejs-developers/#reziume">Резюме</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust для разработчиков на Node.js</h1>
+
+<p><a href="https://developer.ibm.com/articles/rust-for-nodejs-developers/">Перевод</a> | Автор оригинала: Josh Hannaford</p>
+<p>Ключевые различия между JavaScript и Rust, объяснение</p>
+<p>Вы разработчик на Node.js или JavaScript, который интересуется языком программирования Rust, но не знаете, с чего начать? Любопытно, как вы можете перевести свои знания Node.js и JavaScript в «язык Rust». В этой статье я расскажу вам о некоторых из наиболее заметных различий между JavaScript и Rust и о том, как они соотносятся друг с другом, чтобы вы имели лучшее представление о том, чего ожидать, когда вы начнете использовать язык Rust.</p>
+<h2 id="sistema-tipov">Система типов</h2>
+<p>Давайте сначала выделим самое серьезное различие: систему типов. Для тех из вас, кто работает с JavaScript, а не с TypeScript, я знаю, что слух о системе типов может вызвать много беспокойства. Не волнуйтесь, система Rust - одна из самых простых и выразительных, с которыми мне когда-либо приходилось работать!</p>
+<p>Rust - статический язык со строгой типизацией, а JavaScript - динамический язык со слабой типизацией, поэтому давайте посмотрим, что это означает и как это влияет на ваш повседневный код!</p>
+<h3 id="staticheskaia-i-dinamicheskaia-tipizatsiia">Статическая и динамическая типизация</h3>
+<p>Статическая типизация просто означает, что все типы переменных должны быть известны во время компиляции, а не во время выполнения. Это означает, что значения в языках со статической типизацией не зависят от ввода пользователя, возможности изменения во время выполнения или чего-либо еще, неизвестного во время компиляции.</p>
+<p>Rust использует статическую типизацию, тогда как JavaScript использует динамическую типизацию. Давайте посмотрим, как это преобразовать в небольшой фрагмент кода:</p>
+<h4 id="javascript-dinamicheskii">JavaScript (динамический)</h4>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">let </span><span>a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">3 </span><span style="font-style:italic;color:#5c6773;">// a is a `number` type
+</span><span>a </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Hello, world!&quot; </span><span style="font-style:italic;color:#5c6773;">// This is perfectly valid, and a is now a `string`
+</span></code></pre>
+<h4 id="rust-static">Rust (Static)</h4>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let mut</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// a is now an `i32` value
+</span><span>a </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Hello, world!&quot;</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Compiler Error: The type cannot change at runtime.
+</span></code></pre>
+<p>Следует отметить один интересный момент, касающийся приведенного выше кода Rust: в отличие от других языков со статической типизацией, таких как C++ или Java, Rust на самом деле имеет более продвинутые возможности вывода типов. Это означает, что часто вам не нужно указывать тип переменной, кроме как в ваших структурах и определениях функций. Я думаю, что это хороший и сбалансированный подход: его легко понять любому, кто смотрит на сигнатуру функции, но человеку, реализующему функцию, не нужно беспокоиться о том, чтобы напечатать все в ней.</p>
+<p>Еще один момент, который я хотел бы затронуть, заключается в том, что в Rust действительно есть шаблон для работы с переменной, тип которой вы, возможно, захотите изменить в процессе выполнения функции. Например, если у вашей функции есть число, но вы хотите, чтобы это число было строкой для другой операции, вот как вы можете это сделать. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> num </span><span style="color:#f29668;">= </span><span style="color:#f29718;">10 </span><span style="color:#f29668;">* </span><span style="color:#f07178;">get_random_number</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// num is an `i32`
+</span><span style="color:#ff7733;">let</span><span> num </span><span style="color:#f29668;">=</span><span> num</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// num has been shadowed and is now a `String`
+</span></code></pre>
+<p>В Rust этот паттерн называется затенением. Вы увидите этот очень распространенный паттерн во многих кодовых базах Rust. Причина, по которой это работает, заключается в том, что внутри Rust по существу создает новую переменную каждый раз, когда вы используете ключевое слово let, поэтому ему все равно, имеет ли присваивание другой тип переменной перед ним. Что касается Rust, это просто еще одна новая переменная, как и все остальные.</p>
+<p>Теперь, когда мы рассмотрели, чем статическая типизация в Rust отличается от динамически типизированного JavaScript, давайте взглянем на возникающие различия между языками со строгой и слабой типизацией.</p>
+<h3 id="sil-naia-i-slabaia-tipizatsiia">Сильная и слабая типизация</h3>
+<p>Хотя сравнение между статической и динамической типизацией очевидно (типы либо известны во время компиляции, либо нет), сильная и слабая типизация немного более туманна, поскольку эти типы больше похожи на шкалу, по которой языки могут упасть. Это потому, что эти термины измеряют, насколько язык допускает неявные преобразования между одним типом и другим.</p>
+<p>Если язык более строго типизирован, то он допускает меньшее количество случаев неявных преобразований, чем язык с большим количеством экземпляров этих преобразований. Учитывая это определение, Rust занимает ОЧЕНЬ высокое место по шкале сильных сторон, поскольку существует только один экземпляр неявного преобразования, и к этому преобразованию можно получить доступ только при очень определенных обстоятельствах.</p>
+<p>С другой стороны, JavaScript занимает высокое место по слабой шкале, поскольку неявные преобразования происходят повсюду. На самом деле, знаете вы об этом или нет, каждая присваиваемая вами переменная имеет определенный элемент неявного преобразования. Это потому, что каждая объявленная вами переменная на самом деле является объектом с дополнительными свойствами, заданными средой выполнения JavaScript.</p>
+<p>Итак, как это повлияет на ваш код?</p>
+<p>Давайте посмотрим на два эквивалентных фрагмента кода на JavaScript и Rust.</p>
+<h4 id="javascript-slabyi">JavaScript (слабый)</h4>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// Implicitly converts num to a `string`
+</span><span style="color:#ff7733;">const </span><span>num </span><span style="color:#f29668;">= </span><span style="color:#f29718;">10 </span><span style="color:#f29668;">+ </span><span style="color:#c2d94c;">&quot;0&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Prints &quot;Num is a string with a value of 100&quot;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`Num is a ${</span><span style="color:#f29668;">typeof </span><span>num</span><span style="color:#c2d94c;">} with a value of ${</span><span>num</span><span style="color:#c2d94c;">}`</span><span>)
+</span></code></pre>
+<h4 id="rust-krepkaia">Rust (Крепкая)</h4>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">feature</span><span>(type_name_of_val)]
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>any</span><span style="color:#f29668;">::</span><span>type_name_of_val</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// No implicit conversion. You have to manually make 10 a `String` first
+</span><span style="color:#ff7733;">let</span><span> num </span><span style="color:#f29668;">= </span><span style="color:#f29718;">10.</span><span style="color:#f07178;">to_string</span><span>() </span><span style="color:#f29668;">+ </span><span style="color:#c2d94c;">&quot;0&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Prints &quot;Num is a std::string::String with a value of 100&quot;
+</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Num is a </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> with a value of </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">type_name_of_val</span><span>(num)</span><span style="color:#bfbab0cc;">,</span><span> num)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Как видно из приведенного выше кода, у JavaScript не было проблем с неявным преобразованием числа в строку. В Rust вы должны явно отметить, что вы преобразовываете 10 в строку перед добавлением фрагмента строки, содержащего «0».</p>
+<p>Хотя у каждого человека могут быть свои предпочтения, я лично предпочитаю иметь такую явность в моем коде, особенно при работе с более крупными базами кода, где вы не написали весь код самостоятельно. Эта ясность позволяет легче рассуждать о намерениях первоначального автора и предотвращать ошибки, например, задаваться вопросом, почему ваше число теперь равно 100, а не 10 после добавления 0.</p>
+<p>Теперь, когда мы рассмотрели некоторые различия в системах типов, мы рассмотрим еще одну очень важную тему - изменчивость.</p>
+<h2 id="izmenchivost">Изменчивость</h2>
+<p>Как вы знаете, в современном JavaScript есть три разных способа объявления переменной: </p>
+<ul>
+<li>let</li>
+<li>const</li>
+<li>var</li>
+</ul>
+<p>Хотя каждый из них работает по-разному, с целью обсуждения изменчивости я буду ссылаться только на let и const, поскольку и let, и var работают одинаково с точки зрения изменчивости.</p>
+<p>В Rust есть три способа объявить переменную: </p>
+<ul>
+<li>let</li>
+<li>let mut</li>
+<li>const</li>
+</ul>
+<p>Что касается изменчивости, все они работают по-разному. Глядя на различные варианты объявления переменной в Rust, довольно легко понять, что let mut объявляет изменяемую переменную, но если это так, в чем разница между let и const? Кроме того, почему вы должны использовать два слова, чтобы обозначить, что переменная должна быть изменяемой?</p>
+<p>Чтобы ответить на первый вопрос, вам нужно помнить, что Rust, в отличие от JavaScript, является компилируемым языком. Именно в этом заключается основное различие между let и const. Несмотря на то, что они оба неизменяемы, разница сводится к тому, когда переменная инициализируется (Примечание: я специально использую инициализированный здесь вместо объявленного).</p>
+<p>Константная переменная должна быть инициализирована во время компиляции, и каждое вхождение этой переменной фактически встроено в сайт, на который она ссылается. Хорошим примером этого является значение PI. Вероятно, вы захотите сохранить это значение во всем приложении и оставить его неизменным. С другой стороны, переменная let позволяет вам инициализировать ее переменной, известной только во время выполнения, такой как ввод пользователя. Хотя это отвечает на первый вопрос, вы все еще можете задаться вопросом, почему требуется больше усилий для создания изменяемой переменной вместо неизменяемой?</p>
+<p>Что ж, Rust во многом опирается на парадигму функционального программирования, и в чистом функциональном программировании каждое значение неизменяемо. Хотя это значительно увеличивает нагрузку на ЦП и потребление памяти, есть немало преимуществ, и хотя я не могу здесь перечислить их все, одно из самых больших преимуществ - это попытка рассуждать о параллельном / параллельном коде. Rust не следует чисто функциональному программированию, поэтому вы все равно можете объявить изменяемую переменную по соображениям производительности, но они хотят заставить вас задуматься о том, действительно ли вам нужно, чтобы эта переменная была изменяемой.</p>
+<p>Теперь давайте посмотрим на последнее существенное различие между Rust и JavaScript: допустимость значений NULL.</p>
+<h2 id="vozmozhnost-obnuleniia">Возможность обнуления</h2>
+<p>Известно, что изобретатель null, сэр Тони Хоар, сказал, что это была его «ошибка на миллиард долларов». Он называет это ошибкой, потому что, по его оценкам, за последние 40 лет пустые ссылки привели к «бесчисленным ошибкам, уязвимостям и системным сбоям…» на сумму более миллиарда долларов.</p>
+<p>Я уверен, что любой разработчик, использующий язык, допускающий пустые ссылки, в какой-то момент своей карьеры сталкивался с нулевым исключением. Я точно знаю! Однако в JavaScript это различие становится еще более запутанным, когда вы понимаете, что вам может быть передана не только переменная с нулевым значением, но и с неопределенной. Необходимость проверять оба этих экземпляра может быть невероятно запутанной и применяется только во время выполнения, что приводит к множеству экземпляров неудачного выполнения. К счастью, Rust не справляется с такой концепцией «ничто».</p>
+<h3 id="otvet-rust-na-dopustimost-pustykh-znachenii">Ответ Rust на допустимость пустых значений</h3>
+<p>В Rust есть два основных способа обработки потенциально нулевого значения:</p>
+<ul>
+<li>Тип Option<T> используется, когда это не обязательно ошибка из-за того, что там ничего не должно быть</li>
+<li>Тип Result&lt;T, E&gt; используется, когда это значение не существует.</li>
+</ul>
+<p>В следующем руководстве я покажу вам более подробно, как использовать эти шаблоны, но для быстрого примера, демонстрирующего разницу, давайте посмотрим, как это может работать при работе с API. Если конкретное поле объекта, возвращаемого из базы данных, может иметь значение NULL, вы можете использовать тип параметра для представления этой ситуации, но если вы вызываете API и ожидаете ответа, тогда вы должны использовать тип результата моделировать такое поведение.</p>
+<h2 id="reziume">Резюме</h2>
+<p>Хотя можно провести гораздо больше сравнений, я надеюсь, что теперь вы лучше понимаете, как основные языковые особенности Rust соотносятся с JavaScript! Я также надеюсь, что вы, возможно, не так робко попробуете Rust. Хотя к этому нужно привыкнуть, награда того стоит, и вы можете обнаружить, что в результате ваш код JavaScript станет еще лучше.</p>
+<p>Кроме того, следите за обновлениями в следующем посте, который будет учебным пособием, в котором будут рассмотрены некоторые из более низкоуровневых сравнений между языками путем создания API в Rust! В этом руководстве будут рассмотрены такие концепции, как кортежи, массивы, хэш-карты и манипуляции со строками! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

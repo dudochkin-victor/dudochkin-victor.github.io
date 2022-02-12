@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Коллекция и трэйты | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-ballot-contract/collection-and-traits/#kollektsii">Коллекции </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-ballot-contract/collection-and-traits/#cherty">Черты </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-ballot-contract/collection-and-traits/#tvoia-ochered">Твоя очередь! </a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Коллекция и трэйты</h1>
+
+<p>В этой части мы будем использовать структуры, созданные ранее, и напишем общедоступные функции для добавления и извлечения данных из нашего контракта.</p>
+<h2 id="kollektsii">Коллекции <a id="collections"></a></h2>
+<p>Для этого контракта мы собираемся хранить наших избирателей в HashMap с <code>AccountId</code> в качестве ключа и экземпляром <code>Voter</code> в качестве значения. HashMap можно импортировать из ящика ink_storage следующим образом:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Предложения будут храниться в коллекции «Vec», которую можно импортировать из ящика «ink_prelude». ink_prelude — это набор структур данных, которые работают с памятью контракта во время выполнения контракта. Вектор можно импортировать:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#ff7733;">use </span><span>ink_prelude</span><span style="color:#f29668;">::</span><span>vec</span><span style="color:#f29668;">::</span><span>Vec</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Векторы могут быть созданы так же, как HashMap. Новые объекты можно добавлять или ссылаться на них из вектора, используя:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#ff7733;">let</span><span> proposals</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;proposals&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// adding a new proposal
+</span><span>    proposals</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(
+</span><span>        Proposal{
+</span><span>            name</span><span style="color:#bfbab0cc;">:</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Proposal # 1&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            vote_count</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,
+</span><span>        })</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// returns the proposal at index 0 if exists else returns None
+</span><span>    </span><span style="color:#ff7733;">let</span><span> proposal </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>proposals</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(</span><span style="color:#f29718;">0</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Помните, что <code>vector.get</code> возвращает <code>Option</code>, а не фактический объект!</p>
+<h2 id="cherty">Черты <a id="traits"></a></h2>
+<p>Черта сообщает компилятору Rust о функциональности определенного типа и может использоваться совместно с другими типами. Подробнее о них можно прочитать <a href="https://doc.rust-lang.org/book/ch10-02-traits.html">здесь</a>. Прежде чем использовать настраиваемые структуры внутри хранилища «Бюллетень», необходимо реализовать определенные черты для структур «Избиратель» и «Предложение». Эти черты включают в себя:</p>
+<ul>
+<li><code>Отладка</code>: разрешает форматирование отладки в строках формата.</li>
+<li><code>Clone</code>: эта черта позволяет вам создать глубокую копию объекта.</li>
+<li><code>Копировать</code>: Черты копирования позволяют копировать значение поля.</li>
+<li><code>PackedLayout</code>: типы, которые можно сохранять и загружать из одной ячейки хранилища контрактов.</li>
+<li><code>SpreadLayout</code>: типы, которые можно сохранять и загружать из хранилища контрактов.</li>
+</ul>
+<p>Вы можете узнать больше об этих трейтах по <a href="https://doc.rust-lang.org/book/appendix-03-derivable-traits.html">здесь</a> и [здесь](https://paritytech.github.io /ink/ink_storage/traits/index.html). Эти черты реализуются с помощью атрибута <code>derive</code>:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Clone</span><span style="color:#bfbab0cc;">,</span><span> Copy</span><span style="color:#bfbab0cc;">,</span><span> Debug</span><span style="color:#bfbab0cc;">,</span><span> scale::Encode</span><span style="color:#bfbab0cc;">,</span><span> scale::Decode</span><span style="color:#bfbab0cc;">,</span><span> SpreadLayout</span><span style="color:#bfbab0cc;">,</span><span> PackedLayout</span><span style="color:#bfbab0cc;">,</span><span> scale_info::TypeInfo)]
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">XYZ </span><span>{
+</span><span>        ...
+</span><span>        ...
+</span><span>    }
+</span></code></pre>
+<h2 id="tvoia-ochered">Твоя очередь! <a id="your-turn"></a></h2>
+<p>Тебе надо:</p>
+<ul>
+<li>Создайте предложение Vec и избирателей HashMap в структуре голосования.</li>
+<li>Обновите конструктор, чтобы он инициализировал Vec предложений и HashMap избирателей. Также обновите HashMap избирателей, чтобы включить председателя в качестве избирателя.</li>
+<li>Создайте геттеры для обоих элементов хранилища.</li>
+<li>Напишите функцию <code>add_voter</code> для создания избирателя по заданному <code>AccountId</code> и вставьте его в HashMap избирателей.</li>
+<li>Напишите функцию <code>add_proposal</code>, которая создает объект <code>Proposal</code> и вставляет его в вектор предложений.</li>
+</ul>
+<p>Не забудьте запустить <code>cargo +nightly test</code>, чтобы проверить свою работу.</p>
+<p>{% tabs %}
+{% tab title=&quot;🔨Starting Point&quot; %}</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">cfg_attr</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;std&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> no_std)]
+</span><span>
+</span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">contract</span><span>]    
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">ballot </span><span>{
+</span><span>    </span><span style="color:#ff7733;">use </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">use </span><span>ink_prelude</span><span style="color:#f29668;">::</span><span>vec</span><span style="color:#f29668;">::</span><span>Vec</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">use </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>traits</span><span style="color:#f29668;">::</span><span>{PackedLayout</span><span style="color:#bfbab0cc;">,</span><span> SpreadLayout}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Structure to store Proposal information
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Clone</span><span style="color:#bfbab0cc;">,</span><span> Debug</span><span style="color:#bfbab0cc;">,</span><span> scale::Encode</span><span style="color:#bfbab0cc;">,</span><span> scale::Decode</span><span style="color:#bfbab0cc;">,</span><span> SpreadLayout</span><span style="color:#bfbab0cc;">,</span><span> PackedLayout</span><span style="color:#bfbab0cc;">,</span><span>scale_info::TypeInfo)]
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Proposal </span><span>{
+</span><span>        name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>        vote_count</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>, 
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Structure to store Proposal information
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Clone</span><span style="color:#bfbab0cc;">,</span><span> Debug</span><span style="color:#bfbab0cc;">,</span><span> scale::Encode</span><span style="color:#bfbab0cc;">,</span><span> scale::Decode</span><span style="color:#bfbab0cc;">,</span><span> SpreadLayout</span><span style="color:#bfbab0cc;">,</span><span> PackedLayout</span><span style="color:#bfbab0cc;">,</span><span>scale_info::TypeInfo)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Voter </span><span>{
+</span><span>        weight</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>,
+</span><span>        voted</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>,
+</span><span>        delegate</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;AccountId&gt;, 
+</span><span>        vote</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;, 
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Defines the storage of your contract.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Add new fields the struct in order
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// to add new static storage fields to your contract.
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Ballot </span><span>{
+</span><span>        chair_person</span><span style="color:#bfbab0cc;">:</span><span> AccountId,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">//  ACTION: create a voters hash map with account id as key and Voter as value
+</span><span>        voters</span><span style="color:#bfbab0cc;">: 
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">//  ACTION: create a proposals vector
+</span><span>        proposals</span><span style="color:#bfbab0cc;">: 
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Ballot </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// get chair person address
+</span><span>            </span><span style="color:#ff7733;">let</span><span> chair_person </span><span style="color:#f29668;">=  </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>env()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//  ACTION: create empty proposals and voters variables
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//          * let proposals = 
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//          * let mut voters =
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ACTION: add chair persons voter object in voters hash map
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// HINT: Use hashmap.insert(key,value)
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>                chair_person</span><span style="color:#bfbab0cc;">,
+</span><span>                voters</span><span style="color:#bfbab0cc;">,
+</span><span>                proposals</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// return chair person id
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_chairperson</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> AccountId {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>chair_person
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// return the provided voter object
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_voter</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">voter_id</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span>Voter&gt;{
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// return the count of voters
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_voter_count</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize</span><span>{
+</span><span>        }
+</span><span>
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// the function adds the provided voter id into possible
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// list of voters. By default the voter has no voting right,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// the contract owner must approve the voter before he can cast a vote
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">add_voter</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">voter_id</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool</span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ACTION: check if voter already exits, if yes return false       
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//      * if not exists, create an entry in hash map 
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//      * with default weight set to 0 and voted to false
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//      * and return true
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// HINT: use hashmap.get() to get voter
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//        and use options.some() to check if voter exists
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// given an index returns the name of the proposal at that index
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_proposal_name_at_index</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">index</span><span style="color:#bfbab0cc;">:</span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span>String {
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// returns the number of proposals in ballet
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_proposal_count</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>        }
+</span><span>
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// adds the given proposal name in ballet
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">add_proposal</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">proposal_name</span><span style="color:#bfbab0cc;">:</span><span> String){
+</span><span>        }
+</span><span>
+</span><span>
+</span><span>
+</span><span>
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Unit tests in Rust are normally defined within such a `#[cfg(test)]`
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// module and test functions are marked with a `#[test]` attribute.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// The below code is technically just normal Rust code.
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(test)]
+</span><span>    </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">tests </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// Imports all the definitions from the outer scope so we can use them here.
+</span><span>        </span><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Alias `ink_lang` so we can use `ink::test`.
+</span><span>        </span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">test</span><span>]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new_works</span><span>() {
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> proposal_names</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            proposal_names</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Proposal # 1&quot;</span><span>))</span><span style="color:#bfbab0cc;">;  
+</span><span>            </span><span style="color:#ff7733;">let</span><span> ballot </span><span style="color:#f29668;">= </span><span>Ballot</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f07178;">assert_eq!</span><span>(ballot</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_voter_count</span><span>()</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">test</span><span>]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">adding_proposals_works</span><span>() {
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> ballot </span><span style="color:#f29668;">= </span><span>Ballot</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            ballot</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_proposal</span><span>(</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Proposal #1&quot;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f07178;">assert_eq!</span><span>(ballot</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_proposal_count</span><span>()</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">test</span><span>]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">adding_voters_work</span><span>() {
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> ballot </span><span style="color:#f29668;">= </span><span>Ballot</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let</span><span> account_id </span><span style="color:#f29668;">= </span><span>AccountId</span><span style="color:#f29668;">::</span><span>from([</span><span style="color:#f29718;">0x0</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">32</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f07178;">assert_eq!</span><span>(ballot</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_voter</span><span>(account_id)</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f07178;">assert_eq!</span><span>(ballot</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_voter</span><span>(account_id)</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">false</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>{% endtab %}</p>
+<p>{% tab title=&quot;✅Potential Solution&quot; %}</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">cfg_attr</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;std&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> no_std)]
+</span><span>
+</span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">contract</span><span>]    
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">ballot </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// use Hash
+</span><span>    </span><span style="color:#ff7733;">use </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">use </span><span>ink_prelude</span><span style="color:#f29668;">::</span><span>vec</span><span style="color:#f29668;">::</span><span>Vec</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">use </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>traits</span><span style="color:#f29668;">::</span><span>{PackedLayout</span><span style="color:#bfbab0cc;">,</span><span> SpreadLayout}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Structure to store Proposal information
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Clone</span><span style="color:#bfbab0cc;">,</span><span> Debug</span><span style="color:#bfbab0cc;">,</span><span> scale::Encode</span><span style="color:#bfbab0cc;">,</span><span> scale::Decode</span><span style="color:#bfbab0cc;">,</span><span> SpreadLayout</span><span style="color:#bfbab0cc;">,</span><span> PackedLayout</span><span style="color:#bfbab0cc;">,</span><span>scale_info::TypeInfo)]
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Proposal </span><span>{
+</span><span>        name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>        vote_count</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>, 
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Structure to store Proposal information
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Clone</span><span style="color:#bfbab0cc;">,</span><span> Debug</span><span style="color:#bfbab0cc;">,</span><span> scale::Encode</span><span style="color:#bfbab0cc;">,</span><span> scale::Decode</span><span style="color:#bfbab0cc;">,</span><span> SpreadLayout</span><span style="color:#bfbab0cc;">,</span><span> PackedLayout</span><span style="color:#bfbab0cc;">,</span><span>scale_info::TypeInfo)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Voter </span><span>{
+</span><span>        weight</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>,
+</span><span>        voted</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>,
+</span><span>        delegate</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;AccountId&gt;, 
+</span><span>        vote</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;, 
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Defines the storage of your contract.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Add new fields to the below struct in order
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// to add new static storage fields to your contract.
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Ballot </span><span>{
+</span><span>        chair_person</span><span style="color:#bfbab0cc;">:</span><span> AccountId,
+</span><span>        voters</span><span style="color:#bfbab0cc;">: </span><span>HashMap&lt;AccountId, Voter&gt;,
+</span><span>        proposals</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Proposal&gt;    
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Ballot </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// get chair person address
+</span><span>            </span><span style="color:#ff7733;">let</span><span> chair_person </span><span style="color:#f29668;">=  </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>env()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// create empty propsal and voters
+</span><span>            </span><span style="color:#ff7733;">let</span><span> proposals</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Proposal&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> voters </span><span style="color:#f29668;">= </span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// initialize chair person&#39;s vote
+</span><span>            voters</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(chair_person</span><span style="color:#bfbab0cc;">,</span><span> Voter{
+</span><span>                weight</span><span style="color:#bfbab0cc;">:</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,
+</span><span>                voted</span><span style="color:#bfbab0cc;">:</span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">,
+</span><span>                delegate</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>                vote</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>                chair_person</span><span style="color:#bfbab0cc;">,
+</span><span>                voters</span><span style="color:#bfbab0cc;">,
+</span><span>                proposals</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_chairperson</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> AccountId {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>chair_person
+</span><span>        }
+</span><span>
+</span><span>
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_voter</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">voter_id</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span>Voter&gt;{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>voters</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(</span><span style="color:#f29668;">&amp;</span><span>voter_id)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_voter_count</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize</span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>voters</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize
+</span><span>        }
+</span><span>
+</span><span>                </span><span style="font-style:italic;color:#5c6773;">/// the function adds the provided voter id into possible
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// list of voters. By default the voter has no voting right,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// the contract owner must approve the voter before he can cast a vote
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">add_voter</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">voter_id</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool</span><span>{
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">let</span><span> voter_opt </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>voters</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(</span><span style="color:#f29668;">&amp;</span><span>voter_id)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// the voter does not exists
+</span><span>            </span><span style="color:#ff7733;">if</span><span> voter_opt</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_some</span><span>() {
+</span><span>                </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>voters</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(voter_id</span><span style="color:#bfbab0cc;">,</span><span> Voter{
+</span><span>                weight</span><span style="color:#bfbab0cc;">:</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,
+</span><span>                voted</span><span style="color:#bfbab0cc;">:</span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">,
+</span><span>                delegate</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>                vote</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">true
+</span><span>        }
+</span><span>
+</span><span>
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// given an index returns the name of the proposal at that index
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_proposal_name_at_index</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">index</span><span style="color:#bfbab0cc;">:</span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span>String {
+</span><span>            </span><span style="color:#ff7733;">let</span><span> proposal </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>proposals</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(index)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">return </span><span style="color:#f29668;">&amp;</span><span>proposal</span><span style="color:#f29668;">.</span><span>name
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// returns the number of proposals in ballet
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_proposal_count</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>            </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>proposals</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// adds the given proposal name in ballet
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// to do: check unqiueness of proposal,
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">add_proposal</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">proposal_name</span><span style="color:#bfbab0cc;">:</span><span> String){
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>proposals</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(
+</span><span>                Proposal{
+</span><span>                    name</span><span style="color:#bfbab0cc;">:</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(proposal_name)</span><span style="color:#bfbab0cc;">,
+</span><span>                    vote_count</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Unit tests in Rust are normally defined within such a `#[cfg(test)]`
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// module and test functions are marked with a `#[test]` attribute.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// The below code is technically just normal Rust code.
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(test)]
+</span><span>    </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">tests </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// Imports all the definitions from the outer scope so we can use them here.
+</span><span>        </span><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Alias `ink_lang` so we can use `ink::test`.
+</span><span>        </span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">test</span><span>]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new_works</span><span>() {
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> proposal_names</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            proposal_names</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Proposal # 1&quot;</span><span>))</span><span style="color:#bfbab0cc;">;  
+</span><span>            </span><span style="color:#ff7733;">let</span><span> ballot </span><span style="color:#f29668;">= </span><span>Ballot</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f07178;">assert_eq!</span><span>(ballot</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_voter_count</span><span>()</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>}
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

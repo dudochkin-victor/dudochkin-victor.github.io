@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Требования к валидатору | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#minimal-nye-trebovaniia-sol">Минимальные требования SOL</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#rekomendatsii-po-oborudovaniiu">Рекомендации по оборудованию</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#rekomendatsii-po-uzlu-rpc"><small>- Рекомендации по узлу RPC</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#virtual-nye-mashiny-na-oblachnykh-platformakh">Виртуальные машины на облачных платформах</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#doker">Докер</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#programmnoe-obespechenie">Программное обеспечение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#set">Сеть</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#perenapravlenie-porta"><small>- Перенаправление порта</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-reqs/#trebovaniia-k-graficheskomu-protsessoru">Требования к графическому процессору</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Требования к валидатору</h1>
+
+<h2 id="minimal-nye-trebovaniia-sol">Минимальные требования SOL</h2>
+<p>Не существует строгого минимального количества SOL, необходимого для запуска валидатора на Solana.</p>
+<p>Однако для участия в консенсусе требуется учетная запись для голосования с необлагаемым рентой резервом в размере 0,02685864 SOL. Голосование также требует отправки голосовой транзакции для каждого блока, с которым согласен валидатор, что может стоить до 1,1 SOL в день.</p>
+<h2 id="rekomendatsii-po-oborudovaniiu">Рекомендации по оборудованию</h2>
+<ul>
+<li>ПРОЦЕССОР
+<ul>
+<li>12 ядер/24 потока и более</li>
+<li>2,8 ГГц или выше</li>
+<li>Поддержка инструкций AVX2 (для использования официальных бинарных файлов выпуска, в противном случае компилируйте самостоятельно)</li>
+<li>Поддержка инструкций AVX512f и/или SHA-NI полезна.</li>
+<li>Серия AMD Zen3 популярна в сообществе валидаторов.</li>
+</ul>
+</li>
+<li>ОЗУ
+<ul>
+<li>128 ГБ или больше</li>
+<li>Рекомендуется материнская плата емкостью 256 ГБ.</li>
+</ul>
+</li>
+<li>Диск
+<ul>
+<li>Твердотельный накопитель PCIe Gen3 x4 NVME или лучше</li>
+<li>Аккаунты: 500 ГБ или больше. Высокий TBW (всего записанных байтов)</li>
+<li>Леджер: 1 ТБ или больше. Рекомендуется высокое TBW</li>
+<li>ОС: (необязательно) 500 ГБ или больше. SATA ОК</li>
+<li>ОС может быть установлена ​​на диск леджера, хотя тестирование показало лучшую производительность с леджером на собственном диске.</li>
+<li>Учетные записи и бухгалтерская книга <em>могут</em> храниться на одном диске, однако из-за большого количества операций ввода-вывода в секунду это не рекомендуется.</li>
+<li>Твердотельные накопители Samsung серий 970 и 980 Pro популярны среди сообщества валидаторов.</li>
+</ul>
+</li>
+<li>графические процессоры
+<ul>
+<li>В настоящее время не является строго необходимым</li>
+<li>Материнская плата и блок питания предназначены для добавления одного или нескольких высокопроизводительных графических процессоров в будущем.</li>
+</ul>
+</li>
+</ul>
+<h3 id="rekomendatsii-po-uzlu-rpc">Рекомендации по узлу RPC</h3>
+<p>Приведенные выше рекомендации по оборудованию следует рассматривать как минимум, если валидатор предполагается использовать в качестве узла RPC. Для обеспечения полной функциональности и повышения надежности необходимо выполнить следующие настройки.</p>
+<ul>
+<li>ПРОЦЕССОР
+<ul>
+<li>16 ядер/32 потока и более</li>
+</ul>
+</li>
+<li>ОЗУ
+<ul>
+<li>256 ГБ или более</li>
+</ul>
+</li>
+<li>Диск
+<ul>
+<li>Рассмотрите возможность использования большего диска реестра, если требуется более длинная история транзакций.</li>
+<li>Счета и бухгалтерская книга не должны храниться на одном диске.</li>
+</ul>
+</li>
+</ul>
+<h2 id="virtual-nye-mashiny-na-oblachnykh-platformakh">Виртуальные машины на облачных платформах</h2>
+<p>Хотя вы можете запустить валидатор на платформе облачных вычислений, в долгосрочной перспективе это может оказаться нерентабельным.</p>
+<p>Однако может быть удобно запускать узлы API без права голоса на экземплярах ВМ для собственного внутреннего использования. Этот вариант использования включает биржи и сервисы, построенные на Solana.</p>
+<p>Фактически, бета-валидаторы основной сети, которыми управляет команда, в настоящее время (март 2021 г.) работают на экземплярах GCE <code>n2-standard-32</code> (32 виртуальных ЦП, 128 ГБ памяти) с 2048 ГБ SSD для удобства работы.</p>
+<p>Для других облачных платформ выберите типы экземпляров с похожими характеристиками.</p>
+<p>Также обратите внимание, что использование исходящего интернет-трафика может оказаться высоким, особенно в случае запуска стейкинговых валидаторов.</p>
+<h2 id="doker">Докер</h2>
+<p>Запуск валидатора для активных кластеров (включая бета-версию основной сети) внутри Docker не рекомендуется и, как правило, не поддерживается. Это связано с опасениями по поводу общих накладных расходов Docker на контейнеризацию и, как следствие, снижения производительности, если они не настроены специально.</p>
+<p>Мы используем Docker только для целей разработки. Docker Hub содержит образы для всех выпусков на <a href="https://hub.docker.com/r/solanalabs/solana">solanalabs/solana</a>.</p>
+<h2 id="programmnoe-obespechenie">Программное обеспечение</h2>
+<ul>
+<li>Мы собираем и запускаем Ubuntu 20.04.</li>
+<li>См. <a href="../cli/install-solana-cli-tools/">Установка Solana</a> для получения информации о текущей версии программного обеспечения Solana.</li>
+</ul>
+<p>Готовые двоичные файлы доступны для Linux x86_64 на процессорах, поддерживающих AVX2 (рекомендуется Ubuntu 20.04).
+Пользователи MacOS или WSL могут выполнять сборку из исходного кода.</p>
+<h2 id="set">Сеть</h2>
+<p>Интернет-сервис должен быть не менее 300 Мбит/с, симметричный, коммерческий. Предпочтительно 1 Гбит/с</p>
+<h3 id="perenapravlenie-porta">Перенаправление порта</h3>
+<p>Следующие порты должны быть открыты для Интернета как для входящего, так и для исходящего трафика.</p>
+<p>Не рекомендуется запускать валидатор за NAT. Операторы, решившие это сделать, должны самостоятельно настраивать свое сетевое оборудование и устранять любые проблемы с обходом.</p>
+<h4 id="neobkhodimye">Необходимые</h4>
+<ul>
+<li>8000-10000 TCP/UDP - Протоколы P2P (сплетни, турбина, ремонт и т.д.). Это может быть ограничено любым свободным диапазоном из 12 портов с помощью <code>--dynamic-port-range</code></li>
+</ul>
+<h4 id="po-zhelaniiu">По желанию</h4>
+<p>В целях безопасности не рекомендуется, чтобы следующие порты были открыты для Интернета на стейкинговых бета-валидаторах основной сети.</p>
+<ul>
+<li>8899 TCP - JSONRPC через HTTP. Изменить с помощью `--rpc-port RPC_PORT``</li>
+<li>8900 TCP - JSONRPC через веб-сокеты. Полученный. Использует <code>RPC_PORT + 1</code></li>
+</ul>
+<h2 id="trebovaniia-k-graficheskomu-protsessoru">Требования к графическому процессору</h2>
+<p>CUDA требуется для использования графического процессора в вашей системе. Предоставленные двоичные файлы выпуска Solana построены на Ubuntu 20.04 с <a href="https://developer.nvidia.com/cuda-toolkit-archive">CUDA Toolkit 10.1 update 1</a>. Если на вашем компьютере используется другая версия CUDA, вам потребуется выполнить перестроение из исходного кода.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

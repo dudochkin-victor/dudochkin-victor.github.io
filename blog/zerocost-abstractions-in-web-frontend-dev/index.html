@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Абстракции с нулевой стоимостью в разработки веб-интерфейсов | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-abstractions-in-web-frontend-dev/#problema-vzdutiia-zhivota">Проблема вздутия живота</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-abstractions-in-web-frontend-dev/#otslezhivanie-tochnykh-zavisimostei">Отслеживание точных зависимостей</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-abstractions-in-web-frontend-dev/#luchshie-kompiliatory">Лучшие компиляторы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-abstractions-in-web-frontend-dev/#otlichnyi-opyt-razrabotchika">Отличный опыт разработчика</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Абстракции с нулевой стоимостью в разработки веб-интерфейсов</h1>
+
+<p><a href="https://deterministic.space/zero-cost-abstractions-in-web-fontend-dev.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Одна из самых удивительных особенностей компиляторов - это их способность не только преобразовывать код в машиночитаемые объекты, но и оптимизировать абстракции.</p>
+<p>Такие языки, как C++ и Rust, рекламируют нечто, называемое «абстракциями с нулевой стоимостью»:</p>
+<blockquote>
+<p>В целом реализации C++ подчиняются принципу нулевых накладных расходов: то, что вы не используете, вы не платите […]. И еще: то, что вы используете, лучше написать код не получится. - Бьярне Страуструп1</p>
+</blockquote>
+<p>Это может быть очень мощно, как итераторы, которые компилируются в машинные инструкции, эквивалентные таковым из вручную закодированных циклов (или gotos), или библиотека Futures, которая компилируется до конечных автоматов2. «Нулевая стоимость» означает «отсутствие затрат во время выполнения»; за эти функции обычно приходится платить за время компиляции, сложность реализации (компилятора или библиотеки) или за знания, которые вам необходимы как разработчику. Такой же уровень оптимизации обычно невозможен в интерпретируемых языках, таких как JavaScript или Ruby. Некоторые реализации JIT-компиляторов могут оптимизировать удивительно сложный код3, но вы, как разработчик, не можете на это полагаться.</p>
+<h2 id="problema-vzdutiia-zhivota">Проблема вздутия живота</h2>
+<p>Зная это, иногда довольно сложно понять, на что похожа разработка веб-интерфейса.</p>
+<p>Допустим, вы хотите создать новый статический веб-сайт для своего садоводческого бизнеса. Легко: добавьте начальную CSS-структуру для выравнивания и панель навигации, новую блестящую галерею JavaScript, которая также содержит некоторые изображения и код CSS, а затем, когда вы решите действительно принять современные веб-стандарты, включите несколько полифилов для таких вещей, как теги изображений, плавная прокрутка и Fetch API. Это, конечно, все складывается, и вы получите много вещей, которые будут загружены, хотя текущая страница в этом не нуждается. Если вы думаете, что это плохо, попробуйте представить, что включают в себя эти модные темы WordPress за 40 долларов или сколько JavaScript нужно включить для современного одностраничного приложения.</p>
+<p>Я думаю, что это можно улучшить, и некоторые технологии для этого уже существуют. Например, такие инструменты, как критический css и Closure Compiler, уже могут избавиться от некоторых неиспользуемых CSS / JS. Однако использовать это в наших интересах не так просто, и, конечно, не по умолчанию для большинства разработчиков.</p>
+<h2 id="otslezhivanie-tochnykh-zavisimostei">Отслеживание точных зависимостей</h2>
+<p>Мое первое утверждение таково: если бы мы лучше указали, от чего зависят элементы нашего веб-сайта4, мы могли бы получить гораздо больше абстракций бесплатно. Предположим, что наш элемент «основной навигации» указывает, что ему нужна сетка начальной загрузки (и только сетка), собственный небольшой модуль JavaScript (который зависит только от библиотеки медиа-запросов без внешних зависимостей) и собственный модуль CSS (есть модули CSS. spec), мы можем разрешить все эти зависимости и получить только то, что нам действительно нужно.</p>
+<h2 id="luchshie-kompiliatory">Лучшие компиляторы</h2>
+<p>Следующий шаг - использовать лучшие компиляторы и инструменты сборки.</p>
+<p>Для JavaScript с помощью babel можно преобразовать код ES2017 во что-то, что может анализировать Internet Explorer 11, а UglifyJS2 - хороший минимизатор для сохранения драгоценных байтов размера файла, но оба они не подходят для оптимизирующих компиляторов, таких как Google Closure Compiler. В любом случае сравнение не совсем справедливо: компилятору Closure требуется много аннотаций, чтобы иметь возможность использовать все его оптимизации (например, строгое удаление мертвого кода и встраивание). К счастью, я почти не вижу причин, по которым эти аннотации не могут быть созданы на основе информации о типах, доступной при написании кода на TypeScript.</p>
+<p>Ориентируясь на CSS, мне нравится, насколько мощным является SASS. К сожалению, он не имеет понятия об отслеживании зависимостей, как модули CSS, а это означает, что написание «логотипа» @import дважды означает, что код вводится дважды. PostCSS выглядит как надежная основа для написания преобразователей кода CSS, но я не использовал ее.</p>
+<p>В конце концов, нужно будет исключить дубликаты CSS, встроить соответствующие ресурсы и оптимизировать, когда вся страница будет построена.</p>
+<h2 id="otlichnyi-opyt-razrabotchika">Отличный опыт разработчика</h2>
+<p>Для меня это означает две вещи:</p>
+<ul>
+<li>Быстрые инкрементальные сборки</li>
+<li>Читаемые, значимые ошибки, которые легко отлаживать</li>
+</ul>
+<p>Я даже не говорю о горячей перезагрузке кода или написании целой кучи документации. Просто сделайте это быстро во время разработки (не оптимизируя JS) и выводите отлаживаемый код (с помощью SourceMaps).</p>
+<p>Будет добавлено больше контента.</p>
+<ol>
+<li>
+<p>Страуструп Б. (2012, март). Основы C++. В Европейском симпозиуме по программированию (стр. 1-25). Springer Berlin Heidelberg.</p>
+</li>
+<li>
+<p>См. Футуры с нулевой стоимостью в Rust</p>
+</li>
+<li>
+<p>Например: замечательный JIT-компилятор трассировки LuaJIT может оптимизировать сложный функциональный код с помощью luafun (библиотеки для написания функционального Lua) в действительно эффективный машинный код (см. Их Readme).</p>
+</li>
+<li>
+<p>Я имею в виду только статические страницы и надеюсь, что мы сможем их использовать.</p>
+</li>
+</ol>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust для Java-разработчика | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#rust-dlia-java-razrabotchikov-poshagovoe-vvedenie">Rust для Java-разработчиков - пошаговое введение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#prostoi-sintaksis-kak-zastavit-mashinu-delat-to-chto-vy-imeete-v-vidu">Простой синтаксис: как заставить машину делать то, что вы имеете в виду</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#obekty-i-struktury"><small>- Объекты и структуры</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#sama-struktura"><small>- Сама структура</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#sobstvennaia-realizatsiia"><small>- Собственная реализация</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#realizatsiia-treita"><small>- Реализация трэйта</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#peremennye-konstanty-i-vychisleniia"><small>- Переменные, константы и вычисления</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#iteratsiia"><small>- Итерация</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#sovpadenie"><small>- Совпадение</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#zhizn-i-smert-bez-vyvoza-musora"><small>- Жизнь и смерть: без вывоза мусора</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#peremeshchenie-obektov"><small>- Перемещение объектов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#voprosy-sobstvennosti-ssylki-i-izmenchivost"><small>- Вопросы собственности: ссылки и изменчивость</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#voobshche-govoria-dzheneriki"><small>- Вообще говоря: дженерики</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#sviazannye-tipy-i-universal-nye-tipy"><small>- Связанные типы и универсальные типы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#funktsional-noe-myshlenie-liambdy-i-zamykaniia"><small>- Функциональное мышление: лямбды и замыкания</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#vozvrat-zakrytiia"><small>- Возврат закрытия</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#kogda-chto-to-poidet-ne-tak-obrabotka-oshibok"><small>- Когда что-то пойдет не так: обработка ошибок</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#the-operator"><small>- The? Оператор</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#neskol-ko-sposobov-vypolneniia-neskol-kikh-zadach-kak-rust-i-java-obrabatyvaiut-parallelizm"><small>- Несколько способов выполнения нескольких задач: как Rust и Java обрабатывают параллелизм</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#v-budushchee"><small>- В будущее</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-java-developers/#vyvody">Выводы</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust для Java-разработчика</h1>
+
+<p><a href="https://blog.codecentric.de/en/2020/09/rust-for-java-developers/">Перевод</a> | Автор оригинала: Elisabeth Schulz</p>
+<h2 id="rust-dlia-java-razrabotchikov-poshagovoe-vvedenie">Rust для Java-разработчиков - пошаговое введение</h2>
+<p>Экосистема Java обширна и может решить практически любую проблему, с которой вы столкнетесь. Тем не менее, его возраст проявляется в нескольких частях, что делает его неуклюжим и непривлекательным для некоторых разработчиков Java - разработчиков, которые могут быть заинтересованы в Rust, одном из перспективных языков, которые конкурируют за внимание разработчиков. В этом сообщении блога мы исследуем, что делает языки похожими и что отличает их. Он предлагает пошаговое руководство по нескольким основным функциям, а также по тому, сколько концепций Java переведено на Rust.</p>
+<p>Как и любой язык программирования, предназначенный для использования в реальной жизни, Rust предлагает гораздо больше, чем может научить одна запись в блоге. Цель этого поста - дать первый обзор Rust для разработчиков Java. Те, кто интересуется подробностями и дополнительным чтением, могут найти дополнительную документацию в книге Rust. В этом руководстве мы рассмотрим следующие темы:</p>
+<ul>
+<li>Синтаксис</li>
+<li>Время жизни объекта</li>
+<li>Право собственности</li>
+<li>Трэйты</li>
+<li>Общий код</li>
+<li>Замыкания и функциональные особенности</li>
+<li>Обработка ошибок</li>
+<li>Параллелизм</li>
+</ul>
+<h2 id="prostoi-sintaksis-kak-zastavit-mashinu-delat-to-chto-vy-imeete-v-vidu">Простой синтаксис: как заставить машину делать то, что вы имеете в виду</h2>
+<p>Вы можете сказать, что синтаксис не имеет значения, пока не станет. В конце концов, синтаксис определяет, на что вы смотрите в течение всего дня, и тонко влияет на то, как вы подходите к проблеме. И Rust, и Java - императивные языки с объектно-ориентированными функциями. Таким образом, в своей основе синтаксис Rust должен быть знаком Java-разработчику. Доступны почти все концепции, которые вы регулярно используете в Java. Просто они выглядят немного иначе.</p>
+<h3 id="obekty-i-struktury">Объекты и структуры</h3>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">public class </span><span style="color:#59c2ff;">Person </span><span style="color:#ff7733;">implements </span><span style="text-decoration:underline;color:#59c2ff;">Named </span><span>{
+</span><span>  </span><span style="color:#ff7733;">private </span><span style="font-style:italic;color:#39bae6;">String </span><span>name</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">private int </span><span>age</span><span style="color:#bfbab0cc;">;
+</span><span>  
+</span><span>  </span><span style="color:#ff7733;">public </span><span style="color:#ffb454;">Person</span><span>(</span><span style="font-style:italic;color:#39bae6;">String </span><span style="color:#f29718;">name</span><span>) {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>name </span><span style="color:#f29668;">=</span><span> name</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>age </span><span style="color:#f29668;">= </span><span style="color:#f29718;">18</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>  
+</span><span>  </span><span style="color:#bfbab0cc;">@</span><span style="color:#ffb454;">Override </span><span style="color:#ff7733;">public </span><span style="font-style:italic;color:#39bae6;">String </span><span style="color:#ffb454;">getName</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">return</span><span> name</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>  
+</span><span>}
+</span></code></pre>
+<p>Этот фрагмент кода должен быть знаком большинству разработчиков Java. Аналогичный фрагмент Rust может выглядеть примерно так: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    age</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        Person { name</span><span style="color:#bfbab0cc;">,</span><span> age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">18 </span><span>}
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Named </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">name</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String {
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Этот код выглядит как знакомым, так и отличным от кода Java. Код Java «концентрирует» все знания о том, что такое класс. Напротив, код Rust состоит из нескольких блоков. Каждый из этих блоков рассказывает нам об одном из аспектов структуры.</p>
+<h3 id="sama-struktura">Сама структура</h3>
+<p>Первый из этих блоков - это фактическое определение структуры. Он определяет, как структура выглядит в памяти. Этот блок сообщает нам, что структура является общедоступной и имеет два (неявно закрытых) поля. Из этого определения компилятор Rust знает достаточно, чтобы сгенерировать экземпляр структуры. Однако этот блок еще ничего не говорит нам о том, что может делать структура.</p>
+<h3 id="sobstvennaia-realizatsiia">Собственная реализация</h3>
+<p>Второй блок определяет «внутреннюю реализацию» класса. Эта фраза звучит довольно громоздко, но означает просто «вещи, которые структура может делать сама по себе». Подумайте о методах, определенных в классе, без соответствующего интерфейса или метода суперкласса. Фактически, любой метод, который вы не можете аннотировать с помощью @Override, является внутренним методом.</p>
+<p>В нашем примере мы определяем единственную внутреннюю функцию. Функции объявляются с ключевым словом fn. В Java нет специального ключевого слова для объявления функции / метода. Напротив, Rust требует этого синтаксиса. Объявленная функция называется new и возвращает Self. Self - это особый тип, который иногда может пригодиться, особенно когда мы начинаем писать общий код. Это просто означает «текущий тип». Аналогично, self (обратите внимание на нижний регистр!) Означает текущий объект и является ближайшим родственником this в Java. В Rust методы и функции очень похожи - методы - это просто функции, которые принимают в качестве первого аргумента некий вариант себя.</p>
+<h3 id="realizatsiia-treita">Реализация трэйта</h3>
+<p>Наконец, у нас есть реализация Named. Эта трэйта соответствует интерфейсу Java. Итак, нам нужно предоставить ряд методов для выполнения именованного контракта. В отличие от Java, мы не пишем эти методы вместе с собственными. Вместо этого мы создаем новый блок верхнего уровня, содержащий только методы одного трэйта. Для этого есть две причины: структура может фактически реализовывать несколько свойств с определенными конфликтующими методами. В Java это было бы проблемой, поскольку было бы невозможно определить, что следует вызвать. В Rust оба могут сосуществовать. Кроме того, что более важно, вы можете реализовать трейт в двух местах: в определении структуры и в определении трейта. Это означает, что, хотя в Java вы не можете заставить String реализовывать ваш интерфейс, в Rust вполне возможно предоставить реализацию вашего трейта для String. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Stringify </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">stringify</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Stringify </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">String </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">stringify</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="peremennye-konstanty-i-vychisleniia">Переменные, константы и вычисления</h3>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">class </span><span style="color:#59c2ff;">Foo </span><span>{
+</span><span>  </span><span style="color:#ff7733;">double </span><span style="color:#ffb454;">calculate</span><span>(</span><span style="color:#ff7733;">long </span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">double </span><span style="color:#f29718;">y</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">int </span><span style="color:#f29718;">z</span><span>) {
+</span><span>    </span><span style="color:#ff7733;">var</span><span> delta </span><span style="color:#f29668;">=</span><span> x </span><span style="color:#f29668;">&lt;</span><span> z </span><span style="color:#f29668;">? </span><span style="color:#f29718;">2 </span><span style="color:#f29668;">: -</span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span>    x </span><span style="color:#f29668;">+=</span><span> delta</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">var</span><span> q </span><span style="color:#f29668;">=</span><span> y </span><span style="color:#f29668;">*</span><span> x</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">return</span><span> q </span><span style="color:#f29668;">+</span><span> z</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Этот фрагмент может показаться неинтересным большинству разработчиков Java. На самом деле, здесь не так много всего. Просто базовая арифметика. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">calculate</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i64</span><span>, </span><span style="color:#f29718;">y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>, </span><span style="color:#f29718;">z</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">=</span><span> x </span><span style="color:#f29668;">+ </span><span>(</span><span style="color:#ff7733;">if</span><span> x </span><span style="color:#f29668;">&lt;</span><span> z </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">i64 </span><span>{ </span><span style="color:#f29718;">2 </span><span>} </span><span style="color:#ff7733;">else </span><span>{ </span><span style="color:#f29668;">-</span><span style="color:#f29718;">5 </span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> q </span><span style="color:#f29668;">=</span><span> y </span><span style="color:#f29668;">*</span><span> x</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    q </span><span style="color:#f29668;">+</span><span> z
+</span><span>}
+</span></code></pre>
+<p>Соответствующая функция Rust выглядит очень похоже, но есть несколько моментов, которые стоит учесть. Во-первых, мы видим немного странное заявление. x объявляется как параметр, а затем повторно объявляется let. Это означает, что оно затеняет предыдущее объявление - начиная со строки 3 и далее видно только вычисленное значение. Обратите внимание, что это не меняет значение x - это константа. Вместо этого он меняет значение символа.</p>
+<p>Также стоит отметить, что мы просто используем if для нашей проверки. Операция if с обоими вариантами then и else создает значение, как и тройной оператор в Java.</p>
+<p>Фактически, любой блок, который заканчивается значением, неявно «возвращает» это значение. По этой причине мы можем просто закрыть объявление функции с помощью выражения q + z без необходимости писать явный возврат. Фактически, возврат необходим только для раннего возврата из функции. Обратите внимание на отсутствие точки с запятой - добавление единицы «уничтожает» значение, превращая выражение в оператор.</p>
+<h3 id="iteratsiia">Итерация</h3>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">loops</span><span>(</span><span style="color:#f29718;">limit</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>, </span><span style="color:#f29718;">values</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;, </span><span style="color:#f29718;">condition</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// while (condition)
+</span><span>    </span><span style="color:#ff7733;">while</span><span> condition {
+</span><span>        
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// for (var i: values)  
+</span><span>    </span><span style="color:#ff7733;">for</span><span> i </span><span style="color:#f29668;">in</span><span> values {
+</span><span>        
+</span><span>    }
+</span><span>    
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// for (var i = 0; i &lt; limit; i++)
+</span><span>    </span><span style="color:#ff7733;">for</span><span> i </span><span style="color:#f29668;">in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>limit {
+</span><span>        
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// do-while must be simulated
+</span><span>    </span><span style="color:#ff7733;">loop </span><span>{
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">!</span><span>condition {
+</span><span>            </span><span style="color:#ff7733;">break
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Итерация выполняется так же, как и в Java, при этом циклы практически не меняются. Существует удобная аббревиатура для обозначения бесконечного цикла (называемого просто циклом), а ключевое слово for допускает итерацию «повторяемых вещей». Разработчики Java знают Iterable<T>. Эквивалент в Rust называется IntoIterator<T>.</p>
+<p>Но как насчет классического цикла for в Java? <code>for(int i = 0; i &lt;limit; i ++)</code> - это вариант синтаксиса, который мы не видим на стороне Rust. Секрет здесь в двух точках в i..limit. Это создает тип с именем Range, который обеспечивает требуемую реализацию IntoIterator. Хотя это не полностью соответствует всем возможностям цикла «init-check-update for», оно очень элегантно охватывает наиболее распространенное использование. Более сложные случаи нужно будет записать с помощью while.</p>
+<h3 id="sovpadenie">Совпадение</h3>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">match_it</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;, </span><span style="color:#f29718;">flag</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">match</span><span> x {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#f29718;">3</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">!</span><span>flag </span><span style="color:#f29668;">=&gt; </span><span style="color:#f29718;">450</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(x) </span><span style="color:#ff7733;">if</span><span> x </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">900 </span><span style="color:#f29668;">=&gt; </span><span style="color:#f29718;">900</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29668;">_ =&gt; -</span><span style="color:#f29718;">1
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Примерно аналогично выражению switch в Java, match предлагает эту функциональность и многое другое. Как и переключатель Java, они позволяют выбирать разные значения в одном кратком заявлении. В отличие от Java, ответвления оператора match могут выполнять гораздо более структурное сопоставление - в этом случае мы можем переходить в зависимости от наличия значения параметра, дополнительных ограничений и значения по умолчанию. Обратите внимание, что сопоставление действительно проверяет полноту - необходимо охватить все случаи.</p>
+<p>Вы уловили маленькую концепцию, которую мы только что проскользнули мимо вас? Выражения Some и None - это два возможных значения перечисления Option в Rust. Rust позволяет значениям enum фактически быть полными собственными структурами, включая поля данных - то, что не будет работать в Java, поскольку значения enum могут существовать только один раз. Таким образом, у нас есть удобный и безопасный способ смоделировать «что-то, что может существовать, но не обязательно» - если объект присутствует, он будет сконструирован как Some(значение), в противном случае как None, и пользователь может проверить, какое это который через совпадение.</p>
+<h3 id="zhizn-i-smert-bez-vyvoza-musora">Жизнь и смерть: без вывоза мусора</h3>
+<p>Разработчики Java, вам нужно быть храбрым. В Rust нет сборщика мусора. У старших из вас могут быть воспоминания о malloc / free, в то время как младшие могут ломать голову над тем, как программа должна когда-либо освобождать память. К счастью, существует простое и элегантное решение проблемы, когда уничтожать данные в Rust. Каждая область действия очищается после себя и уничтожает все данные, которые больше не нужны. Те из вас, у кого есть опыт работы с C++, могут вспомнить этот подход как «RAII».</p>
+<p>Что это значит? Фактически, это означает то, что каждый разработчик Java, вероятно, находит интуитивно понятным: ваша программа восстанавливает память, когда она становится недоступной. Ключевое отличие в том, что Rust делает это немедленно, а не откладывает до сборки мусора.</p>
+<h3 id="peremeshchenie-obektov">Перемещение объектов</h3>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">destruction</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> String{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> string1 </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Hello World&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> string2 </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> string3 </span><span style="color:#f29668;">=</span><span> string2</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// string2 moved to string3, no longer valid
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> i </span><span style="color:#f29668;">in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="color:#f29718;">32 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let</span><span> another_string </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Yellow Submarine&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">do_something</span><span>(another_string)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// another_string &quot;given away&quot; here, no longer our concern
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">return</span><span> string1</span><span style="color:#bfbab0cc;">;  </span><span style="font-style:italic;color:#5c6773;">// string1 returned to caller, survives past this method
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// string3 destroyed here
+</span><span>}
+</span></code></pre>
+<p>В отличие от Java, в Rust объект не всегда является ссылкой - когда вы объявляете переменную как String в Java, вы фактически выражаете «ссылку на String». Могут быть и другие ссылки на ту же строку практически в произвольных частях памяти программы. Напротив, если вы скажете String в Rust, это именно то, что вы получите - саму строку, эксклюзивную и не разделяемую ни с чем другим (по крайней мере, изначально). Если вы передадите String в другую функцию, сохраните ее в структуре или иным образом передадите куда-нибудь, вы потеряете к ней доступ сами. Строка2 становится недействительной, как только она присваивается другой переменной.</p>
+<p>Единая область видимости владеет любым объектом - либо структурой, либо переменной в стеке. Программа может перемещать объект из области видимости в область видимости. В этом примере another_string перемещается из области уничтожения в область do_something. Эта область становится владельцем и потенциально уничтожает ее. Точно так же строка1 выходит из функции в операторе return и, таким образом, переходит в собственность того, кто ее вызвал. Только string3 становится недоступной после выхода из функции и уничтожается.</p>
+<p>В этой схеме есть исключение. Любой тип, реализующий Copy, не перемещается при переназначении значения - вместо этого он копируется (как может подразумевать название). Копия - это независимый объект со своим жизненным циклом. Clone - похожая трэйта, но требует, чтобы вы явно «подтвердили», что хотите получить потенциально дорогостоящую копию, вызвав метод.</p>
+<p>Фактически, копирование и клонирование предоставляют функции, аналогичные интерфейсу Cloneable JDK.</p>
+<h3 id="voprosy-sobstvennosti-ssylki-i-izmenchivost">Вопросы собственности: ссылки и изменчивость</h3>
+<p>Схема владения, описанная в предыдущем разделе, может показаться простой и интуитивно понятной, но у нее есть одно важное следствие: как бы вы написали функцию, которая что-то делает с объектом, который вы хотите использовать в будущем, в идеале без перетасовки мегабайт данных в вашей памяти. ? Ответ - «используйте ссылки».</p>
+<h4 id="java-i-rust-ikh-vzgliad-na-ssylki">Java и Rust: их взгляд на ссылки</h4>
+<p>Для Java все является справочником - ну почти все. Есть несколько примитивных типов, например int или boolean. Но любой тип объекта всегда находится за ссылкой и, следовательно, доступен косвенно. Поскольку в любом случае все является ссылкой, вы даже не объявляете ничего для этого. Это означает, как вы, вероятно, знаете, что, разместив объект «где-то», вы можете использовать его произвольными способами. В конце концов, сборщик мусора уничтожит его.</p>
+<p>Это подразумевает нечто одновременно легкое для понимания и тонкое: ссылки могут существовать произвольное время - они определяют, как долго живет объект, а не наоборот. Вы можете передавать и хранить ссылки где угодно. Объект живет достаточно долго, чтобы ссылки всегда оставались действительными.</p>
+<p>Как объяснялось в предыдущей главе, Rust сохраняет четкое право собственности на объект. Это позволяет языку немедленно очищать объект, когда он становится неиспользуемым. На этом этапе больше не может быть ссылок - в противном случае вы все равно сможете получить доступ к объекту после его смерти.</p>
+<p>Ссылка вводится ключевым словом ref, но также может быть объявлена в типе переменной. Как правило, оператор &amp; превращает значение в ссылку. Как часть типа &amp; объявляет тип ссылкой. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">reference</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u32 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let ref</span><span> y </span><span style="color:#f29668;">= &amp;</span><span>x</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// reference to x
+</span><span>    </span><span style="color:#ff7733;">let</span><span> z</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">u32</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> short_lived</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">82</span><span style="color:#bfbab0cc;">;
+</span><span>        z </span><span style="color:#f29668;">= &amp;</span><span>short_lived</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#f29668;">*</span><span>z
+</span><span>}
+</span></code></pre>
+<p>Этот код недействителен - и компилятор Rust сообщает нам, что short_lived не живет достаточно долго. Справедливо. Мы можем создавать ссылки на другой объект в памяти. Взамен мы должны убедиться, что эти ссылки не болтаются после смерти объекта.</p>
+<h4 id="obshchaia-bol-izmenchivost-i-ssylki">Общая боль - изменчивость и ссылки</h4>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">class </span><span style="color:#59c2ff;">ConcurrentModification </span><span>{
+</span><span>    </span><span style="color:#ff7733;">public static void </span><span style="color:#ffb454;">main</span><span>(</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#ff7733;">[] </span><span style="color:#f29718;">args</span><span>) {
+</span><span>        </span><span style="color:#ff7733;">var</span><span> list </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">new </span><span style="font-style:italic;color:#39bae6;">ArrayList</span><span>&lt;&gt;(</span><span style="font-style:italic;color:#39bae6;">Arrays</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">asList</span><span>(</span><span style="color:#c2d94c;">&quot;A&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;B&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;C&quot;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">for </span><span>(</span><span style="color:#ff7733;">var</span><span> str </span><span style="color:#f29668;">:</span><span> list) {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">System</span><span style="color:#f29668;">.</span><span>out</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">println</span><span>(</span><span style="color:#c2d94c;">&quot;Doubling &quot; </span><span style="color:#f29668;">+</span><span> str)</span><span style="color:#bfbab0cc;">;
+</span><span>            list</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">add</span><span>(str </span><span style="color:#f29668;">+</span><span> str)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Многие разработчики Java сталкивались с ошибкой, показанной в этом фрагменте кода. Вы изменяете объект, который используется в данный момент. Вы запускаете код. Бац! ConcurrentModificationException. Как ни странно, альтернативы были бы хуже. Неожиданный бесконечный цикл обычно труднее отладить, чем относительно чистое исключение. Фактический одновременный доступ многих потоков был бы еще хуже. Поэтому было бы неплохо, если бы компилятор обеспечил здесь некоторую безопасность. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">endless_loop</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> vector </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#c2d94c;">&quot;A&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;B&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;C&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> string </span><span style="color:#f29668;">in &amp;</span><span>vector {
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> new_string </span><span style="color:#f29668;">=</span><span> string</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        new_string</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push_str</span><span>(</span><span style="color:#f29668;">&amp;</span><span>string)</span><span style="color:#bfbab0cc;">;
+</span><span>        vector</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(new_string)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Весь этот класс ошибок невозможен в Rust. Этому препятствует очень простое правило: у вас может быть столько ссылок на объект только для чтения, сколько вам нужно, или у вас может быть одна ссылка, допускающая изменение. Таким образом, потенциально бесконечный цикл в предыдущем примере не может возникнуть в Rust. Итератор потребует неизменяемую ссылку на список. Эта ссылка заблокирует создание изменяемой ссылки. Однако нам понадобится изменяемая ссылка для push. Таким образом, компилятор отклоняет образец кода.</p>
+<p>Обратите внимание, что этот код снова незаметно вводит новую концепцию: mut. Этот модификатор сообщает, что переменная или ссылка могут изменять значения. Это противоположно подходу в Java. В Java каждая переменная является изменяемой, если она не объявлена окончательной.</p>
+<p>В Java все в порядке с внутренними изменениями конечных объектов. Вы можете объявить окончательный список и по-прежнему добавлять в него элементы. В Rust вы не можете создать ссылку mut на переменную, отличную от mut. Если ваш Vec не является изменяемым, это также включает изменение его содержимого (обычно существуют некоторые исключения). Хотя это означает, что вам нужно иногда немного более глубоко задуматься о изменчивости, это, по крайней мере, предотвращает UnsupportedOperationException.</p>
+<h4 id="ssylki-v-stile-java-v-rust-rc-i-arc">Ссылки в стиле Java в Rust: Rc и Arc</h4>
+<p>Для решения многих проблем все, что нам нужно, - это нативный подход в Rust: мы выделяем объект, что-то с ним делаем, а затем уничтожаем, когда он выполнил свою задачу. Но иногда нам нужна семантика, подобная Java. Мы хотим, чтобы что-то оставалось живым до тех пор, пока мы где-то это используем. Подумайте о пулах подключений. Мы определенно хотим разделить пул между несколькими объектами. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Pool</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">RequestContext </span><span>{
+</span><span>    connection_pool</span><span style="color:#bfbab0cc;">: </span><span>Rc&lt;Pool&gt;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">share_the_love</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;RequestContext&gt;{
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> result </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> pool </span><span style="color:#f29668;">= </span><span>Rc</span><span style="color:#f29668;">::</span><span>new(Pool)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">_ in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="color:#f29718;">1000 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let</span><span> connection_pool </span><span style="color:#f29668;">=</span><span> pool</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        result</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(RequestContext { connection_pool })
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">return</span><span> result</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Rc в этом примере кода означает подсчет ссылок. Rc «обволакивает» реальный объект. Его дешево клонировать, и он может предоставить ссылку на реальный объект «позади» Rc. Каждый из созданных объектов RequestContext может существовать в течение разного времени жизни. Rc можно даже клонировать и связать с чем-то еще, не затрагивая их - и второй пул не будет создан. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bad_rc</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Container </span><span>{
+</span><span>        contained</span><span style="color:#bfbab0cc;">: </span><span>RefCell&lt;</span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;Rc&lt;Container&gt;&gt;&gt;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> outer </span><span style="color:#f29668;">= </span><span>Rc</span><span style="color:#f29668;">::</span><span>new(Container { contained</span><span style="color:#bfbab0cc;">: </span><span>RefCell</span><span style="color:#f29668;">::</span><span>new(</span><span style="font-style:italic;color:#39bae6;">None</span><span>) })</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f29668;">*</span><span>outer</span><span style="color:#f29668;">.</span><span>contained</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow_mut</span><span>() </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(outer)
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// and the container lives forever
+</span><span>}
+</span></code></pre>
+<p>Подсчет ссылок - это недорогая стратегия управления сроками жизни. У него много преимуществ, но есть одно важное предостережение - он не может справиться с циклами. В этом примере мы создаем такой цикл. Этот объект будет жить вечно - ссылка внутри себя может поддерживать его жизнь. В Java это не проблема, сборщик мусора может игнорировать такие внутренние ссылки. В Rust внешний Rc уничтожается, но внутренний сохраняет объект в живых. Также обратите внимание на RefCell. Это одно из исключений из упомянутого ранее правила «глубокой изменчивости». Rc может захотеть защитить нас от изменения общего значения (разрешив только неизменяемую ссылку). Тем не менее RefCell готова нарушить это правило и позволить нам выстрелить себе в ногу.</p>
+<p>Rc дешевый и делает как можно меньше. Это не требует дорогостоящей логики для работы в параллельных сценариях. Если вы предпочитаете работать с несколькими потоками, обменивающимися данными, вам следует использовать его близкого родственника Arc. Arc работает точно так же, но выполняет дополнительную синхронизацию для безопасной работы через границы потоков.</p>
+<h4 id="nasledovanie-zemli-osobennosti-i-realizatsii">Наследование земли: особенности и реализации</h4>
+<p>Мы узнали, что такое трэйты характера, еще в самом начале. Они являются аналогом интерфейсов Java в Rust. За исключением решения о том, чтобы реализация трейта была независимым блоком, они выглядят почти одинаково. И по большей части они могут быть такими. Однако реализация интерфейсов охватывает только одно из двух ключевых слов Java: реализации. А как насчет extends, некогда сияющей звезды объектно-ориентированного программирования, отошедшей на второй план с годами?</p>
+<p>Короче говоря, это не часть языка Rust. Никакого конкретного наследования невозможно. Одна из ваших структур может иметь поле другой структуры и делегировать некоторые из ее методов. Вы можете реализовать AsRef или что-то подобное для другой структуры. Что вы не можете сделать, так это переопределить методы других структур или рассматривать одну структуру как другую при присвоении значений.</p>
+<p>Возможно, одна трэйта требует, чтобы другая работала. Это похоже на расширение интерфейса в Java - чтобы реализовать дочернюю трэйту, вам также необходимо реализовать родительскую трэйту. Однако есть небольшое различие. Как всегда, каждая трэйта получает свой блок.</p>
+<p>Основное использование интерфейсов Java - вызов методов интерфейса независимо от их реализации. То же самое возможно и в Rust. В Rust это называется динамической отправкой и обозначается ключевым словом dyn. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">stringify</span><span>(</span><span style="color:#f29718;">something</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>dyn </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;</span><span style="color:#ff7733;">str</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(something</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>())
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">call_stringify</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Foo</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;</span><span style="color:#ff7733;">str</span><span>&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Foo </span><span>{
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">as_ref</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str </span><span>{
+</span><span>            </span><span style="color:#c2d94c;">&quot;This is custom&quot;
+</span><span>        }
+</span><span>    }
+</span><span>    </span><span style="color:#f07178;">stringify</span><span>(</span><span style="color:#c2d94c;">&quot;Hello World&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &amp;str
+</span><span>    </span><span style="color:#f07178;">stringify</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new())</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">//&amp;String
+</span><span>    </span><span style="color:#f07178;">stringify</span><span>(</span><span style="color:#f29668;">&amp;</span><span>Foo)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &amp;Foo
+</span><span>}
+</span></code></pre>
+<p>В этом фрагменте мы видим эту возможность в действии: мы определяем единственную функцию, которую можно вызывать со ссылками на любое количество типов, реализующих трэйту AsRef <str>. Это очень удобно и очень точно соответствует тому, что мы ожидаем делать с интерфейсами Java - передавать объект по ссылке, не обязательно зная его точный тип, просто определяемый его поведением.</p>
+<h4 id="ukladyvaem-veshchi-v-kreiti">Укладываем вещи в крэйти</h4>
+<p>Подход «просто передача ссылки» отлично подходит для работы с параметрами. Это интуитивно понятно и очень похоже на то, что вы делали бы на Java. Возможно, это не самый быстрый способ сделать что-то, но обычно он работает хорошо. Однако иногда мы не хотим передавать параметр функции - вместо этого мы хотим вернуть значение из функции. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">return_dyn</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> dyn </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;</span><span style="color:#ff7733;">str</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#c2d94c;">&quot;Hello World&quot;
+</span><span>}
+</span></code></pre>
+<p>К сожалению, хотя с точки зрения Java-разработчика это выглядит «должно работать», Rust имеет некоторые дополнительные ограничения. А именно, право собственности на объект переходит к вызывающей стороне. Не вдаваясь в технические подробности, получение права собственности на объект означает обязательство хранить и этот объект. И для этого нам нужно знать одну важную деталь: нам нужно знать его размер.</p>
+<p>Все объекты Java находятся в большой куче, и их истинный размер на самом деле довольно сложно определить. У Rust другая стратегия: Rust хочет хранить в стеке столько данных, сколько разумно. Когда вы выделяете структуру, вы фактически кладете столько байтов в стек. Просто возвращение dyn Trait не дает достаточно информации для этого. В конце концов, насколько вы знаете, могут быть разные реализации в зависимости от некоторых внутренних условий. Так что для динамического возврата о стеке не может быть и речи. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">return_dyn</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;</span><span style="color:#ff7733;">str</span><span>&gt;&gt;  {
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;Hello World&quot;</span><span>)
+</span><span>}
+</span></code></pre>
+<p>Используя тип Box<T>, мы сообщаем компилятору, что наше значение не должно помещаться в стек. В стек помещается только особый вид ссылки, фактические данные начинаются в куче. Сам Box имеет фиксированный размер и может правильно очищать размещенный в куче объект.</p>
+<h4 id="ne-sovsem-nazvaniia-veshchei">Не совсем названия вещей</h4>
+<p>Есть альтернатива боксу ценностей. Хотя упаковка объекта очень похожа на стиль Java, Rust не стремится использовать много кучи. В конце концов, отслеживать кучу сравнительно медленно и сложно. Иногда причина вернуть трэйту - просто скрыть информацию. Часто разработчики не хотят изменять тип в зависимости от некоторых параметров, а вместо этого просто не раскрывают такие детали реализации. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">return_impl</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> impl </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;</span><span style="color:#ff7733;">str</span><span>&gt;  {
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#c2d94c;">&quot;Hello World&quot;
+</span><span>}
+</span></code></pre>
+<p>Выглядит очень аккуратно и аккуратно. Он не раскрывает тип реализации, а просто говорит: «Я возвращаю то, что вы можете использовать в качестве трэйта», не вдаваясь в подробности, что это такое. Но за метафорическим капюшоном - компилятор знает. Он знает и может оптимизировать для фактического типа, вплоть до того, что вообще не выполняет динамический вызов.</p>
+<h3 id="voobshche-govoria-dzheneriki">Вообще говоря: дженерики</h3>
+<p>Практически все разработчики Java знают хотя бы основы дженериков: именно они делают Collection et. al. работайте разумно. Без дженериков (и до Java 5) все эти типы работали исключительно с объектами. Под капотом они по-прежнему делают это, удаляя все общие типы и заменяя их «верхней границей». В Rust нет общего супертипа, такого как Object, но все же есть общие типы (некоторые из них вы уже видели в этой статье).</p>
+<p>Поскольку в Rust нет «общего супертипа», понятно, что его подход должен быть другим. И действительно, это так. Если Java создает один и тот же код для всех возможных параметров типа, Rust вместо этого генерирует специальный код для каждой комбинации фактических параметров типа.</p>
+<p>Вы можете определить ограничения для параметров типа в Java - и Rust работает таким же образом. Там, где в Java используется синтаксис T extends S, в Rust есть несколько менее многословная альтернатива: T: S. Помните, что в Rust нет способа «расширить структуру», поэтому только свойства могут ограничивать тип. Можно потребовать несколько трэйтов, просто указав Trait1 + Trait2, как в нотации Java Interface1 и Interface2. Однако, поскольку свойства Rust часто намного уже, чем обычно бывает в интерфейсах Java, вы будете встречать плюс-нотацию гораздо чаще.</p>
+<h4 id="al-ternativy-dinamicheskoi-otpravke">Альтернативы динамической отправке</h4>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">wrap</span><span>&lt;A&gt;(</span><span style="color:#f29718;">param</span><span style="color:#bfbab0cc;">:</span><span> A) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;A&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> v </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    v</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(param)</span><span style="color:#bfbab0cc;">;
+</span><span>    v
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">add_three</span><span>&lt;A</span><span style="color:#bfbab0cc;">:</span><span> Add&gt;(</span><span style="color:#f29718;">one</span><span style="color:#bfbab0cc;">:</span><span> A, </span><span style="color:#f29718;">two</span><span style="color:#bfbab0cc;">:</span><span> A, </span><span style="color:#f29718;">three</span><span style="color:#bfbab0cc;">:</span><span> A) </span><span style="color:#bfbab0cc;">-&gt;</span><span> A {
+</span><span>    one</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(two)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(three)
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">example</span><span>() {
+</span><span>    </span><span style="color:#f07178;">wrap</span><span>(</span><span style="color:#c2d94c;">&quot;Hello World&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// calls wrap&lt;&amp;str&gt;
+</span><span>    </span><span style="color:#f07178;">wrap</span><span>(</span><span style="color:#f29718;">999</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// calls wrap&lt;i32&gt;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">add_three</span><span>(</span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">20</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">30</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// calls add_three&lt;i32&gt;
+</span><span>    </span><span style="color:#f07178;">add_three</span><span>(</span><span style="color:#f29718;">0.5</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0.9</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">38.4</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// calls add_three&lt;f64&gt;
+</span><span>}
+</span></code></pre>
+<p>Приведенный выше фрагмент иллюстрирует этот шаблон. У нас есть две функции, которые принимают параметры нескольких типов и работают с ними. Однако второй пример на самом деле интересен: мы действительно используем операцию плюса свойства Add. Тем не менее, код не содержит dyn.</p>
+<p>Это связано с упомянутой ранее разницей в стратегии. Когда вызывается наша функция add_three, компилятор фактически создает разные функции для каждого A - и может даже решить встроить некоторые или все эти вызовы. В нашем примере с 32-битными целыми числами нет необходимости даже вызывать какие-либо функции для их добавления. Компилятор может генерировать чрезвычайно высокопроизводительный машинный код. </p>
+<pre data-lang="asm" style="background-color:#0f1419;color:#bfbab0;" class="language-asm "><code class="language-asm" data-lang="asm"><span style="color:#ffb454;">.add_three:
+</span><span style="color:#ff7733;">lea    </span><span style="color:#ffb454;">(%</span><span style="color:#f29718;">rdi</span><span>,</span><span style="color:#ffb454;">%</span><span style="color:#f29718;">rsi</span><span>,</span><span style="color:#f29718;">1</span><span style="color:#ffb454;">)</span><span>,</span><span style="color:#ffb454;">%</span><span style="color:#f29718;">eax
+</span><span style="color:#ff7733;">add    </span><span style="color:#ffb454;">%</span><span style="color:#f29718;">edx</span><span>,</span><span style="color:#ffb454;">%</span><span style="color:#f29718;">eax
+</span><span style="color:#ffb454;">retq
+</span></code></pre>
+<h3 id="sviazannye-tipy-i-universal-nye-tipy">Связанные типы и универсальные типы</h3>
+<p>Обобщения - это хорошо известная концепция Java-разработчикам, и эта концепция хорошо переносится в Rust. Однако есть ключевое различие: Java не поддерживает реализацию одного и того же универсального интерфейса дважды - даже с разными параметрами типа. </p>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">class </span><span style="color:#59c2ff;">Twice </span><span style="color:#ff7733;">implements </span><span style="text-decoration:underline;color:#59c2ff;">Comparable</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Twice</span><span>&gt;</span><span style="color:#bfbab0cc;">, </span><span style="text-decoration:underline;color:#59c2ff;">Comparable</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; {
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">public int </span><span style="color:#ffb454;">compareTo</span><span>(</span><span style="font-style:italic;color:#39bae6;">String </span><span style="color:#f29718;">o</span><span>) {
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">public int </span><span style="color:#ffb454;">compareTo</span><span>(</span><span style="font-style:italic;color:#39bae6;">Twice </span><span style="color:#f29718;">o</span><span>) {
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Это может показаться неожиданным даже для опытных разработчиков Java, но на то есть веская причина: стирание типа. Поскольку параметр типа Comparable забыт, фактический метод compareTo должен иметь параметры объекта. Только один метод может иметь такую точную сигнатуру, и на самом деле у него нет возможности выяснить, в какой из двух методов compareTo пересылать аргумент. Напротив, Rust позволяет две реализации одного и того же трейта с разными параметрами типа. Компилятор генерирует оба из них и в каждом случае выбирает «правильный». Нет стирания типа и, следовательно, нет необходимости в «скрытом» методе пересылки.</p>
+<p>Иногда эта способность оказывается благом - у разработчика больше возможностей и меньше шансов ошибиться. Однако иногда это неудобно. Типаж IntoIterator - один из таких примеров. Вероятно, это не следует реализовывать несколько раз. Каким будет тип переменной в цикле for? По этой причине есть способ переместить переменную типа «в» свойство: Связанные типы. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">AssociatedType </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">TheType</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>AssociatedType </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">i32 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">TheType </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">mogrify</span><span>&lt;A</span><span style="color:#bfbab0cc;">:</span><span> AssociatedType, B</span><span style="color:#bfbab0cc;">: </span><span>AssociatedType&lt;TheType=</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;&gt;(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">:</span><span> A, </span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">:</span><span> B) {
+</span><span>
+</span><span>}
+</span></code></pre>
+<p>Со связанным типом у вас нет переменной типа в предложении impl - и, следовательно, вы не можете реализовать одну и ту же трэйту дважды. Таким образом, вы получаете такое же поведение, как и в Java. Возможна только одна реализация. В Rust это можно сделать намеренно, а не ограничивать историей языка.</p>
+<p>В приведенном выше примере есть еще один интересный фрагмент кода. Строка 9 показывает, как ссылаться на трэйт со связанным типом. Если нам не нужно знать сам тип, мы просто пишем привязку трейта, как обычно. Но если нам действительно нужны эти знания, мы можем заглянуть под капот и рассматривать связанный тип как параметр. Синтаксис немного отличается от «обычных» параметров. Связанные типы необходимо указывать как Name = Value, а не только по их положению.</p>
+<h3 id="funktsional-noe-myshlenie-liambdy-i-zamykaniia">Функциональное мышление: лямбды и замыкания</h3>
+<p>Лямбды уже давно являются частью Java, впервые появившись в Java 8. По сути, они представляют собой ярлык для превращения функции (метода) в объект. До появления Java 8 для этого требовался специальный (часто анонимный) класс и множество нотаций. Вероятно, неудивительно, что Rust предлагает такие же возможности. Фактически, даже обозначения должны показаться знакомыми большинству разработчиков Java. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">double_and_summarize</span><span>(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>    input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">x</span><span>| x </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">fold</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">b</span><span>| a </span><span style="color:#f29668;">+</span><span> b)
+</span><span>}
+</span></code></pre>
+<p>За исключением некоторых тонкостей в обозначениях (отсутствие фигурных скобок и т.д.), Код Rust очень похож на то, что мы писали бы на Java. Все становится несколько интереснее, если мы посмотрим на основы кода «функционального стиля». В Java используется понятие интерфейса SAM. Фактически, любой интерфейс, в котором отсутствует реализация по умолчанию для одного метода, может служить целью для лямбда-выражения. Rust более явный и, возможно, более ограниченный, чем Java. Для представления функций существует специальное семейство черт.</p>
+<h4 id="tipy-funktsii-i-sposoby-ikh-ispol-zovaniia">Типы функций (и способы их использования)</h4>
+<p>Трэйты «функции» в Rust особенные. Вы можете реализовать это семейство черт только с синтаксисом замыкания. У трейтов есть несколько особый синтаксис. Все они имеют вид TraitName (argumentTypeList ...) (-&gt; Result)?</p>
+<p>«Функциональное семейство» состоит из трех черт. Каждое закрытие, которое вы определяете, автоматически реализует максимально допустимое из возможных.</p>
+<ul>
+<li>FnOnce - самое «слабое» из этих трех семейств. Вы можете вызвать эти функции не более одного раза. Основная причина этого может заключаться в том, что функция получает право собственности на объект и уничтожает его после завершения.</li>
+<li>Семейство FnMut не имеет такого же ограничения, но все же несколько ограничено в своей применимости. У реализации есть возможность изменить своего «получателя». Приемник аналогичен этому в Java. Однако вместо FnOnce можно использовать FnMut.</li>
+<li>Fn - самый общий класс функций. Вы можете вызывать их несколько раз, и они не фиксируют какое-либо (изменяемое) состояние. По сути, у этих функций нет «памяти». Замыкание Fn можно использовать вместо двух других типов. </li>
+</ul>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">invoke_once</span><span>&lt;F</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">FnOnce</span><span>()</span><span style="color:#bfbab0cc;">-&gt;</span><span> SomeStruct&gt;(</span><span style="color:#f29718;">function</span><span style="color:#bfbab0cc;">:</span><span> F) </span><span style="color:#bfbab0cc;">-&gt;</span><span> SomeStruct {
+</span><span>    </span><span style="color:#f07178;">function</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">invoke_mut</span><span>&lt;F</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">FnMut</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> SomeStruct&gt;(</span><span style="color:#f29718;">function</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> F) </span><span style="color:#bfbab0cc;">-&gt;</span><span> SomeStruct {
+</span><span>    </span><span style="color:#f07178;">function</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">invoke</span><span>&lt;F</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Fn</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> SomeStruct&gt;(</span><span style="color:#f29718;">function</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>F) </span><span style="color:#bfbab0cc;">-&gt;</span><span> SomeStruct {
+</span><span>    </span><span style="color:#f07178;">function</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">invoke_with_once_closure</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> s </span><span style="color:#f29668;">=</span><span> SomeStruct</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">closure </span><span style="color:#f29668;">= </span><span>|| s</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">invoke_once</span><span>(closure)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">invoke_with_mut_closure</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> count </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut </span><span style="color:#ffb454;">closure </span><span style="color:#f29668;">= </span><span>|| {
+</span><span>        count </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        SomeStruct
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">invoke_mut</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> closure)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">invoke_once</span><span>(closure)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">invoke_with_nonmut_closure</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut </span><span style="color:#ffb454;">closure </span><span style="color:#f29668;">= </span><span>|| SomeStruct</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">invoke</span><span>(</span><span style="color:#f29668;">&amp;</span><span>closure)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">invoke_mut</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> closure)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">invoke_once</span><span>(closure)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>В этом примере показаны различные типы закрытия, которые могут возникнуть. Первый (определенный в invoke_with_once_closure) активно становится владельцем переменной и, таким образом, вынужден реализовать самую слабую из трех черт, FnOnce. Во втором примере при каждом вызове создается собственное значение. Таким образом, он может производить значение несколько раз. Однако он захватывает часть своего вызывающего окружения. Чтобы иметь возможность увеличивать x, неявно создается &amp;mut. Таким образом, замыкание требует самого изменяемого контекста.</p>
+<p>Эта дополнительная сложность служит довольно простой цели: отслеживать, что и как долго живет. Представьте, что вы ссылаетесь на локальную переменную в замыкании и имеете выход из содержащего блока, тем самым уничтожая значение. Это еще раз демонстрирует разницу в философии дизайна. Java решила снизить сложность, исключив более сложные случаи FnMut и FnOnce. В конце концов, все полученные значения должны быть «фактически окончательными».</p>
+<h3 id="vozvrat-zakrytiia">Возврат закрытия</h3>
+<p>Хотя это, возможно, не самый распространенный вариант использования, иногда полезно вернуть закрытие. </p>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">class </span><span style="color:#59c2ff;">MakeRunnable </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Runnable </span><span style="color:#ffb454;">makeRunnable</span><span>(</span><span style="font-style:italic;color:#39bae6;">Object </span><span style="color:#f29718;">o</span><span>) {
+</span><span>        </span><span style="color:#ff7733;">return</span><span>() </span><span style="color:#ff7733;">-&gt; </span><span>{
+</span><span>            </span><span style="color:#ffb454;">runWith</span><span>(o)</span><span style="color:#bfbab0cc;">;
+</span><span>        }</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>В Java это очень элегантно из-за соглашения SAM - вы просто возвращаете интерфейс, который хотите реализовать в закрытии. В теле метода вы можете записать закрытие в операторе возврата. Простой. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">make_runnable</span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">:</span><span> SomeStruct) </span><span style="color:#bfbab0cc;">-&gt;</span><span> impl Fn() {
+</span><span>    </span><span style="color:#ff7733;">move </span><span style="color:#f29668;">||</span><span> runWith(</span><span style="color:#f29668;">&amp;</span><span>a)
+</span><span>}
+</span></code></pre>
+<p>Достичь того же в Rust немного сложнее. Нам нужно дать компилятору еще одну подсказку: ключевое слово move. Без этого ключевого слова значение a умерло бы, как только вернется вызов make_runnable. Таким образом, закрытие будет ссылаться на мертвую ценность, и случатся плохие вещи. Ключевое слово move сообщает компилятору Rust вместо этого переместить любую захваченную переменную в собственность замыкания.</p>
+<p>Также обратите внимание, что эта функция использует возвращаемый тип impl Trait, о котором говорилось ранее. Без этого синтаксиса нам все-таки понадобился бы именованный тип, и пришлось бы вручную реализовывать закрывающие функции.</p>
+<h3 id="kogda-chto-to-poidet-ne-tak-obrabotka-oshibok">Когда что-то пойдет не так: обработка ошибок</h3>
+<p>Обработка ошибок - это головная боль для большинства разработчиков. Это может легко отвлечь от цели кода. Обработка ошибок также является одним из наиболее вероятных виновников сложной логики. В худшем случае разработчик просто отказывается от обработки ошибок - в результате в случайные моменты возникают загадочные сбои. Любой достойный язык требует удобной для пользователя стратегии обработки ошибок.</p>
+<p>Здесь пути Rust и Java довольно существенно расходятся. Java - дитя 90-х. Новаторская на тот момент концепция исключений занимает центральное место в стратегии обработки ошибок. Вообще говоря, метод выдает исключение, чтобы сигнализировать об ошибке. Это прерывает выполнение текущего метода и «переходит назад» в стек к соответствующему обработчику.</p>
+<h4 id="zabota-o-rezul-tatakh">Забота о результатах</h4>
+<p>Это очень удобная модель для разработчика, которой лишь немного мешают накладные расходы на выполнение объявлений throw. Также очень дорого реализовать. Rust гораздо больше, чем Java, заботится о производительности. Таким образом, очевидно, что Rust предпочел бы другой способ обработки ошибок, а не создание исключений: кодирование успеха или неудачи операции в возвращаемое значение. Подобно типу Optional<T>, который мы знаем из Java, Rust определяет тип Result&lt;T, Err&gt;. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">some_function</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, SomeError&gt; {
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">389</span><span>)
+</span><span>}
+</span></code></pre>
+<p>По сути, приведенный выше фрагмент кода выражает то же самое, что и эта подпись Java: </p>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">class </span><span style="color:#59c2ff;">SomeClass </span><span>{
+</span><span>  </span><span style="color:#ff7733;">int </span><span style="color:#ffb454;">someMethod</span><span>() </span><span style="color:#ff7733;">throws </span><span style="font-style:italic;color:#39bae6;">SomeException </span><span>{
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">529</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Ключевое отличие здесь в том, что сбой не распространяется автоматически по стеку: нет необходимости в специальной логике для поиска обработчика исключений. Возможно, что наиболее важно, нет трассировки стека - все функции возвращаются нормально, хотя и с результатом, указывающим на ошибку.</p>
+<p>На первый взгляд это кажется очень подверженным ошибкам. Ведь очень легко просто забыть проверить результат звонка или вовсе отказаться от него. К счастью, Rust предлагает возможность, которую Java не может компенсировать: компилятор, предназначенный для помощи разработчику в обнаружении таких ошибок. Rust имеет возможность пометить возвращаемое значение как «необходимо использовать», и компиляция завершится ошибкой, если вы отбросите такое возвращаемое значение.</p>
+<h3 id="the-operator">The? Оператор</h3>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">f</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, SomeError&gt;{
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">function1</span><span>() {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(v) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> sum </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">for</span><span> element </span><span style="color:#f29668;">in</span><span> v {
+</span><span>                </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">function2</span><span>(element) {
+</span><span>                    </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e)</span><span style="color:#bfbab0cc;">,
+</span><span>                    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(intermediate) </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">function3</span><span>(intermediate) {
+</span><span>                        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e)</span><span style="color:#bfbab0cc;">,
+</span><span>                        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(next) </span><span style="color:#f29668;">=&gt;</span><span> sum </span><span style="color:#f29668;">+=</span><span> next</span><span style="color:#bfbab0cc;">,
+</span><span>                    }
+</span><span>                }
+</span><span>            }
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(sum)
+</span><span>        }</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Этот код вне уродства - он на грани непонятного. К счастью, существует особый вид синтаксиса, облегчающий задачу правильной обработки результатов:?. Этот безобидный оператор фактически служит сокращением для приведенных выше утверждений. Если вы используете этот оператор try, код читается очень похоже на код Java, без использования гораздо более дорогостоящего механизма исключения. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">f2</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, SomeError&gt;{
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> sum </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">for</span><span> element </span><span style="color:#f29668;">in </span><span style="color:#f07178;">function1</span><span>()</span><span style="color:#f29668;">? </span><span>{
+</span><span>        sum </span><span style="color:#f29668;">+= </span><span style="color:#f07178;">function3</span><span>(</span><span style="color:#f07178;">function2</span><span>(element)</span><span style="color:#f29668;">?</span><span>)</span><span style="color:#f29668;">?
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(sum)
+</span><span>}
+</span></code></pre>
+<h4 id="razlichnye-tipy-oshibok">Различные типы ошибок</h4>
+<p>Не все ошибки одинаковы. В конце концов, тип результата параметризуется по типу ошибки, а также по типу результата. Типы ошибок могут быть простыми, как «что-то пошло не так», до относительно сложных структур с большим количеством полезной информации по обработке ошибок. Следовательно, может возникнуть необходимость преобразовать один вид ошибки в другой. Код ? Оператор уже поддерживает это: если существует переход от фактической ошибки к ожидаемой ошибке, оператор просто использует ее для преобразования. В противном случае может потребоваться некоторый настраиваемый код (например, вызов map_err для объекта Result).</p>
+<p>Многие библиотеки («крэйти») определяют тип ошибки, специфичный для этой библиотеки, а некоторые также предлагают удобный ярлык для работы с потенциально неудачными операциями: они определяют псевдоним типа для Result, который исправляет параметр ошибки, поэтому пользователь может сэкономить на вводе параметр ошибки каждый раз.</p>
+<h4 id="kogda-vse-poteriano">Когда все потеряно</h4>
+<p>Во вступлении к этой главе мы упоминали, что Rust не любит производить обратную трассировку или иметь дело с «внезапным выходом» из функций. Это правда, но это еще не вся картина. Есть одна часть головоломки: паника. Эта функция делает именно то, что подразумевает ее название. Он сдается и убегает, как исключение Java. Это не лучший способ справляться с вещами в Rust и в основном используется в случаях, когда ошибка находится на уровне неудачного утверждения. Другими словами, ваша программа должна запаниковать, если она сама замечает ошибку (например, выход за пределы массива). Паника - это инструмент отладки, а не правильный способ обработки ошибок.</p>
+<p>Вы действительно можете «поймать» панику, если воспользуетесь некоторыми функциями стандартной библиотеки, но обычно от этого мало пользы. Обратите внимание, что, к счастью, даже паника - это «управляемая паника» - вся очистка все еще выполняется при выходе из каждого прицела.</p>
+<h3 id="neskol-ko-sposobov-vypolneniia-neskol-kikh-zadach-kak-rust-i-java-obrabatyvaiut-parallelizm">Несколько способов выполнения нескольких задач: как Rust и Java обрабатывают параллелизм</h3>
+<p>Ваш телефон, вероятно, имеет несколько ядер, и любая программа, не использующая более одного из них, должна спросить себя: почему бы и нет? И, как следствие, параллельное и параллельное программирование становится все более важным.</p>
+<p>В настоящее время существует два основных подхода к этому: параллельное вычисление (на основе потоков) и параллельное выполнение. Достопочтенный Thread API и гораздо более молодой API CompletionStage предоставляют их на Java. У обоих есть близкие родственники в Rust, и у обоих есть одно серьезное ограничение: возможность безопасного обмена данными между потоками. С Java это всегда было открытой проблемой: вы всегда можете свободно делиться ссылками. Вам просто нужно правильно управлять общим доступом. Вам также необходимо знать, что означает «правильно» в каждом конкретном случае.</p>
+<p>В Rust очень ясно, что может разделяться между разными параллельными контекстами: все, что реализует Sync. Точно так же все, что реализует Send, можно передавать между разными потоками. Однако помните всю концепцию владения - неизменной ссылкой может быть Sync, но если ее время жизни недостаточно велико, чтобы гарантировать, что все задачи, с которыми вы ее разделяете, выполнены, вы все равно не сможете использовать ее в нескольких контекстах.</p>
+<p>Компилятор автоматически реализует правильные свойства Send и Sync. Обычно вы будете взаимодействовать с обоими типами. Причина проста: любой тип, полностью состоящий из типов отправки, будет сам отправлять, а основные типы - это отправить. То же самое и с Sync. Однако есть некоторые исключения - поэтому обязательно ознакомьтесь с полной документацией.</p>
+<h4 id="zapravka-niti-v-iglu">Заправка нити в иглу</h4>
+<p>Темы здесь очень давно - точнее, с 90-х годов. По сути, они представляют собой легковесные процессы с совместным использованием памяти. Java упрощает создание нового потока. </p>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">class </span><span style="color:#59c2ff;">Threads </span><span>{
+</span><span>    </span><span style="color:#ff7733;">private static final int </span><span style="color:#59c2ff;">SIZE </span><span style="color:#f29668;">= </span><span style="color:#f29718;">500</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">int[] </span><span style="color:#ffb454;">foo</span><span>() </span><span style="color:#ff7733;">throws </span><span style="font-style:italic;color:#39bae6;">Exception </span><span>{
+</span><span>        </span><span style="color:#ff7733;">var</span><span> results </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">new int</span><span>[</span><span style="color:#f29718;">SIZE</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">var</span><span> threads </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">new </span><span style="font-style:italic;color:#39bae6;">Thread</span><span>[</span><span style="color:#f29718;">SIZE</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">for </span><span>(</span><span style="color:#ff7733;">var</span><span> i </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;</span><span> i </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">SIZE</span><span style="color:#bfbab0cc;">;</span><span> i</span><span style="color:#f29668;">++</span><span>) {
+</span><span>            </span><span style="color:#ff7733;">final int</span><span> threadNum </span><span style="color:#f29668;">=</span><span> i</span><span style="color:#bfbab0cc;">;
+</span><span>            threads[threadNum] </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">new </span><span style="font-style:italic;color:#39bae6;">Thread</span><span>(() </span><span style="color:#ff7733;">-&gt; </span><span>{
+</span><span>                results[threadNum] </span><span style="color:#f29668;">= </span><span style="color:#f29718;">2 </span><span style="color:#f29668;">*</span><span> threadNum</span><span style="color:#bfbab0cc;">;
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>            threads[i]</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">start</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">for </span><span>(</span><span style="color:#ff7733;">var</span><span> thread</span><span style="color:#f29668;">:</span><span> threads) {
+</span><span>            thread</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">join</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>        </span><span style="color:#ff7733;">return</span><span> results</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Пригодно, но не увлекательно. Основная проблема здесь в том, что потоки не могут эффективно передавать свои результаты обратно генерирующей функции, но в остальном это довольно легко понять - в конце концов, никакие данные не передаются между потоками. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">threads</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn Error&gt;&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> size </span><span style="color:#f29668;">= </span><span style="color:#f29718;">400</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> thread_results</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;JoinHandle&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;&gt; </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>size)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">i</span><span>| {
+</span><span>        </span><span style="color:#f07178;">spawn</span><span>(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">||</span><span> i </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>)
+</span><span>    })</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> result </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> join </span><span style="color:#f29668;">in</span><span> thread_results {
+</span><span>        result</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(join</span><span style="color:#f29668;">.</span><span style="color:#f07178;">join</span><span>()</span><span style="color:#f29668;">?</span><span>)
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(result)
+</span><span>}
+</span></code></pre>
+<p>Rust выглядит очень похоже, но предлагает небольшую изюминку - у каждого потока есть JoinHandle, который генерируется путем порождения (вместо сохранения изменяемого представления потока вокруг). Этот JoinHandle позволяет выполнять только несколько основных операций - гораздо меньше, чем Thread, но позволяет дождаться завершения потока и получить значение результата.</p>
+<h3 id="v-budushchee">В будущее</h3>
+<p>Потоки отлично подходят для простого параллелизма - особенно для серверных приложений, где каждый из потоков будет видеть один запрос от начала до конца. Эта модель, как вы, наверное, знаете, не самая эффективная и отзывчивая. В конце концов, большую часть времени потоки будут блокироваться в ожидании ввода-вывода. </p>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">class </span><span style="color:#59c2ff;">Completeable </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">CompletionStage</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">SomeType</span><span>&gt; </span><span style="color:#ffb454;">processing</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="color:#ffb454;">loadDataFromDatabase</span><span>()
+</span><span>                </span><span style="color:#f29668;">.</span><span style="color:#ffb454;">thenCompose</span><span>(</span><span style="color:#f29718;">data </span><span style="color:#ff7733;">-&gt; </span><span>{
+</span><span>                   </span><span style="color:#ff7733;">var</span><span> written </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">writeToFileSystem</span><span>(data)</span><span style="color:#bfbab0cc;">;
+</span><span>                   </span><span style="color:#ff7733;">var</span><span> additionallyLoaded </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">loadMoreData</span><span>(data)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>                   </span><span style="color:#ff7733;">var</span><span> processWriteAdditionally </span><span style="color:#f29668;">=</span><span> additionallyLoaded</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">thenCombine</span><span>(written</span><span style="color:#bfbab0cc;">, </span><span>(</span><span style="color:#f29718;">data2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">ignore</span><span>) </span><span style="color:#ff7733;">-&gt;</span><span> data2)</span><span style="color:#bfbab0cc;">;
+</span><span>                   </span><span style="color:#ff7733;">return</span><span> processWriteAdditionally</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">thenCompose</span><span>(</span><span style="color:#f29718;">data2 </span><span style="color:#ff7733;">-&gt; </span><span style="color:#ffb454;">callRestWebService</span><span>(data</span><span style="color:#bfbab0cc;">,</span><span> data2))</span><span style="color:#bfbab0cc;">;
+</span><span>                })</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Этот код Java достаточно хорошо читается, если вы знакомы с API - он объединяет в цепочку несколько асинхронных вызовов и заставляет их все быть успешными, давая окончательный результат. Конечно, в этом примере опущены все детали вызовов, но само количество скобок вызывает небольшую головную боль. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span>async </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">processing</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> SomeType {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> loaded </span><span style="color:#f29668;">= </span><span style="color:#f07178;">load_from_database</span><span>()</span><span style="color:#f29668;">.</span><span>await</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> write_op </span><span style="color:#f29668;">= </span><span style="color:#f07178;">write_to_fs</span><span>(</span><span style="color:#f29668;">&amp;</span><span>loaded)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> load_additional_op </span><span style="color:#f29668;">= </span><span style="color:#f07178;">load_more_data</span><span>(</span><span style="color:#f29668;">&amp;</span><span>loaded)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">,</span><span> additional_loaded) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">join!</span><span>(write_operation</span><span style="color:#bfbab0cc;">,</span><span> load_additional_op)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">call_rest_service</span><span>(</span><span style="color:#f29668;">&amp;</span><span>loaded</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>additional_loaded)</span><span style="color:#f29668;">.</span><span>await
+</span><span>}
+</span></code></pre>
+<p>Rust решил расширить свой синтаксис, поскольку асинхронный код важен, и в будущем он станет еще более важным. Следовательно, соответствующий код на Rust выглядит намного чище.</p>
+<p>Однако специальный синтаксис, по сути, просто сахар - async fn - это, по сути, обычная функция, возвращающая impl Future &lt;Output = T&gt;. Фактически, модификатор async на самом деле не требуется «сам по себе» - это просто синтаксический сахар для объявления такой функции, типа, который служит возвращаемым типом, и реализации трейта Future. Без него код был бы очень похож на пример кода Java.</p>
+<h2 id="vyvody">Выводы</h2>
+<p>В этом посте вы узнали некоторые основы Rust. Итак, заменит ли Rust полностью Java в ближайшие пять лет? Нет, наверное, нет. Но это новый многообещающий язык низкого уровня. Он невероятно быстрый, хорошо структурированный и в целом веселый и выразительный. Кроме того, язык поддерживает прикладных программистов с помощью некоторых из лучших средств диагностики и языковых функций, которые я видел за два десятилетия разработки. Лучше всего то, что это удивительно безопасно, но при этом на низком уровне. Целые классы распространенных ошибок полностью исключаются правилами языка, что является немалым подвигом.</p>
+<p>Итак, когда вы будете выполнять следующий микросервис, почему бы не дать Rust шанс? Возможно, вы захотите ознакомиться с фреймворком Actix для своего веб-сервера. Если вы хотите глубже изучить язык, книга Rust - ваш первый ресурс. Для тех, кто регулярно сталкивается с sun.misc.Unsafe, заглянув на небезопасный подъязык в Rustonomicon, можно получить массу творческих идей. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

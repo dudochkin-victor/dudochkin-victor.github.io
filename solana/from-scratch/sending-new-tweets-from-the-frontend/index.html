@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>10. Отправка новых твитов из внешнего интерфейса | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/sending-new-tweets-from-the-frontend/#otpravka-tvitov">Отправка твитов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/sending-new-tweets-from-the-frontend/#nastroika-formy-tvita">Настройка формы твита</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/sending-new-tweets-from-the-frontend/#pravil-noe-obiazatel-stvo">Правильное обязательство</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/sending-new-tweets-from-the-frontend/#razdacha-sol">Раздача SOL</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/sending-new-tweets-from-the-frontend/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>10. Отправка новых твитов из внешнего интерфейса</h1>
+
+<p><a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/sending-new-tweets-from-the-frontend">Перевод</a> | Автор оригинала: Loris</p>
+<p>ЭПИЗОД 10</p>
+<p>2 МЕСЯЦА НАЗАД</p>
+<p>ЧТЕНИЕ 8 МИН.</p>
+<p>Мы так близки к тому, чтобы иметь готовое децентрализованное приложение (dApp), которым мы можем поделиться со всем миром! Все готово, за исключением того, что мы не можем отправлять твиты из нашего интерфейса. Не очень удобно для приложения, похожего на Twitter.</p>
+<p>Итак, давайте реализуем это прямо здесь и сейчас и завершим наше децентрализованное приложение!</p>
+<h2 id="otpravka-tvitov">Отправка твитов</h2>
+<p>После последнего эпизода вы, возможно, пытались подключить свой кошелек и отправить твит, чтобы посмотреть, что он делает. Ну, это не то, что он делает. Наша конечная точка API sendTweet не только возвращает фиктивные данные, но эти фиктивные данные теперь будут вызывать ошибку при попытке отобразить твит, поскольку мы обновили компонент TweetCard.vue в предыдущем эпизоде.</p>
+<p>Итак, давайте начнем с удаления последнего бита фиктивных данных из нашего внешнего интерфейса и реализуем реальную логику для отправки твита в нашу программу.</p>
+<p>Откройте файл <code>send-tweet.js</code> в папке <code>api</code> и замените все его содержимое следующим кодом.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ web3 } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@project-serum/anchor&#39;
+</span><span style="color:#ff7733;">import </span><span>{ Tweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/models&#39;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// 1. Define the sendTweet endpoint.
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">sendTweet </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>({ </span><span style="color:#f29718;">wallet</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">program </span><span>}</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">content</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>
+</span><span>      </span><span style="font-style:italic;color:#5c6773;">// 2. Generate a new Keypair for our new tweet account.
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweet </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// 3. Send a &quot;SendTweet&quot; instruction with the right data and the right accounts.
+</span><span>    </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>rpc</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendTweet</span><span>(topic</span><span style="color:#bfbab0cc;">, </span><span>content</span><span style="color:#bfbab0cc;">, </span><span>{
+</span><span>        accounts</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>            author</span><span style="color:#bfbab0cc;">: </span><span>wallet</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>            tweet</span><span style="color:#bfbab0cc;">: </span><span>tweet</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>            systemProgram</span><span style="color:#bfbab0cc;">: </span><span>web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span>programId</span><span style="color:#bfbab0cc;">,
+</span><span>        }</span><span style="color:#bfbab0cc;">,
+</span><span>        signers</span><span style="color:#bfbab0cc;">: </span><span>[tweet]
+</span><span>    })
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// 4. Fetch the newly created account from the blockchain.
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweetAccount </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fetch</span><span>(tweet</span><span style="color:#f29668;">.</span><span>publicKey)
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// 5. Wrap the fetched account in a Tweet model so our frontend can display it.
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Tweet</span><span>(tweet</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>tweetAccount)
+</span><span>}
+</span></code></pre>
+<p>Хорошо, нам нужно кое-что объяснить.</p>
+<ol>
+<li>Прежде всего, мы определили сигнатуру нашего метода sendTweet. Как и в случае с другими конечными точками API, метод sendTweet принимает всю рабочую область в качестве первого параметра. В этом случае нам понадобится доступ к программе, а также к подключенному кошельку, который мы деструктурируем из этого первого параметра. Нам также нужен доступ к теме и содержанию твита, которые нам нужны в качестве следующих двух параметров.</li>
+<li>Затем мы создаем новую пару ключей для нашей новой учетной записи «Tweet». Твит будет инициализирован по общедоступному адресу этой пары ключей, и нам понадобится весь объект пары ключей, чтобы подписать транзакцию, чтобы доказать, что мы владеем этим адресом.</li>
+<li>Теперь у нас есть все необходимое для отправки инструкции SendTweet нашей программе Solana. <a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/testing-our-instruction#sending-a-tweet">Так же, как и в наших тестах</a>, мы передаем данные, учетную запись и подписывающие лица к методу <code>sendTweet</code> API нашей программы. На этот раз мы используем подключенный кошелек в качестве учетной записи автора.</li>
+<li>Теперь, когда инструкция отправлена, у нас должна быть учетная запись «Tweet» по предоставленному адресу «tweet.publicKey». Таким образом, мы используем его для доступа к данным нашего только что созданного твита. Мы делаем это, чтобы мы могли вернуть созданную учетную запись твита тому, кто вызывает эту конечную точку API. Это позволяет нашим компонентам автоматически добавлять его в список отображаемых твитов без повторной загрузки всех твитов на странице.</li>
+<li>Наконец, мы упаковываем полученные данные учетной записи и сгенерированный открытый ключ в объект <code>Tweet</code>, чтобы наш интерфейс имел все необходимое для их отображения.</li>
+</ol>
+<h2 id="nastroika-formy-tvita">Настройка формы твита</h2>
+<p>Поскольку мы внесли некоторые изменения в сигнатуру нашей конечной точки API sendTweet, давайте настроим компонент TweetForm.vue, который является единственным компонентом, который его использует.</p>
+<p>Единственная корректировка, которую нам нужно сделать, это убедиться, что рабочая область указана в качестве первого параметра. Итак, давайте начнем с импорта <code>useWorkspace</code> из компонуемых файлов.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ computed</span><span style="color:#bfbab0cc;">, </span><span>ref</span><span style="color:#bfbab0cc;">, </span><span>toRefs } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useAutoresizeTextarea</span><span style="color:#bfbab0cc;">, </span><span>useCountCharacterLimit</span><span style="color:#bfbab0cc;">, </span><span>useSlug</span><span style="color:#bfbab0cc;">, </span><span>useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span style="color:#ff7733;">import </span><span>{ sendTweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span></code></pre>
+<p>Далее, давайте прокрутим немного вниз и воспользуемся компонуемым useWorkspace, чтобы получить доступ к рабочему пространству и передать его методу sendTweet.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>emit </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">defineEmits</span><span>([</span><span style="color:#c2d94c;">&#39;added&#39;</span><span>])
+</span><span style="color:#ff7733;">const </span><span>workspace </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWorkspace</span><span>()
+</span><span style="color:#ff7733;">const </span><span style="color:#ffb454;">send </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">if </span><span>(</span><span style="color:#f29668;">! </span><span>canTweet</span><span style="color:#f29668;">.</span><span>value) </span><span style="color:#ff7733;">return
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweet </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">sendTweet</span><span>(workspace</span><span style="color:#bfbab0cc;">, </span><span>effectiveTopic</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#bfbab0cc;">, </span><span>content</span><span style="color:#f29668;">.</span><span>value)
+</span><span>    </span><span style="color:#ffb454;">emit</span><span>(</span><span style="color:#c2d94c;">&#39;added&#39;</span><span style="color:#bfbab0cc;">, </span><span>tweet)
+</span><span>    topic</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;&#39;
+</span><span>    content</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;&#39;
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, как мы получили доступ к объекту <code>workspace</code> <em>вне</em> асинхронного метода <code>send</code>. Это связано с тем, что компонуемый <code>useWorkspace</code> опирается на API предоставления/внедрения из VueJS, который предполагается использовать при инициализации компонента. Если бы мы попытались получить доступ к рабочей области внутри метода <code>send</code>, мы получили бы ошибку от VueJS при нажатии кнопки «Tweet».</p>
+<h2 id="pravil-noe-obiazatel-stvo">Правильное обязательство</h2>
+<p>Потрясающий! Таким образом, с нашей конечной точкой API sendTweet мы должны быть в состоянии отправить наш первый твит через интерфейс, верно? К сожалению нет.</p>
+<p>В нашем составном <code>useWorkspace</code> есть небольшая ошибка, из-за которой наш код выдает следующую ошибку.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>TypeError: Cannot read properties of undefined (reading &#39;preflightCommitment&#39;)
+</span></code></pre>
+<p>Ошибка в том, что мы предоставили только два параметра при создании экземпляра нашего объекта <code>Provider</code>, когда мы должны были указать три.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>provider </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">computed</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Provider</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>wallet</span><span style="color:#f29668;">.</span><span>value)) </span><span style="font-style:italic;color:#5c6773;">// &lt;- Missing 3rd parameter.
+</span></code></pre>
+<p>Отсутствующий третий параметр — это объект конфигурации, который используется для определения фиксации наших транзакций.</p>
+<p>Чтобы исправить это, мы могли бы просто указать пустой массив — т. е. <code>{}</code> — в качестве третьего аргумента, который бы вернулся к конфигурациям по умолчанию.</p>
+<p>Однако я хотел бы, чтобы мы воспользовались этой возможностью, чтобы понять, какие конфигурации необходимы и как мы можем предоставить их в явном виде.</p>
+<p>Этот объект конфигурации принимает два свойства: <code>commitment</code> и <code>preflightCommitment</code>. Оба они <strong>определяют уровень обязательств, который мы ожидаем от блокчейна при отправке транзакции</strong>. Единственная разница между ними заключается в том, что «preflightCommitment» будет использоваться при моделировании транзакции, тогда как «commitment» будет использоваться при реальной отправке транзакции.</p>
+<p>Если вам интересно, зачем нам нужно имитировать транзакцию, хорошим примером может быть то, что ваш кошелек покажет вам сумму денег, которая, как ожидается, будет получена или потеряна в результате транзакции, прежде чем она будет одобрена.</p>
+<p>Что же такое «обязательство»? Согласно <a href="https://docs.solana.com/developing/clients/jsonrpc-api#configuring-state-commitment">документации Solana</a>, ** обязательство описывает, насколько завершен блок в момент отправки транзакции. **. Когда мы отправляем транзакцию в блокчейн, она добавляется в блок, который необходимо «финализировать», прежде чем он официально станет частью данных блокчейна. Прежде чем блок будет «финализирован», он должен быть «подтвержден» системой голосования, созданной на кластере. Прежде чем блок будет «подтвержден», существует вероятность того, что блок будет пропущен кластером.</p>
+<p>Таким образом, существует 3 уровня обязательств, которые точно соответствуют сценариям, описанным выше. Они в порядке убывания приверженности:</p>
+<ul>
+<li><code>finalized</code>. Это означает, что мы можем быть уверены, что блок не будет пропущен и, следовательно, транзакция не будет откатана.</li>
+<li><code>confirmed</code>. Это означает, что кластер подтвердил посредством голосования, что блок транзакции действителен. Хотя это явный признак того, что транзакция не будет отменена, это все же не гарантия.</li>
+<li><code>processed</code>. Это означает, что транзакция была обработана и добавлена в блок, и нам не нужны какие-либо гарантии того, что произойдет с этим блоком.</li>
+</ul>
+<p>Итак, какой уровень обязательств мы должны выбрать для нашего маленького приложения, похожего на Twitter? Глядя на документацию Solana, они рекомендуют следующее.</p>
+<blockquote>
+<p>При запросе состояния леджера рекомендуется использовать более низкие уровни обязательств для отчета о ходе выполнения и более высокие уровни, чтобы гарантировать, что состояние не будет отменено.</p>
+</blockquote>
+<p>В нашем случае я бы не считал откат твита критической проблемой. Кроме того, очень маловероятно, что блок, содержащий нашу транзакцию, будет пропущен кластером. Таким образом, уровень фиксации «обработано» достаточно хорош для нашего приложения. Мы будем использовать его как для смоделированных, так и для реальных транзакций.</p>
+<p>Обратите внимание, что использование «завершенного» уровня обязательств может быть более подходящим для (не смоделированных) финансовых транзакций с критическими последствиями.</p>
+<p>Теперь, когда мы знаем, какие уровни обязательств использовать, давайте явно настроим их в нашем компонуемом <code>useWorkspace.js</code>. Во-первых, мы определили две переменные <code>preflightCommitment</code> и <code>commitment</code> для смоделированных и реальных транзакций соответственно.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>preflightCommitment </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;processed&#39;
+</span><span style="color:#ff7733;">const </span><span>commitment </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;processed&#39;
+</span><span style="color:#ff7733;">const </span><span>programID </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">PublicKey</span><span>(idl</span><span style="color:#f29668;">.</span><span>metadata</span><span style="color:#f29668;">.</span><span>address)
+</span><span style="color:#ff7733;">const </span><span>workspaceSymbol </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Symbol</span><span>()
+</span></code></pre>
+<p>Затем мы передаем эти уровни фиксации конструктору Provider в качестве объекта конфигурации. Мы также задаем переменную <code>commitment</code> в качестве второго параметра нашего объекта <code>Connection</code>, чтобы он мог использовать ее в качестве резервного уровня фиксации, когда он не указан непосредственно в транзакции.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">initWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>wallet </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useAnchorWallet</span><span>()
+</span><span>    </span><span style="color:#ff7733;">const </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Connection</span><span>(</span><span style="color:#c2d94c;">&#39;http://127.0.0.1:8899&#39;</span><span style="color:#bfbab0cc;">, </span><span>commitment)
+</span><span>    </span><span style="color:#ff7733;">const </span><span>provider </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">computed</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Provider</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>wallet</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#bfbab0cc;">, </span><span>{ preflightCommitment</span><span style="color:#bfbab0cc;">, </span><span>commitment }))
+</span><span>    </span><span style="color:#ff7733;">const </span><span>program </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">computed</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Program</span><span>(idl</span><span style="color:#bfbab0cc;">, </span><span>programID</span><span style="color:#bfbab0cc;">, </span><span>provider</span><span style="color:#f29668;">.</span><span>value))
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span></code></pre>
+<h2 id="razdacha-sol">Раздача SOL</h2>
+<p>Хорошо, теперь мы точно можем отправить твит через наш интерфейс?! Почти… 😅</p>
+<p>Если мы попытаемся отправить твит прямо сейчас, то получим следующую ошибку в консоли.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Attempt to debit an account but found no record of a prior credit.
+</span></code></pre>
+<p>Хорошо, мы видели эту ошибку в прошлом. Это значит, что у нас нет денег. Помните, как я говорил вам, что запуск локальной книги всегда дает 500 миллионов SOL в кошелек вашей локальной машины для запуска тестов? Ну, проблема в том, что мы не используем этот кошелек в нашем браузере. Вместо этого мы используем наш настоящий кошелек в локальном кластере.</p>
+<p>Это означает, что нам нужно явно раздать себе немного денег, прежде чем мы сможем отправлять транзакции.</p>
+<p>Для этого нам сначала нужно узнать открытый ключ нашего реального кошелька. Для этой цели мы можем использовать выпадающее меню кнопки кошелька. После подключения кошелька нажмите кнопку кошелька на боковой панели и выберите «Копировать адрес».</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1205-solana-10-frontend-send-tweet/copy-address.png" alt="Screenshot of our app with the dropdown menu of the wallet button opened. The first dropdown menu item called &quot;Copy address&quot; is highlighted." /></p>
+<p>Затем мы можем использовать команду solana airdrop, за которой следует количество SOL, которое мы хотим раздать, и адрес учетной записи для кредита.</p>
+<p>Нам не нужно много денег, но давайте дадим себе 1000 SOL — почему бы и нет, мы это заслужили. Затем вставьте свой открытый ключ и запустите эту команду. Вот как это выглядит для меня.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> airdrop 1000 B1AfN7AgpMyctfFbjmvRAvE1yziZFDb9XCwydBjJwtRN
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Outputs:
+</span><span style="font-style:italic;color:#5c6773;"># Requesting airdrop of 1000 SOL
+</span><span style="font-style:italic;color:#5c6773;"># 
+</span><span style="font-style:italic;color:#5c6773;"># Signature: 4rBNKMyRTcddaT9QHtYSD62Juk5F4AdgryiuE4N83Yj8JJVTomAnHWL8xvPitJdtDdLorSf81rBsYz89r7dXis6y4
+</span><span style="font-style:italic;color:#5c6773;"># 
+</span><span style="font-style:italic;color:#5c6773;"># 1000 SOL
+</span></code></pre>
+<p>Хорошо, теперь мы наконец-то можем отправить наш первый твит из внешнего интерфейса!</p>
+<p>Введите некоторый контент и, при желании, тему, прежде чем нажимать кнопку «Твитнуть». Вы должны получить всплывающее окно от поставщика кошелька с просьбой одобрить транзакцию.</p>
+<p>В зависимости от поставщика вашего кошелька вы также должны увидеть оценку того, сколько SOL эта транзакция зачислит или спишет с вашего счета. Однако при использовании Phantom это часто не работает для меня при использовании локального кластера, поскольку симулированная транзакция просто зацикливается навсегда.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1205-solana-10-frontend-send-tweet/send-tweet-1.png" alt="Screenshot of the app with a tweet filled in the form. The content is &quot;Hello world&quot; and the topic is &quot;solana&quot;. There is an arrow starting at the &quot;Tweet&quot; button pointing to Phantom wallet approve window asking the user to approve or reject this transaction." /></p>
+<p>Тем не менее, нажатие на «Подтвердить» должно запустить транзакцию по-настоящему и отобразить новый твит вверху списка!</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1205-solana-10-frontend-send-tweet/send-tweet-2.png" alt="Screenshot of the app with the previously filled tweet now showing on the list of tweets on the home page." /></p>
+<p>Если вы обновите страницу, вы увидите, что наш новый твит правильно сохранился в нашем локальном реестре.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Черт возьми, наше децентрализованное приложение наконец-то заработало! 🔥🔥🔥</p>
+<p>Теперь все, что осталось сделать, это развернуть его в реальном кластере, чтобы поделиться им с остальным миром. Именно этим мы и займемся в следующем выпуске!</p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/tree/episode-10">Посмотреть Эпизод 10 на GitHub</a></p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/compare/episode-9...episode-10">Сравните с Эпизодом 9</a></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

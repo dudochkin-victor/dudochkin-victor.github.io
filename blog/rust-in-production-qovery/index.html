@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust в производстве: Qovery | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#interv-iu-s-bendzhaminom-chast-e">Интервью с Бенджамином Частье</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#ne-mogli-by-vy-rasskazat-nam-bol-she-o-qovery-i-vashei-roli-tam"><small>- Не могли бы вы рассказать нам больше о Qovery и вашей роли там?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#gde-vy-ispol-zuete-rust-v-svoem-steke-naskol-ko-bol-shaia-chast-kodovoi-bazy-qovery-napisana-na-rust"><small>- Где вы используете Rust в своем стеке? Насколько большая часть кодовой базы Qovery написана на Rust?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#kak-vy-reshili-vybrat-rust-est-li-kakie-to-osobye-trebovaniia-kotorye-zastavili-vas-vybrat-ego"><small>- Как вы решили выбрать Rust? Есть ли какие-то особые требования, которые заставили вас выбрать его?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#est-li-kakie-nibud-biblioteki-ili-freimvorki-rust-kotorye-vy-sochli-poleznymi-i-khoteli-by-dobavit"><small>- Есть ли какие-нибудь библиотеки или фреймворки Rust, которые вы сочли полезными и хотели бы добавить?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#pomog-li-vam-rust-dobit-sia-chego-to-chto-bylo-by-slozhno-sdelat-s-pomoshch-iu-liubogo-drugogo-iazyka-programmirovaniia"><small>- Помог ли вам Rust добиться чего-то, что было бы сложно сделать с помощью любого другого языка программирования?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#est-li-mesta-gde-rust-terpit-neudachu-podderzhka-ekosistemy-produktivnost-i-t-d"><small>- Есть ли места, где Rust терпит неудачу (поддержка экосистемы, продуктивность и т.д.)?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#kakie-kompanii-ili-proekty-dolzhny-proverit-qovery-dlia-sobstvennogo-ispol-zovaniia"><small>- Какие компании или проекты должны проверить Qovery для собственного использования?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#kakie-plany-na-budushchee-u-qovery"><small>- Какие планы на будущее у Qovery?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-qovery/#kakie-sovety-vy-mogli-by-predlozhit-tem-kto-khochet-zapustit-svoi-sobstvennyi-proekt-na-rust-s-otkrytym-iskhodnym-kodom-mozhet-byt-kak-tekhnicheskim-tak-i-netekhnicheskim"><small>- Какие советы вы могли бы предложить тем, кто хочет запустить свой собственный проект на Rust с открытым исходным кодом (может быть как техническим, так и нетехническим)?</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust в производстве: Qovery</h1>
+
+<p><a href="https://serokell.io/blog/rust-in-production-qovery">Перевод</a> | Автор оригинала: Gints Dreimanis</p>
+<p>В этой статье из нашей серии статей о Rust in Production я беру интервью у Бенджамина Шастаньера, старшего инженера-программиста в Qovery.</p>
+<p>Мы говорим о Qovery, плюсах и минусах Rust, а также о том, что разработчики должны помнить при работе над проектами на Rust.</p>
+<h2 id="interv-iu-s-bendzhaminom-chast-e">Интервью с Бенджамином Частье</h2>
+<h3 id="ne-mogli-by-vy-rasskazat-nam-bol-she-o-qovery-i-vashei-roli-tam">Не могли бы вы рассказать нам больше о Qovery и вашей роли там?</h3>
+<p>Облачные провайдеры появились в начале 2000-х, чтобы позволить любому создать технологическую компанию и управлять инфраструктурой. С годами управление этими поставщиками становится все более сложным и дорогостоящим. Например, AWS, который начинался с трех сервисов, теперь насчитывает более 200, каждый со своей спецификой. В результате в растущих технологических компаниях разработчики должны управлять не только своим техническим развитием, но и этими сложными инфраструктурами, которые тратят время, энергию и ресурсы.</p>
+<p>Qovery стремится решить эту проблему, позволяя пользователям сосредоточиться на своих продуктах. Мы создаем новое поколение приложений для развертывания и управления. Что-то настолько простое, что могла бы использовать ваша бабушка !!!</p>
+<p>Я работаю старшим инженером-разработчиком программного обеспечения в Qovery, в основном занимаюсь расширением движка Qovery, который представляет собой библиотеку уровней абстракции с открытым исходным кодом поверх облачных провайдеров.</p>
+<p><img src="/imgs/posts/3883ca42_01.jpg" alt="" /></p>
+<h3 id="gde-vy-ispol-zuete-rust-v-svoem-steke-naskol-ko-bol-shaia-chast-kodovoi-bazy-qovery-napisana-na-rust">Где вы используете Rust в своем стеке? Насколько большая часть кодовой базы Qovery написана на Rust?</h3>
+<p>Мы используем Rust в самых разных местах, от инструментов до ядра ядра (которое на 100% написано на Rust), отвечая за большую часть специального соуса Qovery.</p>
+<p>Не весь стек написан на Rust, мы просто пытаемся уместить его там, где его использование имело бы смысл. Например, мы собираемся запустить новый прокси-сервер сообщений журнала низкого уровня, и Rust кажется идеальным инструментом для этого.</p>
+<p>На сегодняшний день Qovery CLI (CLI, используемый разработчиками для взаимодействия с Qovery) и Pleco (инструмент, позволяющий очищать старые облачные ресурсы) написаны на Go, а бэкэнд Qovery в основном написан на Kotlin.</p>
+<h3 id="kak-vy-reshili-vybrat-rust-est-li-kakie-to-osobye-trebovaniia-kotorye-zastavili-vas-vybrat-ego">Как вы решили выбрать Rust? Есть ли какие-то особые требования, которые заставили вас выбрать его?</h3>
+<p>Вначале продукт Qovery был основан на стеке Python, который невероятно быстро разросся, поддерживая потребность в новых функциях продукта. Кодовую базу стало трудно должным образом поддерживать и тестировать из-за ее эмпирического дизайна. Трудно было продолжать его продлевать. В этот момент предлагалось переписать, и Rust выглядел очень привлекательно по многим причинам.</p>
+<p>Вот основные из них:</p>
+<ul>
+<li>Rust - это строго типизированный язык, позволяющий выполнять множество проверок во время компиляции, что означает: больше никаких ошибок времени выполнения.</li>
+<li>Rust ориентирован на безопасность и безопасность, не влияя на скорость и производительность, даже если продукты не предназначены для производительности.</li>
+<li>Малый объем памяти. Это большое преимущество для Qovery, поскольку наше решение развертывается в инфраструктуре заказчика. Уменьшение потребностей в инфраструктуре - одна из наших основных целей.</li>
+<li>Безопасно по конструкции.</li>
+<li>Удивительный набор инструментов. Cargo, компилятор, fmt, clippy, и это лишь некоторые из них.</li>
+<li>Обработка ошибок. Rust настоятельно требует признания вероятности ошибок, возникающих в процессе компиляции.</li>
+</ul>
+<h3 id="est-li-kakie-nibud-biblioteki-ili-freimvorki-rust-kotorye-vy-sochli-poleznymi-i-khoteli-by-dobavit">Есть ли какие-нибудь библиотеки или фреймворки Rust, которые вы сочли полезными и хотели бы добавить?</h3>
+<ul>
+<li>Meilisearch: альтернатива поисковым системам Algolia и Elasticsearch.</li>
+<li>Sonic: легкая альтернатива Elasticsearch.</li>
+<li>Sled: движок хранилища, написанный на Rust - альтернатива RocksDB.</li>
+<li>IsomorphicDB: клон PostgreSQL - хороший экспериментальный проект, написанный на Rust.</li>
+<li>Raft-rs: протокол консенсуса Raft, реализованный в Rust с помощью PingCap.</li>
+<li>Трассировка: используйте программы на Rust для сбора структурированной диагностической информации на основе событий.</li>
+</ul>
+<h3 id="pomog-li-vam-rust-dobit-sia-chego-to-chto-bylo-by-slozhno-sdelat-s-pomoshch-iu-liubogo-drugogo-iazyka-programmirovaniia">Помог ли вам Rust добиться чего-то, что было бы сложно сделать с помощью любого другого языка программирования?</h3>
+<p>Как объяснялось ранее, одна из целей Qovery - оптимизировать использование облака клиентами за счет снижения затрат за счет распределения и масштабирования инфраструктуры в соответствии с их потребностями.</p>
+<p>Поскольку Qovery развернут в инфраструктуре клиентов, очень важно, чтобы Qovery занимала как можно меньше места. Rust отлично справляется с этой задачей, позволяя ему работать с минимальными настройками (128 Mo RAM и&gt; 1 vCPU).</p>
+<p>Было бы не так просто добиться этого за такой короткий период времени с C или C++, которые позволяют это сделать, но не предоставляют такой высокоуровневый API, или с Go, Python или другим управляемым языком. для этого может потребоваться больше ресурсов.</p>
+<p>Еще одно большое преимущество заключается в том, что система типов Rust предотвращает возникновение проблем во время выполнения, которые были бы очень раздражающими при работе в облачной инфраструктуре наших клиентов, поскольку ее может быть сложно отладить. Компилятор Rust гарантирует стабильность и отлично помогает избежать сбоев во время выполнения. </p>
+<h3 id="est-li-mesta-gde-rust-terpit-neudachu-podderzhka-ekosistemy-produktivnost-i-t-d">Есть ли места, где Rust терпит неудачу (поддержка экосистемы, продуктивность и т.д.)?</h3>
+<p>На сегодняшний день я думаю о двух:</p>
+<ul>
+<li>Экосистема все еще молода, и на сегодняшний день явно меньше библиотек, чем в других экосистемах, таких как Go или Python, особенно в части инфраструктуры. Некоторые библиотеки существуют, но еще не достигли версии 1 и могут быть нестабильными в том смысле, что их API, возможно, придется изменить до достижения версии 1.</li>
+<li>Время компиляции может быть немного большим. На самом деле это не неудобно, потому что компилятор делает за вас много работы и предотвращает появление 95% ошибок в производственной среде, но длительное время компиляции требует от нас творческого подхода к нашим конвейерам CI / CD, чтобы не замедлять время доставки перебор. Например, мы ввели кеш сборки, который сократил время сборки примерно в 5 раз.</li>
+</ul>
+<h3 id="kakie-kompanii-ili-proekty-dolzhny-proverit-qovery-dlia-sobstvennogo-ispol-zovaniia">Какие компании или проекты должны проверить Qovery для собственного использования?</h3>
+<p>По сути, Qovery идеально подходит для любой онлайн-компании, которой необходимо сосредоточиться на своем бизнесе. За 18 месяцев у нас есть 6500+ разработчиков из 120+ стран, которые используют Qovery. Обещание простое: получите опыт Heroku поверх своей учетной записи AWS.</p>
+<h3 id="kakie-plany-na-budushchee-u-qovery">Какие планы на будущее у Qovery?</h3>
+<p>Qovery - это построение будущего облака. Следите за обновлениями - в ближайшие недели будет объявлено о нашей инициативе под названием «meta.cloud».</p>
+<h3 id="kakie-sovety-vy-mogli-by-predlozhit-tem-kto-khochet-zapustit-svoi-sobstvennyi-proekt-na-rust-s-otkrytym-iskhodnym-kodom-mozhet-byt-kak-tekhnicheskim-tak-i-netekhnicheskim">Какие советы вы могли бы предложить тем, кто хочет запустить свой собственный проект на Rust с открытым исходным кодом (может быть как техническим, так и нетехническим)?</h3>
+<ul>
+<li>Rust - потрясающий язык.</li>
+<li>Изучите и поймите основные концепции (право собственности, заимствование, срок службы и т.д.).</li>
+<li>Не рассчитывайте освоить его раньше, чем через 3-6 месяцев, даже если вы опытный разработчик.</li>
+<li>Поделитесь своим энтузиазмом и тем, что вы узнали, с сообществом - это поможет продвинуть этот замечательный язык.</li>
+<li>Создайте продукт / проект, над которым вам нравится работать.</li>
+<li>Наслаждайтесь Rust. :)</li>
+</ul>
+<p>Хочу поблагодарить Бенджамина за интервью! Если вы хотите узнать больше о Qovery, перейдите прямо на их веб-сайт.</p>
+<p>Для получения дополнительной информации о том, как Rust используется в промышленности, обязательно ознакомьтесь с нашей серией интервью, в которых мы говорим с такими компаниями, как 1Password и MeiliSearch.</p>
+<p>А если вы хотите получать уведомления о новых статьях о Rust, которые мы публикуем, мы находимся в Twitter, на Medium и Dev.</p>
+<p>Увидимся!</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

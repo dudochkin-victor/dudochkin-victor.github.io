@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Распространение блока турбины | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/turbine-block-propagation/#naznachenie-sosedstva-vzveshennyi-vybor">Назначение соседства — взвешенный выбор</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/turbine-block-propagation/#sloi-i-struktura-okruzheniia">Слой и структура окружения</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/turbine-block-propagation/#znacheniia-konfiguratsii"><small>- Значения конфигурации</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/turbine-block-propagation/#raschet-trebuemoi-skorosti-fec">Расчет требуемой скорости FEC</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/turbine-block-propagation/#okrestnosti">Окрестности</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Распространение блока турбины</h1>
+
+<p>Кластер Solana использует многоуровневый механизм распространения блоков под названием <em>Turbine</em> для широковещательной рассылки фрагментов транзакций всем узлам с минимальным количеством повторяющихся сообщений. Кластер делится на небольшие наборы узлов, называемые <em>neighborhoods</em>. Каждый узел отвечает за совместное использование любых данных, которые он получает, с другими узлами в своем районе, а также за распространение данных на небольшой набор узлов в других районах. Таким образом, каждый узел должен взаимодействовать только с небольшим количеством узлов.</p>
+<p>Во время своего слота узел-лидер распределяет кусочки между узлами-валидаторами в первой окрестности (уровень 0). Каждый валидатор делится своими данными в своем окружении, но также повторно передает фрагменты на один узел в некоторых соседствах на следующем уровне (уровень 1). Каждый из узлов уровня 1 делится своими данными со своими одноранговыми узлами по соседству и повторно передает их узлам следующего уровня и т. д., пока все узлы в кластере не получат все фрагменты.</p>
+<h2 id="naznachenie-sosedstva-vzveshennyi-vybor">Назначение соседства — взвешенный выбор</h2>
+<p>Чтобы разветвление плоскости данных работало, весь кластер должен согласовать, как кластер делится на окрестности. Для этого все признанные узлы валидатора (одноранговые узлы TVU) сортируются по доле и сохраняются в списке. Затем этот список индексируется различными способами для определения границ соседства и повторной передачи одноранговых узлов. Например, лидер просто выберет первые узлы, составляющие уровень 0. Они автоматически станут держателями самых высоких ставок, что позволит лидеру первым вернуться к лидеру с наибольшим количеством голосов. Узлы уровня 0 и нижнего уровня используют одну и ту же логику для поиска своих соседей и одноранговых узлов следующего уровня.</p>
+<p>Чтобы уменьшить вероятность векторов атаки, каждый фрагмент передается по случайному дереву окрестностей. Каждый узел использует один и тот же набор узлов, представляющих кластер. Случайное дерево генерируется из набора для каждого фрагмента с использованием начального числа, полученного из идентификатора лидера, слота и индекса фрагмента.</p>
+<h2 id="sloi-i-struktura-okruzheniia">Слой и структура окружения</h2>
+<p>Текущий лидер делает свои начальные широковещательные рассылки не более чем узлам <code>DATA_PLANE_FANOUT</code>. Если этот уровень 0 меньше, чем количество узлов в кластере, то механизм разветвления плоскости данных добавляет слои ниже. Последующие слои следуют этим ограничениям для определения пропускной способности слоя: Каждое соседство содержит узлы <code>DATA_PLANE_FANOUT</code>. Слой 0 начинается с 1 окрестности с узлами разветвления. Количество узлов в каждом дополнительном слое увеличивается на коэффициент разветвления.</p>
+<p>Как упоминалось выше, каждый узел на уровне должен транслировать свои фрагменты только своим соседям и ровно 1 узлу в некоторых окрестностях следующего уровня, а не каждому узлу TVU в кластере. Хороший способ представить это так: уровень 0 начинается с 1 соседства с узлами разветвления, слой 1 добавляет соседства разветвления, каждое из которых имеет узлы разветвления, а слой 2 будет иметь «разветвление * количество узлов в слое 1» и так далее.</p>
+<p>Таким образом, каждый узел должен взаимодействовать не более чем с 2 * DATA_PLANE_FANOUT - 1 узлами.</p>
+<p>На следующей диаграмме показано, как Лидер отправляет фрагменты с разветвлением 2 в Окрестность 0 на уровне 0 и как узлы в Окрестности 0 обмениваются своими данными друг с другом.</p>
+<p><img src="/img/data-plane-seeding.svg" alt="Leader sends shreds to Neighborhood 0 in Layer 0" /></p>
+<p>На следующей диаграмме показано, как Окрестности 0 разветвляются на Окрестности 1 и 2.</p>
+<p><img src="/img/data-plane-fanout.svg" alt="Neighborhood 0 Fanout to Neighborhood 1 and 2" /></p>
+<p>Наконец, на следующей диаграмме показан двухуровневый кластер с разветвлением, равным 2.</p>
+<p><img src="/img/data-plane.svg" alt="Two layer cluster with a Fanout of 2" /></p>
+<h3 id="znacheniia-konfiguratsii">Значения конфигурации</h3>
+<p><code>DATA_PLANE_FANOUT</code> — определяет размер слоя 0. Последующие слои увеличиваются с коэффициентом <code>DATA_PLANE_FANOUT</code>. Количество узлов в окрестности равно значению разветвления. Районы заполнятся до предела, прежде чем будут добавлены новые, т. е. если район не заполнен, он <em>должен</em> быть последним.</p>
+<p>В настоящее время конфигурация задается при запуске кластера. В будущем эти параметры могут быть размещены в сети, что позволит изменять их на лету по мере изменения размеров кластера.</p>
+<h2 id="raschet-trebuemoi-skorosti-fec">Расчет требуемой скорости FEC</h2>
+<p>Turbine полагается на повторную передачу пакетов между валидаторами. Из-за
+повторной передачи, любая потеря пакетов в сети усугубляется, и
+увеличивается вероятность того, что пакет не достигнет адресата
+на каждом прыжке. Скорость FEC должна учитывать всю сеть.
+потеря пакетов и глубина распространения.</p>
+<p>Уничтоженная группа — это набор данных и пакетов кодирования, которые можно использовать.
+реконструировать друг друга. У каждой группы клоков есть шанс провала,
+на основе вероятности того, что количество пакетов
+курс ФЭК. Если валидатору не удается восстановить группу уничтожения,
+тогда блок не может быть реконструирован, и валидатору приходится полагаться
+на ремонте починить блоки.</p>
+<p>Вероятность отказа группы уничтожения может быть вычислена с помощью
+биномиальное распределение. Если скорость FEC равна «16:4», то размер группы
+равно 20, и по крайней мере 4 фрагмента должны выйти из строя, чтобы группа вышла из строя.
+Что равно сумме вероятностей отказа 4 или более трасс.
+из 20.</p>
+<p>Вероятность успеха блока в турбине:</p>
+<ul>
+<li>Вероятность сбоя пакета: <code>P = 1 - (1 - network_packet_loss_rate)^2</code></li>
+<li>Скорость FEC: <code>K:M</code></li>
+<li>Количество испытаний: <code>N = K + M</code></li>
+<li>Частота отказов группы Shred: <code>S = СУММА i=0 -&gt; M для бинома (prob_failure = P, пробы = N, неудачи = i)</code></li>
+<li>Клочков на блок: <code>G</code></li>
+<li>Вероятность успеха блока: <code>B = (1 - S) ^ (G / N)</code></li>
+<li>Биномиальное распределение для ровно <code>i</code> результатов с вероятностью P в N испытаниях определяется как <code>(N выбирают i) * P^i * (1 - P)^(N-i)</code></li>
+</ul>
+<p>Например:</p>
+<ul>
+<li>Скорость потери сетевых пакетов составляет 15%.</li>
+<li>Сеть 50k tps генерирует 6400 фрагментов в секунду.</li>
+<li>Скорость FEC увеличивает общее количество фрагментов на блок на коэффициент FEC.</li>
+</ul>
+<p>Со скоростью FEC: <code>16:4</code></p>
+<ul>
+<li><code>G = 8000</code></li>
+<li><code>P = 1 - 0,85 * 0,85 = 1 - 0,7225 = 0,2775</code></li>
+<li><code>S = СУММА i=0 -&gt; 4 для бинома (prob_failure = 0,2775, испытаний = 20, отказов = i) = 0,689414</code></li>
+<li><code>В = (1 - 0,689) ^ (8000/20) = 10^-203</code></li>
+</ul>
+<p>Со скоростью FEC <code>16:16</code></p>
+<ul>
+<li><code>G = 12800</code></li>
+<li><code>S = СУММА i=0 -&gt; 32 для бинома (prob_failure = 0,2775, испытаний = 64, отказов = i) = 0,002132</code></li>
+<li><code>В = (1 - 0,002132) ^ (12800/32) = 0,42583</code></li>
+</ul>
+<p>Со скоростью FEC <code>32:32</code></p>
+<ul>
+<li><code>G = 12800</code></li>
+<li><code>S = СУММА i=0 -&gt; 32 для бинома (prob_failure = 0,2775, испытаний = 64, отказов = i) = 0,000048</code></li>
+<li><code>В = (1 - 0,000048) ^ (12800/64) = 0,99045</code></li>
+</ul>
+<h2 id="okrestnosti">Окрестности</h2>
+<p>На следующей диаграмме показано, как взаимодействуют две окрестности в разных слоях. Чтобы повредить соседство, достаточное количество узлов (коды стирания +1) из соседства выше должны выйти из строя. Поскольку каждое соседство получает фрагменты от нескольких узлов в соседстве на верхнем уровне, нам потребуется большой сбой сети на верхних уровнях, чтобы получить неполные данные.</p>
+<p><img src="/img/data-plane-neighborhood.svg" alt="Inner workings of a neighborhood" /></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

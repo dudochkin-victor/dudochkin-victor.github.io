@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust против Swift: в чем основные различия? | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#chto-takoe-rust">Что такое Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#rust-program-to-add-two-numbers">Rust Program To Add Two Numbers</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#chto-takoe-swift">Что такое Swift?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#bystraia-programma-dlia-slozheniia-dvukh-chisel">Быстрая программа для сложения двух чисел</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#rust-protiv-swift-kakovy-pliusy-i-minusy-ispol-zovaniia-etikh-iazykov">Rust против Swift - каковы плюсы и минусы использования этих языков?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#pliusy-ispol-zovaniia-rust"><small>- Плюсы использования Rust</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#minusy-ispol-zovaniia-rust"><small>- Минусы использования Rust</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#pliusy-ispol-zovaniia-swift"><small>- Плюсы использования Swift</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#minusy-ispol-zovaniia-swift"><small>- Минусы использования Swift</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#rust-protiv-swift-tendentsii-poiska">Rust против Swift - Тенденции поиска</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#vyvod">Вывод</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-vs-swift-what-are-the-main-differences/#chasto-zadavaemye-voprosy"><small>- Часто задаваемые вопросы</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust против Swift: в чем основные различия?</h1>
+
+<p><a href="https://www.javaassignmenthelp.com/blog/rust-vs-swift/">Перевод</a> | Автор оригинала: javaassignmenthelp</p>
+<p>Нет никаких сомнений в том, что программирование - одна из самых горячих тем сейчас. Студентов очень привлекает программирование, и они хотят изучать языки программирования. Но они часто путаются между несколькими вариантами.</p>
+<p>Итак, чтобы им было проще, сегодня мы предлагаем подробную информацию о Rust и Swift. Оба эти языка являются двумя из самых популярных языков программирования.</p>
+<p>Прежде чем сразу перейти к различиям между Rust и Swift, давайте взглянем на основы этих языков программирования.</p>
+<h2 id="chto-takoe-rust">Что такое Rust?</h2>
+<p>Rust - это высокоуровневый универсальный, статически типизированный и многопарадигмальный язык программирования, который в основном был разработан для обеспечения безопасности и производительности. Его синтаксис в чем-то похож на язык программирования C++.</p>
+<p>Rust очень быстр и эффективен с точки зрения памяти. Это позволяет разработчикам быстро создавать эффективное программное обеспечение. Rust может интегрироваться с другими языками программирования и может работать со встроенными системами.</p>
+<p>Более того, его можно использовать для компонентов браузера, движков моделирования для виртуальной реальности и игр, файловых систем, операционных систем и многих других вещей. Он может легко решить проблемы, которые было трудно решить с помощью языков C и C++.</p>
+<p>Многие небольшие и крупные организации используют язык программирования Rust. Например, Dropbox, Cloudflare, Mozilla, npm, Postmates, Braintree - одни из самых популярных компаний, использующих язык Rust для производства.</p>
+<p>См. Также Разница между языками программирования C и C++. </p>
+<h2 id="rust-program-to-add-two-numbers">Rust Program To Add Two Numbers</h2>
+<p>Program</p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>()
+</span><span>{    
+</span><span>    </span><span style="color:#ff7733;">let</span><span> num1 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">;    
+</span><span>    </span><span style="color:#ff7733;">let</span><span> num2 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">18</span><span style="color:#bfbab0cc;">;    
+</span><span>    </span><span style="color:#ff7733;">let</span><span> add </span><span style="color:#f29668;">=</span><span> num1 </span><span style="color:#f29668;">+</span><span> num2</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(“Sum of {</span><span style="color:#f29718;">0</span><span>} and {</span><span style="color:#f29718;">1</span><span>} is {</span><span style="color:#f29718;">2</span><span>}”</span><span style="color:#bfbab0cc;">,</span><span> num1</span><span style="color:#bfbab0cc;">,</span><span> num2</span><span style="color:#bfbab0cc;">,</span><span> add)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Output</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Sum of 32 and 18 is 50
+</span></code></pre>
+<h2 id="chto-takoe-swift">Что такое Swift?</h2>
+<p>Swift - это мультипарадигмальный компилируемый язык программирования общего назначения. Он был разработан Apple Inc вместе с сообществом разработчиков ПО с открытым исходным кодом и выпущен в 2014 году. Swift в основном используется для настольных приложений, мобильных приложений, системного программирования, масштабирования облачных сервисов и многих других вещей.</p>
+<p>Он был создан для замены Objective-C, более раннего языка программирования Apple. Код Swift безопасен, интерактивен, современен и быстр. Более того, это удобный для новичков язык программирования, потому что его синтаксис очень выразительный, чистый и простой для программирования.</p>
+<p>Swift построен с помощью компилятора LLVM, фреймворка с открытым исходным кодом, включенного в Xcode версии 6. Он использует библиотеку времени выполнения Objective-C на платформе Apple, что позволяет использовать код Objective-C, C, C++ и Swift в одной программе.</p>
+<h2 id="bystraia-programma-dlia-slozheniia-dvukh-chisel">Быстрая программа для сложения двух чисел</h2>
+<p>Program</p>
+<pre data-lang="swift" style="background-color:#0f1419;color:#bfbab0;" class="language-swift "><code class="language-swift" data-lang="swift"><span style="color:#ff7733;">import </span><span style="font-style:italic;color:#39bae6;">Foundation 
+</span><span>
+</span><span style="color:#ff7733;">var</span><span> number1 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">21</span><span>; 
+</span><span style="color:#ff7733;">var</span><span> number2 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">32</span><span>; 
+</span><span style="color:#ff7733;">var</span><span> add </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Int</span><span>(); 
+</span><span>add </span><span style="color:#f29668;">=</span><span> number1</span><span style="color:#f29668;">+</span><span>number2; 
+</span><span>print(“number1 </span><span style="color:#f29668;">+</span><span> number2 </span><span style="color:#f29668;">=</span><span> “,add); 
+</span></code></pre>
+<p>Output</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$swift main.swift
+</span><span>number1 + number2 =  53
+</span></code></pre>
+<h2 id="rust-protiv-swift-kakovy-pliusy-i-minusy-ispol-zovaniia-etikh-iazykov">Rust против Swift - каковы плюсы и минусы использования этих языков?</h2>
+<p>Мы можем лучше узнать о Rust и Swift, проанализировав плюсы и минусы использования этих языков программирования.</p>
+<h3 id="pliusy-ispol-zovaniia-rust">Плюсы использования Rust</h3>
+<h4 id="upravlenie-pamiat-iu">Управление памятью</h4>
+<p>Управление памятью - одно из главных преимуществ использования языка Rust. Rust в основном разработан для системного программирования, у него нет среды выполнения и не выполняется фоновая обработка, то есть сборка мусора.</p>
+<p>Однако он обеспечивает автоматическое управление памятью, что не характерно для других языков программирования.</p>
+<h4 id="parallel-no">Параллельно:</h4>
+<p>Rust - это язык параллельного программирования. Он обеспечивает встроенную поддержку параллелизма.</p>
+<h4 id="podderzhka-generic">Поддержка Generic</h4>
+<p>Rust поддерживает дженерики и имеет отличную систему типов. Следовательно, программистам не нужно писать одни и те же классы словарей и массив несколько раз.</p>
+<h4 id="obnaruzhenie-oshibok">Обнаружение ошибок</h4>
+<p>Rust - это язык программирования со статической типизацией. Итак, ошибки выявляются во время компиляции. Rust не поддерживает исключений. Он использует результат типа &lt;T, E&gt; для исправимых ошибок и использует панику! Макрос для уведомления и остановки выполнения.</p>
+<h4 id="optimal-nyi-kod">Оптимальный код</h4>
+<p>Rust позволяет разработчикам каждый раз писать оптимальный код. Это означает, что программистам на Rust не требуется понимание кода компилятора для оптимизации своей программы.</p>
+<h4 id="dokumentatsiia">Документация</h4>
+<p>Документация Rust описывает работу структур данных и предоставляет архитектурные рекомендации по их подходящему использованию. Он имеет сильную поддержку сообщества и совместимость с Windows, что делает его идеальным выбором для многих людей.</p>
+<h3 id="minusy-ispol-zovaniia-rust">Минусы использования Rust</h3>
+<h4 id="skorost-kompiliatsii">Скорость компиляции</h4>
+<p>Скорость компиляции Rust медленная по сравнению с другими популярными языками программирования.</p>
+<h4 id="slozhnost">Сложность</h4>
+<p>На изучение и понимание языка программирования Rust требуется больше времени из-за его сложности.</p>
+<p>Теперь давайте посмотрим на плюсы и минусы языка программирования Swift, который поможет вам понять Rust и Swift.</p>
+<h3 id="pliusy-ispol-zovaniia-swift">Плюсы использования Swift</h3>
+<h4 id="upravlenie-pamiat-iu-1">Управление памятью</h4>
+<p>Swift обеспечивает автоматическое управление памятью и использует автоматический подсчет ссылок (ARC) для предотвращения утечек памяти и повышения производительности.</p>
+<h4 id="masshtabiruemost">Масштабируемость</h4>
+<p>Язык программирования Swift - это будущее, а это значит, что программисты могут расширять его, добавляя новые функции.</p>
+<h4 id="podderzhka-generic-1">Поддержка Generic</h4>
+<p>Поддержка дженериков в Swift аналогична Rust. Однако основное отличие заключается в том, что общая специализация в Swift является деталью реализации, тогда как Rust использует мономорфизацию для полной специализации универсального.</p>
+<h4 id="legko-poniat">Легко понять</h4>
+<p>Swift очень легко читать, писать и понимать по сравнению с Rust. Он имеет простой и выразительный синтаксис, который может легко понять даже начинающий программист.</p>
+<h4 id="proizvoditel-nost-i-bezopasnost">Производительность и безопасность</h4>
+<p>Swift, как следует из названия, был разработан с упором на скорость. Он обеспечивает надежную обработку ошибок и статически типизированные характеристики, которые помогают программисту узнать об ошибках перед компиляцией и предотвратить сбой кода. Следовательно, он предлагает лучшую производительность и безопасность.</p>
+<h3 id="minusy-ispol-zovaniia-swift">Минусы использования Swift</h3>
+<h4 id="soobshchestvo">Сообщество</h4>
+<p>Несмотря на то, что Swift является одним из самых быстрорастущих языков программирования, сообщество Swift все же меньше по сравнению с другими языками с открытым исходным кодом. Это означает, что если вы создаете проект с помощью программирования на Swift, вы можете столкнуться с проблемами при поиске поддержки сообщества.</p>
+<h2 id="rust-protiv-swift-tendentsii-poiska">Rust против Swift - Тенденции поиска</h2>
+<p><img src="/imgs/posts/21d27c79_01.png" alt="" /></p>
+<p>Согласно Google Trends, язык программирования Swift более популярен, чем язык программирования Rust, за последние 12 месяцев при поиске в Google в Соединенных Штатах.</p>
+<p>Также читайте: Rust vs C++</p>
+<h2 id="vyvod">Вывод</h2>
+<p>В этом блоге мы предоставили подробную информацию о Rust и Swift. Мы увидели преимущества и недостатки обоих этих языков. Надеюсь, это помогло вам узнать о Rust vs Swift. Теперь вы можете легко выбрать один из этих языков в соответствии с вашими потребностями.</p>
+<p>Если вы все еще не уверены или нуждаетесь в помощи по назначению Rust, вы можете обсудить это с нашими экспертами.</p>
+<h3 id="chasto-zadavaemye-voprosy">Часто задаваемые вопросы</h3>
+<h4 id="dlia-chego-luchshe-vsego-ispol-zovat-rust">Для чего лучше всего использовать Rust?</h4>
+<p>Rust - это язык программирования высокого уровня, но он может напрямую обращаться к оборудованию и памяти, что делает его отличным выбором для распределенных онлайн-сервисов, инструментов командной строки, разработки встроенных устройств и т.д.</p>
+<h4 id="swift-luchshe-python">Swift лучше Python?</h4>
+<p>Swift быстрее Python. Однако, чтобы решить, что лучше между Swift и Python, вы должны учитывать свои требования. Если вы хотите создать приложение для Apple OS, лучше выбрать Swift. Но если вы собираетесь создать серверную часть, искусственный интеллект или прототип, Python будет лучшим выбором. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

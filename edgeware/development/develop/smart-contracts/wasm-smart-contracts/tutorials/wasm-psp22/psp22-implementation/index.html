@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Внедрение PSP22 в контракт | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-psp22/psp22-implementation/#shag-1-vkliuchite-zavisimosti">Шаг 1. Включите зависимости</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-psp22/psp22-implementation/#shag-2-dobav-te-import">Шаг 2. Добавьте импорт</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-psp22/psp22-implementation/#shag-3-opredelite-khranilishche">Шаг 3. Определите хранилище</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-psp22/psp22-implementation/#shag-4-nasledovat-logiku">Шаг 4: Наследовать логику</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-psp22/psp22-implementation/#shag-5-opredelite-konstruktor">Шаг 5: Определите конструктор</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-psp22/psp22-implementation/#shag-6-nastroite-svoi-kontrakt">Шаг 6: Настройте свой контракт</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Внедрение PSP22 в контракт</h1>
+
+<p>Для получения последней версии см. <a href="https://docs.openbrush.io/">Документацию OpenBrush</a></p>
+<p>В этом примере показано, как можно повторно использовать реализацию
+<a href="https://github.com/Supercolony-net/openbrush-contracts/tree/main/contracts/token/psp22">psp22</a> токен (таким же образом вы можете повторно использовать
+<a href="https://github.com/Supercolony-net/openbrush-contracts/tree/main/contracts/token/psp721">psp721</a> и [psp1155](https://github.com/Supercolony-net/openbrush-contracts /tree/main/contracts/token/psp1155)). Кроме того, в этом примере показано, как можно настроить
+логика, например, для отказа от передачи токенов на <code>hated_account</code>.</p>
+<h2 id="shag-1-vkliuchite-zavisimosti">Шаг 1. Включите зависимости</h2>
+<p>Включите зависимости от <code>psp22</code> и <code>brush</code> в файл груза.</p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">ink_primitives </span><span>= { </span><span style="color:#59c2ff;">tag </span><span>= </span><span style="color:#c2d94c;">&quot;v3.0.0-rc4&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">git </span><span>= </span><span style="color:#c2d94c;">&quot;https://github.com/Supercolony-net/ink&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false </span><span>}
+</span><span style="color:#59c2ff;">ink_metadata </span><span>= { </span><span style="color:#59c2ff;">tag </span><span>= </span><span style="color:#c2d94c;">&quot;v3.0.0-rc4&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">git </span><span>= </span><span style="color:#c2d94c;">&quot;https://github.com/Supercolony-net/ink&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">features </span><span>= [</span><span style="color:#c2d94c;">&quot;derive&quot;</span><span>]</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">optional </span><span>= </span><span style="color:#f29718;">true </span><span>}
+</span><span style="color:#59c2ff;">ink_env </span><span>= { </span><span style="color:#59c2ff;">tag </span><span>= </span><span style="color:#c2d94c;">&quot;v3.0.0-rc4&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">git </span><span>= </span><span style="color:#c2d94c;">&quot;https://github.com/Supercolony-net/ink&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false </span><span>}
+</span><span style="color:#59c2ff;">ink_storage </span><span>= { </span><span style="color:#59c2ff;">tag </span><span>= </span><span style="color:#c2d94c;">&quot;v3.0.0-rc4&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">git </span><span>= </span><span style="color:#c2d94c;">&quot;https://github.com/Supercolony-net/ink&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false </span><span>}
+</span><span style="color:#59c2ff;">ink_lang </span><span>= { </span><span style="color:#59c2ff;">tag </span><span>= </span><span style="color:#c2d94c;">&quot;v3.0.0-rc4&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">git </span><span>= </span><span style="color:#c2d94c;">&quot;https://github.com/Supercolony-net/ink&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false </span><span>}
+</span><span style="color:#59c2ff;">ink_prelude </span><span>= { </span><span style="color:#59c2ff;">tag </span><span>= </span><span style="color:#c2d94c;">&quot;v3.0.0-rc4&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">git </span><span>= </span><span style="color:#c2d94c;">&quot;https://github.com/Supercolony-net/ink&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false </span><span>}
+</span><span>
+</span><span style="color:#59c2ff;">scale </span><span>= { </span><span style="color:#59c2ff;">package </span><span>= </span><span style="color:#c2d94c;">&quot;parity-scale-codec&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;2.1&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">features </span><span>= [</span><span style="color:#c2d94c;">&quot;derive&quot;</span><span>] }
+</span><span style="color:#59c2ff;">scale-info </span><span>= { </span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.6.0&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">features </span><span>= [</span><span style="color:#c2d94c;">&quot;derive&quot;</span><span>]</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">optional </span><span>= </span><span style="color:#f29718;">true </span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># These dependencies
+</span><span style="color:#59c2ff;">psp22 </span><span>= { </span><span style="color:#59c2ff;">tag </span><span>= </span><span style="color:#c2d94c;">&quot;v1.0.0&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">git </span><span>= </span><span style="color:#c2d94c;">&quot;https://github.com/Supercolony-net/openbrush-contracts&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false </span><span>}
+</span><span style="color:#59c2ff;">brush </span><span>= { </span><span style="color:#59c2ff;">tag </span><span>= </span><span style="color:#c2d94c;">&quot;v1.0.0&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">git </span><span>= </span><span style="color:#c2d94c;">&quot;https://github.com/Supercolony-net/openbrush-contracts&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false </span><span>}
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">features</span><span>]
+</span><span style="color:#59c2ff;">default </span><span>= [</span><span style="color:#c2d94c;">&quot;std&quot;</span><span>]
+</span><span style="color:#59c2ff;">std </span><span>= [
+</span><span>   </span><span style="color:#c2d94c;">&quot;ink_primitives/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;ink_metadata&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;ink_metadata/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;ink_env/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;ink_storage/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;ink_lang/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;scale/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;scale-info&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;scale-info/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>
+</span><span>   </span><span style="font-style:italic;color:#5c6773;"># These dependencies   
+</span><span>   </span><span style="color:#c2d94c;">&quot;psp22/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="color:#c2d94c;">&quot;brush/std&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>]
+</span></code></pre>
+<h2 id="shag-2-dobav-te-import">Шаг 2. Добавьте импорт</h2>
+<p>Замените макрос ink::contract на кисть::contract.
+Импортируйте <strong>все</strong> из <code>psp22::traits</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">brush</span><span>::</span><span style="color:#ffb454;">contract</span><span>]
+</span><span style="color:#ff7733;">pub mod </span><span style="color:#59c2ff;">my_psp22 </span><span>{
+</span><span>   </span><span style="color:#ff7733;">use </span><span>psp22</span><span style="color:#f29668;">::</span><span>traits</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">use </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>Lazy</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">use </span><span>ink_prelude</span><span style="color:#f29668;">::</span><span>{string</span><span style="color:#f29668;">::</span><span>String</span><span style="color:#bfbab0cc;">, </span><span>vec</span><span style="color:#f29668;">::</span><span>Vec}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h2 id="shag-3-opredelite-khranilishche">Шаг 3. Определите хранилище</h2>
+<p>Объявить структуру хранилища и объявить поля, связанные с PSP22Storage и PSP22MetadataStorage.
+черты. Затем вам нужно получить черты PSP22Storage и PSP22MetadataStorage и отметить соответствующие поля.
+с атрибутами <code>#[PSP22StorageField]</code> и <code>#[PSP22MetadataStorageField]</code>. Получение этих признаков позволяет повторно использовать
+реализация по умолчанию «PSP22» и «PSP22Metadata».</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Default</span><span style="color:#bfbab0cc;">,</span><span> PSP22Storage</span><span style="color:#bfbab0cc;">,</span><span> PSP22MetadataStorage)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">MyPSP22 </span><span>{
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">PSP22StorageField</span><span>]
+</span><span>    psp22</span><span style="color:#bfbab0cc;">:</span><span> PSP22Data,
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">PSP22MetadataStorageField</span><span>]
+</span><span>    metadata</span><span style="color:#bfbab0cc;">:</span><span> PSP22MetadataData,
+</span><span>}
+</span></code></pre>
+<h2 id="shag-4-nasledovat-logiku">Шаг 4: Наследовать логику</h2>
+<p>Наследовать реализации трейтов PSP22 и PSP22Metadata. Вы можете настроить (переопределить) методы в этом блоке impl.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span>PSP22 </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyPSP22 </span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>PSP22Metadata </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyPSP22 </span><span>{}
+</span></code></pre>
+<h2 id="shag-5-opredelite-konstruktor">Шаг 5: Определите конструктор</h2>
+<p>Определить конструктор. Ваша базовая версия контракта <code>PSP22</code> готова!</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">MyPSP22 </span><span>{
+</span><span>   </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>   </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">_total_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance, </span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;, </span><span style="color:#f29718;">symbol</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;, </span><span style="color:#f29718;">decimal</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>      </span><span style="color:#ff7733;">let mut</span><span> instance </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>default()</span><span style="color:#bfbab0cc;">;
+</span><span>      Lazy</span><span style="color:#f29668;">::</span><span>set(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> instance</span><span style="color:#f29668;">.</span><span>metadata</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#bfbab0cc;">,</span><span> name)</span><span style="color:#bfbab0cc;">;
+</span><span>      Lazy</span><span style="color:#f29668;">::</span><span>set(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> instance</span><span style="color:#f29668;">.</span><span>metadata</span><span style="color:#f29668;">.</span><span>symbol</span><span style="color:#bfbab0cc;">,</span><span>symbol)</span><span style="color:#bfbab0cc;">;
+</span><span>      Lazy</span><span style="color:#f29668;">::</span><span>set(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> instance</span><span style="color:#f29668;">.</span><span>metadata</span><span style="color:#f29668;">.</span><span>decimals</span><span style="color:#bfbab0cc;">,</span><span>decimal)</span><span style="color:#bfbab0cc;">;
+</span><span>      instance</span><span style="color:#f29668;">.</span><span style="color:#f07178;">_mint</span><span>(instance</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> _total_supply)</span><span style="color:#bfbab0cc;">;
+</span><span>      instance
+</span><span>   }
+</span><span>}
+</span></code></pre>
+<h2 id="shag-6-nastroite-svoi-kontrakt">Шаг 6: Настройте свой контракт</h2>
+<p>Настройте его, добавив ненавистную логику аккаунта. Он будет содержать два общедоступных метода set_hated_account и get_hated_account. Также мы будем
+переопределить метод _before_token_transfer в реализации PSP22. И добавим в структуру поле <code>hated_account:AccountId</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Default</span><span style="color:#bfbab0cc;">,</span><span> PSP22Storage</span><span style="color:#bfbab0cc;">,</span><span> PSP22MetadataStorage)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">MyPSP22 </span><span>{
+</span><span>   </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">PSP22StorageField</span><span>]
+</span><span>   psp22</span><span style="color:#bfbab0cc;">:</span><span> PSP22Data,
+</span><span>   </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">PSP22MetadataStorageField</span><span>]
+</span><span>   metadata</span><span style="color:#bfbab0cc;">:</span><span> PSP22MetadataData,
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// fields for hater logic
+</span><span>   hated_account</span><span style="color:#bfbab0cc;">:</span><span> AccountId,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>PSP22 </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyPSP22 </span><span>{
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// Let&#39;s override method to reject transactions to bad account
+</span><span>   </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">_before_token_transfer</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">_from</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">_to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">_amount</span><span style="color:#bfbab0cc;">:</span><span> Balance) {
+</span><span>      </span><span style="color:#f07178;">assert!</span><span>(_to </span><span style="color:#f29668;">!= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>hated_account</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;{}&quot;</span><span style="color:#bfbab0cc;">, </span><span>PSP22Error</span><span style="color:#f29668;">::</span><span>Custom(</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;I hate this account!&quot;</span><span>))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>PSP22Metadata </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyPSP22 </span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">MyPSP22 </span><span>{
+</span><span>   </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>   </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">_total_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance, </span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;, </span><span style="color:#f29718;">symbol</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;, </span><span style="color:#f29718;">decimal</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>      </span><span style="color:#ff7733;">let mut</span><span> instance </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>default()</span><span style="color:#bfbab0cc;">;
+</span><span>      Lazy</span><span style="color:#f29668;">::</span><span>set(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> instance</span><span style="color:#f29668;">.</span><span>metadata</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#bfbab0cc;">,</span><span> name)</span><span style="color:#bfbab0cc;">;
+</span><span>      Lazy</span><span style="color:#f29668;">::</span><span>set(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> instance</span><span style="color:#f29668;">.</span><span>metadata</span><span style="color:#f29668;">.</span><span>symbol</span><span style="color:#bfbab0cc;">,</span><span>symbol)</span><span style="color:#bfbab0cc;">;
+</span><span>      Lazy</span><span style="color:#f29668;">::</span><span>set(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> instance</span><span style="color:#f29668;">.</span><span>metadata</span><span style="color:#f29668;">.</span><span>decimals</span><span style="color:#bfbab0cc;">,</span><span>decimal)</span><span style="color:#bfbab0cc;">;
+</span><span>      instance</span><span style="color:#f29668;">.</span><span style="color:#f07178;">_mint</span><span>(instance</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> _total_supply)</span><span style="color:#bfbab0cc;">;
+</span><span>      instance
+</span><span>   }
+</span><span>
+</span><span>   </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>   </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">set_hated_account</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">hated</span><span style="color:#bfbab0cc;">:</span><span> AccountId) {
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>hated_account </span><span style="color:#f29668;">=</span><span> hated</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>
+</span><span>   </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>   </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_hated_account</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> AccountId {
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>hated_account</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()
+</span><span>   }
+</span><span>}
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

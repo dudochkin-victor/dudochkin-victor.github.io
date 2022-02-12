@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Добавьте Солану на свою биржу | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#nastroika-uzla">Настройка узла</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#avtomaticheskii-perezapusk-i-monitoring"><small>- Автоматический перезапуск и мониторинг</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#nepreryvnost-reestra"><small>- Непрерывность реестра</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#minimizatsiia-vozdeistviia-porta-validatora"><small>- Минимизация воздействия порта валидатора</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#nastroika-depozitnykh-schetov">Настройка депозитных счетов</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#avtonomnye-uchetnye-zapisi"><small>- Автономные учетные записи</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#proslushivanie-depozitov">Прослушивание депозитов</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#opros-blokov"><small>- Опрос блоков</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#istoriia-adresov"><small>- История адресов</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#otpravka-vyvoda-sredstv">Отправка вывода средств</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#sinkhronnyi"><small>- Синхронный</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#asinkhronnyi"><small>- Асинхронный</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#proverka-adresov-schetov-predostavlennykh-pol-zovateliami-dlia-sniatiia-sredstv"><small>- Проверка адресов счетов, предоставленных пользователями, для снятия средств</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#minimal-nye-summy-depozita-i-sniatiia">Минимальные суммы депозита и снятия</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#podderzhka-standarta-tokenov-spl">Поддержка стандарта токенов SPL</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#monetnye-dvory-tokenov"><small>- Монетные дворы токенов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#ustanovka-cli-instrumenta-spl-token"><small>- Установка CLI-инструмента spl-token</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#sozdanie-akkaunta"><small>- Создание аккаунта</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#proverka-balansa-scheta"><small>- Проверка баланса счета</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#perevody-tokenov"><small>- Переводы токенов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#deponirovanie"><small>- Депонирование</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#sniatie"><small>- Снятие</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#drugie-soobrazheniia"><small>- Другие соображения</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/integrations/exchange/#testirovanie-integratsii">Тестирование интеграции</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Добавьте Солану на свою биржу</h1>
+
+<p>В этом руководстве описывается, как добавить собственный токен Solana SOL на вашу биржу криптовалют.</p>
+<h2 id="nastroika-uzla">Настройка узла</h2>
+<p>Мы настоятельно рекомендуем настроить по крайней мере два узла на полноценных компьютерах/облачных экземплярах, быстро выполнить обновление до более новых версий и следить за операциями службы с помощью встроенного инструмента мониторинга.</p>
+<p>Эта настройка позволяет:</p>
+<ul>
+<li>иметь самоуправляемый шлюз к бета-кластеру основной сети Solana для получения данных и отправки транзакций по снятию средств</li>
+<li>иметь полный контроль над тем, сколько исторических данных блока сохраняется</li>
+<li>поддерживать доступность вашего сервиса, даже если один узел выйдет из строя</li>
+</ul>
+<p>Узлы Solana требуют относительно высокой вычислительной мощности для обработки наших быстрых блоков и высокого TPS. Конкретные требования см. в <a href="../running-validator/validator-reqs/">рекомендациях по оборудованию</a>.</p>
+<p>Чтобы запустить узел API:</p>
+<ol>
+<li><a href="../cli/install-solana-cli-tools/">Установите набор инструментов командной строки Solana</a></li>
+<li>Запустите валидатор как минимум со следующими параметрами:</li>
+</ol>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-validator </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --ledger </span><span style="color:#f29668;">&lt;</span><span>LEDGER_PATH</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --identity </span><span style="color:#f29668;">&lt;</span><span>VALIDATOR_IDENTITY_KEYPAIR</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --entrypoint </span><span style="color:#f29668;">&lt;</span><span>CLUSTER_ENTRYPOINT</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --expected-genesis-hash </span><span style="color:#f29668;">&lt;</span><span>EXPECTED_GENESIS_HASH</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --rpc-port</span><span> 8899 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --no-voting </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --enable-rpc-transaction-history </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --limit-ledger-size </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --known-validator </span><span style="color:#f29668;">&lt;</span><span>VALIDATOR_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --only-known-rpc
+</span></code></pre>
+<p>Настройте <code>--ledger</code> на желаемое место хранения леджера, а <code>--rpc-port</code> на порт, который вы хотите открыть.</p>
+<p>Параметры --entrypoint и --expected-genesis-hash относятся к кластеру, к которому вы присоединяетесь.
+<a href="../clusters.md#example-solana-validator-command-line-2">Текущие параметры для бета-версии основной сети</a></p>
+<p>Параметр <code>--limit-ledger-size</code> позволяет вам указать, сколько леджеров <a href="../terminology.md#shred">клочков</a> ваш узел сохраняет на диске. Если вы не укажете этот параметр, валидатор будет хранить всю книгу до тех пор, пока не закончится место на диске. Значение по умолчанию пытается сохранить использование диска леджера ниже 500 ГБ. Можно запросить большее или меньшее использование диска, добавив аргумент к <code>--limit-ledger-size</code>, если это необходимо. Проверьте <code>solana-validator --help</code> для предельного значения по умолчанию, используемого <code>--limit-ledger-size</code>. Дополнительная информация о выборе пользовательского предельного значения <a href="https://github.com/solana-labs/solana/blob/583cec922b6107e0f85c7e14cb5e642bc7dfb340/core/src/ledger_cleanup_service.rs#L15-L26">доступна здесь</a>.</p>
+<p>Указание одного или нескольких параметров <code>--known-validator</code> может защитить вас от загрузки с вредоносного снимка. <a href="../running-validator/validator-start.md#known-validators">Подробнее о ценности загрузки с известными валидаторами</a></p>
+<p>Необязательные параметры для рассмотрения:</p>
+<ul>
+<li><code>--private-rpc</code> предотвращает публикацию вашего порта RPC для использования другими узлами</li>
+<li><code>--rpc-bind-address</code> позволяет указать другой IP-адрес для привязки порта RPC</li>
+</ul>
+<h3 id="avtomaticheskii-perezapusk-i-monitoring">Автоматический перезапуск и мониторинг</h3>
+<p>Мы рекомендуем настроить каждый из ваших узлов на автоматический перезапуск при выходе, чтобы вы пропустили как можно меньше данных. Запуск программного обеспечения solana в качестве службы systemd — отличный вариант.</p>
+<p>Для мониторинга мы предоставляем <a href="https://github.com/solana-labs/solana/blob/master/watchtower/README.md"><code>solana-watchtower</code></a>, который может отслеживать ваш валидатор и обнаруживать с помощью <code>solana-watchtower</code> процесс валидатора неисправен. Его можно напрямую настроить для оповещения через Slack, Telegram, Discord или Twillio. Для получения подробной информации запустите <code>solana-watchtower --help</code>.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-watchtower</span><span style="color:#f29718;"> --validator-identity </span><span style="color:#f29668;">&lt;</span><span>YOUR VALIDATOR IDENTITY</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<h4 id="obiavleniia-o-novykh-vypuskakh-programmnogo-obespecheniia">Объявления о новых выпусках программного обеспечения</h4>
+<p>Мы часто выпускаем новое программное обеспечение (около 1 выпуска в неделю).
+Иногда более новые версии включают несовместимые изменения протокола, что требует своевременного обновления программного обеспечения во избежание ошибок при обработке блоков.</p>
+<p>Наши официальные объявления о выпуске всех видов выпусков (обычных и безопасных) передаются через канал разногласий под названием <a href="https://discord.com/channels/428295358100013066/669406841830244375"><code>#mb-announcement</code></a> (<code>mb</code> означает <code>основная сеть-бета</code>).</p>
+<p>Как и в случае стейкинговых валидаторов, мы ожидаем, что любые валидаторы, управляемые биржей, будут обновлены при первой же возможности в течение рабочего дня или двух после обычного объявления о выпуске. Для выпусков, связанных с безопасностью, могут потребоваться более срочные действия.</p>
+<h3 id="nepreryvnost-reestra">Непрерывность реестра</h3>
+<p>По умолчанию каждый из ваших узлов будет загружаться со снимка, предоставленного одним из ваших известных валидаторов. Этот моментальный снимок отражает текущее состояние цепочки, но не содержит полного исторического реестра. Если один из ваших узлов выходит и загружается с нового снимка, в реестре на этом узле может быть пробел. Чтобы предотвратить эту проблему, добавьте параметр --no-snapshot-fetch к вашей команде solana-validator, чтобы получать исторические данные реестра вместо моментального снимка.</p>
+<p>Не передавайте параметр <code>--no-snapshot-fetch</code> при начальной загрузке, так как невозможно полностью загрузить узел из исходного блока. Вместо этого сначала загрузитесь со снимка, а затем добавьте параметр --no-snapshot-fetch для перезагрузки.</p>
+<p>Важно отметить, что объем исторической книги, доступной вашим узлам из остальной части сети, ограничен в любой момент времени. После запуска, если ваши валидаторы испытывают значительное время простоя, они могут быть не в состоянии догнать сеть и должны будут загрузить новый снимок от известного валидатора. При этом ваши валидаторы теперь будут иметь пробел в своих исторических данных реестра, который не может быть заполнен.</p>
+<h3 id="minimizatsiia-vozdeistviia-porta-validatora">Минимизация воздействия порта валидатора</h3>
+<p>Валидатор требует, чтобы различные порты UDP и TCP были открыты для входящего трафика от всех других валидаторов Solana. Хотя это наиболее эффективный режим работы, и он настоятельно рекомендуется, можно ограничить валидатор, чтобы он требовал только входящий трафик от одного другого валидатора Solana.</p>
+<p>Сначала добавьте аргумент <code>--restricted-repair-only-mode</code>. Это заставит валидатор работать в ограниченном режиме, когда он не будет получать запросы от остальных валидаторов, и вместо этого ему нужно будет постоянно опрашивать другие валидаторы на наличие блоков. Валидатор будет передавать только UDP-пакеты другим валидаторам, используя порты <em>Gossip</em> и <em>ServeR</em> (&quot;обслуживание ремонта&quot;), и только получать UDP-пакеты на свои порты <em>Gossip</em> и <em>Repair</em>.</p>
+<p>Порт <em>Gossip</em> является двунаправленным и позволяет вашему валидатору оставаться на связи с остальной частью кластера. Ваш валидатор передает на <em>ServeR</em> запросы на восстановление для получения новых блоков из остальной части сети, поскольку Turbine теперь отключена. После этого ваш валидатор получит ответы на ремонт порта <em>Repair</em> от других валидаторов.</p>
+<p>Чтобы дополнительно ограничить валидатор запросом блоков только от одного или нескольких валидаторов, сначала определите публичный ключ идентификации для этого валидатора и добавьте аргументы <code>--gossip-pull-validator PUBKEY --repair-validator PUBKEY</code> для каждого PUBKEY. Это приведет к тому, что ваш валидатор будет истощать ресурсы каждого добавленного вами валидатора, поэтому делайте это экономно и только после консультации с целевым валидатором.</p>
+<p>Теперь ваш валидатор должен обмениваться данными только с явно указанными валидаторами и только на портах <em>Gossip</em>, <em>Repair</em> и <em>ServeR</em>.</p>
+<h2 id="nastroika-depozitnykh-schetov">Настройка депозитных счетов</h2>
+<p>Учетные записи Solana не требуют какой-либо инициализации в сети; как только они содержат некоторое SOL, они существуют. Чтобы настроить депозитный счет для своей биржи, просто создайте пару ключей Solana, используя любой из наших <a href="../wallet-guide/cli/">инструментов кошелька</a>.</p>
+<p>Мы рекомендуем использовать уникальный депозитный счет для каждого из ваших пользователей.</p>
+<p>Аккаунты Solana должны быть освобождены от арендной платы за счет содержания <a href="developing/programming-model/accounts.md#rent">арендной платы</a> за 2 года в SOL. Чтобы найти минимальный безвозмездный баланс для ваших депозитных счетов, запросите конечную точку <a href="developing/clients/jsonrpc-api.md#getminimumbalanceforrentexemption"><code>getMinimumBalanceForRentExemption</code></a>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -X</span><span> POST</span><span style="color:#f29718;"> -H </span><span style="color:#c2d94c;">&quot;Content-Type: application/json&quot;</span><span style="color:#f29718;"> -d </span><span style="color:#c2d94c;">&#39;{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;getMinimumBalanceForRentExemption&quot;,&quot;params&quot;:[0]}&#39;</span><span> localhost:8899
+</span><span>
+</span><span style="color:#ffb454;">{</span><span style="color:#c2d94c;">&quot;jsonrpc&quot;</span><span style="color:#ffb454;">:</span><span style="color:#c2d94c;">&quot;2.0&quot;</span><span style="color:#ffb454;">,</span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#ffb454;">:890880,</span><span style="color:#c2d94c;">&quot;id&quot;</span><span style="color:#ffb454;">:1</span><span>}
+</span></code></pre>
+<h3 id="avtonomnye-uchetnye-zapisi">Автономные учетные записи</h3>
+<p>Вы можете хранить ключи для одной или нескольких учетных записей в автономном режиме для большей безопасности. Если это так, вам нужно будет перенести SOL на горячие аккаунты, используя наши <a href="../offline-signing/">автономные методы</a>.</p>
+<h2 id="proslushivanie-depozitov">Прослушивание депозитов</h2>
+<p>Когда пользователь хочет внести SOL на вашу биржу, попросите его отправить перевод на соответствующий адрес депозита.</p>
+<h3 id="opros-blokov">Опрос блоков</h3>
+<p>Чтобы отслеживать все депозитные счета для вашей биржи, опрашивайте каждый подтвержденный блок и проверяйте интересующие адреса, используя службу JSON-RPC вашего узла Solana API.</p>
+<ul>
+<li>Чтобы определить, какие блоки доступны, отправьте запрос <a href="developing/clients/jsonrpc-api.md#getconfirmedblocks"><code>getConfirmedBlocks</code></a>, передав последний уже обработанный блок в качестве параметра start-slot:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -X</span><span> POST</span><span style="color:#f29718;"> -H </span><span style="color:#c2d94c;">&quot;Content-Type: application/json&quot;</span><span style="color:#f29718;"> -d </span><span style="color:#c2d94c;">&#39;{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;getConfirmedBlocks&quot;,&quot;params&quot;:[5]}&#39;</span><span> localhost:8899
+</span><span>
+</span><span style="color:#ffb454;">{</span><span style="color:#c2d94c;">&quot;jsonrpc&quot;</span><span style="color:#ffb454;">:</span><span style="color:#c2d94c;">&quot;2.0&quot;</span><span style="color:#ffb454;">,</span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#ffb454;">:[5,6,8,9,11],</span><span style="color:#c2d94c;">&quot;id&quot;</span><span style="color:#ffb454;">:1</span><span>}
+</span></code></pre>
+<p>Не каждый слот производит блок, поэтому в последовательности целых чисел могут быть пробелы.</p>
+<ul>
+<li>Для каждого блока запросите его содержимое с помощью запроса <a href="developing/clients/jsonrpc-api.md#getconfirmedblock"><code>getConfirmedBlock</code></a>:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -X</span><span> POST</span><span style="color:#f29718;"> -H </span><span style="color:#c2d94c;">&quot;Content-Type: application/json&quot;</span><span style="color:#f29718;"> -d </span><span style="color:#c2d94c;">&#39;{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;getConfirmedBlock&quot;,&quot;params&quot;:[5, &quot;json&quot;]}&#39;</span><span> localhost:8899
+</span><span>
+</span><span>{
+</span><span>  </span><span style="color:#c2d94c;">&quot;jsonrpc&quot;</span><span style="color:#ffb454;">: </span><span style="color:#c2d94c;">&quot;2.0&quot;</span><span>,
+</span><span>  </span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#ffb454;">: </span><span>{
+</span><span>    </span><span style="color:#c2d94c;">&quot;blockhash&quot;</span><span>: </span><span style="color:#c2d94c;">&quot;2WcrsKSVANoe6xQHKtCcqNdUpCQPQ3vb6QTgi1dcE2oL&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;parentSlot&quot;</span><span>: 4</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;previousBlockhash&quot;</span><span>: </span><span style="color:#c2d94c;">&quot;7ZDoGW83nXgP14vnn9XhGSaGjbuLdLWkQAoUQ7pg6qDZ&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;rewards&quot;</span><span>: </span><span style="color:#ff7733;">[]</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;transactions&quot;</span><span>: [
+</span><span>      {
+</span><span>        </span><span style="color:#c2d94c;">&quot;meta&quot;</span><span>: {
+</span><span>          </span><span style="color:#c2d94c;">&quot;err&quot;</span><span>: null</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;fee&quot;</span><span>: 5000</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;postBalances&quot;</span><span>: [
+</span><span>            2033973061360</span><span style="color:#bfbab0cc;">,
+</span><span>            218099990000</span><span style="color:#bfbab0cc;">,
+</span><span>            42000000003
+</span><span>          ]</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;preBalances&quot;</span><span>: [
+</span><span>            2044973066360</span><span style="color:#bfbab0cc;">,
+</span><span>            207099990000</span><span style="color:#bfbab0cc;">,
+</span><span>            42000000003
+</span><span>          ]</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;status&quot;</span><span>: {
+</span><span>            </span><span style="color:#c2d94c;">&quot;Ok&quot;</span><span>: null
+</span><span>          }
+</span><span>        }</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;transaction&quot;</span><span>: {
+</span><span>          </span><span style="color:#c2d94c;">&quot;message&quot;</span><span>: {
+</span><span>            </span><span style="color:#c2d94c;">&quot;accountKeys&quot;</span><span>: [
+</span><span>              </span><span style="color:#c2d94c;">&quot;Bbqg1M4YVVfbhEzwA9SpC9FhsaG83YMTYoR4a8oTDLX&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>              </span><span style="color:#c2d94c;">&quot;47Sbuv6jL7CViK9F2NMW51aQGhfdpUu7WNvKyH645Rfi&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>              </span><span style="color:#c2d94c;">&quot;11111111111111111111111111111111&quot;
+</span><span>            ]</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#c2d94c;">&quot;header&quot;</span><span>: {
+</span><span>              </span><span style="color:#c2d94c;">&quot;numReadonlySignedAccounts&quot;</span><span>: 0</span><span style="color:#bfbab0cc;">,
+</span><span>              </span><span style="color:#c2d94c;">&quot;numReadonlyUnsignedAccounts&quot;</span><span>: 1</span><span style="color:#bfbab0cc;">,
+</span><span>              </span><span style="color:#c2d94c;">&quot;numRequiredSignatures&quot;</span><span>: 1
+</span><span>            }</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#c2d94c;">&quot;instructions&quot;</span><span>: [
+</span><span>              {
+</span><span>                </span><span style="color:#c2d94c;">&quot;accounts&quot;</span><span>: [
+</span><span>                  0</span><span style="color:#bfbab0cc;">,
+</span><span>                  1
+</span><span>                ]</span><span style="color:#bfbab0cc;">,
+</span><span>                </span><span style="color:#c2d94c;">&quot;data&quot;</span><span>: </span><span style="color:#c2d94c;">&quot;3Bxs3zyH82bhpB8j&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>                </span><span style="color:#c2d94c;">&quot;programIdIndex&quot;</span><span>: 2
+</span><span>              }
+</span><span>            ]</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#c2d94c;">&quot;recentBlockhash&quot;</span><span>: </span><span style="color:#c2d94c;">&quot;7GytRgrWXncJWKhzovVoP9kjfLwoiuDb3cWjpXGnmxWh&quot;
+</span><span>          }</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;signatures&quot;</span><span>: [
+</span><span>            </span><span style="color:#c2d94c;">&quot;dhjhJp2V2ybQGVfELWM1aZy98guVVsxRCB5KhNiXFjCBMK5KEyzV8smhkVvs3xwkAug31KnpzJpiNPtcD5bG1t6&quot;
+</span><span>          ]
+</span><span>        }
+</span><span>      }
+</span><span>    ]
+</span><span>  },
+</span><span>  </span><span style="color:#c2d94c;">&quot;id&quot;</span><span style="color:#ffb454;">:</span><span> 1
+</span><span>}
+</span></code></pre>
+<p>Поля preBalances и postBalances позволяют отслеживать изменения баланса в каждой учетной записи без необходимости анализировать всю транзакцию. Они перечисляют начальный и конечный баланс каждой учетной записи в <a href="../terminology.md#lamport">lamports</a>, проиндексированные в списке <code>accountKeys</code>. Например, если адрес депозита с процентами <code>47Sbuv6jL7CViK9F2NMW51aQGhfdpUu7WNvKyH645Rfi</code>, эта транзакция представляет собой перевод 218099990000 - 207099990000 = 11000000000 лампортов = 11 SOL.</p>
+<p>Если вам нужна дополнительная информация о типе транзакции или других особенностях, вы можете запросить блок у RPC в двоичном формате и проанализировать его с помощью нашего <a href="https://github.com/solana-labs/solana">Rust SDK</a> или <a href="https://github.com/solana-labs/solana-web3.js">Javascript SDK</a>.</p>
+<h3 id="istoriia-adresov">История адресов</h3>
+<p>Вы также можете запросить историю транзакций определенного адреса. Как правило, это <em>не</em> жизнеспособный метод для отслеживания всех ваших депозитных адресов во всех слотах, но он может быть полезен для проверки нескольких учетных записей за определенный период времени.</p>
+<ul>
+<li>Отправьте запрос <a href="developing/clients/jsonrpc-api.md#getconfirmedsignaturesforaddress2"><code>getConfirmedSignaturesForAddress2</code></a> на узел API:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -X</span><span> POST</span><span style="color:#f29718;"> -H </span><span style="color:#c2d94c;">&quot;Content-Type: application/json&quot;</span><span style="color:#f29718;"> -d </span><span style="color:#c2d94c;">&#39;{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;getConfirmedSignaturesForAddress2&quot;,&quot;params&quot;:[&quot;6H94zdiaYfRfPfKjYLjyr2VFBg6JHXygy84r3qhc3NsC&quot;, {&quot;limit&quot;: 3}]}&#39;</span><span> localhost:8899
+</span><span>
+</span><span>{
+</span><span>  </span><span style="color:#c2d94c;">&quot;jsonrpc&quot;</span><span style="color:#ffb454;">: </span><span style="color:#c2d94c;">&quot;2.0&quot;</span><span>,
+</span><span>  </span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#ffb454;">:</span><span> [
+</span><span>    {
+</span><span>      </span><span style="color:#c2d94c;">&quot;err&quot;</span><span style="color:#ffb454;">:</span><span> null,
+</span><span>      </span><span style="color:#c2d94c;">&quot;memo&quot;</span><span style="color:#ffb454;">:</span><span> null,
+</span><span>      </span><span style="color:#c2d94c;">&quot;signature&quot;</span><span style="color:#ffb454;">: </span><span style="color:#c2d94c;">&quot;35YGay1Lwjwgxe9zaH6APSHbt9gYQUCtBWTNL3aVwVGn9xTFw2fgds7qK5AL29mP63A9j3rh8KpN1TgSR62XCaby&quot;</span><span>,
+</span><span>      </span><span style="color:#c2d94c;">&quot;slot&quot;</span><span style="color:#ffb454;">:</span><span> 114
+</span><span>    },
+</span><span>    {
+</span><span>      </span><span style="color:#c2d94c;">&quot;err&quot;</span><span style="color:#ffb454;">:</span><span> null,
+</span><span>      </span><span style="color:#c2d94c;">&quot;memo&quot;</span><span style="color:#ffb454;">:</span><span> null,
+</span><span>      </span><span style="color:#c2d94c;">&quot;signature&quot;</span><span style="color:#ffb454;">: </span><span style="color:#c2d94c;">&quot;4bJdGN8Tt2kLWZ3Fa1dpwPSEkXWWTSszPSf1rRVsCwNjxbbUdwTeiWtmi8soA26YmwnKD4aAxNp8ci1Gjpdv4gsr&quot;</span><span>,
+</span><span>      </span><span style="color:#c2d94c;">&quot;slot&quot;</span><span style="color:#ffb454;">:</span><span> 112
+</span><span>    },
+</span><span>    {
+</span><span>      </span><span style="color:#c2d94c;">&quot;err&quot;</span><span style="color:#ffb454;">:</span><span> null,
+</span><span>      </span><span style="color:#c2d94c;">&quot;memo&quot;</span><span style="color:#ffb454;">:</span><span> null,
+</span><span>      </span><span style="color:#c2d94c;">&quot;signature&quot;</span><span style="color:#ffb454;">: </span><span style="color:#c2d94c;">&quot;dhjhJp2V2ybQGVfELWM1aZy98guVVsxRCB5KhNiXFjCBMK5KEyzV8smhkVvs3xwkAug31KnpzJpiNPtcD5bG1t6&quot;</span><span>,
+</span><span>      </span><span style="color:#c2d94c;">&quot;slot&quot;</span><span style="color:#ffb454;">:</span><span> 108
+</span><span>    }
+</span><span>  </span><span style="color:#ffb454;">],
+</span><span>  </span><span style="color:#c2d94c;">&quot;id&quot;</span><span style="color:#ffb454;">:</span><span> 1
+</span><span>}
+</span></code></pre>
+<ul>
+<li>Для каждой возвращенной подписи получите сведения о транзакции, отправив запрос <a href="developing/clients/jsonrpc-api.md#getconfirmedtransaction"><code>getConfirmedTransaction</code></a>:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -X</span><span> POST</span><span style="color:#f29718;"> -H </span><span style="color:#c2d94c;">&quot;Content-Type: application/json&quot;</span><span style="color:#f29718;"> -d </span><span style="color:#c2d94c;">&#39;{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;getConfirmedTransaction&quot;,&quot;params&quot;:[&quot;dhjhJp2V2ybQGVfELWM1aZy98guVVsxRCB5KhNiXFjCBMK5KEyzV8smhkVvs3xwkAug31KnpzJpiNPtcD5bG1t6&quot;, &quot;json&quot;]}&#39;</span><span> localhost:8899
+</span><span>
+</span><span style="color:#ffb454;">//</span><span> Result
+</span><span>{
+</span><span>  </span><span style="color:#c2d94c;">&quot;jsonrpc&quot;</span><span style="color:#ffb454;">: </span><span style="color:#c2d94c;">&quot;2.0&quot;</span><span>,
+</span><span>  </span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#ffb454;">: </span><span>{
+</span><span>    </span><span style="color:#c2d94c;">&quot;slot&quot;</span><span>: 5</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;transaction&quot;</span><span>: {
+</span><span>      </span><span style="color:#c2d94c;">&quot;message&quot;</span><span>: {
+</span><span>        </span><span style="color:#c2d94c;">&quot;accountKeys&quot;</span><span>: [
+</span><span>          </span><span style="color:#c2d94c;">&quot;Bbqg1M4YVVfbhEzwA9SpC9FhsaG83YMTYoR4a8oTDLX&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;47Sbuv6jL7CViK9F2NMW51aQGhfdpUu7WNvKyH645Rfi&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;11111111111111111111111111111111&quot;
+</span><span>        ]</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;header&quot;</span><span>: {
+</span><span>          </span><span style="color:#c2d94c;">&quot;numReadonlySignedAccounts&quot;</span><span>: 0</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;numReadonlyUnsignedAccounts&quot;</span><span>: 1</span><span style="color:#bfbab0cc;">,
+</span><span>          </span><span style="color:#c2d94c;">&quot;numRequiredSignatures&quot;</span><span>: 1
+</span><span>        }</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;instructions&quot;</span><span>: [
+</span><span>          {
+</span><span>            </span><span style="color:#c2d94c;">&quot;accounts&quot;</span><span>: [
+</span><span>              0</span><span style="color:#bfbab0cc;">,
+</span><span>              1
+</span><span>            ]</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#c2d94c;">&quot;data&quot;</span><span>: </span><span style="color:#c2d94c;">&quot;3Bxs3zyH82bhpB8j&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#c2d94c;">&quot;programIdIndex&quot;</span><span>: 2
+</span><span>          }
+</span><span>        ]</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;recentBlockhash&quot;</span><span>: </span><span style="color:#c2d94c;">&quot;7GytRgrWXncJWKhzovVoP9kjfLwoiuDb3cWjpXGnmxWh&quot;
+</span><span>      }</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="color:#c2d94c;">&quot;signatures&quot;</span><span>: [
+</span><span>        </span><span style="color:#c2d94c;">&quot;dhjhJp2V2ybQGVfELWM1aZy98guVVsxRCB5KhNiXFjCBMK5KEyzV8smhkVvs3xwkAug31KnpzJpiNPtcD5bG1t6&quot;
+</span><span>      ]
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;meta&quot;</span><span>: {
+</span><span>      </span><span style="color:#c2d94c;">&quot;err&quot;</span><span>: null</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="color:#c2d94c;">&quot;fee&quot;</span><span>: 5000</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="color:#c2d94c;">&quot;postBalances&quot;</span><span>: [
+</span><span>        2033973061360</span><span style="color:#bfbab0cc;">,
+</span><span>        218099990000</span><span style="color:#bfbab0cc;">,
+</span><span>        42000000003
+</span><span>      ]</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="color:#c2d94c;">&quot;preBalances&quot;</span><span>: [
+</span><span>        2044973066360</span><span style="color:#bfbab0cc;">,
+</span><span>        207099990000</span><span style="color:#bfbab0cc;">,
+</span><span>        42000000003
+</span><span>      ]</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="color:#c2d94c;">&quot;status&quot;</span><span>: {
+</span><span>        </span><span style="color:#c2d94c;">&quot;Ok&quot;</span><span>: null
+</span><span>      }
+</span><span>    }
+</span><span>  },
+</span><span>  </span><span style="color:#c2d94c;">&quot;id&quot;</span><span style="color:#ffb454;">:</span><span> 1
+</span><span>}
+</span></code></pre>
+<h2 id="otpravka-vyvoda-sredstv">Отправка вывода средств</h2>
+<p>Чтобы удовлетворить запрос пользователя на отзыв SOL, вы должны сгенерировать транзакцию передачи Solana и отправить ее на узел API для пересылки в ваш кластер.</p>
+<h3 id="sinkhronnyi">Синхронный</h3>
+<p>Отправка синхронной передачи в кластер Solana позволяет легко убедиться, что передача выполнена успешно и завершена кластером.</p>
+<p>Инструмент командной строки Solana предлагает простую команду «solana transfer» для создания, отправки и подтверждения транзакций перевода. По умолчанию этот метод будет ждать и отслеживать ход выполнения на stderr, пока транзакция не будет завершена кластером. Если транзакция не удалась, он сообщит обо всех ошибках транзакции.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> transfer </span><span style="color:#f29668;">&lt;</span><span>USER_ADDRESS</span><span style="color:#f29668;">&gt; &lt;</span><span>AMOUNT</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-allow-unfunded-recipient</span><span style="color:#f29718;"> --keypair </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-url http://localhost:8899
+</span></code></pre>
+<p><a href="https://github.com/solana-labs/solana-web3.js">Solana Javascript SDK</a> предлагает аналогичный подход для экосистемы JS. Используйте <code>SystemProgram</code> для создания транзакции перевода и отправьте ее с помощью метода <code>sendAndConfirmTransaction</code>.</p>
+<h3 id="asinkhronnyi">Асинхронный</h3>
+<p>Для большей гибкости вы можете отправлять переводы на снятие средств асинхронно. В этих случаях вы обязаны убедиться, что транзакция прошла успешно и была завершена кластером.</p>
+<p><strong>Примечание.</strong> Каждая транзакция содержит <a href="developing/programming-model/transactions.md#blockhash-format">недавний хэш блока</a>, чтобы указать на ее жизнеспособность. Крайне важно дождаться истечения срока действия этого блок-хэша перед повторной попыткой перевода вывода средств, который не был подтвержден или завершен кластером. В противном случае вы рискуете получить двойную трату. Подробнее о истечение срока действия хэша см. ниже.</p>
+<p>Во-первых, получите последний хэш блока, используя конечную точку <a href="developing/clients/jsonrpc-api.md#getfees"><code>getFees</code></a> или команду CLI:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> fees</span><span style="color:#f29718;"> --url</span><span> http://localhost:8899
+</span></code></pre>
+<p>В инструменте командной строки передайте аргумент <code>--no-wait</code>, чтобы отправить перевод асинхронно, и включите свой недавний хеш-блок с аргументом <code>--blockhash</code>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> transfer </span><span style="color:#f29668;">&lt;</span><span>USER_ADDRESS</span><span style="color:#f29668;">&gt; &lt;</span><span>AMOUNT</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-no-wait</span><span style="color:#f29718;"> --allow-unfunded-recipient --blockhash </span><span style="color:#f29668;">&lt;</span><span>RECENT_BLOCKHASH</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-keypair </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-url http://localhost:8899
+</span></code></pre>
+<p>Вы также можете создать, подписать и сериализовать транзакцию вручную и отправить ее в кластер с помощью JSON-RPC <a href="developing/clients/jsonrpc-api.md#sendtransaction">конечная точка sendTransaction</a>.</p>
+<h4 id="podtverzhdenie-tranzaktsii-i-zavershennost">Подтверждение транзакции и завершенность</h4>
+<p>Получите статус пакета транзакций, используя конечную точку <a href="developing/clients/jsonrpc-api.md#getsignaturestatuses"><code>getSignatureStatuses</code> JSON-RPC</a>.
+Поле «подтверждения» сообщает, сколько <a href="../terminology.md#confirmed-block">подтвержденных блоков</a> прошло с момента обработки транзакции. Если <code>confirmations: null</code>, это <a href="../terminology.md#finality">finalized</a>.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -X</span><span> POST</span><span style="color:#f29718;"> -H </span><span style="color:#c2d94c;">&quot;Content-Type: application/json&quot;</span><span style="color:#f29718;"> -d </span><span style="color:#c2d94c;">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;, &quot;id&quot;:1, &quot;method&quot;:&quot;getSignatureStatuses&quot;, &quot;params&quot;:[[&quot;5VERv8NMvzbJMEkV8xnrLkEaWRtSz9CosKDYjCJjBRnbJLgp8uirBgmQpjKhoR4tjF3ZpRzrFmBV6UjKdiSZkQUW&quot;, &quot;5j7s6NiJS3JAkvgkoc18WVAsiSaci2pxB2A6ueCJP4tprA2TFg9wSyTLeYouxPBJEMzJinENTkpA52YStRW5Dia7&quot;]]}&#39;</span><span> http://localhost:8899
+</span><span>
+</span><span>{
+</span><span>  </span><span style="color:#c2d94c;">&quot;jsonrpc&quot;</span><span style="color:#ffb454;">: </span><span style="color:#c2d94c;">&quot;2.0&quot;</span><span>,
+</span><span>  </span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#ffb454;">: </span><span>{
+</span><span>    </span><span style="color:#c2d94c;">&quot;context&quot;</span><span>: {
+</span><span>      </span><span style="color:#c2d94c;">&quot;slot&quot;</span><span>: 82
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;value&quot;</span><span>: [
+</span><span>      {
+</span><span>        </span><span style="color:#c2d94c;">&quot;slot&quot;</span><span>: 72</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;confirmations&quot;</span><span>: 10</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;err&quot;</span><span>: null</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;status&quot;</span><span>: {
+</span><span>          </span><span style="color:#c2d94c;">&quot;Ok&quot;</span><span>: null
+</span><span>        }
+</span><span>      }</span><span style="color:#bfbab0cc;">,
+</span><span>      {
+</span><span>        </span><span style="color:#c2d94c;">&quot;slot&quot;</span><span>: 48</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;confirmations&quot;</span><span>: null</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;err&quot;</span><span>: null</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;status&quot;</span><span>: {
+</span><span>          </span><span style="color:#c2d94c;">&quot;Ok&quot;</span><span>: null
+</span><span>        }
+</span><span>      }
+</span><span>    ]
+</span><span>  },
+</span><span>  </span><span style="color:#c2d94c;">&quot;id&quot;</span><span style="color:#ffb454;">:</span><span> 1
+</span><span>}
+</span></code></pre>
+<h4 id="srok-deistviia-blokcheina">Срок действия блокчейна</h4>
+<p>Вы можете проверить, действителен ли конкретный хэш блока, отправив запрос <a href="developing/clients/jsonrpc-api.md#getfeecalculatorforblockhash"><code>getFeeCalculatorForBlockhash</code></a> с хэшем блока в качестве параметра. Если значение ответа <code>null</code>, срок действия хэш-блока истек, и транзакция вывода средств с использованием этого хэш-блока никогда не должна быть успешной.</p>
+<h3 id="proverka-adresov-schetov-predostavlennykh-pol-zovateliami-dlia-sniatiia-sredstv">Проверка адресов счетов, предоставленных пользователями, для снятия средств</h3>
+<p>Поскольку снятие средств является необратимым, может быть хорошей практикой проверить адрес учетной записи, предоставленный пользователем, перед авторизацией вывода, чтобы предотвратить случайную потерю средств пользователя.</p>
+<h4 id="bazovaia-proverka">Базовая проверка</h4>
+<p>Solana обращается к 32-байтовому массиву, закодированному биткойнским алфавитом base58. Это приводит к текстовой строке ASCII, соответствующей следующему регулярному выражению:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>[1-9A-HJ-NP-Za-km-z]{32,44}
+</span></code></pre>
+<p>Эта проверка сама по себе недостаточна, поскольку адреса Solana не суммируются, поэтому опечатки не могут быть обнаружены. Для дальнейшей проверки ввода пользователя можно декодировать строку и подтвердить, что длина результирующего массива байтов равна 32. Однако есть некоторые адреса, которые можно декодировать до 32 байт, несмотря на опечатку, такую ​​как отсутствие одного символа, перевернутые символы и игнорирование регистра.</p>
+<h4 id="rasshirennaia-proverka">Расширенная проверка</h4>
+<p>Из-за уязвимости к опечаткам, описанной выше, рекомендуется запрашивать баланс для возможных адресов вывода средств и предлагать пользователю подтвердить свои намерения, если обнаруживается ненулевой баланс.</p>
+<h4 id="deistvitel-naia-proverka-publichnogo-kliucha-ed25519">Действительная проверка публичного ключа ed25519</h4>
+<p>Адрес обычной учетной записи в Solana представляет собой закодированную в Base58 строку 256-битного открытого ключа ed25519. Не все битовые шаблоны являются действительными открытыми ключами для кривой ed25519, поэтому можно гарантировать, что предоставленные пользователем адреса учетных записей являются по крайней мере правильными открытыми ключами ed25519.</p>
+<h4 id="iava">Ява</h4>
+<p>Вот пример Java проверки введенного пользователем адреса как действительного открытого ключа ed25519:</p>
+<p>В следующем примере кода предполагается, что вы используете Maven.</p>
+<p><code>pom.xml</code>:</p>
+<pre data-lang="xml" style="background-color:#0f1419;color:#bfbab0;" class="language-xml "><code class="language-xml" data-lang="xml"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">repositories</span><span style="color:#39bae690;">&gt;
+</span><span>  ...
+</span><span>  </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">repository</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">id</span><span style="color:#39bae690;">&gt;</span><span>spring</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">id</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">url</span><span style="color:#39bae690;">&gt;</span><span>https://repo.spring.io/libs-release/</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">url</span><span style="color:#39bae690;">&gt;
+</span><span>  </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">repository</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">repositories</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span>...
+</span><span>
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">dependencies</span><span style="color:#39bae690;">&gt;
+</span><span>  ...
+</span><span>  </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">dependency</span><span style="color:#39bae690;">&gt;
+</span><span>      </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">groupId</span><span style="color:#39bae690;">&gt;</span><span>io.github.novacrypto</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">groupId</span><span style="color:#39bae690;">&gt;
+</span><span>      </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">artifactId</span><span style="color:#39bae690;">&gt;</span><span>Base58</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">artifactId</span><span style="color:#39bae690;">&gt;
+</span><span>      </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">version</span><span style="color:#39bae690;">&gt;</span><span>0.1.3</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">version</span><span style="color:#39bae690;">&gt;
+</span><span>  </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">dependency</span><span style="color:#39bae690;">&gt;
+</span><span>  </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">dependency</span><span style="color:#39bae690;">&gt;
+</span><span>      </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">groupId</span><span style="color:#39bae690;">&gt;</span><span>cafe.cryptography</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">groupId</span><span style="color:#39bae690;">&gt;
+</span><span>      </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">artifactId</span><span style="color:#39bae690;">&gt;</span><span>curve25519-elisabeth</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">artifactId</span><span style="color:#39bae690;">&gt;
+</span><span>      </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">version</span><span style="color:#39bae690;">&gt;</span><span>0.1.0</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">version</span><span style="color:#39bae690;">&gt;
+</span><span>  </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">dependency</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">dependencies</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<pre data-lang="java" style="background-color:#0f1419;color:#bfbab0;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#ff7733;">import </span><span style="font-style:italic;color:#39bae6;">io</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">github</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">novacrypto</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">base58</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">Base58</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">import </span><span style="font-style:italic;color:#39bae6;">cafe</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">cryptography</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">curve25519</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">CompressedEdwardsY</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">public class </span><span style="color:#59c2ff;">PubkeyValidator
+</span><span>{
+</span><span>    </span><span style="color:#ff7733;">public static boolean </span><span style="color:#ffb454;">verifyPubkey</span><span>(</span><span style="font-style:italic;color:#39bae6;">String </span><span style="color:#f29718;">userProvidedPubkey</span><span>)
+</span><span>    {
+</span><span>        </span><span style="color:#ff7733;">try </span><span>{
+</span><span>            </span><span style="color:#ff7733;">return </span><span style="color:#ffb454;">_verifyPubkeyInternal</span><span>(userProvidedPubkey)</span><span style="color:#bfbab0cc;">;
+</span><span>        } </span><span style="color:#ff7733;">catch </span><span>(</span><span style="font-style:italic;color:#39bae6;">Exception </span><span style="color:#f29718;">e</span><span>) {
+</span><span>            </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">public static boolean </span><span style="color:#ffb454;">_verifyPubkeyInternal</span><span>(</span><span style="font-style:italic;color:#39bae6;">String </span><span style="color:#f29718;">maybePubkey</span><span>) </span><span style="color:#ff7733;">throws </span><span style="font-style:italic;color:#39bae6;">Exception
+</span><span>    {
+</span><span>        </span><span style="color:#ff7733;">byte[]</span><span> bytes </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Base58</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">base58Decode</span><span>(maybePubkey)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="color:#f29668;">!</span><span>(</span><span style="color:#ff7733;">new </span><span style="font-style:italic;color:#39bae6;">CompressedEdwardsY</span><span>(bytes))</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">decompress</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">isSmallOrder</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="minimal-nye-summy-depozita-i-sniatiia">Минимальные суммы депозита и снятия</h2>
+<p>Каждый ввод и вывод SOL должен быть больше или равен минимальному необлагаемому арендной платой балансу учетной записи по адресу кошелька (базовая учетная запись SOL, не содержащая данных), в настоящее время: 0,000890880 SOL.</p>
+<p>Точно так же каждый депозитный счет должен содержать как минимум этот баланс.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -X</span><span> POST</span><span style="color:#f29718;"> -H </span><span style="color:#c2d94c;">&quot;Content-Type: application/json&quot;</span><span style="color:#f29718;"> -d </span><span style="color:#c2d94c;">&#39;{&quot;jsonrpc&quot;: &quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;getMinimumBalanceForRentExemption&quot;,&quot;params&quot;:[0]}&#39;</span><span> localhost:8899
+</span><span>
+</span><span style="color:#ffb454;">{</span><span style="color:#c2d94c;">&quot;jsonrpc&quot;</span><span style="color:#ffb454;">:</span><span style="color:#c2d94c;">&quot;2.0&quot;</span><span style="color:#ffb454;">,</span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#ffb454;">:890880,</span><span style="color:#c2d94c;">&quot;id&quot;</span><span style="color:#ffb454;">:1</span><span>}
+</span></code></pre>
+<h2 id="podderzhka-standarta-tokenov-spl">Поддержка стандарта токенов SPL</h2>
+<p><a href="https://spl.solana.com/token">Токен SPL</a> — это стандарт для создания и обмена обернутых/синтетических токенов в блокчейне Solana.</p>
+<p>Рабочий процесс токена SPL похож на рабочий процесс собственных токенов SOL, но есть несколько отличий, которые будут обсуждаться в этом разделе.</p>
+<h3 id="monetnye-dvory-tokenov">Монетные дворы токенов</h3>
+<p>Каждый <em>type</em> токена SPL объявляется путем создания <em>mint</em> учетной записи. В этой учетной записи хранятся метаданные, описывающие характеристики токенов, такие как предложение, количество десятичных знаков и различные органы, контролирующие монетный двор. Каждая учетная запись токена SPL ссылается на связанный с ней монетный двор и может взаимодействовать только с токенами SPL этого типа.</p>
+<h3 id="ustanovka-cli-instrumenta-spl-token">Установка CLI-инструмента <code>spl-token</code></h3>
+<p>Учетные записи SPL Token запрашиваются и изменяются с помощью утилиты командной строки <code>spl-token</code>. Примеры, представленные в этом разделе, зависят от того, установлен ли он в локальной системе.</p>
+<p><code>spl-token</code> распространяется из Rust <a href="https://crates.io/crates/spl-token">crates.io</a> через утилиту командной строки Rust <code>cargo</code>. Последнюю версию <code>cargo</code> можно установить с помощью удобной однострочной строки для вашей платформы на <a href="https://rustup.rs">rustup.rs</a>.
+После установки <code>cargo</code>, <code>spl-token</code> можно получить с помощью следующей команды:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo install spl-token-cli
+</span></code></pre>
+<p>Затем вы можете проверить установленную версию, чтобы проверить</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>spl-token --version
+</span></code></pre>
+<p>Что должно привести к чему-то вроде</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>spl-token-cli 2.0.1
+</span></code></pre>
+<h3 id="sozdanie-akkaunta">Создание аккаунта</h3>
+<p>Учетные записи SPL Token имеют дополнительные требования, которых нет у собственных учетных записей системной программы:</p>
+<ol>
+<li>Учетные записи токенов SPL должны быть созданы до того, как можно будет внести определенное количество токенов. Учетные записи токенов могут быть созданы явно с помощью команды <code>spl-token create-account</code> или неявно с помощью команды <code>spl-token transfer --fund-recipient ...</code>.</li>
+<li>Учетные записи с токенами SPL должны оставаться <a href="developing/programming-model/accounts.md#rent-exemption">освобожденными от арендной платы</a> на время их существования и, следовательно, требуют внесения небольшого количества собственных токенов SOL при создании учетной записи. Для аккаунтов SPL Token v2 эта сумма составляет 0,00203928 SOL (2 039 280 лэмпортов).</li>
+</ol>
+<h4 id="komandnaia-stroka">Командная строка</h4>
+<p>Чтобы создать учетную запись токена SPL со следующими свойствами:</p>
+<ol>
+<li>Связан с данным монетным двором</li>
+<li>Принадлежит паре ключей учетной записи финансирования</li>
+</ol>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>spl-token create-account &lt;TOKEN_MINT_ADDRESS&gt;
+</span></code></pre>
+<h4 id="primer">Пример</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ spl-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir
+</span><span>Creating account 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+</span><span>Signature: 4JsqZEPra2eDTHtHpB4FMWSfk3UgcCVmkKkP7zESZeMrKmFFkDkNd91pKP3vPVVZZPiu5XxyJwS73Vi5WsZL88D7
+</span></code></pre>
+<p>Или создать учетную запись токена SPL с определенной парой ключей:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ solana-keygen new -o token-account.json
+</span><span>$ spl-token create-account AkUFCWTXb3w9nY2n6SFJvBV6VwvFUCe4KBMCcgLsa2ir token-account.json
+</span><span>Creating account 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+</span><span>Signature: 4JsqZEPra2eDTHtHpB4FMWSfk3UgcCVmkKkP7zESZeMrKmFFkDkNd91pKP3vPVVZZPiu5XxyJwS73Vi5WsZL88D7
+</span></code></pre>
+<h3 id="proverka-balansa-scheta">Проверка баланса счета</h3>
+<h4 id="komandnaia-stroka-1">Командная строка</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>spl-token balance &lt;TOKEN_ACCOUNT_ADDRESS&gt;
+</span></code></pre>
+<h4 id="primer-1">Пример</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ solana balance 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+</span><span>0
+</span></code></pre>
+<h3 id="perevody-tokenov">Переводы токенов</h3>
+<p>Исходная учетная запись для перевода — это фактическая учетная запись токена, содержащая сумму.</p>
+<p>Однако адрес получателя может быть обычной учетной записью кошелька. Если связанная учетная запись токена для данного монетного двора еще не существует для этого кошелька, передача создаст ее при условии, что указан аргумент <code>--fund-recipient</code>.</p>
+<h4 id="komandnaia-stroka-2">Командная строка</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>spl-token transfer &lt;SENDER_ACCOUNT_ADDRESS&gt; &lt;AMOUNT&gt; &lt;RECIPIENT_WALLET_ADDRESS&gt; --fund-recipient
+</span></code></pre>
+<h4 id="primer-2">Пример</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ spl-token transfer 6B199xxzw3PkAm25hGJpjj3Wj3WNYNHzDAnt1tEqg5BN 1 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+</span><span>Transfer 1 tokens
+</span><span>  Sender: 6B199xxzw3PkAm25hGJpjj3Wj3WNYNHzDAnt1tEqg5BN
+</span><span>  Recipient: 6VzWGL51jLebvnDifvcuEDec17sK6Wupi4gYhm5RzfkV
+</span><span>Signature: 3R6tsog17QM8KfzbcbdP4aoMfwgo6hBggJDVy7dZPVmH2xbCWjEj31JKD53NzMrf25ChFjY7Uv2dfCDq4mGFFyAj
+</span></code></pre>
+<h3 id="deponirovanie">Депонирование</h3>
+<p>Поскольку для каждой пары «(кошелек, монетный двор)» требуется отдельная учетная запись в цепочке. Рекомендуется, чтобы адреса для этих учетных записей были получены из депозитных кошельков SOL с использованием схемы <a href="https://spl.solana.com/associated-token-account">Associated Token Account</a> (ATA) и чтобы <em>только</em> вносились депозиты с адресов ATA. быть принятым.</p>
+<p>Мониторинг депозитных транзакций должен следовать описанному выше методу опроса блоков. Каждый новый блок следует сканировать на наличие успешных транзакций, выдающих токен SPL <a href="https://github.com/solana-labs/solana-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/instruction.rs#L105">Transfer</a> или <a href="https://github.com/solana-labs/solana-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/instruction.rs#L268">TransferChecked</a>
+инструкции, относящиеся к учетным записям пользователей. Возможно, передача инициирована
+смарт-контрактом через <a href="/developing/programming-model/calling-between-programs#cross-program-invocations">вызов кросс-программы</a>, поэтому <a href="/terminology#inner-instruction">внутренние инструкции</a> также должны быть проверены.
+Поля <code>preTokenBalance</code> и <code>postTokenBalance</code> из метаданных транзакции должны затем использоваться для определения фактического изменения баланса.</p>
+<h3 id="sniatie">Снятие</h3>
+<p>Адрес для вывода средств, который предоставляет пользователь, должен совпадать с адресом его кошелька SOL.</p>
+<p>Перед выполнением вывода перевода биржа должна проверить адрес как описано выше.
+Кроме того, этот адрес должен принадлежать Системной программе и не содержать учетных данных. Если на адресе нет баланса SOL, необходимо получить подтверждение пользователя, прежде чем приступать к снятию средств. Все другие адреса для вывода средств должны быть отклонены.</p>
+<p>С адреса вывода <a href="https://spl.solana.com/associated-token-account">Связанная учетная запись токена</a>
+(ATA) для правильного монетного двора, и перевод осуществляется на эту учетную запись через [TransferChecked](https://github.com/solana-labs/solana-program-library/blob/fc0d6a2db79bd6499f04b9be7ead0c400283845e/token/program/src/ инструкция.rs#L268) инструкция. Обратите внимание, что возможно, что адрес ATA еще не существует, и в этот момент биржа должна пополнить счет от имени пользователя. Для счетов SPL Token v2 для пополнения счета для вывода средств потребуется 0,00203928 SOL (2 039 280 лэмпортов).</p>
+<p>Шаблон команды <code>spl-token transfer</code> для вывода:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ spl-token transfer --fund-recipient &lt;exchange token account&gt; &lt;withdrawal amount&gt; &lt;withdrawal address&gt;
+</span></code></pre>
+<h3 id="drugie-soobrazheniia">Другие соображения</h3>
+<h4 id="zamorozit-polnomochiia">Заморозить полномочия</h4>
+<p>Из соображений соответствия нормативным требованиям организация, выпускающая токены SPL, может при желании иметь «полномочие заморозить» все учетные записи, созданные в связи с его монетным двором. Это позволяет им <a href="https://spl.solana.com/token#freezing-accounts">замораживать</a> активы в данной учетной записи по своему желанию, делая учетную запись непригодной для использования до тех пор, пока она не будет разморожена.
+Если эта функция используется, публичный ключ органа заморозки будет зарегистрирован в учетной записи монетного двора токена SPL.</p>
+<h2 id="testirovanie-integratsii">Тестирование интеграции</h2>
+<p>Обязательно протестируйте весь рабочий процесс в Solana devnet и testnet <a href="../clusters/">clusters</a>, прежде чем переходить к рабочей версии mainnet-beta. Devnet является наиболее открытым и гибким и идеально подходит для начальной разработки, в то время как тестовая сеть предлагает более реалистичную конфигурацию кластера. И devnet, и testnet поддерживают сборщик, запустите solana airdrop 1, чтобы получить SOL devnet или testnet для разработки и тестирования.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

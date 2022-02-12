@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Улучшение WebAssembly для Rust и для всех языков | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/making-webassembly-better-for-rust-and-for-all-languages/#kak-uprostit-peredachu-obektov-mezhdu-webassembly-i-js">Как упростить передачу объектов между WebAssembly и JS?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/making-webassembly-better-for-rust-and-for-all-languages/#wasm-bindgen"><small>- wasm-bindgen</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/making-webassembly-better-for-rust-and-for-all-languages/#kak-vse-eto-upakovat-dlia-npm">Как все это упаковать для npm?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/making-webassembly-better-for-rust-and-for-all-languages/#wasm-pack"><small>- wasm-pack</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/making-webassembly-better-for-rust-and-for-all-languages/#kak-razrabotchikam-legko-kombinirovat-js-i-wasm-v-sborshchikakh-brauzerakh-ili-v-node">Как разработчикам легко комбинировать JS и WASM в сборщиках, браузерах или в Node?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/making-webassembly-better-for-rust-and-for-all-languages/#moduli-es"><small>- Модули ES</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/making-webassembly-better-for-rust-and-for-all-languages/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Улучшение WebAssembly для Rust и для всех языков</h1>
+
+<p><a href="https://hacks.mozilla.org/2018/03/making-webassembly-better-for-rust-for-all-languages/">Перевод</a> | Автор оригинала: Lin Clark</p>
+<p>Одна из больших целей сообщества Rust на 2018 год - стать веб-языком. Ориентируясь на WebAssembly, Rust может работать в сети точно так же, как JavaScript. Но что это значит? Означает ли это, что Rust пытается заменить JavaScript?</p>
+<p>Ответ на этот вопрос - нет. Мы не ожидаем, что приложения Rust WebAssembly будут полностью написаны на Rust. Фактически, мы ожидаем, что основная часть кода приложения по-прежнему будет на JS, даже в большинстве приложений Rust WebAssembly.</p>
+<p>Это потому, что JS - хороший выбор для большинства вещей. Начать работу с JavaScript можно быстро и легко. Вдобавок к этому существует яркая экосистема, полная JavaScript-разработчиков, которые создали невероятно инновационные подходы к различным проблемам в Интернете.</p>
+<p><img src="/imgs/posts/ac9ca259_01.png" alt="логотип Rust и логотип JS с сердцем между ними" /></p>
+<p>Но иногда для определенных частей приложения Rust + WebAssembly является подходящим инструментом для работы… например, когда вы анализируете исходные карты или выясняете, какие изменения внести в DOM, например Ember.</p>
+<p>Итак, для Rust + WebAssembly путь вперед не ограничивается компиляцией Rust в WebAssembly. Нам нужно убедиться, что WebAssembly вписывается в экосистему JavaScript. Веб-разработчики должны иметь возможность использовать WebAssembly, как если бы это был JavaScript.</p>
+<p>Но WebAssembly еще нет. Чтобы это произошло, нам нужно создать инструменты, которые упростят загрузку WebAssembly и упростят взаимодействие с ним из JS. В этой работе поможет Rust. Но это также поможет всем другим языкам, ориентированным на WebAssembly.</p>
+<p><img src="/imgs/posts/ac9ca259_02.png" alt="конвейер от компиляции до создания привязок, упаковки и сборки" /></p>
+<p>Какие проблемы юзабилити WebAssembly мы решаем? Вот несколько:</p>
+<ol>
+<li>Как упростить передачу объектов между WebAssembly и JS?</li>
+<li>Как все это упаковать для npm?</li>
+<li>Как разработчикам легко комбинировать пакеты JS и WASM в сборщиках или браузерах?</li>
+</ol>
+<p>Но сначала, что мы делаем возможным в Rust?</p>
+<p>Rust сможет вызывать функции JavaScript. JavaScript сможет вызывать функции Rust. Rust сможет вызывать функции с хост-платформы, например, alert. крэйти Rust могут иметь зависимости от пакетов npm. И на протяжении всего этого Rust и JavaScript будут передавать объекты таким образом, чтобы они оба имели смысл. </p>
+<p><img src="/imgs/posts/ac9ca259_03.png" alt="Граф крэйта Rust" /></p>
+<p>Вот что мы делаем в Rust. Теперь давайте посмотрим на проблемы юзабилити WebAssembly, которые нам необходимо решить.</p>
+<h3 id="kak-uprostit-peredachu-obektov-mezhdu-webassembly-i-js">Как упростить передачу объектов между WebAssembly и JS?</h3>
+<h4 id="wasm-bindgen">wasm-bindgen</h4>
+<p>Одна из самых сложных частей работы с WebAssembly - вводить и выводить различные типы значений из функций. Это потому, что в настоящее время WebAssembly имеет только два типа: целые числа и числа с плавающей запятой.</p>
+<p>Это означает, что вы не можете просто передать строку в функцию WebAssembly. Вместо этого вам нужно выполнить несколько шагов:</p>
+<ol>
+<li>
+<p>На стороне JS закодируйте строку в числа (используя что-то вроде API TextEncoder).</p>
+<p><img src="/imgs/posts/ac9ca259_04.png" alt="Кольцо кодировщика, кодирующее Hello в числовой эквивалент" /></p>
+</li>
+<li>
+<p>Поместите эти числа в память WebAssembly, которая по сути представляет собой массив чисел.</p>
+<p><img src="/imgs/posts/ac9ca259_05.png" alt="JS помещает числа в память WebAssembly" /></p>
+</li>
+<li>
+<p>Передайте индекс массива для первой буквы строки в функцию WebAssembly.
+<img src="/imgs/posts/ac9ca259_06.png" alt="" /></p>
+</li>
+<li>
+<p>На стороне WebAssembly используйте это целое число в качестве указателя, чтобы вытащить числа.</p>
+<p><img src="/imgs/posts/ac9ca259_07.png" alt="" /></p>
+</li>
+</ol>
+<p>И это только то, что требуется для струнных. Если у вас есть более сложные типы, вам понадобится более запутанный процесс передачи данных туда и обратно.</p>
+<p>Если вы используете много кода WebAssembly, вы, вероятно, абстрагируете этот вид связующего кода в библиотеке. Но было бы неплохо, если бы вам не пришлось писать весь этот клеевой код? Если бы вы могли просто передать сложные значения через языковые границы и заставить их волшебным образом работать?</p>
+<p>Вот что делает wasm-bindgen. Если вы добавите несколько аннотаций в свой код Rust, он автоматически создаст код, необходимый (с обеих сторон) для работы более сложных типов.</p>
+<p><img src="/imgs/posts/ac9ca259_08.png" alt="JS передает строку Hello в wasm-bindgen, который выполняет всю остальную работу" /></p>
+<p>Это означает вызов JS-функций из Rust с использованием любых типов, ожидаемых этими функциями: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">extern </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">console</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>(static </span><span style="color:#f29668;">=</span><span> console)]
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">log</span><span>(</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">foo</span><span>() {
+</span><span>    console</span><span style="color:#f29668;">::</span><span>log(</span><span style="color:#c2d94c;">&quot;hello!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>… Или использовать структуры в Rust и заставить их работать как классы в JS: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Rust
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Foo </span><span>{
+</span><span>    contents</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Foo </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> Foo {
+</span><span>        Foo { contents</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0 </span><span>}
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">add</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">amt</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u32 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>contents </span><span style="color:#f29668;">+=</span><span> amt</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>contents
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// JS
+</span><span style="color:#ff7733;">import </span><span>{ Foo } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&quot;./js_hello_world&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>foo </span><span style="color:#f29668;">= </span><span>Foo</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">new</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ffb454;">assertEq</span><span>(foo</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>foo</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">free</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Или многие другие тонкости.</p>
+<p>По сути, wasm-bindgen не зависит от языка. Это означает, что по мере стабилизации инструмента должна появиться возможность расширения поддержки конструкций на других языках, таких как C/C++.</p>
+<p>Алекс Крайтон напишет больше о wasm-bindgen через пару недель, так что следите за этой публикацией.</p>
+<h3 id="kak-vse-eto-upakovat-dlia-npm">Как все это упаковать для npm?</h3>
+<h4 id="wasm-pack">wasm-pack</h4>
+<p>Как только мы все это сложим, у нас будет куча файлов. Вот скомпилированный файл WebAssembly. Затем есть весь JavaScript - и зависимости, и JS, сгенерированный wasm-bindgen. Нам нужен способ их всех упаковать. Кроме того, если мы добавили какие-либо зависимости npm, нам нужно поместить их в файл манифеста package.json.</p>
+<p><img src="/imgs/posts/ac9ca259_09.png" alt="несколько файлов упаковываются и публикуются в npm" /></p>
+<p>Опять же, было бы хорошо, если бы это можно было сделать за нас. И это то, что делает wasm-pack. Это универсальный инструмент для перехода от скомпилированного файла WebAsssembly к пакету npm.</p>
+<p>Он запустит за вас wasm-bindgen. Затем он возьмет все файлы и упакует их. Он разместит package.json поверх, заполнив все зависимости npm из вашего кода Rust. Затем все, что вам нужно сделать, это опубликовать npm.</p>
+<p>Опять же, основы этого инструмента не зависят от языка, поэтому мы ожидаем, что он будет поддерживать несколько языковых экосистем.</p>
+<p>Эшли Уильямс напишет больше о wasm-pack в следующем месяце, так что это еще один пост, за которым стоит следить.</p>
+<h3 id="kak-razrabotchikam-legko-kombinirovat-js-i-wasm-v-sborshchikakh-brauzerakh-ili-v-node">Как разработчикам легко комбинировать JS и WASM в сборщиках, браузерах или в Node?</h3>
+<h4 id="moduli-es">Модули ES</h4>
+<p>Теперь, когда мы опубликовали нашу WebAssembly в npm, как нам упростить использование этой WebAssembly в приложении JS?</p>
+<p>Упростите добавление пакета WebAssembly в качестве зависимости… чтобы включить его в графики зависимостей модуля JS.</p>
+<p><img src="/imgs/posts/ac9ca259_10.png" alt="граф модуля с модулями JS и WASM" /></p>
+<p>В настоящее время WebAssembly имеет обязательный JS API для создания модулей. Вам нужно написать код для выполнения каждого шага, от получения файла до подготовки зависимостей. Это тяжелая работа.</p>
+<p>Но теперь, когда в браузерах есть поддержка собственных модулей, мы можем добавить декларативный API. В частности, мы можем использовать API модуля ES. При этом работа с модулями WebAssembly должна быть такой же простой, как их импорт.</p>
+<p><img src="/imgs/posts/ac9ca259_11.png" alt="импорт {myFunction} из &quot;myModule.wasm&quot;" /></p>
+<p>Мы работаем с TC39 и группой сообщества WebAssembly, чтобы стандартизировать это.</p>
+<p>Но нам не просто нужно стандартизировать поддержку модулей ES. Даже если браузеры и Node поддерживают модули ES, разработчики, скорее всего, будут использовать сборщики пакетов. Это связано с тем, что сборщики сокращают количество запросов, которые вам нужно сделать для файлов модулей, а это означает, что загрузка кода занимает меньше времени.</p>
+<p>Компоновщики делают это, комбинируя группу модулей из разных файлов в один файл, а затем добавляя немного среды выполнения в начало, чтобы загрузить их.</p>
+<p><img src="/imgs/posts/ac9ca259_12.png" alt="график модуля объединен в единый файл" /></p>
+<p>Сборщикам по-прежнему потребуется использовать JS API для создания модулей, по крайней мере, в краткосрочной перспективе. Но пользователи будут создавать с синтаксисом модуля ES. Эти пользователи будут ожидать, что их модули будут действовать так, как если бы они были модулями ES. Нам нужно будет добавить некоторые функции в WebAssembly, чтобы упростить компиляторам эмуляцию модулей ES.</p>
+<p>Я напишу больше об усилиях по добавлению интеграции модуля ES в спецификацию WebAssembly. Я также займусь сборщиками пакетов и их поддержкой WebAssembly в ближайшие месяцы.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Чтобы быть полезным в качестве веб-языка, Rust должен хорошо работать с экосистемой JavaScript. У нас есть над чем поработать, и, к счастью, эта работа поможет и другим языкам. Вы хотите помочь сделать WebAssembly лучше для всех языков? Присоединяйтесь к нам! Мы рады помочь вам начать работу :) </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

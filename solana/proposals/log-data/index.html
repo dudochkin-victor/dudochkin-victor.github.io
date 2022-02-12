@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Двоичные данные журнала программы | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/log-data/#problema">Проблема</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/log-data/#sobytiia-v-solidity"><small>- События в Solidity</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/log-data/#proslushivanie-sobytii-v-kliente"><small>- Прослушивание событий в клиенте</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/log-data/#ethereum-tx-v-bloke"><small>- Ethereum Tx в блоке</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/log-data/#dopolnitel-nye-soobrazheniia"><small>- Дополнительные соображения</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/log-data/#predlozhennoe-reshenie">Предложенное решение</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/log-data/#soobrazheniia"><small>- Соображения</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Двоичные данные журнала программы</h1>
+
+<h2 id="problema">Проблема</h2>
+<p>В Solidity нет поддержки регистрации двоичных данных.</p>
+<h3 id="sobytiia-v-solidity">События в Solidity</h3>
+<p>В Solidity можно сообщать о событиях. Они выглядят как структуры с нулем или более полей и могут быть испущены с определенными значениями. Например:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>event PaymentReceived {
+</span><span>    address sender;
+</span><span>    uint amount;
+</span><span>}
+</span><span>
+</span><span>contract c {
+</span><span>    function pay() public payable {
+</span><span>        emit PaymentReceived(msg.sender, msg.value);
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>События доступны только для записи с точки зрения Solidity/VM и записываются в блоки в записях tx.</p>
+<p>Некоторые из этих полей могут быть помечены как «индексированные», что влияет на способ кодирования данных. Все неиндексированные поля кодируются eth abi в массив байтов переменной длины. Все проиндексированные поля входят в так называемые темы.</p>
+<p>Темы представляют собой поля фиксированной длины в 32 байта. Максимум 4 темы; если тип не всегда умещается в 32 байта (например, строковые типы), то топик хешируется keccak256.</p>
+<p>Первая тема — это хэш keccak256 подписи события, в данном случае <code>keccak256('PaymentReceived(address,uint)')</code>. Четыре оставшихся доступны для «индексированных» полей. Событие может быть объявлено «анонимным», и в этом случае первое поле не является хэшем подписи, и разрешено иметь 4 проиндексированных поля.</p>
+<h3 id="proslushivanie-sobytii-v-kliente">Прослушивание событий в клиенте</h3>
+<p>Причина различия между темами/индексируемыми и обычными полями заключается в том, что их легче фильтровать по темам.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>const Web3 = require(&#39;web3&#39;);
+</span><span>const url = &#39;ws://127.0.0.1:8546&#39;;
+</span><span>const web3 = new Web3(url);
+</span><span>
+</span><span>var options = {
+</span><span>    address: &#39;0xfbBE8f06FAda977Ea1E177da391C370EFbEE3D25&#39;,
+</span><span>    topics: [
+</span><span>        &#39;0xdf50c7bb3b25f812aedef81bc334454040e7b27e27de95a79451d663013b7e17&#39;,
+</span><span>        //&#39;0x0000000000000000000000000d8a3f5e71560982fb0eb5959ecf84412be6ae3e&#39;
+</span><span>      ]
+</span><span>};
+</span><span>
+</span><span>var subscription = web3.eth.subscribe(&#39;logs&#39;, options, function(error, result){
+</span><span>    if (!error) console.log(&#39;got result&#39;);
+</span><span>    else console.log(error);
+</span><span>}).on(&quot;data&quot;, function(log){
+</span><span>    console.log(&#39;got data&#39;, log);
+</span><span>}).on(&quot;changed&quot;, function(log){
+</span><span>    console.log(&#39;changed&#39;);
+</span><span>});
+</span></code></pre>
+<p>Для декодирования неиндексированных полей (данных) необходим abi контракта. Таким образом, тема сначала используется для обнаружения того, какое событие было использовано, а затем данные могут быть декодированы.</p>
+<h3 id="ethereum-tx-v-bloke">Ethereum Tx в блоке</h3>
+<p>Транзакция вызывает журналы событий. Вот tx с одним событием, с 3 темами и некоторыми данными.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{
+</span><span>  &quot;tx&quot;: {
+</span><span>    &quot;nonce&quot;: &quot;0x2&quot;,
+</span><span>    &quot;gasPrice&quot;: &quot;0xf224d4a00&quot;,
+</span><span>    &quot;gas&quot;: &quot;0xc350&quot;,
+</span><span>    &quot;to&quot;: &quot;0x6B175474E89094C44Da98b954EedeAC495271d0F&quot;,
+</span><span>    &quot;value&quot;: &quot;0x0&quot;,
+</span><span>    &quot;input&quot;: &quot;0xa9059cbb000000000000000000000000a12431d0b9db640034b0cdfceef9cce161e62be40000000000000000000000000000000000000000000000a030dcebbd2f4c0000&quot;,
+</span><span>    &quot;hash&quot;: &quot;0x98a67f0a35ebc0ac068acf0885d38419c632ffa4354e96641d6d5103a7681910&quot;,
+</span><span>    &quot;blockNumber&quot;: &quot;0xc96431&quot;,
+</span><span>    &quot;from&quot;: &quot;0x82f890D638478d211eF2208f3c1466B5Abf83551&quot;,
+</span><span>    &quot;transactionIndex&quot;: &quot;0xe1&quot;
+</span><span>  },
+</span><span>  &quot;receipt&quot;: {
+</span><span>    &quot;gasUsed&quot;: &quot;0x74d2&quot;,
+</span><span>    &quot;status&quot;: &quot;0x1&quot;,
+</span><span>    &quot;logs&quot;: [
+</span><span>      {
+</span><span>        &quot;address&quot;: &quot;0x6B175474E89094C44Da98b954EedeAC495271d0F&quot;,
+</span><span>        &quot;topics&quot;: [
+</span><span>          &quot;0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef&quot;,
+</span><span>          &quot;0x00000000000000000000000082f890d638478d211ef2208f3c1466b5abf83551&quot;,
+</span><span>          &quot;0x000000000000000000000000a12431d0b9db640034b0cdfceef9cce161e62be4&quot;
+</span><span>        ],
+</span><span>        &quot;data&quot;: &quot;0x0000000000000000000000000000000000000000000000a030dcebbd2f4c0000&quot;
+</span><span>      }
+</span><span>    ]
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<h3 id="dopolnitel-nye-soobrazheniia">Дополнительные соображения</h3>
+<p>В Ethereum события хранятся в блоках. События отмечают определенные изменения состояния в смарт-контрактах. Это служит двум целям:</p>
+<ul>
+<li>Слушайте события (т. е. изменения состояния), когда они происходят, читая новые блоки по мере их публикации.</li>
+<li>Перечитывайте исторические события, читая старые блоки</li>
+</ul>
+<p>Так, например, смарт-контракты могут выдавать изменения по мере их возникновения, но никогда не выдавать полное состояние, поэтому единственный способ восстановить все состояние контракта — это повторно прочитать все события из цепочки. Таким образом, приложение будет считывать события из блока 1 или любого другого блока, в котором было развернуто приложение, а затем использовать это состояние для локальной обработки. Это локальный кеш, который может быть повторно заполнен из цепочки в любой момент.</p>
+<h2 id="predlozhennoe-reshenie">Предложенное решение</h2>
+<p>Двоичное ведение журнала должно быть добавлено в журнал программы. Журнал программы должен включать данные в кодировке base64 (разрешено ноль или более единиц).</p>
+<p>Итак, если мы сначала закодируем темы, а затем данные, то событие в tx выше будет выглядеть так:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>program data: 3fJSrRviyJtpwrBo/DeNqpUrpFjxKEWKPVaTfUjs8AAAAAAAAAAAAAAACC+JDWOEeNIR7yII88FGa1q/g1UQAAAAAAAAAAAAAAAKEkMdC522QANLDN/O75zOFh5ivk AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgMNzrvS9MAAA=
+</span></code></pre>
+<p>Для этого требуется новый системный вызов:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>void sol_log_data(SolBytes *fields, uint64_t length);
+</span></code></pre>
+<h3 id="soobrazheniia">Соображения</h3>
+<ul>
+<li>Должно ли быть текстовое поле в журнале программы, чтобы мы могли иметь немного метаданных в двоичных данных, чтобы сделать их более удобочитаемыми для человека.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

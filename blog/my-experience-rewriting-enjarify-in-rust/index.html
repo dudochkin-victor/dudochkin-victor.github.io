@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Мой опыт переписывания Enjarify на Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#skorost">Скорость</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#razmer-koda">Размер кода</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#vremia-razrabotki">Время разработки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#oshibki">Ошибки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#problemy-realizatsii">Проблемы реализации</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#nasledovanie"><small>- Наследование</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#iskliucheniia"><small>- Исключения</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#obshchaia-izmenchivost"><small>- Общая изменчивость</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#kontrol-nye-tsikly"><small>- Контрольные циклы</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#bolevye-tochki-v-rust">Болевые точки в Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#iavnye-tselochislennye-privedeniia"><small>- Явные целочисленные приведения</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#sintaksis-podtipa-vremeni-zhizni-ne-obnaruzhivaetsia"><small>- Синтаксис подтипа времени жизни не обнаруживается</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#otsutstvie-peregruzki"><small>- Отсутствие перегрузки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#plokhaia-podderzhka-baitovykh-strok"><small>- Плохая поддержка байтовых строк</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#ssylka-na-ravenstvo-mnogoslovna"><small>- Ссылка на равенство многословна</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#net-podmnozhestv-perechislenii"><small>- Нет подмножеств перечислений</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#proverka-polnoty-sootvetstviia-ne-obrabatyvaet-tselye-chisla"><small>- Проверка полноты соответствия не обрабатывает целые числа</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#leksicheskoe-vremia-zhizni"><small>- Лексическое время жизни</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#massivy-klonov-ne-iavliaiutsia-klonami"><small>- Массивы клонов не являются клонами</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#otsutstvuiushchie-funktsii"><small>- Отсутствующие функции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#storonnie-zavisimosti"><small>- Сторонние зависимости</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#net-popytki-dlia-varianta"><small>- Нет попытки! для варианта</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#otladka"><small>- Отладка</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/my-experience-rewriting-enjarify-in-rust/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Мой опыт переписывания Enjarify на Rust</h1>
+
+<p><a href="https://medium.com/@robertgrosse/my-experience-rewriting-enjarify-in-rust-723089b406ad">Перевод</a> | Автор оригинала: Robert Grosse</p>
+<p>В прошлом году я решил переписать Enjarify (приложение Python для командной строки) на Go и делать заметки, чтобы получать данные, сравнивающие языки. Очевидно, что при переписывании существующего проекта результирующий код не будет таким идиоматическим, как проект, написанный с нуля, но я подумал, что это справедливо, поскольку суслики по какой-то причине постоянно пытаются отвести людей от Python и делают rewrite позволяет проводить параллельное сравнение. Enjarify также имеет преимущество сквозного тестирования, позволяя легко проверить, что реализации фактически эквивалентны.</p>
+<p>В любом случае, чем больше я использовал Go, тем больше я его ненавидел, и в итоге я отказался от проекта. Недавно я заинтересовался Rust и решил закончить переписывание Go и переписать Enjarify в Rust, чтобы получить больше опыта с Rust и посмотреть, не перестану ли я ненавидеть его, как это было с Go. Ниже мой опыт, а также сравнение трех версий.</p>
+<p>Весь обсуждаемый код доступен здесь.</p>
+<h2 id="skorost">Скорость</h2>
+<p>Во-первых, сравнение производительности. Для этого я проверил хеш-тесты Enjarify в качестве теста. Это тест, который включает в себя перевод каждого тестового apk для всех возможных комбинаций параметров и хеширование результатов для обнаружения регрессий. Я использовал CPython 3.4.3, Go 1.7 и Rust nightly (2016–09–02), все они работали на i7–4790 с Linux.</p>
+<p>Обратите внимание, что в этом тесте измерялась однопоточная производительность. Я заметил, что при настройках по умолчанию версия Go использовала 130–160% ЦП, несмотря на то, что в коде не было никаких горутин. Я думаю, это потому, что сборщик мусора работает в отдельной горутине, запущенной средой выполнения. Во всяком случае, я проводил тесты с GOMAXPROCS = 1, что привело к замедлению ~ 8% по сравнению с многопоточной версией.</p>
+<p><img src="/imgs/posts/9ae0b0b8_01.png" alt="Диаграмма" /></p>
+<p>Время хеш-тестов: Rust 135 секунд, Go 290 секунд, Python 1328 секунд</p>
+<p>Вот диаграмма, показывающая ускорение по сравнению с Python (т. Е. Обратно).</p>
+<p><img src="/imgs/posts/9ae0b0b8_02.png" alt="Диаграмма" /></p>
+<p>Ускорение: Rust: 9,8x, Go 4.6x, Python 1.0x</p>
+<p>Неудивительно, что Python медленнее Go, а Go медленнее Rust. Однако я был удивлен тем, насколько велик был разрыв, особенно между Go и Rust. Я думаю, что все эти аннотации на время жизни и долгое время компиляции действительно окупаются. Я думаю, это подчеркивает, что Go не находится на том же уровне «системного» языка, как C++ и Rust.</p>
+<p>Прежде чем все суслики выйдут из строя, чтобы сказать что-то вроде «вы можете избежать кучи в Go, если вы действительно попытаетесь», версия Rust реализует более или менее тот же код, так что это не имеет значения в любом случае. Я не делал версию Go намеренно неэффективной - я просто пытался написать что-то эквивалентное исходному Python самым простым и естественным способом, который поддерживает каждый язык. Я ожидаю, что большая часть выигрыша в Rust связана с оптимизацией, которая невозможна или неосуществима в Go из-за таких функций, как время жизни, неизменяемость и обобщения, или вещей, которые неприемлемо увеличивают время компиляции в Go (например, LLVM). Кроме того, в версии Rust еще есть много возможностей для оптимизации.</p>
+<p>^ Обновление: я потратил некоторое время, пытаясь оптимизировать код Go и Rust, и написал следующий пост с результатами.</p>
+<p>Я надеялся включить в это сравнение Pypy, но, к сожалению, он оказался намного медленнее, чем даже CPython. Pypy 3 раньше был в несколько раз быстрее, чем CPython, но похоже, что в прошлом году производительность резко упала и до сих пор не восстановилась. Думаю, мне следует перестать рекомендовать людям использовать Pypy с Enjarify. </p>
+<h2 id="razmer-koda">Размер кода</h2>
+<p>Чтобы измерить размер кода, я вырезал комментарии, начальные и конечные пробелы и сложил длину каждой непустой строки. Я исключил сгенерированный код, но включил код для его создания. Сценарий находится здесь, если вы хотите увидеть точную методологию.</p>
+<p>Изображение:
+<img src="/imgs/posts/9ae0b0b8_03.png" alt="Диаграмма" /></p>
+<p>Байты кода: Rust 108847, Go 114180, Python 83013</p>
+<p>Python, Rust и Go имели 2876, 3783 и 4971 строк кода соответственно. Соответствующее количество символов - 83013, 108847 и 114180. Я думаю, что последний - лучший показатель, поскольку он менее чувствителен к стилю скобок, но в любом случае код Rust был больше, чем Python, но меньше, чем Go.</p>
+<p>Неудивительно, что Go самый многословный. То, что Rust теряет из-за аннотаций времени жизни и больших сигнатур универсальных типов, он выигрывает от акцента на эргономике и наличия реальных абстракций, вместо того, чтобы требовать от вас постоянно копировать и вставлять код. С другой стороны, по лаконичности Rust и близко не может приблизиться к Python, что имеет смысл, поскольку Python - это язык сценариев с динамической типизацией.</p>
+<h2 id="vremia-razrabotki">Время разработки</h2>
+<p>Перезапись Go заняла около 45 часов. Перезапись в Rust заняла 49 часов. Обратите внимание, что эти числа смещены в сторону Rust, потому что у меня было то преимущество, что я мог консультироваться с кодом Python и Go при написании версии Rust, а также преимущество в том, что я уже решил некоторые проблемы, возникшие во время перезаписи Go.</p>
+<p>Я думаю, что важным выводом является то, что переписывание вещей занимает больше времени, чем вы ожидаете, и что это занимает много времени независимо от задействованных языков.</p>
+<p>Во время переписывания Rust я потратил много времени на поиск точных имен и синтаксиса методов в Vec, Option, HashMap и т.д. В отличие от Go, встроенных методов вообще нет. Иногда я выполнял поиск в Интернете, чтобы попытаться найти самый чистый способ сделать что-нибудь в Go, только чтобы обнаружить, что это невозможно, и что вам просто нужно использовать грубую силу с помощью ограниченных доступных инструментов.</p>
+<p>Я также столкнулся с несколькими непостижимыми ошибками времени жизни / заимствования, но по мере того, как я пошел, это стало легче и составило всего около двух часов потраченного впустую времени. Я думаю, что самая большая потеря времени в Rust была своего рода смертью от тысячи сокращений - все время, потраченное на попытки получить амперсанды и ссылки в нужных местах, и другие легко исправляемые, но очень частые ошибки компилятора.</p>
+<p>Однако это показывает, что печально известная кривая обучения Rust не так уж плоха, особенно по сравнению с широко разрекламированной простотой Go. Кроме того, знакомство с языком - это, по сути, единовременные затраты. Я не удивлюсь, если бы обнаружил, что если бы этот эксперимент был проведен кем-то, кто является экспертом в Go и Rust, а не новичком, версия Rust была бы завершена быстрее, чем версия Go.</p>
+<h2 id="oshibki">Ошибки</h2>
+<p>Поскольку первоначальной мотивацией для переписывания было сравнение Go и Python, я тщательно отслеживал количество ошибок времени выполнения в версии Go, чтобы предоставить немного данных для постоянных дебатов о статической и динамической типизации, и решил, что с таким же успехом могу сделать это. то же самое и с Rust.</p>
+<p>В версии Go было 50 ошибок, которые были обнаружены во время тестирования после прохождения компилятора. Сюда входят как тривиальные ошибки, так и несколько ошибок, на отладку каждой из которых уходило 30+ минут. Для Rust соответствующее число - 29. Это не включает 3 преднамеренных целочисленных переполнения, в которых я забыл использовать операции обертывания, поскольку это не повлияет на корректность сборки релиза. Случаи, когда переполнение представляло собой реальную ошибку, включены в 29.</p>
+<p>Я надеялся, что сильная статическая типизация в Rust поможет уменьшить количество ошибок, но, к сожалению, особого эффекта это не дало. Пара ошибок, с которыми я столкнулся в Go, совершенно невозможны в Rust, но в версии Rust все еще было множество ошибок. Отчасти проблема заключается в том, что ошибки, возникающие при переписывании кода, отличаются от ошибок, возникающих при нормальном кодировании. В данном случае я копировал код, который уже был правильным, поэтому большинство ошибок возникло из-за неосторожных ошибок транскрипции, которые никакая система типов не могла бы уловить.</p>
+<p>Однако есть еще один способ, которым язык влияет на количество ошибок - это умственная нагрузка, возникающая при переводе кода. Например, рассмотрим следующие строки Python. </p>
+<pre data-lang="python" style="background-color:#0f1419;color:#bfbab0;" class="language-python "><code class="language-python" data-lang="python"><span>        </span><span style="color:#ff7733;">if </span><span style="color:#f07178;">isinstance</span><span>(instr</span><span style="color:#bfbab0cc;">, </span><span>ir</span><span style="color:#f29668;">.</span><span>RegAccess) </span><span style="color:#f29668;">and not </span><span>instr</span><span style="color:#f29668;">.</span><span>store:
+</span><span>            used</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">add</span><span>(instr</span><span style="color:#f29668;">.</span><span>key)
+</span></code></pre>
+<p>В Rust это стало </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>        </span><span style="color:#ff7733;">if let </span><span>ir</span><span style="color:#f29668;">::</span><span>RegAccess(</span><span style="color:#ff7733;">ref</span><span> data) </span><span style="color:#f29668;">=</span><span> instr</span><span style="color:#f29668;">.</span><span>sub {
+</span><span>            </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">!</span><span>data</span><span style="color:#f29668;">.</span><span>store {
+</span><span>                used</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(data</span><span style="color:#f29668;">.</span><span>key)</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>        }
+</span></code></pre>
+<p>Однако изначально я забыл включить проверку! Data.store, что привело к ошибке. Проблема в том, что в Rust нет способа выполнить требуемое «приведение вниз» как часть более крупного выражения *. Написав внешний if let, я пошел побрить яка и совершенно забыл ввести вторую половину условия if. Если бы понижение было простым выражением, которое я мог бы печатать без перерыва, этого почти наверняка бы не произошло.</p>
+<p>^ Позже я узнал о спичечных охранниках, которые, вероятно, могли бы справиться с этим, но в то время я не знал о них.</p>
+<h2 id="problemy-realizatsii">Проблемы реализации</h2>
+<p>В Python есть ряд функций, которые требуют более сложного перевода на Go или Rust. Вот краткий обзор того, как я с ними справился.</p>
+<h3 id="nasledovanie">Наследование</h3>
+<p>К счастью, в Enjarify есть только два места, где нетривиально используется наследование. Первый и более простой случай - это ConstantPool.</p>
+<p>Существует две реализации пулов констант: SimpleConstantPool и SplitConstantPool. Это подклассы абстрактного базового класса ConstantPool, который реализует большую часть функциональности, полагаясь при этом на пару абстрактных методов, реализованных подклассами.</p>
+<p>В Go встроенные структуры не могут получить доступ к структуре внедрения, поэтому мне пришлось создать структуру для базового класса и интерфейс, представляющий методы, реализованные в подклассах, а затем сохранить этот интерфейс в базовой структуре. Затем я создал структуру для каждого из подклассов, встраивающих базовую структуру, и интерфейс, представляющий общедоступный интерфейс всего этого. Плюс все методы-оболочки, необходимые для реализации интерфейсов.</p>
+<p>К счастью, в Rust методы по умолчанию в трейтах могут вызывать нестандартные методы трейта, что делает возможным прямое моделирование абстрактного базового класса. Версия Rust имеет только одну трэйту и две реализующие структуры, почти идентичные исходному Python. Было только несколько незначительных недостатков - во-первых, у трейтов не может быть полей, поэтому мне пришлось вместо этого использовать метод доступа. Во-вторых, у типажных объектов не может быть общих методов, поэтому я не мог использовать Into для перегрузки (подробнее об этом позже).</p>
+<p>Второй и гораздо более сложный случай наследования - это JvmInstruction. У него есть подклассы для различных типов инструкций (Label, RegAccess, PrimConstant, OtherConstant, Switch и Other), а также LazyJumpBase, у которого есть два собственных подкласса (If и Goto). Кроме того, в коде широко используется понижающее преобразование.</p>
+<p>Версия Go просто реплицировала иерархию наследования Python, используя интерфейсы и структуры, как и раньше. Однако это оказалось кошмаром, и в любом случае это невозможно в Rust (без каких-либо хаков). В версии на Rust я избавился от LazyJumpBase (дублируя код, который он содержал) и сделал JvmInstruction огромным перечислением.</p>
+<p>Было несколько неприятностей при использовании перечисления. Самая большая проблема в том, что для этого требуется много шаблонов и дублирования. Например, вот определение перечисления, которое заменило (большую часть) JvmInstruction. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">JvmInstructionSub </span><span>{
+</span><span>    Label(LabelId)</span><span style="color:#bfbab0cc;">,
+</span><span>    RegAccess(RAImpl)</span><span style="color:#bfbab0cc;">,
+</span><span>    PrimConstant(PCImpl)</span><span style="color:#bfbab0cc;">,
+</span><span>    OtherConstant</span><span style="color:#bfbab0cc;">,
+</span><span>    Goto(GotoImpl)</span><span style="color:#bfbab0cc;">,
+</span><span>    If(IfImpl)</span><span style="color:#bfbab0cc;">,
+</span><span>    Switch(SwitchImpl)</span><span style="color:#bfbab0cc;">,
+</span><span>    Other</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Если вы хотите иметь возможность ссылаться на содержимое перечисления, иметь именованные поля * или вызывать методы, вам необходимо создать отдельное определение структуры. И это в дополнение к именам конструкторов перечисления, что приводит к множеству повторений.</p>
+<p>^ Исправление: варианты перечисления могут иметь именованные поля.</p>
+<p>Кроме того, мне нужно было превратить методы, которые были определены в различных подклассах, в методы JvmInstruction с гигантскими операторами сопоставления по содержащемуся перечислению. Я также добавил вспомогательные методы, такие как is_jump и is_constant, поскольку проверки isinstance являются проблемой для системы перечисления.</p>
+<h3 id="iskliucheniia">Исключения</h3>
+<p>Enjarify использует исключения двумя способами. Во-первых, если сгенерированный байт-код превышает предел файла класса, он генерирует исключение и повторяет попытку перевода со всеми включенными параметрами оптимизации. Во-вторых, если при переводе класса возникает какое-либо другое исключение, оно регистрирует ошибку и переходит к следующему классу, чтобы обработать недопустимые или искаженные классы.</p>
+<p>Хорошая новость заключается в том, что std::panic::catch_unwind / resume_unwind в Rust оказалось намного проще в использовании, чем defer / recovery в Go. Плохая новость заключается в том, что Rust распечатывает трассировку стека, когда паника возникает впервые, а не когда паника распространяется на вершину стека, поэтому мне пришлось установить собственный хук паники, чтобы предотвратить это.</p>
+<h3 id="obshchaia-izmenchivost">Общая изменчивость</h3>
+<p>Одна вещь, которая меня удивила, заключалась в том, насколько дружественным к заимствованиям уже был Enjarify, учитывая, что он был написан на Python, где псевдонимы и изменчивость являются естественными. Большая часть кода требовала лишь незначительных изменений, чтобы заимствовать проверку, но была пара более сложных случаев.</p>
+<p>В первом случае в IRWriter хранится (изменяемая) ссылка на ConstantPool, которая сохраняется до тех пор, пока не будет завершен весь класс. Ссылка на пул на самом деле необходима только при первоначальном создании IR, поэтому я просто разделил и реорганизовал код, что позволило заимствовать чек. Результат стал чище, и я бы сделал то же самое с версией Python, если бы у меня было время, но примечательно, что это потребовало больших изменений в дизайне кода.</p>
+<p>Изменение JvmInstruction с коробок на значения и удаление с ним всех использований ссылочной идентичности также устранило еще один большой источник псевдонимов.</p>
+<p>Другая проблема, с которой я столкнулся, заключалась в повторяющемся шаблоне, когда я перебираю все инструкции и изменяю каждую, исследуя предыдущие инструкции или две. На самом деле это не нарушает правила псевдонимов, но компилятор не может это узнать. Вместо этого я придумал обходной путь. Я создал локальную переменную вне цикла, которая хранит копию соответствующих данных из предыдущей инструкции, и обновил ее и конец тела цикла.</p>
+<p>Последний случай - это CopySetsMap. В этом случае для алгоритма необходима общая изменчивость, поэтому мне просто пришлось поместить все в Rc <RefCell> и выдержать ужасный синтаксис, полученный в результате. По крайней мере, он используется только в очень небольшой части кода. Это немного беспокоит, так как это очень полезный шаблон, и мне хотелось бы, чтобы его было проще реализовать в Rust.</p>
+<h3 id="kontrol-nye-tsikly">Контрольные циклы</h3>
+<p>И снова я был удивлен тем, насколько мало код действительно полагался на ссылочные циклы. Я был готов плохо имитировать сборку мусора с помощью TypedArenas, но, как оказалось, в дизайне уже не было нетривиальных ссылочных циклов.</p>
+<h2 id="bolevye-tochki-v-rust">Болевые точки в Rust</h2>
+<p>Хотя в конечном итоге я не возненавидел Rust, я столкнулся с множеством неприятностей. Надеюсь, большинство из них будет исправлено в будущем.
+Справочный синтаксис сбивает с толку</p>
+<p>Почти невозможно угадать, где вам нужны &amp;s, refs и т.д., Особенно при работе с цепочками и замыканиями итераторов. Если вы сможете написать такой код и скомпилировать его с первой попытки, я буду очень впечатлен. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>        </span><span style="color:#ff7733;">let</span><span> most_common</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt; </span><span style="color:#f29668;">= </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> most_common</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt; </span><span style="color:#f29668;">=</span><span> narrow_pairs</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            most_common</span><span style="color:#f29668;">.</span><span style="color:#f07178;">sort_by_key</span><span>(|</span><span style="color:#f29668;">&amp;</span><span>(</span><span style="color:#f29718;">ref p</span><span style="color:#bfbab0cc;">,</span><span> &amp;</span><span style="color:#f29718;">count</span><span>)| (</span><span style="color:#f29668;">-</span><span>(count </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">i64</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> p</span><span style="color:#f29668;">.</span><span style="color:#f07178;">cmp_key</span><span>()))</span><span style="color:#bfbab0cc;">;
+</span><span>            most_common</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">take</span><span>(pool</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lowspace</span><span>())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|(</span><span style="color:#f29718;">ref p</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">count</span><span>)| (</span><span style="color:#f29668;">*</span><span>p)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()
+</span><span>        }</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">for</span><span> k </span><span style="color:#f29668;">in</span><span> most_common</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>() {
+</span><span>            narrow_pairs</span><span style="color:#f29668;">.</span><span style="color:#f07178;">remove</span><span>(</span><span style="color:#f29668;">&amp;</span><span>k)</span><span style="color:#bfbab0cc;">;
+</span><span>            pool</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert_directly</span><span>(k</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span></code></pre>
+<p>Почему &amp;s, * s и refs идут туда, где они находятся? ¯ \ _ (ツ) _ / ¯</p>
+<p>Отчасти проблема заключается в том, что auto-deref означает, что вы можете обойтись без правильных deref в одних обстоятельствах, но в других сделать то же самое не удается по непонятной причине.</p>
+<p>Что еще хуже, существует огромная несогласованность в том, что одни методы принимают ссылки, а другие принимают значения. Это действительно имеет смысл, если подумать. Например, map insert() и entry() становятся владельцем ключа, потому что им может потребоваться его вставить, в то время как remove(), [], contains_key() и т.д. Не требуют владения и, следовательно, принимают ссылки для максимальной гибкости. . Однако это все еще дополнительное бремя, с которым нужно бороться в начале, особенно когда вы имеете дело только с простыми типами копирования и вам не о чем беспокоиться.</p>
+<p>Компилятор в значительной степени сообщает вам, что вам нужно изменить, но я бы хотел, чтобы мне не пришлось так часто проходить цикл редактирования -&gt; компиляция -&gt; редактирование -&gt; компиляция -&gt; успешный цикл. Это смерть от тысячи порезов, о которых я упоминал выше.</p>
+<h3 id="iavnye-tselochislennye-privedeniia">Явные целочисленные приведения</h3>
+<p>Все эти целочисленные преобразования раздражают в Go, и они раздражают и в Rust. Одна из проблем заключается в том, что он заставляет вас постоянно выбирать между использованием целочисленного типа, представляющего фактический диапазон сохраняемых значений, и использованием типа, который наиболее удобен с синтаксической точки зрения (т. Е. Просто везде используется usize). Частично это связано с тем, что большинство значений, с которыми работает Enjarify, конкретно ограничены 16 или 32 битами из-за формата файла Dalvik. Я полагаю, что для приложений, которые не выполняют синтаксический анализ двоичных файлов, гораздо реже иметь априорные ограничения в значениях.</p>
+<p>Я также хочу, чтобы семантика переполнения могла быть отделена от размера хранилища. Rust идет в этом направлении, требуя явных операций обертывания, когда требуется переполнение, но для полного решения, вероятно, потребуются зависимые типы. Кстати, я нахожу удивительным, что при сужении не проверяется переполнение. Это похоже на оплошность, хотя это может быть слишком сложно сделать в LLVM или в чем-то еще.</p>
+<p>Хуже всего то, что он кажется неэффективным для предотвращения ошибок. В версии Rust было несколько ошибок, связанных с приведением типов целых чисел. В одном случае я вызвал не ту функцию, и она заняла другую ширину, чем желаемая функция. Но он прошел компилятор, потому что я также забыл преобразовать рассматриваемые переменные.</p>
+<p>Кроме того, когда почти для каждого вызова требуется приведение типов, люди просто автоматически добавляют их, чтобы выключить компилятор, что противоречит цели.</p>
+<h3 id="sintaksis-podtipa-vremeni-zhizni-ne-obnaruzhivaetsia">Синтаксис подтипа времени жизни не обнаруживается</h3>
+<p>Комбинация исключения времени жизни и автоматического вывода ковариации означает, что вам редко требуется более одного параметра времени жизни. Но в случае, когда вы это делаете, требуемый синтаксис не обнаруживается.</p>
+<p>Например, моя структура IRBlock хранит изменяемое заимствование объекта ConstantPool, но ссылки, хранящиеся в пуле констант, должны пережить заимствование, а это означает, что требуется несколько параметров времени жизни. Просто указать несколько параметров времени жизни несложно. То, что я нашел невозможным, заключалось в том, чтобы указать, что одна из жизней переживает другую. Оказывается, требуется синтаксис </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">IRBlock</span><span>&lt;</span><span style="color:#ff7733;">&#39;b</span><span>, </span><span style="color:#ff7733;">&#39;a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">&#39;b</span><span>&gt; {
+</span><span>    pool</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;b mut </span><span>(ConstantPool&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; + </span><span style="color:#ff7733;">&#39;a</span><span>),
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// other fields omitted
+</span><span>}
+</span></code></pre>
+<p>Дополнительная граница и круглые скобки на объекте-трэйте достаточно сбивала с толку, но элемент &quot;a:&quot; b не упоминался ни в одном из руководств или руководств, которые я смог найти. Фактически, единственная причина, по которой я это понял, - это то, что я наткнулся на нее в вопросе о переполнении стека, касающемся косвенно связанной темы (могут ли структуры иметь предложения where).</p>
+<p>Обратите внимание, что обычно полезный компилятор здесь совершенно бесполезен. Кажется, что предложения компилятора смещены в сторону наличия как можно меньшего количества параметров времени жизни, поэтому, если вы здесь что-то испортите, в появившемся сообщении об ошибке компилятора будет предложено удалить второй параметр времени жизни, что, очевидно, неверно в данном случае.</p>
+<h3 id="otsutstvie-peregruzki">Отсутствие перегрузки</h3>
+<p>В Rust идиоматично использовать общие параметры Into для перегрузки методов, но, к сожалению, я не мог этого сделать ни в одном из случаев, когда это было наиболее полезно.</p>
+<p>ConstantPool работает с Cow <bstr> внутри, потому что в редких случаях мне нужно сохранить собственную строку. Но почти все вызывающие абоненты будут передавать &amp; bstr, поэтому было бы неплохо, если бы методы принимали это. К сожалению, поскольку ConstantPool является типажным объектом, общие методы использовать нельзя. В итоге я поставил перед «внутренними» методами Cow знак подчеркивания и создал «общедоступные» методы-оболочки, которые принимают &amp;bstr. Но это уродливый хакер, в котором не должно быть необходимости. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">_class</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, bstr&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u16 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let</span><span> ind </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">_utf8</span><span>(s)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(Class(ArgsInd(ind)))
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">class</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> bstr) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u16 </span><span>{</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">_class</span><span>(s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())}
+</span></code></pre>
+<p>Точно так же мой TreePtr (разреженный постоянный массив, реализованный в виде дерева) использует usize для внутренней индексации, но вызывающие стороны всегда используют u16, поэтому было бы неплохо справиться с этим. К сожалению, usize по необъяснимым причинам не может реализовать From<u16>, поэтому я снова застрял на хитрости подчеркивания.</p>
+<p>Я предполагаю, что идея usize не быть From<u16> заключается в том, что Rust может когда-нибудь поддерживать 8-битную платформу, но это все еще безумие. Глупо причинять всем столько боли сегодня в надежде не взломать код в случае появления спекулятивной платформы будущего. Хуже всего то, что большая часть кода Rust в любом случае не будет работать на 8-битной платформе. Фактически, даже сама стандартная библиотека неявно предполагает, что используется&gt; = 32 бита, поскольку Range <u32> реализует ExactSizeIterator.</p>
+<h3 id="plokhaia-podderzhka-baitovykh-strok">Плохая поддержка байтовых строк</h3>
+<p>Поскольку большая часть данных, с которыми работает Enjarify, - это не utf8, я не мог использовать собственные строковые типы Rust. Вместо этого я просто определил псевдонимы типов для байтовых строк и использовал их везде. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub type </span><span style="color:#59c2ff;">BString </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">pub type </span><span style="color:#59c2ff;">bstr </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#ff7733;">u8</span><span>]</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это работает достаточно хорошо, главным образом потому, что я не делаю особых манипуляций со строками, кроме нарезки и конкатенации. Но в тех редких случаях, когда я это делаю, я действительно упускал из виду удобные строковые методы, которые не определены для Vec<u8> или &amp;[u8]. Python, напротив, определяет все строковые методы как для юникодных, так и для байтовых строк. Это также означает, что реализация отладки по умолчанию показывает значения в виде списка целых чисел, а не в виде строк.</p>
+<p>Кстати, я так и не понял, как заставить компилятор замолчать насчет именования bstr, несмотря на неоднократные поиски. Ничего из того, что я пытаюсь, похоже, не работает.</p>
+<p>Обновление: ответ оказывается #[allow (non_camel_case_types)]. Не знаю, как я это пропустил. Я пробовал несколько вариантов, например #[allow (non_camel_case)], но не пробовал ставить _types в конце.</p>
+<h3 id="ssylka-na-ravenstvo-mnogoslovna">Ссылка на равенство многословна</h3>
+<p>В Rust все использует равенство значений, что обычно и нужно вам. Но в тех случаях, когда вам нужно ссылочное равенство, это излишне многословно. Не существует эквивалента оператора is в Python.</p>
+<p>Это приводит к такому коду </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">is</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">rhs</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">Self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>        </span><span style="color:#ff7733;">match </span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">as_ref</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> rhs</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">as_ref</span><span>()) {
+</span><span>            (</span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">,
+</span><span>            (</span><span style="font-style:italic;color:#39bae6;">Some</span><span>(r1)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(r2)) </span><span style="color:#f29668;">=&gt;</span><span> r1 </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*const </span><span style="color:#f29668;">_ ==</span><span> r2 </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*const </span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#f29668;">_ =&gt; </span><span style="color:#f29718;">false
+</span><span>        }
+</span><span>    }
+</span></code></pre>
+<p>или даже хуже, </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">ptr</span><span>(</span><span style="color:#f29718;">p</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span>Rc&lt;RefCell&lt;CopySet&gt;&gt;&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">*const</span><span> CopySet {
+</span><span>    </span><span style="color:#ff7733;">match</span><span> p {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(p) </span><span style="color:#f29668;">=&gt;</span><span> p</span><span style="color:#f29668;">.</span><span style="color:#f07178;">deref</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">deref</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*const </span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">null</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}</span><span style="font-style:italic;color:#5c6773;">// ...        let s_set = ptr(self.0.get(&amp;src));
+</span><span>        </span><span style="color:#ff7733;">let</span><span> d_set </span><span style="color:#f29668;">= </span><span style="color:#f07178;">ptr</span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">get</span><span>(</span><span style="color:#f29668;">&amp;</span><span>dest))</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">!</span><span>s_set</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_null</span><span>() </span><span style="color:#f29668;">&amp;&amp;</span><span> s_set </span><span style="color:#f29668;">==</span><span> d_set {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// src and dest are copies of same value, so we can remove
+</span><span>            </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span></code></pre>
+<p>Написав это, я понял, что это можно упростить, просто взяв указатель на внешний RefCell, но в любом случае это все равно неоправданно сложно.</p>
+<h3 id="net-podmnozhestv-perechislenii">Нет подмножеств перечислений</h3>
+<p>Когда у вас есть значение типа перечисления, оно обрабатывается так, как если бы оно могло быть любым вариантом перечисления, но часто вы статически знаете, что это подмножество полного перечисления. Обычно это вызывает лишь незначительные затруднения с проверкой полноты, но становится намного более раздражающим, когда варианты перечисления имеют разные ограничения.</p>
+<p>Например, с перечислением constantpool::Entry вариант Utf8 хранит Cow &lt;’a, bstr&gt;, но любой другой вариант хранит просто пару целых чисел. Тем не менее, у enum есть целое, внезапно требуется параметр времени жизни повсюду, и он больше не может быть Copy, даже если статически известно, что он не является Utf8. Проблема с параметром времени жизни может быть решена до некоторой степени, просто используя «статическое время жизни» в этих местах, но нет никакого способа волшебным образом заставить его Копировать.</p>
+<p>Очевидно, что подмножества типов значительно усложнили бы систему типов, и я даже понятия не имею, какой синтаксис вы бы использовали для их определения. Но это все равно немного раздражает.</p>
+<h3 id="proverka-polnoty-sootvetstviia-ne-obrabatyvaet-tselye-chisla">Проверка полноты соответствия не обрабатывает целые числа</h3>
+<p>По какой-то причине, даже если вы соответствуете u8 и охватываете все случаи от 0 до 255, вам все равно нужно добавить _ =&gt; unreachable!() В конце, чтобы удовлетворить компилятор. Я не уверен, почему это не обрабатывается, но это как бы противоречит цели проверки полноты. При недостижимом кейсе по умолчанию нет защиты во время компиляции в случае, если вы законно пропустили кейс. Судя по всему, это известная проблема, но ее нельзя исправить из-за обратной совместимости.</p>
+<h3 id="leksicheskoe-vremia-zhizni">Лексическое время жизни</h3>
+<p>Я знаю, что над нелексическим временем жизни активно работают, но я подумал, что с таким же успехом могу выделить некоторые случаи, когда ограничения текущей системы заимствования вызывали неудобный код. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>        </span><span style="color:#ff7733;">let</span><span> t </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>prims</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(src)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>prims</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(dest</span><span style="color:#bfbab0cc;">,</span><span> t)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> t </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>arrs</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(src)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>arrs</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(dest</span><span style="color:#bfbab0cc;">,</span><span> t)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> t </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>tainted</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(src)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>tainted</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(dest</span><span style="color:#bfbab0cc;">,</span><span> t)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Например, здесь мне пришлось разделить вызовы и назначить их временной переменной. Лексическое время жизни запрещает гораздо более естественное вложение выражений, поскольку изменяемое заимствование внешнего вызова метода включает оценку аргументов метода.</p>
+<p>Я не уверен, связано ли это, но я также столкнулся со странной проблемой, когда Box::заимствовать_mut() не работает, а ручное повторное заимствование работает. Это на самом деле меня настолько озадачило, что мне пришлось прибегнуть к вопросу о переполнении стека.</p>
+<h3 id="massivy-klonov-ne-iavliaiutsia-klonami">Массивы клонов не являются клонами</h3>
+<p>По какой-то причине массивы T: Clone нельзя клонировать. Смешно, что мне приходится писать такой код </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">clone</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Clone</span><span>&gt;(</span><span style="color:#f29718;">src</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[T; 16]) </span><span style="color:#bfbab0cc;">-&gt; </span><span>[T</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">16</span><span>] {
+</span><span>    [src[</span><span style="color:#f29718;">0</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">1</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">2</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">3</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">4</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">5</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">6</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">7</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">8</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">9</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">10</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">11</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">12</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">13</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">14</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> src[</span><span style="color:#f29718;">15</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()]
+</span><span>}
+</span></code></pre>
+<p>Похожая проблема делает невозможным инициализацию большого массива, вынуждая меня использовать Vec внутри SplitConstantPool, даже если данные имеют известную фиксированную длину.</p>
+<h3 id="otsutstvuiushchie-funktsii">Отсутствующие функции</h3>
+<p>Я не знаю, упускаю ли я что-то *, но мне не удалось найти никаких вспомогательных методов для копирования или клонирования элементов в цепочке Option или итератора. Его можно решить с помощью закрытий, таких как .map (| x | x) (или его двоюродный брат .map (| ref x | x.clone())), но это кажется глупым и ненужным.</p>
+<p>^ Обновление: мне что-то не хватало.</p>
+<p>Точно так же кажется, что Vec&lt;Option<T>&gt; -&gt; Vec<T>, удаление всех элементов None, было бы обычной задачей, но, насколько я могу судить, по-прежнему требуется подробный iter / filter / map / собрать цепочку.</p>
+<p>^ Обновление: вы можете фильтровать и отображать с помощью одного вызова.</p>
+<p>Еще одна вещь, которую я упустил, - это отсутствие эквивалента int.bit_length() в Python. У целых чисел есть метод lead_zeros(), но без возможности автоматического получения соответствующей ширины это может привести к ошибкам. Это не праздное беспокойство, потому что одна из 29 ошибок, с которыми я столкнулся, была написана </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>(64 - part63.leading_zeros())
+</span></code></pre>
+<p>Для того, что оказалось 32-битной переменной, а не 64-битной, как я думал.</p>
+<h3 id="storonnie-zavisimosti">Сторонние зависимости</h3>
+<p>В версиях Python и Go использовалась только стандартная библиотека, но для версии Rust мне пришлось использовать несколько крэйтов сторонних производителей. В частности, byteorder, getopts, lazy_static, rust-crypto и zip. Cargo делает это очень легко, но вам все равно придется потратить дополнительное время, чтобы выбрать крэйт и прочитать документацию, а зависимости от третьих лиц заставляют меня немного нервничать (см. Фиаско с левой клавиатурой).</p>
+<p>Кроме того, почтовый крэйт выполняет только базовые функции. Например, может быть полезно использовать фиксированную метку времени для выходных jar-файлов, чтобы сделать выходные данные детерминированными. Python и Go поддерживают это, но почтовый крэйт не поддерживает.</p>
+<p>Когда раньше люди говорили, что Go включает батарейки или имеет обширную стандартную библиотеку, я всегда насмехался, поскольку трудно серьезно относиться к стандартной библиотеке, когда в ней даже нет коллекций, но теперь я понимаю, что они имеют в виду. В Rust есть множество полезных коллекций и стандартных алгоритмов, но почти ничего другого, в то время как Go - наоборот. У Python, конечно же, есть и то, и другое.</p>
+<h3 id="net-popytki-dlia-varianta">Нет попытки! для варианта</h3>
+<p>Для Rust-версии декодера mutf8 я использовал специальные адаптеры итератора. Итераторы возвращают Options, а не Results, но, к сожалению, нет эквивалента try! макрос для Option. Это означало, что мне приходилось копировать и вставлять одни и те же четыре строки кода снова и снова, как вы можете видеть ниже. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; Iterator </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">FixPairsIter</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Item </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">char</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">next</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">char</span><span>&gt; {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">next</span><span>() {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(v) </span><span style="color:#f29668;">=&gt;</span><span> v
+</span><span>        }</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="color:#f29718;">0xD800 </span><span style="color:#f29668;">&lt;=</span><span> x </span><span style="color:#f29668;">&amp;&amp;</span><span> x </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">0xDC00 </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> high </span><span style="color:#f29668;">=</span><span> x </span><span style="color:#f29668;">- </span><span style="color:#f29718;">0xD800</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let</span><span> low </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">next</span><span>() {
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(v) </span><span style="color:#f29668;">=&gt;</span><span> v
+</span><span>            } </span><span style="color:#f29668;">- </span><span style="color:#f29718;">0xDC00</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">char</span><span style="color:#f29668;">::</span><span>from_u32(</span><span style="color:#f29718;">0x10000 </span><span style="color:#f29668;">+ </span><span>(high </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">10</span><span>) </span><span style="color:#f29668;">+ </span><span>(low </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">1023</span><span>))
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            </span><span style="color:#ff7733;">char</span><span style="color:#f29668;">::</span><span>from_u32(x)
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="otladka">Отладка</h3>
+<p>Трассы стека по умолчанию, напечатанные при панике, слишком зашумлены. Обычно в нутро Rust наверху есть дюжина стековых фреймов, прежде чем он перейдет к важной части, пользовательскому коду, вызвавшему панику. Кроме того, здесь много визуального шума. Среди всех случайных шестнадцатеричных адресов трудно найти важную часть - номер файла и строки. Я бы хотел, чтобы Rust сделал то, что делает Python, и распечатал соответствующие фрагменты исходного кода в трассировке стека.</p>
+<p>Еще одно раздражение заключается в том, что даже для режимов отладки компиляция занимает некоторое время (около 8 секунд для Enjarify), что является большим препятствием при отладке в цикле редактирование-&gt; компиляция-&gt; выполнение. Моим идеальным сценарием был бы интерпретатор, подобный Python, для отладки Rust, без компиляции, и хороший встроенный отладчик в стиле REPL и pdb (думаю, я предвзято, так как я так много использую Python).
+Индекс сломан</p>
+<p>Типаж Index не работает, потому что он требует возврата ссылки на результат, ограничивая его коллекциями, которые фактически хранят соответствующий элемент. Вы не можете создавать и возвращать значения на лету. Это означает, что я не мог перегрузить [] для настраиваемого типа разреженного массива Enjarify и вынужден был довольствоваться get() и set() вместо этого. Это известная проблема, и я уже читал о ней перед началом перезаписи, поэтому я не стал терять время, пытаясь внедрить Index, но это все еще раздражает.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Если у вас есть приложение Python и вы подумываете о его переписывании из-за шума статической типизации, вам следует серьезно пересмотреть свое решение, по крайней мере, если у вас больше тестов, чем разработчиков. Переписывание чего-либо занимает много времени и вызывает множество ошибок, переход от Python к менее выразительному языку означает повышенную нагрузку на обслуживание. Но если по какой-то причине вы все же хотите его переписать, не выбирайте Go. Rust лучше практически во всех отношениях.</p>
+<p>Кроме того, я надеюсь, что мой опыт покажет пробелы, которые Rust все еще необходимо исправить.</p>
+<p>Мнения, выраженные здесь, являются исключительно моими и не представляют моего работодателя или какую-либо другую организацию. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

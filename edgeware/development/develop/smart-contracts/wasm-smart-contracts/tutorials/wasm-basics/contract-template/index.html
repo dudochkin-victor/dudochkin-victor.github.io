@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Шаблон контракта | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-basics/contract-template/#ink">ink! </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/wasm-basics/contract-template/#tvoia-ochered">Твоя очередь! </a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Шаблон контракта</h1>
+
+<p>Давайте взглянем на высокий уровень, что доступно вам при разработке смарт-контракта с использованием ink!.</p>
+<h2 id="ink">ink! <a id="ink"></a></h2>
+<p>ink! — это <a href="https://wiki.haskell.org/Embedded_domain_specific_language">eDSL</a> для написания смарт-контрактов на основе WebAssembly на языке программирования Rust.</p>
+<p>чернила! это просто стандартный Rust в четко определенном «формате контракта» со специализированными макросами атрибутов <code>#[ink(...)]</code>. Эти макросы атрибутов сообщают ink! что представляют собой различные части вашего смарт-контракта Rust и, в конечном счете, позволяет использовать чернила! чтобы сделать всю магию, необходимую для создания байт-кодов Wasm, совместимых с Substrate!</p>
+<h2 id="tvoia-ochered">Твоя очередь! <a id="your-turn"></a></h2>
+<p>Мы собираемся начать новый проект для контракта Incrementer, который мы создадим в этой главе.</p>
+<p>Итак, зайдите в свой рабочий каталог и запустите:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo contract new incrementer
+</span></code></pre>
+<p>Как и раньше, это создаст новую папку проекта с именем <code>incrementer</code>, которую мы будем использовать до конца этой главы.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cd incrementer/
+</span></code></pre>
+<p>В файле <code>lib.rs</code> замените исходный код контракта &quot;Flipper&quot; приведенным здесь кодом шаблона.</p>
+<p>Быстро проверьте, что он компилируется и тривиальный тест проходит:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo +nightly test
+</span></code></pre>
+<p>Также убедитесь, что вы можете создать файл Wasm, запустив:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo +nightly contract build
+</span></code></pre>
+<p>Если все выглядит хорошо, то мы готовы приступить к программированию!</p>
+<p>{% tabs %}
+{% tab title=&quot;✅Potential Solution&quot; %}
+{% code title=&quot;lib.rs&quot; %}</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">cfg_attr</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;std&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> no_std)]
+</span><span>
+</span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">contract</span><span>]
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">incrementer </span><span>{
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Incrementer </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Storage Declaration
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Incrementer </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">init_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Contract Constructor
+</span><span>            </span><span style="color:#ff7733;">Self</span><span>{}
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Contract Message
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(test)]
+</span><span>    </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">tests </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">test</span><span>]
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">default_works</span><span>() {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Test Your Contract
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>{% endcode %}
+{% endtab %}
+{% endtabs %}</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Процесс управления Solana ABI | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#problema">Проблема</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#trebovaniia-i-tseli">Требования и цели</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#reshenie">Решение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#opredeleniia">Определения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#primer">Пример</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#rabochii-protsess-razrabotchika">Рабочий процесс разработчика</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#zamechaniia-po-realizatsii">Замечания по реализации</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#detali-realizatsii">Детали реализации</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#protsess-perevarivaniia-abi">Процесс переваривания ABI</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/abi-management/#ispol-zovannaia-literatura">Использованная литература</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Процесс управления Solana ABI</h1>
+
+<p>В этом документе предлагается процесс управления Solana ABI. Процесс управления ABI — это инженерная практика и вспомогательная техническая структура, позволяющая избежать внесения непреднамеренных несовместимых изменений ABI.</p>
+<h1 id="problema">Проблема</h1>
+<p>Solana ABI (двоичный интерфейс к кластеру) в настоящее время определяется только неявно реализацией и требует очень внимательного взгляда, чтобы заметить критические изменения. Это чрезвычайно затрудняет обновление программного обеспечения в существующем кластере без перезагрузки реестра.</p>
+<h1 id="trebovaniia-i-tseli">Требования и цели</h1>
+<ul>
+<li>Непреднамеренные изменения ABI могут быть механически обнаружены как сбои CI.</li>
+<li>Новая реализация должна иметь возможность обрабатывать самые старые данные (с момента создания), как только мы перейдем в основную сеть.</li>
+<li>Цель этого предложения состоит в том, чтобы защитить ABI, поддерживая при этом довольно быстрое развитие, выбрав механический процесс, а не очень длительный процесс аудита, управляемый человеком.</li>
+<li>После криптографической подписи большой двоичный объект данных должен быть идентичен, поэтому обновление формата данных на месте невозможно независимо от входящего и исходящего трафика онлайн-системы. Кроме того, учитывая огромный объем транзакций, которые мы собираемся обрабатывать, ретроспективное обновление на месте в лучшем случае нежелательно.</li>
+</ul>
+<h1 id="reshenie">Решение</h1>
+<p>Вместо естественной проверки человеческого зрения, которая, как предполагается, регулярно дает сбои, нам нужна систематическая гарантия того, что кластер не сломается при изменении исходного кода.</p>
+<p>Для этой цели мы вводим механизм маркировки всех вещей, связанных с ABI, в исходном коде (<code>struct</code>s, <code>enum</code>s) с новым атрибутом <code>#[frozen_abi]</code>. Это принимает жестко заданное значение дайджеста, полученное из типов его полей через <code>ser::Serialize</code>. И атрибут автоматически генерирует модульный тест, чтобы попытаться обнаружить любые несанкционированные изменения в отмеченных вещах, связанных с ABI.</p>
+<p>Однако обнаружение не может быть полным; независимо от того, насколько усердно мы статически анализируем исходный код, все равно можно сломать ABI. Например, это включает в себя не производный от руки написанный ser::Serialize, изменения реализации базовой библиотеки (например, bincode), различия в архитектуре ЦП.
+Обнаружение этих возможных несовместимостей ABI выходит за рамки этого управления ABI.</p>
+<h1 id="opredeleniia">Определения</h1>
+<p>Элемент/тип ABI: различные типы, используемые для сериализации, которые в совокупности составляют весь ABI для любых компонентов системы. Например, к этим типам относятся struct и enum.</p>
+<p>Дайджест элемента ABI: некоторый фиксированный хэш, полученный из информации о типе полей элемента ABI.</p>
+<h1 id="primer">Пример</h1>
+<pre data-lang="patch" style="background-color:#0f1419;color:#bfbab0;" class="language-patch "><code class="language-patch" data-lang="patch"><span style="color:#c2d94c;">+#[frozen_abi(digest=&quot;eXSMM7b89VY72V...&quot;)]
+</span><span> #[derive(Serialize, Default, Deserialize, Debug, PartialEq, Eq, Clone)]
+</span><span> pub struct Vote {
+</span><span>     /// A stack of votes starting with the oldest vote
+</span><span>     pub slots: Vec&lt;Slot&gt;,
+</span><span>     /// signature of the bank&#39;s state at the last slot
+</span><span>     pub hash: Hash,
+</span><span> }
+</span></code></pre>
+<h1 id="rabochii-protsess-razrabotchika">Рабочий процесс разработчика</h1>
+<p>Чтобы узнать дайджест для новых элементов ABI, разработчики могут добавить <code>frozen_abi</code> со случайным значением дайджеста, запустить модульные тесты и заменить его правильным дайджестом из сообщения об ошибке проверки утверждений.</p>
+<p>В общем, как только мы добавим <code>frozen_abi</code> и его изменение будет опубликовано в канале стабильного выпуска, его дайджест никогда не должен меняться. Если такое изменение необходимо, мы должны определить новую структуру, например FooV1. И следует подойти к специальному потоку выпуска, такому как хардфорки.</p>
+<h1 id="zamechaniia-po-realizatsii">Замечания по реализации</h1>
+<p>Мы используем некоторую степень макромеханизма для автоматического создания модульных тестов и расчета дайджеста из элементов ABI. Это можно сделать с помощью <code>serde::Serialize</code> (<code>[1]</code>) и <code>any::type_name</code> (<code>[2]</code>). В качестве прецедента для аналогичной реализации «чернила» от Parity Technologies «[3]» могут быть информационными.</p>
+<h1 id="detali-realizatsii">Детали реализации</h1>
+<p>Цель реализации — максимальное автоматическое обнаружение непреднамеренных изменений ABI. С этой целью дайджест структурной информации ABI рассчитывается с максимальной точностью и стабильностью.</p>
+<p>Когда выполняется проверка дайджеста ABI, он динамически вычисляет дайджест ABI, рекурсивно анализируя ABI полей элемента ABI, повторно используя функциональность сериализации <code>serde</code>, макрос proc и общую специализацию.
+Затем проверка утверждает, что ее итоговое значение дайджеста идентично тому, что указано в атрибуте frozen_abi.</p>
+<p>Чтобы понять это, он создает пример экземпляра типа и пользовательский экземпляр Serializer для serde, чтобы рекурсивно перемещаться по его полям, как если бы сериализовал пример по-настоящему. Этот обход должен быть выполнен через <code>serde</code>, чтобы действительно зафиксировать, какие типы данных на самом деле будут сериализованы <code>serde</code>, даже с учетом пользовательских не-<code>derive</code>d реализаций черт <code>Serialize</code>.</p>
+<h1 id="protsess-perevarivaniia-abi">Процесс переваривания ABI</h1>
+<p>Эта часть немного сложна. Существует три взаимозависимых части: <code>AbiExample</code>, <code>AbiDigester</code> и <code>AbiEnumVisitor</code>.</p>
+<p>Во-первых, сгенерированный тест создает пример экземпляра дайджест-типа с трейтом под названием «AbiExample», который должен быть реализован для всех дайджест-типов, таких как «Serialize», и возвращать «Self», как трейт «Default». Обычно это обеспечивается специализацией универсального признака для большинства распространенных типов. Также можно «выводить» для «struct» и «enum» и при необходимости можно написать от руки.</p>
+<p>Пользовательский сериализатор называется AbiDigester. И когда он вызывается <code>serde</code> для сериализации некоторых данных, он рекурсивно собирает информацию ABI, насколько это возможно. Внутреннее состояние <code>AbiDigester</code> для дайджеста ABI обновляется по-разному в зависимости от типа данных. Эта логика специально перенаправляется через трейт под названием <code>AbiEnumVisitor</code> для каждого типа <code>enum</code>. Как следует из названия, нет необходимости реализовывать AbiEnumVisitor для других типов.</p>
+<p>Подводя итог этому взаимодействию, <code>serde</code> обрабатывает поток управления рекурсивной сериализацией в тандеме с <code>AbiDigester</code>. Начальная точка входа в тестах и ​​дочерние AbiDigester используют AbiExample рекурсивно для создания примера иерархического графа объектов. И <code>AbiDigester</code> использует <code>AbiEnumVisitor</code> для запроса фактической информации ABI, используя созданную выборку.</p>
+<p><code>По умолчанию</code> недостаточно для <code>AbiExample</code>. Различные коллекции <code>::default()</code> пусты, но мы хотим переварить их с помощью реальных элементов. И дайджест ABI не может быть реализован только с помощью <code>AbiEnumVisitor</code>. <code>AbiExample</code> требуется, потому что фактический экземпляр типа необходим для фактического прохождения данных через <code>serde</code>.</p>
+<p>С другой стороны, дайджест ABI не может быть выполнен только с помощью <code>AbiExample</code>.
+<code>AbiEnumVisitor</code> необходим, потому что все варианты <code>enum</code> не могут быть пройдены только с одним его вариантом в качестве примера ABI.</p>
+<p>Усваиваемая информация:</p>
+<ul>
+<li>название типа ржавчины</li>
+<li>имя типа данных <code>serde</code></li>
+<li>все поля в <code>struct</code></li>
+<li>все варианты в <code>enum</code></li>
+<li><code>struct</code>: обычная(<code>struct {...}</code>) и в виде кортежа (<code>struct(...)</code>)</li>
+<li><code>enum</code>: обычные варианты и стили <code>struct</code> и <code>tuple</code>.</li>
+<li>атрибуты: <code>serde(serialize_with=...)</code> и <code>serde(skip)</code></li>
+</ul>
+<p>Неперевариваемая информация:</p>
+<ul>
+<li>Любой пользовательский путь сериализации кода, не затронутый образцом, предоставленным <code>AbiExample</code>. (технически невозможно)</li>
+<li>дженерики (должен быть конкретный тип; используйте <code>frozen_abi</code> для псевдонимов конкретного типа)</li>
+</ul>
+<h1 id="ispol-zovannaia-literatura">Использованная литература</h1>
+<ol>
+<li><a href="https://github.com/serde-rs/serde/issues/1095#issuecomment-345483479">(Де)сериализация с информацией о типе · Проблема № 1095 · serde-rs/serde</a></li>
+<li><a href="https://doc.rust-lang.org/std/any/fn.type_name.html"><code>std::any::type_name</code> - Rust</a></li>
+<li><a href="https://github.com/paritytech/ink">ink! Parity для написания смарт-контрактов</a></li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

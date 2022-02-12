@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Создание контракта | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-a-wasm-contract/building-your-contract/#metadannye-kontrakta">Метаданные контракта</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Создание контракта</h1>
+
+<p>Запустите следующую команду, чтобы скомпилировать смарт-контракт:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo +nightly contract build
+</span></code></pre>
+<p>Эта специальная команда превратит ваш ink! проект в двоичный файл Wasm, который вы можете развернуть в своей цепочке. Если все пойдет хорошо, вы должны увидеть целевую папку, содержащую этот файл .wasm.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  target
+</span><span>  └── flipper.wasm
+</span></code></pre>
+<h2 id="metadannye-kontrakta">Метаданные контракта</h2>
+<p>Выполнив следующую команду, мы сгенерируем метаданные контракта (он же ABI контракта):</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo +nightly contract generate-metadata
+</span></code></pre>
+<p>У вас должен быть новый файл JSON (<code>metadata.json</code>) в том же целевом каталоге:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  target
+</span><span>  ├── flipper.wasm
+</span><span>  └── metadata.json
+</span></code></pre>
+<p>Давайте посмотрим на структуру внутри:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  {
+</span><span>  &quot;metadataVersion&quot;: &quot;0.1.0&quot;,
+</span><span>  &quot;source&quot;: {
+</span><span>    &quot;hash&quot;: &quot;0x11ba777b3457bf64cb99421786c90d421afde1c56579aa3dae336e58ccc8f783&quot;,
+</span><span>    &quot;language&quot;: &quot;ink! 3.0.0-rc1&quot;,
+</span><span>    &quot;compiler&quot;: &quot;rustc 1.47.0-nightly&quot;
+</span><span>  },
+</span><span>  &quot;contract&quot;: {
+</span><span>    &quot;name&quot;: &quot;flipper&quot;,
+</span><span>    &quot;version&quot;: &quot;0.1.0&quot;,
+</span><span>    &quot;authors&quot;: [
+</span><span>      &quot;[your_name] &quot;
+</span><span>    ]
+</span><span>  },
+</span><span>  &quot;spec&quot;: {
+</span><span>    &quot;constructors&quot;: [
+</span><span>      {
+</span><span>        &quot;args&quot;: [
+</span><span>          {
+</span><span>            &quot;name&quot;: &quot;init_value&quot;,
+</span><span>            &quot;type&quot;: {
+</span><span>              &quot;displayName&quot;: [
+</span><span>                &quot;bool&quot;
+</span><span>              ],
+</span><span>              &quot;type&quot;: 1
+</span><span>            }
+</span><span>          }
+</span><span>        ],
+</span><span>        &quot;docs&quot;: [
+</span><span>          &quot; Constructor that initializes the `bool` value to the given `init_value`.&quot;
+</span><span>        ],
+</span><span>        &quot;name&quot;: [
+</span><span>          &quot;new&quot;
+</span><span>        ],
+</span><span>        &quot;selector&quot;: &quot;0xd183512b&quot;
+</span><span>      },
+</span><span>      {
+</span><span>        &quot;args&quot;: [],
+</span><span>        &quot;docs&quot;: [
+</span><span>          &quot; Constructor that initializes the `bool` value to `false`.&quot;,
+</span><span>          &quot;&quot;,
+</span><span>          &quot; Constructors can delegate to other constructors.&quot;
+</span><span>        ],
+</span><span>        &quot;name&quot;: [
+</span><span>          &quot;default&quot;
+</span><span>        ],
+</span><span>        &quot;selector&quot;: &quot;0x6a3712e2&quot;
+</span><span>      }
+</span><span>    ],
+</span><span>    &quot;docs&quot;: [],
+</span><span>    &quot;events&quot;: [],
+</span><span>    &quot;messages&quot;: [
+</span><span>      {
+</span><span>        &quot;args&quot;: [],
+</span><span>        &quot;docs&quot;: [
+</span><span>          &quot; A message that can be called on instantiated contracts.&quot;,
+</span><span>          &quot; This one flips the value of the stored `bool` from `true`&quot;,
+</span><span>          &quot; to `false` and vice versa.&quot;
+</span><span>        ],
+</span><span>        &quot;mutates&quot;: true,
+</span><span>        &quot;name&quot;: [
+</span><span>          &quot;flip&quot;
+</span><span>        ],
+</span><span>        &quot;payable&quot;: false,
+</span><span>        &quot;returnType&quot;: null,
+</span><span>        &quot;selector&quot;: &quot;0xc096a5f3&quot;
+</span><span>      },
+</span><span>      {
+</span><span>        &quot;args&quot;: [],
+</span><span>        &quot;docs&quot;: [
+</span><span>          &quot; Simply returns the current value of our `bool`.&quot;
+</span><span>        ],
+</span><span>        &quot;mutates&quot;: false,
+</span><span>        &quot;name&quot;: [
+</span><span>          &quot;get&quot;
+</span><span>        ],
+</span><span>        &quot;payable&quot;: false,
+</span><span>        &quot;returnType&quot;: {
+</span><span>          &quot;displayName&quot;: [
+</span><span>            &quot;bool&quot;
+</span><span>          ],
+</span><span>          &quot;type&quot;: 1
+</span><span>        },
+</span><span>        &quot;selector&quot;: &quot;0x1e5ca456&quot;
+</span><span>      }
+</span><span>    ]
+</span><span>  },
+</span><span>  &quot;storage&quot;: {
+</span><span>    &quot;struct&quot;: {
+</span><span>      &quot;fields&quot;: [
+</span><span>        {
+</span><span>          &quot;layout&quot;: {
+</span><span>            &quot;cell&quot;: {
+</span><span>              &quot;key&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,
+</span><span>              &quot;ty&quot;: 1
+</span><span>            }
+</span><span>          },
+</span><span>          &quot;name&quot;: &quot;value&quot;
+</span><span>        }
+</span><span>      ]
+</span><span>    }
+</span><span>  },
+</span><span>  &quot;types&quot;: [
+</span><span>    {
+</span><span>      &quot;def&quot;: {
+</span><span>        &quot;primitive&quot;: &quot;bool&quot;
+</span><span>      }
+</span><span>    }
+</span><span>  ]
+</span><span>}
+</span></code></pre>
+<p>Как видите, этот файл описывает все интерфейсы, которые можно использовать для взаимодействия с вашим контрактом.</p>
+<ul>
+<li>Реестр предоставляет <strong>строки</strong> и пользовательские <strong>типы</strong>, используемые в остальной части JSON.</li>
+<li>Storage определяет все элементы <strong>хранилища</strong>, управляемые вашим контрактом, и то, как в конечном итоге получить к ним доступ.</li>
+<li>Контракт хранит информацию о вызываемых функциях, таких как <strong>конструкторы</strong> и <strong>сообщения</strong>, которые пользователь может вызывать для взаимодействия с вашим контрактом. Он также содержит полезную информацию, такую как <strong>события</strong>, создаваемые контрактом, или любые <strong>документы.</strong></li>
+</ul>
+<p>Если вы внимательно посмотрите на конструкторы и сообщения, вы также заметите <code>селектор</code>, который представляет собой 4-байтовый хэш имени функции и используется для маршрутизации ваших контрактных вызовов к правильным функциям.</p>
+<p><strong>Выучить больше</strong></p>
+<p>ink! обеспечивает встроенную защиту от переполнения, включенную в нашем файле <code>Cargo.toml</code>. Рекомендуется оставить его включенным, чтобы предотвратить возможные ошибки переполнения в вашем контракте.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>[profile.release]
+</span><span>panic = &quot;abort&quot;           &lt;-- Panics shall be treated as aborts: reduces binary size
+</span><span>lto = true                &lt;-- enable link-time-optimization: more efficient codegen
+</span><span>opt-level = &quot;z&quot;           &lt;-- Optimize for small binary output
+</span><span>overflow-checks = true    &lt;-- Arithmetic overflow protection
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

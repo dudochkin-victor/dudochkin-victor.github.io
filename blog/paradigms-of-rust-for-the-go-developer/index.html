@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Парадигмы Rust для разработчика Go | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/paradigms-of-rust-for-the-go-developer/#smena-paradigmy-rust-ne-liubit-gonki-dannykh">Смена парадигмы: Rust не любит гонки данных</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/paradigms-of-rust-for-the-go-developer/#smena-paradigmy-obshchaia-pamiat-v-rust-ne-vkliuchena">Смена парадигмы: общая память в Rust не включена</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/paradigms-of-rust-for-the-go-developer/#sdvig-paradigmy-blokirovka-dannykh-a-ne-koda">Сдвиг парадигмы: блокировка данных, а не кода</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Парадигмы Rust для разработчика Go</h1>
+
+<p><a href="https://medium.com/@deckarep/paradigms-of-rust-for-the-go-developer-210f67cd6a29">Перевод</a> | Автор оригинала: Ralph Caraveo III</p>
+<blockquote>
+<p>Примечание читателя: эта статья призвана дать некоторое техническое представление о сдвигах парадигмы, которым я подвергся при исследовании и изучении языка программирования Rust, когда дело касается параллелизма. Я потратил 3,5 года на изучение языка программирования Go, и это моя попытка поделиться своими идеями, и я воодушевляю вас; читатель также может изучить эти новые идеи, которые предоставляет Rust. В конце концов, если вы отклоните Rust как не для вас, это нормально, но, надеюсь, вы сможете уйти с новыми концепциями для размышлений.</p>
+</blockquote>
+<p><img src="/imgs/posts/13d3b041_01.png" alt="сейчас хорошее время, чтобы стать программистом, и в нашем распоряжении такие языки, как Rust и Go" /></p>
+<p>У меня есть преимущество перед многими инженерами-программистами, работающими сегодня в индустрии. У меня есть преимущество в том, что я понимаю, что языки программирования - это просто инструменты. Инструменты, которые иногда сильно различаются, а иногда частично совпадают по функциям. Важно понимать, что одни инструменты лучше подходят для работы, чем другие. Например, вы обычно не хотите писать название игры AAA на чистом Python. Причины очевидны: Python не дает вам жесткого контроля над памятью и скоростью, чтобы оправдать создание следующего Call of Duty. Нельзя сказать, что это невозможно, но вы знаете ...</p>
+<p>Сегодня в индустрии я наблюдаю, как инженеры-программисты увлекаются своими языками (мальчики, девочки). Они говорят что-то вроде «Мой язык лучше, потому что у него есть обобщения» или «В C++ слишком много беспорядка, чтобы я мог оправдать его использование». Эти фанаты {мальчики, девочки} участвуют в обсуждениях и часами пытаются убедить друг друга, что их язык «лучший во всем», в то время как остальные из нас создают дерьмо и добиваются своего. Когда вы подписываетесь на лучшие практики и стандарты единого языка, построенные вокруг единого сообщества, я обнаруживаю, что вы можете серьезно ограничивать свой потенциал роста, когда дело доходит до изучения новых языков и, что более важно, новых парадигм.</p>
+<p>В различных языках, существующих сегодня, скрывается набор парадигм, которые могут полностью изменить ваш привычный образ мышления. Иногда эти парадигмы настолько сфокусированы и настолько специфичны для языка, что применимы только к этому конкретному языку. В других случаях я нахожу, и это большая часть; что вы можете взять эти парадигмы и применить их к языкам, которые вы в настоящее время используете. Когда это произойдет, поздравляю, вы расширили свой кругозор и набор навыков, а также теперь у вас есть новый способ решения устаревших старых проблем.</p>
+<p>Не поймите меня неправильно; вы сделали карьеру на нескольких языках, вы любите эти языки и у вас все получается. Нет ничего плохого в восхищении или любви к языку, который дает вам возможность элегантно выражать свои мысли. Мы знаем, что программная инженерия - это одновременно искусство и наука. И большая часть нашей гордости за разработку программного обеспечения - это способность осознавать, что мы решили проблему более элегантно, производительно и надежно, чем другие девушки или парни.</p>
+<p>Кроме того, сообщества, которые развиваются вокруг некоторых языков, так же важны, как и сами языки. Наличие сообщества, в котором можно делиться своими мыслями, оспаривать свои идеи, и наличие кодовой базы, которая будет дополнять усилия друг друга, могут иметь первостепенное значение для решения проблем, которые вы пытаетесь решить.</p>
+<p>Это подводит нас к сути этой статьи. Последние 3,5 года я полностью посвятил разработке Go. Язык программирования Go - фантастический язык общего назначения для создания высокопроизводительных систем с высокой степенью параллелизма. Я слышал, что его называют языком «Облака», и хотя сегодня существует множество языков, которые используются для создания облачных решений, Go привносит в игру особый тон.</p>
+<blockquote>
+<p>Кстати, язык называется Go not Golang. Golang используется как более избирательное ключевое слово, помогающее нам искать в Интернете контент, связанный с Go.</p>
+</blockquote>
+<p>Давайте поговорим о том, почему нужно использовать Go для решения некоторых проблем:</p>
+<ul>
+<li>Вам необходимо интегрироваться с основной частью кода, написанного на C</li>
+<li>Вам необходимо использовать параллелизм или параллелизм, чтобы получить максимальную отдачу от вашего программного обеспечения.</li>
+<li>Вы хотите работать на безопасном для типов языке</li>
+<li>Вы хотите работать с императивным языком, который быстро компилируется</li>
+<li>Вы хотите работать на дистиллированном языке, специально разработанном для уменьшения когнитивных затрат, необходимых для чтения и написания кода.</li>
+<li>Вы хотите использовать программирование, управляемое событиями, без обычного багажа: ад обратных вызовов, отложенные, футуры, обещания, пустые обещания ... или как там их называют крутые ребята в наши дни. </li>
+</ul>
+<p>Перечисленные выше предметы не случайны. Go был разработан специально с учетом этих пунктов.</p>
+<p>Это хороший список. Но это лишь поверхностная информация о Go и о том, почему вы хотите его использовать. У этого языка есть и другие аспекты, о которых я расскажу. Go также имеет концепцию облегченных потоков и сопрограмм и даже заимствует стиль параллельного моделирования, называемый моделью CSP, более известной как Communicating Sequential Processes. Если вы не слышали об этих концепциях, прочтите о них, я подожду.</p>
+<p>Модель CSP вносит свой собственный сдвиг в парадигму построения и моделирования решений с параллелизмом. Если вы пишете код Go сегодня, не понимая модели CSP, я настоятельно рекомендую вам узнать об этом.</p>
+<p>Вот что я имею в виду, если вы один из тех, кто слышал о Go, но никогда не использовал его, выбивает Go, потому что в нем нет универсальных шаблонов, или просто прошел Go Tour в течение 20 минут и понял, что язык отстой. потому что параметры функции перевернуты ... вы только причиняете вред себе. За Go стоит несколько нечестивых концепций, на которые вам обязательно стоит взглянуть, даже если вывод - всего лишь его парадигмы. Также стоит отметить, что Go заимствует парадигмы из языков прошлого. Большинство языков умеют.</p>
+<p>Теперь давайте поговорим о Rust и, возможно, почему вы захотели использовать Rust:</p>
+<ul>
+<li>Вам нужен язык, который предлагает безопасность и контроль</li>
+<li>Вам нужен язык, который практически не требует дополнительных затрат времени выполнения - вы не можете позволить себе паузы в сборке мусора.</li>
+<li>Вам нужна высокая производительность на уровне C или C++</li>
+<li>Вам нужен язык, который не будет допускать ошибок в продакшене.</li>
+<li>Вы хотите язык, который абсолютно лишен данных-гонок.</li>
+<li>Вы хотите работать на языке, который свободен от багажа и влияния в течение последних 30 лет (я смотрю на вас C++)</li>
+</ul>
+<p>Кстати, язык называется Rust… не Rustlang. Кроме того, перечисленные выше пункты не случайны. Rust был специально разработан с учетом этих целей.</p>
+<p>Этот список тоже хороший. Это ни в коем случае не полный список, и Rust - совсем другое дело, чем Go. Rust дополнительно имеет модель владения и времени жизни, которая позволяет вам выражать код таким образом, чтобы компилятор мог использовать его в своих интересах. Это означает устранение целого класса проблем, которые обычно мешают низкоуровневым / небезопасным языкам. Вас сбили свисающие указатели? Использовать после того, как бесплатно вызывает головную боль? Двойная свобода мешает вашей структуре данных? Rust за вашу спину, нет ... компилятор Rust за вашу спину, и это абсолютно передовой материал.</p>
+<blockquote>
+<p>Примечание: несколько дней назад я был в комнате отдыха на работе. Я разговаривал с некоторыми коллегами о том, как растет популярность Rust и находится в списке самых любимых, страшных, разыскиваемых пользователей на Stackoverflow.com за 2016 год. Кто-то сказал мне: «Ох, [я] смотрел на Rust… это слишком сложно». У этого человека есть хороший опыт работы с го, что я ответил? Я сказал: «Конечно, это сложнее, чем Go, я согласен, но то, за что вы платите заранее при написании кода Rust, вы получаете в 10 раз обратно с некоторыми чрезвычайно впечатляющими гарантиями времени выполнения». Это напомнило мне о том, что я чувствовал, когда впервые прочитал языковую спецификацию Rust полтора года назад. К счастью, мой дорогой друг посоветовал мне еще раз взглянуть.</p>
+</blockquote>
+<p>Поэтому я пообещал, что эта статья научит вас некоторым парадигмам Rust для разработчиков Go. Давайте погрузимся.</p>
+<h3 id="smena-paradigmy-rust-ne-liubit-gonki-dannykh">Смена парадигмы: Rust не любит гонки данных</h3>
+<p>Этот фрагмент кода ниже взят прямо из документации Go в отношении детектора гонки. Инструмент, предназначенный для обнаружения скачков данных, но только если у вас есть надлежащие тесты, которые проверяют параллелизм вашего кода. Детектор гонки НЕ является пуленепробиваемым. Он не даст вам ложных срабатываний - если он обнаружит гонку данных ... это гонка данных. Но… нет абсолютно никакой гарантии, что он найдет все гонки данных. Кроме того, детектор гонки должен оценивать вашу программу во время ее работы. Кроме того, некоторые команды, пишущие производственный код Go сегодня, даже не утруждают себя подключением его к своей системе непрерывной интеграции… .¯ \ _ (ツ) _ / ¯
+Приведенный ниже код демонстрирует, что карты Go по умолчанию не являются потокобезопасными. Я все время вижу такой код. Люди играют в splish-splash с горутинами, каналами и общим состоянием, а затем пытаются запустить такой код в производство, а затем удивляются, почему он так ужасно взрывается. </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#ff7733;">func </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>	c </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">chan </span><span style="font-style:italic;color:#39bae6;">bool</span><span>)
+</span><span>	m </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">map</span><span>[</span><span style="font-style:italic;color:#39bae6;">string</span><span>]</span><span style="font-style:italic;color:#39bae6;">string</span><span>)
+</span><span>	</span><span style="color:#ff7733;">go func</span><span>() {
+</span><span>		m[</span><span style="color:#c2d94c;">&quot;1&quot;</span><span>] </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;a&quot; </span><span style="font-style:italic;color:#5c6773;">// First conflicting access.
+</span><span>		c </span><span style="color:#f29668;">&lt;- </span><span style="color:#f29718;">true
+</span><span>	}()
+</span><span>	m[</span><span style="color:#c2d94c;">&quot;2&quot;</span><span>] </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;b&quot; </span><span style="font-style:italic;color:#5c6773;">// Second conflicting access.
+</span><span>	</span><span style="color:#f29668;">&lt;-</span><span>c
+</span><span>	</span><span style="color:#ff7733;">for </span><span>k</span><span style="color:#bfbab0cc;">, </span><span>v </span><span style="color:#f29668;">:= </span><span style="color:#ff7733;">range </span><span>m {
+</span><span>		fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Println</span><span>(k</span><span style="color:#bfbab0cc;">, </span><span>v)
+</span><span>	}
+</span><span>}
+</span></code></pre>
+<p>Ссылка на игровую площадку
+Быстрый просмотр приведенного выше кода выглядит следующим образом:</p>
+<ul>
+<li>Канал создается и используется исключительно для обеспечения того, чтобы основная горутина не закрывалась до тех пор, пока не завершится выполнение анонимной горутины.</li>
+<li>Локальная карта m была создана и захвачена (закрыта) в анонимной горутине, где она видоизменилась.</li>
+<li>Та же самая местная карта также видоизменена в основном потоке.</li>
+<li>Не происходит синхронизации, чтобы гарантировать безопасное изменение карты для этих двух горутин.</li>
+<li>В конце результаты выводятся на экран с помощью цикла for.</li>
+<li>Эти результаты могут быть полностью правильными или нет. Фактически, все ставки отключены - когда у вас есть гонка данных, поведение просто не определено.</li>
+<li>Go с радостью скомпилирует и выполнит приведенный выше код.</li>
+</ul>
+<p>Проницательный читатель поймет, что описанная выше гонка данных может быть исправлена с помощью малейшей настройки кода. Ниже мы синхронизируем мутации, эффективно вводя случай «случилось раньше», читая канал c до того, как может произойти мутация в основном потоке. </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#ff7733;">func </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   c </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">chan </span><span style="font-style:italic;color:#39bae6;">bool</span><span>)
+</span><span>   m </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">map</span><span>[</span><span style="font-style:italic;color:#39bae6;">string</span><span>]</span><span style="font-style:italic;color:#39bae6;">string</span><span>)
+</span><span>   </span><span style="color:#ff7733;">go func</span><span>() {
+</span><span>        m[</span><span style="color:#c2d94c;">&quot;1&quot;</span><span>] </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;a&quot; </span><span style="color:#f29668;">&lt;-- </span><span>this will always happen first
+</span><span>        c </span><span style="color:#f29668;">&lt;- </span><span style="color:#f29718;">true
+</span><span>   }()
+</span><span>   </span><span style="color:#f29668;">&lt;-</span><span>c </span><span style="font-style:italic;color:#5c6773;">// Reading from the channel here synchronizes mutation
+</span><span>   m[</span><span style="color:#c2d94c;">&quot;2&quot;</span><span>] </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;b&quot; </span><span style="color:#f29668;">&lt;-- </span><span>this will always happen after
+</span><span>   </span><span style="color:#ff7733;">for </span><span>k</span><span style="color:#bfbab0cc;">, </span><span>v </span><span style="color:#f29668;">:= </span><span style="color:#ff7733;">range </span><span>m {
+</span><span>       fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Println</span><span>(k</span><span style="color:#bfbab0cc;">, </span><span>v)
+</span><span>   }
+</span><span>}
+</span></code></pre>
+<p>Ссылка на игровую площадку</p>
+<p>С другой стороны, Rust даже не скомпилирует такой код. По сути, он говорит: «Фаааааааак ты, я отказываюсь собирать это дерьмо», и при этом держит два средних пальца прямо к твоему лицу. И поверьте мне, когда вы просыпаетесь в 3 часа ночи, чтобы устранить коварную гонку данных, которую очень сложно отследить, именно здесь вы захотите, чтобы ваш компилятор также сказал вам отвалить.</p>
+<p>Давайте посмотрим, как может выглядеть приведенный выше код Go в Rust: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>mpsc</span><span style="color:#f29668;">::</span><span>channel</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>     </span><span style="color:#ff7733;">let </span><span>(</span><span style="color:#ff7733;">c_tx</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">c_rx</span><span>) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">channel</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>     </span><span style="color:#ff7733;">let mut</span><span> m </span><span style="color:#f29668;">= </span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span> 
+</span><span>     thread</span><span style="color:#f29668;">::</span><span>spawn(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|| </span><span>{
+</span><span>         m</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(“</span><span style="color:#f29718;">1</span><span>”</span><span style="color:#bfbab0cc;">,</span><span> “a”)</span><span style="color:#bfbab0cc;">;
+</span><span>         </span><span style="color:#ff7733;">c_tx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send</span><span>(</span><span style="color:#f29718;">true</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>     })</span><span style="color:#bfbab0cc;">;
+</span><span>     m</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(“</span><span style="color:#f29718;">2</span><span>”</span><span style="color:#bfbab0cc;">,</span><span> “b”)</span><span style="color:#bfbab0cc;">;
+</span><span>     </span><span style="color:#ff7733;">c_rx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">recv</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>     </span><span style="color:#ff7733;">for </span><span>(k</span><span style="color:#bfbab0cc;">,</span><span> v) </span><span style="color:#f29668;">in &amp;</span><span>m {
+</span><span>          </span><span style="color:#f07178;">println!</span><span>(“{}</span><span style="color:#bfbab0cc;">, </span><span>{}”</span><span style="color:#bfbab0cc;">,</span><span> k</span><span style="color:#bfbab0cc;">,</span><span> v)</span><span style="color:#bfbab0cc;">;
+</span><span>     }
+</span><span>}
+</span></code></pre>
+<p>Ссылка на игровую площадку</p>
+<p>Здесь есть несколько очень реальных различий, на которые стоит обратить внимание. Да, на первый взгляд все немного сложнее. Мы должны соответственно импортировать наши потоки, каналы и пространства имен HashMap. Есть дополнительная семантика синтаксиса, которой нет в версии Go. Конструкция канала фактически требует, чтобы мы имели дело с двумя половинами: передающей стороной: c_tx и принимающей стороной: c_rx. И мы не используем облегченную модель потоковой передачи (как это делает код Go), потому что thread::spawn фактически отображает 1: 1 в собственный поток ОС. Хотя модель потоковой передачи совершенно другая, принципы, с которыми мы имеем дело, точно такие же. Несколько потоков совместно используют доступ и видоизменяют одну и ту же карту, и могут случиться неприятности.</p>
+<p>Но, безусловно, самым важным аспектом приведенного выше кода Rust является то, что он не компилируется. Это не потому, что компилятор Rust хочет с вами ссориться. Это не потому, что Rust - отстой. Это потому, что люди из Mozilla очень много работали над тем, чтобы приведенный выше код никогда не компилировался и, следовательно, никогда не запускался в производство только для того, чтобы вызвать в конечном итоге хаос.</p>
+<p>Это полный сдвиг парадигмы модели Go, который стоит понять и рассмотреть. Вы хотите сказать мне, что моя программа даже не будет компилироваться, если существует гонка данных? Да! Зарегистрируйтесь, пожалуйста, это настоящий сдвиг в мышлении для построения параллельных систем.</p>
+<p>Замечание: приведенный выше код в форме Rust можно синхронизировать аналогичным образом, как мы это сделали с версией Go. Исправление может быть таким тривиальным. Но ради этой статьи давайте погрузимся в глубины Rust, чтобы увидеть, как такой язык вообще защищает нас от подобных ситуаций.</p>
+<p>Итак, что компилятор сообщает нам о приведенном выше коде, когда он не компилируется? На самом деле он выдает сообщение об ошибке ниже: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&lt;anon&gt;:14:5: 14:6 error: use of moved value: `m` [E0382]
+</span><span>&lt;anon&gt;:14     m.insert(&quot;2&quot;, &quot;b&quot;);
+</span><span>              ^
+</span><span>&lt;anon&gt;:14:5: 14:6 help: see the detailed explanation for E0382
+</span><span>&lt;anon&gt;:9:19: 12:6 note: `m` moved into closure environment here because it has type `std::collections::hash::map::HashMap&lt;&amp;&#39;static str, &amp;&#39;static str&gt;`, which is non-copyable
+</span><span>&lt;anon&gt;: 9     thread::spawn(move || {
+</span><span>&lt;anon&gt;:10         m.insert(&quot;1&quot;, &quot;a&quot;);
+</span><span>&lt;anon&gt;:11         c_tx.send(true).unwrap();
+</span><span>&lt;anon&gt;:12     });
+</span><span>&lt;anon&gt;:9:19: 12:6 help: perhaps you meant to use `clone()`?
+</span><span>&lt;anon&gt;:17:20: 17:21 error: use of moved value: `m` [E0382]
+</span><span>&lt;anon&gt;:17     for (k, v) in &amp;m {
+</span><span>                             ^
+</span><span>&lt;anon&gt;:17:20: 17:21 help: see the detailed explanation for E0382
+</span><span>&lt;anon&gt;:9:19: 12:6 note: `m` moved into closure environment here because it has type `std::collections::hash::map::HashMap&lt;&amp;&#39;static str, &amp;&#39;static str&gt;`, which is non-copyable
+</span><span>&lt;anon&gt;: 9     thread::spawn(move || {
+</span><span>&lt;anon&gt;:10         m.insert(&quot;1&quot;, &quot;a&quot;);
+</span><span>&lt;anon&gt;:11         c_tx.send(true).unwrap();
+</span><span>&lt;anon&gt;:12     });
+</span><span>&lt;anon&gt;:9:19: 12:6 help: perhaps you meant to use `clone()`?
+</span><span>error: aborting due to 2 previous errors
+</span></code></pre>
+<p>OMG ... черт возьми, это много для того, чтобы проглотить. Да, это более сложно, и я собираюсь не обращать внимания на некоторые детали, но со временем вы научитесь разбираться в таких сообщениях. На самом деле сообщения компилятора практически поэтичны, они рассказывают очень яркую историю о том, почему ваш код не компилируется из-за нарушения модели владения и времени жизни Rust. Rust сообщает нам, что право собственности на карту m было передано созданному потоку. Следовательно, карту m нельзя больше использовать в строке 14, иначе это привело бы к гонке данных.</p>
+<p>Давайте обсудим право собственности, детали собственности и то, почему мы видим упоминания о перемещении в приведенной выше ошибке. Rust реализует концепцию наличия одного владельца данных. Думайте о владельце как о переменной, привязанной к некоторым данным. Как владелец, вы можете временно предоставить доступ к своим данным через общую ссылку. Ниже излагаются некоторые основные аксиомы в отношении модели собственности.</p>
+<p>Запишите это себе в голову:</p>
+<ul>
+<li>Существует только один владелец данных</li>
+<li>Право собственности может быть передано - ход</li>
+<li>Собственные ценности можно временно взять в аренду</li>
+<li>Заимствование предотвращает ходы</li>
+</ul>
+<p>Освежение кишечника: что такое снова гонка за данными?</p>
+<ul>
+<li>2 + потока обращаются к одним и тем же данным (чтение)</li>
+<li>по крайней мере 1 не синхронизирован</li>
+<li>как минимум 1 пишет</li>
+</ul>
+<p>Rust только что сделал нам солидный и поймал идеальный шторм, который мог случиться в продакшене. Вы должны выпить компилятору Rust. Кроме того, гонка данных была обнаружена во время компиляции, а не во время выполнения. Совместная работа компилятора и языковой семантики устраняет все догадки о том, где могут скрываться гонки данных, и вам не нужно писать ни одного параллельного теста, чтобы выявить их.</p>
+<p>Загруженный вопрос: действительно ли в Rust чрезвычайно многословный и почти сюжетный обмен сообщениями об ошибках сложнее или он пытается точно определить расхождения данных в производственной среде из-за того, что приложение демонстрирует неопределенное поведение, более сложное?</p>
+<h2 id="smena-paradigmy-obshchaia-pamiat-v-rust-ne-vkliuchena">Смена парадигмы: общая память в Rust не включена</h2>
+<p>Давайте теперь рассмотрим, как Rust позволяет нам решить проблемы, описанные выше, сначала решив проблемы с общей памятью. Опять же, это действующая модель владения и времени жизни Rust, обеспечивающая соблюдение некоторых очень конкретных правил, чтобы ваш код никогда не делал плохих вещей в производственной среде. Давайте посмотрим, как использование общей памяти выглядит в Rust на немного другом примере. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>mpsc</span><span style="color:#f29668;">::</span><span>channel</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>Arc</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(tx</span><span style="color:#bfbab0cc;">,</span><span> rx) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">channel</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> m </span><span style="color:#f29668;">= </span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    
+</span><span>    m</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(“a”</span><span style="color:#bfbab0cc;">,</span><span> “</span><span style="color:#f29718;">1</span><span>”)</span><span style="color:#bfbab0cc;">;
+</span><span>    m</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(“b”</span><span style="color:#bfbab0cc;">,</span><span> “</span><span style="color:#f29718;">2</span><span>”)</span><span style="color:#bfbab0cc;">;
+</span><span> 
+</span><span>    </span><span style="color:#ff7733;">let</span><span> arc </span><span style="color:#f29668;">= </span><span>Arc</span><span style="color:#f29668;">::</span><span>new(m)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Tells Rust we&#39;re sharing state
+</span><span>    </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">_ in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="color:#f29718;">8 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let</span><span> tx </span><span style="color:#f29668;">=</span><span> tx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> arc </span><span style="color:#f29668;">=</span><span> arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        thread</span><span style="color:#f29668;">::</span><span>spawn(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|| </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> msg </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(“Accessed {</span><span style="color:#bfbab0cc;">:</span><span style="color:#f29668;">?</span><span>}”</span><span style="color:#bfbab0cc;">,</span><span> arc)</span><span style="color:#bfbab0cc;">;
+</span><span>            tx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send</span><span>(msg)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        })</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>    </span><span style="color:#f07178;">drop</span><span>(tx)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Effectively closes the channel
+</span><span>    </span><span style="color:#ff7733;">for</span><span> data </span><span style="color:#f29668;">in</span><span> rx {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(“{</span><span style="color:#bfbab0cc;">:</span><span style="color:#f29668;">?</span><span>}”</span><span style="color:#bfbab0cc;">,</span><span> data)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Playground Link</p>
+<p>Вот описание кода выше:</p>
+<ul>
+<li>Приведенный выше код в настоящее время не подвержен никаким условиям гонки. Это потому, что происходит случай, когда все мутации для отображения m происходят в основном потоке до того, как логика потоковой передачи когда-либо запускается.</li>
+<li>Затем мы оборачиваем нашу карту m оберткой Atomic Reference Count (Arc). Это ключевой принцип, который позволяет нам отказаться от совместного использования памяти, что удовлетворяет требованиям компилятора Rust.</li>
+<li>Кроме того, хотя мы предоставляем общий доступ к карте m в каждом потоке, в многопоточной части кода не происходит никаких изменений.</li>
+<li>Вы также заметите, что выполняются две операции клонирования. Это необходимо, потому что каждый поток будет действовать как производитель для экземпляра одного канала. Кроме того, клон Arc позволяет каждому потоку иметь доступный только для чтения дескриптор карты m, соответственно увеличивая счетчик ссылок.</li>
+<li>Также стоит упомянуть, что, поскольку мы используем оболочку с подсчетом атомных ссылок, Rust будет гарантировать, что, когда каждый поток выходит за пределы области видимости, счетчик ссылок будет уменьшаться, и может произойти надлежащая очистка, когда последнему потоку больше не нужен доступ к карта.</li>
+<li>Затем в многопоточной части нашего кода мы действительно можем создать строку из содержимого карты m и, соответственно, отправить ее через канал. Что еще более важно, компилятор знает, что мы делаем это безопасно для всех потоков, потому что в многопоточном коде не происходит никаких изменений и потому что наша оболочка Arc гарантирует, что поток никогда не увидит висящий указатель.</li>
+</ul>
+<p>Наконец, мы указываем, что закончили с каналом, с помощью вызова drop и loop на принимающей стороне канала, распечатывая результаты. drop - это явный метод, предоставляемый трейтом Drop, и он будет вызываться, когда истечет его время жизни. Обращение к нему «освободит» ресурс до завершения программы.</p>
+<p>Теперь, когда мы рассмотрели, как можно обрабатывать совместное использование памяти в Rust с помощью оболочки Arc, в каком случае нам нужно разделить память при возникновении мутации. Давайте вернемся к нашему исходному коду Rust, который был смоделирован после версии Go, и настроим его так, чтобы он компилировался. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>mpsc</span><span style="color:#f29668;">::</span><span>channel</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>{Arc</span><span style="color:#bfbab0cc;">,</span><span> Mutex}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let </span><span>(</span><span style="color:#ff7733;">c_tx</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">c_rx</span><span>) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">channel</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> m </span><span style="color:#f29668;">= </span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span> 
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// Wrap m with a Mutex, wrap the mutex with Arc
+</span><span>   </span><span style="color:#ff7733;">let</span><span> arc </span><span style="color:#f29668;">= </span><span>Arc</span><span style="color:#f29668;">::</span><span>new(Mutex</span><span style="color:#f29668;">::</span><span>new(m))</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> t_arc </span><span style="color:#f29668;">=</span><span> arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   thread</span><span style="color:#f29668;">::</span><span>spawn(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|| </span><span>{
+</span><span>       </span><span style="color:#ff7733;">let mut</span><span> z </span><span style="color:#f29668;">=</span><span> t_arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lock</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>       z</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(“</span><span style="color:#f29718;">1</span><span>”</span><span style="color:#bfbab0cc;">,</span><span> “a”)</span><span style="color:#bfbab0cc;">;
+</span><span>       </span><span style="color:#ff7733;">c_tx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send</span><span>(</span><span style="color:#f29718;">true</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   })</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// Extra scope is needed to avoid the deadlock
+</span><span>   {
+</span><span>       </span><span style="color:#ff7733;">let mut</span><span> x </span><span style="color:#f29668;">=</span><span> arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lock</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>       x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(“</span><span style="color:#f29718;">2</span><span>”</span><span style="color:#bfbab0cc;">,</span><span> “b”)</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span> 
+</span><span>   </span><span style="color:#ff7733;">c_rx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">recv</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">for </span><span>(k</span><span style="color:#bfbab0cc;">,</span><span> v) </span><span style="color:#f29668;">in</span><span> m</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>       </span><span style="color:#f07178;">println!</span><span>(“{}</span><span style="color:#bfbab0cc;">, </span><span>{}”</span><span style="color:#bfbab0cc;">,</span><span> k</span><span style="color:#bfbab0cc;">,</span><span> v)</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>}
+</span></code></pre>
+<p>Playground Link</p>
+<p>Давайте разберем приведенный выше код:</p>
+<ul>
+<li>Обратите внимание, что в этом случае мы разделяем память с map m в основном потоке, а также с порожденным потоком, поэтому мы обращаемся к нашей оболочке Arc, чтобы согласиться с требованиями Rust в отношении общей памяти.</li>
+<li>Кроме того, мы не только разделяем память, но и мутация теперь происходит в порожденном потоке, а также в основном потоке, и эта логика теперь синхронизируется из-за правильной блокировки общего ресурса.</li>
+<li>Средство блокировки Rust обрабатывает разблокировку, когда она выходит за пределы области видимости автоматически, поэтому мы должны предпринять дополнительный шаг, чтобы ограничить область изменения основных потоков, чтобы предотвратить взаимоблокировку.</li>
+<li>Теперь приведенный выше код почти готов, но по-прежнему не компилируется из-за нашей следующей парадигмы.</li>
+</ul>
+<h2 id="sdvig-paradigmy-blokirovka-dannykh-a-ne-koda">Сдвиг парадигмы: блокировка данных, а не кода</h2>
+<p>Давайте на минутку разойдемся. И в Go, и в Rust есть мьютексы, обеспечивающие защиту целостности общего состояния. Ключевое отличие Rust в том, что в Rust вы блокируете данные напрямую, а не код. Поначалу это различие кажется почти приземленным, но раскрывает мощную концепцию.</p>
+<p>Предположим, я напишу на Go хитрый код, который очень деликатен, и я очень осторожен и дисциплинирован, чтобы обеспечить правильную блокировку карты. Но затем кто-то решает прийти на следующей неделе и добавить что-нибудь в этот код. Они случайно наткнулись на ту же карту, которая содержит некоторые полезные данные, которые им нужны. Затем они ссылаются на эту карту и перебирают ее, получая данные по мере необходимости. Все замечательно, кроме одного очень и очень важного. Не удалось взять блокировку чтения на карте. Последствия этого огромны. Это означает, что они не являются хорошими сторонниками синхронизации и теперь рискуют прочитать грязные данные, которые не были синхронизированы должным образом.</p>
+<p>В Rust такой ситуации просто не может быть. Еще раз спасибо модели владения Rust, поскольку карта m теперь перемещена в Mutex guard, Mutex теперь полностью отвечает за эти данные и разрешает доступ к ним только тогда, когда вы берете lock(). </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>The above code will not compile due to the following error:
+</span><span>&lt;anon&gt;:33:19: 33:20 error: use of moved value: `m` [E0382]
+</span><span>&lt;anon&gt;:33     for (k, v) in m.iter() {
+</span><span>                            ^
+</span><span>&lt;anon&gt;:33:19: 33:20 help: see the detailed explanation for E0382
+</span><span>&lt;anon&gt;:11:35: 11:36 note: `m` moved here because it has type `std::collections::hash::map::HashMap&lt;&amp;&#39;static str, &amp;&#39;static str&gt;`, which is non-copyable
+</span><span>&lt;anon&gt;:11     let arc = Arc::new(Mutex::new(m));
+</span><span>                                            ^
+</span><span>error: aborting due to previous error
+</span></code></pre>
+<p>The fix is rather easy, since ownership moved into the Mutex we just need to make sure that we kindly go through the mutex for the last step in the code. Therefore the last few lines of code change from this:</p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">for </span><span>(k</span><span style="color:#bfbab0cc;">,</span><span> v) </span><span style="color:#f29668;">in</span><span> m</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(“{}</span><span style="color:#bfbab0cc;">, </span><span>{}”</span><span style="color:#bfbab0cc;">,</span><span> k</span><span style="color:#bfbab0cc;">,</span><span> v)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Теперь это: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">=</span><span> arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lock</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">for </span><span>(k</span><span style="color:#bfbab0cc;">,</span><span> v) </span><span style="color:#f29668;">in</span><span> a</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(“{}</span><span style="color:#bfbab0cc;">, </span><span>{}”</span><span style="color:#bfbab0cc;">,</span><span> k</span><span style="color:#bfbab0cc;">,</span><span> v)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Увы, для завершения мы наконец-то добрались до этого кода, который компилируется отлично. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>mpsc</span><span style="color:#f29668;">::</span><span>channel</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>{Arc</span><span style="color:#bfbab0cc;">,</span><span> Mutex}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let </span><span>(</span><span style="color:#ff7733;">c_tx</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">c_rx</span><span>) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">channel</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> m </span><span style="color:#f29668;">= </span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// Wrap m with a Mutex, wrap the mutex with Arc
+</span><span>   </span><span style="color:#ff7733;">let</span><span> arc </span><span style="color:#f29668;">= </span><span>Arc</span><span style="color:#f29668;">::</span><span>new(Mutex</span><span style="color:#f29668;">::</span><span>new(m))</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> t_arc </span><span style="color:#f29668;">=</span><span> arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>       thread</span><span style="color:#f29668;">::</span><span>spawn(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|| </span><span>{
+</span><span>       </span><span style="color:#ff7733;">let mut</span><span> z </span><span style="color:#f29668;">=</span><span> t_arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lock</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>       z</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(“</span><span style="color:#f29718;">1</span><span>”</span><span style="color:#bfbab0cc;">,</span><span> “a”)</span><span style="color:#bfbab0cc;">;
+</span><span>       </span><span style="color:#ff7733;">c_tx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send</span><span>(</span><span style="color:#f29718;">true</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   })</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// Extra scope is needed to avoid the deadlock
+</span><span>   {
+</span><span>       </span><span style="color:#ff7733;">let mut</span><span> x </span><span style="color:#f29668;">=</span><span> arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lock</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>       x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(“</span><span style="color:#f29718;">2</span><span>”</span><span style="color:#bfbab0cc;">,</span><span> “b”)</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>   </span><span style="color:#ff7733;">c_rx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">recv</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">=</span><span> arc</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lock</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">for </span><span>(k</span><span style="color:#bfbab0cc;">,</span><span> v) </span><span style="color:#f29668;">in</span><span> a</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>       </span><span style="color:#f07178;">println!</span><span>(“{}</span><span style="color:#bfbab0cc;">, </span><span>{}”</span><span style="color:#bfbab0cc;">,</span><span> k</span><span style="color:#bfbab0cc;">,</span><span> v)</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>}
+</span></code></pre>
+<p>Playground Link</p>
+<p>Если вы все еще со мной, мы рассмотрели много материала. Эти три парадигмы действительно предлагают альтернативный способ мышления:</p>
+<ul>
+<li>Rust имеет большое значение, чтобы помочь вам избежать гонок данных</li>
+<li>Rust требует, чтобы вы включили общую память, что устраняет многие проблемы, связанные с общим состоянием</li>
+<li>Rust блокирует данные, а не код, используя модель владения для обеспечения постоянной синхронизации.</li>
+</ul>
+<p>На этом мы завершаем статью о парадигмах Rust для разработчика Go. Я хотел прояснить ситуацию и выделить несколько моментов. Примеры в этом эссе немного надуманы, но просты и полезны, чтобы проиллюстрировать действующие механики.</p>
+<p>Кроме того, этот пост никоим образом не имел целью противопоставить один язык другому. Фактически, то, что я узнал в ходе своего исследования с Rust, я думаю, в конечном итоге сделает меня лучшим инженером-программистом, независимо от того, какой язык я использую. Go - это то, чем я занимаюсь сегодня, из-за характера систем, которые я создаю для жизни. Модель облегченных потоков, которую предлагает Go, дает мне значительное преимущество перед таким языком, как Rust в настоящее время. И наоборот, я уверен, что настанет время заняться языком вроде Rust. Когда это время придет, я уверен, что получу удовольствие от работы с таким мощным языком нижнего уровня, который избегает многих ловушек, которые обычно преследуют такие языки.</p>
+<p>Еще кое-что! Если вам понравилась эта статья, я буду благодарен за отзывы. Пожалуйста, поделитесь им и подпишитесь на меня в Твиттере. Кроме того, если эта статья содержит предмет, который вас волнует, присоединяйтесь ко мне в SendGrid, где мы весь день будем играть с распределенными системами. (Также потребуется реальная работа.)</p>
+<p>И если вам понравилась эта статья, посмотрите мой пост под названием «Танцы с мьютексами го».</p>
+<p>Удачного кодирования! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

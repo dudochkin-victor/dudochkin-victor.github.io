@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust для JavaScript-разработчиков - переменные и типы данных | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#peremennye">Переменные</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#let"><small>- let</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#const"><small>- const</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#tipy-dannykh">Типы данных</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#chisla"><small>- Числа</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#bulevy"><small>- Булевы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#stroki"><small>- Строки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#optsii"><small>- Опции</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#massivy">Массивы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#massivy-1"><small>- Массивы:</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#obekty"><small>- Объекты</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-variables-and-data-types/#hashmap"><small>- HashMap:</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust для JavaScript-разработчиков - переменные и типы данных</h1>
+
+<p><a href="https://www.sheshbabu.com/posts/rust-for-javascript-developers-variables-and-data-types/">Перевод</a> | Автор оригинала: Shesh</p>
+<p>Это вторая часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:</p>
+<ol>
+<li>Обзор инструментальной экосистемы</li>
+<li>Переменные и типы данных</li>
+<li>Функции и поток управления</li>
+<li>Сопоставление с образцом и перечисления</li>
+</ol>
+<h2 id="peremennye">Переменные</h2>
+<p>В JavaScript есть три способа объявления переменных - var, const и let. В Rust также есть const и let, но они работают иначе, чем в JavaScript.</p>
+<h3 id="let">let</h3>
+<p>В Rust мы объявляем переменные с помощью let. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">123</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Как и ожидалось, переменной a присваивается значение 123. Но Rust по умолчанию делает переменную неизменной. Вы не сможете изменить значение после того, как оно будет присвоено. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">123</span><span style="color:#bfbab0cc;">;
+</span><span>a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">456</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Error! :(
+</span></code></pre>
+<p>На первый взгляд, это может быть похоже на const в JavaScript, но константа в JavaScript не делает переменные неизменяемыми, а просто делает привязку неизменной.</p>
+<p>Если вы хотите сделать переменную изменяемой, вам нужно явно указать ее с помощью ключевого слова mut </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">123</span><span style="color:#bfbab0cc;">;
+</span><span>a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">456</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// No Error :)
+</span></code></pre>
+<h3 id="const">const</h3>
+<p>Const в Rust также сильно отличается от const в JavaScript - лучше думать о const в Rust как о «метке» для постоянного значения. Во время компиляции они заменяются своими фактическими значениями во всех местах, где они используются. Обычно он используется для констант, таких как номера портов, значения тайм-аута, коды ошибок и т.д.</p>
+<p>Вы также можете определять константные внешние функции на глобальном уровне, что нельзя сделать с помощью let.</p>
+<h2 id="tipy-dannykh">Типы данных</h2>
+<h3 id="chisla">Числа</h3>
+<p>В JavaScript тип Number используется как для целых (числа без десятичной точки), так и для чисел с плавающей запятой (числа с десятичной точкой). В Rust есть множество опций для целых чисел и чисел с плавающей запятой, но по умолчанию мы можем использовать i32 для целых чисел и f64 для чисел с плавающей запятой. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">123</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// i32
+</span><span style="color:#ff7733;">let</span><span> y </span><span style="color:#f29668;">= </span><span style="color:#f29718;">4.5</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// f64
+</span></code></pre>
+<h3 id="bulevy">Булевы</h3>
+<p>Довольно просто - и JavaScript, и Rust имеют логические значения со значениями true / false. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// bool
+</span></code></pre>
+<h3 id="stroki">Строки</h3>
+<p>Обычно мы мало думаем о строках при работе с JavaScript - они «просто работают». В Rust существует множество типов строк, но давайте остановимся на наиболее широко используемых - String и &amp;str.</p>
+<p>Строка может увеличиваться, тогда как &amp;str - неизменяемый и фиксированный размер.</p>
+<p>Когда вы создаете строку с помощью строкового литерала, она создает тип &amp;str: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Saitama&quot;</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &amp;str
+</span></code></pre>
+<p>Вам нужно использовать методы String::from или to_string для создания типа String:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> name  </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Genos&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// String
+</span><span style="color:#ff7733;">let</span><span> name2 </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;King&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;    </span><span style="font-style:italic;color:#5c6773;">// String
+</span></code></pre>
+<p>Вы можете преобразовать из String в &amp;str с помощью функции as_str </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> name2 </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;King&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// String
+</span><span style="color:#ff7733;">let</span><span> name3 </span><span style="color:#f29668;">=</span><span> name2</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">;     </span><span style="font-style:italic;color:#5c6773;">// &amp;str
+</span></code></pre>
+<p>Мы узнаем больше о строках в будущих публикациях.</p>
+<h3 id="optsii">Опции</h3>
+<p>В JavaScript есть два типа пустых значений - undefined и null. Undefined используется, когда переменная, свойство и т.д. Не определены, а null используется, когда что-то намеренно пусто.</p>
+<p>В Rust нет ни того, ни другого - у него даже нет специального нулевого типа данных. Вместо этого у него есть что-то, называемое Option. Когда у нас есть ситуация, когда значение может быть пустым или изначально неопределенным, используется этот тип Option.</p>
+<p>Люди, которые работали с TypeScript / Flow, могут увидеть здесь некоторое сходство, но это совсем другое с точки зрения создания и использования дополнительных опций.</p>
+<p>Допустим, мы хотим написать функцию, которая принимает путь к файлу и возвращает его содержимое. Допустим, по какой-то причине мы хотим вернуть «нулевое» значение, если в качестве пути к файлу передается пустая строка.</p>
+<p>Вот как это можно было бы написать на JavaScript / TypeScript: </p>
+<pre data-lang="ts" style="background-color:#0f1419;color:#bfbab0;" class="language-ts "><code class="language-ts" data-lang="ts"><span style="color:#ff7733;">function </span><span style="color:#ffb454;">read_file</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">string</span><span>)</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">string </span><span style="color:#f29668;">| </span><span style="font-style:italic;color:#39bae6;">null </span><span>{
+</span><span>  </span><span style="color:#ff7733;">const </span><span>contents </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;hello&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">if </span><span>(path </span><span style="color:#f29668;">!== </span><span style="color:#c2d94c;">&quot;&quot;</span><span>) {
+</span><span>    </span><span style="color:#ff7733;">return </span><span>contents</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">null</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Реализация того же самого с помощью Rust's Option: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_file</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>&gt; {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> contents </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;hello&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">if</span><span> path </span><span style="color:#f29668;">!= </span><span style="color:#c2d94c;">&quot;&quot; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(contents)</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вы можете видеть, что мы возвращаем None для нулевого значения, но для ненулевого значения мы не возвращаем содержимое в том виде, в каком оно есть, а скорее «оборачиваем» его в Some и возвращаем его. Тип возвращаемого значения также не является «строковым или нулевым» в соответствии с примером TypeScript, а является типом «Option, который содержит &amp;str».</p>
+<p>Вот как бы вы могли вызвать эту функцию в JavaScript / TypeScript: </p>
+<pre data-lang="ts" style="background-color:#0f1419;color:#bfbab0;" class="language-ts "><code class="language-ts" data-lang="ts"><span style="color:#ff7733;">function </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">const </span><span>file_contents </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">read_file</span><span>(</span><span style="color:#c2d94c;">&quot;/path/to/file&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">if </span><span>(file_contents </span><span style="color:#f29668;">!== </span><span style="color:#f29718;">null</span><span>) {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(file_contents)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// file_contents is refined to string type
+</span><span>  } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Empty!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Вызов функции в Rust: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> file </span><span style="color:#f29668;">= </span><span style="color:#f07178;">read_file</span><span>(</span><span style="color:#c2d94c;">&quot;path/to/file&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">if</span><span> file</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_some</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> contents </span><span style="color:#f29668;">=</span><span> file</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> contents)</span><span style="color:#bfbab0cc;">;
+</span><span>  } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Empty!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Как видите, нам нужно вручную «развернуть» Option, чтобы получить содержимое внутри.</p>
+<h2 id="massivy">Массивы</h2>
+<p>Подобно строкам, существует два типа массивов - один с фиксированным размером (называемый просто «массивом»), а другой, который может увеличиваться / уменьшаться в размере (называемый «векторами»).</p>
+<h3 id="massivy-1">Массивы:</h3>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> list </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> list)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Векторы: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let mut</span><span> list </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>  list</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(</span><span style="color:#f29718;">4</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> list)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h3 id="obekty">Объекты</h3>
+<p>Технически все непримитивные типы являются «объектами» в JavaScript, но мы обычно используем термин «объект» для двух вещей - пакета данных или хеш-карты.</p>
+<h4 id="paket-dannykh">Пакет данных:</h4>
+<p>В отличие от других языков, вам не нужно проходить много церемоний для создания объекта, и это одна из самых крутых особенностей JavaScript.</p>
+<p>Чтобы создать объект сотрудника в JavaScript: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">function </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">const </span><span>employee </span><span style="color:#f29668;">= </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Saitama&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">25</span><span style="color:#bfbab0cc;">,
+</span><span>    occupation</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Hero&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>  }</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Чтобы создать такой же объект в Rust, мы можем использовать структуры: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Employee </span><span>{
+</span><span>  name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>  age</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>  occupation</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> employee </span><span style="color:#f29668;">=</span><span> Employee {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Saitama&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">25</span><span style="color:#bfbab0cc;">,
+</span><span>    occupation</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Hero&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>  }</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h3 id="hashmap">HashMap:</h3>
+<p>В JavaScript для создания объекта с произвольными парами ключ-значение мы можем использовать либо обычные литералы объекта, либо объект Map: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">function </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">const </span><span>colors </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Map</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  colors</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(</span><span style="color:#c2d94c;">&quot;white&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;#fff&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  colors</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(</span><span style="color:#c2d94c;">&quot;black&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;#000&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(colors</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(</span><span style="color:#c2d94c;">&quot;white&quot;</span><span>))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// #fff
+</span><span>}
+</span></code></pre>
+<p>В Rust вы можете сделать то же самое, используя тип HashMap: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let mut</span><span> colors </span><span style="color:#f29668;">= </span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  colors</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(</span><span style="color:#c2d94c;">&quot;white&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;#fff&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  colors</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(</span><span style="color:#c2d94c;">&quot;black&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;#000&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> colors</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(</span><span style="color:#c2d94c;">&quot;white&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>())</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// #fff
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание на использование развёртки выше. Метод get HashMap возвращает тип Option, который нам нужно развернуть, чтобы получить значение внутри.</p>
+<p>Спасибо за чтение! Не стесняйтесь подписываться на меня в Twitter, чтобы увидеть больше подобных сообщений :) </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

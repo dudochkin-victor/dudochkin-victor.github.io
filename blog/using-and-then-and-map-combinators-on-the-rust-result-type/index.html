@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Использование комбинаторов and_then и map для типа результата Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#podkhod">Подход</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#and-then-combinator">and_then Combinator</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#obedinenie-neskol-kikh-funktsii-and-then">Объединение нескольких функций and_then</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#rezul-taty-sglazhivaniia">Результаты сглаживания</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#map-combinator">map Combinator</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#osnovy"><small>- Основы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#sopostavlenie-varianta-rezul-tata-ok-s-drugim-tipom"><small>- Сопоставление варианта результата &quot;ОК&quot; с другим типом</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#otobrazhenie-oboikh-variantov-rezul-tata"><small>- Отображение обоих вариантов результата</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#razlichnye-tipy-vozvrata-s-ispol-zovaniem-and-then-and-map">Различные типы возврата с использованием and_then And map</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#vyvod">Вывод</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#dopolnitel-no">Дополнительно</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#or-else-combinator"><small>- or_else Combinator</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-and-then-and-map-combinators-on-the-rust-result-type/#otladka-slozhnykh-kombinatorov"><small>- Отладка сложных комбинаторов</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Использование комбинаторов and_then и map для типа результата Rust</h1>
+
+<p><a href="https://hermanradtke.com/2016/09/12/rust-using-and_then-and-map-combinators-on-result-type.html">Перевод</a> | Автор оригинала: Herman J. Radtke III</p>
+<p>Если вы потратили какое-то время на изучение Rust, вы быстро привыкнете к типам Option и Result. Именно благодаря этим двум основным типам мы делаем наши программы надежными. Мой опыт работы с C и динамическими языками. Я обнаружил, что при работе с этими типами проще всего использовать ключевое слово соответствия. Существуют также функции комбинатора, такие как map и and_then, которые позволяют объединить набор вычислений в цепочку. Мне нравится объединять комбинаторы в цепочку, чтобы логика ошибок была отделена от основной логики кода.</p>
+<p>Я недавно вернулся домой с RustConf 2016, где в крэйте футур была версия 0.1.1 и первые проблески токио. Все футуры реализуют функцию опроса, которая возвращает тип опроса. Тип опроса определяется как тип публикации Poll &lt;T, E&gt; = Result&lt;Async<T>, E&gt; ;. Таким образом, если мы хотим использовать футуры, нам нужно хорошо разбираться в функциях комбинатора, реализованных в основном типе Result. Вы не сможете отказаться от использования ключевого слова match. Многие из примеров, которые я видел, использовали функции комбинатора для объединения футур вместе. Мы можем посмотреть, как комбинаторы and_then и map работают с типом Result, и лучше понять, как работают комбинаторы, без дополнительной умственной нагрузки, связанной с попытками понять, как работают футуры. Когда мы освоимся с комбинаторами, мы сможем лучше понять примеры, в которых комбинаторы используются для объединения футур. (Edit: исправлено предыдущее предложение в соответствии с обсуждением r / rust).</p>
+<h2 id="podkhod">Подход</h2>
+<p>Я буду указывать явные типы во всех примерах, чтобы облегчить понимание происходящего. В подавляющем большинстве случаев вы можете позволить компилятору определять типы. На самом деле, позволять компилятору определять типы - идиоматично.</p>
+<p>Справочник API стандартной библиотеки для комбинаторов результатов хорошо справляется с пояснениями и простыми примерами. Однако в большинстве примеров используется один и тот же тип для вариантов Ok и Err. Я думаю, это затрудняет понимание того, что происходит. Я буду использовать вариант Err(&amp;'static str) в примерах, чтобы легко идентифицировать сообщения об ошибках. Если вас смущает «статическое время жизни», знайте, что &amp; »static str означает жестко запрограммированный строковый литерал. Пример: let foo: &amp;'static str = &quot;Hello World!&quot; ;.</p>
+<h2 id="and-then-combinator">and_then Combinator</h2>
+<p>Начнем с комбинаторной функции and_then. Комбинатор and_then - это функция, которая вызывает замыкание тогда и только тогда, когда вариант типа перечисления Result - Ok(T). </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">5</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>В этом первом примере значение res равно Ok(5). Согласно нашему определению and_then: and_then будет соответствовать варианту Ok и вызывать закрытие со значением usize 5 в качестве аргумента. Что произойдет, если res - вариант Err? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;error&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &lt;--- closure is not called
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;error&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;</span><span>```
+</span></code></pre>
+<p>В этом втором примере значение res равно Err(«ошибка»). Согласно нашему определению and_then: and_then будет соответствовать варианту Err и пропустить вызов закрытия. Значение Err(«ошибка») будет возвращено как есть. Это удобно, поскольку мы смогли написать замыкание, которое игнорировало ошибки. Значение Err(«ошибка») будет передано в фоновом режиме в конец цепочки комбинатора. Пока мы только возвращали Ок из закрытия. Наше закрытие также может вернуть ошибку.</p>
+<h2 id="obedinenie-neskol-kikh-funktsii-and-then">Объединение нескольких функций and_then</h2>
+<p>Вместо умножения разделим 2 на результат n. Чтобы защитить себя от ошибок деления на ноль, нам нужно добавить еще один шаг в цепочку, который будет возвращать ошибку, если значение равно нулю. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">0</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> res
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| {
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">== </span><span style="color:#f29718;">0 </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;cannot divide by zero&quot;</span><span>)
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(n)
+</span><span>        }
+</span><span>    })
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">2 </span><span style="color:#f29668;">/</span><span> n))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &lt;--- closure is not called
+</span><span>
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;cannot divide by zero&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Начальное значение Ok(0) будет передано первому закрытию. В этом случае n действительно равно 0, и замыкание возвращает Err(«не может делиться на ноль»). Наш следующий вызов and_then указывает, что теперь у нас есть вариант результата с ошибкой Err, и не вызывает закрытие.</p>
+<h2 id="rezul-taty-sglazhivaniia">Результаты сглаживания</h2>
+<p>Бывают случаи, когда у нас есть вложенные типы результатов. Как правило, это хорошая стратегия, чтобы попытаться сгладить результат. Например, мы можем преобразовать <code>Result&lt;Result&lt;usize, &amp;'static str&gt;, &amp;' static str&gt;</code> в <code>Result&lt;usize, &amp;'static str&gt;</code>. Более плоский результат обычно легче обрабатывать более позднему коду. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt;, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">5</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> res
+</span><span>	</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt;| {
+</span><span>		n </span><span style="font-style:italic;color:#5c6773;">// &lt;--- this is either Ok(usize) or Err(&amp;&#39;static str)
+</span><span>	})
+</span><span>	</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| {
+</span><span>		</span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>)
+</span><span>	})</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>В приведенном выше примере первое закрытие and_then возвращает n. Обратите внимание, что в предыдущих примерах мы заключили возвращаемое значение в вариант Ok или Err перечисления Result. В этом примере наша цель - сгладить результат, чтобы мы не возвращали явно Ok или Err. Значение n будет либо Ok(usize), либо Err(&amp;'static str). Таким образом, мы можем вернуть n как есть. Если значение n имеет тип Ok(usize), то значение будет передано следующему and_then, как ожидалось. Если значение n имеет тип Err(&amp;'static str), тогда вторая функция and_then будет пропущена.</p>
+<p>Функция and_then в scala называется flatMap, и вы можете понять, почему. Мы сводим тип Result&lt;Result&lt;_, _&gt;, <em>&gt; к Result&lt;</em>, _&gt;, сопоставляя варианты во внутреннем Result с внешним Result.</p>
+<h2 id="map-combinator">map Combinator</h2>
+<p>До сих пор мы использовали and_then для объединения вычислений и сглаживания вложенных результатов. В примерах использовались результаты с типами, которые являются теми же типами, которые мы хотели получить в итоге. Иногда нам дают Результат, когда один или оба варианта не соответствуют тому типу, который нам нужен. Мы будем использовать карту для преобразования одного типа результата в другой.</p>
+<h3 id="osnovy">Основы</h3>
+<p>Если вы в основном используете язык с динамической типизацией, вы могли использовать map как замену для итерации / цикла по списку значений. То же самое мы можем сделать и в Rust. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> value</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>&gt; </span><span style="color:#f29668;">=</span><span> res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span>| n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">10</span><span>]</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Использование карты с типом результата немного отличается. Функция map вызывает закрытие тогда и только тогда, когда вариант перечисления Result равен Ok(T). Вот наш самый первый пример and_then, но вместо него используется карта. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">5</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> value</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">=</span><span> res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span>| n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это очень похоже на первый пример and_then, но обратите внимание, что мы вернули Ok(n * 2) в примере and_then, а в этом примере мы возвращаем n * 2. Функция карты всегда оборачивает возвращаемое значение замыкания в вариант Ok.</p>
+<h3 id="sopostavlenie-varianta-rezul-tata-ok-s-drugim-tipom">Сопоставление варианта результата &quot;ОК&quot; с другим типом</h3>
+<p>Давайте посмотрим на пример, в котором вариант Ok(T) перечисления Result имеет неправильный тип. Пример: нам дан Result&lt;i32, _&gt;, но мы хотим Result&lt;usize, _&gt;. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> given</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">5</span><span style="color:#ff7733;">i32</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> desired</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">=</span><span> given</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>| n </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">5</span><span style="color:#ff7733;">usize</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> desired)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> desired</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>В этом примере значение res равно Ok(5i32). Согласно нашему определению map, map будет соответствовать варианту Ok и вызывать замыкание со значением i32, равным 5, в качестве аргумента. Когда замыкание возвращает значение, map обернет это значение в Ok и вернет его.</p>
+<p>Если заданное значение является вариантом Err, оно передается через функции map и and_then без вызова замыкания. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> given</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;an error&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> desired</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">=</span><span> given</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>| n </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &lt;--- closure not called
+</span><span>
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;an error&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> desired)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> desired</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &lt;--- closure not called
+</span><span>
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;an error&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="otobrazhenie-oboikh-variantov-rezul-tata">Отображение обоих вариантов результата</h3>
+<p>Что, если бы оба варианта Результата были разными? Пример: нам дан Result&lt;i32, MyError&gt;, но мы хотим Result&lt;usize, &amp;'static str&gt;.</p>
+<p>Мы преобразуем только вариант Ok(i32) в приведенном выше примере. В этом примере нам также нужно будет преобразовать вариант Err(MyError) в Err(&amp;'static str). Для этого нам нужно будет использовать map_err для обработки варианта Err(E). Комбинаторная функция map_err противоположна map, потому что она соответствует только вариантам Err(E) Result. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">MyError </span><span>{ Bad }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> given</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, MyError&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(MyError</span><span style="color:#f29668;">::</span><span>Bad)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> desired</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">=</span><span> given
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>| {
+</span><span>       n </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize
+</span><span>    })
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map_err</span><span>(|</span><span style="color:#f29718;">_e</span><span style="color:#bfbab0cc;">:</span><span> MyError| {
+</span><span>       </span><span style="color:#c2d94c;">&quot;bad MyError&quot;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> desired</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;bad MyError&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Вы должны понимать, что:</p>
+<ul>
+<li>карта обрабатывает только вариант Ok(T) результата</li>
+<li>map_err обрабатывает только вариант результата Err(E)</li>
+</ul>
+<h2 id="razlichnye-tipy-vozvrata-s-ispol-zovaniem-and-then-and-map">Различные типы возврата с использованием and_then And map</h2>
+<p>Функции and_then, map и map_err не обязаны возвращать один и тот же тип внутри своих вариантов. Функциям отображения можно дать Ok(T) и вернуть Ok(U). Функции map_err можно дать Err(E) и вернуть Err(F). Функции and_then можно дать Ok(T) и вернуть Ok(U) или Err(F)!</p>
+<p>Давайте попробуем сложный пример, где нам дан вложенный результат, но ни один из типов не соответствует желаемым типам, которые мы хотим. Пример: нам дан Result&lt;Result&lt;i32, FooError&gt;, BarError&gt;, но нам нужен Result&lt;usize, &amp;'static str&gt;. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">FooError </span><span>{
+</span><span>    Bad</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">BarError </span><span>{
+</span><span>    Horrible</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, FooError&gt;, BarError&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="font-style:italic;color:#39bae6;">Err</span><span>(FooError</span><span style="color:#f29668;">::</span><span>Bad))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> res
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// `map` will only call the closure for `Ok(Result&lt;i32, FooError&gt;)`
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, FooError&gt;| {
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// transform `Ok(Result&lt;i32, FooError&gt;)` into `Ok(Result&lt;usize, &amp;&#39;static str&gt;)`
+</span><span>        res
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// transform i32 to usize
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>| n </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>)
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// transform `FooError` into `&#39;static str`
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map_err</span><span>(|</span><span style="color:#f29718;">_e</span><span style="color:#bfbab0cc;">:</span><span> FooError| </span><span style="color:#c2d94c;">&quot;bad FooError&quot;</span><span>)
+</span><span>
+</span><span>    })
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// `map_err` will only call the closure for `Err(BarError)`
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map_err</span><span>(|</span><span style="color:#f29718;">_e</span><span style="color:#bfbab0cc;">:</span><span> BarError| {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// transform `BarError` into `&#39;static str`
+</span><span>        </span><span style="color:#c2d94c;">&quot;horrible BarError&quot;
+</span><span>    })
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// `and_then` will only call the closure for `Ok(Result&lt;usize, &amp;&#39;static str&gt;)`
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Note: this is result of our first `map` above
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt;| {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// transform (flatten) `Ok(Result&lt;usize, &amp;&#39;static str&gt;)` into `Result&lt;usize, &amp;&#39;static str&gt;`
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// this may be `Ok(Ok(usize))` _or_ `Ok(Err(&amp;&#39;static str))`
+</span><span>        n
+</span><span>    })
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// `and_then` will only call the closure for `Ok(usize)`
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>| {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// transform Ok(usize) into Ok(usize * 2)
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(n </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>)
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;bad FooError&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Я решил встроить объяснение в комментарии, чтобы прояснить ситуацию. Вы видите, как быстро все усложняется. Моя общая стратегия - попытаться сгладить вложенный результат как можно раньше, чтобы упростить последующие комбинаторы.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Многие функции возвращают Result, чтобы представить значение счастливого пути и случай ошибки. Использование комбинаторов может помочь изолировать обработку ошибок от обычных вычислений. Комбинаторы также позволяют нам пропустить ошибки до самого конца. Мне нравится железнодорожное ориентированное программирование за хорошую визуализацию этой концепции. Все примеры, которые мы рассмотрели, также работают с типом Option. Теперь вы должны быть лучше подготовлены, чтобы читать другой код, который использует функции комбинатора результатов, и писать их самостоятельно.</p>
+<h2 id="dopolnitel-no">Дополнительно</h2>
+<h3 id="or-else-combinator">or_else Combinator</h3>
+<p>Комбинатор функций or_else противоположен and_then. Он вызывает закрытие только в том случае, если результат - Err(E). Я не использую or_else так часто, как and_then. Пожалуйста, не стесняйтесь показать мне, что мне не хватает.</p>
+<h3 id="otladka-slozhnykh-kombinatorov">Отладка сложных комбинаторов</h3>
+<p>Мне нравится делать типы явными, когда я пытаюсь заставить работать сложную комбинацию. Однако это может стать нереалистичным при работе с итераторами или футурами, которые становятся глубоко вложенными. Когда это происходит, я начинаю присваивать результаты неправильным типам. Вот небольшой пример, если я не понимаю, что такое тип res: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// assume it is not clear what type `res` is
+</span><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">5</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> c</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">=</span><span> res</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Что генерирует: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0308]: mismatched types
+</span><span> --&gt; &lt;anon&gt;:5:13
+</span><span>  |
+</span><span>5 | let c: u8 = res;
+</span><span>  |             ^^^ expected u8, found enum `std::result::Result`
+</span><span>  |
+</span><span>  = note: expected type `u8`
+</span><span>  = note:    found type `std::result::Result&lt;usize, &amp;&#39;static str&gt;`
+</span></code></pre>
+<p>Обычно я использую переменную c, потому что хочу видеть тип res в сообщении об ошибке компилятора. Ха ха я знаю.</p>
+<p>Вот пример его использования в комбинаторе: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">5</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">wut</span><span>| {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> c</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">=</span><span> wut</span><span style="color:#bfbab0cc;">;
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Что генерирует: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0308]: mismatched types
+</span><span> --&gt; &lt;anon&gt;:6:17
+</span><span>  |
+</span><span>6 |     let c: u8 = wut;
+</span><span>  |                 ^^^ expected u8, found usize
+</span><span>
+</span><span>error[E0308]: mismatched types
+</span><span> --&gt; &lt;anon&gt;:5:32
+</span><span>  |
+</span><span>5 | let value = res.and_then(|wut| {
+</span><span>  |                                ^ expected enum `std::result::Result`, found()
+</span><span>  |
+</span><span>  = note: expected type `std::result::Result&lt;_, &amp;str&gt;`
+</span><span>  = note:    found type `()`
+</span><span>
+</span><span>error: aborting due to 2 previous errors
+</span></code></pre>
+<p>Ошибки компилятора показывают как ожидаемый ввод, так и ожидаемый вывод. Я нахожу это действительно полезным, когда теряюсь во всех комбинаторах.</p>
+<h4 id="format-nochnoi-oshibki">Формат ночной ошибки</h4>
+<p>На момент написания этой статьи Rust 1.11.0 является стабильной версией. Rust 1.11.0 не имеет нового формата ошибок, который присутствует в Rust nightly. Если я борюсь с ошибкой компилятора, я часто переключаюсь на использование Rust каждую ночь, пока не устраню ошибку. Rustup упрощает это.</p>
+<p>В вашем текущем рабочем каталоге:</p>
+<ul>
+<li>Переключиться на ночной режим - ночной режим переопределения rustup</li>
+<li>Переключиться на стабильную - стабильная установка переопределения Rust </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

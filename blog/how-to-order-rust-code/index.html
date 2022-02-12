@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Организация кода в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-order-rust-code/#raspolozhite-kod-v-predlozhennom-poriadke-chteniia">Расположите код в предложенном порядке чтения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-order-rust-code/#eto-ne-obiazatel-no-tot-poriadok-v-kotorom-ia-pishu-kod">Это не обязательно тот порядок, в котором я пишу код</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-order-rust-code/#nekotorye-osobennosti-koda-rust">Некоторые особенности кода Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-order-rust-code/#kak-uporiadochit-opredeleniia-tipov-struktury-perechisleniia-i-ikh-realizatsii"><small>- Как упорядочить определения типов (структуры, перечисления) и их реализации?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-order-rust-code/#gde-ispol-zovat-instruktsii"><small>- Где использовать инструкции?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-order-rust-code/#razdelenie-obshchedostupnogo-i-chastnogo-interfeisov"><small>- Разделение общедоступного и частного интерфейсов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-order-rust-code/#abstraktsii-poverkh-abstraktsii"><small>- Абстракции поверх абстракций</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Организация кода в Rust</h1>
+
+<p><a href="https://deterministic.space/how-to-order-rust-code.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Примечание: этот пост о том, как я оформляю код, который пишу на Rust. Если вы хотели «заказать» код Rust в смысле «нанять кого-нибудь для написания кода», вы все равно должны продолжать читать, поскольку это отличный материал для собеседования. (Не то мнение, которое я представляю, а то, что у меня есть мнение по теме.)</p>
+<h2 id="raspolozhite-kod-v-predlozhennom-poriadke-chteniia">Расположите код в предложенном порядке чтения</h2>
+<p>Я стараюсь упорядочить функции / модули / элементы в моих исходных файлах от наиболее высокоуровневых до наиболее конкретных / небольших. Сначала вы можете назвать это fn main.</p>
+<p>Я делаю это для того, чтобы, когда кто-то открывает файл и начинает читать, он может очень быстро получить общее представление о том, о чем этот файл, а затем, при необходимости, погрузиться в детали, которые они ищут. Я думаю, что это особенно хорошо работает для файлов ввода в проекте.</p>
+<p>Противоположная позиция - начать с общих помощников, затем ввести специфичные для домена типы и функции и, наконец, иметь основную функцию, которая вызывает все вещи, которые вы определили выше. Я обычно читаю эти файлы, прокручивая их до конца, а затем двигаясь вверх; так что это просто странно для тех, кто привык читать на европейских языках.</p>
+<h2 id="eto-ne-obiazatel-no-tot-poriadok-v-kotorom-ia-pishu-kod">Это не обязательно тот порядок, в котором я пишу код</h2>
+<p>Обычно я не сажусь, пишу код сверху вниз и получаю идеально структурированный и упорядоченный файл. Это совсем не цель: достаточно легко скопировать и вставить части файла в другой или использовать функции редактора / языкового плагина для быстрого перехода между разделами файлов, когда я ищу что-то конкретное. Помните: моя цель организовать код описанным выше способом - это когда вы читаете его впервые.</p>
+<h2 id="nekotorye-osobennosti-koda-rust">Некоторые особенности кода Rust</h2>
+<p>Порядок элементов в Rust обычно не имеет значения (макросы - это странный крайний случай). Однако есть несколько вещей, которые нужно решить:</p>
+<h3 id="kak-uporiadochit-opredeleniia-tipov-struktury-perechisleniia-i-ikh-realizatsii">Как упорядочить определения типов (структуры, перечисления) и их реализации?</h3>
+<p>Есть два очевидных варианта:</p>
+<ul>
+<li>Сначала определите все типы, а затем перечислите все реализации?</li>
+<li>Чередовать реализации с типами?</li>
+</ul>
+<p>Лично меня устраивают оба варианта, и я предпочитаю последнее. Однако я мог бы разделить блоки impl и определить некоторые методы (особенно частные) рядом с функциями, для которых они необходимы. (Иногда это похоже на особые, единичные особенности.)</p>
+<p>У @matklad был еще один интересный комментарий:</p>
+<blockquote>
+<p>[Я] люблю заранее читать типы (если вы знаете набор полей, вы знаете все возможные методы)</p>
+</blockquote>
+<h3 id="gde-ispol-zovat-instruktsii">Где использовать инструкции?</h3>
+<p>Чтобы использовать элемент (тип, трэйта, функция и т.д.), Который не входит в область действия, вы можете либо сослаться на него по его полному пути (например, std::collections::HashMap), либо импортировать его с помощью use std::collections: : HashMap; после чего вы можете называть его просто HashMap. Вопрос в том, где разместить эти инструкции по использованию?</p>
+<p>Один из типичных подходов - разместить их все в верхней части файла. Эту «стену импорта» вы также видите во многих других языках программирования. Это хорошая идея, если единственное место, где вы можете разместить операторы импорта, находится на корневом уровне, и особенно если файл содержит один «главный элемент» (например, если foo.java содержит операторы импорта, за которыми следует класс Foo {…}). Однако в Rust у вас не часто есть только один элемент на корневом уровне. У вас есть файл foo.rs, содержащий структуру Foo {…}, различные блоки impl Bar для Foo {…}, возможно, некоторые бесплатные функции и во многих случаях даже модульные тесты. Итак, мы должны переосмыслить, где разместить эти строки использования! </p>
+<p>Один из подходов, которые я использовал ранее, - использовать как можно ближе к области, в которой они необходимы. Если у меня есть функция, которая читает пять файлов, я добавляю use std::fs::File; в начале этой функции. К сожалению, это не работает, когда вы хотите импортировать тип для использования его в сигнатуре функции / метода или в качестве типа поля в структуре: в этом случае использование use должно быть на уровне выше точки использования (т. Е. на уровне определения функции / трэйта / структуры). Кроме того, если вы использовали std::sync::Arc над одной структурой, она становится доступной в общей области. Итак, ваша следующая структура, использующая Arc, не нуждается во втором экземпляре этой строки использования.</p>
+<p>Все это привело меня к тому моменту, когда я часто просто возвращаюсь к сбору использований в верхней части файла. Однако я не буду писать одноразовые строки для всех предметов, которые хочу использовать, а вместо этого</p>
+<ul>
+<li>импортировать модуль только тогда, когда я использую различные элементы, но каждый из них только несколько раз (например, используйте std::sync; и обратитесь к sync::Arc и sync::Mutex.)</li>
+<li>используйте вложенный импорт Rust (например, используйте std::{error::Error, fs, io::{self, Read}};).</li>
+</ul>
+<h3 id="razdelenie-obshchedostupnogo-i-chastnogo-interfeisov">Разделение общедоступного и частного интерфейсов</h3>
+<p>Когда входной файл пакета или module1 становится слишком длинным, вы хотите разделить его. Надежный подход состоит в том, чтобы переместить детали реализации в отдельный файл, который может оказаться файлом «помощников» или фактически разбить большую часть кода на модули, которые не видны извне.</p>
+<p>В языках, которые позволяют определять видимость элементов на очень детальном уровне, вы можете очень точно пометить только части вашего кода как «общедоступный интерфейс». Но это также означает, что существует непубличный интерфейс: действительно, у большинства абстракций есть два интерфейса: общедоступный, ориентированный на потребителя, и внутренний для «производителей». Сознательное разделение двух элементов макетом кода поможет создать удобные и понятные базы кода.</p>
+<h3 id="abstraktsii-poverkh-abstraktsii">Абстракции поверх абстракций</h3>
+<p>Часто вы пишете структуры, которые используются только для внутреннего использования, но затем преобразуются в другие структуры для потребителей вашего пакета / модуля. У меня нет хорошего рецепта, как с этим справиться, за исключением того, что я бы порекомендовал попытаться сделать часть шаблона / преобразования «очевидной» / невидимой и таким образом выделить отличительные детали.</p>
+<ol>
+<li>«Пакет или модуль»? Да, а также «приложение» и «функция»: это фрактальное свойство.</li>
+</ol>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

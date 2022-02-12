@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Политика обратной совместимости | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#ozhidaniia">Ожидания</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#protsess-ustarevaniia">Процесс устаревания</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#kadentsiia-vypuska">Каденция выпуска</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#kanaly-vypuska"><small>- Каналы выпуска</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#osnovnye-vypuski-x-0-0"><small>- Основные выпуски (x.0.0)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#neznachitel-nye-vypuski-1-x-0"><small>- Незначительные выпуски (1.x.0)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#vypuski-ispravlenii-1-0-x"><small>- Выпуски исправлений (1.0.x)</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#api-rpc">API RPC</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#rzhavye-iashchiki">Ржавые ящики</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#instrumenty-komandnoi-stroki">Инструменты командной строки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#funktsii-sredy-vypolneniia">Функции среды выполнения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#izmeneniia-infrastruktury">Изменения инфраструктуры</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#uzly-obshchedostupnogo-api"><small>- Узлы общедоступного API</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#skripty-lokal-nogo-klastera-i-obrazy-docker"><small>- Скрипты локального кластера и образы Docker</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#iskliucheniia">Исключения</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#paket-sdk-dlia-javascript-web3"><small>- Пакет SDK для JavaScript Web3</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/backwards-compatibility/#vektory-atak"><small>- Векторы атак</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Политика обратной совместимости</h1>
+
+<p>По мере роста экосистемы разработчиков Solana растет и потребность в четких ожиданиях в отношении взлома API и изменений поведения, влияющих на приложения и инструменты, созданные для Solana. В идеальном мире разработка Solana могла бы продолжаться очень быстрыми темпами, не вызывая проблем у существующих разработчиков. Однако необходимо будет пойти на некоторые компромиссы, поэтому в этом документе делается попытка прояснить и систематизировать процесс для новых выпусков.</p>
+<h3 id="ozhidaniia">Ожидания</h3>
+<ul>
+<li>Релизы программного обеспечения Solana включают API, SDK и инструменты командной строки (с некоторыми исключениями).</li>
+<li>Выпуски программного обеспечения Solana следуют семантическому управлению версиями, подробнее см. ниже.</li>
+<li>Программное обеспечение для версии <code>MINOR</code> будет совместимо со всем программным обеспечением той же версии <code>MAJOR</code>.</li>
+</ul>
+<h3 id="protsess-ustarevaniia">Процесс устаревания</h3>
+<ol>
+<li>В любом выпуске <code>PATCH</code> или <code>MINOR</code> функция, API, конечная точка и т. д. могут быть помечены как устаревшие.</li>
+<li>В зависимости от сложности обновления кода некоторые функции будут оставаться устаревшими в течение нескольких циклов выпуска.</li>
+<li>В будущем ОСНОВНОМ выпуске устаревшие функции будут удалены несовместимым образом.</li>
+</ol>
+<h3 id="kadentsiia-vypuska">Каденция выпуска</h3>
+<p>Solana RPC API, Rust SDK, инструменты CLI и BPF Program SDK обновляются и поставляются вместе с каждым выпуском программного обеспечения Solana и всегда должны быть совместимы между обновлениями <code>PATCH</code> конкретной версии <code>MINOR</code>.</p>
+<h4 id="kanaly-vypuska">Каналы выпуска</h4>
+<ul>
+<li>«передовое» программное обеспечение, содержащее передовые функции без политики обратной совместимости.</li>
+<li>бета-версия программного обеспечения, работающего в кластере Solana Testnet.</li>
+<li>«стабильное» программное обеспечение, работающее на кластерах Solana Mainnet Beta и Devnet.</li>
+</ul>
+<h4 id="osnovnye-vypuski-x-0-0">Основные выпуски (x.0.0)</h4>
+<p>Выпуски ОСНОВНЫХ версий (например, 2.0.0) могут содержать критические изменения и удаление ранее объявленных устаревшими функций. Клиентские SDK и инструменты начнут использовать новые функции и конечные точки, которые были включены в предыдущей ОСНОВНОЙ версии.</p>
+<h4 id="neznachitel-nye-vypuski-1-x-0">Незначительные выпуски (1.x.0)</h4>
+<p>Новые функции и реализации предложений добавляются в <em>new</em> версии MINOR (например, 1.4.0) и впервые запускаются в кластере Solana Testnet. При работе в тестовой сети версии MINOR считаются находящимися в канале бета-версии. После того, как эти изменения будут исправлены по мере необходимости и докажут свою надежность, «MINOR» ​​версия будет обновлена ​​​​до «стабильного» выпуска и развернута в бета-кластере основной сети.</p>
+<h4 id="vypuski-ispravlenii-1-0-x">Выпуски исправлений (1.0.x)</h4>
+<p>Функции с низким уровнем риска, некритические изменения, а также исправления безопасности и ошибок поставляются как часть выпусков версий <code>PATCH</code> (например, 1.0.11). Патчи могут быть применены как к «бета», так и к «стабильным» каналам выпуска.</p>
+<h3 id="api-rpc">API RPC</h3>
+<p>Выпуски патчей:</p>
+<ul>
+<li>Исправление ошибок</li>
+<li>Исправления безопасности</li>
+<li>Конечная точка/функция устарела</li>
+</ul>
+<p>Незначительные выпуски:</p>
+<ul>
+<li>Новые конечные точки и функции RPC</li>
+</ul>
+<p>Основные выпуски:</p>
+<ul>
+<li>Удаление устаревших функций</li>
+</ul>
+<h3 id="rzhavye-iashchiki">Ржавые ящики</h3>
+<ul>
+<li><a href="https://docs.rs/solana-sdk/"><code>solana-sdk</code></a> - Rust SDK для создания транзакций и анализа состояния аккаунта</li>
+<li><a href="https://docs.rs/solana-program/"><code>solana-program</code></a> - Rust SDK для написания программ</li>
+<li><a href="https://docs.rs/solana-client/"><code>solana-client</code></a> - клиент Rust для подключения к RPC API</li>
+<li><a href="https://docs.rs/solana-cli-config/"><code>solana-cli-config</code></a> - клиент Rust для управления конфигурационными файлами Solana CLI.</li>
+<li><a href="https://docs.rs/solana-accountsdb-plugin-interface/"><code>solana-accountsdb-plugin-interface</code></a> - Интерфейс Rust для разработки плагинов Solana AccountsDb.</li>
+</ul>
+<p>Выпуски патчей:</p>
+<ul>
+<li>Исправление ошибок</li>
+<li>Исправления безопасности</li>
+<li>Улучшения производительности</li>
+</ul>
+<p>Незначительные выпуски:</p>
+<ul>
+<li>Новые API</li>
+</ul>
+<p>Основные релизы</p>
+<ul>
+<li>Удаление устаревших API</li>
+<li>Обратно несовместимые изменения поведения</li>
+</ul>
+<h3 id="instrumenty-komandnoi-stroki">Инструменты командной строки</h3>
+<p>Выпуски патчей:</p>
+<ul>
+<li>Исправления ошибок и безопасности</li>
+<li>Улучшения производительности</li>
+<li>Устаревание подкоманды/аргумента</li>
+</ul>
+<p>Незначительные выпуски:</p>
+<ul>
+<li>Новые подкоманды</li>
+</ul>
+<p>Основные выпуски:</p>
+<ul>
+<li>Переключение на новые конечные точки/конфигурацию API RPC, представленные в предыдущей основной версии.</li>
+<li>Удаление устаревших функций</li>
+</ul>
+<h3 id="funktsii-sredy-vypolneniia">Функции среды выполнения</h3>
+<p>Новые функции среды выполнения Solana переключаются между функциями и активируются вручную. Функции среды выполнения включают: введение новых собственных программ, системных переменных и системных вызовов; и изменения в их поведении. Активация функции не зависит от кластера, что позволяет создать уверенность в тестовой сети перед активацией в основной сети-бета.</p>
+<p>Процесс выпуска выглядит следующим образом:</p>
+<ol>
+<li>Новая функция среды выполнения включена в новую версию, деактивирована по умолчанию.</li>
+<li>Как только достаточное количество стейкинговых валидаторов обновится до новой версии, переключатель функций среды выполнения активируется вручную с помощью инструкции.</li>
+<li>Функция вступает в силу в начале следующей эпохи</li>
+</ol>
+<h3 id="izmeneniia-infrastruktury">Изменения инфраструктуры</h3>
+<h4 id="uzly-obshchedostupnogo-api">Узлы общедоступного API</h4>
+<p>Solana предоставляет общедоступные узлы RPC API для использования всеми разработчиками. Команда Solana приложит все усилия, чтобы сообщить о любых изменениях в хосте, порте, поведении ограничения скорости, доступности и т. д. Однако мы рекомендуем разработчикам полагаться на свои собственные узлы проверки, чтобы не допустить зависимости от узлов, управляемых Solana.</p>
+<h4 id="skripty-lokal-nogo-klastera-i-obrazy-docker">Скрипты локального кластера и образы Docker</h4>
+<p>Критические изменения будут ограничены ОСНОВНЫМИ обновлениями версии. Обновления <code>MINOR</code> и <code>PATCH</code> всегда должны быть обратно совместимы.</p>
+<h3 id="iskliucheniia">Исключения</h3>
+<h4 id="paket-sdk-dlia-javascript-web3">Пакет SDK для JavaScript Web3</h4>
+<p>Web3.JS SDK также соответствует семантическим спецификациям управления версиями, но поставляется отдельно от выпусков программного обеспечения Solana.</p>
+<h4 id="vektory-atak">Векторы атак</h4>
+<p>Если в существующем коде обнаруживается новый вектор атаки, вышеуказанные процессы можно обойти, чтобы быстро развернуть исправление, в зависимости от серьезности проблемы.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

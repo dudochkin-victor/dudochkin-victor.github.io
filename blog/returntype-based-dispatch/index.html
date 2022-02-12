@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Диспетчеризация на основе возвращаемого типа | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/returntype-based-dispatch/#vy-vybiraete-vykhod">Вы выбираете выход</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/returntype-based-dispatch/#bolee-obshchii-sbor">Более общий: сбор</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/returntype-based-dispatch/#eshche-odin-v-dorogu">Еще один в дорогу</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Диспетчеризация на основе возвращаемого типа</h1>
+
+<p><a href="https://deterministic.space/return-type-based-dispatch.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Одна удивительная особенность вывода типов в таких языках, как Rust, - это определение функций с универсальными типами возврата. Идея состоит в том, что, указав на более позднем этапе кода, какой тип вы хотите, чтобы функция возвращала, компилятор может вернуться и заполнить пробелы.</p>
+<p>Например, давайте посмотрим на эту функцию: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Default</span><span>&gt;() </span><span style="color:#bfbab0cc;">-&gt;</span><span> T {
+</span><span>  T</span><span style="color:#f29668;">::</span><span>default()
+</span><span>}
+</span></code></pre>
+<h2 id="vy-vybiraete-vykhod">Вы выбираете выход</h2>
+<p>У него нет параметров значения, но есть один параметр типа T. Этот тип T является его возвращаемым типом и также используется в теле функции. Назвать это можно так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">new</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Или, если явно указать параметр типа, например: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span>new</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это довольно здорово!</p>
+<h2 id="bolee-obshchii-sbor">Более общий: сбор</h2>
+<p>Многообещающий способ сделать Rust более универсальным - использовать больше трейтов! Посмотрите, как определяется метод Iterator::collect: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">collect</span><span>&lt;B</span><span style="color:#bfbab0cc;">: </span><span>FromIterator&lt;</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Item&gt;&gt;(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> B </span><span style="font-style:italic;color:#5c6773;">// ...
+</span></code></pre>
+<p>Вы можете прочитать эту подпись типа как</p>
+<blockquote>
+<p>Потребляйте self и возвращайте что-то типа, который реализует, может быть сделан From [an] Iterator для типа элементов, которые мы повторяем.</p>
+</blockquote>
+<p>Как и выше, мы вызываем это, указывая, какой тип вывода нужен. [Взгляд] [разработчиков FromIterator] на некоторые из типов, для которых реализован FromIterator, довольно показывает варианты использования. Вы можете получить:</p>
+<ul>
+<li>Vec, собирая любые предметы,</li>
+<li>BTreeMap или HashMap путем сбора кортежей,</li>
+<li>но также и PathBuf, собирая пути,</li>
+<li>и String для струн и фрагментов струн.</li>
+</ul>
+<p>Все эти типы можно назвать «контейнерными».</p>
+<h2 id="eshche-odin-v-dorogu">Еще один в дорогу</h2>
+<blockquote>
+<p>Более общий? Больше черт.</p>
+</blockquote>
+<p>В FromIterator спрятан еще один драгоценный камень: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;A, E, V&gt; FromIterator&lt;</span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;A, E&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Result</span><span>&lt;V, E&gt; </span><span style="color:#ff7733;">where
+</span><span>    V</span><span style="color:#bfbab0cc;">: </span><span>FromIterator&lt;A&gt;, </span><span style="font-style:italic;color:#5c6773;">// ...
+</span></code></pre>
+<p>Это означает: вы можете создать Result, содержащий любой тип контейнера элементов A, собирая элементы, которые являются Результатами типа A. (Первая ошибка сделает внешний Результат ошибкой.) Вот пример, см. Документацию для другого. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> input</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>,()&gt;&gt; </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">2</span><span>)]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> output</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;,()&gt; </span><span style="color:#f29668;">=</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Если вам нравится теория типов: мы создаем Result&lt;&lt; T <A>, E &gt;&gt;, собирая Result&lt;A, E&gt; и указывая T.</p>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

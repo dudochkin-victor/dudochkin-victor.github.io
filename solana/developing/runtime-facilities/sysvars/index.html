@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sysvar Cluster Data | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#chasy">Часы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#raspisanie-epokh">Расписание эпох</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#sbory">Сборы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#instruktsii">Инструкции</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#nedavnie-blok-kheshi">Недавние блок-хэши</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#arenda">Аренда</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#slotovye-kheshi">Слотовые хэши</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#istoriia-slotov">История слотов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/sysvars/#istoriia-stavok">История ставок</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Sysvar Cluster Data</h1>
+
+<p>Solana предоставляет различные данные о состоянии кластера программам через учетные записи <a href="terminology.md#sysvar"><code>sysvar</code></a>. Эти учетные записи заполняются по известным адресам, опубликованным вместе с макетами учетных записей в <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/sysvar/index.html"><code>solana-program</code> crate</a>, и описаны ниже. .</p>
+<p>Программа может получить доступ к системной переменной двумя способами.</p>
+<p>Первый — запросить sysvar во время выполнения с помощью функции sysvar <code>get()</code>:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>let clock = Clock::get()
+</span></code></pre>
+<p>Следующие системные переменные поддерживают <code>get</code>:</p>
+<ul>
+<li>Clock</li>
+<li>EpochSchedule</li>
+<li>Fees</li>
+<li>Rent</li>
+</ul>
+<p>Второй проход sysvar программе в качестве учетной записи, включив ее адрес в качестве одной из учетных записей в «Инструкцию», а затем десериализовав данные во время выполнения. Доступ к учетным записям sysvars всегда <em>только для чтения</em>.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>let clock_sysvar_info = next_account_info(account_info_iter)?;
+</span><span>let clock = Clock::from_account_info(&amp;clock_sysvar_info)?;
+</span></code></pre>
+<p>Первый метод более эффективен и не требует, чтобы учетная запись sysvar была передана программе или указана в «Инструкции», которую обрабатывает программа.</p>
+<h2 id="chasy">Часы</h2>
+<p>Системная переменная Clock содержит данные о времени кластера, включая текущий слот, эпоху и предполагаемую временную метку Unix настенных часов. Он обновляется каждый слот.</p>
+<ul>
+<li>
+<p>Адрес: <code>SysvarC1ock11111111111111111111111111111111</code></p>
+</li>
+<li>
+<p>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/clock/struct.Clock.html">Часы</a></p>
+</li>
+<li>
+<p>Поля:</p>
+<ul>
+<li><code>slot</code>: текущий слот</li>
+<li><code>epoch_start_timestamp</code>: временная метка Unix первого слота в эту эпоху. В первом слоте эпохи эта метка времени идентична <code>unix_timestamp</code> (ниже).</li>
+<li><code>эпоха</code>: текущая эпоха</li>
+<li><code>leader_schedule_epoch</code>: самая последняя эпоха, для которой уже создано расписание лидера.</li>
+<li><code>unix_timestamp</code>: метка времени Unix для этого слота.</li>
+</ul>
+<p>Каждый слот имеет расчетную продолжительность, основанную на Proof of History. Но на самом деле интервалы могут заканчиваться быстрее или медленнее, чем это предполагается. В результате временная метка слота Unix создается на основе ввода оракула от голосующих валидаторов. Эта временная метка рассчитывается как взвешенная медиана оценок временных меток, предоставленных голосами, ограниченная ожидаемым временем, прошедшим с начала эпохи.</p>
+<p>Более явно: для каждого слота самая последняя метка времени голосования, предоставленная каждым валидатором, используется для генерации оценки метки времени для текущего слота (считается, что интервалы, прошедшие с момента метки времени голосования, равны Bank::ns_per_slot). Каждая оценка метки времени связана со ставкой, делегированной этой учетной записи для голосования, для создания распределения меток времени по доле. Медианная метка времени используется как <code>unix_timestamp</code>, если только время, прошедшее с момента <code>epoch_start_timestamp</code>, не отклонилось от ожидаемого истекшего времени более чем на 25%.</p>
+</li>
+</ul>
+<h2 id="raspisanie-epokh">Расписание эпох</h2>
+<p>Системная переменная EpochSchedule содержит константы планирования эпохи, которые устанавливаются в генезисе, и позволяет вычислять количество слотов в данной эпохе, эпоху для данного слота и т. д. (Примечание: расписание эпохи отличается от <a href="terminology.md#%D0%BB%D0%B8%D0%B4%D0%B5%D1%80-%D1%80%D0%B0%D1%81%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5"><code>лидерного расписания</code></a>)</p>
+<ul>
+<li>Адрес: <code>SysvarEpochSchedu1e111111111111111111111111</code></li>
+<li>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/epoch_schedule/struct.EpochSchedule.html">EpochSchedule</a></li>
+</ul>
+<h2 id="sbory">Сборы</h2>
+<p>Системная переменная Fees содержит калькулятор комиссий для текущего слота. Он обновляется каждый слот в зависимости от регулятора ставки.</p>
+<ul>
+<li>Адрес: <code>SysvarFees111111111111111111111111111111111</code></li>
+<li>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/sysvar/fees/struct.Fees.html">Сборы</a></li>
+</ul>
+<h2 id="instruktsii">Инструкции</h2>
+<p>Системная переменная «Instructions» содержит сериализованные инструкции в сообщении, пока это сообщение обрабатывается. Это позволяет инструкциям программы ссылаться на другие инструкции в той же транзакции. Подробнее читайте на <a href="implemented-proposals/instruction_introspection/">инструкции самоанализа</a>.</p>
+<ul>
+<li>Адрес: <code>Sysvar1nstructions1111111111111111111111111</code></li>
+<li>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/sysvar/instructions/struct.Instructions.html">Инструкции</a></li>
+</ul>
+<h2 id="nedavnie-blok-kheshi">Недавние блок-хэши</h2>
+<p>Системная переменная RecentBlockhashes содержит активные недавние хэши блоков, а также связанные с ними калькуляторы комиссий. Он обновляется каждый слот. Записи упорядочены по убыванию высоты блока, поэтому первая запись содержит хэш самого последнего блока, а последняя запись содержит хеш старого блока.</p>
+<ul>
+<li>Адрес: <code>SysvarRecentB1ockHashes11111111111111111111</code></li>
+<li>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/sysvar/recent_blockhashes/struct.RecentBlockhashes.html">RecentBlockhashes</a></li>
+</ul>
+<h2 id="arenda">Аренда</h2>
+<p>Системная переменная Rent содержит арендную ставку. В настоящее время ставка статична и задана в генезисе. Процент сжигания арендной платы изменяется при ручной активации функции.</p>
+<ul>
+<li>Адрес: <code>SysvarRent111111111111111111111111111111111</code></li>
+<li>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/rent/struct.Rent.html">Аренда</a></li>
+</ul>
+<h2 id="slotovye-kheshi">Слотовые хэши</h2>
+<p>Системная переменная SlotHashes содержит самые последние хэши родительских банков слота. Он обновляется каждый слот.</p>
+<ul>
+<li>Адрес: <code>SysvarS1otHashes1111111111111111111111111111</code></li>
+<li>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/slot_hashes/struct.SlotHashes.html">SlotHashes</a></li>
+</ul>
+<h2 id="istoriia-slotov">История слотов</h2>
+<p>Системная переменная SlotHistory содержит битовый вектор слотов за последнюю эпоху. Он обновляется каждый слот.</p>
+<ul>
+<li>Адрес: <code>SysvarS1otHistory111111111111111111111111111</code></li>
+<li>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/slot_history/struct.SlotHistory.html">SlotHistory</a></li>
+</ul>
+<h2 id="istoriia-stavok">История ставок</h2>
+<p>Системная переменная StakeHistory содержит историю активаций и деактиваций ставок на уровне кластера за эпоху. Он обновляется в начале каждой эпохи.</p>
+<ul>
+<li>Адрес: <code>SysvarStakeHistory1111111111111111111111111</code></li>
+<li>Макет: <a href="https://docs.rs/solana-program/VERSION_FOR_DOCS_RS/solana_program/stake_history/struct.StakeHistory.html">StakeHistory</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

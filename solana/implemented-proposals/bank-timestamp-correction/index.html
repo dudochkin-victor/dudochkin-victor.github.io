@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Коррекция метки времени банка | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/bank-timestamp-correction/#ispravlenie-metki-vremeni">Исправление метки времени</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/bank-timestamp-correction/#vychislenie-mediannoi-vremennoi-metki-vzveshennoi-po-dole"><small>- Вычисление медианной временной метки, взвешенной по доле</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/bank-timestamp-correction/#ogranichivaiushchie-vremennye-metki"><small>- Ограничивающие временные метки</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Коррекция метки времени банка</h1>
+
+<p>У каждого банка есть метка времени, которая хранится в системной переменной Clock и используется для оценки блокировок счетов ставок на основе времени. Однако с момента создания это значение было основано на теоретических слотах в секунду, а не на реальности, поэтому оно довольно неточно. Это создает проблему для блокировок, поскольку учетные записи не будут зарегистрированы как свободные от блокировки в дату (или в ближайшее время), когда установлен срок действия блокировки.</p>
+<p>Время блока уже оценивается для кэширования в Blockstore и долгосрочном хранилище с использованием <a href="validator-timestamp-oracle/">валидатора временной метки оракула</a>; эти данные дают возможность более точно согласовать отметку времени банка с реальным временем.</p>
+<p>Общая схема предлагаемой реализации выглядит следующим образом:</p>
+<ul>
+<li>Исправьте временную метку каждого банка, используя временную метку, предоставленную валидатором.</li>
+<li>Обновите расчет метки времени, предоставленный валидатором, чтобы использовать медиану, взвешенную по доле, а не среднее взвешенное по доле.</li>
+<li>Ограничьте поправку метки времени, чтобы она не могла слишком сильно отклоняться от ожидаемой теоретической оценки.</li>
+</ul>
+<h2 id="ispravlenie-metki-vremeni">Исправление метки времени</h2>
+<p>Для каждого нового банка среда выполнения вычисляет реалистичную оценку метки времени, используя данные оракула метки времени проверки. Временная метка банка корректируется на это значение, если оно больше или равно временной метке предыдущего банка. То есть время никогда не должно идти назад, чтобы заблокированные учетные записи могли быть разблокированы исправлением, но однажды разблокированные учетные записи никогда не могли быть повторно заблокированы исправлением времени.</p>
+<h3 id="vychislenie-mediannoi-vremennoi-metki-vzveshennoi-po-dole">Вычисление медианной временной метки, взвешенной по доле</h3>
+<p>Чтобы рассчитать предполагаемую временную метку для конкретного банка, среде выполнения сначала необходимо получить самые последние временные метки голосования из активного набора валидаторов. Метод <code>Bank::vote_accounts()</code> предоставляет состояние учетных записей для голосования, и они могут быть отфильтрованы для всех учетных записей, чья самая последняя метка времени была предоставлена ​​в течение последней эпохи.</p>
+<p>По каждой метке времени голосования вычисляется оценка для текущего банка с использованием целевого значения ns_per_slot эпохи для любой разницы между слотом банка и слотом метки времени. Каждая оценка временной метки связана с долей, делегированной этой учетной записи для голосования, и все временные метки собираются для создания взвешенного распределения временных меток.</p>
+<p>Из этого набора выбирается медианная отметка времени, взвешенная по доле, то есть отметка времени, при которой 50% доли оценивают отметку времени больше или равно, а 50% доли оценивают отметку времени меньше или равно. как потенциальная исправленная временная метка.</p>
+<p>Эта медианная отметка времени, взвешенная по доле, предпочтительнее взвешенного среднего, потому что умножение доли на предложенную отметку времени при расчете среднего позволяет узлу с очень маленькой долей по-прежнему оказывать большое влияние на результирующую отметку времени, предлагая отметку времени, которая очень большой или очень маленький. Например, используя предыдущий метод <code>calculate_stake_weighted_timestamp()</code>, узел с 0,00003% ставки, предлагающий метку времени <code>i64::MAX</code>, может сдвинуть метку времени вперед на 97 тысяч лет!</p>
+<h3 id="ogranichivaiushchie-vremennye-metki">Ограничивающие временные метки</h3>
+<p>В дополнение к предотвращению смещения времени назад мы можем предотвратить злонамеренную активность, ограничивая скорректированную метку времени допустимым уровнем отклонения от теоретического ожидаемого времени.</p>
+<p>Это предложение предполагает, что каждая временная метка может отклоняться до 25% от ожидаемого времени с начала эпохи.</p>
+<p>Чтобы рассчитать отклонение метки времени, каждый банк должен зарегистрировать <code>epoch_start_timestamp</code> в системной переменной Clock. Это значение устанавливается равным <code>Clock::unix_timestamp</code> в первом слоте каждой эпохи.</p>
+<p>Затем среда выполнения сравнивает ожидаемое прошедшее время с начала эпохи с предполагаемым прошедшим временем на основе скорректированной метки времени. Если скорректированное прошедшее время находится в пределах +/- 25% от ожидаемого, скорректированная метка времени принимается. В противном случае оно ограничивается допустимым отклонением.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

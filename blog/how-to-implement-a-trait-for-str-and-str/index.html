@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Как реализовать трейт для &amp;str и &amp;[&amp;str] | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-implement-a-trait-for-str-and-str/#pervaia-popytka">Первая попытка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-implement-a-trait-for-str-and-str/#vtoraia-popytka">Вторая попытка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-implement-a-trait-for-str-and-str/#v-tretii-raz-ocharovanie">В третий раз очарование</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Как реализовать трейт для &amp;str и &amp;[&amp;str]</h1>
+
+<p><a href="https://deterministic.space/impl-a-trait-for-str-slices-and-slices-of-strs.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Rust имеет довольно мощную систему типов, но некоторые вещи не так-то просто выразить. Следуйте за мной в путешествие, в котором мы попытаемся реализовать небольшую перегрузку методов, используя трейты с забавными ограничениями, и обнаружим несколько интересных способов убедить Rust в том, что все в порядке.</p>
+<p>tl;dr «Чувак, это какое-то злоупотребление системой типов, если я когда-либо видел это. Мне это очень нравится! Если мне когда-нибудь понадобится, будет полезно узнать об этом. (/u/mgattozzi на Reddit)</p>
+<p>Примечание: этот пост предполагает общее понимание Rust. Также будут подписи с волосатым шрифтом - не бойтесь! Просто пропустите части, которые вам непонятны.</p>
+<p>Итак, приступим! Наша цель такова: мы хотим иметь функцию, которая может принимать как фрагменты строки, так и фрагменты строк: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">foo</span><span>(</span><span style="color:#c2d94c;">&quot;Hello World&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;Hello&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;World&quot;</span><span>])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Фактический вариант использования заключается в том, что фрагмент строки может быть внутренне разделен на фрагменты - или пользователь может сделать это сам (чтобы убедиться, что он правильный, или сделать это программно).</p>
+<p>Мы делаем это, реализуя новый trait1 ToFoo для обоих типов, поэтому наша функция foo может принимать любой аргумент, реализующий ToFoo, и использовать его для преобразования во что-то, что она может использовать: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">ToFoo </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="pervaia-popytka">Первая попытка</h2>
+<p>Звучит достаточно просто, правда? Запишем (манеж): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">ToFoo</span><span>&lt;&#39;a&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; ToFoo&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span style="color:#59c2ff;">str </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; { </span><span style="color:#f07178;">unimplemented!</span><span>() }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, </span><span style="color:#ff7733;">&#39;b</span><span>&gt; ToFoo&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> [</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;b </span><span style="color:#59c2ff;">str</span><span>] {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; { </span><span style="color:#f07178;">unimplemented!</span><span>() }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;yay&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_foo</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;yay&quot;</span><span>])</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_foo</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Извините за весь шум2! Пожалуйста, проигнорируйте это минутку!</p>
+<p>Но подождите - это не компилируется!</p>
+<p>не найден метод с именем <code>to_foo</code> для типа <code>&amp;[&amp;'static str; 1]</code> в текущей области</p>
+<p>К сожалению, мы реализовали наш трейт на срезе (это &amp;[<em>]), но дали ему &amp;[</em>; 1]. Разница? &amp;[_; 1] - это ссылка на массив известного размера. У нас есть два варианта:</p>
+<ol>
+<li>Используйте &amp;[&quot;foo&quot;] [..], чтобы создать фрагмент с открытым диапазоном, то есть со всеми элементами.</li>
+<li>Реализуйте ToFoo для этого типа массива.</li>
+</ol>
+<p>Первый вариант вполне допустим, если это вы пишете, пишет, что foo(&amp;[&quot;bar&quot;] [..]), но я нацелен здесь на то, чтобы предоставить пользователю этой теоретической библиотеки хороший API. И я не хочу говорить людям, чтобы они добавляли волшебных персонажей в конце аргументов, если мне не нужно!</p>
+<p>К сожалению, начиная с Rust 1.163 нам нужно было написать реализации для всех типов массивов, которые мы хотим поддерживать, где тип также содержит длину массива! Итак, один для &amp;[<em>; 1], другой для &amp;[</em>; 2] и так далее. Мы могли бы сделать это в макросе, но он просто сгенерирует целую кучу кода, и это будет не очень элегантно.</p>
+<p>Кроме того, разве не должно быть тривиальным представление некоторых &amp;[_, n] в виде фрагментов? И есть места, где это работает! Почему не здесь? /u/dbaupp дал прекрасное объяснение этому на Reddit: это потому, что мы хотим использовать метод &amp;self для &amp;[&amp;str], что означает, что мы имеем дело с &amp;&amp;[&amp;str]. А поскольку мы начинаем с &amp;[&amp;str; 1], мы можем полагаться только на принуждение для ссылки, а не на внутренний [&amp;str; 1].</p>
+<p>Мы могли бы реализовать ToFoo на [&amp;str], однако, чтобы использовать тот факт, что ссылка в &amp;[&quot;foo&quot;] будет запускать приведение deref, что означает, что он находит наш impl. К сожалению, это не работает для функций или методов, которые принимают &amp;T, где T: ToFoo. Итак, хотя мы можем выполнять [&quot;lorem&quot;]. To_foo(), мы не можем выполнять foo(&amp;[&quot;lorem&quot;]) или даже ToFoo::to_foo(&amp;[&quot;yay&quot;]) - что именно то, что мы хотим использовать это для…</p>
+<p>Так что давайте вместо этого попробуем что-нибудь другое!</p>
+<h2 id="vtoraia-popytka">Вторая попытка</h2>
+<p>В Rust есть довольно хорошая коллекция трэйтов преобразования (см. Std::convert), и одна из них - AsRef, которая выполняет «преобразование ссылки в ссылку». По сути, вы даете ему &amp;x, и он возвращает вам &amp; y совместимого типа: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">AsRef</span><span>&lt;T&gt; where T: ?Sized {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">as_ref</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span>T</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, что это не ... для &amp;T, а ... для T, а затем имеет метод, который принимает &amp;self. Хорошо, вот упрощенная новая версия (манеж): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">ToFoo </span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; ToFoo </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span style="color:#59c2ff;">str </span><span>{}
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; ToFoo </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">T </span><span style="color:#ff7733;">where</span><span> T</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;[</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>]&gt; {}
+</span></code></pre>
+<p>Ааа и не компилируется: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0119]: conflicting implementations of trait `ToFoo` for type `&amp;str`:
+</span><span> --&gt; &lt;anon&gt;:4:1
+</span><span>  |
+</span><span>3 | impl&lt;&#39;a&gt; ToFoo for &amp;&#39;a str {}
+</span><span>  | ----------------------------- first implementation here
+</span><span>4 | impl&lt;&#39;a, T&gt; ToFoo for T where T: AsRef&lt;[&amp;&#39;a str]&gt; {}
+</span><span>  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `&amp;str`
+</span></code></pre>
+<p>Какие? «Конфликтная реализация для &amp;str»? Где? Охххх ... В стандартном вводе есть следующее: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T, U&gt; </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;U&gt; </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span style="color:#59c2ff;">T </span><span style="color:#ff7733;">where
+</span><span>    T</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;U&gt; + ?Sized, U</span><span style="color:#bfbab0cc;">:</span><span> ?Sized
+</span></code></pre>
+<p>Итак, Rust достаточно умен, чтобы видеть, что и &amp;<em>, и &amp;[</em>] соответствуют этой реализации AsRef, но недостаточно умен, чтобы различать impl AsRefss, чтобы понять, что наш второй impl ToFoo всегда должен работать только для &amp;[_].</p>
+<p>Итак, проблема в &amp;, не так ли?</p>
+<h2 id="v-tretii-raz-ocharovanie">В третий раз очарование</h2>
+<p>Прежде всего, давайте еще раз повторим нашу сигнатуру, чтобы не прокручивать вверх: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">ToFoo </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Теперь давайте реализуем наш трейт для str вместо &amp;str. Кстати: str - это тип, размер которого мы не знаем, но давайте не будем зацикливаться на этом сейчас. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span>ToFoo </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">str </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; { </span><span style="color:#f07178;">unimplemented!</span><span>() }
+</span><span>}
+</span></code></pre>
+<p>Видите ли, мы в любом случае используем только &amp;str, поскольку наш метод принимает &amp;self. Не о чем беспокоиться.</p>
+<p>Далее: реализуйте трейт для каждого T, где ссылка на него реализует AsRef &lt;[&amp;str]&gt;: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; ToFoo </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">T </span><span style="color:#ff7733;">where</span><span> T</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;[</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>]&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; { </span><span style="color:#f07178;">unimplemented!</span><span>() }
+</span><span>}
+</span></code></pre>
+<p>Мне потребовалось довольно много времени, чтобы добраться до этого момента. Теперь мы можем использовать это так (манеж): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T</span><span style="color:#bfbab0cc;">:</span><span> ToFoo </span><span style="color:#f29668;">+ </span><span style="color:#ff3333;">?</span><span style="font-style:italic;color:#39bae6;">Sized</span><span style="color:#f29668;">&gt;</span><span>(_x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> T) {
+</span><span>    </span><span style="color:#f07178;">unimplemented!</span><span>()
+</span><span>}
+</span></code></pre>
+<p>(Параметр «? Sized» предназначен для разрешения str.)</p>
+<p>Хороший!</p>
+<p>Наконец, вы можете найти реальный код, который использует этот шаблон в этой фиксации.</p>
+<ol>
+<li>
+<p>Для получения информации о трэйтах характера прочтите этот пост, эту главу книги или эту главу, второе издание книги, которое готовится.</p>
+</li>
+<li>
+<p>Если вы не привыкли к Rust: так выглядит большая часть кода на Rust. Для чего нужны эти «галочки»? Я рада, что вы спросили! Одна из определяющих особенностей Rust заключается в том, что он может гарантировать, что ссылки на x (&amp;x) действительны только до тех пор, пока действителен ресурс x. Это предотвращает некоторые довольно серьезные ошибки! Синтаксис 'a позволяет нам дать имя этим временам жизни, чтобы мы могли, например, определить ссылки &amp;' ax и &amp;'by и указать, что' a действительно (по крайней мере) до тех пор, пока 'b', написав 'a : 'б. И обычно для этого есть довольно приятные правила вывода; Однако в определениях трэйтов Rust требует, чтобы мы были явными.</p>
+</li>
+<li>
+<p>rustc 1.16.0 (30cf806ef 10.03.2017)</p>
+</li>
+</ol>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

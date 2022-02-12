@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Оптимизация использования памяти Rc в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/optimizing-rc-memory-usage-in-rust/#obnovlenie-sistemnyi-raspredelitel">Обновление: системный распределитель</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/optimizing-rc-memory-usage-in-rust/#obnovlenie-2-rezhim-bezumiia">Обновление 2: режим безумия</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/optimizing-rc-memory-usage-in-rust/#obnovlenie-3-bitovaia-upakovka">Обновление 3: битовая упаковка</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Оптимизация использования памяти Rc в Rust</h1>
+
+<p><a href="https://medium.com/@robertgrosse/optimizing-rc-memory-usage-in-rust-6652de9e119e">Перевод</a> | Автор оригинала: Robert Grosse</p>
+<p>Недавно я попытался оптимизировать код Rust с интенсивным использованием памяти. Это оказалось сложнее, чем я ожидал, но по пути я узнал кое-что интересное об использовании памяти Rust, поэтому пишу свою историю на случай, если кто-то еще сочтет ее полезной.</p>
+<p>Основной алгоритм моего кода включает в себя манипулирование длинными строками, образованными путем многократной конкатенации друг с другом. Чтобы быть эффективными, строки должны быть неявно представлены в виде дерева (фактически, DAG) конкатенированных строк. Поэтому я определил структуру данных, чтобы представить их естественным образом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">LongStr </span><span>{
+</span><span>    Leaf(</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;)</span><span style="color:#bfbab0cc;">,
+</span><span>    Concat(RcStr</span><span style="color:#bfbab0cc;">,</span><span> RcStr)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RcStr </span><span style="color:#f29668;">= </span><span>Arc&lt;LongStr&gt;</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Я использовал Arc, потому что мой код параллелен, но все последующее в равной степени применимо к Rc. В любом случае мой код создает миллиарды этих RcStr, которых достаточно, чтобы исчерпать даже 32 ГБ ОЗУ, поэтому важно сделать этот тип как можно меньше.</p>
+<p>Сам по себе RcStr уже оптимален, так как это всего лишь указатель, а LongStr::Concat - всего лишь два указателя на подузлы. Однако есть один скрытый источник раздувания: слабый счетчик ссылок. Когда вы создаете Arc<T> или Rc<T>, он не просто выделяет место для T, ему также нужно место для счетчиков ссылок. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">ArcInner</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff3333;">?</span><span>Sized&gt; {
+</span><span>    strong</span><span style="color:#bfbab0cc;">: </span><span>atomic</span><span style="color:#f29668;">::</span><span>AtomicUsize,
+</span><span>    weak</span><span style="color:#bfbab0cc;">: </span><span>atomic</span><span style="color:#f29668;">::</span><span>AtomicUsize,
+</span><span>    data</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>}
+</span></code></pre>
+<p>Однако на самом деле существует два счетчика ссылок. Второй нужен для поддержки слабых указателей, которые я не использовал. Следовательно, на каждый выделенный узел приходится 8 байтов потраченной впустую памяти, что является очевидной целью для оптимизации.</p>
+<p>Я скопировал реализацию Arc из стандартных библиотек, исправил атрибуты импорта и крэйта до тех пор, пока он не скомпилировался, удалил счетчик слабых ссылок и все функции, связанные со слабыми указателями, и с нетерпением переписал код, чтобы сравнить использование памяти… и никаких изменений не было. Вот тогда все стало по-настоящему интересно / разочаровывающе.</p>
+<p>Моя первая идея заключалась в том, что либо он не использовал мою модифицированную Arc, либо компилятор был достаточно гениальным, чтобы оптимизировать подсчет слабых ссылок. Поэтому я добавил неиспользуемое фиктивное поле [u8; 100] в мою копию ArcInner, и, конечно же, использование памяти резко возросло.</p>
+<p>Затем я поэкспериментировал с изменением размера фиктивного поля, чтобы увидеть, как это влияет на использование памяти. Я установил его на 0, 16, 32 и 64 байта и получил ожидаемое линейное увеличение использования памяти.</p>
+<p><img src="/imgs/posts/748ef6f2_01.png" alt="Диаграмма" /></p>
+<p>Однако, когда фиктивное поле было 8 байтов, имитируя удаленный счетчик слабых ссылок, использование памяти было таким же, как и с 0 байтами! (На графике выше это выделено красным). Это похоже на то, как боги оптимизации издевались надо мной, особенно пессимизируя один случай, который меня действительно волновал: 0 байтов против 8 байтов.</p>
+<p>Моя следующая идея заключалась в том, что, возможно, возникла проблема с заполнением или выравниванием, из-за которой size_of <ArcInner> было одинаковым в случаях 0 и 8 байтов, но не в более крупных случаях. Как оказалось, есть способ заставить компилятор распечатать размер, макет и выравнивание всех ваших типов. </p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">cargo</span><span> rustc</span><span style="color:#f29718;"> --release</span><span style="color:#f29668;"> --</span><span> -Z print-type-sizes
+</span></code></pre>
+<p>Это дает следующий результат. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>print-type-size type: `weakless::arc::ArcInner&lt;LongStr&gt;`: 40 bytes, alignment: 8 bytes
+</span><span>print-type-size     field `.strong`: 8 bytes
+</span><span>print-type-size     field `.dummy`: 0 bytes
+</span><span>print-type-size     field `.data`: 32 bytesprint-type-size type: `weakless::arc::ArcInner&lt;LongStr&gt;`: 48 bytes, alignment: 8 bytes
+</span><span>print-type-size     field `.strong`: 8 bytes
+</span><span>print-type-size     field `.dummy`: 8 bytes
+</span><span>print-type-size     field `.data`: 32 bytes
+</span></code></pre>
+<p>LongStr был 32 байта, больше, чем я ожидал, но я подумал, что беспокоюсь об этом позже. Важная часть заключается в том, что это показало, что не было никаких странных проблем с выравниванием или заполнением - ArcInner фактически переходит с 40 до 48 байтов, когда размер пустышки увеличивается с 0 до 8, как и ожидалось.</p>
+<p>В конце концов я понял, что есть еще один возможный источник заполнения, который работает на более низком уровне, чем даже компилятор, - распределитель. Чтобы уменьшить фрагментацию, распределитель по умолчанию, jemalloc, группирует размеры небольших объектов в ячейки. Когда вы выделяете x байтов, на самом деле это не дает вам точно x байтов. Вместо этого он округляется до ближайшего размера корзины.</p>
+<p>Я просмотрел размеры бункеров jemalloc, и, конечно же, есть бункер размером 48, но нет бина размером 40. Таким образом, выделение 40 и 48 байтов приводит к 48 байтам фактического использования памяти.</p>
+<p>Фактически, список размеров ячеек от 16 до 128 - это [16, 32, 48, 64, 80, 96, 112, 128]. Это означает, что когда я изменил фиктивную переменную с 0 на 16, на 32, на 64 байта, размер структуры ArcInner увеличился с 40 до 56, до 72, до 104 байтов, что привело к использованию размеров ячеек 48, 64, 80 и 112. В каждом случае накладные расходы бункера были одинаковыми (8 байтов), так что мне повезло, что я получил красивый линейный паттерн.</p>
+<p>К этому моменту я решил загадку, но мне все еще не удалось уменьшить использование памяти. К счастью, я заметил еще одну проблему. LongStr составлял 32 байта, что кажется больше, чем необходимо, поскольку узлы Concat содержат только два указателя (по 8 байтов каждый). Даже с 8-байтовым дискриминантом enum это составляет всего 24 байта.</p>
+<p>Хитрость в том, что размер перечислений рассчитан на самый большой вариант, и в этом случае вариант Leaf был излишне большим. Он содержит Vec, который содержит указатель, поле длины и поле емкости, всего 24 байта, в результате чего перечисление составляет 32 байта. Однако в этом случае поле емкости совершенно бесполезно. Вы можете избавиться от него, переключившись с Vec<T> на Box&lt;[T]&gt;. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">LongStr </span><span>{
+</span><span>    Leaf(</span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;[</span><span style="color:#ff7733;">u8</span><span>]&gt;)</span><span style="color:#bfbab0cc;">,
+</span><span>    Concat(RcStr</span><span style="color:#bfbab0cc;">,</span><span> RcStr)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RcStr </span><span style="color:#f29668;">= </span><span>Arc&lt;LongStr&gt;</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это сокращает LongStr до 24 байтов, что в сочетании с удалением счетчика слабых ссылок означает, что ArcInner <LongStr> теперь составляет всего 32 байта, размер следующего наименьшего бина jemalloc. Таким образом, каждый выделенный узел теперь использует на 33% меньше памяти, что приводит к огромному увеличению памяти и скорости всего кода.</p>
+<p>В любом случае, эта оптимизация оказалась намного сложнее, чем я ожидал, но я узнал много интересных деталей о Rust в процессе его отладки, и я надеюсь, что эта информация будет полезна другим.</p>
+<h2 id="obnovlenie-sistemnyi-raspredelitel">Обновление: системный распределитель</h2>
+<p>Кто-то предложил мне попробовать использовать системный распределитель вместо jemalloc. Оказывается, это оказалось проще, чем я ожидал. Все, что вам нужно сделать, это положить его на верхнюю часть корня крэйта. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">feature</span><span>(alloc_system)]
+</span><span style="color:#ff7733;">extern crate</span><span> alloc_system</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>К сожалению, системный распределитель использовал значительно больше памяти, чем jemalloc, до такой степени, что он был настолько очевиден, что я не стал пытаться получить конкретные числа. Обратите внимание, что это со всеми упомянутыми выше оптимизациями, так как я мог не беспокоиться об их отмене, но если системный malloc не может обработать оптимизированный код, он определенно не сможет обработать исходную версию.</p>
+<h2 id="obnovlenie-2-rezhim-bezumiia">Обновление 2: режим безумия</h2>
+<p>Причина всех этих проблем с Arcs заключается в том, чтобы освободить память, когда на нее больше не ссылаются, но что, если вы просто намеренно все просочили и использовали &amp;'static LongStr вместо Arc<LongStr>? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">leak_allocate</span><span>&lt;T&gt;(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">:</span><span> T) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static</span><span> T {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> b</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(val)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">unsafe</span><span>{</span><span style="color:#f29668;">&amp;*</span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>into_raw(b)}
+</span><span>}
+</span></code></pre>
+<p>Преимущество утечки памяти состоит в том, что вам больше не нужны все эти счетчики ссылок, уменьшая размер каждого узла до 24 байтов. Само по себе это не принесет пользы из-за проблемы с размером корзины. Однако единственная причина, по которой каждый ArcInner был выделен индивидуально, заключалась в том, чтобы их можно было отдельно освободить. Утечка памяти означает, что вы можете просто разместить все свои узлы непрерывно в гигантском списке массивов. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">arena_allocate</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">:</span><span> LongStr) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static</span><span> LongStr {
+</span><span>    </span><span style="color:#f07178;">thread_local! </span><span>{
+</span><span>        </span><span style="color:#ff7733;">static </span><span style="color:#f29718;">ARENA</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static </span><span>TypedArena&lt;LongStr&gt; </span><span style="color:#f29668;">= </span><span style="color:#f07178;">leak_allocate</span><span>(TypedArena</span><span style="color:#f29668;">::</span><span>new())</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>    </span><span style="color:#f29718;">ARENA</span><span style="color:#f29668;">.</span><span style="color:#f07178;">with</span><span>(|</span><span style="color:#f29718;">ar</span><span>| {
+</span><span>        ar</span><span style="color:#f29668;">.</span><span style="color:#f07178;">alloc</span><span>(val)
+</span><span>    })
+</span><span>}
+</span></code></pre>
+<p>Очевидным недостатком утечки всей памяти является то, что вы используете память, что приводит к дополнительному разбиению на страницы. В моем случае у меня 32 ГБ ОЗУ и раздел подкачки 32 ГБ (на SSD). Теоретически, если на страницу последовательного LongStr больше не ссылаются, Linux должен заметить, что к ней нет доступа, и в конечном итоге вывести ее на страницу из памяти.</p>
+<p>В любом случае, это интересная идея, но она оказалась медленнее, чем использование подсчета ссылок на практике, предположительно из-за всей дополнительной разбивки на страницы. Это также зависит от наличия достаточного пространства подкачки.</p>
+<h2 id="obnovlenie-3-bitovaia-upakovka">Обновление 3: битовая упаковка</h2>
+<p>Другой комментатор указал, что с небезопасным кодом можно полностью уйти до 16 байт. Хитрость в том, что на x64 указатели (пользовательского пространства) ограничены 47-битным адресным пространством. Это означает, что два указателя плюс дискриминант перечисления могут быть упакованы в 12 байтов, оставляя 4 байта для атомарного счетчика ссылок.</p>
+<p>Я действительно пытался реализовать это, но он вылетел, и мне не хотелось отлаживать, почему. Я полагаю, что такова опасность написания умного небезопасного кода. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

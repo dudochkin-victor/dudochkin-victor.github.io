@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Репликация AccountsDB для служб RPC | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#problema">Проблема</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#obzor-resheniia">Обзор решения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#podrobnoe-reshenie">Подробное решение</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#model-soglasovannosti"><small>- Модель согласованности</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#uzel-repliki-solana"><small>- Узел реплики Solana</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#voprosy-sovmestimosti"><small>- Вопросы совместимости</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#nastroika-replikatsii"><small>- Настройка репликации</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#otkazoustoichivost"><small>- Отказоустойчивость</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/accounts-db-replication/#interfeis"><small>- Интерфейс</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Репликация AccountsDB для служб RPC</h1>
+
+<h2 id="problema">Проблема</h2>
+<p>Валидаторы отстают от сети, когда перегружены большой нагрузкой RPC. По-видимому, это связано с комбинацией нагрузки на ЦП и состязаниями за блокировки, вызванными обслуживанием запросов RPC. Самые дорогие RPC-запросы связаны со сканированием учетных записей.</p>
+<h2 id="obzor-resheniia">Обзор решения</h2>
+<p>«Реплики» AccountsDB, которые запускаются отдельно от основного валидатора, могут использоваться для разгрузки запросов на сканирование учетных записей. Реплики будут только: запрашивать и извлекать обновления учетной записи из валидатора, обслуживать запросы RPC состояния учетной записи клиента и управлять очисткой + сжатием AccountsDb и AccountsBackgroundService.</p>
+<p>Реплика взаимодействует с основным валидатором через новый механизм RPC для получения метаданных о репликации и обновлении учетных записей от валидатора.
+Основной валидатор поддерживает только один узел-реплику. Узел реплики может передавать информацию одной или нескольким другим репликам, формирующим дерево репликации.</p>
+<p>При начальном запуске узла-реплики он загружает последний снимок из валидатора и создает из него банк и AccountsDb. После этого он запрашивает у своего основного валидатора новые слоты и просит валидатор отправить обновленные учетные записи для этого слота и обновить его собственный AccountsDb.</p>
+<p>Один и тот же механизм репликации RPC может использоваться между репликами и другими репликами.
+Это требует, чтобы реплика обслуживала как клиент, так и сервер в модели репликации.</p>
+<p>На стороне обслуживания клиентского RPC JsonRpcAccountsService отвечает за обслуживание клиентских вызовов RPC для информации, связанной с учетными записями, аналогичной существующей JsonRpcService.</p>
+<p>Реплика также будет периодически делать моментальные снимки, чтобы ее можно было быстро запустить после перезапуска, если моментальный снимок не слишком старый.</p>
+<h2 id="podrobnoe-reshenie">Подробное решение</h2>
+<p>В следующих разделах содержится более подробная информация о конструкции.</p>
+<h3 id="model-soglasovannosti">Модель согласованности</h3>
+<p>Информация AccountsDb реплицируется асинхронно от основного валидатора к реплике.
+Когда делается запрос к AccountsDb реплики, реплика может не иметь последней информации о последнем слоте. В этом отношении он в конечном итоге будет последовательным. Однако для конкретного слота предоставленная информация согласуется с информацией его равноправного валидатора для подтвержденных и завершенных уровней обязательств. Для версии 1 мы поддерживаем запросы только на этих двух уровнях.</p>
+<h3 id="uzel-repliki-solana">Узел реплики Solana</h3>
+<p>Будет введен новый узел с именем solana-replica-node, основной обязанностью которого является поддержка реплики AccountsDb. Узел RPC или узел реплики используются в этом документе взаимозаменяемо.
+Это будет отдельный исполняемый файл от валидатора.</p>
+<p>Реплика состоит из следующих основных компонентов:</p>
+<p><code>ReplicaSlotConfirmationRequestor</code>: эта служба отвечает за периодическую отправку запроса <code>ReplicaSlotConfirmationRequest</code> своему одноранговому валидатору или реплике для последних слотов.
+Он указывает последний слот (last_replicated_slot), для которого реплика уже получила информацию об учетных записях. Это поддерживает ReplWorkingSlotSet и управляет жизненным циклом BankForks, BlockCommitmentCache (для самого высокого подтвержденного слота) и оптимистически подтвержденного банка.</p>
+<p><code>ReplicaSlotConfirmationServer</code>: эта служба отвечает за обслуживание <code>ReplicaSlotConfirmationRequest</code> и отправляет <code>ReplicaSlotConfirmationResponse</code> обратно запрашивающей стороне.
+Ответ состоит из вектора новых слотов, о которых известно валидатору, которые позже, чем указанный last_replicated_slot. Этот сервис также работает в основном валидаторе. Этот сервис получает слоты для репликации от BankForks, BlockCommitmentCache и OpmiscallyConfirmBank.</p>
+<p><code>ReplicaAccountsRequestor</code>: эта служба отвечает за отправку запроса <code>ReplicaAccountsRequest</code> своему одноранговому валидатору или реплике для <code>ReplicaAccountInfo</code> для слота, для которого не была завершена репликация базы данных учетных записей. ReplicaAccountInfo содержит ReplicaAccountMeta, Hash и AccountData. <code>ReplicaAccountMeta</code> содержит информацию о существующей <code>AccountMeta</code> в дополнение к длине данных учетной записи в байтах.</p>
+<p>«ReplicaAccountsServer»: эта служба отвечает за обслуживание «ReplicaAccountsRequest» и отправляет «ReplicaAccountsResponse» запрашивающей стороне. Ответ содержит счетчик ReplAccountInfo и вектор ReplAccountInfo. Эта служба работает как в валидаторе, так и в реплике, передающей информацию о репликации. Сервер может передавать информацию об учетной записи из своего AccountCache или из хранилища, если оно уже очищено. Это похоже на создание пакета моментальных снимков из AccountsDb с той разницей, что хранилище не нужно сбрасывать на диск перед потоковой передачей клиенту. Если данные учетной записи находятся в кеше, их можно передавать напрямую. Необходимо соблюдать осторожность, чтобы избежать очистки данных учетной записи для слота во время обслуживания потоковой передачи. При попытке репликации слота, если слот уже очищен с данными учетных записей, очищенными в результате обновления в более поздних корневых слотах, реплика должна отказаться от этого слота и попробовать более поздний неочищенный корневой слот.</p>
+<p>Во время репликации нам также необходимо реплицировать информацию об учетных записях, которые были очищены из-за нулевых лампортов, т. е. мы должны иметь возможность определить разницу между учетной записью в данном слоте, которая не была обновлена ​​и, следовательно, не имеет записи в хранилище в этом слот, и тот, который содержит 0 лэмпортов и был очищен в истории. Мы можем записать это через какой-нибудь механизм &quot;Tombstone&quot; - запись удаленных мертвых учетных записей для слота. Сами надгробия могут быть удалены по истечении срока хранения, выраженного в эпохах. Любая попытка реплицировать слоты с удаленными надгробиями потерпит неудачу, и реплика должна пропустить этот слот и попробовать более поздние.</p>
+<p><code>JsonRpcAccountsService</code>: это служба RPC, обслуживающая клиентские запросы на информацию об учетной записи. Существующий JsonRpcService обслуживает другие клиентские вызовы, кроме AccountsDb.
+Узел реплики обслуживает только вызовы AccountsDb.</p>
+<p>Существующему JsonRpcService требуются BankForks, OptimisticallyConfirmedBank и BlockCommitmentCache для загрузки банка. Службе JsonRpcAccountsService потребуется использовать информацию, полученную из ReplicaSlotConfirmationResponse, для создания AccountsDb.</p>
+<p><code>AccountsBackgroundService</code>: эта служба также работает в реплике, которая отвечает за периодическое создание моментальных снимков, сжатие AccountsDb и очистку учетных записей.
+Существующий код также использует BankForks, которые нам нужно сохранить в реплике.</p>
+<h3 id="voprosy-sovmestimosti">Вопросы совместимости</h3>
+<p>Из соображений совместимости протокола все запросы имеют версию репликации, которая изначально установлена ​​​​на 1. В качестве альтернативы мы можем использовать версию валидатора. Сторона сервера RPC должна проверить версию запроса и завершиться ошибкой, если она не поддерживается.</p>
+<h3 id="nastroika-replikatsii">Настройка репликации</h3>
+<p>Чтобы ограничить неблагоприятное воздействие на валидатор и реплику из-за репликации, их можно настроить со списком узлов реплики, которые могут образовывать с ним пару репликации. И узел реплики настроен с валидатором, который может обслуживать его запросы.</p>
+<h3 id="otkazoustoichivost">Отказоустойчивость</h3>
+<p>Основная ответственность за обеспечение устойчивости репликации к ошибкам лежит на реплике. В случае неудачных запросов реплика должна повторить запросы.</p>
+<h3 id="interfeis">Интерфейс</h3>
+<p>Ниже приведены клиентские API-интерфейсы RPC, поддерживаемые узлом реплики в JsonRpcAccountsService.</p>
+<ul>
+<li>getAccountInfo</li>
+<li>getBlockCommitment</li>
+<li>getMultipleAccounts</li>
+<li>getProgramAccounts</li>
+<li>getMinimumBalanceForRentExemption</li>
+<li>getInflationGovenor</li>
+<li>getInflationRate</li>
+<li>getEpochSchedule</li>
+<li>getRecentBlockhash</li>
+<li>getFees</li>
+<li>getFeeCalculatorForBlockhash</li>
+<li>getFeeRateGovernor</li>
+<li>getLargestAccounts</li>
+<li>getSupply</li>
+<li>getStakeActivation</li>
+<li>getTokenAccountBalance</li>
+<li>getTokenSupply</li>
+<li>getTokenLargestAccounts</li>
+<li>getTokenAccountsByOwner</li>
+<li>getTokenAccountsByDelegate</li>
+</ul>
+<p>Следующие API не включены:</p>
+<ul>
+<li>getInflationReward</li>
+<li>getClusterNodes</li>
+<li>getRecentPerformanceSamples</li>
+<li>getGenesisHash</li>
+<li>getSignatueStatuses</li>
+<li>getMaxRetransmitSlot</li>
+<li>getMaxShredInsertSlot</li>
+<li>sendTransaction</li>
+<li>simulateTransaction</li>
+<li>getSlotLeader</li>
+<li>getSlotLeaders</li>
+<li>minimumLedgerSlot</li>
+<li>getBlock</li>
+<li>getBlockTime</li>
+<li>getBlocks</li>
+<li>getBlocksWithLimit</li>
+<li>getTransaction</li>
+<li>getSignaturesForAddress</li>
+<li>getFirstAvailableBlock</li>
+<li>getBlockProduction</li>
+</ul>
+<p>Пункты действий</p>
+<ol>
+<li>Создайте структуру реплики и исполняемый файл</li>
+<li>Интегрируйте код восстановления моментального снимка для начальной загрузки AccountsDb.</li>
+<li>Разработайте код интерфейса ReplicaSlotConfirmationRequestor и ReplicaSlotConfirmationServer.</li>
+<li>Разработайте подробные реализации ReplicaSlotConfirmationRequestor и ReplicaSlotConfirmationServer: управление жизненным циклом ReplEligibleSlotSet: добавление к нему новых корней и удаление корней. И интерфейсы, управляющие интерфейсом ReplWorkingSlotSet: добавление и удаление. Разработать компонент, синтезирующий информацию из BankForks, BlockCommitmentCache и OptimistcallyConfirmedBank на стороне сервера и поддерживающий информацию на стороне клиента.</li>
+<li>Разработайте код интерфейса для ReplicaAccountsRequestor и ReplicaAccountsServer.</li>
+<li>Разработайте подробную реализацию для ReplicaAccountsRequestor и ReplicaAccountsServer и разработайте сериализатор и десериализатор хранилища учетных записей репликации.</li>
+<li>Разработать код интерфейса JsonRpcAccountsService</li>
+<li>Подробная реализация JsonRpcAccountsService, код рефакторинга для совместного использования с частью JsonRpcService.</li>
+<li>Интеграция с AccountsBackgroundService в реплике для сжатия, очистки и моментальных снимков.</li>
+<li>Метрики и тестирование производительности</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

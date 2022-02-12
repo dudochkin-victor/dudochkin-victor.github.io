@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Инструменты Экосистемы | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#tsepnye-interfeisy">Цепные интерфейсы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#pol-zovatel-skii-interfeis-v-goroshek">Пользовательский интерфейс в горошек</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#koshel-ki"><small>- Кошельки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#obmenniki"><small>- Обменники</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#uzly-i-razvertyvanie"><small>- Узлы и развертывание</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#obozrevateli-blokov"><small>- Обозреватели блоков</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#vasm"><small>- ВАСМ</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#instrumenty-smart-kontrakta"><small>- Инструменты смарт-контракта</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#smesiteli"><small>- Смесители</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#programmy-grantov"><small>- Программы грантов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#fidy-api"><small>- Фиды API</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#generatsiia-i-preobrazovanie-kliuchei"><small>- Генерация и преобразование ключей</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#postavshchiki-uslug-uzel-kak-usluga"><small>- Поставщики услуг «Узел как услуга»</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#setevoi-monitoring-i-otchetnost">Сетевой мониторинг и отчетность</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#klienty">Клиенты</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#instrumenty">Инструменты</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#interfeis">интерфейс</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#biblioteki">Библиотеки</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#obshchii-polkadot-js"><small>- Общий Polkadot-JS</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#instrumenty-komandnoi-stroki"><small>- Инструменты командной строки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#vasm-1"><small>- ВАСМ</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#instrumenty-rpc-i-api"><small>- Инструменты RPC и API</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#scale-codec"><small>- SCALE Codec</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/resources/ecosystem-tools/#skanirovanie-i-preobrazovanie-dannykh">Сканирование и преобразование данных</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Инструменты Экосистемы</h1>
+
+<h3 id="tsepnye-interfeisy">Цепные интерфейсы</h3>
+<ul>
+<li><a href="https://Commonwealth.im">Содружество</a></li>
+<li><a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fmainnet1.edgewa.re#/explorer">Пользовательский интерфейс Polkadot</a></li>
+</ul>
+<h2 id="pol-zovatel-skii-interfeis-v-goroshek">Пользовательский интерфейс в горошек</h2>
+<p><a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fmainnet1.edgewa.re#/explorer">Пользовательский интерфейс Polkadot</a> — это важный интерфейс для выполнения различных действий с Edgeware и Цепи на основе субстрата. Это будет основной способ вашего взаимодействия с сетью Edgeware, будь то стейкинг, операции с учетными записями, некоторые функции управления или многое другое.</p>
+<p>Вторичным по отношению к пользовательскому интерфейсу Polkadot является <a href="http://Commonwealth.im">Commonwealth.im</a>, который сочетает в себе обсуждения и опросы в сети с функциями управления и учетной записи. Поскольку Commonwealth все еще находится в стадии разработки, многие инструкции на этом сайте будут написаны для пользовательского интерфейса Polkadot.</p>
+<p><strong>Функции</strong></p>
+<ul>
+<li>Управление учетными записями, просмотр информации об учетной записи.</li>
+<li>Отправка и получение/мониторинг транзакций</li>
+<li>Просмотр информации о цепочке, блоке и узле.</li>
+<li>Проведение ставок, демократия, советы и действия казначейства.</li>
+<li>Просмотр состояния цепи и параметров.</li>
+<li>Наблюдайте за внешними данными</li>
+<li>Загрузить контракты</li>
+</ul>
+<h3 id="koshel-ki">Кошельки</h3>
+<ul>
+<li><a href="http://commonwealth.im/"><strong>Commonwealth.im</strong></a> <strong>(Регистрация справа вверху, необходимо подключить адрес EDG)</strong>
+<ul>
+<li>В настоящее время <strong>кошелек находится в разработке</strong>. Он поддерживает просмотр балансов, отправку и получение транзакций, а также действия по управлению через пользовательский интерфейс Commonwealth.im. Показанные общедоступные адреса не отображают версию с кодировкой сетевого идентификатора Edgeware в настоящее время, но эта функция должна появиться к концу недели запуска. Вы должны восстановить свой публичный адрес, используя ссылку ниже.</li>
+</ul>
+</li>
+<li><a href="https://github.com/polkadot-js/extension"><strong>Расширение браузера Polkadot JS</strong></a><strong>(</strong>[<strong>Chrome</strong>](https://chrome.google.com/ webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd) <strong>и</strong> [<strong>Firefox</strong>](https://addons.mozilla.org/en-US/firefox/addon/polkadot-js-extension /)<strong>)</strong>
+<ul>
+<li>Может использоваться для подключения адресов EDG к Commonwealth.im. (Это официальное расширение кошелька Polkadot)</li>
+<li>Поддерживает большинство функций через <a href="https://polkadot.js.org/apps/#/explorer">пользовательский интерфейс Polkadot</a>.</li>
+<li>Расширение браузера Polkadot.js ** не отображает идентификатор сети Edgeware, закодированный в настоящее время. ** Публичный адрес вашего кошелька EDG, показанный в расширении, закодирован с использованием «идентификатора сети по умолчанию» Subkey, программы, которая генерирует пары ключей для цепочек на основе субстрата. В результате отображаемые общедоступные адреса могут оказаться бесполезными для использования обозревателей блоков. Вы должны повторно сгенерировать свой открытый ключ, чтобы получить общедоступный адрес, закодированный в идентификаторе сети Edgeware, см. выше.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href="https://www.mathwallet.org/en/">MathWallet Browser Extension</a></li>
+<li><a href="https://polkawallet.io/">Polkawallet</a> - Мобильный кошелек для Polkadot на iOS и Android. В настоящее время находится в разработке, но бета-версия доступна для скачивания. Следите за развитием на <a href="https://github.com/polkawallet-io/polkawallet-RN">GitHub</a>.</li>
+<li><a href="http://blockxlabs.com/">Enzyme</a> - Кошелек расширения для браузера. Следите за развитием на <a href="https://github.com/blockxlabs/enzyme/">GitHub</a>.</li>
+<li><a href="https://github.com/w3finance/sakura">Sakura </a>- Настольный кошелек для экосистемы Polkadot. В развитие.</li>
+<li><a href="https://www.parity.io/signer/">Signer</a></li>
+<li><a href="https://lunie.io/">Lunie</a></li>
+<li><a href="https://trustwallet.com/">Trust Wallet</a></li>
+<li><a href="https://token.im/">ImToken</a></li>
+<li><a href="https://ownbit.io/">Ownbit</a></li>
+<li><a href="https://airgap.it/">AirGap</a></li>
+<li><a href="https://www.safepal.io/download">SafePal</a></li>
+<li><a href="https://crypto.com/en/index.html">Crypto.com</a></li>
+<li><a href="https://zondax.ch/kusama.html#overview">Ledger App</a></li>
+<li><a href="https://atomicwallet.io">Atomic Wallet</a></li>
+<li><a href="https://dether.io/">Dether</a></li>
+<li><a href="https://cobo.com/">Cobo Wallet</a></li>
+<li><a href="https://swipe.io/">Swipe</a></li>
+<li><a href="https://github.com/EthWorks/extension">Polkadot{.js} extension</a></li>
+<li><a href="https://metamask.io/index.html">MetaMask</a></li>
+<li><a href="https://github.com/GetSpeckle/speckle-browser-extension">Speckle</a> </li>
+<li><a href="https://kodadot.netlify.app/#/accounts">KodaDot</a></li>
+<li><a href="https://github.com/yxf/subwallet">Subwallet</a></li>
+<li><a href="https://soramitsu.co.jp/fearless">Fearless</a></li>
+<li><a href="https://spatium.net/">Spatium</a></li>
+<li><a href="https://www.blockchain.com/">Blockchain.com</a></li>
+</ul>
+<h3 id="obmenniki">Обменники</h3>
+<blockquote>
+<p>Этот список предоставлен без одобрения Commonwealth Labs, основных разработчиков Edgeware. Использование биржи осуществляется <strong>на ваш собственный риск</strong>, и вы должны полностью изучить риски и характер объекта. <a href="https://www.coingecko.com/en/coins/edgeware"><strong>Вы также можете проверить листинги CoinGecko.</strong></a></p>
+</blockquote>
+<table><thead><tr><th align="left">Exchange</th><th align="left">Pairs</th><th align="left">URL</th></tr></thead><tbody>
+<tr><td align="left">HotBit</td><td align="left">EDG/BTC</td><td align="left"><a href="https://www.hotbit.io/exchange?symbol=EDG_BTC">https://www.hotbit.io/exchange</a></td></tr>
+<tr><td align="left">MXC</td><td align="left">EDG/USDT</td><td align="left"><a href="https://www.mxc.com/trade/easy#EDG_USDT">https://www.mxc.com/trade/easy#EDG_USDT</a></td></tr>
+<tr><td align="left">BKEX</td><td align="left">EDG/USDT</td><td align="left"><a href="https://www.bkex.com/#/trade/EDG_USDT">https://www.bkex.com/trade/EDG_USDT</a></td></tr>
+<tr><td align="left">HotBit</td><td align="left">EDG/USDT</td><td align="left"><a href="https://www.hotbit.io/exchange?symbol=EDG_USDT">https://www.hotbit.io/exchange?symbol=EDG_USDT</a></td></tr>
+<tr><td align="left">MXC</td><td align="left">EDG/BTC</td><td align="left"><a href="https://www.mxc.com/trade/easy#EDG_BTC">https://www.mxc.com/trade/easy#EDG_BTC</a></td></tr>
+<tr><td align="left">Biki</td><td align="left">EDG/USDT</td><td align="left"><a href="https://www.biki.com/en_US/trade/EDG_USDT">https://www.biki.com/en_US/trade/EDG_USDT</a></td></tr>
+<tr><td align="left">BiHodl</td><td align="left">EDG/ USDT</td><td align="left"><a href="https://www.bihodl.com/#/exchange/edg_usdt">https://www.bihodl.com/#/exchange/edg_usdt</a></td></tr>
+</tbody></table>
+<h3 id="uzly-i-razvertyvanie">Узлы и развертывание</h3>
+<ul>
+<li><a href="https://github.com/flex-dapps/gantree-lib-nodejs">Набор инструментов инфраструктуры Gantree для субстрата</a></li>
+<li><a href="https://polkalert.com/">Polkalert: мониторинг узлов</a></li>
+<li><a href="https://telemetry.polkadot.io/">Телеметрия: статистика узлов</a></li>
+</ul>
+<h3 id="obozrevateli-blokov">Обозреватели блоков</h3>
+<ul>
+<li>
+<p><a href="https://polkadot.js.org/apps/#/explorer">Проводник приложений Polkadot-JS</a> - блок панели инструментов Polkadot</p>
+<p>исследователь. В настоящее время подключается к Kusama по умолчанию, но может быть настроен для подключения к другим</p>
+<p>удаленные или локальные конечные точки.</p>
+</li>
+<li>
+<p><a href="https://polkascan.io/">Polkascan</a> - Обозреватель блокчейна для Polkadot, Kusama и других связанных</p>
+<p>цепи. <a href="https://github.com/polkascan/polkascan-os">Репозиторий</a>.</p>
+</li>
+<li>
+<p><a href="https://subscan.io">Subscan</a> - Обозреватель блокчейнов для цепочек субстратов.</p>
+<p><a href="https://github.com/itering/subscan-essentials">Репозиторий</a>.</p>
+</li>
+</ul>
+<h3 id="vasm">ВАСМ</h3>
+<p>Инструменты и проекты, связанные с Webassembly.</p>
+<ul>
+<li>
+<p><a href="https://github.com/paritytech/ink/">ink!</a> - eDSL для написания смарт-контрактов на основе WebAssembly</p>
+<p>с помощью языка программирования Rust.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/parity-wasm">parity-wasm</a> - низкоуровневая библиотека формата WebAssembly.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/wasm-utils">wasm-utils</a> - Коллекция утилит WASM, используемых в</p>
+<p>Разработка pwasm-ethereum и субстрата.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/wasmi">wasmi</a> - интерпретатор Wasm, задуманный как компонент</p>
+<p>parity-ethereum (эфириум-подобные контракты в wasm) и субстрат.</p>
+</li>
+</ul>
+<h3 id="instrumenty-smart-kontrakta">Инструменты смарт-контракта</h3>
+<ul>
+<li>
+<p><a href="https://github.com/halva-suite/halva">Halva</a> - локальная среда разработки, вдохновленная трюфелем.</p>
+<p>для подложки.</p>
+</li>
+<li>
+<p><a href="https://github.com/patractlabs/redspot">Красное пятно</a></p>
+</li>
+</ul>
+<h3 id="smesiteli">Смесители</h3>
+<ul>
+<li><a href="https://faucets.blockxlabs.com/">BlockX Labs testEDG Faucet</a></li>
+</ul>
+<h3 id="programmy-grantov">Программы грантов</h3>
+<ul>
+<li><a href="https://commonwealth.im/edgeware/proposal/discussion/466-creating-edgeware-grants">Программа грантов Edgeware</a></li>
+<li><a href="https://web3.foundation/grants/">Программа грантов Web3Foundation</a></li>
+</ul>
+<h3 id="fidy-api">Фиды API</h3>
+<ul>
+<li><a href="https://edgeware-supply.now.sh/">Общая конечная точка снабжения для Edgeware</a> (Не вычитает тайник казначейства)</li>
+</ul>
+<h3 id="generatsiia-i-preobrazovanie-kliuchei">Генерация и преобразование ключей</h3>
+<ul>
+<li><a href="https://edgewa.re/keygen/">Оригинальный генератор ключей Edgeware для преобразователя ключей Lockdrop и Pub</a></li>
+<li><a href="https://substrate.dev/docs/en/ecosystem/subkey">Подключ: Генерация ключей для цепочек субстратов</a></li>
+</ul>
+<h3 id="postavshchiki-uslug-uzel-kak-usluga">Поставщики услуг «Узел как услуга»</h3>
+<p>Эти поставщики не были проверены основной командой разработчиков.</p>
+<table><thead><tr><th align="left">Name</th><th align="left">Link to Product</th></tr></thead><tbody>
+<tr><td align="left">BisonTrails</td><td align="left"><a href="https://bisontrails.co/edgeware/">https://bisontrails.co/edgeware/</a></td></tr>
+</tbody></table>
+<p><em>Следующие объявили о своем намерении разработать NAAS.</em></p>
+<ul>
+<li>Ankr.com</li>
+<li>Ставка.Рыба</li>
+<li><a href="https://deploy.radar.tech/">https://deploy.radar.tech/</a></li>
+</ul>
+<h2 id="setevoi-monitoring-i-otchetnost">Сетевой мониторинг и отчетность</h2>
+<ul>
+<li>
+<p><a href="https://telemetry.polkadot.io/">Служба телеметрии Polkadot</a> - Сетевая информация, включая то, что узлы работают в цепочке, какие версии программного обеспечения они используют, состояние синхронизации и местоположение.</p>
+</li>
+<li>
+<p>Polkabot - мониторинг сети Polkadot и отчеты с использованием чата Matrix (Riot / Element). Пользователи могут создавать собственные плагины для ботов. <a href="https://medium.com/polkadot-network/polkabot-a3dba18c20c8">Сообщение в блоге</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/Ryabina-io/substratebot">Telegram Bot Рябиной</a> - Telegram бот для мониторинг событий в цепочке цепочек Substrate <a href="https://gitlab.com/Polkabot/polkabot">Репозиторий Github</a></p>
+</li>
+<li>
+<p><a href="https://polkastats.io/">PolkaStats</a> - Статистика сети Polkadot (включая Kusama). Шоу сетевая информация и детали стейкинга от валидаторов и намерений <a href="https://github.com/Colm3na/polkastats-v2/">Репозиторий Github</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/SimplyVC/panic_polkadot">Panic</a> - сервер мониторинга и оповещения узлов для валидаторы.</p>
+</li>
+<li>
+<p><a href="https://github.com/open-web3-stack/guardian">OpenWeb3/Guardian</a> - инструмент CLI и библиотека JS для следить за чиан состояниями и событиями.</p>
+</li>
+</ul>
+<h2 id="klienty">Клиенты</h2>
+<p>— <a href="https://github.com/paritytech/polkadot">Polkadot</a> — Rust-реализация хоста Polkadot.</p>
+<ul>
+<li>
+<p><a href="https://github.com/soramitsu/kagome">Kagome</a> - клиент C++ Polkadot, разработанный <a href="https://github.com/soramitsu">Сорамицу</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/ChainSafe/gossamer">Gossamer</a> — Go-реализация хоста Polkadot.</p>
+</li>
+<li>
+<p><a href="https://github.com/polkadot-js/client">Клиент Polkadot-JS</a> - Альтернативный клиент для JavaScript энтузиасты.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/txwrapper">TX Wrapper</a> - Вспомогательные функции для офлайн-транзакций поколение.</p>
+</li>
+</ul>
+<h2 id="instrumenty">Инструменты</h2>
+<ul>
+<li>
+<p><a href="https://github.com/paritytech/substrate">Substrate</a> - Платформа разработки блокчейна, написанная на Ржавчина. Polkadot строится поверх Substrate.</p>
+</li>
+<li>
+<p><a href="https://substrate.dev/docs/en/">База знаний по субстрату</a> - Полная документация и учебные пособия по созданию блокчейна с использованием Substrate.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/vscode-substrate">Плагин Substrate VSCode</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/substrate-debug-kit">Substrate Debug Kit</a> - Коллекция отладочных</p>
+<p>инструменты и библиотеки вокруг цепочек субстратов. Включает инструменты для расчета выборов NPoS в автономном режиме, мониторинг использования диска, тестовые шаблоны в зависимости от состояния цепи и другие помощники для конкретных поддонов.</p>
+</li>
+<li>
+<p><a href="https://crates.io/crates/diener">Diener</a> - инструмент для легкой замены Polkadot или Substrate версии зависимостей.</p>
+</li>
+<li>
+<p><a href="https://github.com/shawntabrizi/polkadot-launch">Запуск Polkadot</a> - инструмент для легкого запуска настраиваемые локальные версии Polkadot с поддержкой парачейна.</p>
+</li>
+<li>
+<p><a href="https://github.com/halva-suite/halva">Halva</a> - локальная среда разработки, вдохновленная трюфелем для подложки.</p>
+</li>
+<li>
+<p><a href="https://github.com/maxsam4/fork-off-substrate">Fork-off Substrate</a> - копирует состояние существующую цепочку в вашу локальную версию и позволяет вам поэкспериментировать с ней дальше.</p>
+</li>
+<li>
+<p><a href="https://www.chevdor.com/tags/srtool/">srtool</a> - инструмент для проверки runtime-версий на соответствие хэши предложения в сети.</p>
+</li>
+<li>
+<p><a href="https://github.com/nikvolf/sub-bench">sub-bench</a> - инструмент для спама вашей ноды транзакциями для ради бенчмаркинга.</p>
+</li>
+<li>
+<p><a href="https://github.com/danforbes/substrate-devhub-utils">substrate-devhub-utils</a> - набор</p>
+<p>Утилиты JavaScript, упрощающие работу с Substrate.</p>
+</li>
+</ul>
+<h2 id="interfeis">интерфейс</h2>
+<ul>
+<li>
+<p><a href="https://github.com/Swader/polkadash">Polkadash</a> - стартовый набор на основе VueJS для пользовательского пользователя интерфейсы для цепочек субстратов. <a href="https://dotleap.com/tag/tutorial/">Учебники</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/polkadot-js/apps">Пользовательский интерфейс приложений Polkadot JS</a> - Репозиторий <a href="https://polkadot.js.org/apps">polkadot.js.org/apps</a> Пользовательский интерфейс.</p>
+</li>
+<li>
+<p><a href="https://github.com/substrate-developer-hub/substrate-front-end-template">Шаблон внешнего интерфейса Substrate</a> - Начальный пользовательский интерфейс на основе ReactJS для настраиваемых пользовательских интерфейсов для цепочек субстратов.</p>
+</li>
+<li>
+<p><a href="https://github.com/polkadot-js/extension">Расширение браузера Polkadot JS</a> - управление ключами в расширение для хрома.</p>
+</li>
+</ul>
+<h2 id="biblioteki">Библиотеки</h2>
+<h3 id="obshchii-polkadot-js">Общий Polkadot-JS</h3>
+<p>Polkadot-JS Common предоставляет различные служебные функции, которые используются во всех проектах в пространстве имен <code>@polkadot</code> и разделены на несколько внутренних служебных пакетов. Документация и инструкции по использованию представлены в <a href="https://polkadot.js.org/common/">Документация по Polkadot-JS/Common API</a>.</p>
+<ul>
+<li>
+<p><a href="https://polkadot.js.org/common/keyring/">@polkadot/keyring</a> Для создания/загрузки аккаунтов в JavaScript, полезный для создания кошельков или любого приложения, которое потребует от пользователя записи в цепь. <a href="https://polkadot.js.org/docs/keyring/start/create">Примеры</a>.</p>
+</li>
+<li>
+<p><a href="https://polkadot.js.org/common/util/">@polkadot/util</a> Функции утилиты, такие как проверка строки имеет шестнадцатеричное кодирование.</p>
+</li>
+<li>
+<p><a href="https://polkadot.js.org/common/util-crypto/">@polkadot/util-crypto</a> Утилиты для шифрования, которые пригодится при разработке с Polkadot.</p>
+</li>
+</ul>
+<h3 id="instrumenty-komandnoi-stroki">Инструменты командной строки</h3>
+<ul>
+<li>
+<p>Команда <a href="https://github.com/polkadot-js/tools/tree/master/packages/api-cli">@polkadot/api-cli</a> линейный интерфейс для API polkadot. <a href="https://polkadot.js.org/docs/api/start">Документация</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/polkadot-js/tools/tree/master/packages/monitor-rpc">@polkadot/monitor-rpc</a> RPC монитор для Polkadot. Дополнительные сведения см. в приведенных ниже инструментах RPC.</p>
+</li>
+<li>
+<p>Инструмент <a href="https://github.com/polkadot-js/tools/tree/master/packages/signer-cli">@polkadot/signer-cli</a> создавать, подписывать и транслировать транзакции. Подписание может быть сделано в автономном режиме.</p>
+</li>
+<li>
+<p><a href="https://github.com/usetech-llc/polkadot_api_cpp">Polkadot API Cpp</a> - С++ API для Polkadot, может построить <code>clip</code>, инструмент командной строки.</p>
+</li>
+</ul>
+<h3 id="vasm-1">ВАСМ</h3>
+<p>Инструменты и проекты, связанные с Webassembly.</p>
+<ul>
+<li>
+<p><a href="https://github.com/paritytech/ink/">ink!</a> - eDSL для написания смарт-контрактов на основе WebAssembly</p>
+<p>с помощью языка программирования Rust.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/parity-wasm">parity-wasm</a> - низкоуровневая библиотека формата WebAssembly.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/wasm-utils">wasm-utils</a> - Коллекция утилит WASM, используемых в Разработка pwasm-ethereum и субстрата.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/wasmi">wasmi</a> - интерпретатор Wasm, задуманный как компонент parity-ethereum (эфириум-подобные контракты в wasm) и субстрат.</p>
+</li>
+</ul>
+<h3 id="instrumenty-rpc-i-api">Инструменты RPC и API</h3>
+<ul>
+<li>
+<p><a href="https://github.com/polkadot-js/api/tree/master/packages/rpc-provider">@polkadot/api/rpc-provider</a> Демонстрирует, как инструменты JS взаимодействуют с узлом через RPC.</p>
+</li>
+<li>
+<p><a href="https://polkadot.js.org/docs/substrate/rpc">Документация по RPC</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/SimplyVC/polkadot_api_server">Сервер API Polkadot от SimplyVC</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/itering/substrate-api-rpc">Перейти: Subscan API</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/usetech-lc/polkadot_api_cpp">C++ Polkadot API</a> - С++ API для Polkadot.</p>
+</li>
+<li>
+<p><a href="https://github.com/usetech-llc/polkadot_api_dotnet">.NET Polkadot API</a> - Polkadot Substrate API для .NET.</p>
+</li>
+<li>
+<p><a href="https://github.com/polkascan/py-substrate-interface">Python Polkadot API</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/centrifuge/go-substrate-rpc-client/">GSRPC</a> — Substrate RPC-клиент в Go, также известный как GSRPC.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/substrate-api-sidecar">Substrate API Sidecar</a> — HTTP-оболочка для Substrate, абстрагирующая некоторые сложные вызовы RPC в простые вызовы REST.</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/substrate-subxt">Subxt</a> — библиотека Rust для отправки внешних данных на узел Substrate через RPC.</p>
+</li>
+</ul>
+<h3 id="scale-codec">SCALE Codec</h3>
+<p>Кодек <a href="https://substrate.dev/docs/en/knowledgebase/advanced/codec">SCALE</a> (Simple Concatenated Aggregate Little-Endian) — это легкий, эффективный кодек двоичной сериализации и десериализации.</p>
+<p>Он предназначен для высокопроизводительного кодирования и декодирования данных без копирования в контекстах выполнения с ограниченными ресурсами, таких как среда выполнения Substrate. Он никоим образом не описывает себя и предполагает, что контекст декодирования имеет все сведения о типах закодированных данных.</p>
+<p>Он используется почти во всех сообщениях с узлами Substrate и с ними, поэтому существуют реализации на разных языках:</p>
+<ul>
+<li><a href="https://github.com/itering/scale.rb">Рубин</a></li>
+<li><a href="https://github.com/paritytech/parity-scale-codec">Ржавчина</a></li>
+<li><a href="https://github.com/itering/scale.go">Перейти</a></li>
+<li><a href="https://github.com/soramitsu/kagome/tree/master/core/scale">С++</a></li>
+<li><a href="https://github.com/polkadot-js/api">TypeScript</a></li>
+<li><a href="https://github.com/LimeChain/as-scale-codec">AssemblyScript</a></li>
+<li><a href="https://github.com/airalab/hs-web3/tree/master/src/Codec">Хаскелл</a></li>
+<li><a href="https://github.com/emeraldpay/polkaj">Java</a></li>
+<li><a href="https://github.com/polkascan/py-scale-codec">Питон</a></li>
+</ul>
+<h2 id="skanirovanie-i-preobrazovanie-dannykh">Сканирование и преобразование данных</h2>
+<p>Следующие инструменты помогут вам извлечь и структурировать данные из узла Substrate.</p>
+<ul>
+<li>
+<p><a href="https://github.com/polkascan/polkascan-pre-harvester">Комбайн Polkascan PRE</a></p>
+<p>(<a href="https://github.com/polkascan/polkascan-pre-explorer-gui">соответствующий проводник для собранных данных</a>).</p>
+</li>
+<li>
+<p><a href="https://github.com/paritytech/substrate-archive">Архив субстратов Parity</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/Joystream/joystream">Гидра: конструктор GraphQL</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/TheGoldenEye/polka-store">Polka-store</a> - инструмент, который сканирует цепочку Substrate и сохраняет транзакции, относящиеся к балансу, в базе данных SQLite.</p>
+</li>
+<li>
+<p><a href="https://github.com/playzero/substrate-graph">Substrate-graph</a> — компактный индексатор для узлов на основе субстрата, предоставляющий интерфейс GraphQL.</p>
+<p><strong>Разное</strong></p>
+</li>
+<li>
+<p><a href="https://github.com/centrifuge/go-substrate-rpc-client">GSRPC: Substrate RPC Client в Go</a></p>
+</li>
+<li>
+<p><a href="https://blog.chronologic.network/how-to-schedule-edgeware-edg-transactions-ed4bae4c5648">Хронологический планировщик транзакций</a></p>
+</li>
+<li>
+<p><a href="https://github.com/luboremo/Edgeware-seed-generating-script-SSSS">Генератор безопасных мнемонических фраз Edgeware для Lockdrop</a></p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

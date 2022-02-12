@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Настройка аварийного переключения | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-failover/#nastraivat">Настраивать</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-failover/#nastroika-klastera-etcd"><small>- Настройка кластера etcd</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-failover/#osnovnoi-validator"><small>- Основной валидатор</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-failover/#vtorichnyi-validator"><small>- Вторичный валидатор</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-failover/#zapusk-avariinogo-perekliucheniia-vruchnuiu">Запуск аварийного переключения вручную</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-failover/#zapusk-avariinogo-perekliucheniia-cherez-monitoring">Запуск аварийного переключения через мониторинг</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-failover/#obnovleniia-programmnogo-obespecheniia-validatora">Обновления программного обеспечения валидатора</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Настройка аварийного переключения</h1>
+
+<p>Здесь описан простой метод аварийного переключения двух экземпляров компьютеров, который позволяет:</p>
+<ul>
+<li>обновить программное обеспечение валидатора практически без простоев, и</li>
+<li>переключение на дополнительный экземпляр, когда ваш мониторинг обнаруживает проблему с основным экземпляром
+без каких-либо проблем с безопасностью, которые в противном случае были бы связаны с запуском двух экземпляров вашего валидатора.</li>
+</ul>
+<p>Вам понадобятся две машины класса валидатора для вашего основного и вторичного валидатора. Третья машина для запуска кластера <a href="https://etcd.io/">etcd</a>, который используется для хранения записи голосования башни для вашего валидатора.</p>
+<h2 id="nastraivat">Настраивать</h2>
+<h3 id="nastroika-klastera-etcd">Настройка кластера etcd</h3>
+<p>На https://etcd.io/ имеется обширная документация по установке и настройке etcd, пожалуйста, ознакомьтесь с etcd, прежде чем продолжить.</p>
+<p>Рекомендуется, чтобы etcd был установлен на машине, отдельной от вашей основной и дополнительной машин валидатора. Эта машина должна быть высокодоступной, и в зависимости от ваших потребностей вы можете настроить etcd с более чем одним узлом.</p>
+<p>Сначала установите <code>etcd</code> для вашей машины. Затем необходимо создать сертификаты TLS для аутентификации между кластером etcd и вашим валидатором. Вот один из способов сделать это:</p>
+<p>С установленным <a href="https://golang.org/">Golang</a> запустите «go get github.com/cloudflare/cfssl/cmd/cfssl». Теперь программа <code>cfssl</code> должна быть доступна в <code>~/go/bin/cfssl</code>. Убедитесь, что <code>~/go/bin</code> находится в вашем PATH, запустив <code>PATH=$PATH:~/go/bin/</code>.</p>
+<p>Теперь создайте каталог сертификата и файл конфигурации:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>mkdir -p certs/
+</span><span>echo &#39;{&quot;CN&quot;:&quot;etcd&quot;,&quot;hosts&quot;:[&quot;localhost&quot;, &quot;127.0.0.1&quot;],&quot;key&quot;:{&quot;algo&quot;:&quot;rsa&quot;,&quot;size&quot;:2048}}&#39; &gt; certs/config.json
+</span></code></pre>
+<p>затем создайте сертификаты для сервера etcd и валидатора:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cfssl gencert -initca certs/config.json | cfssljson -bare certs/etcd-ca
+</span><span>cfssl gencert -ca certs/etcd-ca.pem -ca-key certs/etcd-ca-key.pem certs/config.json | cfssljson -bare certs/validator
+</span><span>cfssl gencert -ca certs/etcd-ca.pem -ca-key certs/etcd-ca-key.pem certs/config.json | cfssljson -bare certs/etcd
+</span></code></pre>
+<p>Скопируйте эти файлы на ваш основной и дополнительный компьютеры валидатора:</p>
+<ul>
+<li><code>certs/validator-key.pem</code></li>
+<li><code>certs/validator.pem</code></li>
+<li><code>certs/etcd-ca.pem</code></li>
+</ul>
+<p>и эти файлы на машину с сервером etcd:</p>
+<ul>
+<li><code>certs/etcd.pem</code></li>
+<li><code>certs/etcd-key.pem</code></li>
+<li><code>certs/etcd-ca.pem</code></li>
+</ul>
+<p>В этой конфигурации и валидатор, и etdc будут использовать один и тот же центр сертификации TLS и будут аутентифицировать друг друга с его помощью.</p>
+<p>Запустите <code>etcd</code> со следующими аргументами:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">etcd</span><span style="color:#f29718;"> --auto-compaction-retention</span><span> 2</span><span style="color:#f29718;"> --auto-compaction-mode</span><span> revision </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --cert-file</span><span style="color:#f29668;">=</span><span>certs/etcd.pem</span><span style="color:#f29718;"> --key-file</span><span style="color:#f29668;">=</span><span>certs/etcd-key.pem </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --client-cert-auth </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --trusted-ca-file</span><span style="color:#f29668;">=</span><span>certs/etcd-ca.pem </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --listen-client-urls</span><span style="color:#f29668;">=</span><span>https://127.0.0.1:2379 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --advertise-client-urls</span><span style="color:#f29668;">=</span><span>https://127.0.0.1:2379
+</span></code></pre>
+<p>и используйте <code>curl</code>, чтобы убедиться, что сертификаты etcd TLS настроены правильно:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> --cacert</span><span> certs/etcd-ca.pem https://127.0.0.1:2379/</span><span style="color:#f29718;"> --cert</span><span> certs/validator.pem</span><span style="color:#f29718;"> --key</span><span> certs/validator-key.pem
+</span></code></pre>
+<p>В случае успеха curl вернет ответ 404.</p>
+<p>Для получения дополнительной информации о настройке etcd TLS, пожалуйста, обратитесь к https://etcd.io/docs/v3.5/op-guide/security/#example-2-client-to-server-authentication-with-https-client- сертификаты</p>
+<h3 id="osnovnoi-validator">Основной валидатор</h3>
+<p>Следующие дополнительные параметры <code>solana-validator</code> необходимы для включения хранилища башни в etcd:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-validator ... \
+</span><span>  --tower-storage etcd \
+</span><span>  --etcd-cacert-file certs/etcd-ca.pem \
+</span><span>  --etcd-cert-file certs/validator.pem \
+</span><span>  --etcd-key-file certs/validator-key.pem \
+</span><span>  --etcd-endpoint 127.0.0.1:2379  # &lt;-- replace 127.0.0.1 with the actual IP address
+</span></code></pre>
+<p>Обратите внимание, что после запуска ваш валидатор <em>прекратит работу</em>, если он не сможет записать свою башню в etcd перед отправкой транзакции голосования, поэтому важно, чтобы ваша конечная точка etcd оставалась доступной в любое время.</p>
+<h3 id="vtorichnyi-validator">Вторичный валидатор</h3>
+<p>Настройте вторичный валидатор так же, как и первичный, за исключением следующих изменений аргумента командной строки solana-validator:</p>
+<ul>
+<li>Создайте и используйте вторичный идентификатор валидатора: <code>--identitysecondary-validator-keypair.json</code></li>
+<li>Добавить <code>--no-check-vote-account</code></li>
+<li>Добавьте <code>--authorized-voter validator-keypair.json</code> (где
+<code>validator-keypair.json</code> — это пара ключей идентификации для вашего основного валидатора)</li>
+</ul>
+<h2 id="zapusk-avariinogo-perekliucheniia-vruchnuiu">Запуск аварийного переключения вручную</h2>
+<p>Когда оба валидатора работают нормально и догоняют кластер, можно запустить отработку отказа с основного на вторичный, выполнив следующую команду на вторичном валидаторе:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-validator wait-for-restart-window</span><span style="color:#f29718;"> --identity</span><span> validator-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span>  </span><span style="color:#f29668;">&amp;&amp; </span><span style="color:#ffb454;">solana-validator</span><span> set-identity validator-keypair.json
+</span></code></pre>
+<p>Вторичный валидатор получит блокировку башни в etcd, чтобы обеспечить безопасное переключение голосования и производства блоков с основного валидатора.</p>
+<p>Затем первичный валидатор прекратит работу, как только обнаружит вторичного валидатора, используя его идентификатор.</p>
+<p>Примечание. Когда основной валидатор перезапустится (что может произойти немедленно, если вы настроили основной валидатор на это), он вернет свою идентификацию от вторичного валидатора. Это, в свою очередь, приведет к выходу вторичного валидатора. Однако, если/когда вторичный валидатор перезапустится, он сделает это, используя идентификатор вторичного валидатора, и, таким образом, цикл перезапуска будет нарушен.</p>
+<h2 id="zapusk-avariinogo-perekliucheniia-cherez-monitoring">Запуск аварийного переключения через мониторинг</h2>
+<p>Мониторинг по вашему выбору может вызвать команду solana-validator set-identity validator-keypair.json, упомянутую в предыдущем разделе.</p>
+<p>Нет необходимости гарантировать, что первичный валидатор остановился перед переключением на вторичный, так как процесс аварийного переключения не позволит первичному валидатору голосовать и создавать блоки, даже если он находится в неизвестном состоянии.</p>
+<h2 id="obnovleniia-programmnogo-obespecheniia-validatora">Обновления программного обеспечения валидатора</h2>
+<p>Чтобы выполнить обновление программного обеспечения с помощью этого метода аварийного переключения:</p>
+<ol>
+<li>Установите новую версию программного обеспечения в свою основную систему валидатора, но пока не перезапускайте ее.</li>
+<li>Инициируйте ручное переключение на резервный валидатор. Это должно привести к прекращению работы вашего основного валидатора.</li>
+<li>Когда ваш основной валидатор перезапустится, он теперь будет использовать новую версию программного обеспечения.</li>
+<li>Как только основной валидатор наверстает упущенное, обновите вторичный валидатор по своему усмотрению.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

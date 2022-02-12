@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Настройка узла Edgeware для локальной разработки | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/setting-up-an-edgeware-node-for-local-development/#nastroika-lokal-nogo-uzla-edgeware-dlia-razrabotki-wasm-evm">Настройка локального узла Edgeware для разработки WASM&#x2F;EVM </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/setting-up-an-edgeware-node-for-local-development/#sviazhites-s-nami-chtoby-uznat-bol-she">Свяжитесь с нами, чтобы узнать больше</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Настройка узла Edgeware для локальной разработки</h1>
+
+<h2 id="nastroika-lokal-nogo-uzla-edgeware-dlia-razrabotki-wasm-evm">Настройка локального узла Edgeware для разработки WASM/EVM <a id="setting-up-a-edgeware-node-for-ethereumevm-development"></a></h2>
+<p>В этом руководстве рассказывается, как быстро запустить личную цепочку блоков Edgeware, которую вы можете использовать для запуска тестов, выполнения команд и проверки состояния, одновременно контролируя работу цепочки.</p>
+<blockquote>
+<p><strong>Примечание</strong> Это ускоренный способ запуска узла. <a href="https://github.com/hicommonwealth/edgeware-node/tree/v3.2.0">Вы всегда можете скомпилировать из исходного кода</a>. Мы рекомендуем использовать ваши собственные скомпилированные двоичные файлы для рабочей сети.</p>
+</blockquote>
+<blockquote>
+<p><strong>Примечание</strong> Если у вас не установлен <a href="https://docs.docker.com/get-docker/">Docker, вы можете быстро установить его отсюда</a></p>
+</blockquote>
+<p>Вы можете клонировать наш репозиторий с помощью docker-compose, чтобы сразу приступить к работе:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>git clone https://github.com/edgeware-network/edgeware-node
+</span><span>cd edgeware-node
+</span><span>docker run --rm -it decentration/edgeware:v3.3.3
+</span><span>cd docker
+</span><span>docker-compose -f docker-compose-local.yml up
+</span></code></pre>
+<blockquote>
+<p><strong>Примечание</strong> Если вы хотите сбросить или очистить локальную цепочку, удалите контейнер докеров, запустив <strong><code>docker-compose rm</code></strong></p>
+</blockquote>
+<p>Вы увидите что-то вроде этого:</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/121593861-5afdd380-ca0a-11eb-80dd-8922a0b7cfc7.PNG" alt="" /></p>
+<p>После этого вы можете перейти в <a href="https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer">Приложения Polkadot</a> или [Edgeware.app](https ://www.edgeware.app/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/explorer) и подключитесь к 127.0.0.1:9944, и вы должны увидеть создаваемые блоки.</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/121594313-e9725500-ca0a-11eb-8f5f-36e5184d6b46.PNG" alt="" /></p>
+<p>Теперь вы можете продолжать подключать <a href="https://main.edgeware.wiki/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-metamask">Metamask</a>, Remix и Web3.js, чтобы иметь большой опыт.</p>
+<h2 id="sviazhites-s-nami-chtoby-uznat-bol-she">Свяжитесь с нами, чтобы узнать больше</h2>
+<p>Рад, что вы прошли через это! 🥰 Мы стремимся помочь вам в ваших исследованиях с помощью функции совместимости Edgeware Ethereum. Мы <strong>будем рады узнать о вашем опыте и предложениях, которые вы можете нам предложить.</strong>. Вы можете свободно <a href="https://linktr.ee/edg_developers">общаться с нами в каналах Edgeware, таких как Discord, Element и Telegram</a>, мы можем помочь вам с проблемами, которые могут у вас возникнуть, или с проектом, который вы хотите финансировать. через нашу <a href="https://docs.edgewa.re/edgeware-runtime/treasury">программу казначейства</a>. Не стесняйтесь делиться своими отзывами на наших каналах, всегда есть место для улучшения! 🙌</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Создание удостоверения Edgeware | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/create-an-edgeware-identity/#lichnost">Личность</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/create-an-edgeware-identity/#dobavlenie-udostoverenii-s-pomoshch-iu-polkadot-js">Добавление удостоверений с помощью Polkadot.js</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/create-an-edgeware-identity/#preduprezhdenie-o-formate"><small>- Предупреждение о формате</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Создание удостоверения Edgeware</h1>
+
+<h2 id="lichnost">Личность</h2>
+<p>Substrate предоставляет систему именования, которая позволяет участникам добавлять личную информацию в свою учетную запись в сети и впоследствии запрашивать проверку этой информации у регистраторов. <a href="https://wiki.polkadot.network/docs/en/learn-identity#registrars">Подробнее здесь</a></p>
+<h2 id="dobavlenie-udostoverenii-s-pomoshch-iu-polkadot-js">Добавление удостоверений с помощью Polkadot.js</h2>
+<p>Самый простой способ добавить встроенные поля — щелкнуть значок шестеренки рядом со своей учетной записью и выбрать «Установить идентификацию в сети».</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/116119305-477def80-a68c-11eb-9dba-1124d54a13e7.PNG" alt="" /></p>
+<p><img src="https://user-images.githubusercontent.com/32852637/116119319-4d73d080-a68c-11eb-9b4e-8ac906e18baf.png" alt="" /></p>
+<p>Чтобы добавить настраиваемые поля помимо полей по умолчанию, используйте пользовательский интерфейс Extrinsics для отправки необработанной транзакции, сначала нажав «Добавить элемент» и добавив любое имя поля, которое вам нравится. В приведенном ниже примере добавляется поле <code>steam</code>, которое представляет собой имя пользователя <a href="https://store.steampowered.com/">Steam</a>. Первое значение — это имя поля в байтах (&quot;steam&quot;), а второе — имя учетной записи в байтах (&quot;theswader&quot;). Отображаемое имя также должно быть предоставлено, иначе палитра Identity будет считать его стертым, если мы отправим его с выбранным параметром «Нет». То есть каждый раз, когда вы вносите изменения в свои идентификационные значения, вам нужно повторно отправлять весь набор полей: операция записи всегда «перезаписывает», а не «добавляет».</p>
+<p>Рендеринг таких пользовательских значений, в конечном счете, зависит от создателей пользовательского интерфейса/децентрализованных приложений. В случае с PolkadotJS команда пока предпочитает показывать только официальные поля. Если вы хотите убедиться, что значения по-прежнему сохраняются, используйте <a href="https://polkadot.js.org/apps/#/chainstate">пользовательский интерфейс состояния цепочки</a>, чтобы запросить информацию об удостоверении активной учетной записи:</p>
+<p><img src="https://wiki.polkadot.network/img/identity/05.jpg" alt="Raw values of custom fileds are available on-chain" /></p>
+<p>Затем ваш собственный пользовательский интерфейс или децентрализованное приложение могут делать с этими данными все, что им заблагорассудится. Данные останутся доступными для запросов через API Polkadot, поэтому вам не нужно полагаться на пользовательский интерфейс PolkadotJS.</p>
+<p>У вас может быть не более 100 настраиваемых полей.</p>
+<h3 id="preduprezhdenie-o-formate">Предупреждение о формате</h3>
+<p>Обратите внимание на следующее предостережение: поскольку поля поддерживают разные форматы, от необработанных байтов до различных хэшей, пользовательский интерфейс не может сказать, как кодировать данное поле, с которым он сталкивается. Пользовательский интерфейс PolkadotJS в настоящее время кодирует необработанные байты, с которыми он сталкивается, как строки UTF8, что делает эти значения читаемыми на экране. Однако, учитывая отсутствие ограничений на значения, которые можно поместить в эти поля, другой пользовательский интерфейс может интерпретировать их, например, как хэши IPFS или закодированные растровые изображения. Это означает, что любое поле, хранящееся в виде необработанных байтов, станет нечитаемым для этого конкретного пользовательского интерфейса. По мере кристаллизации полевых стандартов все станет проще в использовании, но на данный момент каждая пользовательская реализация отображения информации о пользователе, вероятно, должна будет принять сознательное решение о подходе или поддержке нескольких форматов, а затем пытаться использовать несколько кодировок до тех пор, пока вывод не будет иметь смысла.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

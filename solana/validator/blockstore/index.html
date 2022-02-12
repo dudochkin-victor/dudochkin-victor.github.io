@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blockstore | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/blockstore/#funktsional-nost-blockstore">Функциональность Blockstore</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/blockstore/#dizain-blochnogo-magazina">Дизайн блочного магазина</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/blockstore/#api-interfeisy-blochnykh-magazinov">API-интерфейсы блочных магазинов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/blockstore/#vzaimodeistvie-s-bankom">Взаимодействие с банком</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/blockstore/#udalenie-blockstore">Удаление Blockstore</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Blockstore</h1>
+
+<p>После того, как блок достигает окончательности, все блоки от этого до блока генезиса образуют линейную цепочку со знакомым названием блокчейн. Однако до этого момента валидатор должен поддерживать все потенциально действительные цепочки, называемые <em>forks</em>. Процесс естественного формирования вилок в результате ротации лидеров описан в <a href="../cluster/fork-generation/">генерация вилки</a>. Описанная здесь структура данных <em>blockstore</em> показывает, как валидатор справляется с этими ответвлениями, пока блоки не будут завершены.</p>
+<p>Хранилище блоков позволяет валидатору записывать каждый клочок, который он наблюдает в сети, в любом порядке, если клочок подписан ожидаемым лидером для данного слота.</p>
+<p>Фрагменты перемещаются в ключевое пространство с возможностью разветвления, состоящее из <code>ведущего слота</code> + <code>индекса фрагмента</code> (внутри слота). Это позволяет сохранять структуру списка пропусков протокола Solana полностью, без априорного выбора, за какой веткой следовать, какие записи сохранять или когда их сохранять.</p>
+<p>Запросы на восстановление недавних фрагментов обслуживаются из ОЗУ или последних файлов, а также из более глубокого хранилища для менее свежих фрагментов, как это реализовано в хранилище, поддерживающем Blockstore.</p>
+<h2 id="funktsional-nost-blockstore">Функциональность Blockstore</h2>
+<ol>
+<li>
+<p>Постоянство: Blockstore находится перед конвейером проверки узлов, сразу за сетевым получением и проверкой подписи. Если полученный клок соответствует расписанию лидера (т.е. был подписан лидером для указанного слота), он сразу же сохраняется.</p>
+</li>
+<li>
+<p>Ремонт: ремонт аналогичен описанному выше ремонту окон, но способен обслужить любой полученный клочок. Blockstore хранит фрагменты с подписями, сохраняя цепочку происхождения.</p>
+</li>
+<li>
+<p>Вилки: Blockstore поддерживает произвольный доступ к фрагментам, поэтому может удовлетворить потребность валидатора в откате и воспроизведении с контрольной точки банка.</p>
+</li>
+<li>
+<p>Перезапуск: при правильном сокращении/отборе Blockstore можно воспроизвести путем упорядоченного перечисления записей из слота 0. Логика этапа воспроизведения (т.е. работа с вилками) должна будет использоваться для самых последних записей в Блокмаркет.</p>
+</li>
+</ol>
+<h2 id="dizain-blochnogo-magazina">Дизайн блочного магазина</h2>
+<ol>
+<li>
+<p>Записи в Blockstore хранятся в виде пар ключ-значение, где ключ — это конкатенированный индекс слота и индекс уничтожения для записи, а значение — это данные записи. Обратите внимание, что индексы уничтожения отсчитываются от нуля для каждого слота \ (т. е. они относятся к слоту ).</p>
+</li>
+<li>
+<p>Blockstore поддерживает метаданные для каждого слота в структуре SlotMeta, содержащей:</p>
+<ul>
+<li>
+<p><code>slot_index</code> - Индекс этого слота</p>
+</li>
+<li>
+<p><code>num_blocks</code> - количество блоков в слоте (используется для привязки к предыдущему слоту)</p>
+</li>
+<li>
+<p><code>consumed</code> - наивысший индекс порчи <code>n</code>, такой, что для всех <code>m &lt; n</code> в этом слоте существует порча с индексом порчи, равным <code>n</code> \ (т. е. самый высокий последовательный индекс порции).</p>
+</li>
+<li>
+<p><code>received</code> - наивысший полученный индекс уничтожения для слота.</p>
+</li>
+<li>
+<p><code>next_slots</code> - список будущих слотов, к которым может быть привязан этот слот. Используется при перестроении леджера для поиска возможных точек разветвления.</p>
+</li>
+<li>
+<p><code>last_index</code> - индекс фрагмента, помеченного как последний фрагмент для данного слота. Этот флаг на фрагменте будет установлен лидером для слота, когда он передает последний фрагмент для слота.</p>
+</li>
+<li>
+<p><code>is_connected</code> - Истинно, если и только если каждый блок от 0 до слота образует полную последовательность без каких-либо пробелов. Мы можем вывести is_connected для каждого слота со следующими правилами. Пусть slot(n) будет слотом с индексом <code>n</code>, а slot(n).is_full() будет истинным, если слот с индексом <code>n</code> имеет все тики, ожидаемые для этого слота. Пусть is_connected(n) будет утверждением, что &quot;слот(n).is_connected является истинным&quot;. Затем: is_connected(0) is_connected(n+1) iff (is_connected(n) и slot(n).is_full()</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Цепочка. Когда приходит фрагмент для нового слота <code>x</code>, мы проверяем количество блоков (<code>num_blocks</code>) для этого нового слота (эта информация закодирована в фрагменте). Затем мы знаем, что этот новый слот связан со слотом <code>x - num_blocks</code>.</p>
+</li>
+<li>
+<p>Подписки — Blockstore записывает набор слотов, на которые была «подписана». Это означает, что записи, связанные с этими слотами, будут отправлены по каналу Blockstore для использования ReplayStage. Подробнее см. в разделе «API Blockstore».</p>
+</li>
+<li>
+<p>Уведомления об обновлениях. Blockstore уведомляет слушателей, когда slot(n).is_connected переключается с false на true для любого <code>n</code>.</p>
+</li>
+</ol>
+<h2 id="api-interfeisy-blochnykh-magazinov">API-интерфейсы блочных магазинов</h2>
+<p>Blockstore предлагает API на основе подписки, который ReplayStage использует для запроса интересующих его записей. Записи будут отправляться по каналу, открытому Blockstore. Эти API подписки следующие: 1. <code>fn get_slots_since(slot_indexes: &amp;[u64]) -&gt; Vec&lt;SlotMeta&gt;</code>: возвращает новые слоты, соединяющиеся с любым элементом списка <code>slot_indexes</code>.</p>
+<ol>
+<li><code>fn get_slot_entries(slot_index: u64, entry_start_index: usize, max_entries: Option&lt;u64&gt;) -&gt; Vec&lt;Entry&gt;</code>: возвращает вектор входа для слота, начинающийся с <code>entry_start_index</code>, ограничивая результат значением <code>max</code>, если <code>max_entries == Some(max)</code>, в противном случае верхний предел длины возвращаемого вектора не налагается.</li>
+</ol>
+<p>Примечание. В совокупности это означает, что этап воспроизведения теперь должен будет знать, когда слот будет завершен, и подписаться на следующий интересующий его слот, чтобы получить следующий набор записей. Раньше бремя объединения слотов ложилось на Blockstore.</p>
+<h2 id="vzaimodeistvie-s-bankom">Взаимодействие с банком</h2>
+<p>Банк выставляет на повтор этап:</p>
+<ol>
+<li>
+<p><code>prev_hash</code>: с какой цепочкой PoH он работает, на что указывает хэш последней обработанной записи.</p>
+</li>
+<li>
+<p><code>tick_height</code>: тики в цепочке PoH, которые в настоящее время проверяются этим банком.</p>
+</li>
+<li>
+<p><code>votes</code>: стек записей, который содержит: 1. <code>prev_hashes</code>: все, что после этого голосования должно быть связано в PoH 2. <code>tick_height</code>: высота тика, на которой было подано это голосование 3. <code>период блокировки</code> : как долго должна наблюдаться цепочка в реестре, чтобы ее можно было привязать ниже этого голоса</p>
+</li>
+</ol>
+<p>Этап воспроизведения использует API-интерфейсы Blockstore, чтобы найти самую длинную цепочку записей, которая может быть привязана к предыдущему голосованию. Если эта цепочка записей не зависает от последнего голосования, этап воспроизведения откатывает банк к этому голосованию и воспроизводит цепочку оттуда.</p>
+<h2 id="udalenie-blockstore">Удаление Blockstore</h2>
+<p>Как только записи Blockstore становятся достаточно старыми, представление всех возможных ответвлений становится менее полезным, возможно, даже проблематичным для воспроизведения после перезапуска. Однако после того, как количество голосов валидатора достигнет максимальной блокировки, любое содержимое Blockstore, которое не находится в цепочке PoH для этого голосования, может быть удалено, удалено.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

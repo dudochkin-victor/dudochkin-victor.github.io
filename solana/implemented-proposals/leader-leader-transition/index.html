@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Переход от лидера к лидеру | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-leader-transition/#problemy">Проблемы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-leader-transition/#taim-aut-lidera">Тайм-аут лидера</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-leader-transition/#al-ternativnye-varianty-dizaina">Альтернативные варианты дизайна</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-leader-transition/#zashchitnaia-galochka-v-kontse-slota"><small>- Защитная галочка в конце слота</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Переход от лидера к лидеру</h1>
+
+<p>Этот дизайн описывает, как лидеры передают производство реестра PoH друг другу, поскольку каждый лидер создает свой собственный слот.</p>
+<h2 id="problemy">Проблемы</h2>
+<p>Текущий лидер и следующий лидер соревнуются, чтобы сгенерировать последний тик для текущего слота. Следующий лидер может появиться в этом слоте, все еще обрабатывая записи текущего лидера.</p>
+<p>Идеальным сценарием было бы то, что следующий лидер сгенерировал свой собственный слот сразу после того, как смог проголосовать за текущего лидера. Весьма вероятно, что следующий лидер достигнет высоты своего слота PoH до того, как текущий лидер закончит трансляцию всего блока.</p>
+<p>Следующий лидер должен принять решение о присоединении своего блока к последнему завершенному блоку или дождаться завершения ожидающего блока. Вполне возможно, что следующий лидер создаст блок, который предполагает, что текущий лидер потерпел неудачу, даже если остальная часть сети наблюдает, что этот блок успешен.</p>
+<p>У нынешнего лидера есть стимулы начать свой слот как можно раньше, чтобы получить экономическую выгоду. Эти стимулы должны быть уравновешены потребностью лидера присоединить свой блок к блоку, который имеет наибольшую приверженность от остальной части сети.</p>
+<h2 id="taim-aut-lidera">Тайм-аут лидера</h2>
+<p>Пока лидер активно получает записи для предыдущего слота, лидер может задержать трансляцию начала своего блока в реальном времени. Задержка настраивается локально каждым лидером и может быть динамически основана на поведении предыдущего лидера. Если блок предыдущего лидера подтверждается TVU лидера до истечения времени ожидания, PoH сбрасывается на начало слота, и этот лидер немедленно создает свой блок.</p>
+<p>Недостатки:</p>
+<ul>
+<li>Лидер задерживает свой собственный слот, потенциально давая следующему лидеру больше времени, чтобы наверстать упущенное.</li>
+</ul>
+<p>Плюсы по сравнению с гвардией:</p>
+<ul>
+<li>Все пространство в блоке используется для записей.</li>
+<li>Таймаут не фиксирован.</li>
+<li>Тайм-аут является локальным для лидера, и поэтому может быть умным. Эвристика лидера может учитывать характеристики турбины.</li>
+<li>Этот дизайн не требует обновления хардфорка леджера.</li>
+<li>Предыдущий лидер может избыточно передать последнюю запись в блоке следующему лидеру, а следующий лидер может спекулятивно решить доверить ему создание своего блока без проверки предыдущего блока.</li>
+<li>Лидер может спекулятивно сгенерировать последний тик из последней полученной записи.</li>
+<li>Лидер может спекулятивно обрабатывать транзакции и угадывать, какие из них не будут закодированы предыдущим лидером. Это тоже вектор атаки цензуры. Текущий лидер может удерживать транзакции, которые он получает от клиентов, чтобы он мог закодировать их в свой собственный слот. После обработки записи можно быстро воспроизвести в PoH.</li>
+</ul>
+<h2 id="al-ternativnye-varianty-dizaina">Альтернативные варианты дизайна</h2>
+<h3 id="zashchitnaia-galochka-v-kontse-slota">Защитная галочка в конце слота</h3>
+<p>Лидер не создает записи в своем блоке после <em>предпоследнего тика</em>, который является последним тиком перед первым тиком следующего слота. Сеть голосует за <em>последний тик</em>, поэтому разница во времени между <em>предпоследним тиком</em> и <em>последним тиком</em> является принудительной задержкой для всей сети, а также для следующего лидера, прежде чем может быть сгенерирован новый слот. Сеть может создать <em>последний тик</em> из <em>предпоследнего тика</em>.</p>
+<p>Если следующий лидер получает <em>предпоследний тик</em> до того, как он произведет свой собственный <em>первый тик</em>, он сбросит свой PoH и создаст <em>первый тик</em> из <em>предпоследнего тика</em> предыдущего лидера. Остальная часть сети также сбросит свой PoH, чтобы создать <em>последний тик</em> в качестве идентификатора для голосования.</p>
+<p>Недостатки:</p>
+<ul>
+<li>Каждое голосование и, следовательно, подтверждение задерживается на фиксированный тайм-аут. 1 тик или около 100 мс.</li>
+<li>Среднее время подтверждения кейса для транзакции будет как минимум на 50 мс хуже.</li>
+<li>Это часть определения леджера, поэтому для изменения этого поведения потребуется хард-форк.</li>
+<li>Не все доступное пространство используется для записей.</li>
+</ul>
+<p>Преимущества по сравнению с тайм-аутом лидера:</p>
+<ul>
+<li>Следующий лидер получил все предыдущие записи, поэтому он может начать обработку транзакций, не записывая их в PoH.</li>
+<li>Предыдущий лидер может избыточно передать последнюю запись, содержащую <em>предпоследний тик</em>, следующему лидеру. Следующий лидер может предположительно сгенерировать <em>последний тик</em>, как только он получит <em>предпоследний тик</em>, даже до его проверки.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

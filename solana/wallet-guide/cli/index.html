@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Кошельки командной строки | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/cli/#koshelek-failovoi-sistemy">Кошелек файловой системы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/cli/#bezopasnost-koshel-ka-failovoi-sistemy"><small>- Безопасность кошелька файловой системы</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/cli/#bumazhnyi-koshelek">Бумажный кошелек</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/cli/#bezopasnost-bumazhnogo-koshel-ka"><small>- Безопасность бумажного кошелька</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/cli/#apparatnyi-koshelek">Аппаратный кошелек</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/cli/#bezopasnost-apparatnogo-koshel-ka"><small>- Безопасность аппаратного кошелька</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Кошельки командной строки</h1>
+
+<p>Solana поддерживает несколько различных типов кошельков, которые можно использовать для прямого взаимодействия с инструментами командной строки Solana.</p>
+<p><strong>Если вы не знакомы с использованием программ командной строки и просто хотите иметь возможность отправлять и получать токены SOL, мы рекомендуем настроить сторонний <a href="apps/">App Wallet</a></strong>.</p>
+<p>Чтобы использовать кошелек командной строки, вы должны сначала <a href="../cli/install-solana-cli-tools/">установить инструменты Solana CLI</a></p>
+<h2 id="koshelek-failovoi-sistemy">Кошелек файловой системы</h2>
+<p><em>Кошелек файловой системы</em>, также известный как кошелек FS, представляет собой каталог в файловой системе вашего компьютера. Каждый файл в каталоге содержит пару ключей.</p>
+<h3 id="bezopasnost-koshel-ka-failovoi-sistemy">Безопасность кошелька файловой системы</h3>
+<p>Кошелек с файловой системой является наиболее удобной и наименее безопасной формой кошелька. Это удобно тем, что ключевая пара хранится в простом файле. Вы можете сгенерировать столько ключей, сколько захотите, и тривиально создать их резервную копию, скопировав файлы. Это небезопасно, потому что файлы пары ключей <strong>не зашифрованы</strong>. Если вы единственный пользователь своего компьютера и уверены, что на нем нет вредоносных программ, кошелек FS — отличное решение для небольших сумм криптовалюты. Однако если ваш компьютер содержит вредоносное ПО и подключен к Интернету, это вредоносное ПО может загрузить ваши ключи и использовать их для получения ваших токенов. Аналогичным образом, поскольку пары ключей хранятся на вашем компьютере в виде файлов, опытный хакер, имеющий физический доступ к вашему компьютеру, может получить к нему доступ. Использование зашифрованного жесткого диска, такого как FileVault в MacOS, минимизирует этот риск.</p>
+<p><a href="file-system-wallet/">Кошелек файловой системы</a></p>
+<h2 id="bumazhnyi-koshelek">Бумажный кошелек</h2>
+<p><em>Бумажный кошелек</em> представляет собой набор <em>начальных фраз</em>, написанных на бумаге. Исходная фраза — это некоторое количество слов (обычно 12 или 24), которые можно использовать для регенерации пары ключей по запросу.</p>
+<h3 id="bezopasnost-bumazhnogo-koshel-ka">Безопасность бумажного кошелька</h3>
+<p>С точки зрения удобства и безопасности бумажный кошелек находится на противоположной стороне спектра от кошелька FS. Это ужасно неудобно в использовании, но предлагает отличную безопасность. Эта высокая безопасность еще более усиливается, когда бумажные кошельки используются в сочетании с <a href="../offline-signing/">автономной подписью</a>. Депозитарные службы, такие как <a href="https://custody.coinbase.com/">Coinbase Custody</a>, используют эту комбинацию.
+Бумажные кошельки и депозитарные услуги — отличный способ обезопасить большое количество токенов на длительный период времени.</p>
+<p><a href="paper-wallet/">Бумажные кошельки</a></p>
+<h2 id="apparatnyi-koshelek">Аппаратный кошелек</h2>
+<p>Аппаратный кошелек — это небольшое портативное устройство, которое хранит пары ключей и предоставляет некоторый интерфейс для подписания транзакций.</p>
+<h3 id="bezopasnost-apparatnogo-koshel-ka">Безопасность аппаратного кошелька</h3>
+<p>Аппаратный кошелек, например
+<a href="https://www.ledger.com/">Аппаратный кошелек Ledger</a> предлагает отличное сочетание безопасности и удобства для криптовалют. Он эффективно автоматизирует процесс автономной подписи, сохраняя при этом почти все удобства кошелька файловой системы.</p>
+<p><a href="hardware-wallets/">Аппаратные кошельки</a></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Плагины | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#obzor">Обзор</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#vazhnye-iashchiki"><small>- Важные ящики:</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#interfeis-plagina">Интерфейс плагина</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#primer-plagina-postgresql">Пример плагина PostgreSQL</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#vybor-uchetnoi-zapisi"><small>- Выбор учетной записи</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#vybor-tranzaktsii"><small>- Выбор транзакции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#nastroika-bazy-dannykh"><small>- Настройка базы данных</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#zakhvat-istoricheskikh-dannykh-scheta"><small>- Захват исторических данных счета</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#osnovnye-tablitsy"><small>- Основные таблицы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/plugins/accountsdb-plugin/#voprosy-proizvoditel-nosti"><small>- Вопросы производительности</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Плагины</h1>
+
+<h2 id="obzor">Обзор</h2>
+<p>Валидаторы при больших нагрузках RPC, например, при обслуживании вызовов getProgramAccounts, могут отставать от сети. Чтобы решить эту проблему, валидатор был усовершенствован для поддержки механизма плагинов, с помощью которого информация об учетных записях и слотах может передаваться во внешние хранилища данных, такие как реляционные базы данных, базы данных NoSQL или Kafka. Затем можно разработать службы RPC для использования данных из этих внешних хранилищ данных с возможностью более гибкой и целенаправленной оптимизации, такой как кэширование и индексирование. Это позволяет валидатору сосредоточиться на обработке транзакций, не замедляясь из-за загруженных запросов RPC.</p>
+<p>В этом документе описываются интерфейсы подключаемого модуля и ссылочная реализация подключаемого модуля для базы данных PostgreSQL.</p>
+<h3 id="vazhnye-iashchiki">Важные ящики:</h3>
+<ul>
+<li>
+<p><a href="https://docs.rs/solana-accountsdb-plugin-interface"><code>solana-accountsdb-plugin-interface</code></a> — Этот крейт определяет интерфейсы плагинов.</p>
+</li>
+<li>
+<p><a href="https://docs.rs/solana-accountsdb-plugin-postgres"><code>solana-accountsdb-plugin-postgres</code></a> — Крейт для реализации ссылочного плагина для базы данных PostgreSQL.</p>
+</li>
+</ul>
+<h2 id="interfeis-plagina">Интерфейс плагина</h2>
+<p>Интерфейс плагина объявлен в <a href="https://docs.rs/solana-accountsdb-plugin-interface"><code>solana-accountsdb-plugin-interface</code></a>. Он определяется трейтом <code>AccountsDbPlugin</code>. Плагин должен реализовать трейт и предоставить функцию &quot;C&quot; <code>_create_plugin</code>, чтобы вернуть указатель на этот трейт. Например, в ссылочной реализации следующий код создает экземпляр подключаемого модуля PostgreSQL <code>AccountsDbPluginPostgres</code> и возвращает его указатель.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>#[no_mangle]
+</span><span>#[allow(improper_ctypes_definitions)]
+</span><span>/// # Safety
+</span><span>///
+</span><span>/// This function returns the AccountsDbPluginPostgres pointer as trait AccountsDbPlugin.
+</span><span>pub unsafe extern &quot;C&quot; fn _create_plugin() -&gt; *mut dyn AccountsDbPlugin {
+</span><span>    let plugin = AccountsDbPluginPostgres::new();
+</span><span>    let plugin: Box&lt;dyn AccountsDbPlugin&gt; = Box::new(plugin);
+</span><span>    Box::into_raw(plugin)
+</span><span>}
+</span></code></pre>
+<p>Реализация плагина может реализовать метод on_load для своей инициализации. Эта функция вызывается после динамической загрузки плагина в валидатор при его запуске. Конфигурация плагина управляется конфигурационным файлом в формате JSON5. В файле JSON5 должно быть поле <code>libpath</code>, которое указывает на полный путь к общей библиотеке, реализующей подключаемый модуль, и может содержать другую информацию о конфигурации, например параметры подключения к внешней базе данных. Файл конфигурации плагина указывается параметром CLI валидатора <code>--accountsdb-plugin-config</code>, и файл должен быть доступен для чтения процессу валидатора.</p>
+<p>В качестве примера см. файл конфигурации для ссылочного плагина PostgreSQL ниже.</p>
+<p>Плагин может реализовать метод <code>on_unload</code> для выполнения любой очистки перед выгрузкой плагина, когда валидатор корректно завершает работу.</p>
+<p>Платформа плагина поддерживает потоковую передачу учетных записей, транзакций или и того, и другого. Плагин использует следующую функцию, чтобы указать, заинтересован ли он в получении данных учетной записи:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>fn account_data_notifications_enabled(&amp;self) -&gt; bool
+</span></code></pre>
+<p>И он использует следующую функцию, чтобы указать, заинтересован ли он в получении данных транзакции:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>    fn transaction_notifications_enabled(&amp;self) -&gt; bool
+</span></code></pre>
+<p>Для уведомления об обновлении учетной записи используется следующий метод:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>    fn update_account(
+</span><span>        &amp;mut self,
+</span><span>        account: ReplicaAccountInfoVersions,
+</span><span>        slot: u64,
+</span><span>        is_startup: bool,
+</span><span>    ) -&gt; Result&lt;()&gt;
+</span></code></pre>
+<p>Структура ReplicaAccountInfoVersions содержит метаданные и данные потоковой учетной записи. «Слот» указывает на слот, в котором обновляется учетная запись. Когда <code>is_startup</code> имеет значение true, это означает, что учетная запись загружается из моментальных снимков при запуске валидатора. Когда <code>is_startup</code> имеет значение false, учетная запись обновляется при обработке транзакции.</p>
+<p>Следующий метод вызывается, когда все учетные записи были уведомлены, когда валидатор восстанавливает AccountsDb из моментальных снимков при запуске.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>fn notify_end_of_startup(&amp;mut self) -&gt; Result&lt;()&gt;
+</span></code></pre>
+<p>Когда <code>update_account</code> вызывается во время обработки транзакций, плагин должен обрабатывать уведомление как можно быстрее, потому что любая задержка может привести к тому, что валидатор отстанет от сети. Сохранение внешнего хранилища данных лучше всего выполнять асинхронно.</p>
+<p>Для уведомления об изменении статуса слота используется следующий метод:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>    fn update_slot_status(
+</span><span>        &amp;mut self,
+</span><span>        slot: u64,
+</span><span>        parent: Option&lt;u64&gt;,
+</span><span>        status: SlotStatus,
+</span><span>    ) -&gt; Result&lt;()&gt;
+</span></code></pre>
+<p>Чтобы обеспечить согласованность данных, реализация плагина может отменить валидатор в случае сохранения ошибки во внешних хранилищах. При перезапуске валидатора данные учетной записи будут переданы повторно.</p>
+<p>Для уведомления о транзакциях используется следующий метод:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>    fn notify_transaction(
+</span><span>        &amp;mut self,
+</span><span>        transaction: ReplicaTransactionInfoVersions,
+</span><span>        slot: u64,
+</span><span>    ) -&gt; Result&lt;()&gt;
+</span></code></pre>
+<p>Структура ReplicaTransactionInfoVersionsoVersions содержит информацию о потоковой транзакции. Он обертывает <code>ReplicaTransactionInfo</code></p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>pub struct ReplicaTransactionInfo&lt;&#39;a&gt; {
+</span><span>    /// The first signature of the transaction, used for identifying the transaction.
+</span><span>    pub signature: &amp;&#39;a Signature,
+</span><span>
+</span><span>    /// Indicates if the transaction is a simple vote transaction.
+</span><span>    pub is_vote: bool,
+</span><span>
+</span><span>    /// The sanitized transaction.
+</span><span>    pub transaction: &amp;&#39;a SanitizedTransaction,
+</span><span>
+</span><span>    /// Metadata of the transaction status.
+</span><span>    pub transaction_status_meta: &amp;&#39;a TransactionStatusMeta,
+</span><span>}
+</span></code></pre>
+<p>Подробную информацию о SanitizedTransaction и TransactionStatusMeta см. в <a href="https://docs.rs/solana-sdk"><code>solana-sdk</code></a> и <a href="https://docs.rs/solana-transaction-status"><code>solana-transaction-status</code></a>.</p>
+<p>«Слот» указывает на слот, в котором выполняется транзакция. Для получения более подробной информации обратитесь к документации Rust в <a href="https://docs.rs/solana-accountsdb-plugin-interface"><code>solana-accountsdb-plugin-interface</code></a>.</p>
+<h2 id="primer-plagina-postgresql">Пример плагина PostgreSQL</h2>
+<p>Крейт <a href="https://docs.rs/solana-accountsdb-plugin-postgres"><code>solana-accountsdb-plugin-postgres</code></a> реализует плагин, сохраняющий данные учетной записи в базе данных PostgreSQL, чтобы проиллюстрировать, как можно разработать плагин.</p>
+<a name="config">
+### Формат файла конфигурации
+</a>
+<p>Плагин настраивается с помощью входного файла конфигурации. Пример файла конфигурации выглядит следующим образом:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{
+</span><span>    &quot;libpath&quot;: &quot;/solana/target/release/libsolana_accountsdb_plugin_postgres.so&quot;,
+</span><span>    &quot;host&quot;: &quot;postgres-server&quot;,
+</span><span>    &quot;user&quot;: &quot;solana&quot;,
+</span><span>    &quot;port&quot;: 5433,
+</span><span>    &quot;threads&quot;: 20,
+</span><span>    &quot;batch_size&quot;: 20,
+</span><span>    &quot;panic_on_db_errors&quot;: true,
+</span><span>    &quot;accounts_selector&quot; : {
+</span><span>        &quot;accounts&quot; : [&quot;*&quot;]
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>«Хост», «пользователь» и «порт» управляют информацией о конфигурации PostgreSQL. Для более продвинутых параметров подключения используйте поле <code>connection_str</code>. См. <a href="https://docs.rs/postgres/0.19.2/postgres/config/struct.Config.html">Конфигурация Rust postgres</a>.</p>
+<p>Чтобы повысить пропускную способность базы данных, подключаемый модуль поддерживает пул соединений с использованием нескольких потоков, каждый из которых поддерживает соединение с базой данных PostgreSQL. Количество потоков контролируется полем threads. Большее количество потоков обычно обеспечивает лучшую производительность.</p>
+<p>Для дальнейшего повышения производительности при сохранении большого количества учетных записей при запуске плагин использует массовые вставки. Размер пакета контролируется параметром <code>batch_size</code>. Это может помочь сократить циклы обращения к базе данных.</p>
+<p><code>panic_on_db_errors</code> можно использовать для паники валидатора в случае ошибок базы данных, чтобы обеспечить согласованность данных.</p>
+<h3 id="vybor-uchetnoi-zapisi">Выбор учетной записи</h3>
+<p>Accounts_selector можно использовать для фильтрации учетных записей, которые должны быть сохранены.</p>
+<p>Например, можно использовать следующее, чтобы сохранить только учетные записи с определенными публичными ключами в кодировке Base58:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>    &quot;accounts_selector&quot; : {
+</span><span>         &quot;accounts&quot; : [&quot;pubkey-1&quot;, &quot;pubkey-2&quot;, ..., &quot;pubkey-n&quot;],
+</span><span>    }
+</span></code></pre>
+<p>Или используйте следующее, чтобы выбрать учетные записи с определенными владельцами программы:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>    &quot;accounts_selector&quot; : {
+</span><span>         &quot;owners&quot; : [&quot;pubkey-owner-1&quot;, &quot;pubkey-owner-2&quot;, ..., &quot;pubkey-owner-m&quot;],
+</span><span>    }
+</span></code></pre>
+<p>Чтобы выбрать все учетные записи, используйте подстановочный знак (*):</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>    &quot;accounts_selector&quot; : {
+</span><span>         &quot;accounts&quot; : [&quot;*&quot;],
+</span><span>    }
+</span></code></pre>
+<h3 id="vybor-tranzaktsii">Выбор транзакции</h3>
+<p>«transaction_selector» определяет, какие транзакции следует хранить. Если это поле отсутствует, ни одна из транзакций не сохраняется.</p>
+<p>Например, можно использовать следующее, чтобы выбрать только транзакции, ссылающиеся на учетные записи с определенными публичными ключами в кодировке Base58,</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&quot;transaction_selector&quot; : {
+</span><span>    &quot;mentions&quot; : \[&quot;pubkey-1&quot;, &quot;pubkey-2&quot;, ..., &quot;pubkey-n&quot;\],
+</span><span>}
+</span></code></pre>
+<p>Поле «упоминания» поддерживает подстановочные знаки для выбора всех транзакций или всех транзакций «голосования». Например, чтобы выбрать все транзакции:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&quot;transaction_selector&quot; : {
+</span><span>    &quot;mentions&quot; : \[&quot;*&quot;\],
+</span><span>}
+</span></code></pre>
+<p>Чтобы выбрать все операции голосования:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&quot;transaction_selector&quot; : {
+</span><span>    &quot;mentions&quot; : \[&quot;all_votes&quot;\],
+</span><span>}
+</span></code></pre>
+<h3 id="nastroika-bazy-dannykh">Настройка базы данных</h3>
+<h4 id="ustanovit-server-postgresql">Установить сервер PostgreSQL</h4>
+<p>Следуйте инструкциям <a href="https://www.postgresql.org/download/linux/ubuntu/">Установка PostgreSQL Ubuntu</a>, чтобы установить сервер базы данных PostgreSQL. Например, чтобы установить postgresql-14,</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>sudo sh -c &#39;echo &quot;deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main&quot; &gt; /etc/apt/sources.list.d/pgdg.list&#39;
+</span><span>wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+</span><span>sudo apt-get update
+</span><span>sudo apt-get -y install postgresql-14
+</span></code></pre>
+<h4 id="kontroliruite-dostup-k-baze-dannykh">Контролируйте доступ к базе данных</h4>
+<p>При необходимости измените pg_hba.conf, чтобы предоставить подключаемому модулю доступ к базе данных. Например, в /etc/postgresql/14/main/pg_hba.conf следующая запись разрешает узлам с IP-адресами в CIDR 10.138.0.0/24 доступ ко всем базам данных. Валидатор работает в узле с IP-адресом в указанном диапазоне.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>host    all             all             10.138.0.0/24           trust
+</span></code></pre>
+<p>Рекомендуется запускать сервер базы данных на отдельном узле от валидатора для лучшей производительности.</p>
+<h4 id="nastroika-parametrov-proizvoditel-nosti-bazy-dannykh">Настройка параметров производительности базы данных</h4>
+<p>Пожалуйста, обратитесь к <a href="https://www.postgresql.org/docs/14/runtime-config.html">Конфигурация сервера PostgreSQL</a> для получения подробной информации о конфигурации. Ссылочная реализация использует следующие конфигурации для повышения производительности базы данных в /etc/postgresql/14/main/postgresql.conf, которые отличаются от установки postgresql-14 по умолчанию.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>max_connections = 200                  # (change requires restart)
+</span><span>shared_buffers = 1GB                   # min 128kB
+</span><span>effective_io_concurrency = 1000        # 1-1000; 0 disables prefetching
+</span><span>wal_level = minimal                    # minimal, replica, or logical
+</span><span>fsync = off                            # flush data to disk for crash safety
+</span><span>synchronous_commit = off               # synchronization level;
+</span><span>full_page_writes = off                 # recover from partial page writes
+</span><span>max_wal_senders = 0                    # max number of walsender processes
+</span></code></pre>
+<p>Образец <a href="https://github.com/solana-labs/solana/blob/7ac43b16d2c766df61ae0a06d7aaf14ba61996ac/accountsdb-plugin-postgres/scripts/postgresql.conf">postgresql.conf</a> можно использовать для справки.</p>
+<h4 id="sozdaite-ekzempliar-bazy-dannykh-i-rol">Создайте экземпляр базы данных и роль</h4>
+<p>Запустите сервер:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>sudo systemctl start postgresql@14-main
+</span></code></pre>
+<p>Создайте базу данных. Например, следующий код создает базу данных с именем «solana»:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>sudo -u postgres createdb solana -p 5433
+</span></code></pre>
+<p>Создайте пользователя базы данных. Например, следующий код создает обычного пользователя с именем solana:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>sudo -u postgres createuser -p 5433 solana
+</span></code></pre>
+<p>Убедитесь, что база данных работает с помощью psql. Например, если предположить, что узел, на котором работает PostgreSQL, имеет IP-адрес 10.138.0.9, следующая команда попадет в оболочку, где можно вводить команды SQL:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>psql -U solana -p 5433 -h 10.138.0.9 -w -d solana
+</span></code></pre>
+<h4 id="sozdaite-obekty-skhemy">Создайте объекты схемы</h4>
+<p>Используйте <a href="https://github.com/solana-labs/solana/blob/a70eb098f4ae9cd359c1e40bbb7752b3dd61de8d/accountsdb-plugin-postgres/scripts/create_schema.sql">create_schema.sql</a> для создания объектов для хранения учетных записей и слотов.</p>
+<p>Скачиваем скрипт с гитхаба:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>wget https://raw.githubusercontent.com/solana-labs/solana/a70eb098f4ae9cd359c1e40bbb7752b3dd61de8d/accountsdb-plugin-postgres/scripts/create_schema.sql
+</span></code></pre>
+<p>Затем запустите скрипт:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>psql -U solana -p 5433 -h 10.138.0.9 -w -d solana -f create_schema.sql
+</span></code></pre>
+<p>После этого запустите валидатор с плагином, используя аргумент <code>--accountsdb-plugin-config</code>, упомянутый выше.</p>
+<h4 id="unichtozhit-obekty-skhemy">Уничтожить объекты схемы</h4>
+<p>Чтобы уничтожить объекты базы данных, созданные <code>create_schema.sql</code>, используйте <a href="https://github.com/solana-labs/solana/blob/a70eb098f4ae9cd359c1e40bbb7752b3dd61de8d/accountsdb-plugin-postgres/scripts/drop_schema.sql">drop_schema.sql</a>.
+Например,</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>psql -U solana -p 5433 -h 10.138.0.9 -w -d solana -f drop_schema.sql
+</span></code></pre>
+<h3 id="zakhvat-istoricheskikh-dannykh-scheta">Захват исторических данных счета</h3>
+<p>Чтобы получить исторические данные учетной записи, в файле конфигурации установите для параметра store_account_historical_data значение true.</p>
+<p>И убедитесь, что триггер базы данных создан для сохранения данных в <code>audit_table</code> при обновлении записей в <code>account</code>, как показано в <code>create_schema.sql</code>,</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>CREATE FUNCTION audit_account_update() RETURNS trigger AS $audit_account_update$
+</span><span>    BEGIN
+</span><span>        INSERT INTO account_audit (pubkey, owner, lamports, slot, executable, rent_epoch, data, write_version, updated_on)
+</span><span>            VALUES (OLD.pubkey, OLD.owner, OLD.lamports, OLD.slot,
+</span><span>                    OLD.executable, OLD.rent_epoch, OLD.data, OLD.write_version, OLD.updated_on);
+</span><span>        RETURN NEW;
+</span><span>    END;
+</span><span>
+</span><span>$audit_account_update$ LANGUAGE plpgsql;
+</span><span>
+</span><span>CREATE TRIGGER account_update_trigger AFTER UPDATE OR DELETE ON account
+</span><span>    FOR EACH ROW EXECUTE PROCEDURE audit_account_update();
+</span></code></pre>
+<p>Триггер можно сбросить, чтобы отключить эту функцию, например,</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>DROP TRIGGER account_update_trigger ON account;
+</span></code></pre>
+<p>Со временем account_audit может накопить большой объем данных. Вы можете ограничить это, удалив старые исторические данные.</p>
+<p>Например, следующую инструкцию SQL можно использовать для хранения до 1000 самых последних записей для учетной записи:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>delete from account_audit a2 where (pubkey, write_version) in
+</span><span>    (select pubkey, write_version from
+</span><span>        (select a.pubkey, a.updated_on, a.slot, a.write_version, a.lamports,
+</span><span>            rank() OVER ( partition by pubkey order by write_version desc) as rnk
+</span><span>            from account_audit a) ranked
+</span><span>            where ranked.rnk &gt; 1000)
+</span></code></pre>
+<h3 id="osnovnye-tablitsy">Основные таблицы</h3>
+<p>Ниже приведены таблицы в базе данных Postgres.</p>
+<table><thead><tr><th align="left">Table</th><th align="left">Description</th></tr></thead><tbody>
+<tr><td align="left">account</td><td align="left">Account data</td></tr>
+<tr><td align="left">slot</td><td align="left">Slot metadata</td></tr>
+<tr><td align="left">transaction</td><td align="left">Transaction data</td></tr>
+<tr><td align="left">account_audit</td><td align="left">Account historical data</td></tr>
+</tbody></table>
+<h3 id="voprosy-proizvoditel-nosti">Вопросы производительности</h3>
+<p>Когда валидатору не хватает вычислительной мощности, накладные расходы на сохранение данных учетной записи могут привести к тому, что он отстанет от сети, особенно когда выбраны все учетные записи или большое количество учетных записей. Узел, на котором размещена база данных PostgreSQL, также должен быть достаточно мощным, чтобы справляться с нагрузками базы данных. Было обнаружено, что использование типа машины GCP n2-standard-64 для валидатора и n2-highmem-32 для узла PostgreSQL достаточно для обработки передачи всех учетных записей, не отставая от сети. Кроме того, лучше всего держать валидатор и PostgreSQL в одной локальной сети, чтобы уменьшить задержку. Возможно, вам придется изменить размер узла валидатора и базы данных, если вы обслуживаете другие нагрузки.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

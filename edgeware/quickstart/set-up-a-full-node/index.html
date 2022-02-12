@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Настройка полного узла | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-full-node/#0-initsializatsiia-servera">0. Инициализация сервера</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-full-node/#1-ustanovka-edgeware-i-nastroika-ego-kak-sistemnoi-sluzhby">1. Установка Edgeware и настройка его как системной службы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-full-node/#2-nastroika-ssl-sertifikata-tol-ko-dlia-publichnykh-uzlov">2. Настройка SSL-сертификата (только для публичных узлов)</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-full-node/#3-nastroika-proksi-servera-websockets-tol-ko-dlia-publichnykh-uzlov">3. Настройка прокси-сервера Websockets (только для публичных узлов)</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-full-node/#4-podkliuchenie-k-vashemu-uzlu">4. Подключение к вашему узлу</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/quickstart/set-up-a-full-node/#5-sleduiushchie-shagi">5. Следующие шаги</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Настройка полного узла</h1>
+
+<p>В этом руководстве рассказывается, как настроить узел Edgeware. Есть два способа продолжить:</p>
+<ul>
+<li>Настройка частного узла, например. если вы хотите запустить валидатор</li>
+<li>Настройка общедоступного узла, например. если вы хотите запускать сервисы подключения или децентрализованные приложения к Edgeware</li>
+</ul>
+<p>{% подсказка стиль = &quot;информация&quot; %}
+Чтобы быстро запустить узел из образа <strong>Docker</strong>: <a href="https://hub.docker.com/repository/docker/hicommonwealth/edgeware">https://hub.docker.com/repository/docker/hicommonwealth/edgeware</a>
+{% конец%}</p>
+<p>Если вы используете частный узел, вам нужно будет выполнить только <strong>шаги 0 и 1</strong> этого руководства. В противном случае мы проведем вас через настройку SSL-сертификата на <strong>шагах 2 и 3</strong>, чтобы любой браузер мог безопасно подключиться к вашему узлу. (Большинству людей, включая валидаторов, достаточно настроить приватный узел.)</p>
+<h2 id="0-initsializatsiia-servera">0. Инициализация сервера</h2>
+<p>Предоставьте сервер подходящего размера от надежного поставщика VPS, например:</p>
+<ul>
+<li><a href="https://www.vultr.com">Vultr</a></li>
+<li><a href="https://www.digitalocean.com">DigitalOcean</a></li>
+<li><a href="https://www.linode.com">Linode</a></li>
+<li><a href="https://www.ovh.com.au">OVH</a></li>
+<li><a href="https://contabo.com">Contabo</a></li>
+<li><a href="https://www.scaleway.com/en/">Scaleway</a></li>
+<li><a href="https://aws.amazon.com">Amazon AWS</a>, etc.</li>
+</ul>
+<p>Мы рекомендуем узел с оперативной памятью не менее 2 ГБ и Ubuntu 18.04 x64. Другие операционные системы потребуют внесения изменений в эти инструкции.</p>
+<p>Если вы используете общедоступный узел, настройте DNS с доменного имени, которым вы владеете, чтобы оно указывало на сервер. Цель DNS должна быть типа A, а не типа Redirect. Мы будем использовать testnet1.edgewa.re. (Вам не нужно делать это, если вы настраиваете частный узел.)</p>
+<p>SSH на сервер.</p>
+<h2 id="1-ustanovka-edgeware-i-nastroika-ego-kak-sistemnoi-sluzhby">1. Установка Edgeware и настройка его как системной службы</h2>
+<p>Сначала клонируйте репозиторий <code>edgeware-node</code>, установите все зависимости и запустите необходимые сценарии сборки.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>apt update
+</span><span>apt install -y gcc libc6-dev
+</span><span>apt install -y cmake pkg-config libssl-dev git clang libclang-dev
+</span><span>
+</span><span># Prefetch SSH publickeys
+</span><span>ssh-keyscan -H github.com &gt;&gt; ~/.ssh/known_hosts
+</span><span>
+</span><span># Install rustup
+</span><span>curl https://sh.rustup.rs -sSf | sh -s -- -y
+</span><span>source /root/.cargo/env
+</span><span>export PATH=/root/.cargo/bin:$PATH
+</span><span>
+</span><span># Get packages
+</span><span>git clone https://github.com/hicommonwealth/edgeware-node.git
+</span><span>cd edgeware-node
+</span><span>
+</span><span># Build packages
+</span><span>./setup.sh
+</span></code></pre>
+<p>Настройте узел как системную службу. Для этого перейдите в корневой каталог репозитория <code>edgeware-node</code> и выполните следующее, чтобы создать файл конфигурации службы:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{
+</span><span>    echo &#39;[Unit]&#39;
+</span><span>    echo &#39;Description=Edgeware&#39;
+</span><span>    echo &#39;[Service]&#39;
+</span><span>    echo &#39;Type=exec&#39;
+</span><span>    echo &#39;WorkingDirectory=&#39;`pwd`
+</span><span>    echo &#39;ExecStart=&#39;`pwd`&#39;/target/release/edgeware --chain=edgeware --ws-external --rpc-cors &quot;*&quot;&#39;
+</span><span>    echo &#39;[Install]&#39;
+</span><span>    echo &#39;WantedBy=multi-user.target&#39;
+</span><span>} &gt; /etc/systemd/system/edgeware.service
+</span></code></pre>
+<p><strong>Примечание. Это создаст сервер Edgeware, который принимает входящие подключения от любого пользователя в Интернете. Если вы используете узел в качестве валидатора, вам следует вместо этого удалить флаг <code>ws-external</code>, чтобы Edgeware не принимал внешние подключения.</strong></p>
+<p>Дважды проверьте правильность записи конфигурации в <code>/etc/systemd/system/edgeware.service</code>. Если это так, включите службу, чтобы она запускалась при запуске, а затем попробуйте запустить ее сейчас:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>systemctl enable edgeware
+</span><span>systemctl start edgeware
+</span></code></pre>
+<p>Проверить статус услуги:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>systemctl status edgeware
+</span></code></pre>
+<p>Вы должны увидеть узел, подключающийся к сети и синхронизирующий последние блоки. Если вам нужно сохранить последний вывод, вы можете использовать:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>journalctl -u edgeware.service -f
+</span></code></pre>
+<h2 id="2-nastroika-ssl-sertifikata-tol-ko-dlia-publichnykh-uzlov">2. Настройка SSL-сертификата (только для публичных узлов)</h2>
+<p>Мы будем использовать Certbot для связи с Let’s Encrypt. Установите зависимости Certbot:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>apt -y install software-properties-common
+</span><span>add-apt-repository universe
+</span><span>snap install --classic certbot
+</span><span>apt update
+</span></code></pre>
+<p>Установите Сертбот:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>apt -y install certbot python-certbot-nginx
+</span></code></pre>
+<p>Он поможет вам получить сертификат от Let's Encrypt:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>certbot certonly --standalone
+</span></code></pre>
+<p>Если у вас уже есть работающий веб-сервер (например, nginx, Apache и т. д.), вам нужно будет остановить его, запустив, например, <code>service nginx stop</code>, чтобы это работало.</p>
+<p>Certbot задаст вам несколько вопросов, запустит собственный веб-сервер и поговорит с Let's Encrypt, чтобы выдать сертификат. В конце вы должны увидеть вывод, который выглядит следующим образом:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>root:~/edgeware-node# certbot certonly --standalone
+</span><span>Saving debug log to /var/log/letsencrypt/letsencrypt.log
+</span><span>Plugins selected: Authenticator standalone, Installer None
+</span><span>Please enter in your domain name(s) (comma and/or space separated)  (Enter &#39;c&#39;
+</span><span>to cancel): testnet1.edgewa.re
+</span><span>Obtaining a new certificate
+</span><span>Performing the following challenges:
+</span><span>http-01 challenge for testnet1.edgewa.re
+</span><span>Waiting for verification...
+</span><span>Cleaning up challenges
+</span><span>
+</span><span>IMPORTANT NOTES:
+</span><span> - Congratulations! Your certificate and chain have been saved at:
+</span><span>   /etc/letsencrypt/live/testnet1.edgewa.re/fullchain.pem
+</span><span>   Your key file has been saved at:
+</span><span>   /etc/letsencrypt/live/testnet1.edgewa.re/privkey.pem
+</span><span>   Your cert will expire on 2019-10-08. To obtain a new or tweaked
+</span><span>   version of this certificate in the future, simply run certbot
+</span><span>   again. To non-interactively renew *all* of your certificates, run
+</span><span>   &quot;certbot renew&quot;
+</span></code></pre>
+<h2 id="3-nastroika-proksi-servera-websockets-tol-ko-dlia-publichnykh-uzlov">3. Настройка прокси-сервера Websockets (только для публичных узлов)</h2>
+<p>Сначала устанавливаем nginx:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>apt -y install nginx
+</span></code></pre>
+<p>Установите предполагаемый публичный адрес сервера, например. <code>testnet1.edgewa.re</code> в качестве переменной среды:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>export name=testnet1.edgewa.re
+</span></code></pre>
+<p>Настройте конфигурацию nginx. Это введет публичный адрес, который вы только что определили.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{
+</span><span>    echo &#39;user       www-data;  ## Default: nobody&#39;
+</span><span>    echo &#39;worker_processes  5;  ## Default: 1&#39;
+</span><span>    echo &#39;error_log  /var/log/nginx/error.log;&#39;
+</span><span>    echo &#39;pid        /var/run/nginx.pid;&#39;
+</span><span>    echo &#39;worker_rlimit_nofile 8192;&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;events {&#39;
+</span><span>    echo &#39;  worker_connections  4096;  ## Default: 1024&#39;
+</span><span>    echo &#39;}&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;http {&#39;
+</span><span>    echo &#39;    map $http_upgrade $connection_upgrade {&#39;
+</span><span>    echo &#39;      default upgrade;&#39;
+</span><span>    echo &quot;      \&#39;\&#39; close;&quot;
+</span><span>    echo &#39;    }&#39;
+</span><span>    echo &#39;    server {&#39;
+</span><span>    echo &#39;      listen       443 ssl;&#39;
+</span><span>    echo &#39;      server_name  &#39;$name&#39;;&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;      ssl_certificate /etc/letsencrypt/live/&#39;$name&#39;/cert.pem;&#39;
+</span><span>    echo &#39;      ssl_certificate_key /etc/letsencrypt/live/&#39;$name&#39;/privkey.pem;&#39;
+</span><span>    echo &#39;      ssl_session_timeout 5m;&#39;
+</span><span>    echo &#39;      ssl_protocols  SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;&#39;
+</span><span>    echo &#39;      ssl_ciphers  HIGH:!aNULL:!MD5;&#39;
+</span><span>    echo &#39;      ssl_prefer_server_ciphers   on;&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;      location / {&#39;
+</span><span>    echo &#39;          proxy_pass http://127.0.0.1:9944 ;&#39;
+</span><span>    echo &#39;          proxy_http_version 1.1;&#39;
+</span><span>    echo &#39;          proxy_set_header Upgrade $http_upgrade;&#39;
+</span><span>    echo &#39;          proxy_set_header Connection $connection_upgrade;&#39;
+</span><span>    echo &#39;      }&#39;
+</span><span>    echo &#39;    }&#39;
+</span><span>    echo &#39;}&#39;
+</span><span>} &gt; /etc/nginx/nginx.conf
+</span></code></pre>
+<p>Убедитесь, что пути <code>ssl_certificate</code> и <code>ssl_certificate_key</code> соответствуют тому, что Let's Encrypt создал ранее. Убедитесь, что файл конфигурации создан правильно.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cat /etc/nginx/nginx.conf
+</span><span>nginx -t
+</span></code></pre>
+<p>Убедитесь, что версия OpenSSL Nginx &gt; 1.0.2. Вам придется пересобрать Nginx, если версия OpenSSL ниже. В противном случае современные протоколы TLS, созданные в сертификатах letsencrypt, не будут работать, и Nginx выдаст ошибку.</p>
+<p>Если есть ошибка, <code>nginx -t</code> должен сказать вам, где она находится. <strong>Обратите внимание, что могут быть незначительные различия в настройке различных систем, например. некоторые ящики могут иметь разных пользователей входа в систему или места для файлов журнала. Вам решать, как примирить эти разногласия.</strong></p>
+<p>Запустите сервер:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>service nginx restart
+</span></code></pre>
+<p>Теперь вы можете попробовать подключиться к своему новому узлу из <a href="https://polkadot.js.org/apps/#/settings">polkadot.js/apps</a> или сделать запрос curl, который имитирует открытие защищенного соединения WebSockets:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl --include --no-buffer --header &quot;Connection: Upgrade&quot; --header &quot;Upgrade: websocket&quot; --header &quot;Host: $name:80&quot; --header &quot;Origin: http://$name:80&quot; --header &quot;Sec-WebSocket-Key: SGVsbG8sIHdvcmxkIQ==&quot; --header &quot;Sec-WebSocket-Version: 13&quot; http://$name:9944/
+</span></code></pre>
+<h2 id="4-podkliuchenie-k-vashemu-uzlu">4. Подключение к вашему узлу</h2>
+<p>Поздравляю с новым узлом! Если вы настроили общедоступный DNS и SSL-сертификат на шагах 2 и 3, вы сможете подключиться к нему сейчас из <a href="https://polkadot.js.org/apps/#/settings">polkadot-js/apps</a> :</p>
+<p><img src="https://user-images.githubusercontent.com/1273926/66156368-631b3400-e5d6-11e9-8254-33040f87ee4f.png" alt="" /></p>
+<p>В противном случае вы сможете использовать <a href="https://github.com/hicommonwealth/edgeware-cli">edgeware-cli</a> для подключения к нему:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>git clone https://github.com/hicommonwealth/edgeware-cli.git
+</span><span>cd edgeware-cli
+</span><span>yarn
+</span><span>bin/edge -r ws://testnet1.edgewa.re:9944 balances freeBalance 5G8jA2TLTQqnofx2jCE1MAtaZNqnJf1ujv7LdZBv2LGznJE2
+</span></code></pre>
+<p>Как правило, вы должны использовать эти URL-адреса для подключения к вашему узлу:</p>
+<ul>
+<li><code>ws://testnet1.edgewa.re:9944</code>, если вы настроили его как общедоступный узел с помощью <code>--ws-external</code> на шаге 1.</li>
+<li><code>wss://testnet1.edgewa.re</code>, если вы настроили его как общедоступный узел, а также выполнили шаги 2 и 3.</li>
+</ul>
+<h2 id="5-sleduiushchie-shagi">5. Следующие шаги</h2>
+<p>Ваш узел автоматически перезапустится при перезагрузке системы, но может не восстановиться после других сбоев. Чтобы справиться с ними, следуйте нашему руководству <a href="../advanced/setting-up-monitoring/">Настройка мониторинга</a>.</p>
+<p>Вы также можете перейти к <a href="set-up-a-validator/">Проверке на Edgeware</a>.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

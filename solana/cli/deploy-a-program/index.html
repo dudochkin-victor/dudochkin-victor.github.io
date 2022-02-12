@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Деплой программ | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#ispol-zovanie">Использование</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#razvernut-programmu"><small>- Развернуть программу</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#pokaz-uchetnoi-zapisi-programmy"><small>- Показ учетной записи программы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#povtornoe-razvertyvanie-programmy"><small>- Повторное развертывание программы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#vozobnovlenie-neudachnogo-razvertyvaniia"><small>- Возобновление неудачного развертывания</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#zakrytie-programmnykh-i-bufernykh-uchetnykh-zapisei-i-vosstanovlenie-ikh-lamportov"><small>- Закрытие программных и буферных учетных записей и восстановление их лампортов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#ustanovit-polnomochiia-obnovleniia-programmy"><small>- Установить полномочия обновления программы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#neizmeniaemye-programmy"><small>- Неизменяемые программы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#sbros-programmy-v-fail"><small>- Сброс программы в файл</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/deploy-a-program/#ispol-zovanie-uchetnoi-zapisi-posrednika-buffer"><small>- Использование учетной записи-посредника Buffer</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Деплой программ</h1>
+
+<p>Разработчики могут развертывать внутрисетевые <a href="terminology.md#program">программы</a> (в других местах часто называемые смарт-контрактами) с помощью инструментов Solana.</p>
+<p>Чтобы узнать о разработке и выполнении программ на Солане, начните с <a href="developing/programming-model/overview/">обзора</a>, а затем углубитесь в
+подробности <a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/%D0%BE%D0%BD%D1%87%D0%B5%D0%B9%D0%BD-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B/overview/">ончейн-программ</a>.</p>
+<p>Чтобы развернуть программу, используйте инструменты Solana для взаимодействия с загрузчиком в цепочке, чтобы:</p>
+<ul>
+<li>Инициализировать учетную запись программы</li>
+<li>Загрузить общий объект программы в буфер данных учетной записи программы</li>
+<li>Проверьте загруженную программу</li>
+<li>Доработать программу, пометив учетную запись программы как исполняемую.</li>
+</ul>
+<p>После развертывания любой может выполнить программу, отправив транзакции, которые ссылаются на нее, в кластер.</p>
+<h2 id="ispol-zovanie">Использование</h2>
+<h3 id="razvernut-programmu">Развернуть программу</h3>
+<p>Чтобы развернуть программу, вам потребуется расположение общего объекта программы (двоичный файл программы .so).</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program deploy </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Успешное развертывание вернет идентификатор развернутой программы, например:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">Program</span><span> Id: 3KS2k14CmtnuVv2fvYcvdrNgC94Y11WETBpMUGgXyWZL
+</span></code></pre>
+<p>Укажите пару ключей в команде развертывания для развертывания на определенный идентификатор программы:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program deploy</span><span style="color:#f29718;"> --program-id </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR_FILEPATH</span><span style="color:#f29668;">&gt; &lt;</span><span>PROGRAM_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Если идентификатор программы не указан в командной строке, инструменты сначала будут искать файл пары ключей, соответствующий <code>&lt;PROGRAM_FILEPATH&gt;</code>, или внутренне сгенерировать новую пару ключей.</p>
+<p>Соответствующий файл пары ключей программы находится в том же каталоге, что и общий объект программы, и называется &lt;PROGRAM_NAME&gt;-keypair.json. Совпадающие пары ключей программы генерируются автоматически средствами сборки программы:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">./path-to-program/program.so
+</span><span style="color:#ffb454;">./path-to-program/program-keypair.json
+</span></code></pre>
+<h3 id="pokaz-uchetnoi-zapisi-programmy">Показ учетной записи программы</h3>
+<p>Чтобы получить информацию о развернутой программе:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program show </span><span style="color:#f29668;">&lt;</span><span>ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Пример вывода выглядит так:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">Program</span><span> Id: 3KS2k14CmtnuVv2fvYcvdrNgC94Y11WETBpMUGgXyWZL
+</span><span style="color:#ffb454;">Owner:</span><span> BPFLoaderUpgradeab1e11111111111111111111111
+</span><span style="color:#ffb454;">ProgramData</span><span> Address: EHsACWBhgmw8iq5dmUZzTA1esRqcTognhKNHUkPi4q4g
+</span><span style="color:#ffb454;">Authority:</span><span> FwoGJNUaJN2zfVEex9BB11Dqb3NJKy3e9oY3KTh9XzCU
+</span><span style="color:#ffb454;">Last</span><span> Deployed In Slot: 63890568
+</span><span style="color:#ffb454;">Data</span><span> Length: 5216 (0x1460) </span><span style="color:#ffb454;">bytes
+</span></code></pre>
+<ul>
+<li>«Идентификатор программы» — это адрес, на который можно ссылаться в поле «program_id» инструкции при вызове программы.</li>
+<li><code>Владелец</code>: загрузчик, с которым была развернута эта программа.</li>
+<li>«Адрес ProgramData» — это учетная запись, связанная с учетной записью программы, которая содержит данные программы (общий объект).</li>
+<li><code>Полномочия</code> - это полномочия обновления программы.</li>
+<li>«Последнее развертывание в слоте» — это слот, в котором программа была развернута в последний раз.</li>
+<li>«Длина данных» — это размер пространства, зарезервированного для развертывания. Фактическое пространство, используемое текущей развернутой программой, может быть меньше.</li>
+</ul>
+<h3 id="povtornoe-razvertyvanie-programmy">Повторное развертывание программы</h3>
+<p>Программу можно повторно развернуть по тому же адресу, чтобы ускорить разработку, исправление ошибок или обновление. Файлы совпадающих пар ключей генерируются один раз, поэтому повторные развертывания будут выполняться по тому же адресу программы.</p>
+<p>Команда выглядит так же, как команда развертывания:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program deploy </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>По умолчанию программы развертываются на учетных записях, размер которых в два раза превышает размер исходного развертывания. Это оставляет место для расширения программы при будущих передислокациях. Но если первоначально развернутая программа очень мала (например, простая программа helloworld), а затем существенно разрослась, повторное развертывание может завершиться неудачей. Чтобы избежать этого, укажите <code>max_len</code>, который, по крайней мере, равен размеру (в байтах) ожидаемой программы (плюс некоторое пространство для маневра).</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program deploy</span><span style="color:#f29718;"> --max-len</span><span> 200000 </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Обратите внимание, что учетные записи программы должны быть освобождены от аренды (developing/programming-model/accounts.md#rent-exemption), а «max-len» фиксируется после первоначального развертывания, поэтому любой SOL в учетных записях программы заперт навсегда.</p>
+<h3 id="vozobnovlenie-neudachnogo-razvertyvaniia">Возобновление неудачного развертывания</h3>
+<p>Если развертывание программы завершится ошибкой, появится зависшая промежуточная буферная учетная запись с ненулевым балансом. Чтобы компенсировать этот баланс, вы можете возобновить неудачное развертывание, предоставив тот же промежуточный буфер для нового вызова <code>deploy</code>.</p>
+<p>При сбое развертывания будет напечатано сообщение об ошибке с указанием исходной фразы, необходимой для восстановления пары ключей сгенерированного промежуточного буфера:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>==================================================================================
+</span><span>Recover the intermediate account&#39;s ephemeral keypair file with
+</span><span>`solana-keygen recover` and the following 12-word seed phrase:
+</span><span>==================================================================================
+</span><span>valley flat great hockey share token excess clever benefit traffic avocado athlete
+</span><span>==================================================================================
+</span><span>To resume a deploy, pass the recovered keypair as
+</span><span>the [BUFFER_SIGNER] to `solana program deploy` or `solana write-buffer&#39;.
+</span><span>Or to recover the account&#39;s lamports, pass it as the
+</span><span>[BUFFER_ACCOUNT_ADDRESS] argument to `solana program drain`.
+</span><span>==================================================================================
+</span></code></pre>
+<p>Чтобы восстановить пару ключей:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> recover</span><span style="color:#f29718;"> -o </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR_PATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>При появлении запроса введите исходную фразу из 12 слов.</p>
+<p>Затем введите новую команду <code>deploy</code> и укажите буфер:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program deploy</span><span style="color:#f29718;"> --buffer </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR_PATH</span><span style="color:#f29668;">&gt; &lt;</span><span>PROGRAM_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<h3 id="zakrytie-programmnykh-i-bufernykh-uchetnykh-zapisei-i-vosstanovlenie-ikh-lamportov">Закрытие программных и буферных учетных записей и восстановление их лампортов</h3>
+<p>Как программные, так и буферные счета могут быть закрыты, а их лэмпорт-балансы могут быть переведены на счет получателя.</p>
+<p>Если развертывание завершится неудачно, останется лишняя буферная учетная запись, содержащая lamports. Буферную учетную запись можно использовать для возобновления развертывания или закрыть.</p>
+<p>Полномочия программы или буферной учетной записи должны присутствовать, чтобы закрыть учетную запись, чтобы вывести список всех открытых программных или буферных учетных записей, которые соответствуют полномочиям по умолчанию:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program show</span><span style="color:#f29718;"> --programs
+</span><span style="color:#ffb454;">solana</span><span> program show</span><span style="color:#f29718;"> --buffers
+</span></code></pre>
+<p>Чтобы указать другой орган:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program show</span><span style="color:#f29718;"> --programs --buffer-authority </span><span style="color:#f29668;">&lt;</span><span>AURTHORITY_ADRESS</span><span style="color:#f29668;">&gt;
+</span><span style="color:#ffb454;">solana</span><span> program show</span><span style="color:#f29718;"> --buffers --buffer-authority </span><span style="color:#f29668;">&lt;</span><span>AURTHORITY_ADRESS</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Чтобы закрыть одну учетную запись:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program close </span><span style="color:#f29668;">&lt;</span><span>BADDRESS</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Чтобы закрыть одну учетную запись и указать полномочия, отличные от установленных по умолчанию:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program close </span><span style="color:#f29668;">&lt;</span><span>ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-buffer-authority </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Чтобы закрыть одну учетную запись и указать получателя, отличного от получателя по умолчанию:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program close </span><span style="color:#f29668;">&lt;</span><span>ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-recipient </span><span style="color:#f29668;">&lt;</span><span>RECIPIENT_ADDRESS</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Чтобы закрыть все буферные учетные записи, связанные с текущими полномочиями:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program close</span><span style="color:#f29718;"> --buffers
+</span></code></pre>
+<p>Чтобы показать все буферные счета независимо от полномочий</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program show</span><span style="color:#f29718;"> --buffers --all
+</span></code></pre>
+<h3 id="ustanovit-polnomochiia-obnovleniia-programmy">Установить полномочия обновления программы</h3>
+<p>Для развертывания программы должны присутствовать полномочия обновления программы. Если во время развертывания программы не указаны полномочия, в качестве полномочий используется пара ключей по умолчанию. Вот почему повторное развертывание программы на шагах, описанных выше, не требовало явного указания полномочий.</p>
+<p>Полномочия могут быть указаны во время развертывания:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program deploy</span><span style="color:#f29718;"> --upgrade-authority </span><span style="color:#f29668;">&lt;</span><span>UPGRADE_AUTHORITY_SIGNER</span><span style="color:#f29668;">&gt; &lt;</span><span>PROGRAM_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Или после развертывания и использования пары ключей по умолчанию в качестве текущих полномочий:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program set-upgrade-authority </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-new-upgrade-authority </span><span style="color:#f29668;">&lt;</span><span>NEW_UPGRADE_AUTHORITY</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Или после развертывания и указания текущих полномочий:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program set-upgrade-authority </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-upgrade-authority </span><span style="color:#f29668;">&lt;</span><span>UPGRADE_AUTHORITY_SIGNER</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-new-upgrade-authority </span><span style="color:#f29668;">&lt;</span><span>NEW_UPGRADE_AUTHORITY</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<h3 id="neizmeniaemye-programmy">Неизменяемые программы</h3>
+<p>Программу можно пометить как неизменяемую, что предотвратит все дальнейшие повторные развертывания.
+указание флага <code>--final</code> во время развертывания:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program deploy </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_FILEPATH</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-final
+</span></code></pre>
+<p>Или в любое время после:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program set-upgrade-authority </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-final
+</span></code></pre>
+<h3 id="sbros-programmy-v-fail">Сброс программы в файл</h3>
+<p>Развернутую программу можно сбросить обратно в локальный файл:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program dump </span><span style="color:#f29668;">&lt;</span><span>ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt; &lt;</span><span>OUTPUT_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Файл дампа будет таким же, как и развернутый, поэтому в случае общего объекта файл дампа будет полностью функциональным общим объектом. Обратите внимание, что команда <code>dump</code> выгружает все пространство данных, а это означает, что выходной файл будет иметь нули после данных общего объекта до <code>max_len</code>. Иногда полезно сделать дамп и сравнить программу, чтобы убедиться, что она соответствует известному двоичному файлу программы. Исходный программный файл может быть расширен нулями, хеширован и сравнен с хэшем файла дампа.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana dump </span><span style="color:#f29668;">&lt;</span><span>ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt;</span><span> dump.so
+</span><span style="color:#ffb454;">$</span><span> cp original.so extended.so
+</span><span style="color:#ffb454;">$</span><span> truncate</span><span style="color:#f29718;"> -r</span><span> dump.so extended.so
+</span><span style="color:#ffb454;">$</span><span> sha256sum extended.so dump.so
+</span></code></pre>
+<h3 id="ispol-zovanie-uchetnoi-zapisi-posrednika-buffer">Использование учетной записи-посредника Buffer</h3>
+<p>Вместо развертывания непосредственно в учетной записи программы программу можно записать в промежуточную буферную учетную запись. Промежуточные учетные записи могут быть полезны для таких вещей, как управляемые несколькими организациями программы, где управляющие члены сначала проверяют содержимое промежуточного буфера, а затем голосуют за разрешение обновления с его использованием.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program write-buffer </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_FILEPATH</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Буферные учетные записи поддерживают полномочия, такие как программные учетные записи:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program set-buffer-authority </span><span style="color:#f29668;">&lt;</span><span>BUFFER_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-new-upgrade-authority </span><span style="color:#f29668;">&lt;</span><span>NEW_UPGRADE_AUTHORITY</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Единственным исключением является то, что буферные учетные записи не могут быть помечены как неизменяемые, как учетные записи программ, поэтому они не поддерживают <code>--final</code>.</p>
+<p>Буферная учетная запись, когда она будет полностью записана, может быть передана в <code>deploy</code> для развертывания программы:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> program deploy</span><span style="color:#f29718;"> --program-id </span><span style="color:#f29668;">&lt;</span><span>PROGRAM_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-buffer </span><span style="color:#f29668;">&lt;</span><span>BUFFER_ADDRESS</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Обратите внимание, что права доступа к буферу должны совпадать с правами обновления программы.</p>
+<p>Буферы также поддерживают <code>show</code> и <code>dump</code>, как это делают программы.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

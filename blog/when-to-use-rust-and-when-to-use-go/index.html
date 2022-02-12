@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Когда использовать Rust, а когда - Go | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#proizvoditel-nost">Производительность</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#parallelizm">Параллелизм</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#kanal"><small>- Канал</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#zamok"><small>- Замок</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#bezopasnost-pamiati">Безопасность памяти</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#opyt-razrabotchika">Опыт разработчика</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#kogda-ispol-zovat-go">Когда использовать Go</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#kogda-ispol-zovat-rust">Когда использовать Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/when-to-use-rust-and-when-to-use-go/#go-vs-rust-moi-chestnyi-vzgliad">Go vs Rust: мой честный взгляд</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Когда использовать Rust, а когда - Go</h1>
+
+<p><a href="https://blog.logrocket.com/when-to-use-rust-and-when-to-use-golang/">Перевод</a> | Автор оригинала: Michiel Mulders</p>
+<p><img src="/imgs/posts/41a4f110_01.png" alt="когда использовать Rust, а когда - Golang" /></p>
+<p>С самого начала есть явные различия между Go и Rust. Go уделяет больше внимания созданию веб-API и небольших сервисов, которые можно масштабировать бесконечно, особенно с помощью горутин. Последнее также возможно с Rust, но с точки зрения разработчика все намного сложнее.</p>
+<p>Rust хорошо подходит для обработки больших объемов данных и других операций, интенсивно использующих ЦП, таких как выполнение алгоритмов. Это самое большое преимущество Rust перед Go. Как правило, для Rust лучше подходят проекты, требующие высокой производительности.</p>
+<p>В этом руководстве мы сравним и сопоставим Go и Rust, оценив каждый язык программирования с точки зрения производительности, параллелизма, управления памятью и общего опыта разработчика. Мы также представим обзор этих элементов, чтобы помочь вам с первого взгляда выбрать правильный язык для вашего проекта.</p>
+<p>Если вы только начинаете работать с Rust, было бы неплохо освежить в памяти это руководство для начинающих, прежде чем читать дальше.</p>
+<p>Если вы все догнали, давайте нырнем!</p>
+<h2 id="proizvoditel-nost">Производительность</h2>
+<p>Первоначально разработанный инженерами Google, Go был представлен публике в 2009 году. Он был создан, чтобы предложить альтернативу C++, более простую в изучении и кодировании и оптимизированную для работы на многоядерных процессорах.</p>
+<p>С тех пор Go отлично подходит для разработчиков, которые хотят воспользоваться преимуществами параллелизма, предлагаемыми языком. В языке есть горутины, которые позволяют запускать функции как подпроцессы.</p>
+<p>Большим преимуществом Go является то, насколько легко вы можете использовать горутины. Простое добавление синтаксиса go к функции заставляет ее работать как подпроцесс. Модель параллелизма Go позволяет развертывать рабочие нагрузки на нескольких ядрах ЦП, что делает его очень эффективным языком. </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#ff7733;">package </span><span>main
+</span><span>
+</span><span style="color:#ff7733;">import </span><span>(
+</span><span>    </span><span style="color:#c2d94c;">&quot;fmt&quot;
+</span><span>    </span><span style="color:#c2d94c;">&quot;time&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#ff7733;">func </span><span style="color:#ffb454;">f</span><span>(</span><span style="color:#f29718;">from </span><span style="font-style:italic;color:#39bae6;">string</span><span>) {
+</span><span>    </span><span style="color:#ff7733;">for </span><span>i </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">; </span><span>i </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">; </span><span>i</span><span style="color:#f29668;">++ </span><span>{
+</span><span>        fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Println</span><span>(from</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;:&quot;</span><span style="color:#bfbab0cc;">, </span><span>i)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">func </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>
+</span><span>    </span><span style="color:#ffb454;">f</span><span>(</span><span style="color:#c2d94c;">&quot;direct&quot;</span><span>)
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">go </span><span style="color:#ffb454;">f</span><span>(</span><span style="color:#c2d94c;">&quot;goroutine&quot;</span><span>)
+</span><span>    time</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Sleep</span><span>(time</span><span style="color:#f29668;">.</span><span>Second)
+</span><span>    fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Println</span><span>(</span><span style="color:#c2d94c;">&quot;done&quot;</span><span>)
+</span><span>}
+</span></code></pre>
+<p>Несмотря на поддержку многоядерных процессоров, Rust все же превосходит Go. Rust более эффективен при выполнении алгоритмов и ресурсоемких операций. Benchmarks Game сравнивает Rust и Go для различных алгоритмов, таких как бинарные деревья. Для всех протестированных алгоритмов Rust был как минимум на 30 процентов быстрее; в случае вычислений двоичного дерева он составлял до 1000 процентов. Исследование Bitbucket показывает аналогичные результаты, в которых Rust работает наравне с C++.</p>
+<p><img src="/imgs/posts/41a4f110_02.png" alt="Производительность Rust согласно Bitbucket" /></p>
+<p>(Источник: Benchmarks Game)</p>
+<h2 id="parallelizm">Параллелизм</h2>
+<p>Как упоминалось выше, Go поддерживает параллелизм. Например, предположим, что у вас запущен веб-сервер, который обрабатывает запросы API. Вы можете использовать горутины Go для выполнения каждого запроса как подпроцесса, максимизируя эффективность за счет разгрузки задач на все доступные ядра ЦП.</p>
+<p>Горутины являются частью встроенных функций Go, в то время как Rust получил только собственный синтаксис async / await для поддержки параллелизма. Таким образом, когда дело доходит до параллелизма, преимущество разработчиков передается на Go. Однако Rust намного лучше гарантирует безопасность памяти.</p>
+<p>Вот пример упрощенных потоков для Rust: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// 1. create a new thread
+</span><span>   </span><span style="color:#ff7733;">for</span><span> i </span><span style="color:#f29668;">in </span><span style="color:#f29718;">1</span><span style="color:#f29668;">..</span><span style="color:#f29718;">10 </span><span>{
+</span><span>      thread</span><span style="color:#f29668;">::</span><span>spawn(|| {
+</span><span>         </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;thread: number </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">!&quot;</span><span style="color:#bfbab0cc;">,</span><span> i)</span><span style="color:#bfbab0cc;">;
+</span><span>         thread</span><span style="color:#f29668;">::</span><span>sleep(Duration</span><span style="color:#f29668;">::</span><span>from_millis(</span><span style="color:#f29718;">100</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>      })</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>  
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;hi from the main thread!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Параллелизм всегда был сложной проблемой для разработчиков. Гарантировать безопасный для памяти параллелизм без ущерба для опыта разработчика - непростая задача. Однако этот крайний упор на безопасность привел к созданию доказуемо правильного параллелизма. Rust экспериментировал с концепцией владения, чтобы предотвратить незапрашиваемый доступ к ресурсам, чтобы предотвратить ошибки безопасности памяти.</p>
+<p>Rust предлагает четыре различных парадигмы параллелизма, чтобы помочь вам избежать распространенных ошибок безопасности памяти. Мы более подробно рассмотрим две общие парадигмы: канал и блокировка.</p>
+<h3 id="kanal">Канал</h3>
+<p>Канал помогает передавать сообщение из одного потока в другой. Хотя эта концепция существует и для Go, Rust позволяет передавать указатель из одного потока в другой, чтобы избежать гонок за ресурсами. Посредством передачи указателей Rust может обеспечить изоляцию потоков для каналов. Опять же, Rust демонстрирует свою одержимость безопасностью памяти в отношении своей модели параллелизма.</p>
+<h3 id="zamok">Замок</h3>
+<p>Данные доступны только при удержании блокировки. Rust полагается на принцип блокировки данных вместо кода, который часто встречается в языках программирования, таких как Java.</p>
+<p>Дополнительные сведения о концепции владения и всех парадигмах параллелизма можно найти в статье «Бесстрашный параллелизм с Rust».</p>
+<h2 id="bezopasnost-pamiati">Безопасность памяти</h2>
+<p>Ранняя концепция владения - один из главных аргументов в пользу Rust. Rust выводит безопасность типов, что также важно для обеспечения безопасного для памяти параллелизма, на новый уровень.</p>
+<p>Согласно блогу Bitbucket, «очень строгий и педантичный компилятор Rust проверяет каждую переменную, которую вы используете, и каждый адрес памяти, на который вы ссылаетесь. Это позволяет избежать возможных состояний гонки данных и информирует вас о неопределенном поведении ».</p>
+<p>Это означает, что вы не столкнетесь с переполнением буфера или состоянием гонки из-за крайней одержимости Rust безопасностью памяти. Однако у этого есть и недостатки. Например, при написании кода необходимо внимательно следить за принципами распределения памяти. Непросто всегда заботиться о безопасности памяти.</p>
+<h2 id="opyt-razrabotchika">Опыт разработчика</h2>
+<p>Прежде всего, давайте посмотрим на кривую обучения, связанную с каждым языком. Go был разработан с учетом простоты. Разработчики часто называют его «скучным» языком, что означает, что его ограниченный набор встроенных функций упрощает внедрение Go.</p>
+<p>Кроме того, Go предлагает более простую альтернативу C++, скрывающую такие аспекты, как безопасность памяти и распределение памяти. Rust использует другой подход, заставляя задуматься о таких понятиях, как безопасность памяти. Концепция владения и возможность передавать указатели делают Rust менее привлекательным для изучения. Когда вы постоянно думаете о безопасности памяти, вы менее продуктивны, и ваш код неизбежно становится более сложным.</p>
+<p>Кривая обучения Rust довольно крутая по сравнению с Go. Однако стоит отметить, что у Go более крутая кривая обучения, чем у более динамичных языков, таких как Python и JavaScript. </p>
+<h2 id="kogda-ispol-zovat-go">Когда использовать Go</h2>
+<p>Go хорошо работает для самых разных сценариев использования, что делает его отличной альтернативой Node.js для создания веб-API. Как отмечает Лорис Кро, «модель параллелизма Go хорошо подходит для серверных приложений, которые должны обрабатывать несколько независимых запросов». Именно поэтому Go предоставляет горутины.</p>
+<p>Более того, Go имеет встроенную поддержку веб-протокола HTTP. Вы можете быстро разработать небольшой API-интерфейс, используя встроенную поддержку HTTP, и запустить его как микросервис. Таким образом, Go хорошо сочетается с архитектурой микросервисов и удовлетворяет потребности разработчиков API.</p>
+<p>Короче говоря, Go подходит, если вы цените скорость разработки и предпочитаете простоту синтаксиса производительности. Вдобавок к этому Go предлагает лучшую читаемость кода, что является важным критерием для больших команд разработчиков.</p>
+<p>Выберите Go, когда:</p>
+<ul>
+<li>Вы заботитесь о простоте и удобочитаемости</li>
+<li>Вам нужен простой синтаксис для быстрого написания кода</li>
+<li>Вы хотите использовать более гибкий язык, поддерживающий веб-разработку.</li>
+</ul>
+<h2 id="kogda-ispol-zovat-rust">Когда использовать Rust</h2>
+<p>Rust - отличный выбор, когда важна производительность, например, когда вы обрабатываете большие объемы данных. Более того, Rust дает вам детальный контроль над поведением потоков и распределением ресурсов между потоками.</p>
+<p>С другой стороны, Rust требует сложного обучения и замедляет скорость разработки из-за дополнительной сложности, связанной с безопасностью памяти. Это не обязательно недостаток; Rust также гарантирует, что вы не столкнетесь с ошибками безопасности памяти, поскольку компилятор проверяет каждый указатель данных. Для сложных систем эта гарантия может пригодиться.</p>
+<p>Выбирайте Rust, когда:</p>
+<ul>
+<li>Вы заботитесь о производительности</li>
+<li>Вам нужен точный контроль над потоками</li>
+<li>Вы цените безопасность памяти над простотой</li>
+</ul>
+<h2 id="go-vs-rust-moi-chestnyi-vzgliad">Go vs Rust: мой честный взгляд</h2>
+<p>Начнем с того, что подчеркнем сходства. И Go, и Rust имеют открытый исходный код и предназначены для поддержки архитектуры микросервисов и параллельных вычислительных сред. Оба оптимизируют использование доступных ядер ЦП за счет параллелизма.</p>
+<p>Но, в конце концов, какой язык лучше?</p>
+<p>Есть много способов подойти к этому вопросу. Я бы порекомендовал подумать, какое приложение вы хотите создать. Go хорошо подходит для создания веб-приложений и API-интерфейсов, которые используют его встроенные функции параллелизма и поддерживают архитектуру микросервисов.</p>
+<p>Вы также можете использовать Rust для разработки веб-API, но он не был разработан с учетом этого варианта использования. Сосредоточение внимания Rust на безопасности памяти увеличивает сложность и время разработки, особенно для довольно простого веб-API. Однако больший контроль над кодом позволяет писать более оптимизированный, эффективный с точки зрения памяти и производительный код. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

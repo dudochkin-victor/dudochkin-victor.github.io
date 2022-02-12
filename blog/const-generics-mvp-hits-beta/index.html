@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Const generics MVP достиг бета-версии | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#chto-takoe-dzheneriki-const">Что такое дженерики const?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#tekushchie-ogranicheniia"><small>- Текущие ограничения</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#dlia-konstantnykh-dzhenerikov-razresheny-tol-ko-tselochislennye-tipy"><small>- Для константных дженериков разрешены только целочисленные типы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#v-konstantnykh-argumentakh-net-slozhnykh-universal-nykh-vyrazhenii"><small>- В константных аргументах нет сложных универсальных выражений</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#iterator-massiva-po-znacheniiu">Итератор массива по значению</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#chto-dal-she">Что дальше?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#obshchie-konstanty-i-argumenty-po-umolchaniiu"><small>- Общие константы и аргументы по умолчанию</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#konstantnye-universal-nye-shablony-dlia-pol-zovatel-skikh-tipov"><small>- Константные универсальные шаблоны для пользовательских типов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#konstantnye-obobshcheniia-so-slozhnymi-vyrazheniiami"><small>- Константные обобщения со сложными выражениями</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/const-generics-mvp-hits-beta/#reziume">Резюме</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Const generics MVP достиг бета-версии</h1>
+
+<p><a href="https://blog.rust-lang.org/2021/02/26/const-generics-mvp-beta.html">Перевод</a> | Автор оригинала: The const generics project group</p>
+<p>Спустя более 3 лет с момента принятия оригинального RFC для константных дженериков первая версия константных дженериков теперь доступна на бета-канале Rust! Он будет доступен в версии 1.51, которая, как ожидается, будет выпущена 25 марта 2021 года. Дженерики Const - одна из самых долгожданных функций, которые появятся в Rust, и мы рады, что люди начнут пользоваться преимуществами возросшей мощности. языка, следующего за этим дополнением.</p>
+<p>Даже если вы не знаете, что такое константные дженерики (в этом случае, читайте дальше!), Вы, вероятно, извлекли из них пользу: константные дженерики уже используются в стандартной библиотеке Rust для улучшения эргономики массивов и диагностики; подробнее об этом ниже.</p>
+<p>Когда дженерики const достигли бета-версии, давайте быстро рассмотрим, что на самом деле стабилизируется, что это означает на практике и что будет дальше.</p>
+<h2 id="chto-takoe-dzheneriki-const">Что такое дженерики const?</h2>
+<p>Универсальные константы - это общие аргументы, которые варьируются в пределах постоянных значений, а не типов или времени жизни. Это позволяет, например, параметризовать типы целыми числами. Фактически, с самого начала разработки Rust был один пример универсальных типов const: типы массивов [T; N], для некоторых типов T и N: usize. Однако ранее не было возможности абстрагироваться от массивов произвольного размера: если вы хотели реализовать трэйту для массивов любого размера, вам пришлось бы делать это вручную для каждого возможного значения. Долгое время из-за этой проблемы даже стандартные библиотечные методы для массивов были ограничены массивами длиной не более 32. Это ограничение было окончательно снято в Rust 1.47 - изменение, которое стало возможным благодаря дженерикам const.</p>
+<p>Вот пример типа и реализации, использующих константные дженерики: тип, заключающий в себе пару массивов одинакового размера. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">ArrayPair</span><span>&lt;T, </span><span style="color:#ff7733;">const</span><span> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>&gt; {
+</span><span>    left</span><span style="color:#bfbab0cc;">:</span><span> [T; N],
+</span><span>    right</span><span style="color:#bfbab0cc;">:</span><span> [T; N],
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T</span><span style="color:#bfbab0cc;">:</span><span> Debug, </span><span style="color:#ff7733;">const</span><span> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>&gt; Debug </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">ArrayPair</span><span>&lt;T, N&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span></code></pre>
+<h3 id="tekushchie-ogranicheniia">Текущие ограничения</h3>
+<p>Первая итерация константных дженериков была намеренно ограничена: другими словами, эта версия является MVP (минимально жизнеспособным продуктом) для константных дженериков. Это решение мотивировано как дополнительной сложностью общих константных дженериков (реализация общих константных дженериков еще не завершена, но мы чувствуем, что константные дженерики в 1.51 уже очень полезны), так и желанием постепенно вводить большую функцию , чтобы получить опыт работы с любыми потенциальными недостатками и трудностями. Мы намерены отменить их в будущих версиях Rust: посмотрим, что будет дальше.</p>
+<h3 id="dlia-konstantnykh-dzhenerikov-razresheny-tol-ko-tselochislennye-tipy">Для константных дженериков разрешены только целочисленные типы</h3>
+<p>На данный момент единственными типами, которые могут использоваться в качестве типа универсального аргумента const, являются типы целых чисел (т.е. целые числа со знаком и без знака, включая isize и usize), а также char и bool. Это охватывает основной вариант использования const, а именно абстрагирование по массивам. В будущем это ограничение будет снято, чтобы разрешить использование более сложных типов, таких как &amp;str и типы, определяемые пользователем.</p>
+<h3 id="v-konstantnykh-argumentakh-net-slozhnykh-universal-nykh-vyrazhenii">В константных аргументах нет сложных универсальных выражений</h3>
+<p>В настоящее время константные параметры могут быть созданы только константными аргументами следующих форм:</p>
+<ul>
+<li>Автономный константный параметр.</li>
+<li>Литерал (т.е. целое число, логическое значение или символ).</li>
+<li>Конкретное постоянное выражение (заключенное в {}), не содержащее общих параметров.</li>
+</ul>
+<p>Например: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>&lt;</span><span style="color:#ff7733;">const</span><span> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>&gt;() {}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bar</span><span>&lt;T, </span><span style="color:#ff7733;">const</span><span> M</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>&gt;() {
+</span><span>    foo</span><span style="color:#f29668;">::</span><span>&lt;M&gt;()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ok: `M` is a const parameter
+</span><span>    foo</span><span style="color:#f29668;">::</span><span>&lt;2021&gt;()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ok: `2021` is a literal
+</span><span>    foo</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff3333;">{</span><span style="color:#f29718;">20 </span><span style="color:#f29668;">* </span><span style="color:#f29718;">100 </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">20 </span><span style="color:#f29668;">* </span><span style="color:#f29718;">10 </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>}</span><span style="color:#f29668;">&gt;</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ok: const expression contains no generic parameters
+</span><span>    
+</span><span>    foo</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff3333;">{</span><span> M </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span> }</span><span style="color:#f29668;">&gt;</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// error: const expression contains the generic parameter `M`
+</span><span>    foo</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff3333;">{ </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;T&gt;() }</span><span style="color:#f29668;">&gt;</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// error: const expression contains the generic parameter `T`
+</span><span>    
+</span><span>    </span><span style="color:#ff7733;">let </span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">: </span><span>[</span><span style="color:#ff7733;">u8</span><span style="color:#bfbab0cc;">;</span><span> M]</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ok: `M` is a const parameter
+</span><span>    </span><span style="color:#ff7733;">let </span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">: </span><span>[</span><span style="color:#ff7733;">u8</span><span style="color:#bfbab0cc;">; </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;T&gt;()]</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// error: const expression contains the generic parameter `T`
+</span><span>}
+</span></code></pre>
+<h2 id="iterator-massiva-po-znacheniiu">Итератор массива по значению</h2>
+<p>В дополнение к изменениям языка, описанным выше, мы также начали добавлять методы в стандартную библиотеку, использующие преимущества дженериков const. Хотя большинство из них еще не готовы к стабилизации в этой версии, есть один метод, который был стабилизирован. array::IntoIter позволяет выполнять итерацию массивов по значению, а не по ссылке, что устраняет существенный недостаток. Продолжается обсуждение возможности реализации IntoIterator непосредственно для массивов, хотя есть проблемы с обратной совместимостью, которые все еще необходимо решить. IntoIter::new действует как временное решение, значительно упрощающее работу с массивами. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>array</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">needs_vec</span><span>(</span><span style="color:#f29718;">v</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> arr </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span>]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">3</span><span>]]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">for</span><span> elem </span><span style="color:#f29668;">in </span><span>array</span><span style="color:#f29668;">::</span><span>IntoIter</span><span style="color:#f29668;">::</span><span>new(arr) {
+</span><span>    </span><span style="color:#f07178;">needs_vec</span><span>(elem)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="chto-dal-she">Что дальше?</h2>
+<h3 id="obshchie-konstanty-i-argumenty-po-umolchaniiu">Общие константы и аргументы по умолчанию</h3>
+<p>Общие параметры в настоящее время должны располагаться в определенном порядке: время жизни, типы, константы. Однако это вызывает трудности, когда кто-то пытается использовать аргументы по умолчанию вместе с константными параметрами. Чтобы компилятор знал, какой общий аргумент является каким, любые аргументы по умолчанию должны быть помещены последними. Эти два ограничения - «типы предшествуют константам» и «значения по умолчанию идут последними» - конфликтуют друг с другом для определений, которые имеют аргументы типа по умолчанию и параметры констант.</p>
+<p>Решение этой проблемы - ослабить ограничение порядка, чтобы параметры const могли предшествовать аргументам типа. Однако при реализации этого изменения, оказывается, есть свои тонкости, потому что компилятор Rust в настоящее время делает предположения о порядке параметров, которые требуют некоторой деликатности для удаления.</p>
+<p>В свете аналогичных вопросов проектирования по умолчанию для аргументов const, они также в настоящее время не поддерживаются в версии 1.51. Однако исправление проблем с упорядочением параметров выше также разблокирует значения по умолчанию const.</p>
+<h3 id="konstantnye-universal-nye-shablony-dlia-pol-zovatel-skikh-tipov">Константные универсальные шаблоны для пользовательских типов</h3>
+<p>Чтобы тип был допустимым, теоретически, как тип константного параметра, мы должны иметь возможность сравнивать значения этого типа во время компиляции. Кроме того, равенство значений должно быть правильным (а именно, оно должно быть детерминированным, рефлексивным, симметричным и транзитивным). Чтобы гарантировать эти свойства, концепция структурного равенства была введена в RFC-обобщениях констант: по сути, это включает любой тип с #[derive(PartialEq, Eq)], члены которого также удовлетворяют структурному равенству.</p>
+<p>Есть еще несколько вопросов, касающихся того, как именно должно вести себя структурное равенство, и предпосылок для его реализации. Примитивные типы значительно проще, что позволило нам стабилизировать константные дженерики для этих типов перед более общими типами.</p>
+<h3 id="konstantnye-obobshcheniia-so-slozhnymi-vyrazheniiami">Константные обобщения со сложными выражениями</h3>
+<p>Есть несколько сложностей, связанных с поддержкой сложных выражений. Флаг функции, feature (const_evaluatable_checked), доступен в канале Nightly, который включает версию поддержки сложных выражений для константных обобщений.</p>
+<p>Одна из трудностей заключается в необходимости иметь какой-то способ сравнения неоцененных констант, поскольку компилятор автоматически не знает, что два синтаксически идентичных выражения фактически равны. Это включает в себя своего рода символические рассуждения о выражениях, что в целом является сложной проблемой. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// The two expressions `N + 1` and `N + 1` are distinct
+</span><span style="font-style:italic;color:#5c6773;">// entities in the compiler, so we need a way to check
+</span><span style="font-style:italic;color:#5c6773;">// if they should be considered equal.
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>&lt;</span><span style="color:#ff7733;">const</span><span> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>&gt;() </span><span style="color:#bfbab0cc;">-&gt; </span><span>[</span><span style="color:#ff7733;">u8</span><span style="color:#bfbab0cc;">;</span><span> N </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>] {
+</span><span>    [</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;</span><span> N </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>]
+</span><span>}
+</span></code></pre>
+<p>Нам также нужен способ борьбы с потенциальными ошибками при оценке общих операций. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">split_first</span><span>&lt;T, </span><span style="color:#ff7733;">const</span><span> N</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>&gt;(</span><span style="color:#f29718;">arr</span><span style="color:#bfbab0cc;">:</span><span> [T; N]) </span><span style="color:#bfbab0cc;">-&gt; </span><span>(T, [T; N - 1]) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">generic_function</span><span>&lt;</span><span style="color:#ff7733;">const</span><span> M</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>&gt;(</span><span style="color:#f29718;">arr</span><span style="color:#bfbab0cc;">:</span><span> [</span><span style="color:#ff7733;">i32</span><span>; M]) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(head</span><span style="color:#bfbab0cc;">,</span><span> tail) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">split_first</span><span>(arr)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span></code></pre>
+<p>Без возможности ограничить возможные значения M здесь, вызов generic_function::&lt;0&gt;() вызовет ошибку при оценке 0 - 1, которая не обнаруживается во время объявления и поэтому может неожиданно выйти из строя для нижестоящих пользователей.</p>
+<p>Существуют вопросы проектирования о том, как точно выразить эти виды границ, которые необходимо решить, прежде чем стабилизировать сложные константные аргументы.</p>
+<h2 id="reziume">Резюме</h2>
+<p>С такой важной новой функцией, вероятно, будет несколько шероховатостей. Если у вас возникнут какие-либо проблемы, даже если они настолько незначительны, как запутанное сообщение об ошибке, пожалуйста, откройте проблему! Мы хотим, чтобы пользовательский опыт был как можно лучше - и любые проблемы, которые сейчас возникают, вероятно, станут еще более важными для следующих итераций константных дженериков. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

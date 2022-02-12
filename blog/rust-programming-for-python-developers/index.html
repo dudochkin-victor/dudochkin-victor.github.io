@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Программирование на Rust для разработчиков Python | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#kakoi-iazyk-programmirovaniia-vybrat-dlia-sleduiushchego-biznes-proekta">Какой язык программирования выбрать для следующего бизнес-проекта?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#chto-takoe-python">Что такое Python?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#chto-takoe-rust">Что такое Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#rust-vs-python-sravnenie-osnovnykh-kharakteristik-iazykov">Rust vs Python - Сравнение основных характеристик языков</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#bezopasnost"><small>- Безопасность</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#proizvoditel-nost"><small>- Производительность</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#ekosistema"><small>- Экосистема</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#intuitivnost-i-prostota-ispol-zovaniia"><small>- Интуитивность и простота использования</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#dokumentatsiia-i-soobshchestvo"><small>- Документация и сообщество</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#kogda-ispol-zovat-rust-kogda-ispol-zovat-python"><small>- Когда использовать Rust? Когда использовать Python?</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#sleduiushchie-shagi">Следующие шаги</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-programming-for-python-developers/#ispol-zovannaia-literatura"><small>- Использованная литература:</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Программирование на Rust для разработчиков Python</h1>
+
+<p><a href="https://softwaresim.com/blog/rust-programming-for-python-developers/">Перевод</a> | Автор оригинала: softwaresim</p>
+<h3 id="kakoi-iazyk-programmirovaniia-vybrat-dlia-sleduiushchego-biznes-proekta">Какой язык программирования выбрать для следующего бизнес-проекта?</h3>
+<p>Во многих ситуациях правильным ответом будет Python. Python - это гиперпопулярный язык программирования, который можно использовать для создания чего угодно, от калькулятора до надежной серверной части веб-сайта. С учетом сказанного, Python может быть тусклым для некоторых приложений.</p>
+<p>Здесь на помощь приходит Rust. Очевидно, что Rust не единственная альтернатива Python, но он обладает определенными функциями, которые делают его очень предпочтительным в определенных средах.</p>
+<p>Rust - относительно молодой язык программирования. Rust покорил разработчиков, исследователей и любителей своим упором на производительность, эффективность и безопасность. Принятие Rust все еще находится в зачаточном состоянии, но этот язык обещает стать основным инструментом для проектов, ориентированных на скорость и безопасность.</p>
+<p>Итак, в контексте потребностей команды, сможет ли Python удовлетворить требования? Или лучше подумать о включении Rust в рабочие процессы команды?</p>
+<p>Чтобы ответить на эти вопросы, нам нужно лучше понять, что делает эти языки программирования уникальными!</p>
+<p>Если вы ищете язык программирования для проекта в области науки о данных, прочтите наше руководство с подробным описанием наиболее популярных языков статистики. Это руководство поможет вам разработать структурированный подход к выбору языка программирования, а также познакомит вас с плюсами и минусами нескольких языков, включая Python, R и MATLAB.</p>
+<h2 id="chto-takoe-python">Что такое Python?</h2>
+<p>Вкратце о Python:</p>
+<ul>
+<li>Владеет сотнями тысяч библиотек.</li>
+<li>Сохраняет простой и легко читаемый синтаксис.</li>
+<li>Демонстрирует очень дружелюбную к новичкам среду.</li>
+<li>Проявляет гибкость и может использоваться практически в любой ситуации.</li>
+<li>Обнаруживает свою популярность в машинном обучении, глубоком обучении, науке о данных и научных вычислениях.</li>
+<li>Отображает низкую производительность (смягчается в пакетах, реализованных на быстрых языках программирования).</li>
+</ul>
+<p>Python - это язык программирования общего назначения, который подчеркивает простоту и ясность кодирования. Согласно опросу разработчиков Stack Overflow 2021, Python является третьим по популярности языком программирования: 48,24% респондентов активно используют его в своих проектах.</p>
+<p>Простой синтаксис Python сделал его языком программирования для начинающих. Более того, экосистема Python содержит сотни тысяч библиотек (пакетов) практически для любых нужд. Эти библиотеки включают модули для веб-разработки, разработки игр, создания графического пользовательского интерфейса (GUI), парсинга веб-страниц, научных вычислений и искусственного интеллекта.</p>
+<p>Язык программирования Python - особенно сильный игрок в отраслях машинного обучения и глубокого обучения. Существующие готовые пакеты скрывают сложные математические детали реализации алгоритмов искусственного интеллекта, позволяя любому создавать и использовать сложные модели для улучшения своих бизнес-операций.</p>
+<h2 id="chto-takoe-rust">Что такое Rust?</h2>
+<p>В двух словах о Rust:</p>
+<ul>
+<li>Демонстрирует отличную производительность (наравне с C и C++).</li>
+<li>Сильно подчеркивает безопасность памяти.</li>
+<li>Устанавливает строгие правила, делающие код безопасным, безопасным и свободным от ошибок.</li>
+<li>Имеет десятки тысяч библиотек.</li>
+<li>Относительно сложен для изучения из-за синтаксиса, подобного C++, и уникальных правил кодирования.</li>
+</ul>
+<p>Выпущенный в 2010 году, Rust все еще находится на ранней стадии внедрения и не может сравниться с Python по популярности. Согласно опросу разработчиков Stack Overflow 2021, только около 7,03% разработчиков используют Rust.</p>
+<p>Но, несмотря на низкую долю рынка, Rust - самый любимый язык программирования из всех, 86,98% разработчиков желают продолжать использовать его в своих проектах. Более того, Rust сохраняет этот статус шесть лет подряд!</p>
+<p>Причина восхищения проста - Rust, хотя и трудный для восприятия из-за его синтаксиса и правил программирования, имеет блестящую документацию, отличную производительность и заставляет разработчиков более внимательно относиться к качеству и безопасности своего кода. Конечным продуктом бизнес-ценности Rust является код, который выполняется быстро, безопасен и содержит минимальное количество ошибок.</p>
+<p>Как язык программирования общего назначения Rust, как и Python, снова может служить основой для любого проекта. В нем есть библиотеки для математических вычислений, веб-разработки, разработки игр и обработки текста, среди прочего.</p>
+<p>Кроме того, в последнее время Rust нашел все более широкое применение в исследованиях. Все больше и больше исследователей предпочитают программировать свои научные проекты на Rust - в первую очередь из-за производительности и эффективности языка. </p>
+<h2 id="rust-vs-python-sravnenie-osnovnykh-kharakteristik-iazykov">Rust vs Python - Сравнение основных характеристик языков</h2>
+<p>Теперь, когда у нас есть четкое представление о функциях и назначении Rust и Python, мы можем сопоставить их друг с другом. Ниже мы сравним языки с точки зрения их:</p>
+<ul>
+<li>Безопасность.</li>
+<li>Представление.</li>
+<li>Экосистемы.</li>
+<li>Удобство использования.</li>
+<li>Документация и сообщество.</li>
+</ul>
+<h3 id="bezopasnost">Безопасность</h3>
+<p>Rust сильнее Python в области безопасности памяти и безопасного программирования. Python тоже не сутулится, но Rust, в отличие от Python, реализует набор строгих правил, не позволяющих разработчикам создавать небезопасный код.</p>
+<p>Rust разработан с учетом требований безопасности и защиты памяти. Стандартная реализация Rust даже называется Safe Rust, что ясно демонстрирует намерения создателей Rust в отношении языка.</p>
+<p>Безопасность Rust основана на нескольких уникальных функциях, включая владение и средство проверки заимствований, функция которых состоит в том, чтобы, по сути, гарантировать, что переменные не выходят за пределы области, в которой они предназначены для использования. Это помогает защитить данные и предотвращает утечки памяти и ошибки.</p>
+<p>В отличие от Python, в Rust нет сборки мусора. Вместо этого Rust выполняет управление памятью с помощью функций безопасности. Кроме того, Rust не компилирует код, который считает небезопасным - всякий раз, когда нарушаются его передовые методы, язык выдает сообщение об ошибке, описывающее, что пошло не так.</p>
+<p>Из-за такой «привязанности» Rust может показаться довольно неуклюжим разработчикам, привыкшим к более традиционной логике программирования. Однако после освоения Rust предлагает безопасный опыт программирования с небольшим количеством ошибок или их отсутствием.</p>
+<p>Это не означает, что Python небезопасен. Как язык высокого уровня, Python обрабатывает выделение и освобождение памяти «за кулисами», оставляя мало возможностей для внесения уязвимостей в код или запуска утечек памяти. Однако Python не имеет эквивалента строгому набору правил кодирования Rust и, следовательно, требует от пользователей большей осторожности с точки зрения безопасности.</p>
+<h3 id="proizvoditel-nost">Производительность</h3>
+<p>Rust значительно быстрее и эффективнее Python. Однако многие пакеты Python фактически написаны на других, более быстрых языках программирования, что может несколько компенсировать разницу в производительности в некоторых приложениях.</p>
+<p>Производительность - еще один важный аргумент в пользу языка программирования Rust. Rust предлагает производительность, сопоставимую с C и C++. Фактически, в некоторых приложениях Rust часто выполняет вычисления быстрее, чем C/C++!</p>
+<p>С другой стороны, Python известен своей медлительностью. Как интерпретируемый язык программирования Python - один из самых медленных языков программирования в отрасли, и он на световые годы отстает от Rust с точки зрения производительности. Rust часто обеспечивает выполнение в десять раз быстрее, чем Python!</p>
+<p>При этом производительность Python во многом зависит от того, какой пакет библиотеки используется. Возьмем, к примеру, матричные вычисления - стандартные списки Python оказываются в них ужасно неэффективными. Однако, если бы команда вместо этого использовала статистические библиотеки, такие как SciPy или NumPy, можно было бы добиться существенно лучшей производительности. Это потому, что эти пакеты Python (и многие другие) реализованы на более быстрых низкоуровневых языках, что позволяет пользователям наслаждаться хорошей или лучшей производительностью, оставаясь в интуитивно понятной среде Python.</p>
+<p>В конце концов, Rust, вероятно, превзойдет Python в большинстве ситуаций, но Python также может быть жизнеспособным выбором, когда важна скорость - все зависит от приложений и используемых пакетов библиотек. </p>
+<h3 id="ekosistema">Экосистема</h3>
+<p>Экосистема Python богаче, предлагая пакеты для широкого спектра приложений, таких как машинное обучение / глубокое обучение, наука о данных, статистика, научные вычисления, визуализация данных и веб-разработка.</p>
+<p>Python обладает множеством пакетов библиотек, предназначенных для использования в самых разных отраслях, от искусственного интеллекта до создания приложений. PyPi, индекс пакетов Python, по состоянию на сентябрь 2021 года содержал более 300 000 пакетов, в то время как Crates.io (реестр пакетов Rust) содержал около 67 000 пакетов (на языке Rust они назывались «крэйтами»).</p>
+<p>Python особенно популярен в машинном обучении / глубоком обучении благодаря популярным пакетам, таким как TensorFlow (разработанный Google), Keras API, построенный на основе TensorFlow для облегчения его использования), PyTorch (разработанный Facebook) и scikit-learn. На эти библиотеки не влияет низкая производительность Python, потому что их бэкэнд не написан исключительно на Python - многие из них реализованы на C++, C или CUDA (API, который позволяет разработчикам использовать графические процессоры NVIDIA для вычислений общего назначения).</p>
+<p>Пакеты Rust также позволяют использовать язык практически для всего и вся, но в некоторых областях он слабее Python. Python, возможно, не имеет аналогов в области искусственного интеллекта и силен в науке о данных и статистике, а его огромная сокровищница пакетов может помочь организациям создать основу для любого проекта.</p>
+<p>Тем не менее, если мы рассмотрим конкретные преимущества Rust, а именно безопасность памяти и отличную производительность, небольшая экосистема может не показаться проблематичной. Когда важна скорость, возможно, стоит написать код на Rust, даже если для этого потребуется некоторое обучение и реализация алгоритмов с нуля.</p>
+<h3 id="intuitivnost-i-prostota-ispol-zovaniia">Интуитивность и простота использования</h3>
+<p>Python - это более удобный для начинающих язык программирования и гораздо лучший выбор для новичков в программировании (если мы не учитываем различия в вариантах использования Python и Rust).</p>
+<p>Синтаксис Python ясен и прост, что значительно сокращает время изучения языка.</p>
+<p>В частности, Python требует минимального количества знаков препинания (например, точки с запятой не требуются в конце операторов) и не требует от пользователей указывать тип переменных при их объявлении. В языке также широко используются отступы для определения порядка выполнения кода и улучшения читаемости.</p>
+<p>В совокупности эти функции снижают входной барьер для Python, что является одной из причин безумной популярности языка. Тем не менее, использование отступов может расстроить опыт программирования на Python - одно лишнее место в коде может вызвать ошибки, которые может быть трудно исправить.</p>
+<p>Rust, напротив, имеет синтаксис, похожий на C и C++. Благодаря этому Rust будет знаком многим, и те, кто презирает выбор дизайна Python, могут также отдать предпочтение синтаксису Rust.</p>
+<p>Но что бы вы ни думали о философии дизайна Python, Rust, безусловно, труднее изучить. Не только из-за синтаксиса, но и из-за правил программирования Rust, безопасных для памяти, вероятно, очень часто заставят новичков ломать голову в замешательстве.</p>
+<p>Здесь следует помнить одну вещь: сообщения об ошибках Rust в некоторых случаях более полезны, чем сообщения Python. Например, если вы неправильно введете имя переменной в Rust, компилятор выдаст исключение (как и ожидалось) и намекнет, что существует переменная с именем, похожим на то, что было введено. В Python вы получаете общую ошибку, которая просто сообщает вам, что имя переменной не определено.</p>
+<p>Но в целом с Python легче начать, и многие из вас, вероятно, сочтут код Python более визуально приятным. </p>
+<h3 id="dokumentatsiia-i-soobshchestvo">Документация и сообщество</h3>
+<p>И Rust, и Python имеют отличную документацию и процветающие сообщества, но для Python доступно больше ресурсов из-за его популярности и принятия.</p>
+<p>Ни один из языков не испытывает недостатка в наличии образовательных ресурсов. Python и Rust имеют хорошо разработанную всестороннюю стандартную документацию, и их [сообщества](Rust Communities «Rust Communities») чрезвычайно дружелюбны к новичкам. Независимо от того, какой язык вы выберете для своего проекта, у вас не будет недостатка в информации, хотя Python в целом покрыт лучше.</p>
+<p>Но учитывая, насколько Rust меньше Python, монументальные усилия команды Rust по документированию своего языка заслуживают похвалы. Документация Rust аккуратно и логично организована в разделы, охватывающие аспекты Rust-подобия, его менеджера пакетов Cargo, основных функций языка и его основных функций и концепций. Индекс ошибок компилятора Rust - особенно полезный ресурс, который содержит коды ошибок Rust, а также подробные объяснения и примеры плохих и рабочих кодов. Индекс ошибок также является интерактивным, и пользователи могут запускать, редактировать и отлаживать представленный код в своих веб-браузерах.</p>
+<p>Таким образом, хотя проникновение Rust на рынок не идет ни в какое сравнение с проникновением Python, его превосходная документация делает процесс адаптации довольно плавным. Тем не менее, имейте в виду, что освоение Rust может занять гораздо больше времени, чем Python.</p>
+<h3 id="kogda-ispol-zovat-rust-kogda-ispol-zovat-python">Когда использовать Rust? Когда использовать Python?</h3>
+<p>В противостоянии Rust и Python не было объявлено победителя - каждый язык имеет определенные преимущества, которые делают его подходящим для конкретных приложений. Чтобы суммировать сильные и слабые стороны Rust и Python, некоторые из лучших вариантов использования для каждого языка описаны в следующей таблице. </p>
+<table><thead><tr><th>Используйте Rust, если:</th><th>Используйте Python, если:</th></tr></thead><tbody>
+<tr><td>Команда работает с большими наборами данных и требует высокой производительности</td><td>Команда создает проект для целей ИИ, статистики или науки о данных.</td></tr>
+<tr><td>Команда создает безупречное приложение с небольшим количеством ошибок или без них</td><td>Команде нужно быстро развернуть рабочий продукт</td></tr>
+<tr><td>Команде требуется дополнительная степень безопасности</td><td>Команда ценит удобочитаемость и простоту кода</td></tr>
+</tbody></table>
+<p>Таким образом, эта таблица предлагает:</p>
+<ul>
+<li>Rust отлично подходит для проектов, где производительность и безопасность памяти являются главными приоритетами. Это также прекрасный выбор, если вам нужно создать сложный продукт с очень небольшим количеством ошибок.</li>
+<li>Python отлично подходит для проектов, направленных на решение задач искусственного интеллекта, обработки данных или статистики. Его чистый и интуитивно понятный синтаксис позволяет людям с ограниченным опытом программирования запустить продукт в считанные минуты.</li>
+</ul>
+<h2 id="sleduiushchie-shagi">Следующие шаги</h2>
+<p>Пытаясь выбрать язык программирования для своего проекта, не увлекайтесь вечными спорами о «лучшем языке в мире». Языки программирования - это просто инструменты, предназначенные для достижения конкретных целей, и ни один универсальный язык не может удовлетворить все наши потребности.</p>
+<p>Выбор языка программирования сводится к пониманию требований вашего проекта и уверенности в том, что ваш набор инструментов сможет поддержать вас на пути к вашим целям. Будьте гибкими, не зацикливайтесь на языке программирования только потому, что он нравится или популярен, и убедитесь, что у вас есть универсальный арсенал инструментов (программных или нет) для достижения ваших целей!</p>
+<p>Если члены вашей команды заинтересованы в быстром знакомстве с любым языком, ознакомьтесь с этими бесплатными вводными курсами для самостоятельного изучения Python или Rust.</p>
+<h3 id="ispol-zovannaia-literatura">Использованная литература:</h3>
+<p>Curcio, K., Navarro, T., Malucelli, A., &amp; Reinehr, S. (2018). Requirements engineering: A systematic mapping study in agile software development. Journal of Systems and Software, 139, 32-50.</p>
+<p>Kasauli, R., Liebel, G., Knauss, E., Gopakumar, S., &amp; Kanagwa, B. (2017, September). Requirements engineering challenges in large-scale agile system development. In 2017 IEEE 25th International Requirements Engineering Conference (RE) (pp. 352-361). IEEE.</p>
+<p>Vogelsang, A., &amp; Borg, M. (2019, September). Requirements engineering for machine learning: Perspectives from data scientists. In 2019 IEEE 27th International Requirements Engineering Conference Workshops (REW) (pp. 245-251). IEEE.</p>
+<p>Zamudio, L., Aguilar, J. A., Tripp, C., &amp; Misra, S. (2017, July). A requirements engineering techniques review in agile software development methods. In International Conference on Computational Science and Its Applications (pp. 683-698). Springer, Cham.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

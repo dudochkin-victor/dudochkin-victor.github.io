@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Элегантные API библиотеки в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#chto-delaet-api-elegantnym">Что делает API элегантным?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#metody">Методы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#soglasovannye-imena"><small>- Согласованные имена</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#dok-testy"><small>- Док тесты</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#ne-vvodite-strogo-svoi-api"><small>- Не вводите &quot;строго&quot; свой API</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#obrabotka-oshibok"><small>- Обработка ошибок</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#psevdonimy-otkrytogo-tipa"><small>- Псевдонимы открытого типа</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#ispol-zovat-osobennosti-preobrazovaniia"><small>- Использовать особенности преобразования</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#len-laziness"><small>- Лень (Laziness)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#udobstva"><small>- Удобства</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#pol-zovatel-skie-kharakteristiki-dlia-vkhodnykh-parametrov"><small>- Пользовательские характеристики для входных параметров</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#rasshirenie-chert"><small>- Расширение черт</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#shablon-stroitelia"><small>- Шаблон строителя</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#tipy-sessii"><small>- Типы сессий</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#pravil-no-ispol-zuite-vremia-zhizni"><small>- Правильно используйте время жизни</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#primery-ispol-zovaniia"><small>- Примеры использования</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/elegant-library-apis-in-rust/#drugie-shablony-proektirovaniia">Другие шаблоны проектирования</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Элегантные API библиотеки в Rust</h1>
+
+<p><a href="https://deterministic.space/elegant-apis-in-rust.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Наличие библиотек с красивыми, удобными интерфейсами - один из важнейших факторов при выборе языка программирования. Вот несколько советов о том, как писать библиотеки с хорошими API в Rust. (Многие пункты применимы и к другим языкам.)</p>
+<p>Вы также можете посмотреть мой доклад на Rustfest 2017 об этом!</p>
+<p>Обновление 2017-04-27: С момента написания этого поста @brson из команды Rust Libs опубликовал довольно подробный документ с рекомендациями по Rust API, который включает мои советы здесь и многое другое.</p>
+<p>Обновление 2020-06-01: этому посту уже несколько лет! Большинство шаблонов все еще действительны и активно используются в Rust сегодня, но язык также претерпел значительные изменения и позволил использовать новые шаблоны, которые здесь не обсуждаются. Я обновил некоторые рекомендации по синтаксису и крэйтам, но в остальном сохранил пост, как это было в 2016 году.</p>
+<h2 id="chto-delaet-api-elegantnym">Что делает API элегантным?</h2>
+<ul>
+<li>Код, использующий API, легко читается благодаря очевидным и понятным названиям методов.</li>
+<li>Понятные имена методов также помогают при использовании API, поэтому меньше необходимости читать документацию.</li>
+<li>У всего есть хоть какая-то документация и небольшой пример кода.</li>
+<li>Пользователям API необходимо написать небольшой шаблонный код, чтобы использовать его, как
+<ul>
+<li>методы принимают широкий диапазон допустимых типов ввода (где преобразования очевидны), и</li>
+<li>доступны ярлыки для быстрого выполнения «обычных» задач.</li>
+</ul>
+</li>
+<li>Типы грамотно использованы для предотвращения логических ошибок, но не мешайте слишком сильно.</li>
+<li>Возвращаемые ошибки полезны, а случаи паники четко задокументированы.</li>
+</ul>
+<h2 id="metody">Методы</h2>
+<h3 id="soglasovannye-imena">Согласованные имена</h3>
+<p>Есть несколько RFC Rust, которые описывают схему именования стандартной библиотеки. Вы должны следовать им, чтобы API вашей библиотеки был знаком для пользователей.</p>
+<ul>
+<li>RFC 199 объясняет, что вы должны использовать mut, move или ref в качестве суффиксов, чтобы различать методы на основе изменчивости их параметров.</li>
+<li>RFC 344 определяет некоторые интересные соглашения, например
+<ul>
+<li>как ссылаться на типы в именах методов (например, &amp;mut [T] становится mut_slice, а * mut T становится mut_ptr),</li>
+<li>как вызывать методы, возвращающие итераторы,</li>
+<li>методы получения должны называться field_name, а методы установки должны быть set_field_name,</li>
+<li>и как называть трэйты характера: «Отдавайте предпочтение (переходным) глаголам, существительным, а затем прилагательным; избегайте грамматических суффиксов (например, способный) », но также« если есть единственный метод, который является доминирующей функциональностью трэйта, подумайте об использовании того же имени для самого трэйта ».</li>
+</ul>
+</li>
+<li>RFC 430 описывает некоторые общие соглашения о регистрах (tl;dr CamelCase для материалов уровня типа, snake_case для материалов уровня значений).</li>
+<li>RFC 445 требует, чтобы вы добавили суффикс Ext к трэйтам расширения.</li>
+</ul>
+<h4 id="dopolnitel-nye-soglasheniia-ob-imenakh-metodov">Дополнительные соглашения об именах методов</h4>
+<p>В дополнение к тому, что определяют RFC 199 и RFC 344 (см. Выше), существует еще несколько соглашений о выборе имен методов, которые, похоже, не представлены в RFC (пока). Они в основном задокументированы в старых правилах стиля Rust и в публикации @ llogiq Rustic Bits, а также в строке invalid_self_convention от clippy. Вот краткое изложение:</p>
+<table><thead><tr><th>Method name</th><th>Parameters</th><th>Notes</th><th>Examples</th></tr></thead><tbody>
+<tr><td>new</td><td>no self, usually ≥ 11</td><td>Конструктор, также Default</td><td>Box::new, std::net::Ipv4Addr::new</td></tr>
+<tr><td>with_...</td><td>no self, ≥ 1</td><td>Альтернативные конструкторы</td><td>Vec::with_capacity, regex::Regex::with_size_limit</td></tr>
+<tr><td>from_...</td><td>1</td><td>конверсионные трэйты</td><td>String::from_utf8_lossy</td></tr>
+<tr><td>as_...</td><td>&amp;self</td><td>Бесплатное преобразование, дает представление о данных</td><td>str::as_bytes, uuid::Uuid::as_bytes</td></tr>
+<tr><td>to_...</td><td>&amp;self</td><td>Дорогое преобразование</td><td>str::to_string, std::path::Path::to_str</td></tr>
+<tr><td>into_...</td><td>self (consumes)</td><td>Потенциально дорогое преобразование, ср. конверсионные трэйты</td><td>std::fs::File::into_raw_fd</td></tr>
+<tr><td>is_...</td><td>&amp;self (or none)</td><td>Вероятно, должен вернуть bool</td><td>slice::is_empty, Result::is_ok</td></tr>
+<tr><td>has_...</td><td>&amp;self (or none)</td><td>Вероятно, должен вернуть bool</td><td>regex_syntax::Expr::has_bytes</td></tr>
+</tbody></table>
+<h3 id="dok-testy">Док тесты</h3>
+<p>Напишите документацию с примерами кода, показывающими, как использовать ваш API и получить бесплатные автоматические тесты - Два зайца, один камень. Вы можете узнать больше об этом в разделе документации официальной книги. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">/// Manipulate a number by magic
+</span><span style="font-style:italic;color:#5c6773;">///
+</span><span style="font-style:italic;color:#5c6773;">/// # Examples
+</span><span style="font-style:italic;color:#5c6773;">///
+</span><span style="font-style:italic;color:#5c6773;">/// ```rust
+</span><span style="font-style:italic;color:#5c6773;">/// assert_eq!(min( 0,   14),    0);
+</span><span style="font-style:italic;color:#5c6773;">/// assert_eq!(min( 0, -127), -127);
+</span><span style="font-style:italic;color:#5c6773;">/// assert_eq!(min(42,  666),   42);
+</span><span style="font-style:italic;color:#5c6773;">/// ```
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">min</span><span>(</span><span style="color:#f29718;">lhs</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29718;">rhs</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>	</span><span style="color:#ff7733;">if</span><span> lhs </span><span style="color:#f29668;">&lt;</span><span> rhs { lhs } </span><span style="color:#ff7733;">else </span><span>{ rhs }
+</span><span>}
+</span></code></pre>
+<p>Чтобы обеспечить документирование каждого элемента общедоступного API, используйте #! [Deny (missing_docs)]. Возможно, вас заинтересует мой пост, в котором предлагаются соглашения по форматированию документации Rust.</p>
+<h3 id="ne-vvodite-strogo-svoi-api">Не вводите &quot;строго&quot; свой API</h3>
+<p>Исходя из языков с динамической типизацией, у вас может возникнуть соблазн использовать строки с определенными значениями в разных местах.</p>
+<p>Например: вы хотите, чтобы функция печатала некоторый вводимый текст в цвете, поэтому вы используете цвет параметра типа &amp;str. Это также означает, что вы ожидаете, что ваши пользователи будут писать одно из имен из ограниченного количества названий цветов (например, [«красный», «зеленый», «синий», «светло-золотой стержень желтый»]).</p>
+<p>Это не то, что вам следует делать в Rust! Если вы заранее знаете все возможные варианты, используйте перечисление. Таким образом, вам не нужно выполнять синтаксический анализ / сопоставление строки с шаблоном и устранять возможные ошибки, но вы можете быть уверены, что пользователь вашего API может предоставить только допустимые входные данные2. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Color </span><span>{ Red</span><span style="color:#bfbab0cc;">,</span><span> Green</span><span style="color:#bfbab0cc;">,</span><span> Blue</span><span style="color:#bfbab0cc;">,</span><span> LightGoldenRodYellow }
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">color_me</span><span>(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>, </span><span style="color:#f29718;">color</span><span style="color:#bfbab0cc;">:</span><span> Color) { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">color_me</span><span>(</span><span style="color:#c2d94c;">&quot;surprised&quot;</span><span style="color:#bfbab0cc;">, </span><span>Color</span><span style="color:#f29668;">::</span><span>Blue)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h4 id="modul-polnyi-konstant">Модуль, полный констант</h4>
+<p>В качестве альтернативы, если у вас есть более сложное значение, которое вы хотите выразить, вы можете определить новую структуру, а затем определить набор констант с общими значениями. Если вы поместите константы в общедоступный модуль, ваши пользователи смогут получить к ним доступ, используя такой же синтаксис, как и при использовании варианта перечисления.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub mod </span><span style="color:#59c2ff;">output_options </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">OutputOptions </span><span>{ </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}
+</span><span>    
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">OutputOptions </span><span>{ </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="font-style:italic;color:#5c6773;">/* ... */</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> OutputOptions { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>} }
+</span><span>    
+</span><span>    </span><span style="color:#ff7733;">pub const </span><span style="color:#f29718;">DEFAULT</span><span style="color:#bfbab0cc;">:</span><span> OutputOptions </span><span style="color:#f29668;">=</span><span> OutputOptions { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">pub const </span><span style="color:#f29718;">SLIM</span><span style="color:#bfbab0cc;">:</span><span> OutputOptions </span><span style="color:#f29668;">=</span><span> OutputOptions { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">pub const </span><span style="color:#f29718;">PRETTY</span><span style="color:#bfbab0cc;">:</span><span> OutputOptions </span><span style="color:#f29668;">=</span><span> OutputOptions { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">output</span><span>(</span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Foo, </span><span style="color:#f29718;">opts</span><span style="color:#bfbab0cc;">:</span><span> OutputOptions) { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> foo </span><span style="color:#f29668;">= </span><span>Foo</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    
+</span><span>    </span><span style="color:#f07178;">output</span><span>(foo</span><span style="color:#bfbab0cc;">, </span><span>output_options</span><span style="color:#f29668;">::</span><span style="color:#f29718;">PRETTY</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h4 id="sobstvenno-razbor-stroki-s-pomoshch-iu-fromstr">Собственно разбор строки с помощью FromStr</h4>
+<p>Могут быть случаи, когда у пользователей вашего API действительно есть строки, например считывая переменные среды или принимая их пользовательский ввод, т. е. они не записывали (статические) строки в свой код для передачи в ваш API (что мы пытаемся предотвратить). В таких случаях имеет смысл взглянуть на то, что может дать вам трэйта FromStr, которая абстрагируется от концепции синтаксического анализа строки в тип данных Rust.</p>
+<p>Если все, что вы хотите сделать, это сопоставить строку с именем варианта перечисления с правильным вариантом перечисления, вы можете адаптировать этот макрос (из этого твита; для этого также может быть крэйт).</p>
+<p>В зависимости от вашего API вы также можете решить, чтобы ваши пользователи занимались синтаксическим анализом строки. Если вы предоставите правильные типы и реализации, это не составит труда (но, тем не менее, это необходимо задокументировать). </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Option A: You do the parsing
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">output_a</span><span>(</span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Foo, </span><span style="color:#f29718;">color</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;Bar, ParseError&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// This shadows the `options` name with the parsed type
+</span><span>    </span><span style="color:#ff7733;">let</span><span> color</span><span style="color:#bfbab0cc;">:</span><span> Color </span><span style="color:#f29668;">=</span><span> options</span><span style="color:#f29668;">.</span><span style="color:#f07178;">parse</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    f</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_bar</span><span>(</span><span style="color:#f29668;">&amp;</span><span>color)
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Option B: User does the parsing
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">output_b</span><span>(</span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Foo, </span><span style="color:#f29718;">color</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Color) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Bar {
+</span><span>    f</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_bar</span><span>(color)
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> foo </span><span style="color:#f29668;">= </span><span>Foo</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Option A: You do the parsing, user needs to deal with API error
+</span><span>    </span><span style="color:#f07178;">output_a</span><span>(foo</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;Green&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Error :(&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Option B: User has correct type, no need to deal with error here
+</span><span>    </span><span style="color:#f07178;">output_b</span><span>(foo</span><span style="color:#bfbab0cc;">, </span><span>Color</span><span style="color:#f29668;">::</span><span>Green)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Option B: User has string, needs to parse and deal with parse error
+</span><span>    </span><span style="color:#f07178;">output_b</span><span>(foo</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;Green&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">parse</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">except</span><span>(</span><span style="color:#c2d94c;">&quot;Parse error!&quot;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h3 id="obrabotka-oshibok">Обработка ошибок</h3>
+<p>В официальной книге есть замечательная глава об обработке ошибок.</p>
+<p>Есть несколько крэйтов, чтобы уменьшить шаблон, необходимый для хорошей обработки ошибок, например, так или иначе (динамический тип ошибки с методами аннотирования и связывания ошибок), и thiserror (упрощает создание пользовательских типов ошибок).</p>
+<h3 id="psevdonimy-otkrytogo-tipa">Псевдонимы открытого типа</h3>
+<p>Если ваш внутренний код снова и снова использует универсальные типы с одними и теми же параметрами, имеет смысл использовать псевдоним типа. Если вы также предоставляете эти типы своим пользователям, вы также должны предоставить (и задокументировать) псевдоним типа.</p>
+<p>Обычный случай, когда это используется, - это типы Result&lt;T, E&gt;, где случай ошибки (E) фиксирован. Например, std::io::Result<T> - это псевдоним для Result&lt;T, std::io::Error&gt;, std::fmt::Result - это псевдоним для Result&lt;(), std::fmt::Error&gt;, а serde_json::error::Result<T> - это псевдоним для Result&lt;T, serde_json::error::Error&gt;.</p>
+<h3 id="ispol-zovat-osobennosti-preobrazovaniia">Использовать особенности преобразования</h3>
+<p>Хорошей практикой является никогда не использовать &amp;string или &amp;Vec<T> в качестве входных параметров, а вместо этого использовать &amp;str и &amp;[T], поскольку они позволяют передавать больше типов (в основном, все, что изменяет ссылку на (строковый) фрагмент).</p>
+<p>Мы можем применить ту же идею на более абстрактном уровне: вместо использования конкретных типов для входных параметров попробуйте использовать универсальные типы с точными ограничениями. Обратной стороной этого является то, что документация будет менее читабельной, поскольку она будет полна обобщений со сложными ограничениями!</p>
+<p>У std::convert есть для этого кое-что:</p>
+<ul>
+<li>AsMut: дешевое, изменяемое преобразование ссылки в изменяемую ссылку.</li>
+<li>AsRef: дешевое преобразование ссылки в ссылку.</li>
+<li>От: сконструировать себя через преобразование.</li>
+<li>В: преобразование, которое потребляет самого себя, что может быть дорогостоящим, а может и не стоить.</li>
+<li>TryFrom: попытка сконструировать себя посредством преобразования. (Нестабильно с Rust 1.10)</li>
+<li>TryInto: попытка преобразования, потребляющая самого себя, что может быть дорогостоящим, а может и нет. (Нестабильно с Rust 1.10)</li>
+</ul>
+<p>Вам также может понравиться эта статья об удобных и идиоматических преобразованиях в Rust.</p>
+<h4 id="korova">Корова</h4>
+<p>Если вы имеете дело с множеством вещей, которые могут или не могут нуждаться в распределении, вам также следует изучить Cow &lt;'a, B&gt;, который позволяет вам абстрагироваться от заимствованных и собственных данных.</p>
+<h4 id="primer-std-convert-into">Пример: std::convert::Into</h4>
+<table><thead><tr><th><code>fn foo(p: PathBuf)</code></th><th><code>fn foo&lt;P: Into&lt;PathBuf&gt;&gt;(p: P)</code></th></tr></thead><tbody>
+<tr><td>Пользователям необходимо преобразовать свои данные в PathBuf.</td><td>Библиотека может вызывать для них .into()</td></tr>
+<tr><td>Пользователь делает аллокацию</td><td>Менее очевидно: библиотеке может потребоваться выделение памяти</td></tr>
+<tr><td>Пользователь должен заботиться о том, что такое PathBuf и как его получить.</td><td>Пользователь может просто указать String, OsString или PathBuf и быть счастливым.</td></tr>
+</tbody></table>
+<h4 id="into-option">Into&lt;Option&lt;_&gt;&gt;</h4>
+<p>Этот запрос на перенос, который появился в Rust 1.12, добавляет impl<T> From<T> для Option<T>. Хотя это всего несколько строк, это позволяет вам писать API-интерфейсы, которые можно вызывать, не набирая все время Some(…).</p>
+<p>До: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Easy for API author, easy to read documentation
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>(</span><span style="color:#f29718;">lorem</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>, </span><span style="color:#f29718;">ipsum</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;, </span><span style="color:#f29718;">dolor</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;, </span><span style="color:#f29718;">sit</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;) {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> lorem)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">foo</span><span>(</span><span style="color:#c2d94c;">&quot;bar&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span>)</span><span style="color:#bfbab0cc;">;               </span><span style="font-style:italic;color:#5c6773;">// That looks weird
+</span><span>    </span><span style="color:#f07178;">foo</span><span>(</span><span style="color:#c2d94c;">&quot;bar&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#f29718;">42</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span>)</span><span style="color:#bfbab0cc;">;           </span><span style="font-style:italic;color:#5c6773;">// Okay
+</span><span>    </span><span style="color:#f07178;">foo</span><span>(</span><span style="color:#c2d94c;">&quot;bar&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#f29718;">42</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#f29718;">1337</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#f29668;">-</span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Halp! Too… much… Some…!
+</span><span>}
+</span></code></pre>
+<p>После: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// A bit more typing for the API author.
+</span><span style="font-style:italic;color:#5c6773;">// (Sadly, the parameters need to be specified individually – or Rust would
+</span><span style="font-style:italic;color:#5c6773;">// infer the concrete type from the first parameter given. This reads not as
+</span><span style="font-style:italic;color:#5c6773;">// nicely, and documentation might not look as pretty as before.)
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>&lt;I, D, S&gt;(</span><span style="color:#f29718;">lorem</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>, </span><span style="color:#f29718;">ipsum</span><span style="color:#bfbab0cc;">:</span><span> I, </span><span style="color:#f29718;">dolor</span><span style="color:#bfbab0cc;">:</span><span> D, </span><span style="color:#f29718;">sit</span><span style="color:#bfbab0cc;">:</span><span> S) </span><span style="color:#ff7733;">where
+</span><span>    I</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Into</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;&gt;,
+</span><span>    D</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Into</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;&gt;,
+</span><span>    S</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Into</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;&gt;,
+</span><span>{
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> lorem)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">foo</span><span>(</span><span style="color:#c2d94c;">&quot;bar&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Still weird
+</span><span>    </span><span style="color:#f07178;">foo</span><span>(</span><span style="color:#c2d94c;">&quot;bar&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">None</span><span>)</span><span style="color:#bfbab0cc;">;   </span><span style="font-style:italic;color:#5c6773;">// Okay
+</span><span>    </span><span style="color:#f07178;">foo</span><span>(</span><span style="color:#c2d94c;">&quot;bar&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1337</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">-</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;     </span><span style="font-style:italic;color:#5c6773;">// Wow, that&#39;s nice! Gimme more APIs like this!
+</span><span>}
+</span></code></pre>
+<h4 id="zamechanie-o-vozmozhno-dolgom-vremeni-kompiliatsii">Замечание о возможно долгом времени компиляции</h4>
+<p>Если у вас есть:</p>
+<ol>
+<li>множество параметров типа (например, для трэйтов преобразования)</li>
+<li>на сложной / большой функции</li>
+<li>который используется много</li>
+</ol>
+<p>тогда rustc нужно будет скомпилировать множество перестановок этой функции (он мономорфизирует общие функции), что приведет к длительному времени компиляции.</p>
+<p>bluss упомянул на Reddit, что вы можете использовать «де-генерализацию», чтобы обойти эту проблему: ваша (общедоступная) универсальная функция просто вызывает другую (частную) неуниверсальную функцию, которая будет скомпилирована только один раз.</p>
+<p>В примерах, которые привел Bluss, была реализация std::fs::OpenOptions::open (исходный код из Rust 1.12) и этот запрос на перенос крэйта изображений, который изменил его функцию open на это: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">open</span><span>&lt;P&gt;(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">:</span><span> P) </span><span style="color:#bfbab0cc;">-&gt; </span><span>ImageResult&lt;DynamicImage&gt; </span><span style="color:#ff7733;">where</span><span> P</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;Path&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// thin wrapper function to strip generics before calling open_impl
+</span><span>    </span><span style="color:#f07178;">open_impl</span><span>(path</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>())
+</span><span>}
+</span></code></pre>
+<h3 id="len-laziness">Лень (Laziness)</h3>
+<p>Хотя в Rust нет «лени» в смысле ленивого вычисления выражений, как это реализовано в Haskell, есть несколько методов, которые вы можете использовать, чтобы элегантно опустить ненужные вычисления и выделения.</p>
+<h4 id="ispol-zovat-iteratory">Использовать итераторы</h4>
+<p>Одна из самых удивительных конструкций в стандартной библиотеке - это Iterator, свойство, которое позволяет выполнять итерацию значений, подобную генератору, где вам нужно только реализовать следующий метод3. Итераторы Rust ленивы в том смысле, что вам явно нужно вызвать потребителя, чтобы начать итерацию по значениям. Просто напишите &quot;привет&quot; .chars(). Filter (char::is_whitespace) ничего не сделаете, пока вы не вызовете для него что-то вроде .collect::<String>().</p>
+<h4 id="iteratory-kak-parametry">Итераторы как параметры</h4>
+<p>Использование итераторов в качестве входных данных может затруднить чтение вашего API (например, T: Iterator &lt;Item = Thingy&gt; vs &amp;[Thingy]), но позволяет пользователям пропускать выделения.</p>
+<p>На самом деле, возможно, вам не захочется использовать общий итератор: вместо этого используйте IntoIterator. Таким образом, вы можете получить все, что вы можете легко превратить в итератор, вызвав для него .into_iter(). Также довольно легко определить, какие типы реализуют IntoIterator - как сказано в документации:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Одним из преимуществ реализации IntoIterator является то, что ваш тип будет работать с синтаксисом цикла for в Rust.
+</span></code></pre>
+<p>То есть все, что пользователь может использовать в цикле for, они также могут передать вашей функции.</p>
+<h4 id="vozvrat-realizatsiia-iteratorov">Возврат / реализация итераторов</h4>
+<p>Если вы хотите вернуть что-то, что ваши пользователи могут использовать в качестве итератора, лучше всего определить новый тип, реализующий итератор. Это может стать проще, когда Im Trait стабилизируется (см. Проблему с отслеживанием). Вы можете найти немного больше информации об этом в учебнике по футурам (поскольку возвращение Future и Iterator имеет схожие характеристики).</p>
+<h4 id="iteratornye-treity">Итераторные трэйты</h4>
+<p>Есть несколько библиотек, которые реализуют трейты, такие как Iterator, например:</p>
+<ul>
+<li>Futures::Stream: Как написано в учебнике по футурам, где Iterator::next возвращает Option<a href="Self::Item">Self::Item</a>, Stream::poll возвращает асинхронный результат Option<a href="Self::Item">Self::Item</a> (или ошибку).</li>
+</ul>
+<h4 id="vziat-zakrytie">Взять закрытие</h4>
+<p>Если потенциально дорогостоящее значение (например, типа Value) не используется во всех ветвях вашего потока управления, рассмотрите возможность замыкания, которое возвращает это значение (Fn() -&gt; Value).</p>
+<p>Если вы разрабатываете трэйту, у вас также могут быть два метода, которые делают то же самое, но в которых один принимает значение, а другой - замыкание, которое вычисляет значение. Реальный пример этого шаблона находится в Result с unwrap_or и unwrap_or_else: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;oh noes&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#f29718;">42</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// just returns `42`
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;oh noes&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or_else</span><span>(|</span><span style="color:#f29718;">msg</span><span>| msg</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">i32</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// will call the closure
+</span></code></pre>
+<h4 id="lenivye-ulovki">Ленивые уловки</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Предоставление Deref делать всю работу: Тип оболочки с реализацией Deref, которая содержит логику для фактического вычисления значения. Crate lazy реализует макрос, который сделает это за вас (хотя для этого требуются нестабильные функции).
+</span></code></pre>
+<h3 id="udobstva">Удобства</h3>
+<p>Вот некоторые особенности, которые вы должны попробовать реализовать, чтобы упростить / согласовать использование ваших типов для ваших пользователей:</p>
+<ul>
+<li>Внедрить или получить &quot;обычные&quot; трэйты, такие как Debug, Hash, PartialEq, PartialOrd, Eq, Ord.</li>
+<li>Реализовать или получить значение по умолчанию вместо написания нового метода без аргументов</li>
+<li>Если вы обнаружите, что реализуете метод для типа, чтобы возвращать некоторые данные типа в качестве итератора, вам также следует подумать о реализации IntoIterator для этого типа. (Это работает только тогда, когда есть только один очевидный способ перебора данных вашего типа. Также см. Раздел об итераторах выше.)</li>
+<li>Если ваш настраиваемый тип данных можно рассматривать аналогично примитивному типу данных T из std, рассмотрите возможность реализации Deref &lt;Target = T&gt;. Но, пожалуйста, не переусердствуйте - Дереф не предназначен для имитации наследования!</li>
+<li>Вместо написания метода конструктора, который принимает строку и создает новый экземпляр вашего типа данных, реализуйте FromStr.</li>
+</ul>
+<h3 id="pol-zovatel-skie-kharakteristiki-dlia-vkhodnykh-parametrov">Пользовательские характеристики для входных параметров</h3>
+<p>В Rust можно реализовать своего рода «перегрузку функции», используя универсальную трэйту T для одного входного параметра и реализуя T для всех типов, которые функция должна принимать.</p>
+<h4 id="primer-str-find">Пример: str::find</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">str</span><span style="color:#f29668;">::</span><span>find&lt;P</span><span style="color:#bfbab0cc;">:</span><span> Pattern&gt;(p</span><span style="color:#bfbab0cc;">:</span><span> P) accepts a Pattern which is implemented </span><span style="color:#ff7733;">for char</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">str</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">FnMut</span><span>(</span><span style="color:#ff7733;">char</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool</span><span style="color:#bfbab0cc;">,</span><span> etc</span><span style="color:#f29668;">.
+</span><span>
+</span><span style="color:#c2d94c;">&quot;Lorem ipsum&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">find</span><span>(</span><span style="color:#c2d94c;">&#39;L&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#c2d94c;">&quot;Lorem ipsum&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">find</span><span>(</span><span style="color:#c2d94c;">&quot;ipsum&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#c2d94c;">&quot;Lorem ipsum&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">find</span><span>(</span><span style="color:#ff7733;">char</span><span style="color:#f29668;">::</span><span>is_whitespace)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="rasshirenie-chert">Расширение черт</h3>
+<p>Рекомендуется использовать типы и свойства, определенные в стандартной библиотеке, поскольку они известны многим программистам на Rust, хорошо протестированы и хорошо задокументированы. И хотя стандартная библиотека Rust имеет тенденцию предлагать типы с семантическим значением4, методов, реализованных на этих типах, может быть недостаточно для вашего API. К счастью, «сиротские правила» Rust позволяют реализовать трейт для (универсального) типа, если хотя бы один из них определен в текущем крейте.</p>
+<h4 id="dekorirovanie-rezul-tatov">Декорирование результатов</h4>
+<p>Как пишет Флориан в «Украшении результатов», вы можете использовать это для написания и реализации трейтов для предоставления ваших собственных методов встроенным типам, таким как Result. Например: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">GrandResultExt </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">party</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>GrandResultExt </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Error&gt;&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">party</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Error&gt;&gt; {
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_ok</span><span>() {
+</span><span>          </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Wooohoo! 🎉&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// User&#39;s code
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> fortune </span><span style="color:#f29668;">= </span><span style="color:#f07178;">library_function</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">method_returning_result</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">party</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#c2d94c;">&quot;Out of luck.&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Реальный код Флориана в лазерах использует тот же шаблон для украшения BoxFuture (из крэйта Futures), чтобы сделать код более читабельным (сокращенно): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> my_database </span><span style="color:#f29668;">=</span><span> client
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">find_database</span><span>(</span><span style="color:#c2d94c;">&quot;might_not_exist&quot;</span><span>)
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">or_create</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h4 id="rasshirenie-chert-1">Расширение черт</h4>
+<p>До сих пор мы расширили методы, доступные для типа, путем определения и реализации нашей собственной характеристики. Вы также можете определить трэйты, которые расширяют другие трэйты (трэйта MyTrait: BufRead + Debug {}). Наиболее ярким примером этого является крэйт itertools, который добавляет длинный список методов к итераторам std.</p>
+<p>К вашему сведению: RFC 445 хочет, чтобы вы добавили суффикс Ext к трэйтам расширения.</p>
+<h3 id="shablon-stroitelia">Шаблон строителя</h3>
+<p>Вы можете упростить выполнение сложных вызовов API, объединив несколько более мелких методов вместе. Это хорошо работает с типами сеансов (см. Ниже). крэйт derive_builder можно использовать для автоматической генерации (более простых) построителей для пользовательских структур.</p>
+<h4 id="primer-std-fs-openoptions">Пример: std::fs::OpenOptions</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fs</span><span style="color:#f29668;">::</span><span>OpenOptions</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> file </span><span style="color:#f29668;">= </span><span>OpenOptions</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read</span><span>(</span><span style="color:#f29718;">true</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">write</span><span>(</span><span style="color:#f29718;">true</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">open</span><span>(</span><span style="color:#c2d94c;">&quot;foo.txt&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="tipy-sessii">Типы сессий</h3>
+<p>Вы можете закодировать конечный автомат в системе типов.</p>
+<ol>
+<li>Каждое состояние отличается от другого.</li>
+<li>Каждый тип состояния реализует разные методы.</li>
+<li>Некоторые методы используют тип состояния (принимая владение им) и возвращают другой тип состояния.</li>
+</ol>
+<p>Это очень хорошо работает в Rust, поскольку ваши методы могут перемещать ваши данные в новый тип, и вы больше не можете получить доступ к старому состоянию после этого.</p>
+<p>Вот произвольный пример отправки пакета по почте: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> p</span><span style="color:#bfbab0cc;">:</span><span> OpenPackage </span><span style="color:#f29668;">= </span><span>Package</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> p</span><span style="color:#bfbab0cc;">:</span><span> OpenPackage </span><span style="color:#f29668;">=</span><span> package</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>([stuff</span><span style="color:#bfbab0cc;">,</span><span> padding</span><span style="color:#bfbab0cc;">,</span><span> padding])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> p</span><span style="color:#bfbab0cc;">:</span><span> ClosedPackage </span><span style="color:#f29668;">=</span><span> package</span><span style="color:#f29668;">.</span><span style="color:#f07178;">seal_up</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// let p: OpenPackage = package.insert([more_stuff]);
+</span><span style="font-style:italic;color:#5c6773;">//~^ ERROR: No method named `insert` on `ClosedPackage`
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> p</span><span style="color:#bfbab0cc;">:</span><span> DeliveryTracking </span><span style="color:#f29668;">=</span><span> package</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send</span><span>(address</span><span style="color:#bfbab0cc;">,</span><span> postage)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Хороший пример из реальной жизни был дан /u/ssokolow в этой ветке на /r/rust:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Hyper использует это, чтобы гарантировать во время компиляции, что невозможно попасть в такие ситуации, как «попытка установить заголовки HTTP после начала тела запроса / ответа», которые мы периодически видим на сайтах PHP. (Компилятор может это уловить, потому что в соединении в этом состоянии нет метода «установить заголовок», а признание устаревших ссылок недействительными позволяет ему быть уверенным, что используется только правильное состояние.)
+</span></code></pre>
+<p>В документации по hyper::server немного подробно рассказывается о том, как это реализовано. Еще одну интересную идею можно найти в крэйте lazers-replicator: он использует std::convert::From для перехода между состояниями.</p>
+<p>Дополнительная информация:</p>
+<ul>
+<li>В статье «За пределами безопасности памяти с помощью типов» описывается, как эту технику можно использовать для реализации красивого и безопасного интерфейса для протокола IMAP.</li>
+<li>Статья Томаса Брахта Лауманна Джесперсена, Филипа Мунксгаарда и Кена Фрииса Ларсена «Типы сессий для Rust» (PDF). DOI.</li>
+<li>В сообщении Эндрю Хобдена «Симпатичные шаблоны конечных автоматов в Rust» показано несколько способов реализации конечных автоматов в системе типов Rust: использование одного перечисления для всех состояний, явных структур, базовой структуры, обобщенной над структурами состояний, и переходов с использованием Into.</li>
+</ul>
+<h3 id="pravil-no-ispol-zuite-vremia-zhizni">Правильно используйте время жизни</h3>
+<p>Определение ограничений типа и трэйтов для вашего API имеет важное значение для разработки API на статически типизированном языке и, как написано выше, помогает вашим пользователям предотвращать логические ошибки. Система типов Rust также может кодировать другое измерение: вы также можете описывать время жизни ваших данных (и писать ограничения на время жизни).</p>
+<p>Это может позволить вам (как разработчику) более спокойно относиться к выдаче заемных ресурсов (вместо более дорогостоящих с точки зрения вычислений собственных данных). Использование ссылок на данные там, где это возможно, определенно является хорошей практикой в Rust, поскольку высокая производительность и библиотеки с «нулевым распределением» являются одним из преимуществ языков.</p>
+<p>Однако вам следует попытаться написать хорошую документацию по этому поводу, поскольку понимание времени жизни и работа со ссылками может представлять проблему для пользователей вашей библиотеки, особенно когда они плохо знакомы с Rust.</p>
+<p>По какой-то причине (вероятно, для краткости) многие жизни называются «a», «b» или чем-то подобным бессмысленным. Если вы знаете ресурс, в течение которого действительны ваши ссылки, вы, вероятно, сможете найти лучшее имя. Например, если вы читаете файл в память и работаете со ссылками на эту память, вызовите файл времени жизни. Или, если вы обрабатываете TCP-запрос и анализируете его данные, вы можете вызвать его время жизни 'req.</p>
+<h4 id="pomestite-kod-finalizatora-v-drop">Поместите код финализатора в drop</h4>
+<p>Правила владения Rust работают не только с памятью: если ваш тип данных представляет внешний ресурс (например, TCP-соединение), вы можете использовать трейт Drop, чтобы закрыть / освободить / очистить ресурс, когда он выходит за пределы области видимости. Вы можете использовать это так же, как и финализаторы (или попробовать… поймать… наконец) на других языках.</p>
+<p>Примеры из реальной жизни:</p>
+<ul>
+<li>Типы счетчика ссылок Rc и Arc используют Drop для уменьшения счетчика ссылок (и освобождения внутренних данных, если счетчик достигает нуля).</li>
+<li>MutexGuard использует Drop для снятия блокировки мьютекса.</li>
+<li>В дизельном крэйте реализована функция Drop для закрытия соединений с базой данных (например, в SQLite).</li>
+</ul>
+<h3 id="primery-ispol-zovaniia">Примеры использования</h3>
+<p>Возможные библиотеки Rust, которые используют несколько хороших трюков в своих API:</p>
+<ul>
+<li>гипер: типы сеансов (см. выше)</li>
+<li>дизель: кодирует запросы SQL как типы, использует трэйты со сложными связанными типами</li>
+<li>футуры: очень абстрактный и хорошо задокументированный крэйт</li>
+</ul>
+<h2 id="drugie-shablony-proektirovaniia">Другие шаблоны проектирования</h2>
+<p>Я попытался описать здесь шаблоны проектирования интерфейсов, то есть API-интерфейсы, доступные пользователю. Хотя я считаю, что некоторые из этих шаблонов применимы только для написания библиотек, многие также применимы для написания общего кода приложения.</p>
+<p>Вы можете найти дополнительную информацию по этой теме в репозитории Rust Design Patterns.</p>
+<hr />
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>1. Если вы можете построить свой тип без каких-либо параметров, вы должны реализовать для него Default и использовать его вместо new. Исключением являются новые типы «контейнеров», такие как Vec или HashMap, где имеет смысл инициализировать пустой контейнер.
+</span><span>
+</span><span>2. В других строго типизированных языках есть лозунг «сделать незаконные государства непредставимыми». Хотя я впервые услышал это, когда говорил с людьми о Haskell, это также название этой статьи, написанной F # для развлечения и наживы, и выступления Ричарда Фельдмана, представленного на elm-conf 2016.
+</span><span>
+</span><span>3. В этом отношении итераторы Rust очень похожи на интерфейс Iterator в Java или протокол Iteration в Python (а также на многие другие).
+</span><span>
+</span><span>4. Например, std имеет тип Result (с вариантами Ok и Err), который следует использовать для обработки ошибок, вместо типа Either (с вариантами Left и Right), что не подразумевает этого значения.
+</span></code></pre>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Подписание офлайн-транзакций | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/offline-signing/#komandy-podderzhivaiushchie-avtonomnuiu-podpis">Команды, поддерживающие автономную подпись</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/offline-signing/#podpisanie-tranzaktsii-v-avtonomnom-rezhime">Подписание транзакций в автономном режиме</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/offline-signing/#primer-avtonomnaia-podpis-platezha"><small>- Пример: автономная подпись платежа</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/offline-signing/#otpravka-avtonomnykh-podpisannykh-tranzaktsii-v-set">Отправка автономных подписанных транзакций в сеть</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/offline-signing/#primer-otpravka-platezha-s-podpis-iu-v-avtonomnom-rezhime"><small>- Пример: отправка платежа с подписью в автономном режиме</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/offline-signing/#avtonomnyi-vkhod-v-techenie-neskol-kikh-seansov">Автономный вход в течение нескольких сеансов</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/offline-signing/#primer-peredacha-s-dvumia-avtonomnymi-seansami-podpisi"><small>- Пример: передача с двумя автономными сеансами подписи</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/offline-signing/#vyigraite-bol-she-vremeni-dlia-podpisaniia">Выиграйте больше времени для подписания</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Подписание офлайн-транзакций</h1>
+
+<p>Некоторые модели безопасности требуют хранения ключей подписи и, следовательно, процесса подписи отдельно от создания транзакций и широковещательной рассылки по сети. Примеры включают:</p>
+<ul>
+<li>Сбор подписей от географически разрозненных подписантов в <a href="https://spl.solana.com/token#multisig-usage">схеме с несколькими подписями</a></li>
+<li>Подписание транзакций с помощью устройства для подписи <a href="https://en.wikipedia.org/wiki/Air_gap_(networking)">airgapped</a></li>
+</ul>
+<p>В этом документе описывается использование интерфейса командной строки Solana для отдельной подписи и отправки транзакции.</p>
+<h2 id="komandy-podderzhivaiushchie-avtonomnuiu-podpis">Команды, поддерживающие автономную подпись</h2>
+<p>В настоящее время автономную подпись поддерживают следующие команды:</p>
+<ul>
+<li>
+<p><a href="cli/usage.md#solana-create-stake-account"><code>create-stake-account</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-create-stake-account-checked"><code>create-stake-account-checked</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-deactivate-stake"><code>deactivate-stake</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-delegate-stake"><code>delegate-stake</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-split-stake"><code>split-stake</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-stake-authorize"><code>stake-authorize</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-stake-authorize-checked"><code>stake-authorize-checked</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-stake-set-lockup"><code>stake-set-lockup</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-stake-set-lockup-checked"><code>stake-set-lockup-checked</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-transfer"><code>transfer</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-withdraw-stake"><code>withdraw-stake</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-create-vote-account"><code>create-vote-account</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-vote-authorize-voter"><code>vote-authorize-voter</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-vote-authorize-voter-checked"><code>vote-authorize-voter-checked</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-vote-authorize-withdrawer"><code>vote-authorize-withdrawer</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-vote-authorize-withdrawer-checked"><code>vote-authorize-withdrawer-checked</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-vote-update-commission"><code>vote-update-commission</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-vote-update-validator"><code>vote-update-validator</code></a></p>
+</li>
+<li>
+<p><a href="cli/usage.md#solana-withdraw-from-vote-account"><code>withdraw-from-vote-account</code></a></p>
+</li>
+</ul>
+<h2 id="podpisanie-tranzaktsii-v-avtonomnom-rezhime">Подписание транзакций в автономном режиме</h2>
+<p>Чтобы подписать транзакцию в автономном режиме, передайте следующие аргументы в командной строке.</p>
+<ol>
+<li><code>--sign-only</code> запрещает клиенту отправлять подписанную транзакцию в сеть. Вместо этого пары открытый ключ/подпись выводятся на стандартный вывод.</li>
+<li><code>--blockhash BASE58_HASH</code> позволяет вызывающей стороне указать значение, используемое для заполнения поля транзакции <code>recent_blockhash</code>. Это служит ряду
+целей, а именно: _ Устраняет необходимость подключения к сети и запроса последнего хэша блока через RPC _ Позволяет подписывающим сторонам координировать хеш блока в схеме с несколькими подписями</li>
+</ol>
+<h3 id="primer-avtonomnaia-podpis-platezha">Пример: автономная подпись платежа</h3>
+<p>Команда</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana@offline$</span><span> solana pay</span><span style="color:#f29718;"> --sign-only --blockhash</span><span> 5Tx8F3jgSHx21CbtjwmdaKPLM5tWmreWAnPrbqHomSJF </span><span style="color:#bfbab0cc;">\
+</span><span>    recipient-keypair.json 1
+</span></code></pre>
+<p>Вывод</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Blockhash: 5Tx8F3jgSHx21CbtjwmdaKPLM5tWmreWAnPrbqHomSJF
+</span><span>Signers (Pubkey=Signature):
+</span><span>  FhtzLVsmcV7S5XqGD79ErgoseCLhZYmEZnz9kQg1Rp7j=4vC38p4bz7XyiXrk6HtaooUqwxTWKocf45cstASGtmrD398biNJnmTcUCVEojE7wVQvgdYbjHJqRFZPpzfCQpmUN
+</span><span>
+</span><span>{&quot;blockhash&quot;:&quot;5Tx8F3jgSHx21CbtjwmdaKPLM5tWmreWAnPrbqHomSJF&quot;,&quot;signers&quot;:[&quot;FhtzLVsmcV7S5XqGD79ErgoseCLhZYmEZnz9kQg1Rp7j=4vC38p4bz7XyiXrk6HtaooUqwxTWKocf45cstASGtmrD398biNJnmTcUCVEojE7wVQvgdYbjHJqRFZPpzfCQpmUN&quot;]}&#39;
+</span></code></pre>
+<h2 id="otpravka-avtonomnykh-podpisannykh-tranzaktsii-v-set">Отправка автономных подписанных транзакций в сеть</h2>
+<p>Чтобы отправить транзакцию, подписанную в автономном режиме, в сеть, передайте следующие аргументы в командной строке.</p>
+<ol>
+<li><code>--blockhash BASE58_HASH</code> должен быть тем же хэшем, который использовался для подписи.</li>
+<li><code>--signer BASE58_PUBKEY=BASE58_SIGNATURE</code>, по одному для каждого подписавшего в автономном режиме. Это включает в себя пары открытого ключа/подписи непосредственно в транзакции, а не ее подписание какой-либо локальной парой ключей.</li>
+</ol>
+<h3 id="primer-otpravka-platezha-s-podpis-iu-v-avtonomnom-rezhime">Пример: отправка платежа с подписью в автономном режиме</h3>
+<p>Команда</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana@online$</span><span> solana pay</span><span style="color:#f29718;"> --blockhash</span><span> 5Tx8F3jgSHx21CbtjwmdaKPLM5tWmreWAnPrbqHomSJF </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --signer</span><span> FhtzLVsmcV7S5XqGD79ErgoseCLhZYmEZnz9kQg1Rp7j=4vC38p4bz7XyiXrk6HtaooUqwxTWKocf45cstASGtmrD398biNJnmTcUCVEojE7wVQvgdYbjHJqRFZPpzfCQpmUN
+</span><span>    </span><span style="color:#ffb454;">recipient-keypair.json</span><span> 1
+</span></code></pre>
+<p>Вывод</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>4vC38p4bz7XyiXrk6HtaooUqwxTWKocf45cstASGtmrD398biNJnmTcUCVEojE7wVQvgdYbjHJqRFZPpzfCQpmUN
+</span></code></pre>
+<h2 id="avtonomnyi-vkhod-v-techenie-neskol-kikh-seansov">Автономный вход в течение нескольких сеансов</h2>
+<p>Подписание в автономном режиме также может выполняться в течение нескольких сеансов. В этом случае передайте открытый ключ отсутствующей подписывающей стороны для каждой роли. Все публичные ключи, которые были указаны, но для которых не была сгенерирована подпись, будут указаны как отсутствующие в выходных данных автономной подписи.</p>
+<h3 id="primer-peredacha-s-dvumia-avtonomnymi-seansami-podpisi">Пример: передача с двумя автономными сеансами подписи</h3>
+<p>Команда (оффлайн сеанс № 1)</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana@offline1$ solana transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
+</span><span>    --blockhash 7ALDjLv56a8f6sH6upAZALQKkXyjAwwENH9GomyM8Dbc \
+</span><span>    --sign-only \
+</span><span>    --keypair fee_payer.json \
+</span><span>    --from 674RgFMgdqdRoVtMqSBg7mHFbrrNm1h1r721H1ZMquHL
+</span></code></pre>
+<p>Вывод (оффлайн сеанс № 1)</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Blockhash: 7ALDjLv56a8f6sH6upAZALQKkXyjAwwENH9GomyM8Dbc
+</span><span>Signers (Pubkey=Signature):
+</span><span>  3bo5YiRagwmRikuH6H1d2gkKef5nFZXE3gJeoHxJbPjy=ohGKvpRC46jAduwU9NW8tP91JkCT5r8Mo67Ysnid4zc76tiiV1Ho6jv3BKFSbBcr2NcPPCarmfTLSkTHsJCtdYi
+</span><span>Absent Signers (Pubkey):
+</span><span>  674RgFMgdqdRoVtMqSBg7mHFbrrNm1h1r721H1ZMquHL
+</span></code></pre>
+<p>Команда (оффлайн сеанс № 2)</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana@offline2$ solana transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
+</span><span>    --blockhash 7ALDjLv56a8f6sH6upAZALQKkXyjAwwENH9GomyM8Dbc \
+</span><span>    --sign-only \
+</span><span>    --keypair from.json \
+</span><span>    --fee-payer 3bo5YiRagwmRikuH6H1d2gkKef5nFZXE3gJeoHxJbPjy
+</span></code></pre>
+<p>Вывод (оффлайн сеанс № 2)</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Blockhash: 7ALDjLv56a8f6sH6upAZALQKkXyjAwwENH9GomyM8Dbc
+</span><span>Signers (Pubkey=Signature):
+</span><span>  674RgFMgdqdRoVtMqSBg7mHFbrrNm1h1r721H1ZMquHL=3vJtnba4dKQmEAieAekC1rJnPUndBcpvqRPRMoPWqhLEMCty2SdUxt2yvC1wQW6wVUa5putZMt6kdwCaTv8gk7sQ
+</span><span>Absent Signers (Pubkey):
+</span><span>  3bo5YiRagwmRikuH6H1d2gkKef5nFZXE3gJeoHxJbPjy
+</span></code></pre>
+<p>Команда (онлайн сеанс)</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana@online$ solana transfer Fdri24WUGtrCXZ55nXiewAj6RM18hRHPGAjZk3o6vBut 10 \
+</span><span>    --blockhash 7ALDjLv56a8f6sH6upAZALQKkXyjAwwENH9GomyM8Dbc \
+</span><span>    --from 674RgFMgdqdRoVtMqSBg7mHFbrrNm1h1r721H1ZMquHL \
+</span><span>    --signer 674RgFMgdqdRoVtMqSBg7mHFbrrNm1h1r721H1ZMquHL=3vJtnba4dKQmEAieAekC1rJnPUndBcpvqRPRMoPWqhLEMCty2SdUxt2yvC1wQW6wVUa5putZMt6kdwCaTv8gk7sQ \
+</span><span>    --fee-payer 3bo5YiRagwmRikuH6H1d2gkKef5nFZXE3gJeoHxJbPjy \
+</span><span>    --signer 3bo5YiRagwmRikuH6H1d2gkKef5nFZXE3gJeoHxJbPjy=ohGKvpRC46jAduwU9NW8tP91JkCT5r8Mo67Ysnid4zc76tiiV1Ho6jv3BKFSbBcr2NcPPCarmfTLSkTHsJCtdYi
+</span></code></pre>
+<p>Вывод (онлайн сеанс)</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>ohGKvpRC46jAduwU9NW8tP91JkCT5r8Mo67Ysnid4zc76tiiV1Ho6jv3BKFSbBcr2NcPPCarmfTLSkTHsJCtdYi
+</span></code></pre>
+<h2 id="vyigraite-bol-she-vremeni-dlia-podpisaniia">Выиграйте больше времени для подписания</h2>
+<p>Обычно транзакция Solana должна быть подписана и принята сетью в пределах нескольких слотов от хэша блока в его поле <code>recent_blockhash</code> (~ 1 минута на момент написания этой статьи). Если ваша процедура подписания занимает больше времени, <a href="offline-signing/durable-nonce/">Durable Transaction Nonce</a> может дать вам необходимое дополнительное время.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

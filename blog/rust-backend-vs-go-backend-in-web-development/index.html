@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust Backend против Go Backend в веб-разработке | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#skhodstva">Сходства</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#rasshirennye-standartnye-biblioteki"><small>- Расширенные стандартные библиотеки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#otkrytyi-istochnik"><small>- Открытый источник</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#otnositel-no-novye-iazyki"><small>- Относительно новые языки</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#proizvoditel-nost">Производительность</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#upravlenie-pamiat-iu">Управление памятью</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#skorost-razrabotki">Скорость разработки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#sravnenie-koda">Сравнение кода</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#parallelizm">Параллелизм</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#pobeditel">Победитель</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#rust-tsenitsia"><small>- Rust ценится…</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-backend-vs-go-backend-in-web-development/#go-predpochitaiut"><small>- Go предпочитают ...</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust Backend против Go Backend в веб-разработке</h1>
+
+<p><a href="https://qvault.io/rust/rust-vs-go-in-backend-web-development/">Перевод</a> | Автор оригинала: Lane Wagner</p>
+<p>Rust и Go - два самых больших успеха отрасли, когда дело касается разработки современных языков программирования. Оба языка конкурируют с точки зрения серверной веб-разработки, и это жесткая конкуренция. Golang и Rust - новые языки, у них растут сообщества, они быстрые и эффективные. Когда дело доходит до микросервисных архитектур, фреймворков и приложений, Rust и Go широко используются в серверной части.</p>
+<h2 id="skhodstva">Сходства</h2>
+<h3 id="rasshirennye-standartnye-biblioteki">Расширенные стандартные библиотеки</h3>
+<p>Rust и Go имеют много общих черт, особенно когда дело касается веб-разработки. У них обоих есть богатые стандартные библиотеки, хотя Go, как правило, имеет более ориентированные на Интернет протоколы, такие как HTTP, поддерживаемые из коробки.</p>
+<h3 id="otkrytyi-istochnik">Открытый источник</h3>
+<p>Оба языка имеют открытый исходный код, что означает, что ни одна компания в ближайшее время не будет выдергивать исходный код из-под нас, хотя стоит отметить, что Google движет разработкой Go, а Rust - это скорее проект сообщества. Есть плюсы и минусы поддержки компании. Go извлекает выгоду из ресурсов и PR крупной технологической компании, в то время как Rust никогда не подвергнется риску навязывания специфических для Google повесток дня проекту.</p>
+<h3 id="otnositel-no-novye-iazyki">Относительно новые языки</h3>
+<p>Go и Rust - это новые языки, а это значит, что они не обладают тем багажом устаревшей и обратной совместимости, который вы можете найти с такими языками, как Java и Javascript.</p>
+<p>Релиз Rust v1: 15 мая 2015 г.</p>
+<p>Релиз Go v1: 28 марта 2012 г.</p>
+<h2 id="proizvoditel-nost">Производительность</h2>
+<p>Показатели производительности обычно ставят Rust прямо перед Go, но ненамного. Компилятор Rust и дизайн языка позволяют разработчикам легко использовать оптимизацию, которая обеспечивает скорость, сравнимую с подобными C. С другой стороны, Go жертвует небольшой скоростью ради простоты и элегантного синтаксиса.</p>
+<p><img src="/imgs/posts/3288d5bf_01.png" alt="Rust против Go по скорости" /></p>
+<h2 id="upravlenie-pamiat-iu">Управление памятью</h2>
+<p>Оба языка претендуют на звание «безопасных для памяти», но используют разные подходы к его достижению. Rust обнаруживает ошибки памяти во время компиляции, в то время как Go использует сборщик мусора во время выполнения.</p>
+<p>Rust использует стратегию владения во время компиляции за счет абстракций с нулевой стоимостью. Если программа на Rust небезопасна для памяти, она не скомпилируется. Для всех, кто часто сталкивается с ошибками памяти в языках C, это признано удивительной особенностью. Вместо умной оптимизации компилятора компилятор Go добавляет к завершенному исполняемому файлу небольшую среду выполнения, которая управляет выделением и освобождением памяти.</p>
+<p>Хотя у обоих подходов есть свои плюсы и минусы, в целом оптимизация компилятора Rust приводит к более производительным программам. В качестве альтернативы код приложения Go более чистый, поскольку управление памятью полностью обрабатывается средой выполнения.</p>
+<p><img src="/imgs/posts/3288d5bf_02.png" alt="Rust против Go по памяти" /></p>
+<h2 id="skorost-razrabotki">Скорость разработки</h2>
+<p>Бывают случаи, когда во время разработки веб-приложения скорость разработки важнее скорости приложения. Python - отличный пример, это один из самых медленных языков, но у него самый чистый синтаксис. Хотя Go, как правило, быстрее и использует меньше памяти, чем такие языки, как Java, C#, JavaScript, Python и Ruby, он дает компромисс в производительности, чтобы обеспечить быструю и простую разработку.</p>
+<p>Также стоит отметить, что Go и Rust становятся все популярнее. Если вы хотите узнать об этом больше, прочтите соответствующую статью «Rust vs Go - что более популярно?».</p>
+<h2 id="sravnenie-koda">Сравнение кода</h2>
+<p>Теперь, когда мы концептуально сравнили и противопоставили Rust и Go, давайте посмотрим, как будет выглядеть простой HTTP-сервер на обоих языках.</p>
+<p>Пример внутреннего HTTP-сервера на Rust </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="font-style:italic;color:#5c6773;">// example taken from https://gist.github.com/mjohnsullivan/e5182707caf0a9dbdf2d
+</span><span>
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>net</span><span style="color:#f29668;">::</span><span>{TcpStream</span><span style="color:#bfbab0cc;">,</span><span> TcpListener}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>io</span><span style="color:#f29668;">::</span><span>{Read</span><span style="color:#bfbab0cc;">,</span><span> Write}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">handle_read</span><span>(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">stream</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>TcpStream) {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> buf </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">0</span><span style="color:#ff7733;">u8 </span><span style="color:#bfbab0cc;">;</span><span style="color:#f29718;">4096</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">match</span><span> stream</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> buf) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> req_str </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from_utf8_lossy(</span><span style="color:#f29668;">&amp;</span><span>buf)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> req_str)</span><span style="color:#bfbab0cc;">;
+</span><span>            }</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Unable to read stream: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">handle_write</span><span>(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">stream</span><span style="color:#bfbab0cc;">:</span><span> TcpStream) {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> response </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">b</span><span style="color:#c2d94c;">&quot;HTTP/1.1 200 OK</span><span style="color:#95e6cb;">\r\n</span><span style="color:#c2d94c;">Content-Type: text/html; charset=UTF-8</span><span style="color:#95e6cb;">\r\n\r\n</span><span style="color:#c2d94c;">&lt;html&gt;&lt;body&gt;Hello world&lt;/body&gt;&lt;/html&gt;</span><span style="color:#95e6cb;">\r\n</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">match</span><span> stream</span><span style="color:#f29668;">.</span><span style="color:#f07178;">write</span><span>(response) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Response sent&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Failed sending response: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">handle_client</span><span>(</span><span style="color:#f29718;">stream</span><span style="color:#bfbab0cc;">:</span><span> TcpStream) {
+</span><span>    </span><span style="color:#f07178;">handle_read</span><span>(</span><span style="color:#f29668;">&amp;</span><span>stream)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">handle_write</span><span>(stream)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> listener </span><span style="color:#f29668;">= </span><span>TcpListener</span><span style="color:#f29668;">::</span><span>bind(</span><span style="color:#c2d94c;">&quot;127.0.0.1:8080&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Listening for connections on port </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8080</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> stream </span><span style="color:#f29668;">in</span><span> listener</span><span style="color:#f29668;">.</span><span style="color:#f07178;">incoming</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">match</span><span> stream {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(stream) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>                thread</span><span style="color:#f29668;">::</span><span>spawn(|| {
+</span><span>                    </span><span style="color:#f07178;">handle_client</span><span>(stream)
+</span><span>                })</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>                </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Unable to connect: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Кодовый язык: Rust (Rust)</p>
+<p>Как вы заметили в приведенном выше коде, мы можем развернуть довольно простой HTTP-сервер без чего-либо, кроме стандартной библиотеки, хотя мы должны реализовать некоторые из протоколов HTTP самостоятельно. Обратите внимание, что мы включаем ответ HTTP / 1.1 200 OK непосредственно в поток данных, которым мы отвечаем. Это не значит, что нет других крэйтов, которые бы облегчили нашу жизнь, но Rust из коробки заставляет нас делать большую часть тяжелой работы самостоятельно.</p>
+<p>Если вы посмотрите на стандартное создание HTTP, вы увидите, что это намеренный выбор не стандартизировать реализацию.</p>
+<blockquote>
+<p>Примечательно, что в этом крэйте вы не найдете реализации отправки запросов или раскрутки сервера. Предполагается, что этот крэйт является «стандартной библиотекой» для HTTP-клиентов и серверов, не требуя какой-либо конкретной реализации. Обратите внимание, что этот крэйт все еще находится на ранней стадии своего жизненного цикла, поэтому библиотеки поддержки, которые интегрируются с крэйтом http, находятся в стадии разработки! Следите за обновлениями, и в будущем мы обязательно будем выделять здесь крэйти.</p>
+</blockquote>
+<p>http - Rust</p>
+<p>Пример внутреннего HTTP-сервера Golang </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#ff7733;">package </span><span>main
+</span><span>
+</span><span style="color:#ff7733;">import </span><span>(
+</span><span>	</span><span style="color:#c2d94c;">&quot;encoding/json&quot;
+</span><span>	</span><span style="color:#c2d94c;">&quot;net/http&quot;
+</span><span>)
+</span><span>
+</span><span style="color:#ff7733;">func </span><span style="color:#ffb454;">hello</span><span>(</span><span style="color:#f29718;">w </span><span>http</span><span style="color:#f29668;">.</span><span style="color:#ff7733;">ResponseWriter</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">req </span><span style="color:#f29668;">*</span><span>http</span><span style="color:#f29668;">.</span><span style="color:#ff7733;">Request</span><span>) {
+</span><span>	</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">response </span><span style="color:#ff7733;">struct </span><span>{
+</span><span>		Message </span><span style="font-style:italic;color:#39bae6;">string </span><span style="color:#c2d94c;">`json:&quot;message&quot;`
+</span><span>	}
+</span><span>	resp </span><span style="color:#f29668;">:= </span><span>response{
+</span><span>		Message</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;hello world&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>	}
+</span><span>	respBytes</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">_ </span><span style="color:#f29668;">:= </span><span>json</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Marshal</span><span>(resp)
+</span><span>	w</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Header</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Set</span><span>(</span><span style="color:#c2d94c;">&quot;Content-Type&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;application/json&quot;</span><span>)
+</span><span>	w</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">WriteHeader</span><span>(</span><span style="color:#f29718;">200</span><span>)
+</span><span>	w</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Write</span><span>(respBytes)
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">func </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>	http</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">HandleFunc</span><span>(</span><span style="color:#c2d94c;">&quot;/hello&quot;</span><span style="color:#bfbab0cc;">, </span><span>hello)
+</span><span>	http</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ListenAndServe</span><span>(</span><span style="color:#c2d94c;">&quot;:8080&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">nil</span><span>)
+</span><span>}
+</span></code></pre>
+<p>Язык кода: Go (go)</p>
+<p>С другой стороны, с Go чрезвычайно легко развернуть рабочий веб-сервер, мы даже получаем поддержку JSON, заголовков и кодов состояния прямо из стандартной библиотеки.</p>
+<h2 id="parallelizm">Параллелизм</h2>
+<p>Параллелизм необходим в серверных приложениях. Некоторые языки работают в однопоточных средах, что означает, что они используют некоторые хитрые приемы для имитации параллелизма без достижения истинного параллелизма. И Rust, и Go имеют элегантные решения для создания полностью параллельных приложений, но Go снова берет пирог с точки зрения простоты, с ключевым словом go, являющимся единственным синтаксисом, необходимым для запуска нового потока: </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#ff7733;">go </span><span style="color:#ffb454;">someFunc</span><span>()
+</span></code></pre>
+<p>Язык кода: Go (go)</p>
+<h2 id="pobeditel">Победитель</h2>
+<p>Как обычно, явного победителя нет, результаты более тонкие.</p>
+<h3 id="rust-tsenitsia">Rust ценится…</h3>
+<ul>
+<li>Скорость вычислений</li>
+<li>Использование памяти</li>
+<li>Тонкая настройка и контроль над финальным исполняемым файлом</li>
+</ul>
+<h3 id="go-predpochitaiut">Go предпочитают ...</h3>
+<ul>
+<li>Простой синтаксис</li>
+<li>Для новичков</li>
+<li>Скорость разработчика</li>
+<li>Механизмы параллелизма</li>
+</ul>
+<p>Отличительная трэйта успешного программиста, даже самоучки, - это способность выбирать хорошие инструменты для конкретного проекта. Это не означает, что вам нужно быть экспертом во всех существующих языках, базах данных, технологиях и фреймворках, но это означает, что вам нужно знать их достаточно, чтобы принимать обоснованные решения. Способность принимать такие решения выделит вас среди других и даст вам больше возможностей для развития карьеры программиста. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

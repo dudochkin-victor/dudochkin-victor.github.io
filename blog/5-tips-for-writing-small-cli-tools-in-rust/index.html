@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>5 советов по написанию небольших инструментов командной строки на Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/5-tips-for-writing-small-cli-tools-in-rust/#bystraia-obrabotka-argumentov-cli">Быстрая обработка аргументов CLI</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/5-tips-for-writing-small-cli-tools-in-rust/#obrabotka-oshibok">Обработка ошибок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/5-tips-for-writing-small-cli-tools-in-rust/#mnozhestvo-malen-kikh-kreitov">Множество маленьких крэйтов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/5-tips-for-writing-small-cli-tools-in-rust/#mnozhestvo-nebol-shikh-vspomogatel-nykh-funktsii">Множество небольших вспомогательных функций</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/5-tips-for-writing-small-cli-tools-in-rust/#mnozhestvo-struktur">Множество структур</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/5-tips-for-writing-small-cli-tools-in-rust/#bonus-vedenie-zhurnala">Бонус: ведение журнала</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/5-tips-for-writing-small-cli-tools-in-rust/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>5 советов по написанию небольших инструментов командной строки на Rust</h1>
+
+<p><a href="https://deterministic.space/rust-cli-tips.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Rust - отличный язык для написания небольших инструментов командной строки. Хотя он дает вам некоторые инструменты для общих задач, позволяет создавать красивые абстракции, он также имеет систему типов и подход к дизайну API, которые побуждают вас писать надежный код. Позвольте мне показать вам несколько приемов, которые помогут сделать этот опыт приятным.</p>
+<h2 id="bystraia-obrabotka-argumentov-cli">Быстрая обработка аргументов CLI</h2>
+<p>Есть много библиотек, которые помогут вам в этом. Что мне понравилось, так это structopt: она дает вам возможность аннотировать структуру или перечисление и превращать ее поля / варианты во флаги интерфейса командной строки: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> structopt_derive</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">use </span><span>structopt</span><span style="color:#f29668;">::</span><span>StructOpt</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/// Do fancy things
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(StructOpt</span><span style="color:#bfbab0cc;">,</span><span> Debug)]
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">structopt</span><span>(name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;fancify&quot;</span><span>)]
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Cli </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// The source, possibly unfancy
+</span><span>    source</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Level of fanciness we should aim for
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">structopt</span><span>(long </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;level&quot;</span><span style="color:#bfbab0cc;">,</span><span> short </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;l&quot;</span><span style="color:#bfbab0cc;">,</span><span> default_value </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;42&quot;</span><span>)]
+</span><span>    level</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Output file
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">structopt</span><span>(long </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;output&quot;</span><span style="color:#bfbab0cc;">,</span><span> short </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;w&quot;</span><span style="color:#bfbab0cc;">,</span><span> default_value </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;/dev/null&quot;</span><span>)]
+</span><span>    output</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    Cli</span><span style="color:#f29668;">::</span><span>from_args()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это очень лаконично, но при этом очень мощно! (Он использует хлопок за кулисами.) </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run -- --help
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+</span><span>     Running `target/debug/fancify --help`
+</span><span>fancify 0.1.0
+</span><span>Pascal Hertleif &lt;killercup@gmail.com&gt;
+</span><span>Do fancy things
+</span><span>
+</span><span>USAGE:
+</span><span>    fancify [OPTIONS] &lt;source&gt;
+</span><span>
+</span><span>FLAGS:
+</span><span>    -h, --help       Prints help information
+</span><span>    -V, --version    Prints version information
+</span><span>
+</span><span>OPTIONS:
+</span><span>    -l, --level &lt;level&gt;      Level of fanciness we should aim for [default: 42]
+</span><span>    -w, --output &lt;output&gt;    Output file [default: /dev/null]
+</span><span>
+</span><span>ARGS:
+</span><span>    &lt;source&gt;    The source, possibly unfancy
+</span></code></pre>
+<p>Или:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run -- whatever --levl
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+</span><span>     Running `target/debug/fancify whatever --levl`
+</span><span>error: Found argument &#39;--levl&#39; which wasn&#39;t expected, or isn&#39;t valid in this context
+</span><span>        Did you mean --level?
+</span><span>
+</span><span>USAGE:
+</span><span>    fancify &lt;source&gt; --level &lt;level&gt;
+</span><span>
+</span><span>For more information try --help
+</span></code></pre>
+<h2 id="obrabotka-oshibok">Обработка ошибок</h2>
+<p>Это было обновлено в апреле 2020 года.</p>
+<p>Во многих приложениях CLI обработка ошибок не должна быть сложной. Все, что вам нужно, это библиотека, которая позволяет вам выделять практически все типы ошибок и, при желании, добавлять к ним некоторый контекст (описания). </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fs</span><span style="color:#f29668;">::</span><span>File</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>anyhow</span><span style="color:#f29668;">::</span><span>Context</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Anyhow exports a type alias for a Result with its own error type.
+</span><span style="font-style:italic;color:#5c6773;">// Having main return this makes it print the error as well as a list of causes.
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span>anyhow</span><span style="color:#f29668;">::</span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Let&#39;s say this is user input
+</span><span>    </span><span style="color:#ff7733;">let</span><span> source </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;./whatever&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> level </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;42&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Opening a file can fail, but the error message is something like
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// &quot;OS error 2: No such file or directory&quot;…
+</span><span>    </span><span style="color:#ff7733;">let</span><span> source </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(source)
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// …so, let&#39;s add a bit of context to it:
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">with_context</span><span>(|| </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;Can&#39;t open `</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">`&quot;</span><span style="color:#bfbab0cc;">,</span><span> source))</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> level </span><span style="color:#f29668;">=</span><span> level</span><span style="color:#f29668;">.</span><span style="color:#f07178;">parse</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// can return a ParseIntError
+</span><span>    </span><span style="color:#ff7733;">let</span><span> source_fanciness </span><span style="color:#f29668;">= </span><span style="color:#f07178;">get_fanciness</span><span>(</span><span style="color:#f29668;">&amp;</span><span>source)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// returns generic error as well
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// An assert that returns an Error
+</span><span>    anyhow</span><span style="color:#f29668;">::</span><span>ensure</span><span style="color:#f29668;">!</span><span>(source_fanciness </span><span style="color:#f29668;">&lt;</span><span> level</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;source is already fancy&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Everything is fine, and main returns an empty &quot;okay&quot;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_fanciness</span><span>(</span><span style="color:#f29718;">_source</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>File) </span><span style="color:#bfbab0cc;">-&gt; </span><span>anyhow</span><span style="color:#f29668;">::</span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">u8</span><span>&gt; {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">255</span><span>) </span><span style="font-style:italic;color:#5c6773;">// Let&#39;s assume all inputs are fancy
+</span><span>}
+</span></code></pre>
+<p>Это выглядит достаточно просто, правда? Есть много способов улучшить работу с ошибками, например, написав свои собственные типы ошибок. Но для быстрых инструментов CLI в этом чаще всего нет необходимости.</p>
+<p>Кстати, вот как выглядит вывод ошибки: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.61 secs
+</span><span>     Running `target/debug/fancify`
+</span><span>Error: Can&#39;t open `./whatever`
+</span><span>
+</span><span>Caused by:
+</span><span>    No such file or directory (os error 2)
+</span></code></pre>
+<p>Или:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ touch whatever
+</span><span>$ cargo run
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+</span><span>     Running `target/debug/fancify`
+</span><span>Error: source is already fancy
+</span></code></pre>
+<h2 id="mnozhestvo-malen-kikh-kreitov">Множество маленьких крэйтов</h2>
+<p>Не бойтесь зависеть от множества крэйтов. Cargo действительно хорош тем, что позволяет вам не заботиться о компиляции и обновлении зависимостей, поэтому позвольте Cargo и сообществу Rust помочь вам!</p>
+<p>Например, я недавно написал инструмент CLI с 37 строками кода. Это первый блок: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> structopt_derive</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> error_chain</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> serde_derive</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> serde_json </span><span style="color:#f29668;">as</span><span> json</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use</span><span> serde_yaml </span><span style="color:#f29668;">as</span><span> yaml</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h2 id="mnozhestvo-nebol-shikh-vspomogatel-nykh-funktsii">Множество небольших вспомогательных функций</h2>
+<p>Я обычно пишу множество мелких функций. Вот пример такой «небольшой вспомогательной функции»: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">open</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;File&gt; {
+</span><span>    File</span><span style="color:#f29668;">::</span><span>open(path)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">with_context</span><span>(|| </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;Can&#39;t open `</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">`&quot;</span><span style="color:#bfbab0cc;">,</span><span> path))
+</span><span>}
+</span></code></pre>
+<p>Ладно, это немного не впечатляет. Как насчет этого? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> result </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> file </span><span style="color:#f29668;">= </span><span style="color:#f07178;">open</span><span>(path)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    file</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_to_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> result)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(result)
+</span><span>}
+</span></code></pre>
+<p>Она на один уровень более абстрактна, чем стандартная библиотека, скрывает выделение String с неизвестной длиной, но ... это действительно удобно.</p>
+<p>Я знаю, что можно было бы поместить тела функций прямо в основной код, но дать этим маленьким кодовым блокам имена и получить возможность их повторного использования - это действительно мощный инструмент. Это также делает основную функцию более абстрактной и более простой для чтения (не нужно вдаваться в подробности реализации). Более того (но это обычно не очень хорошо работает в небольших приложениях с интерфейсом командной строки), это упрощает модульное тестирование.</p>
+<p>И между прочим: в большинстве небольших инструментов CLI производительность не так важна. Не стесняйтесь предпочесть .clone() добавлению в код параметров времени жизни.</p>
+<h2 id="mnozhestvo-struktur">Множество структур</h2>
+<p>По моему опыту, использование большого количества структур действительно окупается. Некоторые сценарии: </p>
+<ul>
+<li>Есть ли выбор между использованием serde_json::Value с набором совпадений или структурой с <code>#[derive (Deserialize)]</code>? Выберите структуру, получите производительность, хорошие ошибки и документацию о форме, которую вы ожидаете.</li>
+<li>Передать те же 3 параметра кучке функций? Сгруппируйте их в структуру (кортеж), дайте группе имя и, возможно, даже превратите некоторые из этих функций в методы.</li>
+<li>Видите, как вы пишете много шаблонного кода? Посмотрите, сможете ли вы написать структуру / перечисление и использовать наследование.</li>
+</ul>
+<h2 id="bonus-vedenie-zhurnala">Бонус: ведение журнала</h2>
+<p>И бонусный раунд: немного регистрации с помощью loggerv! (Это действительно просто, но обычно этого достаточно для приложений с интерфейсом командной строки. На данный момент нет необходимости вдаваться в потоковое воспроизведение журналов JSON в logstash.) </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> log</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> error_chain</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> structopt_derive</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>structopt</span><span style="color:#f29668;">::</span><span>StructOpt</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/// Do fancy things
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(StructOpt</span><span style="color:#bfbab0cc;">,</span><span> Debug)]
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">structopt</span><span>(name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;fancify&quot;</span><span>)]
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Cli </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Enable logging, use multiple `v`s to increase verbosity
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">structopt</span><span>(short </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;v&quot;</span><span style="color:#bfbab0cc;">,</span><span> long </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;verbose&quot;</span><span>)]
+</span><span>    verbosity</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#f07178;">quick_main!</span><span>(|| </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> args </span><span style="color:#f29668;">= </span><span>Cli</span><span style="color:#f29668;">::</span><span>from_args()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    loggerv</span><span style="color:#f29668;">::</span><span>init_with_verbosity(args</span><span style="color:#f29668;">.</span><span>verbosity)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>    </span><span style="color:#ff7733;">let</span><span> thing </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;foobar&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">debug!</span><span>(</span><span style="color:#c2d94c;">&quot;Thing happened: {}&quot;</span><span style="color:#bfbab0cc;">,</span><span> thing)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>
+</span><span>    </span><span style="color:#f07178;">info!</span><span>(</span><span style="color:#c2d94c;">&quot;It&#39;s all good!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">error_chain! </span><span>{
+</span><span>    foreign_links {
+</span><span>        Log(</span><span style="color:#f29668;">::</span><span>log</span><span style="color:#f29668;">::</span><span>SetLoggerError)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Давайте запустим его три раза с большим или меньшим количеством подробностей! </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+</span><span>     Running `target/debug/fancify`
+</span><span>$ cargo run -- -v
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+</span><span>     Running `target/debug/fancify -v`
+</span><span>fancify: It&#39;s all good!
+</span><span>$ cargo run -- -vv
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+</span><span>     Running `target/debug/fancify -vv`
+</span><span>fancify: Thing happened: foobar
+</span><span>fancify: It&#39;s all good!
+</span></code></pre>
+<h2 id="vyvod">Вывод</h2>
+<p>Это были мои пять советов по написанию небольших приложений CLI на Rust (создание хороших библиотек - другая тема). Если у вас есть еще советы, дайте мне знать!</p>
+<p>Если вы хотите копнуть немного глубже, я бы посоветовал посмотреть, как многоплатформенный сборщик бинарных выпусков Rust, как использовать clap для автозаполнения аргументов CLI и как написать интеграционный тест для ваших приложений CLI (предстоящая публикация) .</p>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

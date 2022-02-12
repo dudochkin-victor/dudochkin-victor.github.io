@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust: структурирование и обработка ошибок в 2020 году | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#vstuplenie">Вступление</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#podschet-slov">Подсчет слов</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#otsutstvuet-kontekst"><small>- Отсутствует контекст</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#biblioteki-protiv-prilozhenii">Библиотеки против приложений</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#granitsy-api"><small>- Границы API</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#tip-oshibki-biblioteki"><small>- Тип ошибки библиотеки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#vozvrat-oshibok-biblioteki"><small>- Возврат ошибок библиотеки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#oshibki-prilozheniia"><small>- Ошибки приложения</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#obratnye-sledy">Обратные следы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#vyvod">Вывод</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-structuring-and-handling-errors-in-2020/#otzyvy-i-razgovory">Отзывы и разговоры</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust: структурирование и обработка ошибок в 2020 году</h1>
+
+<p><a href="https://nick.groenen.me/posts/rust-error-handling/">Перевод</a> | Автор оригинала: nick.groenen</p>
+<p>Недавно я начал изучать язык программирования Rust, прочитав «книгу», которая дает феноменальную работу по объяснению основ языка.</p>
+<p>Проработав основное содержание книги, я приступил к работе со своим первым нетривиальным, реальным приложением. Но вскоре я столкнулся с вопросом, с которым еще не чувствовал себя хорошо подготовленным:</p>
+<blockquote>
+<p>«Как вы должны структурировать обработку ошибок в зрелом приложении для Rust?»</p>
+</blockquote>
+<p>В этой статье описывается мой путь к ответу на этот вопрос. Я попытаюсь объяснить шаблон, который я выбрал, вместе с примером кода, показывающим его реализацию, в надежде, что другим новичкам будет легче начать работу.</p>
+<h2 id="vstuplenie">Вступление</h2>
+<p>В книге рассматриваются основы обработки ошибок, включая использование типа std::Result и распространение ошибок с помощью? оператора, он в значительной степени замалчивает различные шаблоны использования этих инструментов в реальных приложениях или компромиссы, связанные с различными подходами.</p>
+<p>Когда я начал изучать передовой опыт, я наткнулся на довольно много устаревших советов по использованию крэйта отказов. Неудача имела полуофициальный вид из-за того, что она находилась в пространстве имен rust-lang-nurry, но недавно она устарела.</p>
+<p>За последние два года в трейт std::error::Error был внесен ряд улучшений.</p>
+<p>Это в целом сделало отказ менее необходимым и привело к появлению ряда более современных библиотек, использующих эти улучшения, чтобы предложить лучшую эргономику.</p>
+<p>Прочитав довольно много исторического контекста и оценив ряд библиотек, я остановился на (в основном независимом от библиотеки) шаблоне для структурирования ошибок, который я реализую с помощью крэйтов anyhow и thiserror.</p>
+<p>Остальная часть этой статьи будет:</p>
+<ol>
+<li>Представьте относительно тривиальное приложение для подсчета слов, чтобы исследовать и объяснять проблемное пространство.</li>
+<li>Объясните, почему приложения и библиотеки должны использовать разные шаблоны обработки ошибок.</li>
+<li>Продемонстрируйте, как применять эти шаблоны, используя anyhow и thiserror. </li>
+</ol>
+<h2 id="podschet-slov">Подсчет слов</h2>
+<p>Давайте представим пример кода для использования в оставшейся части этой статьи. Мы создадим программу для подсчета количества слов в текстовом файле, как это делает wc -w.</p>
+<p>Наивная реализация с базовой обработкой ошибок с использованием std::Result может выглядеть так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>env</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>error</span><span style="color:#f29668;">::</span><span>Error</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fs</span><span style="color:#f29668;">::</span><span>File</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>io</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>io</span><span style="color:#f29668;">::</span><span>BufReader</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/// Count the number of words in the given input.
+</span><span style="font-style:italic;color:#5c6773;">///
+</span><span style="font-style:italic;color:#5c6773;">/// Any potential errors, such as being unable to read from the input will be propagated
+</span><span style="font-style:italic;color:#5c6773;">/// upwards as-is due to the use of `line?` just before `split_whitespace()`.
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_words</span><span>&lt;R</span><span style="color:#bfbab0cc;">:</span><span> Read&gt;(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> R) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">u32</span><span>, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn Error&gt;&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> reader </span><span style="color:#f29668;">= </span><span>BufReader</span><span style="color:#f29668;">::</span><span>new(input)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> wordcount </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">for</span><span> line </span><span style="color:#f29668;">in</span><span> reader</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lines</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">for</span><span> _word </span><span style="color:#f29668;">in</span><span> line</span><span style="color:#f29668;">?.</span><span style="color:#f07178;">split_whitespace</span><span>() {
+</span><span>            wordcount </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(wordcount)
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;(), </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn Error&gt;&gt; {
+</span><span>    </span><span style="color:#ff7733;">for</span><span> filename </span><span style="color:#f29668;">in </span><span>env</span><span style="color:#f29668;">::</span><span>args()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">skip</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;&gt;() {
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> reader </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(</span><span style="color:#f29668;">&amp;</span><span>filename)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> wordcount </span><span style="color:#f29668;">= </span><span style="color:#f07178;">count_words</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> reader)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{} {}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> wordcount</span><span style="color:#bfbab0cc;">,</span><span> filename)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Давайте создадим входной файл для нашего нового счетчика слов и попробуем его запустить: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ fortune &gt; words.txt
+</span><span>$ cargo run --quiet -- words.txt
+</span><span>50 words.txt
+</span></code></pre>
+<p>Однако, если у вас нет файла words.txt, вы столкнетесь со следующей ошибкой: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run --quiet -- words.txt
+</span><span>Error: Os { code: 2, kind: NotFound, message: &quot;No such file or directory&quot; }
+</span></code></pre>
+<p>Эта ошибка является результатом того, что File::open() возвращает ошибку в main().</p>
+<p>Чтобы завершить пример, давайте также смоделируем ошибку в вызове read(), происходящую под капотом внутри count_words().</p>
+<p>так что мы можем увидеть, как это выглядит: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run --quiet -- words.txt
+</span><span>Error: Custom { kind: BrokenPipe, error: &quot;read: broken pipe&quot; }
+</span></code></pre>
+<h3 id="otsutstvuet-kontekst">Отсутствует контекст</h3>
+<p>Так что же не так с вышеуказанной ошибкой? Хотя основная причина ошибки («сломанная труба») ясна, мы упускаем большую часть контекста. Мы не можем сказать, какой файл не удалось открыть, и нет информации о последовательности событий, приведших к этой ошибке.</p>
+<p>Если подумать, здесь есть цепочка ошибок:</p>
+<ul>
+<li>main() возвращает ошибку, потому что count_words() возвращает ошибку.</li>
+<li>count_words() возвращает ошибку, потому что мы сталкиваемся с ошибкой, повторяющейся в reader.lines() (строки 14-15).</li>
+<li>Итерация ошибок reader.lines(), потому что мы внедрили реализацию std::io::Read, которая дает сбой при первом вызове read().</li>
+</ul>
+<p>Однако мы не видим, чтобы это отражалось в приведенных выше сообщениях об ошибках.</p>
+<p>В этом примере имя файла является входным аргументом для самой программы. Это упрощает сопоставление ошибки с файлом, который он пытался открыть.</p>
+<p>А теперь представьте ошибку, происходящую 5 вызовов глубоко внутри библиотеки в гораздо более крупном программном обеспечении. Без какой-либо информации о цепочке событий в таком случае быстро становится очень трудно понять, что может вызвать ошибку.</p>
+<h2 id="biblioteki-protiv-prilozhenii">Библиотеки против приложений</h2>
+<p>Ранее я упоминал две разные библиотеки, anyhow и thiserror (хотя обе принадлежат одному автору, dtolnay). Вам может быть интересно, зачем нам нужны две отдельные библиотеки, чтобы делать что-то столь простое, как обработка ошибок.</p>
+<p>Мне потребовалось время, чтобы оценить это различие, но есть смысл подходить к обработке ошибок по-разному между библиотеками и приложениями, поскольку они, как правило, имеют разные проблемы:</p>
+<ul>
+<li>Библиотеки должны сосредоточиться на создании осмысленных, структурированных типов / вариантов ошибок. Это позволяет приложениям легко различать различные случаи ошибок.</li>
+<li>Приложения в основном потребляют ошибки.</li>
+<li>Библиотеки могут захотеть преобразовать ошибки из одного типа в другой. Ошибка ввода-вывода, вероятно, должна быть заключена в тип ошибки высокого уровня, предоставляемый библиотекой.
+<ul>
+<li>В противном случае ошибку ввода-вывода в библиотеке foo нельзя будет отличить от аналогичной ошибки ввода-вывода в панели библиотеки.</li>
+<li>Если этого не сделать, потребителю также необходимо знать внутреннее устройство библиотеки. Например, могут ли возвращаться только ошибки ввода-вывода? А как насчет ошибок HTTP, которые могут исходить - от клиента HTTP, внутреннего по отношению к библиотеке?</li>
+</ul>
+</li>
+<li>Библиотеки должны быть осторожны при изменении ошибок или создании новых ошибок, поскольку они могут легко внести критические изменения для потребителей. Они могут вызывать новые внутренние ошибки, но они вряд ли потребуют специальной структуры и могут быть легко изменены по желанию.</li>
+<li>Если библиотеки возвращают ошибки, приложения решают, будут ли и как эти ошибки форматироваться и отображаться для пользователей.</li>
+<li>Приложения могут также захотеть анализировать и проверять ошибки, например, чтобы перенаправить их в службы отслеживания исключений или повторить операции, когда это считается безопасным.</li>
+</ul>
+<p>Кроме того, и я думаю, что это очень важно, библиотеки всегда должны использовать std::Result вместе с типом ошибки, реализующим std::error::Error в своих общедоступных API. Пользовательские типы результатов, такие как failure::Fail, могут плохо сочетаться с другими частями вашего пользовательского кода и заставлять их изучать еще одну библиотеку.</p>
+<h3 id="granitsy-api">Границы API</h3>
+<p>Возвращаясь к нашему примеру с подсчетом слов, представьте, что мы хотим сделать count_words доступным в виде публичной библиотеки. Обычно вы не сделали бы этого для такого небольшого и простого фрагмента кода, но может быть полезно сделать функциональность доступной через общедоступные крэйти в более крупных проектах.</p>
+<p>В качестве демонстрации мы можем определить границы в нашем счетчике слов, чтобы разделить этот код на библиотеку и часть приложения.</p>
+<p>Мы извлечем count_words в крэйт библиотеки с именем wordcounter. Ниже я выделю соответствующие части, но если вы хотите пропустить, вы можете найти полный src/wordcounter.rs на GitHub.</p>
+<p>Все, что находится за пределами count_words, - это код нашего приложения. Он будет жить в двоичном крэйте, который мы назовем rwc (от Rust Word Count - я знаю, очень оригинально). Соответствующие файлы для этого - src/main.rs и src/lib.rs.</p>
+<h3 id="tip-oshibki-biblioteki">Тип ошибки библиотеки</h3>
+<p>Для нашей библиотеки wordcounter мы определим тип ошибки верхнего уровня под названием WordCountError. В этом перечислении есть варианты ошибок для каждой возможной ошибки, с которой может столкнуться наша библиотека.</p>
+<p>Вот тут-то и появляется эта ошибка. Хотя мы можем реализовать это вручную, thiserror позволяет нам избежать написания большого количества шаблонного кода: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>thiserror</span><span style="color:#f29668;">::</span><span>Error</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/// WordCountError enumerates all possible errors returned by this library.
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Error</span><span style="color:#bfbab0cc;">,</span><span> Debug)]
+</span><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">WordCountError </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Represents an empty source. For example, an empty text file being given
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// as input to `count_words()`.
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">error</span><span>(</span><span style="color:#c2d94c;">&quot;Source contains no data&quot;</span><span>)]
+</span><span>    EmptySource</span><span style="color:#bfbab0cc;">,
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Represents a failure to read from input.
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">error</span><span>(</span><span style="color:#c2d94c;">&quot;Read error&quot;</span><span>)]
+</span><span>    ReadError { source</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>io</span><span style="color:#f29668;">::</span><span>Error }</span><span style="color:#bfbab0cc;">,
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Represents all other cases of `std::io::Error`.
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">error</span><span>(transparent)]
+</span><span>    IOError(</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">from</span><span>] std</span><span style="color:#f29668;">::</span><span>io</span><span style="color:#f29668;">::</span><span>Error)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>(Цитата из официальной документации: «Thiserror намеренно не появляется в вашем общедоступном API. Вы получаете то же самое, как если бы вы написали реализацию std::error::Error вручную, и переключитесь с рукописных импликаций на thiserror или наоборот. не является критическим изменением. &quot;)</p>
+<p>С этим типом ошибки мы теперь можем изменить подпись count_words следующим образом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_words</span><span>&lt;R</span><span style="color:#bfbab0cc;">:</span><span> Read&gt;(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> R) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">u32</span><span>, WordCountError&gt; { </span><span style="font-style:italic;color:#5c6773;">/* .. */ </span><span>}
+</span></code></pre>
+<p>Помните, ранее подпись выглядела так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_words</span><span>&lt;R</span><span style="color:#bfbab0cc;">:</span><span> Read&gt;(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> R) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">u32</span><span>, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn Error&gt;&gt; { </span><span style="font-style:italic;color:#5c6773;">/* .. */ </span><span>}
+</span></code></pre>
+<p>По сравнению с предыдущей версией наш новый код намного более конкретен. Теперь пользователи получают гораздо больше информации о возможных случаях ошибок, которые могут быть возвращены. В качестве дополнительного преимущества нам также больше не нужно использовать Box Error, потому что размер WordCountError может быть определен во время компиляции.</p>
+<h3 id="vozvrat-oshibok-biblioteki">Возврат ошибок библиотеки</h3>
+<p>В WordCountError выше мы указываем три возможных типа ошибок.</p>
+<p>EmptySource может рассматриваться как ошибка, связанная с нашим бизнес-доменом. Мы можем вернуть это из нашей функции count_words, используя следующий код: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">if</span><span> wordcount </span><span style="color:#f29668;">== </span><span style="color:#f29718;">0 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(WordCountError</span><span style="color:#f29668;">::</span><span>EmptySource)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>ReadError - это пример включения ошибки более низкого уровня в ошибку нашей библиотеки высокого уровня. Это используется для возврата значимой ошибки для ошибок чтения, и его можно увидеть здесь: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">for</span><span> line </span><span style="color:#f29668;">in</span><span> reader</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lines</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> line </span><span style="color:#f29668;">=</span><span> line</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map_err</span><span>(|</span><span style="color:#f29718;">source</span><span>| WordCountError</span><span style="color:#f29668;">::</span><span>ReadError { source })</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">for</span><span> _word </span><span style="color:#f29668;">in</span><span> line</span><span style="color:#f29668;">.</span><span style="color:#f07178;">split_whitespace</span><span>() {
+</span><span>        wordcount </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Самый интересный код в приведенном выше фрагменте находится в строке 2, которая содержит line.map_Err(| source | WordCountError::ReadError {source})?;. Тем не менее, здесь происходит довольно много всего, поэтому давайте рассмотрим это шаг за шагом:</p>
+<ul>
+<li>Мы перебираем строки из читателя, которые возвращаются как io::Result<String>, потому что операции чтения могут завершиться ошибкой.</li>
+<li>Если результат относится к варианту Err, наше использование map_err() преобразует значение ошибки, встроенное в этот результат, из io::Error в WordCountError::ReadError. Если результат - вариант ОК, он остается без изменений.</li>
+<li>Затем распаковываем результат с помощью? оператор. Если это был вариант Ok, то он присваивается переменной строке. Если это был вариант Err, функция завершается здесь, возвращая это как возвращаемое значение (помните, что тип возврата - Result&lt;u32, WordCountError&gt;).</li>
+</ul>
+<p>Поскольку мы инкапсулируем io::Error в исходный атрибут WordCountError::ReadError, наша цепочка контекст / ошибка остается неизменной. Это гарантирует, что в любом случае, что мы будем использовать в описании нижеприведенных приложений, в конечном итоге отобразятся обе ошибки.</p>
+<p>.</p>
+<h4 id="prozrachnaia-peresylka">Прозрачная пересылка</h4>
+<p>На этом этапе стоит отметить, что ошибки могут использовать error (transparent) для перенаправления методов source и Display напрямую к основной ошибке без добавления дополнительного сообщения. Это можно увидеть в случае WordCountError::IOError, который действует как универсальный вариант для всех других ошибок ввода-вывода.</p>
+<p>Если бы нас не интересовал специализированный вариант WordCountError::ReadError, это означало бы, что мы могли бы также написать наш код следующим образом, и в этом случае нам больше не нужно использовать map_err() и мы можем использовать? напрямую: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">for</span><span> line </span><span style="color:#f29668;">in</span><span> reader</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lines</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">for</span><span> _word </span><span style="color:#f29668;">in</span><span> line</span><span style="color:#f29668;">?.</span><span style="color:#f07178;">split_whitespace</span><span>() {
+</span><span>        wordcount </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>С помощью этого шаблона мы избегаем добавления дополнительного кода обертывания ошибок, но при этом преобразуем ошибки в наш высокоуровневый WordCountError, чтобы поддерживать чистоту нашего общедоступного API.</p>
+<h3 id="oshibki-prilozheniia">Ошибки приложения</h3>
+<p>Имея указанный выше API, мы можем настроить остальную часть нашего кода для решения проблем на уровне приложения, таких как синтаксический анализ аргументов и вызов wordcounter::count_words.</p>
+<p>Как бы то ни было, мы можем получить эту основную функцию: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Some `use` statements have been omitted here for brevity
+</span><span style="color:#ff7733;">use </span><span>anyhow</span><span style="color:#f29668;">::</span><span>{Context</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Result</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;()&gt; {
+</span><span>    </span><span style="color:#ff7733;">for</span><span> filename </span><span style="color:#f29668;">in </span><span>env</span><span style="color:#f29668;">::</span><span>args()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">skip</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;&gt;() {
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> reader </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(</span><span style="color:#f29668;">&amp;</span><span>filename)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">context</span><span>(</span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;unable to open &#39;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&#39;&quot;</span><span style="color:#bfbab0cc;">,</span><span> filename))</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> wordcount </span><span style="color:#f29668;">=
+</span><span>            </span><span style="color:#f07178;">count_words</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> reader)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">context</span><span>(</span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;unable to count words in &#39;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&#39;&quot;</span><span style="color:#bfbab0cc;">,</span><span> filename))</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{} {}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> wordcount</span><span style="color:#bfbab0cc;">,</span><span> filename)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Это привело к нескольким изменениям.</p>
+<h4 id="1-uproshchennyi-tip-rezul-tata">1. Упрощенный тип результата</h4>
+<p>Вместо того, чтобы создавать собственные типы ошибок или везде использовать std::Result&lt;T, Box<dyn Error >&gt;, мы можем использовать anyhow::Result как более удобный тип с меньшим количеством шаблонов.</p>
+<p>В случае с main() выше это позволяет нам в любом случае напрямую возвращать::Result&lt;()&gt;. Это кажется мелочью, но я считаю, что возможность сосредоточиться только на типе данных успеха без необходимости аннотировать дополнительные типы ошибок добавляет здесь много ясности.</p>
+<h4 id="2-annotirovanie-oshibok">2. Аннотирование ошибок</h4>
+<p>Трэйта anyhow::Context, которую мы ввели через use anyhow::Context выше, включает метод context() для типов Result. Это позволяет нам заключать / аннотировать ошибки с дополнительной информацией более эргономичным способом записи, чем подход map_err, используемый в коде библиотеки: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> reader </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(</span><span style="color:#f29668;">&amp;</span><span>filename)
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">context</span><span>(</span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;unable to open &#39;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&#39;&quot;</span><span style="color:#bfbab0cc;">,</span><span> filename))</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> wordcount </span><span style="color:#f29668;">= </span><span style="color:#f07178;">count_words</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> reader)
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">context</span><span>(</span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;unable to count words in &#39;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&#39;&quot;</span><span style="color:#bfbab0cc;">,</span><span> filename))</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это предоставляет пользователю приложения ценную информацию о том, что предпринималось в случае возникновения ошибки. С этими вызовами наши ошибки теперь будут отображаться следующим образом: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run --quiet -- words.txt
+</span><span>Error: unable to open &#39;words.txt&#39;
+</span><span>
+</span><span>Caused by:
+</span><span>    No such file or directory (os error 2)
+</span><span>
+</span><span>$ cargo run --quiet -- words.txt
+</span><span>Error: unable to count words in &#39;words.txt&#39;
+</span><span>
+</span><span>Caused by:
+</span><span>    0: Error encountered while reading from input
+</span><span>    1: read: broken pipe
+</span></code></pre>
+<p>В обоих случаях наше сообщение об ошибке теперь включает имя файла, с которым мы работали. Мы также описываем, какая высокоуровневая операция была предпринята, когда возникла проблема.</p>
+<h4 id="3-otobrazhenie-oshibki">3. Отображение ошибки</h4>
+<p>Вы заметите, что нам не пришлось писать какой-либо дополнительный код форматирования ошибок, чтобы получить эти красивые сообщения об ошибках. Все, что нам нужно было сделать, это изменить тип возвращаемого значения main на тип Result.</p>
+<p>Нет необходимости полагаться на это неявное поведение при возврате Result из main. Мы могли бы вместо этого переместить весь наш код в функцию выполнения, а затем написать main следующим образом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">if let </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err) </span><span style="color:#f29668;">= </span><span>wordcount</span><span style="color:#f29668;">::</span><span>run() {
+</span><span>        </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Error: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> err)</span><span style="color:#bfbab0cc;">;
+</span><span>        std</span><span style="color:#f29668;">::</span><span>process</span><span style="color:#f29668;">::</span><span>exit(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Это приведет к точно такому же результату.</p>
+<p>Одно из преимуществ этого подхода (помимо большего контроля над выходом нашей программы, например, с помощью другого кода выхода) заключается в том, что он позволяет нам изменять формат сообщения.</p>
+<p>Например, если мы используем вместо этого eprintln! (&quot;{: #?}&quot;, Err) (обратите внимание на {: #?} Vs {:?}), Мы получим представление в стиле структуры: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run --quiet -- words.txt
+</span><span>Error {
+</span><span>    context: &quot;unable to count words in \&#39;words.txts\&#39;&quot;,
+</span><span>    source: ReadError {
+</span><span>        source: Custom {
+</span><span>            kind: BrokenPipe,
+</span><span>            error: &quot;read: broken pipe&quot;,
+</span><span>        },
+</span><span>    },
+</span><span>}
+</span></code></pre>
+<p>(Различные варианты задокументированы в любом случае в Медийных представлениях.)</p>
+<h2 id="obratnye-sledy">Обратные следы</h2>
+<p>До сих пор мы не говорили об обратных трассировках, которые часто используются при отладке сложных проблем.</p>
+<p>В любом случае также позволяет нам фиксировать и отображать обратную трассировку при возникновении ошибки. На данный момент поддержка обратной трассировки доступна только в ночном Rust, поскольку модуль std::backtrace в настоящее время является экспериментальным API, предназначенным только для ночной работы.</p>
+<p>При использовании ночного канала соответствующая установка RUST_BACKTRACE включит обратную трассировку: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ RUST_BACKTRACE=1 cargo run --quiet -- words.txt
+</span><span>Error: unable to count words in &#39;words.txt&#39;
+</span><span>
+</span><span>Caused by:
+</span><span>    0: Error encountered while reading from input
+</span><span>    1: read: broken pipe
+</span><span>
+</span><span>   0: &lt;E as anyhow::context::ext::StdError&gt;::ext_context
+</span><span>             at /home/zoni/.cargo/registry/src/github.com-1ecc6299db9ec823/anyhow-1.0.28/src/backtrace.rs:26
+</span><span>   1: anyhow::context::&lt;impl anyhow::Context&lt;T,E&gt; for core::result::Result&lt;T,E&gt;&gt;::context::{{closure}}
+</span><span>             at /home/zoni/.cargo/registry/src/github.com-1ecc6299db9ec823/anyhow-1.0.28/src/context.rs:50
+</span><span>   2: core::result::Result&lt;T,E&gt;::map_err
+</span><span>             at /rustc/2454a68cfbb63aa7b8e09fe05114d5f98b2f9740/src/libcore/result.rs:612
+</span><span>   3: anyhow::context::&lt;impl anyhow::Context&lt;T,E&gt; for core::result::Result&lt;T,E&gt;&gt;::context
+</span><span>             at /home/zoni/.cargo/registry/src/github.com-1ecc6299db9ec823/anyhow-1.0.28/src/context.rs:50
+</span><span>   4: wordcount::run
+</span><span>             at src/lib.rs:58
+</span><span>   5: rwc::main
+</span><span>             at src/main.rs:9
+</span><span>   6: std::rt::lang_start::{{closure}}
+</span><span>             at /rustc/2454a68cfbb63aa7b8e09fe05114d5f98b2f9740/src/libstd/rt.rs:67
+</span><span>   7: std::rt::lang_start_internal::{{closure}}
+</span><span>             at src/libstd/rt.rs:52
+</span><span>      std::panicking::try::do_call
+</span><span>             at src/libstd/panicking.rs:297
+</span><span>      std::panicking::try
+</span><span>             at src/libstd/panicking.rs:274
+</span><span>      std::panic::catch_unwind
+</span><span>             at src/libstd/panic.rs:394
+</span><span>      std::rt::lang_start_internal
+</span><span>             at src/libstd/rt.rs:51
+</span><span>   8: std::rt::lang_start
+</span><span>             at /rustc/2454a68cfbb63aa7b8e09fe05114d5f98b2f9740/src/libstd/rt.rs:67
+</span><span>   9: main
+</span><span>  10: __libc_start_main
+</span><span>  11: _start
+</span></code></pre>
+<p>Обычно я нахожу обратные следы Rust слишком загадочными и запутанными, чтобы они могли сильно помочь, поэтому их отсутствие поддержки на стабильном канале не было проблемой для меня лично. Пока что для меня было более чем достаточно отображения цепочки ошибок.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>На этом история ошибок Rust не заканчивается. Изменения все еще происходят, и еще неизвестно, останутся ли эти две библиотеки такими же популярными, как сегодня.</p>
+<p>Одно можно сказать наверняка: история обработки ошибок прошла долгий путь, и с текущим состоянием Rust вы можете писать очень надежное программное обеспечение в приятной и практичной манере.</p>
+<p>Надеюсь, эта статья оказалась для вас полезной. Если вы это сделали, рассмотрите возможность отправки быстрой благодарственной записки по электронной почте или через твит на @NickGroenen.</p>
+<h2 id="otzyvy-i-razgovory">Отзывы и разговоры</h2>
+<p>На Reddit ведется небольшая дискуссия, и один опубликованный там комментарий, кажется, стоит включить сюда. /u/Yaahallo пишет:</p>
+<ul>
+<li>
+<p>Я думаю, что то, что обработка ошибок различается в зависимости от того, пишете ли вы библиотеку или приложение, является упрощением, обычным для сообщества rust, но также источником путаницы.</p>
+</li>
+<li>
+<p>Причины использования anyhow vs thiserror на самом деле основаны не на том, библиотека это или приложение, а на том, нужно ли вам обрабатывать ошибки или сообщать о них.</p>
+</li>
+<li>
+<p>Библиотеки часто хотят поддерживать как можно больше вариантов использования обработки ошибок для своих потребителей. В конечном итоге это означает, что они хотят экспортировать типы ошибок, которые являются как обрабатываемыми (он же перечисление), так и отчетными (он же реализует std::error::Error).</p>
+</li>
+<li>
+<p>С другой стороны, приложения часто в конечном итоге выполняют обработку ошибок или составление отчетов. Для работы вам обычно не нужна библиотека, вы просто используете match. Для сообщения вам нужен тип ошибки, или, точнее, тип сообщения об ошибке, для чего в любом случае и предназначен::Error.</p>
+</li>
+</ul>
+<p>Burntsushi (от ripgrep fame) согласен со многими моими замечаниями, но также ставит под сомнение использование библиотек на основе proc-макросов, таких как thiserror, для определенных случаев использования, в первую очередь из-за увеличения времени компиляции в результате их использования. В дополнение к своей точке зрения он показывает нам, как вручную написать реализацию WordCountError из этой статьи.</p>
+<p>Также есть интересная тема, касающаяся влияния на производительность использования context() по сравнению с with_context(). </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

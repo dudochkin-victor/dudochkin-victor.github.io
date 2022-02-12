@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Настройка общедоступного пользовательского интерфейса | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/setting-up-a-public-ui/#0-initsializatsiia-servera">0. Инициализация сервера</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/setting-up-a-public-ui/#1-ustanovka-apps-i-nastroika-ikh-kak-sistemnoi-sluzhby">1. Установка apps и настройка их как системной службы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/setting-up-a-public-ui/#2-nastroika-ssl-sertifikata">2. Настройка SSL-сертификата</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/setting-up-a-public-ui/#3-obnovlenie-konfiguratsii-nginx">3. Обновление конфигурации nginx</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Настройка общедоступного пользовательского интерфейса</h1>
+
+<p>На этой странице объясняется, как настроить <a href="https://polkadot.js.org/apps/">пользовательский интерфейс polkadot-js/apps</a> для Edgeware, используя ветку Edgeware приложения. Основное отличие заключается в том, что ветвь Edgeware поддерживает типы, определенные в модулях голосования и управления Edgeware.</p>
+<h2 id="0-initsializatsiia-servera">0. Инициализация сервера</h2>
+<p>Подготовьте сервер подходящего размера у одного из рекомендуемых поставщиков VPS.</p>
+<p>Мы предполагаем, что вы используете Ubuntu 18.04 x64; другие версии или операционные системы потребуют внесения изменений в эти инструкции.</p>
+<p>Настройте DNS, указывающий на сервер, например. приложения.edgewa.re. Настоятельно рекомендуется сделать это сейчас.</p>
+<p>SSH на сервер.</p>
+<h2 id="1-ustanovka-apps-i-nastroika-ikh-kak-sistemnoi-sluzhby">1. Установка <code>apps</code> и настройка их как системной службы</h2>
+<p>Клонируйте репозиторий <code>apps</code>:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>git clone https://github.com/hicommonwealth/apps.git
+</span><span>cd apps
+</span></code></pre>
+<p>Установите nodejs 11.x и yarn. Вам нужно будет добавить новые репозитории пакетов:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+</span><span>echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | sudo tee /etc/apt/sources.list.d/yarn.list
+</span><span>curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+</span><span>apt update
+</span><span>apt install -y nodejs yarn
+</span></code></pre>
+<p>Установите зависимости:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>yarn
+</span></code></pre>
+<p>Создайте службу приложений:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{
+</span><span>    echo &#39;[Unit]&#39;
+</span><span>    echo &#39;Description=EdgewareApps&#39;
+</span><span>    echo &#39;[Service]&#39;
+</span><span>    echo &#39;Type=exec&#39;
+</span><span>    echo &#39;WorkingDirectory=&#39;`pwd`
+</span><span>    echo &#39;Environment=ENV=production&#39;
+</span><span>    echo &#39;ExecStart=yarn run start&#39;
+</span><span>    echo &#39;[Install]&#39;
+</span><span>    echo &#39;WantedBy=multi-user.target&#39;
+</span><span>} &gt; /etc/systemd/system/apps.service
+</span></code></pre>
+<p>Запустите и проверьте, работает ли служба:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>systemctl start apps
+</span><span>systemctl status apps
+</span><span>curl localhost:3000
+</span></code></pre>
+<h2 id="2-nastroika-ssl-sertifikata">2. Настройка SSL-сертификата</h2>
+<p>Чтобы сделать <code>apps</code> безопасным, мы будем использовать Let’s Encrypt и certbot, чтобы сделать сервер доступным через SSL.</p>
+<p>Установите Сертбот:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>apt -y install software-properties-common
+</span><span>add-apt-repository universe
+</span><span>add-apt-repository ppa:certbot/certbot
+</span><span>apt update
+</span><span>apt -y install certbot python-certbot-nginx
+</span></code></pre>
+<p>Запустите certbot, чтобы получить сертификат от Let's Encrypt:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>certbot --nginx
+</span></code></pre>
+<p>Certbot задаст вам несколько вопросов, запустит собственный веб-сервер и поговорит с Let's Encrypt, чтобы выдать сертификат.</p>
+<p>Когда он спросит вас, следует ли перенаправлять трафик с порта 80 на SSL, вы должны ответить <strong>да</strong>.</p>
+<h2 id="3-obnovlenie-konfiguratsii-nginx">3. Обновление конфигурации nginx</h2>
+<p>Установите предполагаемый публичный адрес сервера, например. apps.edgewa.re в качестве переменной среды:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>export name=apps.edgewa.re
+</span></code></pre>
+<p>Настройте конфигурацию nginx. Это введет публичный адрес, который вы только что определили.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{
+</span><span>    echo &#39;user       www-data;  ## Default: nobody&#39;
+</span><span>    echo &#39;worker_processes  5;  ## Default: 1&#39;
+</span><span>    echo &#39;error_log  /var/log/nginx/error.log;&#39;
+</span><span>    echo &#39;pid        /var/run/nginx.pid;&#39;
+</span><span>    echo &#39;worker_rlimit_nofile 8192;&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;events {&#39;
+</span><span>    echo &#39;  worker_connections  4096;  ## Default: 1024&#39;
+</span><span>    echo &#39;}&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;http {&#39;
+</span><span>    echo &#39;    map $http_upgrade $connection_upgrade {&#39;
+</span><span>    echo &#39;      default upgrade;&#39;
+</span><span>    echo &quot;      \&#39;\&#39; close;&quot;
+</span><span>    echo &#39;    }&#39;
+</span><span>    echo &#39;    server {&#39;
+</span><span>    echo &#39;      listen       443 ssl;&#39;
+</span><span>    echo &#39;      server_name  &#39;$name&#39;;&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;      ssl_certificate /etc/letsencrypt/live/&#39;$name&#39;/cert.pem;&#39;
+</span><span>    echo &#39;      ssl_certificate_key /etc/letsencrypt/live/&#39;$name&#39;/privkey.pem;&#39;
+</span><span>    echo &#39;      ssl_session_timeout 5m;&#39;
+</span><span>    echo &#39;      ssl_protocols  SSLv2 SSLv3 TLSv1;&#39;
+</span><span>    echo &#39;      ssl_ciphers  HIGH:!aNULL:!MD5;&#39;
+</span><span>    echo &#39;      ssl_prefer_server_ciphers   on;&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;      location / {&#39;
+</span><span>    echo &#39;          proxy_pass http://127.0.0.1:3000 ;&#39;
+</span><span>    echo &#39;      }&#39;
+</span><span>    echo &#39;    }&#39;
+</span><span>    echo &#39;}&#39;
+</span><span>} &gt; /etc/nginx/nginx.conf
+</span></code></pre>
+<p>Запустите nginx и убедитесь, что он запускается при запуске системы:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>systemctl daemon-reload
+</span><span>systemctl start nginx
+</span><span>systemctl enable nginx
+</span></code></pre>
+<p>Убедитесь, что ваш сервер работает в локальном браузере.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

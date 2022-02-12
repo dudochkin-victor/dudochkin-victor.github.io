@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Разработка на основе трейтов в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/trait-driven-development-in-rust/#treity-i-sviazannye-predmety">Трэйты и связанные предметы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/trait-driven-development-in-rust/#metody">Методы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/trait-driven-development-in-rust/#vse-ostal-noe">Все остальное</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Разработка на основе трейтов в Rust</h1>
+
+<p><a href="https://deterministic.space/trait-driven-development-in-rust.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>На самом деле, название - ложь: здесь мы просто сосредотачиваемся на трэйтах, но писать Rust также легко на основе тестирования, управления данными, управления документацией или [A-Z] [a-z] *.</p>
+<p>Как и почти любой язык, Rust содержит множество концепций, которые можно смешивать и на которых можно сосредоточиться. Я считаю трэйты характера самыми интересными и сильными1.</p>
+<p>Вместо того, чтобы делать что-то обычным способом ООП и описывать классы объектов, перечисляя их поля и их методы, в Rust вы определяете свои структуры данных (структуры, перечисления), а затем реализуете для них трейты.</p>
+<h2 id="treity-i-sviazannye-predmety">Трэйты и связанные предметы</h2>
+<p>То есть у вас есть набор вещей, которые связаны с определенной чертой (определенным типом поведения) и определяют, что они собой представляют для типа. Самый простой из этих связанных элементов - functions2. Определив функциональную панель как часть трейта Foo, она становится связанной функцией: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Foo </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bar</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29718;">y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это означает, что теоретически его можно называть как Foo::bar (21, 21). На практике вам нужно реализовать трейт в типе, чтобы иметь возможность его вызывать: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Foo </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bar</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29718;">y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Baz </span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Foo </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Baz </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bar</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29718;">y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>        </span><span style="color:#f29718;">42
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">test</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bar_test</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> result </span><span style="color:#f29668;">= </span><span>Baz</span><span style="color:#f29668;">::</span><span>bar(</span><span style="color:#f29718;">21</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">21</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">,</span><span> result)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Посмотрите, как мы вызвали функцию с помощью Baz::здесь вместо Foo ::? Мы можем делать еще больше безумных вещей!</p>
+<h2 id="metody">Методы</h2>
+<p>В Rust есть довольно хороший способ определить, является ли функция в трейте методом или просто обычной связанной функцией: если первый параметр - self, это метод. (self имеет тип, в котором реализована характеристика; (изменяемая) ссылка на self тоже подойдет.) </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Amet </span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Lorem </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">ipsum</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Lorem </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Amet </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">ipsum</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>        </span><span style="color:#f29718;">42
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">test</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">ipsum_test</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> amet </span><span style="color:#f29668;">=</span><span> Amet {}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> result </span><span style="color:#f29668;">=</span><span> amet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ipsum</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">,</span><span> result)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вы все еще можете вызвать это с помощью синтаксиса, который мы видели ранее3: Lorem::ipsum (&amp;amet).</p>
+<h2 id="vse-ostal-noe">Все остальное</h2>
+<p>Это в основном это. Однако есть еще много чего интересного! Вот с чего стоит начать:</p>
+<ul>
+<li>Анонимные трэйты, реализованные для одного типа (struct Foo (i32); impl Foo {fn new (x: i32) -&gt; Foo {Foo (x)}}, называемый как Foo::new (12))</li>
+<li>Общие трэйты с ограничениями и предложениями where (impl<T> Foo для Option<T> {…}, где T: Eq)</li>
+<li>Производные трэйты (например, Debug, PartialEq и Clone)</li>
+<li>Реализации по умолчанию для методов (запись тела связанной функции в определении трэйта с использованием только других доступных методов)</li>
+<li>Расширяющие трэйты (трэйты, которые реализованы в типах, реализующих другую трэйту)</li>
+<li>Маркерные трэйты (специальные «пустые» трэйты, такие как «Отправить» и «Синхронизировать»)</li>
+</ul>
+<hr />
+<ol>
+<li>
+<p>Владение и заимствование можно рассматривать как ортогональные системе черт; в Rust функции живут в симбиозе, например через маркерные трэйты.</p>
+</li>
+<li>
+<p>Другие связанные элементы, которые вы можете определить в трейте, - это псевдонимы типов и константы (нестабильные с Rust 1.13).</p>
+</li>
+<li>
+<p>Использование полного имени трэйта и метода часто называется «синтаксисом универсального вызова функции» (UFCS), но, вероятно, его следует называть «синтаксисом полного трэйта и имени метода» (FuQuTraMeNS).</p>
+</li>
+</ol>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust для JavaScript-разработчиков - сопоставление с образцом и перечисления | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-pattern-matching-and-enums/#sootvetstvie-shablonu">Соответствие шаблону</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-pattern-matching-and-enums/#destrukturizatsiia">Деструктуризация</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-pattern-matching-and-enums/#sravnenie-struktur">Сравнение структур</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-pattern-matching-and-enums/#enum">Enum</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-pattern-matching-and-enums/#option">Option</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust для JavaScript-разработчиков - сопоставление с образцом и перечисления</h1>
+
+<p><a href="https://www.sheshbabu.com/posts/rust-for-javascript-developers-pattern-matching-and-enums/">Перевод</a> | Автор оригинала: Shesh</p>
+<p>Это четвертая часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:</p>
+<ol>
+<li>Обзор инструментальной экосистемы</li>
+<li>Переменные и типы данных</li>
+<li>Функции и поток управления</li>
+<li>Сопоставление с образцом и перечисления</li>
+</ol>
+<h2 id="sootvetstvie-shablonu">Соответствие шаблону</h2>
+<p>Чтобы понять, что такое сопоставление с шаблоном, давайте начнем с чего-нибудь знакомого по JavaScript - Switch Case.</p>
+<p>Вот простой пример, который использует регистр переключателя в JavaScript: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">function </span><span style="color:#ffb454;">print_color</span><span>(</span><span style="color:#f29718;">color</span><span>) {
+</span><span>  </span><span style="color:#ff7733;">switch </span><span>(color) {
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;rose&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;roses are red,&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;violet&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;violets are blue,&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">default</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;sugar is sweet, and so are you.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">print_color</span><span>(</span><span style="color:#c2d94c;">&quot;rose&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// roses are red,
+</span><span style="color:#ffb454;">print_color</span><span>(</span><span style="color:#c2d94c;">&quot;violet&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// violets are blue,
+</span><span style="color:#ffb454;">print_color</span><span>(</span><span style="color:#c2d94c;">&quot;you&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// sugar is sweet, and so are you.
+</span></code></pre>
+<p>Вот эквивалентный код на Rust: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_color</span><span>(</span><span style="color:#f29718;">color</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) {
+</span><span>  </span><span style="color:#ff7733;">match</span><span> color {
+</span><span>    </span><span style="color:#c2d94c;">&quot;rose&quot; </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;roses are red,&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;violet&quot; </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;violets are blue,&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29668;">_ =&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;sugar is sweet, and so are you.&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#f07178;">print_color</span><span>(</span><span style="color:#c2d94c;">&quot;rose&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// roses are red,
+</span><span>  </span><span style="color:#f07178;">print_color</span><span>(</span><span style="color:#c2d94c;">&quot;violet&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// violets are blue,
+</span><span>  </span><span style="color:#f07178;">print_color</span><span>(</span><span style="color:#c2d94c;">&quot;you&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// sugar is sweet, and so are you.
+</span><span>}
+</span></code></pre>
+<p>Большая часть кода должна быть сразу понятна. Выражение соответствия имеет следующую сигнатуру: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>match VALUE {
+</span><span>  PATTERN1 =&gt; EXPRESSION1,
+</span><span>  PATTERN2 =&gt; EXPRESSION2,
+</span><span>  PATTERN3 =&gt; EXPRESSION3,
+</span><span>}
+</span></code></pre>
+<p>Синтаксис толстой стрелки =&gt; может сбить нас с толку из-за сходства со стрелочными функциями JavaScript, но они не связаны. Последний шаблон, в котором используется подчеркивание _, называется общим шаблоном и аналогичен случаю по умолчанию в случае переключения. Каждая комбинация ШАБЛОН =&gt; ВЫРАЖЕНИЕ называется матчевой рукой.</p>
+<p>Приведенный выше пример на самом деле не показывает, насколько полезно сопоставление с образцом - он просто выглядит как switch case с другим синтаксисом и причудливым именем. Давайте поговорим о деструктуризации и перечислениях, чтобы понять, почему сопоставление с образцом полезно.</p>
+<h2 id="destrukturizatsiia">Деструктуризация</h2>
+<p>Деструктуризация - это процесс извлечения внутренних полей массива или структуры в отдельные переменные. Если вы использовали деструктуризацию в JavaScript, она очень похожа на Rust.</p>
+<p>Вот пример на JavaScript: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">let </span><span>rgb </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">96</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">172</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">57</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>[red</span><span style="color:#bfbab0cc;">, </span><span>green</span><span style="color:#bfbab0cc;">, </span><span>blue] </span><span style="color:#f29668;">= </span><span>rgb</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(red)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 96
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(green)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 172
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(blue)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 57
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>person </span><span style="color:#f29668;">= </span><span>{ name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;shesh&quot;</span><span style="color:#bfbab0cc;">, </span><span>city</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;singapore&quot; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>{ name</span><span style="color:#bfbab0cc;">, </span><span>city } </span><span style="color:#f29668;">= </span><span>person</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(name)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// name
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(city)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// city
+</span></code></pre>
+<p>Вот тот же пример в Rust: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>  name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>  city</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> rgb </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">96</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">172</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">57</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let </span><span>[red</span><span style="color:#bfbab0cc;">,</span><span> green</span><span style="color:#bfbab0cc;">,</span><span> blue] </span><span style="color:#f29668;">=</span><span> rgb</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> red)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 96
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> green)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 172
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> blue)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 57
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let</span><span> person </span><span style="color:#f29668;">=</span><span> Person {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;shesh&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    city</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;singapore&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>  }</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let</span><span> Person { name</span><span style="color:#bfbab0cc;">,</span><span> city } </span><span style="color:#f29668;">=</span><span> person</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> name)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// name
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> city)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// city
+</span><span>}
+</span></code></pre>
+<h2 id="sravnenie-struktur">Сравнение структур</h2>
+<p>Очень часто пишут код типа «если это, то то». Сочетание деструктуризации и сопоставления с образцом позволяет нам очень кратко написать логику такого типа.</p>
+<p>Возьмем следующий пример на JavaScript. Это надумано, но вы, вероятно, когда-нибудь в своей карьере написали что-то подобное: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>point </span><span style="color:#f29668;">= </span><span>{ x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span>y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">30 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>{ x</span><span style="color:#bfbab0cc;">, </span><span>y } </span><span style="color:#f29668;">= </span><span>point</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">if </span><span>(x </span><span style="color:#f29668;">=== </span><span style="color:#f29718;">0 </span><span style="color:#f29668;">&amp;&amp; </span><span>y </span><span style="color:#f29668;">=== </span><span style="color:#f29718;">0</span><span>) {
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;both are zero&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>} </span><span style="color:#ff7733;">else if </span><span>(x </span><span style="color:#f29668;">=== </span><span style="color:#f29718;">0</span><span>) {
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`x is zero and y is ${</span><span>y</span><span style="color:#c2d94c;">}`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>} </span><span style="color:#ff7733;">else if </span><span>(y </span><span style="color:#f29668;">=== </span><span style="color:#f29718;">0</span><span>) {
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`x is ${</span><span>x</span><span style="color:#c2d94c;">} and y is zero`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>} </span><span style="color:#ff7733;">else </span><span>{
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`x is ${</span><span>x</span><span style="color:#c2d94c;">} and y is ${</span><span>y</span><span style="color:#c2d94c;">}`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Давайте напишем тот же код на Rust, используя сопоставление с образцом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Point </span><span>{
+</span><span>  x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>  y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> point </span><span style="color:#f29668;">=</span><span> Point { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">match</span><span> point {
+</span><span>    Point { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0 </span><span>} </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;both are zero&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Point { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,</span><span> y } </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;x is zero and y is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> y)</span><span style="color:#bfbab0cc;">,
+</span><span>    Point { x</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0 </span><span>} </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;x is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> and y is zero&quot;</span><span style="color:#bfbab0cc;">,</span><span> x)</span><span style="color:#bfbab0cc;">,
+</span><span>    Point { x</span><span style="color:#bfbab0cc;">,</span><span> y } </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;x is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> and y is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#bfbab0cc;">,</span><span> y)</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Это немного лаконично по сравнению с логикой if else, но также может сбивать с толку, поскольку мы выполняем сравнение, деструктуризацию и привязку переменных одновременно.</p>
+<p>Вот как это выглядит визуально:</p>
+<p><img src="/imgs/posts/d8ce9ce5_01.png" alt="" /></p>
+<p><img src="/imgs/posts/d8ce9ce5_01.png" alt="" /></p>
+<p>Мы начинаем понимать, почему это называется «сопоставление с образцом» - мы вводим данные и смотрим, какой образец в спичечных рычагах «подходит» лучше - это похоже на игрушки-сортировщики форм, с которыми играют дети. Помимо сравнения, мы также выполняем связывание переменных во 2-м, 3-м и 4-м матчах. Мы передаем переменные x или y или обе в их соответствующие выражения.</p>
+<p>Сопоставление с образцом также является исчерпывающим, то есть заставляет вас обрабатывать все возможные случаи. Попробуйте удалить последнюю совпадающую руку, и Rust не позволит вам скомпилировать код.</p>
+<h2 id="enum">Enum</h2>
+<p>В JavaScript нет перечислений, но если вы использовали TypeScript, вы можете думать о перечислениях Rust как о комбинации перечислений TypeScript и дискриминируемых объединений TypeScript.</p>
+<p>В простейшем случае Enums можно использовать как группу констант.</p>
+<p>Например, хотя в JavaScript нет перечислений, вы могли использовать этот шаблон: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>DIRECTION </span><span style="color:#f29668;">= </span><span>{
+</span><span>  FORWARD</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;FORWARD&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>  BACKWARD</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;BACKWARD&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>  LEFT</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;LEFT&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>  RIGHT</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;RIGHT&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">function </span><span style="color:#ffb454;">move_drone</span><span>(</span><span style="color:#f29718;">direction</span><span>) {
+</span><span>  </span><span style="color:#ff7733;">switch </span><span>(direction) {
+</span><span>    </span><span style="color:#ff7733;">case </span><span>DIRECTION</span><span style="color:#f29668;">.</span><span>FORWARD:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Move Forward&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span>DIRECTION</span><span style="color:#f29668;">.</span><span>BACKWARD:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Move Backward&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span>DIRECTION</span><span style="color:#f29668;">.</span><span>LEFT:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Move Left&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span>DIRECTION</span><span style="color:#f29668;">.</span><span>RIGHT:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Move Right&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">move_drone</span><span>(DIRECTION</span><span style="color:#f29668;">.</span><span>FORWARD)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &quot;Move Forward&quot;
+</span></code></pre>
+<p>Здесь мы могли бы определить FORWARD, BACKWARD, LEFT и RIGHT как отдельные константы, но группирование их внутри объекта DIRECTION дает следующие преимущества:</p>
+<ul>
+<li>Имена FORWARD, BACKWARD, LEFT и RIGHT помещены в пространство имен под DIRECTION, поэтому конфликтов имен можно избежать.</li>
+<li>Это самодокументируется, так как мы можем быстро увидеть все действительные направления, доступные в кодовой базе.</li>
+</ul>
+<p>Однако у этого подхода есть некоторые проблемы:</p>
+<ul>
+<li>Что, если кто-то передаст NORTH или UP в качестве аргумента move_drone? Чтобы исправить это, мы можем добавить проверку, чтобы убедиться, что в функции перемещения разрешены только значения, присутствующие в объекте DIRECTION.</li>
+<li>Что, если мы решим поддерживать UP и DOWN в будущем или переименуем LEFT / RIGHT в PORT / STARBOARD? Нам нужно найти все места, где используются похожие switch-case или if-else. Есть вероятность, что мы упустим несколько мест, которые могут вызвать проблемы в производственной среде.</li>
+</ul>
+<p>Перечисления в строго типизированных языках, таких как Rust, более эффективны, поскольку они решают эти проблемы без написания дополнительного кода.</p>
+<ul>
+<li>Если функция может принимать только небольшой набор допустимых входных данных, Enums можно использовать для обеспечения соблюдения этого ограничения.</li>
+<li>Перечисления с сопоставлением с образцом вынуждают охватить все случаи. Полезно при обновлении Enums в будущем</li>
+</ul>
+<p>Вот эквивалентный пример на Rust: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Direction </span><span>{
+</span><span>  Forward</span><span style="color:#bfbab0cc;">,
+</span><span>  Backward</span><span style="color:#bfbab0cc;">,
+</span><span>  Left</span><span style="color:#bfbab0cc;">,
+</span><span>  Right</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">move_drone</span><span>(</span><span style="color:#f29718;">direction</span><span style="color:#bfbab0cc;">:</span><span> Direction) {
+</span><span>  </span><span style="color:#ff7733;">match</span><span> direction {
+</span><span>    Direction</span><span style="color:#f29668;">::</span><span>Forward </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Move Forward&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Direction</span><span style="color:#f29668;">::</span><span>Backward </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Move Backward&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Direction</span><span style="color:#f29668;">::</span><span>Left </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Move Left&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Direction</span><span style="color:#f29668;">::</span><span>Right </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Move Right&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#f07178;">move_drone</span><span>(Direction</span><span style="color:#f29668;">::</span><span>Forward)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Мы получаем доступ к вариантам внутри Enum, используя нотацию ::. Попробуйте отредактировать этот код, вызвав «move_drone (Direction::Up)» или добавив «Down» в качестве нового элемента в перечислении Direction. В первом случае компилятор выдаст ошибку, сообщающую, что «Вверх» не найдено в «Направление», а во втором случае компилятор будет жаловаться, что мы не покрыли «Вниз» в блоке соответствия.</p>
+<p>Rust Enums может не только действовать как группа констант - мы также можем связать данные с вариантом Enum. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Direction </span><span>{
+</span><span>  Forward</span><span style="color:#bfbab0cc;">,
+</span><span>  Backward</span><span style="color:#bfbab0cc;">,
+</span><span>  Left</span><span style="color:#bfbab0cc;">,
+</span><span>  Right</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Operation </span><span>{
+</span><span>  PowerOn</span><span style="color:#bfbab0cc;">,
+</span><span>  PowerOff</span><span style="color:#bfbab0cc;">,
+</span><span>  Move(Direction)</span><span style="color:#bfbab0cc;">,
+</span><span>  Rotate</span><span style="color:#bfbab0cc;">,
+</span><span>  TakePhoto { is_landscape</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span style="color:#bfbab0cc;">,</span><span> zoom_level</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32 </span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">operate_drone</span><span>(</span><span style="color:#f29718;">operation</span><span style="color:#bfbab0cc;">:</span><span> Operation) {
+</span><span>  </span><span style="color:#ff7733;">match</span><span> operation {
+</span><span>    Operation</span><span style="color:#f29668;">::</span><span>PowerOn </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Power On&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Operation</span><span style="color:#f29668;">::</span><span>PowerOff </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Power Off&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Operation</span><span style="color:#f29668;">::</span><span>Move(direction) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">move_drone</span><span>(direction)</span><span style="color:#bfbab0cc;">,
+</span><span>    Operation</span><span style="color:#f29668;">::</span><span>Rotate </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Rotate&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Operation</span><span style="color:#f29668;">::</span><span>TakePhoto {
+</span><span>      is_landscape</span><span style="color:#bfbab0cc;">,
+</span><span>      zoom_level</span><span style="color:#bfbab0cc;">,
+</span><span>    } </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;TakePhoto </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">, </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> is_landscape</span><span style="color:#bfbab0cc;">,</span><span> zoom_level)</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">move_drone</span><span>(</span><span style="color:#f29718;">direction</span><span style="color:#bfbab0cc;">:</span><span> Direction) {
+</span><span>  </span><span style="color:#ff7733;">match</span><span> direction {
+</span><span>    Direction</span><span style="color:#f29668;">::</span><span>Forward </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Move Forward&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Direction</span><span style="color:#f29668;">::</span><span>Backward </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Move Backward&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Direction</span><span style="color:#f29668;">::</span><span>Left </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Move Left&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Direction</span><span style="color:#f29668;">::</span><span>Right </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Move Right&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#f07178;">operate_drone</span><span>(Operation</span><span style="color:#f29668;">::</span><span>Move(Direction</span><span style="color:#f29668;">::</span><span>Forward))</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">operate_drone</span><span>(Operation</span><span style="color:#f29668;">::</span><span>TakePhoto {
+</span><span>    is_landscape</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">,
+</span><span>    zoom_level</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">,
+</span><span>  })
+</span><span>}
+</span></code></pre>
+<p>Здесь мы добавили еще одно перечисление под названием Operation, которое содержит варианты, похожие на единицы (PowerOn, PowerOff, Rotate) и варианты, похожие на структуру (Move, TakePhoto). Обратите внимание, как мы использовали сопоставление с образцом с деструктуризацией и связыванием переменных.</p>
+<p>Если вы использовали TypeScript или Flow, это похоже на различаемые объединения или типы сумм: </p>
+<pre data-lang="ts" style="background-color:#0f1419;color:#bfbab0;" class="language-ts "><code class="language-ts" data-lang="ts"><span style="color:#ff7733;">interface </span><span style="color:#59c2ff;">PowerOn </span><span>{
+</span><span>  kind</span><span style="color:#f29668;">: </span><span style="color:#c2d94c;">&quot;PowerOn&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">interface </span><span style="color:#59c2ff;">PowerOff </span><span>{
+</span><span>  kind</span><span style="color:#f29668;">: </span><span style="color:#c2d94c;">&quot;PowerOff&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Direction </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Forward&quot; </span><span style="color:#f29668;">| </span><span style="color:#c2d94c;">&quot;Backward&quot; </span><span style="color:#f29668;">| </span><span style="color:#c2d94c;">&quot;Left&quot; </span><span style="color:#f29668;">| </span><span style="color:#c2d94c;">&quot;Right&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">interface </span><span style="color:#59c2ff;">Move </span><span>{
+</span><span>  kind</span><span style="color:#f29668;">: </span><span style="color:#c2d94c;">&quot;Move&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>  direction</span><span style="color:#f29668;">: </span><span style="color:#59c2ff;">Direction</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">interface </span><span style="color:#59c2ff;">Rotate </span><span>{
+</span><span>  kind</span><span style="color:#f29668;">: </span><span style="color:#c2d94c;">&quot;Rotate&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">interface </span><span style="color:#59c2ff;">TakePhoto </span><span>{
+</span><span>  kind</span><span style="color:#f29668;">: </span><span style="color:#c2d94c;">&quot;TakePhoto&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>  is_landscape</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">boolean</span><span style="color:#bfbab0cc;">;
+</span><span>  zoom_level</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">number</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Operation </span><span style="color:#f29668;">= </span><span style="color:#59c2ff;">PowerOn </span><span style="color:#f29668;">| </span><span style="color:#59c2ff;">PowerOff </span><span style="color:#f29668;">| </span><span style="color:#59c2ff;">Move </span><span style="color:#f29668;">| </span><span style="color:#59c2ff;">Rotate </span><span style="color:#f29668;">| </span><span style="color:#59c2ff;">TakePhoto</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">function </span><span style="color:#ffb454;">operate_drone</span><span>(</span><span style="color:#f29718;">operation</span><span style="color:#f29668;">: </span><span style="color:#59c2ff;">Operation</span><span>) {
+</span><span>  </span><span style="color:#ff7733;">switch </span><span>(operation</span><span style="color:#f29668;">.</span><span>kind) {
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;PowerOn&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Power On&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;PowerOff&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Power Off&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;Move&quot;</span><span>:
+</span><span>      </span><span style="color:#ffb454;">move_drone</span><span>(operation</span><span style="color:#f29668;">.</span><span>direction)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;Rotate&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Rotate&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;TakePhoto&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`TakePhoto ${</span><span>operation</span><span style="color:#f29668;">.</span><span>is_landscape</span><span style="color:#c2d94c;">}, ${</span><span>operation</span><span style="color:#f29668;">.</span><span>zoom_level</span><span style="color:#c2d94c;">}`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">function </span><span style="color:#ffb454;">move_drone</span><span>(</span><span style="color:#f29718;">direction</span><span style="color:#f29668;">: </span><span style="color:#59c2ff;">Direction</span><span>) {
+</span><span>  </span><span style="color:#ff7733;">switch </span><span>(direction) {
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;Forward&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Move Forward&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;Backward&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Move Backward&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;Left&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Move Left&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">case </span><span style="color:#c2d94c;">&quot;Right&quot;</span><span>:
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;Move Right&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>      </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">operate_drone</span><span>({
+</span><span>  kind</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Move&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>  direction</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Forward&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">operate_drone</span><span>({
+</span><span>  kind</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;TakePhoto&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>  is_landscape</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">,
+</span><span>  zoom_level</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h2 id="option">Option</h2>
+<p>Мы узнали о типе Option в главе 2. Option - это фактически Enum с двумя вариантами - Some и None: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Option</span><span>&lt;T&gt; {
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(T)</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Вот как мы обрабатывали значение Option в этой главе: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_file</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>&gt; {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> contents </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;hello&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">if</span><span> path </span><span style="color:#f29668;">!= </span><span style="color:#c2d94c;">&quot;&quot; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(contents)</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> file </span><span style="color:#f29668;">= </span><span style="color:#f07178;">read_file</span><span>(</span><span style="color:#c2d94c;">&quot;path/to/file&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">if</span><span> file</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_some</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> contents </span><span style="color:#f29668;">=</span><span> file</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> contents)</span><span style="color:#bfbab0cc;">;
+</span><span>  } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Empty!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Используя сопоставление с образцом, мы можем реорганизовать логику следующим образом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> file </span><span style="color:#f29668;">= </span><span style="color:#f07178;">read_file</span><span>(</span><span style="color:#c2d94c;">&quot;path/to/file&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">match</span><span> file {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(contents) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> contents)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Empty!&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Спасибо за чтение! Не стесняйтесь подписываться на меня в Twitter, чтобы увидеть больше подобных сообщений :) </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

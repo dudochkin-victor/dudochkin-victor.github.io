@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Одноразовые номера устойчивых транзакций | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/durable-tx-nonces/#problema">Проблема</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/durable-tx-nonces/#trebovaniia">Требования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/durable-tx-nonces/#reshenie-na-osnove-kontrakta">Решение на основе контракта</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/durable-tx-nonces/#mekhanika-kontraktov"><small>- Механика контрактов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/durable-tx-nonces/#podderzhka-vo-vremia-vypolneniia"><small>- Поддержка во время выполнения</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Одноразовые номера устойчивых транзакций</h1>
+
+<h2 id="problema">Проблема</h2>
+<p>Чтобы предотвратить повтор, транзакции Solana содержат поле одноразового номера, заполненное «последним» значением хэша блока. Транзакция, содержащая слишком старый блокхеш (на момент написания этой статьи ~2 минуты), отклоняется сетью как недействительная. К сожалению, в некоторых случаях использования, таких как кастодиальные услуги, требуется больше времени для создания подписи для транзакции. Необходим механизм для включения этих потенциально автономных участников сети.</p>
+<h2 id="trebovaniia">Требования</h2>
+<ol>
+<li>Подпись транзакции должна покрывать значение одноразового номера.</li>
+<li>Одноразовый номер не должен использоваться повторно, даже в случае раскрытия ключа подписи.</li>
+</ol>
+<h2 id="reshenie-na-osnove-kontrakta">Решение на основе контракта</h2>
+<p>Здесь мы описываем основанное на контракте решение проблемы, при котором клиент может «спрятать» одноразовое значение для будущего использования в поле <code>recent_blockhash</code> транзакции. Этот подход похож на атомарную инструкцию Compare and Swap, реализованную некоторыми процессорными ISA.</p>
+<p>При использовании устойчивого одноразового номера клиент должен сначала запросить его значение из данных учетной записи. Теперь транзакция строится обычным образом, но со следующими дополнительными требованиями:</p>
+<ol>
+<li>Значение устойчивого одноразового номера используется в поле <code>recent_blockhash</code></li>
+<li>Инструкция «AdvanceNonceAccount» выдается первой в транзакции.</li>
+</ol>
+<h3 id="mekhanika-kontraktov">Механика контрактов</h3>
+<p>TODO: svgbob это в блок-схему</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Start
+</span><span>Create Account
+</span><span>  state = Uninitialized
+</span><span>NonceInstruction
+</span><span>  if state == Uninitialized
+</span><span>    if account.balance &lt; rent_exempt
+</span><span>      error InsufficientFunds
+</span><span>    state = Initialized
+</span><span>  elif state != Initialized
+</span><span>    error BadState
+</span><span>  if sysvar.recent_blockhashes.is_empty()
+</span><span>    error EmptyRecentBlockhashes
+</span><span>  if !sysvar.recent_blockhashes.contains(stored_nonce)
+</span><span>    error NotReady
+</span><span>  stored_hash = sysvar.recent_blockhashes[0]
+</span><span>  success
+</span><span>WithdrawInstruction(to, lamports)
+</span><span>  if state == Uninitialized
+</span><span>    if !signers.contains(owner)
+</span><span>      error MissingRequiredSignatures
+</span><span>  elif state == Initialized
+</span><span>    if !sysvar.recent_blockhashes.contains(stored_nonce)
+</span><span>      error NotReady
+</span><span>    if lamports != account.balance &amp;&amp; lamports + rent_exempt &gt; account.balance
+</span><span>      error InsufficientFunds
+</span><span>  account.balance -= lamports
+</span><span>  to.balance += lamports
+</span><span>  success
+</span></code></pre>
+<p>Клиент, желающий использовать эту функцию, начинает с создания одноразовой учетной записи в системной программе. Эта учетная запись будет находиться в состоянии «Неинициализированная» без сохраненного хэша и, следовательно, непригодной для использования.</p>
+<p>Чтобы инициализировать вновь созданную учетную запись, необходимо выполнить инструкцию InitializeNonceAccount. Эта инструкция принимает один параметр, <code>Pubkey</code> [полномочия] учетной записи (../offline-signing/durable-nonce.md#nonce-authority). Одноразовые учетные записи должны быть <a href="rent.md#two-tiered-rent-regime">освобождены от аренды</a>, чтобы соответствовать требованиям к сохранению данных этой функции, и поэтому требуют внесения достаточного количества ламповых портов, прежде чем их можно будет инициализировать. После успешной инициализации последний блок-хэш кластера сохраняется вместе с указанным одноразовым ключом Pubkey.</p>
+<p>Инструкция AdvanceNonceAccount используется для управления сохраненным значением одноразового номера учетной записи. Он сохраняет самый последний хеш-блок кластера в данных состояния учетной записи, терпя неудачу, если он соответствует уже хранящемуся там значению. Эта проверка предотвращает повторное воспроизведение транзакций в одном и том же блоке.</p>
+<p>Из-за требования <a href="rent.md#two-tiered-rent-regime">rent-exempt</a> учетных записей nonce для вывода средств со счета используется пользовательская инструкция по снятию средств.
+Инструкция <code>WithdrawNonceAccount</code> принимает один аргумент, указывает на вывод средств и обеспечивает освобождение от арендной платы, предотвращая падение баланса счета ниже минимума, освобожденного от арендной платы. Исключением из этой проверки является случай, когда окончательный баланс будет равен нулю лампортов, что делает учетную запись подходящей для удаления. Для этой детали закрытия учетной записи есть дополнительное требование, согласно которому сохраненное значение одноразового номера не должно совпадать с самым последним хэшем блока в соответствии с <code>AdvanceNonceAccount</code>.</p>
+<p>[nonce полномочия] учетной записи (../offline-signing/durable-nonce.md#nonce-authority) можно изменить с помощью инструкции <code>AuthorizeNonceAccount</code>. Он принимает один параметр, <code>Pubkey</code> нового органа. Выполнение этой инструкции предоставляет новым полномочиям полный контроль над счетом и его балансом.</p>
+<blockquote>
+<p><code>AdvanceNonceAccount</code>, <code>WithdrawNonceAccount</code> и <code>AuthorizeNonceAccount</code> требуют текущих <a href="../offline-signing/durable-nonce.md#nonce-authority">одноразовых полномочий</a> для учетной записи, чтобы подписать транзакцию.</p>
+</blockquote>
+<h3 id="podderzhka-vo-vremia-vypolneniia">Поддержка во время выполнения</h3>
+<p>Одного контракта недостаточно для реализации этой функции. Чтобы применить существующий <code>recent_blockhash</code> к транзакции и предотвратить кражу комиссий из-за неудачного воспроизведения транзакции, необходимы модификации во время выполнения.</p>
+<p>Любая транзакция, не прошедшая обычную проверку <code>check_hash_age</code>, будет проверена на наличие одноразового номера устойчивой транзакции. Об этом сигнализирует включение инструкции «AdvanceNonceAccount» в качестве первой инструкции в транзакции.</p>
+<p>Если среда выполнения определяет, что используется одноразовый номер устойчивой транзакции, она предпримет следующие дополнительные действия для проверки транзакции:</p>
+<ol>
+<li>Загружается <code>NonceAccount</code>, указанный в инструкции <code>Nonce</code>.</li>
+<li><code>NonceState</code> десериализуется из поля данных <code>NonceAccount</code> и подтверждается, что он находится в состоянии <code>Initialized</code>.</li>
+<li>Значение nonce, хранящееся в <code>NonceAccount</code>, проверяется на соответствие значению, указанному в поле <code>recent_blockhash</code> транзакции.</li>
+</ol>
+<p>Если все три вышеуказанные проверки завершаются успешно, транзакция может продолжить проверку.</p>
+<p>Поскольку с транзакций, завершившихся ошибкой «InstructionError», взимается комиссия, а изменения их состояния откатываются, существует возможность кражи комиссии, если отменяется инструкция «AdvanceNonceAccount». Злонамеренный валидатор может воспроизвести неудачную транзакцию до тех пор, пока сохраненный одноразовый номер не будет успешно расширен. Изменения во время выполнения предотвращают такое поведение. Когда длительная транзакция одноразового номера завершается с ошибкой InstructionError помимо инструкции AdvanceNonceAccount, учетная запись одноразового номера, как обычно, откатывается в состояние, предшествующее выполнению. Затем среда выполнения увеличивает свое значение одноразового номера, и расширенная учетная запись одноразового номера сохраняется, как если бы это было успешно.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

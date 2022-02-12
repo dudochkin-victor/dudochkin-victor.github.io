@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Призывая Божий гнев проклятый Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/inviting-gods-wrath-with-cursed-rust/#akt-1-nekotorye-razumnye-optimizatsii">Акт 1. Некоторые разумные оптимизации</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/inviting-gods-wrath-with-cursed-rust/#akt-2-shag-v-zapretnye-miry">Акт 2: Шаг в запретные миры</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/inviting-gods-wrath-with-cursed-rust/#akt-3-prosti-menia">Акт 3: прости меня</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Призывая Божий гнев проклятый Rust</h1>
+
+<p><a href="http://troubles.md/abusing-rustc/">Перевод</a> | Автор оригинала: troubles.md</p>
+<p>В этой статье рассказывается об оптимизации размера и производительности std::заимствовать::Cow<T> в Rust. Это требует некоторых базовых знаний программирования на Rust, но не требует каких-либо знаний о низкоуровневых деталях модели компиляции Rust. Позже мы затронем некоторые довольно второстепенные темы, но я объясню их по ходу дела. Оптимизация начнется довольно разумно, но будет продолжать становиться все более отвратительной и проклятой, пока весь ад не вырвется наружу, а сами небеса не станут кроваво-красными от ярости древних.</p>
+<p>В любом случае, для начала давайте кратко поговорим об указателях.</p>
+<p>В частности, поговорим об указателях на массивы. В C указатели на массивы такие же, как «обычные» указатели, и не имеют размера или других прикрепленных метаданных. Если вы хотите узнать размер массива в C, вы должны реализовать это самостоятельно. Для строк это обычно реализуется путем завершения строки «контрольным значением», поэтому при итерации по строке вы можете постоянно проверять это значение и выходить. Для других массивов это обычно реализуется путем предоставления некоторых метаданных в качестве дополнительного параметра функции или поля в структуре. Однако для безопасного языка, такого как Rust, это просто не работает. Rust имеет тип &amp;[T], который представляет заимствованный массив, и Box&lt;[T]&gt;, который является собственным массивом. Оба они используют тот же синтаксис, что и «обычные» указатели на один элемент, но дополнительно сохраняют свою длину, используя некоторую магию в самом компиляторе. Вы можете представить себе указатели в Rust, разделенные на два разных типа: указатель на тип размера (указатель на тип, размер которого известен во время компиляции, например &amp; u64, &amp;[u8; 10], &amp;() и т.д.) и указатель на тип без размера (указатель на тип, размер которого известен только во время выполнения, например &amp;[u8], &amp;str или &amp; dyn Trait). </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Ptr</span><span>&lt;T&gt;
+</span><span>where
+</span><span>    T: Sized
+</span><span>{
+</span><span>    address</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Ptr</span><span>&lt;T&gt;
+</span><span>where
+</span><span>    T: !Sized
+</span><span>{
+</span><span>    address</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Rust currently only ever uses a pointer or pointer-sized integer for the fat pointer
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// extra data, but in theory we could have anything here, and it could be more than just
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// the size of a `usize`.
+</span><span>    extra_data</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span></code></pre>
+<p>Это означает, что &amp;[T] и Box&lt;[T]&gt; на самом деле являются двумя целыми числами размером с указатель (т.е. 64-битными в 64-битных архитектурах и 32-битными в 32-битных архитектурах), одно для указателя на первый элемент. и еще один для длины массива. Я собираюсь объяснить здесь некоторые основы, чтобы убедиться, что, когда мы начнем использовать темные обряды, чтобы извлекать и изгибать их, вы не потерялись полностью.</p>
+<p>Итак, если вы действительно использовали Rust в реальном коде, вы могли заметить, что здесь не упоминается Vec<T>. Box&lt;[T]&gt; не является распространенным типом в Rust, поскольку Vec<T> гораздо более гибок - он позволяет добавлять больше элементов в массив во время выполнения без создания нового массива, тогда как Box&lt;[T]&gt; делает нет. Причина этой разницы в том, что Box&lt;[T]&gt; хранит только количество элементов, и все эти элементы должны быть определены. Vec<T> работает иначе. Он имеет целое число, представляющее объем имеющегося у него места, которое может быть больше, чем количество элементов в Vec. Это означает, что он может выделить дополнительное пространство, которое не содержит определенных элементов, а затем, нажав на него, Vec просто записывает в это пространство, без необходимости выделять целый новый массив. Пока все в порядке, хотя это означает, что Vec, к сожалению, требует три целых числа размером с указатель. Вот краткая справка: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// This is invalid syntax in Rust of course, but it&#39;s just an illustration
+</span><span style="font-style:italic;color:#5c6773;">// Size: 2 * size_of::&lt;usize&gt;()
+</span><span style="color:#ff7733;">struct </span><span>&amp;&#39;</span><span style="color:#59c2ff;">a</span><span> [T] {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*const</span><span> T,
+</span><span>    length</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Size: 2 * size_of::&lt;usize&gt;()
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">dyn_as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">cow</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>CursedCow&lt;&#39;</span><span style="color:#f29668;">_</span><span>, dyn Foo&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> dyn Foo {
+</span><span>    </span><span style="color:#f29668;">&amp;**</span><span>cow
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">dyn_to_cow</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">cow</span><span style="color:#bfbab0cc;">: </span><span>CursedCow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, dyn Foo&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>std</span><span style="color:#f29668;">::</span><span>borrow</span><span style="color:#f29668;">::</span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, dyn Foo&gt; {
+</span><span>    cow</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">dyn_new_cow</span><span>(</span><span style="color:#f29718;">cow</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn Foo&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;CursedCow&lt;</span><span style="color:#ff7733;">&#39;static</span><span>, dyn Foo&gt;&gt; {
+</span><span>    CursedCow</span><span style="color:#f29668;">::</span><span>try_owned(cow)
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">repr</span><span>(transparent)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Test</span><span>(</span><span style="color:#ff7733;">u64</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>ToOwned </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Test </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Owned </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Test&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>    
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_owned</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Owned {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(Test(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0</span><span>))
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">static_new_cow</span><span>(</span><span style="color:#f29718;">cow</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Test&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;CursedCow&lt;</span><span style="color:#ff7733;">&#39;static</span><span>, Test&gt;&gt; {
+</span><span>    CursedCow</span><span style="color:#f29668;">::</span><span>try_owned(cow)
+</span><span>}
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Box</span><span>&lt;T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*mut</span><span> T,
+</span><span>    length</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Size: 3 * size_of::&lt;usize&gt;()
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Vec</span><span>&lt;T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*mut</span><span> T,
+</span><span>    length</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    capacity</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span></code></pre>
+<blockquote>
+<p>Если вы уже знакомы с низкоуровневыми деталями Rust, вы могли заметить некоторые вещи, которые я упустил из перечисленных выше типов. Пока не обращайте на них внимания, я займусь этим.</p>
+</blockquote>
+<p>Итак, есть еще один тип массива, о котором я хочу поговорить, и именно ему будет посвящена остальная часть этой статьи. Этот тип - std::заимствовать::Корова. Мы начнем с обсуждения Cow &lt;[T]&gt; и Cow <str>, хотя Cow является общим и работает с другими типами, о которых мы поговорим позже. Когда дело доходит до реализации, мы в основном будем говорить о Cow &lt;[T]&gt;, поскольку Cow <str> во время выполнения то же самое, что Cow &lt;[u8]&gt; - просто требуется, чтобы некоторые дополнительные инварианты были истинными для байтов, которые он содержит, поэтому он должен быть отдельным типом. Cow &lt;[T]&gt; / Cow <str> может быть &amp;'a [T] / &amp;' a str или Vec<T> / String. Они полезны во многих случаях, но одна большая проблема - в синтаксическом анализе. Один из примеров того, где это может быть полезно, - это если у вас есть синтаксический анализатор для языка программирования, в котором есть строки, которые могут иметь escape-символы. У вас может быть много строк, просто являющихся ссылкой на исходный текст программы: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>let a = &quot;Hello, world&quot;;
+</span><span>         ^----------^ Take a reference to these characters in the original program text
+</span><span>                      and use it as the string value.
+</span></code></pre>
+<p>Однако если у вас есть escape-последовательность, вам необходимо выделить новую String, которая является принадлежащим типу строки, размещенной в куче, например Box&lt;[T]&gt; является типом принадлежащего массива. Это запрашивает блок памяти, который не должен следовать тем же правилам времени жизни, что и заимствования - заимствования должны создаваться во внешней области и передаваться внутрь, но собственные указатели могут быть созданы во внутренней области и переданы обратно наружу, и в целом являются гораздо более гибкими за счет подавления некоторых оптимизаций и необходимости выполнения вычислений для их создания и уничтожения. После того, как мы выделили нашу строку, мы записываем версию строки из текста программы в этот буфер, при этом все escape-последовательности превращаются в символы, которые они представляют. Вы можете представить это с помощью Cow <str> - либо Cow::Borrowed (some_string_reference), если строка может быть взята из текста программы без изменений, либо Cow::Owned (some_computed_string), если строку нужно было отредактировать. Итак, сколько байтов занимает Cow &lt;[T]&gt;? Ну, это либо Vec<T>, либо &amp;[T], так что нам нужно достаточно места для Vec<T>, но мы можем повторно использовать часть этого пространства, если это &amp;[T], поскольку он может только быть тем или другим. Vec<T> принимает 3 целых числа размером с указатель, и мы можем повторно использовать 2 из них для &amp;[T], так что нам нужно только 3 целых числа с размером указателя. За исключением того, что нам также нужно хранить «тег», независимо от того, является ли это Vec<T> или &amp;[T]. Это означает, что это 3 целых числа размером с указатель плюс один бит, который может быть либо 0 для Vec<T>, либо 1 для &amp;[T]. Итак, для 64-разрядной версии это будет 3 * 64 + 1 или 193, верно?</p>
+<p>К сожалению нет. Вы не можете получить доступ к типу с битовым смещением, только с байтовым смещением. Это означает, что наш размер должен быть кратен 8. Легко, мы округляем его в большую сторону и получаем 7 неиспользуемых бит, верно? Ну все равно нет. Целые числа должны иметь смещение, кратное его размеру. Вы можете сохранить u64 со смещением 8, 16, 24, 32, 40 и т.д., Но не со смещением 9, 10, 11, 12 и т.д. Что ж, легко, мы просто видим, какой самый большой размер целого числа, которое у нас есть в качестве поля нашего типа (в данном случае размер указателя), и округляем наш размер до этого. Итак, теперь размер нашего типа Cow имеет размер 4 указателя, что в два раза больше размера &amp;[T]. Звучит неплохо, но это складывается, и у этого увеличения размера есть и другие недостатки, о которых я расскажу позже. Мы можем подтвердить размер так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Prints 32 on 64-bit systems, which is 4 * 8, where 8 is the number of bytes in a 64-bit
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// integer
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;std</span><span style="color:#f29668;">::</span><span>borrow</span><span style="color:#f29668;">::</span><span>Cow&lt;[</span><span style="color:#ff7733;">u8</span><span>]&gt;&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="akt-1-nekotorye-razumnye-optimizatsii">Акт 1. Некоторые разумные оптимизации</h2>
+<p>Итак, чем мы можем помочь? Ну, есть несколько вещей. Для начала мы можем заметить, что если вектор имеет нулевую емкость, мы можем рассматривать его как пустой массив для большинства операций. Например, векторы с нулевой пропускной способностью не нуждаются в запуске их «кода отбрасывания». Итак, давайте создадим версию Vec, в которой он всегда должен иметь ненулевую емкость. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>num</span><span style="color:#f29668;">::</span><span>NonZeroUsize</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">NonZeroCapVec</span><span>&lt;T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*mut</span><span> T,
+</span><span>    len</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    cap</span><span style="color:#bfbab0cc;">:</span><span> NonZeroUsize,
+</span><span>}
+</span></code></pre>
+<p>Вы заметите, что у нас все еще может быть вектор без элементов, если в нем есть место для хранения элементов. Итак, теперь мы можем снова выполнить вычисления размера Cow &lt;[T]&gt;, заменив Vec<T> на NonZeroCapVec<T>. Снова мы замечаем, что у нас NonZeroCapVec 3 размера указателя, и мы можем повторно использовать 2 размера указателя из них для хранения среза, за исключением того, что теперь компилятор Rust знает, что он может использовать cap как для тега, так и для емкости, где если cap равен нулю, то он срез, и если он не равен нулю, то это Vec. Это полезный трюк. Мы можем подтвердить, что этот тип теперь имеет 3 размера указателя, например: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">CowArr</span><span>&lt;&#39;a, T&gt; {
+</span><span>    Borrowed(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[T])</span><span style="color:#bfbab0cc;">,
+</span><span>    Owned(NonZeroCapVec&lt;T&gt;)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;CowArr&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Но, к сожалению, мы не можем это подтвердить. На момент написания Rust еще не оптимизировал это правильно и по-прежнему сообщает, что размер равен 32. Это прискорбно, но до тех пор мы можем реализовать эту оптимизацию вручную: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">CowArr</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// We can use `*mut` to store immutable pointers like `&amp;T`, as long as we never derive an
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// `&amp;mut T` from an `&amp;T`
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*mut</span><span> T,
+</span><span>    len</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    cap</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span></code></pre>
+<p>Затем, когда нам нужно знать, принадлежит ли стоимость или заимствована, мы можем просто проверить, равен ли кэп нулю.</p>
+<p>В Rust есть варианты NonZero для всех целых чисел, а также тип указателя NonNull<T>, который действует так же, как * mut T, за исключением того, что Rust знает, что он не может быть нулевым, он может использовать нулевой указатель в качестве тега перечисления. Хотя Rust не оптимизирует размер перечисления, определенного выше, он будет правильно использовать эти типы NonZero / NonNull в Option, что означает, что Option&lt;Box&lt;[T] &gt;&gt; имеет тот же размер, что и Box&lt;[T]&gt; - он может использовать нулевой указатель для обозначения None. Таким образом, мы можем заставить наш тип CowArr работать так же, как Box&lt;[T]&gt; для Option, и позволить ему использовать нулевой указатель для представления None, например: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>ptr</span><span style="color:#f29668;">::</span><span>NonNull</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">CowArr</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;,
+</span><span>    len</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    cap</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span></code></pre>
+<p>Опять же, мы можем вручную выполнить оптимизацию, где мы проверяем cap на ноль, но теперь Rust будет автоматически использовать нулевой указатель для ptr, чтобы обозначать None, если у нас есть Option&lt;CowArr<T>&gt;. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Both of these print 24 on 64-bit systems, and 12 on 32-bit systems
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;CowArr&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;CowArr&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;&gt;&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Хм, за исключением того, что у нас здесь есть нечто большее, чем просто уменьшение размера. Чтобы объяснить, что я имею в виду, нам нужно поговорить о сборке. Для std::заимствовать::Cow, чтобы сделать as_ref, мы сначала должны проверить, есть ли у нас Cow::Borrowed или Cow::Owned, затем, если у нас есть первое, мы возвращаем заем, который у нас уже есть, и если у нас есть в последнем случае мы выполняем &lt;Vec<T>&gt;::as_ref, что довольно просто - взять ptr и len из вектора и создать срез с этими ptr и len. Остальная часть преобразования выполняется только в системе типов, во время выполнения все, что делает &lt;Vec<T>&gt;::as_ref, - это копирование указателя и длины из одного места в другое. Что ж, с CowArr наш код проще. Заимствованные ptr и len точно такие же, как и собственные ptr и len, с той лишь разницей, что если у нас есть собственное значение, то cap не равно нулю. Это означает, что нам вообще не нужно проверять ограничение, нам нужно только убедиться, что части системы типов преобразования верны - по сути, нам нужно только убедиться, что мы правильно аннотируем время жизни. Затем, когда сборка создана, информация о типе удаляется, и остается реализация as_ref, которая, по сути, не работает. Что ж, в Rust Playground есть функция «Показать сборку», так что давайте воспользуемся ею: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>{
+</span><span>    borrow</span><span style="color:#f29668;">::</span><span>Cow</span><span style="color:#bfbab0cc;">,
+</span><span>    ptr</span><span style="color:#f29668;">::</span><span>NonNull
+</span><span>    marker</span><span style="color:#f29668;">::</span><span>PhantomData</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">CowArr</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;,
+</span><span>    len</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    cap</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// I omitted this before since it&#39;s just to silence the error that `&#39;a` is unused.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// There is more to `PhantomData` than just silencing errors, but it&#39;s out of scope
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// for this article.
+</span><span>    _marker</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> T&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; </span><span style="color:#59c2ff;">CowArr</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">as_ref</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span>[T] {
+</span><span>        </span><span style="color:#ff7733;">unsafe </span><span>{ std</span><span style="color:#f29668;">::</span><span>slice</span><span style="color:#f29668;">::</span><span>from_raw_parts(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ptr</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>len) }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">cow_as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>Cow&lt;&#39;</span><span style="color:#f29668;">_</span><span>, [</span><span style="color:#ff7733;">u8</span><span>]&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[</span><span style="color:#ff7733;">u8</span><span>] {
+</span><span>    a</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">cowarr_as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>CowArr&lt;&#39;</span><span style="color:#f29668;">_</span><span>, </span><span style="color:#ff7733;">u8</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[</span><span style="color:#ff7733;">u8</span><span>] {
+</span><span>    a</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()
+</span><span>}
+</span></code></pre>
+<p>Щелчок по «Показать сборку» (конечно, в режиме выпуска) показывает нам, во что это компилируется. Не волнуйтесь, я знаю, что сборка может быть пугающей, поэтому написал комментарии: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>;; For the standard library `Cow`...
+</span><span>cow_as_ref:
+</span><span>    ;; We only need to load the `ptr` once (good!)
+</span><span>    mov   rax, [rdi + 8]
+</span><span>    ;; Unfortunately, we check the tag to load the length
+</span><span>    cmp   [rdi], 1
+</span><span>
+</span><span>    ;; This is a pointer to the length if we have a borrowed slice
+</span><span>    lea   rcx, [rdi + 16]
+</span><span>
+</span><span>    ;; This is a pointer to the length if we have an owned vector
+</span><span>    lea   rdx, [rdi + 24]
+</span><span>    ;; We use `cmov`, which will overwrite the pointer to the borrowed
+</span><span>    ;; slice&#39;s length with the pointer to the owned vector&#39;s length if
+</span><span>    ;; our `Cow`&#39;s tag shows that it is owned.
+</span><span>    cmove rcx, rdx
+</span><span>
+</span><span>    ;; Then finally, we dereference this pointer-to-length to get the
+</span><span>    ;; actual length
+</span><span>    mov   rdx, [rcx]
+</span><span>    ret
+</span><span>
+</span><span>;; For our `CowArr`
+</span><span>cowarr_as_ref:
+</span><span>    ;; We return the `ptr`
+</span><span>    mov rax, [rdi]
+</span><span>    ;; We return the `len`
+</span><span>    mov rdx, [rdi + 8]
+</span><span>    ;; That&#39;s it! We&#39;re done
+</span><span>    ret
+</span></code></pre>
+<p>Даже если вы не разбираетесь в ассемблере, вы можете видеть, что это улучшение за счет сокращения количества инструкций, если ничего другого. Это также снижает давление в регистре, хотя, если вы не знаете, что это значит, не беспокойтесь - его эффект достаточно мал, и вам не нужно беспокоиться об этом сейчас.</p>
+<p>Если вы знаете что-нибудь о соглашениях о вызовах, вы можете заметить что-то странное в этом ассемблерном коде. Мы доберемся до этого в свое время, хотя и не раньше, чем перейдем в Запретные миры.</p>
+<h2 id="akt-2-shag-v-zapretnye-miry">Акт 2: Шаг в запретные миры</h2>
+<p>Пока все просто. Но мы можем добиться большего, если захотим добавить некоторые ограничения. Мы не можем уменьшить размер ptr, поскольку на самом деле невозможно безопасно делать много предположений о диапазоне значений, которые может принимать указатель, но этого нельзя сказать о len и cap. Если мы находимся в 64-битной системе, использование 64-битной длины и емкости позволяет нам хранить до 18 446 744 073 709 551 615 элементов, и я думаю, мы можем согласиться с тем, что маловероятно, чтобы один массив содержал такое количество элементов в большинстве программы. Фактически, невозможно даже создать такой большой массив для чего-либо, кроме u8 и других однобайтовых (или даже меньших) типов, поскольку у вас закончится адресное пространство задолго до этого, даже не говоря о том, что вы не хватит памяти на вашем компьютере задолго до того, как закончится адресное пространство. Итак, допустим, что len и cap являются 32-битными в 64-битных системах. На данный момент мы проигнорируем 32-битные системы, в 32-битных системах мы могли бы сделать либо len, и cap 16-битными, либо вернуться к реализации, описанной в предыдущем разделе. Этот выбор пока не так важен, поэтому я остановлюсь на 64-битной версии. С 32-битными len и cap мы можем хранить массивы до 4294967295 элементов, что означает, например, что одна строка может иметь длину до 4 Гб. Это ограничение, конечно, нет ничего невероятного, что ваша программа захочет обрабатывать строки большего размера, но стандартная библиотека Cow всегда будет поддерживать это, если вам это нужно. Если вам не нужно такое количество элементов, это дает вам уменьшение размера. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>ptr</span><span style="color:#f29668;">::</span><span>NonNull</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">CowArr</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;,
+</span><span>    len</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>,
+</span><span>    cap</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Both of these print 16 on 64-bit systems, and still print 12 on 32-bit systems
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;CowArr&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;CowArr&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;&gt;&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Если вы похожи на меня, таких 8 байтов достаточно, чтобы заставить вас плакать от радости, но, может быть, мы сможем лучше. Теперь вернемся к тому «кое-чему немного странному», о котором я упоминал выше. Видите ли, когда Rust передает структуру в функцию или возвращает структуру из функции, у него есть несколько способов обработки совместного использования структуры между вызывающим и вызываемым объектами. Если структура «малая» (имеется в виду два поля или меньше, каждое поле помещается в один регистр), тогда структура будет передана как аргумент в регистрах и возвращена в регистрах. В противном случае структура будет записана в стек, а указатель на структуру будет передан вызываемому. Это «что-то немного странное», о котором я упоминал ранее - многие люди предполагают, что Rust всегда передает структуры с более чем одним элементом по указателю, и на самом деле до относительно недавнего времени так и было. Теперь, если вы такой же юрист по правилам, как и я, вы могли бы заметить трюк, который мы можем здесь сделать: хотя структура выше не считается «маленькой» в Rust, мы можем сделать ее версию, которая будет считаться небольшой. . Давайте сделаем это: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>ptr</span><span style="color:#f29668;">::</span><span>NonNull</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">CowArr</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;,
+</span><span>    len_cap</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">LEN_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64 </span><span style="color:#f29668;">= </span><span>std</span><span style="color:#f29668;">::</span><span>u32</span><span style="color:#f29668;">::</span><span style="color:#f29718;">MAX </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">CAP_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64 </span><span style="color:#f29668;">= !</span><span style="color:#f29718;">LEN_MASK</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// We want the low 32 bits of `len_cap` to be `len`, and the high 32 bits to be `cap`,
+</span><span style="font-style:italic;color:#5c6773;">// so we need to shift `cap` when reading and writing it.
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">CAP_SHIFT</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; </span><span style="color:#59c2ff;">CowArr</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">as_ref</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span>[T] {
+</span><span>        </span><span style="color:#ff7733;">unsafe </span><span>{ std</span><span style="color:#f29668;">::</span><span>slice</span><span style="color:#f29668;">::</span><span>from_raw_parts(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ptr</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>len </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">LEN_MASK</span><span>) }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Итак, конечно, теперь у нас есть структура того же размера, но ее можно передавать в регистрах, что ускоряет вызовы функций, которые ее используют. Круто, но разве это и маскировка длины добавят дополнительных затрат? К счастью для нас, в x86 есть способ бесплатно замаскировать младшие биты числа! Поскольку сборка не типизирована, мы можем просто притвориться, что наше 64-битное число является 32-битным числом, когда мы его используем, и это будет так же, как если бы мы замаскировали младшие 32 бита. Кроме того, нам нужно только выделить пространство стека и передать указатель вызываемому объекту, когда нам действительно нужно передать ссылку на Cow. Если мы передадим собственное значение, оно останется в регистрах. Давайте посмотрим здесь на сборку, чтобы понять, что я имею в виду: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">CowArr3Fields</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;,
+</span><span>    len</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>,
+</span><span>    cap</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">CowArr2Fields</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;,
+</span><span>    len_cap</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">cow_as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>Cow&lt;&#39;</span><span style="color:#f29668;">_</span><span>, [</span><span style="color:#ff7733;">u8</span><span>]&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[</span><span style="color:#ff7733;">u8</span><span>] {
+</span><span>    a</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">cowarr2fields_as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>CowArr2Fields&lt;&#39;</span><span style="color:#f29668;">_</span><span>, </span><span style="color:#ff7733;">u8</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[</span><span style="color:#ff7733;">u8</span><span>] {
+</span><span>    a</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()
+</span><span>}
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">cowarr3fields_as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>CowArr3Fields&lt;&#39;</span><span style="color:#f29668;">_</span><span>, </span><span style="color:#ff7733;">u8</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[</span><span style="color:#ff7733;">u8</span><span>] {
+</span><span>    a</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">cow_noop</span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span>Cow&lt;&#39;</span><span style="color:#f29668;">_</span><span>, [</span><span style="color:#ff7733;">u8</span><span>]&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cow&lt;&#39;</span><span style="color:#f29668;">_</span><span>, [</span><span style="color:#ff7733;">u8</span><span>]&gt; {
+</span><span>    a
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">cowarr2fields_noop</span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span>CowArr2Fields&lt;&#39;</span><span style="color:#f29668;">_</span><span>, </span><span style="color:#ff7733;">u8</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>CowArr2Fields&lt;&#39;</span><span style="color:#f29668;">_</span><span>, </span><span style="color:#ff7733;">u8</span><span>&gt; {
+</span><span>    a
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">cowarr3fields_noop</span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span>CowArr3Fields&lt;&#39;</span><span style="color:#f29668;">_</span><span>, </span><span style="color:#ff7733;">u8</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>CowArr3Fields&lt;&#39;</span><span style="color:#f29668;">_</span><span>, </span><span style="color:#ff7733;">u8</span><span>&gt; {
+</span><span>    a
+</span><span>}
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cow_as_ref:
+</span><span>    mov   rax, [rdi + 8]
+</span><span>    cmp   [rdi], 1
+</span><span>    lea   rcx, [rdi + 16]
+</span><span>    lea   rdx, [rdi + 24]
+</span><span>    cmove rcx, rdx
+</span><span>    mov   rdx, [rcx]
+</span><span>    ret
+</span><span>
+</span><span>cowarr2fields_as_ref:
+</span><span>    mov rax, [rdi]
+</span><span>    mov edx, [rdi + 8]
+</span><span>    ret
+</span><span>
+</span><span>cowarr3fields_as_ref:
+</span><span>    mov rax, [rdi]
+</span><span>    mov edx, [rdi + 8]
+</span><span>    ret
+</span><span>    
+</span><span>cow_noop:
+</span><span>    mov    rax, rdi
+</span><span>    movups xmm0, [rsi]
+</span><span>    movups xmm1, [rsi + 16]
+</span><span>    movups [rdi + 16], xmm1
+</span><span>    movups [rdi], xmm0
+</span><span>    ret
+</span><span>
+</span><span>cowarr2fields_noop:
+</span><span>    mov rdx, rsi
+</span><span>    mov rax, rdi
+</span><span>    ret
+</span><span>
+</span><span>cowarr3fields_noop:
+</span><span>    mov    rax, rdi
+</span><span>    movups xmm0, [rsi]
+</span><span>    movups [rdi], xmm0
+</span><span>    ret
+</span></code></pre>
+<p>Если вы умеете читать сборку, вы можете видеть, что просто возврат немодифицированной Cow требует некоторой возни с загрузкой и хранением данных для всех структур, кроме CowArr2Fields. Если вы не можете читать сборку, то все, что вам нужно знать, - это [...] квадратные скобки для доступа к памяти, а cowarr2fields_noop - единственная функция, которая в них не нуждается.</p>
+<p>Итак, мы максимально оптимизировали массивы Cow. Сейчас мы начинаем использовать Темную Магию и рискуем навлечь на себя гнев Древних (вы знаете, основная команда Rust). Давайте создадим «общую» оптимизированную Cow, которая работает не только с массивами.</p>
+<h2 id="akt-3-prosti-menia">Акт 3: прости меня</h2>
+<p>Так что это все хорошо, но этого недостаточно. По сути, он переопределяет Cow &lt;[T]&gt; с настраиваемым типом, который не работает для Cow <str> - вам нужно написать свою собственную оболочку, возможно, назовите ее CowStr. Затем повторите это для каждого типа. Нет, мы можем лучше. Мы можем сделать CursedCow, который будет одинаково работать с вами, независимо от того, CursedCow &lt;[T]&gt;, CursedCow <str> или даже CursedCow <dyn Trait>. Именно в этом последнем код действительно начинает наносить ущерб душе. Если вы однажды окажетесь в аду, знайте, что это может быть потому, что вы прочитали эту статью. Думаю, мы оба можем согласиться, что это справедливое и справедливое наказание. В любом случае, прежде чем мы сможем по-настоящему проклясть себя, нам нужно заложить основу и заставить работать гораздо более простую CursedCow &lt;[T]&gt; / CursedCow <str>. Чтобы это сработало, нам понадобится трэйта. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub unsafe trait </span><span style="color:#59c2ff;">Cursed</span><span>&lt;T: ?Sized&gt;: Borrow&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">borrowed</span><span>(</span><span style="color:#f29718;">borowed</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>T) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;NonNull&lt;T&gt;&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">owned</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;NonNull&lt;T&gt;&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">is_owned</span><span>(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">unsafe fn </span><span style="color:#ffb454;">as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> T</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">unsafe fn </span><span style="color:#ffb454;">reconstruct</span><span>(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Эта трэйта фактически реализована для собственного варианта, в отличие от ToOwned, который реализован для заимствованного варианта. Это связано с тем, что многие типы могут реализовывать ToOwned, указывающий на один и тот же тип (вы можете представить себе обертку среза, в которой ToOwned по-прежнему генерирует Vec), но мы по-прежнему хотим явно выделить Box и другие интеллектуальные указатели. Реализация для собственного варианта означает, что нам не нужно писать какие-либо общие реализации с impl<T> Cursed for T where ..., что позволяет нам обойти проблему перекрывающихся реализаций. Эта трэйта небезопасна, так как требует, чтобы некоторые инварианты были истинными в отношении Borrow, и требует, чтобы заимствованные, принадлежащие и принадлежащие им были согласованы в отношении того, как выглядят заимствованные и принадлежащие указатели. Кроме того, as_ref и reconstruct должны быть небезопасными функциями, потому что в них должны передаваться только действительные указатели.</p>
+<p>Итак, давайте сейчас напишем реальную структуру CursedCow. Итак, хотя в предыдущих разделах мы в основном переопределяли систему «толстых указателей» в Rust, мы больше не можем этого делать, если хотим поддерживать больше, чем просто массивы. Мы хотим иметь CursedCow<T> шириной 2 указателя, если T не имеет размера (например, [T], str или dyn Trait), и CursedCow<T> шириной 1 указатель - просто обычный указатель - если T равно размер. Мы делаем это, просто используя NonNull<T>, который является жирным указателем для типов без размера, и позволяя реализации Cursed handle где-то скрывать тег. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// `repr(transparent)` ensures that this struct is always treated exactly the same as `NonNull&lt;T&gt;`
+</span><span style="font-style:italic;color:#5c6773;">// at runtime.
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">repr</span><span>(transparent)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">CursedCow</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T&gt;
+</span><span>where
+</span><span>    T: ?Sized + ToOwned,
+</span><span>    T::Owned: Cursed&lt;T&gt;,
+</span><span>{
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;,
+</span><span>    _marker</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> T&gt;,
+</span><span>}
+</span></code></pre>
+<p>Помимо того факта, что вы не можете явно сопоставить его варианты (или получить изменяемую ссылку на внутренние компоненты, но есть способы обойти это), это идентично std::заимствовать::Cow - вы не делаете CowArr &lt; T&gt;, вы просто выполняете CursedCow &lt;[T]&gt;, и этот новый CursedCow имеет ширину 2 указателя. Это то же самое, что и раньше для 64-битной версии, но меньше в 32-битной за счет того, что допускается только до 65 535 элементов.</p>
+<p>Реализовать необходимые методы для нашего нового CursedCow<T> - методов для его создания из собственных или заимствованных данных, реализации Deref, реализации Drop и т.д. - довольно просто, поэтому я пропущу это, но вы можете увидеть это в полная суть (ссылка в конце статьи).</p>
+<p>Настоящая работа выполняется в реализациях Cursed для Vec<T>, String, Box<T> и так далее. Я пока пропущу реализацию String, так как она в основном такая же, как Vec<T>, но давайте начнем с объяснения того, как мы храним всю информацию, необходимую для CursedCow &lt;[T]&gt; в одном NonNull &lt;[ T]&gt;. Вы увидите ссылки на эти константы CAP_SHIFT, CAP_MASK и LEN_MASK в следующих функциях, поэтому я начну с их определения здесь: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>mem</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">CAP_SHIFT</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span>(mem</span><span style="color:#f29668;">::</span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>&gt;() </span><span style="color:#f29668;">* </span><span style="color:#f29718;">8</span><span>) </span><span style="color:#f29668;">/ </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">LEN_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span style="color:#f29718;">MAX </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#f29718;">CAP_SHIFT</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">CAP_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= !</span><span style="color:#f29718;">LEN_MASK</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>CAP_SHIFT - это величина, на которую вам нужно сдвинуть поле len указателя жира NonNull &lt;[T]&gt;, чтобы получить емкость, которую мы скрыли в этом поле, то есть верхние 32/16 бит (в 64- и 32-битных версиях). , соответственно). LEN_MASK и CAP_MASK являются «масками» для этих битов, поэтому мы можем использовать побитовое &amp; только для получения битов, которые представляют длину или емкость, соответственно. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">unsafe impl</span><span>&lt;T&gt; Cursed&lt;[T]&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Vec</span><span>&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">borrowed</span><span>(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[T]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;NonNull&lt;[T]&gt;&gt; {
+</span><span>        </span><span style="color:#ff7733;">if</span><span> ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">CAP_MASK </span><span style="color:#f29668;">!= </span><span style="color:#f29718;">0 </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(NonNull</span><span style="color:#f29668;">::</span><span>from(ptr))
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">owned</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;NonNull&lt;[T]&gt;&gt; {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Fail if the capacity is too high
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">CAP_MASK </span><span style="color:#f29668;">!= </span><span style="color:#f29718;">0 </span><span style="color:#f29668;">|| </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">capacity</span><span>() </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">CAP_MASK </span><span style="color:#f29668;">!= </span><span style="color:#f29718;">0 </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> this </span><span style="color:#f29668;">= </span><span>mem</span><span style="color:#f29668;">::</span><span>ManuallyDrop</span><span style="color:#f29668;">::</span><span>new(</span><span style="font-style:italic;color:#39bae6;">self</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">unsafe </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(NonNull</span><span style="color:#f29668;">::</span><span>from(slice</span><span style="color:#f29668;">::</span><span>from_raw_parts_mut(
+</span><span>                    this</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_mut_ptr</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>                    </span><span style="font-style:italic;color:#5c6773;">// This combines the length and capacity into a single `usize`
+</span><span>                    this</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">| </span><span>(this</span><span style="color:#f29668;">.</span><span style="color:#f07178;">capacity</span><span>() </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">CAP_SHIFT</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>                )))
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...snip...
+</span><span>}
+</span></code></pre>
+<p>Итак, здесь вы можете видеть, как мы проверяем, что длина заимствованных / принадлежащих ценностей не превышает сумму, которую мы можем представить в уменьшенном объеме пространства, которое у нас есть. Если у нас слишком много элементов или слишком много емкости, мы возвращаем None, поскольку у нас нет возможности сохранить это. Хотя мы можем обрезать len, мы не можем безопасно обрезать емкость, не нарушив работу некоторых распределителей, а усечение len было бы ненужным. В остальном это выглядит примерно так же, как было раньше.</p>
+<p>Остальная часть трейта реализована так, как вы ожидаете, и выглядит почти так же, как CowArr, которая была у нас раньше. Реализация этой трэйты в целом выглядит точно так же для String. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">unsafe impl</span><span>&lt;T&gt; Cursed&lt;[T]&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Vec</span><span>&lt;T&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...snip...
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">is_owned</span><span>(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;[T]&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>        </span><span style="color:#ff7733;">unsafe </span><span>{ ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>() }</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">CAP_MASK </span><span style="color:#f29668;">!= </span><span style="color:#f29718;">0
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">unsafe fn </span><span style="color:#ffb454;">as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;[T]&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[T] {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Like before, this mask is essentially free because we can just treat `self.len`
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// like a smaller value, which acts the same as if we did the mask, instead of
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// actually masking.
+</span><span>        slice</span><span style="color:#f29668;">::</span><span>from_raw_parts(ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ptr</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*const</span><span> T</span><span style="color:#bfbab0cc;">,</span><span> ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">LEN_MASK</span><span>)
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">unsafe fn </span><span style="color:#ffb454;">reconstruct</span><span>(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;[T]&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>from_raw_parts(
+</span><span>            ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ptr</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*mut</span><span> T</span><span style="color:#bfbab0cc;">,
+</span><span>            ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">LEN_MASK</span><span style="color:#bfbab0cc;">,
+</span><span>            ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#f29718;">CAP_SHIFT</span><span style="color:#bfbab0cc;">,
+</span><span>        )
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Ну вот и все. Теперь наш новый CursedCow &lt;[T]&gt; автоматически действует как CowArr<T>. Проклятье скрывать тег и емкость внутри поля len фрагмента, но мы только начинаем</p>
+<p>Теперь мы переходим к самой дрянной части - CursedCow<T> для других значений T и, в частности, CursedCow <dyn Trait>. Теперь мы не можем быть универсальными для любого CursedCow <dyn Trait>, поскольку нет способа указать «некоторый объект-трэйт» в системе типов, но допустим, что если вы используете CursedCow <dyn Trait> по одной причине или в другом случае может быть реализация ToOwned с Owned = Box<dyn Trait>, поскольку это единственный способ иметь принадлежащий объект-трэйт. Это может выглядеть примерно так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">MyCoolTrait </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">clone_boxed</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;</span><span style="color:#ff7733;">Self</span><span>&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ... the rest of my cool functions... 
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>ToOwned </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">dyn MyCoolTrait </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Owned </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn MyCoolTrait&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_owned</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>ToOwned {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone_boxed</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Итак, как нам сохранить тег, представляющий принадлежащий или заимствованный тег в Box<T>, поскольку Box также внутренне использует, возможно, толстый указатель NonNull<T>? Что ж, есть пара методов, оба полагаются на тот факт, что используются не все биты указателей. Для начала, большинство типов имеют выравнивание больше 1. Мы упоминали о выравнивании ниже - u64 могут находиться только в местах, кратных mem::size_of::<u64>(), u32 могут находиться только в местах, которые являются кратное mem::size_of::<u32>() и т.д. Итак, из-за этого мы знаем, что если целочисленное значение указателя нечетное, то оно должно быть недействительным. Мы можем использовать это для хранения тега - если указатель нечетный, значит, он принадлежит (и мы должны вычесть 1, чтобы получить истинный указатель), если четный, то это просто обычный заимствованный указатель. Конечно, это была бы довольно проклятая реализация Cow, но мы не можем реализовать ее в общем, и мы не можем реализовать ее для dyn Trait, так как это привело бы к странным ошибкам, где Cow <dyn Trait> подходила для большинства типов. , но не работает, если реализация вашего трейта имеет размер 1, и вы не узнаете об этом, пока он не взорвется во время выполнения.</p>
+<p>Другая возможность состоит в том, что Rust изо всех сил старается убедиться, что указатели не могут переполнить isize, поскольку это означает, что добавление двух указателей никогда не приведет к переполнению. Насколько я знаю, это не жесткая гарантия, но, безусловно, на 64-битном x86 невозможно даже на любом оборудовании, которое существует в реальном мире, иметь указатель больше 63 бит, так что 64-й бит всегда будет 0 . Мы можем воспользоваться этим, и если мы получим указатель, у которого установлен верхний бит, мы можем просто вернуть None, как если бы мы получили слишком большой &amp;[T] / Vec<T> хранить. Теперь ручное управление полем указателя толстого указателя запрещено в Rust - мы можем выполнять арифметические операции с обычным, «тонким» указателем, но нет способа изменить поле указателя толстого указателя. Однако мы можем обойти это, выполнив приведение указателя к указателю, что является неопределенным поведением в C, но не в Rust. Это в высшей степени небезопасно, и нам нужно быть предельно осторожными, чтобы заставить его вообще работать, не говоря уже о том, чтобы он работал так, чтобы не сразу вызывать неопределенное поведение. В основе всего этого лежит проклятая функция, которая позволяет нам обрабатывать указатель данных жирного указателя, как если бы он использовался, и, таким образом, позволяет нам напрямую манипулировать его битами. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">update_as_usize</span><span>&lt;O, F</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">FnOnce</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> O, T</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff3333;">?</span><span style="font-style:italic;color:#39bae6;">Sized</span><span style="color:#f29668;">&gt;</span><span>(ptr</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut *mut</span><span> T</span><span style="color:#bfbab0cc;">,</span><span> func</span><span style="color:#bfbab0cc;">:</span><span> F) </span><span style="color:#bfbab0cc;">-&gt;</span><span> O {
+</span><span>    </span><span style="color:#ff7733;">unsafe </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Here&#39;s where we invoke the darkest of dark magic, explanation below.
+</span><span>        </span><span style="color:#ff7733;">let</span><span> ptr_as_bytes </span><span style="color:#f29668;">= </span><span>mem</span><span style="color:#f29668;">::</span><span>transmute</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut *mut</span><span> T, </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut usize</span><span>&gt;(ptr)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Since this is dark magic, we make sure that we explode if our
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// assumptions are wrong.
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f29668;">*</span><span>ptr_as_bytes</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">*</span><span>ptr </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*mut u8 </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">func</span><span>(ptr_as_bytes)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Это работает при условии, что в макете жирного указателя сначала указан указатель данных. По сути, жирный указатель для NonNull <dyn Trait> выглядит так, и на самом деле вы можете найти эту точную структуру в std::raw::TraitObject: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">TraitObject </span><span>{
+</span><span>    data</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*mut</span><span>(),
+</span><span>    vtable</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*mut</span><span>(),
+</span><span>}
+</span></code></pre>
+<p>Однако даже с ночным Rust мы не можем использовать std::raw::TraitObject, поскольку он не работает ни с одним жирным указателем, а только с dyn Trait, и, как упоминалось ранее, мы не можем быть универсальными по «любому объекту трейта». . Таким образом, мы должны сделать дополнительное предположение, что не только объекты-трэйты сначала имеют указатель данных, но и все жирные указатели сначала имеют указатель данных. Именно это и делает assert_eq в update_as_usize: он использует встроенную способность Rust преобразовывать указатель в thin * mut u8, чтобы убедиться, что наш изменяемый указатель на использование указывает на правильные данные. Это в высшей степени небезопасно, и хотя в обозримом будущем это, вероятно, будет работать для всех жирных указателей, поддерживаемых Rust, нет никакой гарантии, что это будет так, и если это когда-либо станет некорректным таким образом, что assert_eq не поймает тогда вы получите неопределенное поведение. Так что пока мы продолжим использовать это, потому что это работает, но я хочу подчеркнуть, что вы НЕ должны ИСПОЛЬЗОВАТЬ ЭТО В НАСТОЯЩЕМ ПРОГРАММНОМ ОБЕСПЕЧЕНИИ, если вы не хотите, чтобы вас уволили и вы этого не заслужили.</p>
+<p>В любом случае, пока это работает отлично, давай исследуем эти проклятые миры еще немного, не так ли? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// The mask for the actual pointer
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">PTR_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span style="color:#f29718;">MAX </span><span style="color:#f29668;">&gt;&gt; </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// The mask for just the &quot;is owned&quot; tag
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">TAG_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= !</span><span style="color:#f29718;">PTR_MASK</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">unsafe impl</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff3333;">?</span><span style="color:#59c2ff;">Sized</span><span>&gt; </span><span style="color:#59c2ff;">Cursed</span><span>&lt;T&gt; </span><span style="color:#59c2ff;">for Box</span><span>&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">borrowed</span><span>(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>T) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;NonNull&lt;T&gt;&gt; {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// We use `Self::is_owned` here to avoid duplicating information. You can think of this
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// in this context as expressing &quot;if we _would think_ that `ptr` was owned&quot;
+</span><span>        </span><span style="color:#ff7733;">if Self</span><span style="color:#f29668;">::</span><span>is_owned(NonNull</span><span style="color:#f29668;">::</span><span>from(ptr)) {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(NonNull</span><span style="color:#f29668;">::</span><span>from(ptr))
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">owned</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;NonNull&lt;T&gt;&gt; {
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> this </span><span style="color:#f29668;">= </span><span>mem</span><span style="color:#f29668;">::</span><span>ManuallyDrop</span><span style="color:#f29668;">::</span><span>new(</span><span style="font-style:italic;color:#39bae6;">self</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> original_ptr </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29668;">**</span><span>this </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*mut</span><span> T</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> ptr </span><span style="color:#f29668;">=</span><span> original_ptr</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">update_as_usize</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> ptr</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29718;">p</span><span>| </span><span style="color:#f29668;">*</span><span>p </span><span style="color:#f29668;">|= </span><span style="color:#f29718;">TAG_MASK</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">unsafe </span><span>{
+</span><span>            </span><span style="color:#ff7733;">if Self</span><span style="color:#f29668;">::</span><span>is_owned(NonNull</span><span style="color:#f29668;">::</span><span>new_unchecked(original_ptr)) {
+</span><span>                this</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_inner</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>            } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(NonNull</span><span style="color:#f29668;">::</span><span>new_unchecked(ptr))
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">is_owned</span><span>(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>        ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ptr</span><span>() </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*mut u8 </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">TAG_MASK </span><span style="color:#f29668;">!= </span><span style="color:#f29718;">0
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">unsafe fn </span><span style="color:#ffb454;">as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> T {
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> ptr </span><span style="color:#f29668;">=</span><span> ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ptr</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">update_as_usize</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> ptr</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29718;">p</span><span>| </span><span style="color:#f29668;">*</span><span>p </span><span style="color:#f29668;">&amp;= </span><span style="color:#f29718;">PTR_MASK</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f29668;">&amp;*</span><span>ptr
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">unsafe fn </span><span style="color:#ffb454;">reconstruct</span><span>(</span><span style="color:#f29718;">ptr</span><span style="color:#bfbab0cc;">: </span><span>NonNull&lt;T&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> ptr </span><span style="color:#f29668;">=</span><span> ptr</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ptr</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">update_as_usize</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> ptr</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29718;">p</span><span>| </span><span style="color:#f29668;">*</span><span>p </span><span style="color:#f29668;">&amp;= </span><span style="color:#f29718;">PTR_MASK</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>from_raw(ptr)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Итак, мы идем, помимо реализаций черт, которые вы ожидаете от реализации Cow, которая должна быть довольно понятной, и реализации Drop, которая также довольно проста, это более или менее полностью - рабочая замена для std::заимствовать::корова. Наконец, давайте посмотрим, как выглядит кодогенератор для этой реализации Cursed for Box<T>. Вы можете просто поверить мне на слово, что CursedCow &lt;[T]&gt; генерирует точно такой же код, что и CowArr<T>. Давайте напишем код для пары разных сценариев, для которых мы хотим протестировать кодогенератор - сначала для жирных указателей, а затем для тонких указателей (если по какой-то причине у вас была реализация ToOwned для типа нединамического размера, который все еще использовался Коробка когда есть в собственности). </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">dyn_as_ref</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">cow</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>CursedCow&lt;&#39;</span><span style="color:#f29668;">_</span><span>, dyn Foo&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> dyn Foo {
+</span><span>    </span><span style="color:#f29668;">&amp;**</span><span>cow
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">dyn_to_cow</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">cow</span><span style="color:#bfbab0cc;">: </span><span>CursedCow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, dyn Foo&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>std</span><span style="color:#f29668;">::</span><span>borrow</span><span style="color:#f29668;">::</span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, dyn Foo&gt; {
+</span><span>    cow</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">dyn_new_cow</span><span>(</span><span style="color:#f29718;">cow</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn Foo&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;CursedCow&lt;</span><span style="color:#ff7733;">&#39;static</span><span>, dyn Foo&gt;&gt; {
+</span><span>    CursedCow</span><span style="color:#f29668;">::</span><span>try_owned(cow)
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">repr</span><span>(transparent)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Test</span><span>(</span><span style="color:#ff7733;">u64</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>ToOwned </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Test </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Owned </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Test&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>    
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_owned</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Owned {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(Test(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0</span><span>))
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">static_new_cow</span><span>(</span><span style="color:#f29718;">cow</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Test&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;CursedCow&lt;</span><span style="color:#ff7733;">&#39;static</span><span>, Test&gt;&gt; {
+</span><span>    CursedCow</span><span style="color:#f29668;">::</span><span>try_owned(cow)
+</span><span>}
+</span></code></pre>
+<p>Код, созданный этими функциями, на удивление минимален и почти полностью избегает использования стека, сохраняя большинство значений в регистрах. Я не буду подробно объяснять эту сборку, но она здесь для полноты: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>dyn_as_ref:
+</span><span>    mov    rdx, [rdi + 8]
+</span><span>    movabs rax, 9223372036854775807
+</span><span>    and    rax, [rdi]
+</span><span>    ret
+</span><span>
+</span><span>dyn_to_cow:
+</span><span>    mov    rax, rdi
+</span><span>    movabs rcx, 9223372036854775807
+</span><span>    and    rcx, rsi
+</span><span>    test   rsi, rsi
+</span><span>    jns    .is_ref
+</span><span>    mov    esi, 1
+</span><span>    mov    [rax + 8], rcx
+</span><span>    mov    [rax + 16], rdx
+</span><span>    mov    [rax], rsi
+</span><span>    ret
+</span><span>.is_ref:
+</span><span>    xor    esi, esi
+</span><span>    mov    [rax + 8], rcx
+</span><span>    mov    [rax + 16], rdx
+</span><span>    mov    [rax], rsi
+</span><span>    ret
+</span><span>
+</span><span>dyn_new_cow:
+</span><span>    mov    rdx, rsi
+</span><span>    movabs rcx, -9223372036854775808
+</span><span>    or     rcx, rdi
+</span><span>    xor    eax, eax
+</span><span>    test   rdi, rdi
+</span><span>    cmovns rax, rcx
+</span><span>    ret
+</span><span>
+</span><span>static_new_cow:
+</span><span>    movabs rcx, -9223372036854775808
+</span><span>    or     rcx, rdi
+</span><span>    xor    eax, eax
+</span><span>    test   rdi, rdi
+</span><span>    cmovns rax, rcx
+</span><span>    ret
+</span></code></pre>
+<p>В любом случае, если вы хотите попробовать это, я рекомендую крэйт для говядины, который в большинстве случаев служит заменой для std::заимствовать::Cow. Ее написал мой коллега и друг, и эта статья появилась из-за дискуссий о том, как оптимизировать этот крэйт для использования при синтаксическом анализе JSON. Слава богу, здесь нет нашей невероятно схематичной реализации Dyn Trait. Также есть более простой крэйт cowvec, который является моей более ранней реализацией, примерно эквивалентный коду, который мы имели в конце акта 2. Я бы рекомендовал только говядину вместо cowvec, потому что cowvec не действует как замена, поскольку он имеет другая подпись для std::заимствовать::Cow. Ну, и тот факт, что говядина - явно лучшее название.</p>
+<p>крэйт для синтаксического анализа JSON simdjson-rs недавно фактически интегрировал beef, и вы можете увидеть улучшения в пропускной способности, которые они увидели, просто отключив свою реализацию Cow в интеграционном PR.</p>
+<p>А теперь, если вы не возражаете, я пойду за советом к священнику.</p>
+<blockquote>
+<p>Изначально эта статья содержала расширенный раздел о том, как расширить эту реализацию для поддержки встраивания данных, но это было сочтено слишком проклятым для глаз простых смертных. Возможно, после того, как я полностью очистлю себя святой водой, я смогу заставить себя написать дополнительную статью, в которой подробно описывается, как реализовать это в наших существующих рамках. </p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

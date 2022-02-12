@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Дешевые хитрости для высокопроизводительного Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#nastroika-nashego-profilia-vypuska">Настройка нашего профиля выпуска</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#optimizatsiia-vremeni-komponovki"><small>- Оптимизация времени компоновки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#bloki-generatsii-koda"><small>- Блоки генерации кода</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#ustanovka-konkretnogo-tselevogo-tsp"><small>- Установка конкретного целевого ЦП</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#preryvanie"><small>- Прерывание</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#ispol-zovanie-drugogo-raspredelitelia">Использование другого распределителя</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#jemalloc"><small>- jemalloc</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#mimalloc"><small>- mimalloc</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#profil-naia-optimizatsiia">Профильная оптимизация</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/cheap-tricks-for-highperformance-rust/#aktual-noe-profilirovanie-i-optimizatsiia-vashego-koda">Актуальное профилирование и оптимизация вашего кода</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Дешевые хитрости для высокопроизводительного Rust</h1>
+
+<p><a href="https://deterministic.space/high-performance-rust.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Итак, вы пишете Rust, но этого недостаточно? Даже если вы используете Cargo build --release? Вот несколько небольших вещей, которые вы можете сделать, чтобы увеличить скорость выполнения проекта на Rust - практически без изменения кода!</p>
+<p>Помните, что следующие предложения не заменяют фактическое профилирование и оптимизацию! Я также думаю, что само собой разумеется, что единственный способ определить, помогает ли что-либо из этого, - это иметь тесты, которые показывают, как ваше приложение ведет себя при реальном использовании.</p>
+<p>Если вы хотите прочитать об оптимизации производительности, которая занимает немного больше времени, но на самом деле касается улучшения вашего кода, взгляните на эту небольшую онлайн-книгу Николаса Нетеркота.</p>
+<h2 id="nastroika-nashego-profilia-vypuska">Настройка нашего профиля выпуска</h2>
+<p>Прежде всего, давайте включим еще несколько оптимизаций, когда мы выполняем сборку cargo - выпуск. Сделка довольно проста: мы включаем некоторые функции, которые делают сборку релизов еще медленнее, но в качестве награды получаем более тщательную оптимизацию.</p>
+<p>Мы добавляем флаги, описанные ниже, в наш основной файл Cargo.toml, то есть в самый верхний файл манифеста, если вы используете рабочую область Cargo. Если у вас еще нет раздела под названием profile.release, добавьте его: </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">profile</span><span style="color:#bfbab0cc;">.</span><span style="color:#59c2ff;">release</span><span>]
+</span></code></pre>
+<h3 id="optimizatsiia-vremeni-komponovki">Оптимизация времени компоновки</h3>
+<p>Первое, что мы сделаем, это включим оптимизацию времени компоновки (LTO). Это своего рода оптимизация всей программы или между модулями, поскольку она выполняется как самый последний шаг при связывании различных частей вашего двоичного файла вместе. Вы можете думать об этом как о улучшении встраивания через границы зависимостей (но это, конечно, сложнее).</p>
+<p>Rust может использовать несколько вариантов линкера, и мы хотим «оптимизировать для всех крэйтов», что называется «жирным». Чтобы установить это, добавьте в свой профиль флаг lto: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>lto = &quot;fat&quot;
+</span></code></pre>
+<h3 id="bloki-generatsii-koda">Блоки генерации кода</h3>
+<p>Далее аналогичная тема. Чтобы ускорить компиляцию, Rust пытается разбить ваши крэйти на небольшие части и компилировать как можно больше параллельно. Обратной стороной является то, что у компилятора меньше возможностей оптимизировать код для этих фрагментов. Итак, давайте посоветуем делать по одному фрагменту на крэйт: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>codegen-units = 1
+</span></code></pre>
+<h3 id="ustanovka-konkretnogo-tselevogo-tsp">Установка конкретного целевого ЦП</h3>
+<p>По умолчанию Rust хочет создать двоичный файл, который работает на как можно большем количестве машин целевой архитектуры. Однако на самом деле у вас может быть довольно новый процессор с новыми классными функциями! Чтобы включить их, мы добавляем </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>-C target-cpu=native
+</span></code></pre>
+<p>в качестве «флага Rust», то есть переменной окружения RUSTFLAGS или целевого поля rustflags в вашем .cargo / config.</p>
+<h3 id="preryvanie">Прерывание</h3>
+<p>Теперь мы переходим к некоторым из наиболее небезопасных вариантов. Помните, как Rust по умолчанию использует раскрутку стека (на самых распространенных платформах)? Это стоит производительности! Давайте пропустим трассировку стека и возможность поймать панику для уменьшения размера кода и лучшего использования кеша: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>panic = &quot;abort&quot;
+</span></code></pre>
+<p>Обратите внимание, что некоторые библиотеки могут зависеть от раскрутки и ужасно взорвутся, если вы включите это!</p>
+<h2 id="ispol-zovanie-drugogo-raspredelitelia">Использование другого распределителя</h2>
+<p>Многие программы на Rust выделяют память. И они не просто делают это сами, а фактически используют для этого (внешнюю) библиотеку: распределитель. Текущие двоичные файлы Rust по умолчанию используют системный распределитель по умолчанию, ранее они включали свой собственный в стандартную библиотеку. (Это изменение привело к уменьшению размера двоичных файлов и лучшей возможности отладки, что порадовало некоторых людей).</p>
+<p>Однако иногда распределитель вашей системы - не лучший выбор. Не волнуйтесь, мы можем это изменить! Я предлагаю попробовать как jemalloc, так и mimalloc.</p>
+<h3 id="jemalloc">jemalloc</h3>
+<p>jemalloc - это распределитель, с которым ранее поставлялся Rust, и который компилятор Rust все еще использует сам. Его цель - уменьшить фрагментацию памяти и поддерживать высокий уровень параллелизма. Это также распределитель по умолчанию во FreeBSD. Если вам это интересно, давайте попробуем!</p>
+<p>Во-первых, добавьте крэйт jemallocator в качестве зависимости: </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">jemallocator </span><span>= </span><span style="color:#c2d94c;">&quot;0.3.2&quot;
+</span></code></pre>
+<p>Затем в точке входа вашего приложения (main.rs) установите его как глобальный распределитель следующим образом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">global_allocator</span><span>]
+</span><span style="color:#ff7733;">static </span><span style="color:#f29718;">GLOBAL</span><span style="color:#bfbab0cc;">: </span><span>jemallocator</span><span style="color:#f29668;">::</span><span>Jemalloc </span><span style="color:#f29668;">= </span><span>jemallocator</span><span style="color:#f29668;">::</span><span>Jemalloc</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Обратите внимание, что jemalloc поддерживает не все платформы.</p>
+<h3 id="mimalloc">mimalloc</h3>
+<p>Другой интересный альтернативный распределитель - это mimalloc. Он был разработан Microsoft, имеет довольно небольшой размер и несколько новаторских идей для бесплатных списков.</p>
+<p>Он также имеет настраиваемые функции безопасности (посмотрите его Cargo.toml). Это означает, что мы можем отключить их от большей производительности! Добавьте крэйт mimalloc как зависимость, например: </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">mimalloc </span><span>= { </span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.1.17&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false </span><span>}
+</span></code></pre>
+<p>и, как и выше, добавьте это в свой файл точки входа: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">global_allocator</span><span>]
+</span><span style="color:#ff7733;">static </span><span style="color:#f29718;">GLOBAL</span><span style="color:#bfbab0cc;">: </span><span>mimalloc</span><span style="color:#f29668;">::</span><span>MiMalloc </span><span style="color:#f29668;">= </span><span>mimalloc</span><span style="color:#f29668;">::</span><span>MiMalloc</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h2 id="profil-naia-optimizatsiia">Профильная оптимизация</h2>
+<p>Это отличная функция LLVM, но я никогда ею не пользовался. Пожалуйста, прочтите документацию.</p>
+<h2 id="aktual-noe-profilirovanie-i-optimizatsiia-vashego-koda">Актуальное профилирование и оптимизация вашего кода</h2>
+<p>Теперь именно здесь вам нужно скорректировать свой код и исправить все эти вызовы clone(). К сожалению, это тема для другого поста! (Пока вы ждете еще год, пока я напишу это, вы можете прочитать о коровах!)</p>
+<p>Изменить: люди продолжают спрашивать эти актуальные советы о том, как оптимизировать код Rust. И, к счастью, я их обманул, у них есть хороший материал, на который я могу ссылаться:</p>
+<ul>
+<li>Очень удобный cargo флеймограф (также работает как самостоятельный инструмент)</li>
+<li>Кристофер Себастьян недавно опубликовал Как писать быстрый код на Rust.</li>
+<li>Мастерская Джека Франшама по Fastware от RustFest 2018</li>
+</ul>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

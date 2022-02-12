@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Нативные программы | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/programs/#sistemnaia-programma">Системная программа</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/programs/#programma-konfiguratsii">Программа конфигурации</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/programs/#programma-stavok">Программа ставок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/programs/#programma-golosovaniia">Программа голосования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/programs/#zagruzchik-bpf">Загрузчик BPF</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/programs/#programma-ed25519">Программа Ed25519</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/programs/#programma-secp256k1">Программа Secp256k1</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/runtime-facilities/programs/#primechaniia-po-optimizatsii"><small>- Примечания по оптимизации</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Нативные программы</h1>
+
+<p>Solana содержит небольшое количество нативных программ, которые необходимы для запуска узлов валидатора. В отличие от сторонних программ, собственные программы являются частью реализации валидатора и могут быть обновлены в рамках обновления кластера.
+Обновления могут выполняться для добавления функций, исправления ошибок или повышения производительности. Изменения интерфейса в отдельных инструкциях должны происходить редко, если вообще когда-либо. Вместо этого, когда необходимы изменения, добавляются новые инструкции, а предыдущие помечаются как устаревшие. Приложения могут обновляться по собственной временной шкале, не беспокоясь о сбоях при обновлении.</p>
+<p>Для каждой собственной программы предоставляется идентификатор программы и описание каждой поддерживаемой инструкции. Транзакция может смешивать и сопоставлять инструкции из разных программ, а также включать инструкции из сетевых программ.</p>
+<h2 id="sistemnaia-programma">Системная программа</h2>
+<p>Создавайте новые учетные записи, распределяйте данные учетных записей, назначайте учетные записи программам-владельцам, переносите лампы с учетных записей, принадлежащих системной программе, и оплачивайте комиссию за транзакцию.</p>
+<ul>
+<li>Идентификатор программы: <code>11111111111111111111111111111111</code></li>
+<li>Инструкции: <a href="https://docs.rs/solana-sdk/VERSION_FOR_DOCS_RS/solana_sdk/system_instruction/enum.SystemInstruction.html">SystemInstruction</a></li>
+</ul>
+<h2 id="programma-konfiguratsii">Программа конфигурации</h2>
+<p>Добавьте данные конфигурации в цепочку и список открытых ключей, которым разрешено ее изменять.</p>
+<ul>
+<li>Идентификатор программы: <code>Config1111111111111111111111111111111111111</code></li>
+<li>Инструкции: <a href="https://docs.rs/solana-config-program/VERSION_FOR_DOCS_RS/solana_config_program/config_instruction/index.html">config_instruction</a></li>
+</ul>
+<p>В отличие от других программ, программа Config не определяет никаких отдельных инструкций. Он имеет только одну неявную инструкцию, инструкцию «сохранить». Его данные инструкции представляют собой набор ключей, которые ограничивают доступ к учетной записи, и данные для хранения в ней.</p>
+<h2 id="programma-stavok">Программа ставок</h2>
+<p>Создавайте и управляйте учетными записями, представляющими ставки и вознаграждения для делегаций.
+валидаторы.</p>
+<ul>
+<li>Идентификатор программы: <code>Stake11111111111111111111111111111111111111</code></li>
+<li>Инструкции: <a href="https://docs.rs/solana-sdk/VERSION_FOR_DOCS_RS/solana_sdk/stake/instruction/enum.StakeInstruction.html">StakeInstruction</a></li>
+</ul>
+<h2 id="programma-golosovaniia">Программа голосования</h2>
+<p>Создавайте и управляйте учетными записями, которые отслеживают состояние голосования и вознаграждения валидатора.</p>
+<ul>
+<li>Идентификатор программы: <code>Vote111111111111111111111111111111111111111</code></li>
+<li>Инструкции: <a href="https://docs.rs/solana-vote-program/VERSION_FOR_DOCS_RS/solana_vote_program/vote_instruction/enum.VoteInstruction.html">VoteInstruction</a></li>
+</ul>
+<h2 id="zagruzchik-bpf">Загрузчик BPF</h2>
+<p>Развертывает, обновляет и выполняет программы в цепочке.</p>
+<ul>
+<li>Идентификатор программы: <code>BPFLoaderUpgradeab1e11111111111111111111111</code></li>
+<li>Инструкции: <a href="https://docs.rs/solana-sdk/VERSION_FOR_DOCS_RS/solana_sdk/loader_upgradeable_instruction/enum.UpgradeableLoaderInstruction.html">Инструкция по загрузке</a></li>
+</ul>
+<p>Обновляемый загрузчик BPF помечает себя как «владельца» исполняемого файла и учетных записей программных данных, которые он создает для хранения вашей программы. Когда пользователь вызывает инструкцию через идентификатор программы, среда выполнения Solana загрузит как вашу программу, так и ее владельца, обновляемый загрузчик BPF. Затем среда выполнения передает вашу программу обновляемому загрузчику BPF для обработки инструкции.</p>
+<p><a href="cli/deploy-a-program/">Подробнее о развертывании</a></p>
+<h2 id="programma-ed25519">Программа Ed25519</h2>
+<p>Проверьте программу подписи ed25519. Эта программа принимает подпись ed25519, открытый ключ и сообщение. Можно проверить несколько подписей. Если какая-либо из подписей не проходит проверку, возвращается ошибка.</p>
+<ul>
+<li>Идентификатор программы: <code>Ed25519SigVerify111111111111111111111111111</code></li>
+<li>Инструкции: <a href="https://github.com/solana-labs/solana/blob/master/sdk/src/ed25519_instruction.rs#L45">new_ed25519_instruction</a></li>
+</ul>
+<p>Программа ed25519 обрабатывает инструкцию. Первый <code>u8</code> — это количество проверяемых подписей, за которым следует однобайтовое заполнение. После этого сериализуется следующая структура, по одной для каждой проверяемой подписи.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>struct Ed25519SignatureOffsets {
+</span><span>    signature_offset: u16,             // offset to ed25519 signature of 64 bytes
+</span><span>    signature_instruction_index: u16,  // instruction index to find signature
+</span><span>    public_key_offset: u16,            // offset to public key of 32 bytes
+</span><span>    public_key_instruction_index: u16, // instruction index to find public key
+</span><span>    message_data_offset: u16,          // offset to start of message data
+</span><span>    message_data_size: u16,            // size of message data
+</span><span>    message_instruction_index: u16,    // index of instruction data to get message data
+</span><span>}
+</span></code></pre>
+<p>Псевдокод операции:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>process_instruction() {
+</span><span>    for i in 0..count {
+</span><span>        // i&#39;th index values referenced:
+</span><span>        instructions = &amp;transaction.message().instructions
+</span><span>        instruction_index = ed25519_signature_instruction_index != u16::MAX ? ed25519_signature_instruction_index : current_instruction;
+</span><span>        signature = instructions[instruction_index].data[ed25519_signature_offset..ed25519_signature_offset + 64]
+</span><span>        instruction_index = ed25519_pubkey_instruction_index != u16::MAX ? ed25519_pubkey_instruction_index : current_instruction;
+</span><span>        pubkey = instructions[instruction_index].data[ed25519_pubkey_offset..ed25519_pubkey_offset + 32]
+</span><span>        instruction_index = ed25519_message_instruction_index != u16::MAX ? ed25519_message_instruction_index : current_instruction;
+</span><span>        message = instructions[instruction_index].data[ed25519_message_data_offset..ed25519_message_data_offset + ed25519_message_data_size]
+</span><span>        if pubkey.verify(signature, message) != Success {
+</span><span>            return Error
+</span><span>        }
+</span><span>    }
+</span><span>    return Success
+</span><span>}
+</span></code></pre>
+<h2 id="programma-secp256k1">Программа Secp256k1</h2>
+<p>Проверьте операции восстановления открытого ключа secp256k1 (ecrecover).</p>
+<ul>
+<li>Идентификатор программы: <code>KeccakSecp256k11111111111111111111111111111</code></li>
+<li>Инструкции: <a href="https://github.com/solana-labs/solana/blob/1a658c7f31e1e0d2d39d9efbc0e929350e2c2bcb/sdk/src/secp256k1_instruction.rs#L31">new_secp256k1_instruction</a></li>
+</ul>
+<p>Программа secp256k1 обрабатывает инструкцию, которая принимает в качестве первого байта счетчик следующей структуры, сериализованной в данных инструкции:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>struct Secp256k1SignatureOffsets {
+</span><span>    secp_signature_key_offset: u16,        // offset to [signature,recovery_id,etherum_address] of 64+1+20 bytes
+</span><span>    secp_signature_instruction_index: u8,  // instruction index to find data
+</span><span>    secp_pubkey_offset: u16,               // offset to [signature,recovery_id] of 64+1 bytes
+</span><span>    secp_signature_instruction_index: u8,  // instruction index to find data
+</span><span>    secp_message_data_offset: u16,         // offset to start of message data
+</span><span>    secp_message_data_size: u16,           // size of message data
+</span><span>    secp_message_instruction_index: u8,    // index of instruction data to get message data
+</span><span>}
+</span></code></pre>
+<p>Псевдокод операции:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>process_instruction() {
+</span><span>  for i in 0..count {
+</span><span>      // i&#39;th index values referenced:
+</span><span>      instructions = &amp;transaction.message().instructions
+</span><span>      signature = instructions[secp_signature_instruction_index].data[secp_signature_offset..secp_signature_offset + 64]
+</span><span>      recovery_id = instructions[secp_signature_instruction_index].data[secp_signature_offset + 64]
+</span><span>      ref_eth_pubkey = instructions[secp_pubkey_instruction_index].data[secp_pubkey_offset..secp_pubkey_offset + 32]
+</span><span>      message_hash = keccak256(instructions[secp_message_instruction_index].data[secp_message_data_offset..secp_message_data_offset + secp_message_data_size])
+</span><span>      pubkey = ecrecover(signature, recovery_id, message_hash)
+</span><span>      eth_pubkey = keccak256(pubkey[1..])[12..]
+</span><span>      if eth_pubkey != ref_eth_pubkey {
+</span><span>          return Error
+</span><span>      }
+</span><span>  }
+</span><span>  return Success
+</span><span>}
+</span></code></pre>
+<p>Это позволяет пользователю указать любые данные инструкции в транзакции для подписи и данных сообщения. Указав специальную инструкцию sysvar, можно также получить данные из самой транзакции.</p>
+<p>Стоимость транзакции будет учитывать количество подписей для проверки, умноженное на множитель стоимости проверки подписи.</p>
+<h3 id="primechaniia-po-optimizatsii">Примечания по оптимизации</h3>
+<p>Операция должна будет выполняться после (по крайней мере, частичной) десериализации, но все входные данные поступают из самих данных транзакции, это позволяет относительно легко выполнять ее параллельно с обработкой транзакции и проверкой PoH.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

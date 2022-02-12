@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Создание учетной записи с мультиподписью | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced/setup-multi-signature-account/create-multi-signature-account/#sozdanie-perevoda-iz-uchetnoi-zapisi-s-mul-tipodpis-iu">Создание перевода из учетной записи с мультиподписью</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Создание учетной записи с мультиподписью</h1>
+
+<p>Мы создадим учетную запись с мультиподписью, используя локальную сеть разработки Edgeware, и выполним тестовую транзакцию из этой учетной записи. Вам нужно будет убедиться, что у вас запущен <a href="../../development/develop/smart-contracts/setting-up-an-edgeware-node-for-local-development/">локальный узел разработки</a> для этого.</p>
+<p>Когда узел разработки станет активным, нажмите на эту ссылку: [https://polkadot.js.org/apps//#/explorer](https://polkadot.js.org/apps/#/ исследователь). Затем в верхнем левом раскрывающемся меню перейдите и нажмите «Разработка» &gt; «Локальный узел» &gt; «Переключить», а затем дождитесь завершения «инициализации соединения».</p>
+<p>После этого ваш экран должен выглядеть примерно так:</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%206.52.11%20PM.png" alt="" /></p>
+<p>Отсюда вы перейдете и наведете курсор на вкладку <strong>Учетные записи</strong> на панели навигации вверху и нажмите <strong>Учетные записи</strong>. После этого ваш экран должен выглядеть примерно так:</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%206.59.49%20PM.png" alt="" /></p>
+<p>Нажмите <strong>+Мультиподпись</strong>.</p>
+<p>Теперь вы будете выбирать свои подписи (то есть учетные записи ваших товарищей по команде). В нашем сценарии мы выберем **Алису, Боба и Чарли ** и установим <strong>порог равным 2.</strong>. Это означает, что для проведения транзакции в сети потребуется только 2/3 подписи. Вы можете установить порог равным или меньшим, чем количество подписантов, участвующих в мультиподписи. Мы назовем эту мультиподпись нашей учетной записью <strong>Team Funding</strong>.</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%207.19.12%20PM.png" alt="" /></p>
+<p>Теперь мы пополним <strong>1 000 000</strong> tEDG на мультиподписной счет <strong>Team Funding</strong> от <strong>Alice</strong>. Спасибо, Алиса!</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%207.21.48%20PM.png" alt="" /></p>
+<h2 id="sozdanie-perevoda-iz-uchetnoi-zapisi-s-mul-tipodpis-iu">Создание перевода из учетной записи с мультиподписью</h2>
+<p>Теперь, когда счет <strong>Team Funding</strong> пополнен, мы можем заплатить <strong>DAVE</strong> <strong>200 000</strong> tEDG для завершения проекта. В списке наших аккаунтов нажмите <strong>Отправить</strong> из нашего аккаунта <strong>Team Funding</strong>.</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%207.23.52%20PM.png" alt="" /></p>
+<p>Теперь нам предлагается (<strong>как CHARLIE</strong>) авторизовать транзакцию.</p>
+<p>Вы увидите их <code>multisig call data</code> с полезной нагрузкой <code>0x060300306721211d5404bd9da88e0204360a1a9ab8b87c66c1bc2fcdd37f3c2222cc201b000000ed95c28f055a2a</code>. Это данные вызова, которые могут быть предоставлены для окончательного вызова для множественного утверждения. Это то, что запускает логику цепочки для выполнения команд. Затем вы нажмете «Подписать и отправить».</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%207.28.19%20PM.png" alt="" /></p>
+<p>Перевод был передан в сеть, вы можете увидеть уведомление в правом верхнем углу.</p>
+<p><img src="../../../.gitbook/assets/transfer-ms-first-call.png" alt="" /></p>
+<p>Ссылаясь на изображение ниже, мы можем видеть одобрения мультиподписи, ожидающие подтверждения рядом с нашей учетной записью <strong>Team Funding</strong>. В учетной записи **Team Funding** нажмите «Отправить».</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%207.40.04%20PM.png" alt="" /></p>
+<p>Теперь вы снова введете ту же сумму (<strong>200 000</strong>) и выберите тот же «отправить на адрес» (<strong>DAVE</strong>), чтобы <strong>получить ту же полезную нагрузку для последнего вызова</strong>. Нажмите <strong>Перевести</strong>, когда все необходимые поля будут заполнены правильно.</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%207.43.17%20PM.png" alt="" /></p>
+<p>Теперь как <strong>BOB</strong> мы можем авторизовать транзакцию. Пользовательский интерфейс достаточно умен и обнаружил окончательное одобрение, необходимое для выполнения транзакции в сети. Под переключателем «Сообщение с несколькими подписями» вы увидите ту же полезную нагрузку, что и при создании транзакции с несколькими подписями. Нажмите «Подписать» и «Отправить», и он должен быть подписан 2 из 3 подписантов, что достаточно для этого сценария, чтобы транзакция могла пройти к DAVE.</p>
+<p><img src="../../.gitbook/assets/Screen%20Shot%202021-10-11%20at%207.52.26%20PM.png" alt="" /></p>
+<p>Воала, <strong>ДЭЙВ</strong> имеет <strong>обеспеченные</strong> средства tEDG на своем счету!</p>
+<p><img src="../../../.gitbook/assets/funds-secured.png" alt="multi-signature-funds-secured" /></p>
+<p>Вы научились проводить транзакцию с мультиподписью. Учетные записи с мультиподписью имеют широкий вариант использования, и вы можете использовать окончательный вызов для своего варианта использования, когда это уместно в сети.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

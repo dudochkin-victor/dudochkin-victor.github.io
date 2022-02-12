@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Отладка | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/debugging/#zapusk-modul-nykh-testov">Запуск модульных тестов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/debugging/#logirovanie">Логирование</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/debugging/#obrabotka-oshibok">Обработка ошибок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/debugging/#monitoring-raskhoda-vychislitel-nogo-biudzheta">Мониторинг расхода вычислительного бюджета</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/debugging/#elf-damp">ELF Дамп</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/debugging/#trassirovka-instruktsii">Трассировка инструкций</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Отладка</h1>
+
+<p>Программы Solana работают в сети, поэтому их отладка в дикой природе может быть сложной задачей. Чтобы упростить отладку программ, разработчики могут написать модульные тесты, которые напрямую проверяют выполнение их программы через среду выполнения Solana, или запустить локальный кластер, который позволит клиентам RPC взаимодействовать с их программой.</p>
+<h2 id="zapusk-modul-nykh-testov">Запуск модульных тестов</h2>
+<ul>
+<li><a href="developing-rust.md#how-to-test">Тестирование с помощью Rust</a></li>
+<li><a href="developing-c.md#how-to-test">Тестирование с помощью C</a></li>
+</ul>
+<h2 id="logirovanie">Логирование</h2>
+<p>Во время выполнения программы как время выполнения, так и состояние журнала программы и сообщения об ошибках.</p>
+<p>Для получения информации о том, как войти в программу, см. документацию по конкретному языку:</p>
+<ul>
+<li><a href="developing-rust.md#logging">Ведение журнала из программы на Rust</a></li>
+<li><a href="developing-c.md#logging">Ведение журнала из программы C</a></li>
+</ul>
+<p>При запуске локального кластера журналы записываются в стандартный вывод, если они включены с помощью маски журнала «RUST_LOG». С точки зрения разработки программы полезно сосредоточиться только на журналах времени выполнения и программы, а не на остальных журналах кластера. Чтобы сосредоточиться на конкретной информации о программе, рекомендуется использовать следующую маску журнала:</p>
+<p><code>экспортировать RUST_LOG=solana_runtime::system_instruction_processor=trace,solana_runtime::message_processor=info,solana_bpf_loader=debug,solana_rbpf=debug</code></p>
+<p>Сообщения журнала, поступающие непосредственно из программы (а не из среды выполнения), будут отображаться в виде:</p>
+<p><code>Журнал программы: &lt;определенное пользователем сообщение&gt;</code></p>
+<h2 id="obrabotka-oshibok">Обработка ошибок</h2>
+<p>Объем информации, которая может быть передана через ошибку транзакции, ограничен, но существует множество точек возможных сбоев. Ниже приведены возможные точки сбоя и информация о том, каких ошибок следует ожидать и где получить дополнительную информацию:</p>
+<ul>
+<li>Загрузчик BPF может не разобрать программу, этого не должно происходить, так как загрузчик уже <em>финализировал</em> данные аккаунта программы.
+<ul>
+<li><code>InstructionError::InvalidAccountData</code> будет возвращен как часть ошибки транзакции.</li>
+</ul>
+</li>
+<li>Загрузчик BPF может не настроить среду выполнения программы.
+<ul>
+<li><code>InstructionError::Custom(0x0b9f_0001)</code> будет возвращен как часть ошибки транзакции. «0x0b9f_0001» — это шестнадцатеричное представление <a href="https://github.com/solana-labs/solana/blob/bc7133d7526a041d1aaee807b80922baa89b6f90/programs/bpf_loader/src/lib.rs#L44"><code>VirtualMachineCreationFailed</code></a>.</li>
+</ul>
+</li>
+<li>Загрузчик BPF мог обнаружить фатальную ошибку во время выполнения программы (например, паники, нарушения памяти, ошибки системных вызовов и т. д.).
+<ul>
+<li><code>InstructionError::Custom(0x0b9f_0002)</code> будет возвращен как часть ошибки транзакции. «0x0b9f_0002» — это шестнадцатеричное представление <a href="https://github.com/solana-labs/solana/blob/bc7133d7526a041d1aaee807b80922baa89b6f90/programs/bpf_loader/src/lib.rs#L46"><code>VirtualMachineFailedToRunProgram</code></a>.</li>
+</ul>
+</li>
+<li>Программа сама может возвращать ошибку
+<ul>
+<li><code>InstructionError::Custom(&lt;значение, определенное пользователем&gt;)</code> будет возвращено. «Пользовательское значение» не должно конфликтовать ни с одной из <a href="https://github.com/solana-labs/solana/blob/bc7133d7526a041d1aaee807b80922baa89b6f90/sdk/program/src/program_error.rs#L87">встроенных ошибок программы выполнения</a> .
+Программы обычно используют типы перечисления для определения кодов ошибок, начинающихся с нуля, чтобы они не конфликтовали.</li>
+</ul>
+</li>
+</ul>
+<p>В случае ошибок <code>VirtualMachineFailedToRunProgram</code> дополнительная информация о специфике того, что не удалось, записывается в <a href="debugging.md#logging">журналы выполнения программы</a>.</p>
+<p>Например, нарушение прав доступа, связанное со стеком, будет выглядеть примерно так:</p>
+<p><code>Программа BPF 4uQeVj5tqViQh7yWWGStvkEG1Zmhx6uasJtWCJziofM не удалась: хранилище вне границ памяти (insn # 615), адрес 0x200001e38/8</code></p>
+<h2 id="monitoring-raskhoda-vychislitel-nogo-biudzheta">Мониторинг расхода вычислительного бюджета</h2>
+<p>Программа может регистрировать оставшееся количество вычислительных единиц, которое ей будет разрешено, прежде чем выполнение программы будет остановлено. Программы могут использовать эти журналы для переноса операций, которые они хотят профилировать.</p>
+<ul>
+<li><a href="developing-rust.md#compute-budget">Зарегистрировать оставшиеся вычислительные единицы из программы Rust</a></li>
+<li><a href="developing-c.md#compute-budget">Зарегистрировать оставшиеся вычислительные единицы из программы C</a></li>
+</ul>
+<p>См. <a href="developing/programming-model/runtime.md#compute-budget">вычислить бюджет</a> для получения дополнительной информации.</p>
+<h2 id="elf-damp">ELF Дамп</h2>
+<p>Внутреннее устройство общего объекта BPF можно сбросить в текстовый файл, чтобы получить более полное представление о составе программы и о том, что она может делать во время выполнения.</p>
+<ul>
+<li><a href="developing-rust/">Создать файл дампа программы на Rust</a></li>
+<li><a href="developing-c/">Создать файл дампа программы C</a></li>
+</ul>
+<h2 id="trassirovka-instruktsii">Трассировка инструкций</h2>
+<p>Во время выполнения интерпретатор BPF во время выполнения можно настроить для регистрации сообщения трассировки для каждой выполняемой инструкции BPF. Это может быть очень полезно для таких вещей, как точное определение контекста среды выполнения, ведущего к нарушению доступа к памяти.</p>
+<p>Журналы трассировки вместе с дампом ELF могут дать много информации (хотя трассировки дают много информации).</p>
+<p>Чтобы включить сообщения трассировки интерпретатора BPF в локальном кластере, настройте уровень solana_rbpf в RUST_LOG на значение трассировка. Например:</p>
+<p><code>export RUST_LOG=solana_rbpf=trace</code></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

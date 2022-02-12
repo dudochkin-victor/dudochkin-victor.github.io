@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Генерация форков | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/fork-generation/#obzor">Обзор</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/fork-generation/#potok-soobshchenii">Поток сообщений</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/fork-generation/#razdely-vilki">Разделы, вилки</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/fork-generation/#vzgliad-validatora"><small>- Взгляд валидатора</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/fork-generation/#vzgliad-lidera"><small>- Взгляд Лидера</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Генерация форков</h1>
+
+<p>В этом разделе описывается, как естественным образом возникают разветвления в результате <a href="leader-rotation/">ротации лидеров</a>.</p>
+<h2 id="obzor">Обзор</h2>
+<p>Узлы по очереди становятся лидерами и генерируют PoH, который кодирует изменения состояния. Кластер может допустить потерю подключения к любому лидеру, синтезируя то, что лидер <em><strong>создал</strong></em>, если бы он был подключен, но не принимая никаких изменений состояния. Таким образом, возможное количество ответвлений ограничено списком пропуска ответвлений &quot;там/не там&quot;, которые могут возникать на границах интервала вращения лидера. В любой заданный слот будут приниматься транзакции только одного лидера.</p>
+<h2 id="potok-soobshchenii">Поток сообщений</h2>
+<ol>
+<li>Транзакции принимаются текущим лидером.</li>
+<li>Лидер фильтрует действительные транзакции.</li>
+<li>Лидер выполняет допустимые транзакции, обновляя свое состояние.</li>
+<li>Лидер упаковывает транзакции в записи на основе своего текущего слота PoH.</li>
+<li>Лидер передает записи узлам валидатора (подписанными клочьями)
+<ol>
+<li>Поток PoH включает тики; пустые записи, указывающие на живучесть лидера и прохождение времени на кластере.</li>
+<li>Поток лидера начинается с записей тиков, необходимых для завершения PoH обратно к последнему наблюдаемому предыдущему слоту лидера.</li>
+</ol>
+</li>
+<li>Валидаторы повторно передают записи одноранговым узлам в своем наборе и последующим нижестоящим узлам.</li>
+<li>Валидаторы проверяют транзакции и выполняют их в своем состоянии.</li>
+<li>Валидаторы вычисляют хэш состояния.</li>
+<li>В определенное время, т. е. определенное количество тиков PoH, валидаторы передают голоса лидеру.
+<ol>
+<li>Голоса — это подписи хэша вычисленного состояния на этом подсчете тиков PoH.</li>
+<li>Голоса также распространяются через сплетни.</li>
+</ol>
+</li>
+<li>Лидер выполняет голоса, как и любую другую транзакцию, и транслирует их в кластер.</li>
+<li>Валидаторы наблюдают за своими голосами и всеми голосами из кластера.</li>
+</ol>
+<h2 id="razdely-vilki">Разделы, вилки</h2>
+<p>Форки могут возникать при подсчете тиков PoH, соответствующих голосованию. Следующий лидер может не наблюдать за последним слотом для голосования и может начать свой слот со сгенерированных виртуальных записей PoH. Эти пустые тики генерируются всеми узлами в кластере с настроенной для кластера скоростью для хэшей/за/тик <code>Z</code>.</p>
+<p>Есть только две возможные версии PoH во время слота голосования: PoH с тиками «T» и записями, сгенерированными текущим лидером, или PoH только с тиками. Версию PoH с «просто тиками» можно рассматривать как виртуальную книгу, которую все узлы в кластере могут получить из последнего тика в предыдущем слоте.</p>
+<p>Валидаторы могут игнорировать разветвления в других точках (например, от неправильного лидера) или срезать лидера, ответственного за разветвление.</p>
+<p>Валидаторы голосуют на основе жадного выбора, чтобы максимизировать свое вознаграждение, описанное в <a href="../implemented-proposals/tower-bft/">Tower BFT</a>.</p>
+<h3 id="vzgliad-validatora">Взгляд валидатора</h3>
+<h4 id="progress-vo-vremeni">Прогресс во времени</h4>
+<p>На приведенной ниже диаграмме представлен взгляд валидатора на поток PoH с возможными разветвлениями с течением времени. L1, L2 и т. д. являются лидерскими слотами, а <code>E</code> представляет записи от этого лидера во время слота этого лидера. Значки «x» обозначают только тики, а время на диаграмме течет вниз.</p>
+<p><img src="/img/fork-generation.svg" alt="Fork generation" /></p>
+<p>Обратите внимание, что символ «E», появляющийся на двух ответвлениях в одном и том же слоте, является условием с косой чертой, поэтому валидатор, наблюдающий за «E3» и «E3», может срезать L3 и безопасно выбрать «x» для этого слота. Как только валидатор фиксирует форк, другие форки могут быть отброшены ниже этого количества тиков. Для любого слота валидаторам нужно рассмотреть только одну цепочку «есть записи» или цепочку «только тики», которые будут предложены лидером. Но несколько виртуальных записей могут перекрываться, поскольку они ссылаются на предыдущий слот.</p>
+<h4 id="razdelenie-vremeni">Разделение времени</h4>
+<p>Полезно рассматривать ротацию лидеров по счетчику тиков PoH как временное разделение работы по кодированию состояния для кластера. В следующей таблице приведенное выше дерево вилок представлено в виде реестра, разделенного по времени.</p>
+<table><thead><tr><th align="left">leader slot</th><th align="left">L1</th><th align="left">L2</th><th align="left">L3</th><th align="left">L4</th><th align="left">L5</th></tr></thead><tbody>
+<tr><td align="left">data</td><td align="left">E1</td><td align="left">E2</td><td align="left">E3</td><td align="left">E4</td><td align="left">E5</td></tr>
+<tr><td align="left">ticks since prev</td><td align="left"></td><td align="left"></td><td align="left"></td><td align="left">x</td><td align="left">xx</td></tr>
+</tbody></table>
+<p>Обратите внимание, что во время слота лидера L3 будут приниматься только данные от лидера L3. Данные из L3 могут включать тики «наверстывания» обратно в слот, отличный от L2, если L3 не наблюдал данные L2. Передачи L4 и L5 включают записи PoH «такты до предыдущего».</p>
+<p>Такое расположение потоков сетевых данных позволяет узлам сохранять именно это в реестре для воспроизведения, перезапуска и контрольных точек.</p>
+<h3 id="vzgliad-lidera">Взгляд Лидера</h3>
+<p>Когда новый лидер начинает слот, он должен сначала передать любые PoH (тики), необходимые для связи нового слота с самым последним наблюдаемым и проголосовавшим слотом. Вилка, которую предлагает лидер, свяжет текущий слот с предыдущей вилкой, за которую лидер проголосовал виртуальными тиками.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

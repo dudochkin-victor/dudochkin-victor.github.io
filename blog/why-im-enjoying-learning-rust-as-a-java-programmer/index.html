@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Почему мне нравится изучать Rust как Java-программист | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-im-enjoying-learning-rust-as-a-java-programmer/#1-rust-kazhetsia-znakomoi">1. Rust кажется знакомой</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-im-enjoying-learning-rust-as-a-java-programmer/#2-ssylki-imeiut-smysl">2. Ссылки имеют смысл</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-im-enjoying-learning-rust-as-a-java-programmer/#3-pravo-sobstvennosti-imeet-smysl">3. Право собственности имеет смысл</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-im-enjoying-learning-rust-as-a-java-programmer/#4-cargo-polezen">4. Cargo полезен</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-im-enjoying-learning-rust-as-a-java-programmer/#5-kompiliator-potriasaiushchii">5. Компилятор потрясающий</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-im-enjoying-learning-rust-as-a-java-programmer/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Почему мне нравится изучать Rust как Java-программист</h1>
+
+<p><a href="https://opensource.com/article/20/5/rust-java">Перевод</a> | Автор оригинала: Mike Bursell</p>
+<p><img src="/imgs/posts/34fffee8_01.png" alt="краб Феррис под морем, неофициальный логотип языка программирования Rust" /></p>
+<p>Прошло много времени с тех пор, как я должным образом выучил новый язык - компьютерный или человеческий. Может, лет 25. Этим языком была Java, и хотя мне пока приходилось писать небольшие кусочки C (очень, очень мало) и JavaScript, единственными двумя языками, на которых я написал много реального кода, были Perl и Java.</p>
+<p>Я соучредитель проекта Enarx, который почти полностью написан на Rust. Сейчас я называю себя «архитектором», и прошло довольно много времени с тех пор, как я написал какой-либо производственный код. В преддверии Рождества 2019 года я завершил первый значительный проект, который я написал за несколько лет: реализация набора алгоритмов вокруг патентной заявки на Java. Это была хорошая возможность снова погрузиться в код, и мне это очень понравилось.</p>
+<p>Вот некоторые из моих мыслей о Rust с точки зрения Java-разработчика с сильным объектно-ориентированным опытом.</p>
+<h2 id="1-rust-kazhetsia-znakomoi">1. Rust кажется знакомой</h2>
+<p>Хотя многие учебные пособия и книги, которые вы там найдете, написаны с учетом C и C++, сходства с Java достаточно, чтобы сделать общий язык знакомым. Два руководства, которые я использую чаще всего, - это The Rust Programming Language (онлайн) и каноническая книга Programming Rust (в формате мертвого дерева), причем в последней часто упоминаются сходства и различия между другими языками и между ними, включая не только C, C++ и Java, а также Python, JavaScript и другие. Такие вещи, как управляющие структуры и типы, достаточно похожи на Java, поэтому они обычно просты для понимания, и, хотя есть некоторые существенные различия, вы сможете довольно просто изучить основы языка. Однако будьте осторожны: одна из самых больших начальных проблем, с которыми я столкнулся, заключается в том, что Rust иногда кажется мне слишком знакомым, поэтому я начинаю пытаться делать что-то неправильно, и мне приходится отступать и пытаться найти способ более идиоматичный по сравнению с Rust. Мне предстоит долгий путь к этому!</p>
+<h2 id="2-ssylki-imeiut-smysl">2. Ссылки имеют смысл</h2>
+<p>В Rust вам приходится использовать ссылки, то есть получать доступ к данным по адресу памяти. Откровенно говоря, ссылки на переменные и разыменование переменных никогда не имели для меня особого смысла, когда я смотрел на C или C++, но на этот раз мне кажется, что я понял. Если вы привыкли передавать переменные Java по ссылке и значению и знаете, когда вам нужно предпринять шаги, чтобы сделать это по-другому в конкретных ситуациях, то вы готовы начать понимать ссылки на Rust. Еще одна вещь, которую вам нужно понять, - это то, почему Rust нуждается в их использовании: это потому, что Rust очень, очень осторожен в управлении памятью, и у вас нет сборщика мусора, который бы убирал после вас, куда бы вы ни пошли (как в Java). . Вы не можете передавать строки (например) волей-неволей: Rust будет настаивать на том, чтобы вы знали время жизни переменной, и подумайте о том, когда она будет готова к &quot;отбрасыванию&quot;. Это означает, что вам нужно хорошо подумать об объеме, и это вводит сложную концепцию: владение.</p>
+<h2 id="3-pravo-sobstvennosti-imeet-smysl">3. Право собственности имеет смысл</h2>
+<p>Честно говоря, я еще не там. Я изучаю и кодирую на Rust меньше двух недель, и я начинаю понимать, что такое право собственности. Для меня (как, я подозреваю, для многих новичков) это большой сдвиг при переходе на Rust с Java или большинства других языков: владение. Как я уже упоминал выше, вам нужно понимать, когда будет использоваться переменная и как долго она будет жить. Однако есть еще кое-что, и действительно получить это - то, что мне как Java-разработчику кажется немного чуждым: вам нужно понимать стек и кучу, различие, которое было достаточно скрыто от меня Java, но то, что многие разработчики C и C++, вероятно, поймут гораздо легче. Здесь не место для объяснения концепции (я нашел диаграммы в Programming Rust особенно полезными), но для управления временем жизни переменных в памяти Rust необходимо знать, какой компонент владеет каждой из них. Это усложняется, когда вы привыкли создавать объекты и создавать их экземпляры с переменными из любого места (как в Java), и требует значительного переосмысления. Сочетание этого с явной маркировкой времен жизни - это самое большое концептуальное изменение, которое мне нужно выполнить прямо сейчас. </p>
+<h2 id="4-cargo-polezen">4. Cargo полезен</h2>
+<p>Честно говоря, я не использую самые последние и лучшие инструменты Java должным образом. Когда я начал изучать Java, этого даже не было в версии 1.0, и к тому времени, когда я закончил писать производственный код на регулярной основе, еще не было необходимости подбирать самые последние инструменты, так что, возможно, Java в этом лучше, чем я помню, но встроенные инструменты для управления различными частями проекта Rust, включая зависимости, библиотеки, компиляцию и тестирование, стали откровением. Бинарный файл Cargo просто делает правильные вещи, и удивительно наблюдать, как он выполняет свою работу, когда понимает, что вы, например, внесли изменения в свои зависимости. Он будет выполнять автоматические тесты, автоматически оптимизировать, создавать документацию - так много полезных задач, все в одном пакете. Совместите это с репозиториями Git, и управление проектами станет более разумным и простым.</p>
+<h2 id="5-kompiliator-potriasaiushchii">5. Компилятор потрясающий</h2>
+<p>И последнее, но не менее важное - это компилятор. Мне нравится компилятор Rust: он очень, очень пытается вам помочь. Члены сообщества1, которые создают и поддерживают Rust, явно стараются изо всех сил давать полезные советы, чтобы исправить вас, когда вы делаете ошибки, - и я, например, делал много из них. Вместо предсказаний, которые могут быть знакомы по компиляторам других языков, вы получите цветной текст с предупреждениями, ошибками и предложениями относительно того, что вы на самом деле пытаетесь сделать. Вам даже будет предоставлен такой вывод, как: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>For more information about this error, try rustc --explain E0308
+</span></code></pre>
+<p>Когда вы все же попробуете это, вы получите (как правило!) Полезные объяснения и фрагменты кода. Иногда, особенно когда вы все еще работаете над языком, не всегда очевидно, что вы делаете не так, но пробираться через ошибки может помочь вам разобраться в концепциях таким образом, который сильно отличается от сообщений. Я, например, привык получать из инструмента javac.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Я не ожидаю, что когда-либо напишу много производственного Rust, или когда-нибудь действительно достигну статуса гуру - на Rust или на любом другом языке, если честно, - но я действительно думаю, что Rust есть что сказать. На протяжении всего моего пути я кивал головой и думал: «Это хороший способ сделать это» или «ах, это имеет гораздо больше смысла, чем то, к чему я привык». Это статья не о том, почему Rust такой хороший язык - их множество - или о том, как лучше всего выучить Rust - их тоже много, - но я могу сказать, что мне это нравится. Это сложно, но одна вещь, на которой сильны все учебники, книги и другие учебные материалы, - это объяснение причин выбора, который делает Rust, и это, безусловно, помогло мне как в решении моих разочарований, так и в попытке усвоить некоторые различия между Java и Rust.</p>
+<p>Если я смогу по-настоящему погрузиться в Rust, я, честно говоря, не думаю, что когда-либо снова напишу какую-нибудь Java. Я не уверен, что у меня есть еще 25 лет программирования, но я думаю, что сейчас я с Rust надолго. Я (подающий надежды) Rustacean.</p>
+<ol>
+<li>Rust, конечно же, имеет полностью открытый исходный код, и его поддержка сообществом кажется потрясающей. </li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

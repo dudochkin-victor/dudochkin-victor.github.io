@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Варианты монады в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/option-monads-in-rust/#value-in-value-out">Value In, Value Out</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/option-monads-in-rust/#ne-prosto-nol">Не просто ноль</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/option-monads-in-rust/#sostavlenie-simfonii-funktsii">Составление симфонии функций</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/option-monads-in-rust/#interfeis-funktora-map">Интерфейс функтора: .map()</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/option-monads-in-rust/#interfeis-monad-and-then">Интерфейс монад: .and_then()</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/option-monads-in-rust/#primery">Примеры</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/option-monads-in-rust/#obsuzhdenie">Обсуждение:</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/option-monads-in-rust/#dopolnitel-nye-resursy">Дополнительные ресурсы:</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Варианты монады в Rust</h1>
+
+<p><a href="https://hoverbear.org/blog/option-monads-in-rust/">Перевод</a> | Автор оригинала: Ana Hoverbear</p>
+<p>Одной из распространенных монадических структур является тип Option (или Maybe в Haskell и других языках). Это можно рассматривать как тип инкапсуляции. Рассмотрим функцию, которая может не выдавать значимое значение для определенных входных данных. Например, </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// Parses a string into an integer.
+</span><span>  from_str</span><span style="color:#f29668;">::</span><span>&lt;int&gt;(</span><span style="color:#c2d94c;">&quot;4&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// A valid input.
+</span><span>  from_str</span><span style="color:#f29668;">::</span><span>&lt;int&gt;(</span><span style="color:#c2d94c;">&quot;Potato&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Definitely invalid.
+</span><span>}
+</span></code></pre>
+<p>Функция from_str не может возвращать значимое значение для «Potato». Rust (и многие другие функциональные языки) не имеют null, так что же нам возвращать? Здесь становится полезным тип Option. В нашем примере вместо возврата типа int функция from_str возвращает тип Option<int>.</p>
+<p>В Rust перечисление Option представлено либо Some(x), либо None, где x - инкапсулированное значение. Таким образом, монаду Option можно рассматривать как коробку. Он инкапсулирует значение x, где x - любой тип. Rust определяет Option как таковой, где<T> и (T) обозначают, что он обрабатывает общий тип, а это означает, что T может быть int, str, vec или чем-то еще, даже другими типами Option. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Option</span><span>&lt;T&gt; { </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(T) }
+</span></code></pre>
+<h2 id="value-in-value-out">Value In, Value Out</h2>
+<p>Поскольку мы можем видеть Option как коробку или тип инкапсуляции, нам нужно иметь возможность помещать вещи в коробку или вынимать вещи.</p>
+<p>Поместить значение в опцию восхитительно просто. Просто используйте Some(x) или None вместо x или (мнимого) null. В большинстве случаев вы будете получать или возвращать Option на основе введенных данных, а не просто создавать их напрямую. Вот несколько примеров различных техник. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Ways to create an Option containing an int.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> w </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(3i)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Something
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;int&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Nothing
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Receive from function.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> y </span><span style="color:#f29668;">= </span><span style="color:#f07178;">some_on_even</span><span>(</span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Something
+</span><span>    </span><span style="color:#ff7733;">let</span><span> z </span><span style="color:#f29668;">= </span><span style="color:#f07178;">some_on_even</span><span>(</span><span style="color:#f29718;">3</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Nothing
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">some_on_even</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">:</span><span> int) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;int&gt; {
+</span><span>    </span><span style="color:#ff7733;">match</span><span> val {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Matches an even number.
+</span><span>        x </span><span style="color:#ff7733;">if</span><span> x </span><span style="color:#f29668;">% </span><span style="color:#f29718;">2 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">0 </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(x)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Matches anything else.
+</span><span>        </span><span style="color:#f29668;">_                     =&gt; </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Чтобы извлечь что-то из Option, нам нужно иметь возможность извлекать или «разворачивать» значение. Есть несколько способов сделать это. Некоторые распространенные методы используют match или .expect().</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span> Если вы хотите написать код, который не даст сбоев, избегайте .expect() и его двоюродного брата .unwrap() и используйте более безопасные альтернативы, такие как unwrap_or_default() или unwrap_or(). 
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Create an Option containing the value 1.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> a_monad</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;int&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Extract and branch based on result.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> value_from_match </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> a_monad {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(x) </span><span style="color:#f29668;">=&gt;</span><span> x</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">None    </span><span style="color:#f29668;">=&gt;</span><span> 0i </span><span style="font-style:italic;color:#5c6773;">// A fallback value.
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Extract with failure message.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> value_from_expect </span><span style="color:#f29668;">=</span><span> a_monad</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;No result.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Extract, or get a default value
+</span><span>    </span><span style="color:#ff7733;">let</span><span> value_or_default </span><span style="color:#f29668;">=</span><span> a_monad</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or_default</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> value_or_fallback </span><span style="color:#f29668;">=</span><span> a_monad</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(42i)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="ne-prosto-nol">Не просто ноль</h2>
+<p>К настоящему времени вы, вероятно, задаетесь вопросом примерно следующего:</p>
+<blockquote>
+<p>Так почему бы просто не иметь null? Что еще дает монада Option?</p>
+</blockquote>
+<p>Это очень хороший вопрос. Каковы преимущества этой парадигмы?</p>
+<ul>
+<li>Вы должны обрабатывать все возможные возвраты или их отсутствие. Компилятор выдаст ошибки, если вы неправильно обработаете Option. Вы не можете просто забыть обработать случай None (или null).</li>
+<li>Нуля не существует. Читателям и потребителям сразу становится ясно, какие функции могут не возвращать значимое значение. Попытка использовать значение из Option без его обработки приводит к ошибке компилятора.</li>
+<li>Значения не заключены в рамки. Значения параметров не переносят указатели, они переносят значения. Чтобы иметь значение NULL, вам обязательно понадобится указатель. (Спасибо, cmr!)</li>
+<li>Композиция становится легкой. Монада Option становится намного более мощной, когда она используется в композиции, поскольку ее характеристики позволяют создавать конвейеры, которым не нужно явно обрабатывать ошибки на каждом шаге.</li>
+</ul>
+<p>Давайте подробнее рассмотрим композиционную идею ...</p>
+<h2 id="sostavlenie-simfonii-funktsii">Составление симфонии функций</h2>
+<p>Nirvana может составлять ряд функций вместе, не вводя между ними тесную зависимость, так что их можно перемещать или изменять, не беспокоясь о том, как это может повлиять на другие функции. Например, предположим, что у нас есть функции со следующими подписями: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">log</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>)     </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// This could fail. (log(-2) == ??)
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">sqrt</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>)    </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// This could fail. (sqrt(-2) == ??)
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">square</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>)  </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">double</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>)  </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">inverse</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Довольно маленькая математическая библиотека, которая у нас есть! Как насчет того, чтобы придумать способ превратить 20 во что-то еще, используя циклический конвейер? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">sqrt</span><span>(</span><span style="color:#f29668;">-</span><span style="color:#f29718;">1 </span><span style="color:#f29668;">* </span><span>(</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#f29668;">-</span><span style="color:#f29718;">1 </span><span style="color:#f29668;">* </span><span>(</span><span style="color:#f29718;">20 </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>)))</span><span style="color:#f29668;">^</span><span style="color:#f29718;">2</span><span>)
+</span></code></pre>
+<p>С нашей небольшой библиотекой это выглядело бы примерно так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// This code will not compile, it&#39;s invalid.
+</span><span style="font-style:italic;color:#5c6773;">// `Null` isn&#39;t a real type in Rust.
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">20.</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">log</span><span>(</span><span style="color:#f07178;">inverse</span><span>(</span><span style="color:#f07178;">double</span><span>(number))) {
+</span><span>        x </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">sqrt</span><span>(</span><span style="color:#f07178;">square</span><span>(</span><span style="color:#f07178;">inverse</span><span>(x)))) {
+</span><span>                y </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;The result is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> y)</span><span style="color:#bfbab0cc;">,
+</span><span>                Null </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;.sqrt failed.&quot;</span><span>)
+</span><span>            }
+</span><span>        }</span><span style="color:#bfbab0cc;">,
+</span><span>        Null </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;.log failed.&quot;</span><span>)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>В этом случае у нас были две функции, которые могли выйти из строя, поскольку у нас не было типа Option, автор должен знать и обрабатывать возможные значения Null. Обратите внимание, что ответственность за то, чтобы знать, когда может быть возвращено значение NULL, лежала на программисте, и не забывайте обрабатывать его, а не на компиляторе.</p>
+<p>Давайте посмотрим, как будет выглядеть тот же код с использованием монады Option. В этом примере все функции определены соответствующим образом. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> number</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">20.</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Perform a pipeline of options.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> result </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(number)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(inverse) </span><span style="font-style:italic;color:#5c6773;">// Described below.
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(double)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(inverse)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(log) </span><span style="font-style:italic;color:#5c6773;">// Described below.
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(square)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(sqrt)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Extract the result.
+</span><span>    </span><span style="color:#ff7733;">match</span><span> result {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(x) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Result was </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">.&quot;</span><span style="color:#bfbab0cc;">,</span><span> x)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">None    </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;This failed.&quot;</span><span>)
+</span><span>    }
+</span><span>}
+</span><span style="font-style:italic;color:#5c6773;">// You can ignore these.
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">log</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">match</span><span> value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log2</span><span>() {
+</span><span>        x </span><span style="color:#ff7733;">if</span><span> x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_normal</span><span>() </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(x)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29668;">_                  =&gt; </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>    }
+</span><span>}
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">sqrt</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">f64</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">match</span><span> value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">sqrt</span><span>() {
+</span><span>        x </span><span style="color:#ff7733;">if</span><span> x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_normal</span><span>() </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(x)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29668;">_                  =&gt; </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>    }
+</span><span>}
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">double</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64 </span><span>{
+</span><span>    value </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2.
+</span><span>}
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">square</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64 </span><span>{
+</span><span>    value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">powi</span><span>(</span><span style="color:#f29718;">2 </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">i32</span><span>)
+</span><span>}
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">inverse</span><span>(</span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f64 </span><span>{
+</span><span>    value </span><span style="color:#f29668;">* -</span><span style="color:#f29718;">1.
+</span><span>}
+</span></code></pre>
+<p>Этот код аккуратно обрабатывает все возможные ответвления результатов, и автору не нужно явно обрабатывать каждый возможный результат None, ему нужно только обработать конечный результат. Если какая-либо из функций, которые могут дать сбой (вызываемые and_then()), все же не сработают, остальные вычисления будут пропущены. Кроме того, это значительно упрощает выражение и понимание конвейера вычислений.</p>
+<p>map и and_then (наряду с целым рядом других функций, перечисленных здесь) предоставляют надежный набор инструментов для объединения функций вместе. Давайте посмотрим, их подписи ниже. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">map</span><span>&lt;U&gt;     (</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">:</span><span> |T| -&gt; U)         </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;U&gt;
+</span><span>fn and_then&lt;U&gt;(self, f: |T| -&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;U&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;U&gt;
+</span></code></pre>
+<h2 id="interfeis-funktora-map">Интерфейс функтора: .map()</h2>
+<p>map предоставляет возможность применить функцию подписи | T | -&gt; U в Option<T>, возвращая Option<U>. Это идеально подходит для таких функций, как double(), которые не возвращают Option.</p>
+<p>Этот вызов соответствует fmap в Haskell, который является частью функтора. У монад есть эта трэйта, потому что каждая монада является функтором.</p>
+<h2 id="interfeis-monad-and-then">Интерфейс монад: .and_then()</h2>
+<p>and_then позволяет применить | T | -&gt; Option<U> в Option<T>, возвращая Option<U>. Это позволяет применять функции, которые могут не возвращать значения, такие как sqrt().</p>
+<p>Этот вызов соответствует связыванию в Haskell и теоретических определениях Monad. Между тем разворачивание Some<T> или None эквивалентно возврату. (Спасибо dirkt)</p>
+<h2 id="primery">Примеры</h2>
+<p>Работа с параметрами в векторах. Разбор вектора строк на целые числа. Обратите внимание, что итераторы Rust ленивы, поэтому, если collect() не вызывается, сам итератор может быть скомпонован с другими. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> strings </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>(</span><span style="color:#c2d94c;">&quot;4&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;12&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;foo&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;15&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;bar&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;baz&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;1&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> numbers</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;int&gt; </span><span style="color:#f29668;">=</span><span> strings</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// `filter_map` transforms `Vec&lt;&amp;&#39;static str&gt;` to `Vec&lt;int&gt;`
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Any `None` will be removed,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// while any `Some` will be unwrapped.
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">filter_map</span><span>(|</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">x</span><span>| from_str</span><span style="color:#f29668;">::</span><span>&lt;int&gt;(x))
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// `collect` forces iteration through the lazy iterator.
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> numbers)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Простой конвейер. В этом примере сильное значение разбивается на итератор. next() выбирает следующий токен, который является Option. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;15 Bear&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">split</span><span>(</span><span style="color:#c2d94c;">&#39; &#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Need to pull the number and parse it.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> number </span><span style="color:#f29668;">=</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">next</span><span>()
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Process Option&lt;&amp;&#39;static str&gt; to Option&lt;int&gt;
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">x</span><span>| from_str</span><span style="color:#f29668;">::</span><span>&lt;int&gt;(x))
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Was not provided a valid number.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The next token is our animal.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> animal </span><span style="color:#f29668;">=</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">next</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Was not provided an animal.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Ouput `number` times.
+</span><span>    </span><span style="color:#ff7733;">for</span><span> x </span><span style="color:#f29668;">in </span><span>std</span><span style="color:#f29668;">::</span><span>iter</span><span style="color:#f29668;">::</span><span>range(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,</span><span> number) {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{} {}</span><span style="color:#c2d94c;"> says hi!&quot;</span><span style="color:#bfbab0cc;">,</span><span> animal</span><span style="color:#bfbab0cc;">,</span><span> x)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="obsuzhdenie">Обсуждение:</h2>
+<ul>
+<li>Сообщение Reddit</li>
+<li>Хакерский новостной пост</li>
+</ul>
+<h2 id="dopolnitel-nye-resursy">Дополнительные ресурсы:</h2>
+<ul>
+<li>Статья в Википедии</li>
+<li>Монады 101</li>
+<li>Учебное пособие по монаде для программистов на Clojure</li>
+<li>Clojure.algo.monads</li>
+<li>Функторы, аппликативы и монады в изображениях</li>
+<li>Горсть монад </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

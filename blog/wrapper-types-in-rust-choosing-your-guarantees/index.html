@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Типы обертки в Rust: выбор гарантий | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#osnovnye-tipy-ukazatelei">Основные типы указателей</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#korobka"><small>- Коробка</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#t-i-mut-t"><small>- &amp;T и &amp;mut T</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#const-t-i-mut-t"><small>- * const T и * mut T</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#rc"><small>- Rc</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#tipy-iacheek">Типы ячеек</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#iacheika"><small>- Ячейка</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#refcell"><small>- RefCell</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#sinkhronnye-tipy">Синхронные типы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#duga"><small>- Дуга</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#mutex-i-rwlock"><small>- Mutex и RwLock</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/wrapper-types-in-rust-choosing-your-guarantees/#sochinenie">Сочинение</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Типы обертки в Rust: выбор гарантий</h1>
+
+<p><a href="https://manishearth.github.io/blog/2015/05/27/wrapper-types-in-rust-choosing-your-guarantees/">Перевод</a> | Автор оригинала: Manish Goregaokar</p>
+<p>Этот пост стал частью официальной книги Rust</p>
+<p>В моем предыдущем посте я немного рассказал о том, почему шаблон RWlock важен для доступа к данным, поэтому Rust применяет этот шаблон либо во время компиляции, либо во время выполнения, в зависимости от используемых абстракций.</p>
+<p>Мне пришло в голову, что в Rust существует множество таких абстракций, каждая со своими уникальными гарантиями. У программиста снова есть выбор между принудительным исполнением и временем компиляции. Мне пришло в голову, что это множество «типов обертки» 1 может устрашить новичков; В этом посте я намерен дать подробное объяснение того, что делают некоторые известные из них и когда их следует использовать.</p>
+<p>Я предполагаю, что читатель знает о владении и заимствовании в Rust. Тем не менее, я постараюсь, чтобы большая часть этого поста была доступна для тех, кто еще не знаком с этими концепциями. Помимо двух ссылок на книгу выше, эти два сообщения в блоге подробно освещают эту тему.</p>
+<h2 id="osnovnye-tipy-ukazatelei">Основные типы указателей</h2>
+<h3 id="korobka">Коробка<T></h3>
+<p>Box<T> - это «указатель собственности» или «поле». Хотя он может раздавать заимствованные ссылки на данные, он является единственным владельцем данных. В частности, когда происходит что-то вроде следующего: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> y </span><span style="color:#f29668;">=</span><span> x</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// x no longer accessible here
+</span></code></pre>
+<p>Здесь коробка была перемещена в y. Поскольку x больше не владеет им, компилятор больше не позволит программисту использовать x после этого. Блок аналогичным образом может быть перемещен из функции путем возврата, и когда блок (тот, который не был перемещен) выходит за пределы области видимости, запускаются деструкторы, освобождая внутренние данные.</p>
+<p>Эта абстракция представляет собой недорогую абстракцию для динамического распределения. Если вы хотите выделить часть памяти в куче и безопасно передать указатель на эту память, это идеально. Обратите внимание, что вам будет разрешено делиться заимствованными ссылками на это только с помощью обычных правил заимствования, проверенных во время компиляции.</p>
+<h4 id="interliudiia-kopirovat">Интерлюдия: Копировать</h4>
+<p>Семантика перемещения / владения не является особенной для Box<T>; это функция всех типов, не являющихся копией.</p>
+<p>Тип копирования - это тип, в котором все данные, которые он логически охватывает (обычно владеет), являются частью его представления в стеке2. Большинство типов, содержащих указатели на другие данные, не являются копией, поскольку в другом месте есть дополнительные данные, и простое копирование представления стека может случайно разделить владение этими данными небезопасным образом.</p>
+<p>Такие типы, как Vec<T> и String, которые также содержат данные в куче, также не являются копией. Типы, подобные целочисленным / логическим типам, - это Копировать</p>
+<p>&amp;T и необработанные указатели - это Копировать. Несмотря на то, что они указывают на дополнительные данные, они не «владеют» этими данными. В то время как Box<T> можно рассматривать как «некоторые данные, которые случайно распределяются динамически», а &amp;T рассматривается как «заимствующая ссылка на некоторые данные». Хотя оба являются указателями, только первый считается «данными». Следовательно, копия первого должна включать в себя копию данных (которая не является частью его представления стека), а для копии второго требуется только копия ссылки. &amp;mut T не является копией, потому что изменяемые псевдонимы не могут быть общими, а &amp;mut T в некоторой степени «владеет» данными, на которые он указывает, поскольку он может видоизменяться.</p>
+<p>Фактически, тип может быть копируемым, если копия его представления в стеке не нарушает безопасность памяти.</p>
+<h3 id="t-i-mut-t">&amp;T и &amp;mut T</h3>
+<p>Это неизменяемые и изменяемые ссылки соответственно. Они следуют шаблону «блокировка чтения-записи», описанному в моем предыдущем посте, так что можно иметь либо только одну изменяемую ссылку на некоторые данные, либо любое количество неизменяемых, но не то и другое одновременно. Эта гарантия применяется во время компиляции и не требует видимых затрат во время выполнения. В большинстве случаев таких указателей достаточно для обмена дешевыми ссылками между разделами кода.</p>
+<p>Эти указатели не могут быть скопированы таким образом, чтобы они пережили связанный с ними срок службы.</p>
+<h3 id="const-t-i-mut-t">* const T и * mut T</h3>
+<p>Это необработанные указатели в стиле C без привязки к времени жизни или праву собственности. Они просто указывают на какое-то место в памяти без каких-либо других ограничений. Единственная гарантия, которую они предоставляют, - то, что они не могут быть разыменованы, за исключением кода, помеченного как небезопасный.</p>
+<p>Они полезны при создании безопасных и недорогих абстракций, таких как Vec<T>, но их следует избегать в безопасном коде. </p>
+<h3 id="rc">Rc<T></h3>
+<p>Это первая оболочка, которую мы рассмотрим, которая требует затрат времени выполнения.</p>
+<p>Rc<T> - указатель с подсчетом ссылок. Другими словами, это позволяет нам иметь несколько указателей-владельцев на одни и те же данные, и данные будут освобождены (деструкторы будут запущены), когда все указатели выйдут за пределы области видимости.</p>
+<p>Внутри он содержит общий «счетчик ссылок», который увеличивается каждый раз, когда клонируется Rc, и уменьшается каждый раз, когда один из Rcs выходит за пределы области видимости. Основная ответственность Rc<T> - обеспечить вызов деструкторов для общих данных.</p>
+<p>Внутренние данные здесь неизменяемы, и если создается цикл ссылок, данные будут утекать. Если нам нужны данные, которые не утекают во время циклов, нам нужен сборщик мусора. Я не знаю ни одного существующего сборщика мусора в Rust, но я работаю над одним с Никой Лейзелл, а есть еще один цикл сбора одного, написанный Ником Фицджеральдом.</p>
+<h4 id="garantii">Гарантии</h4>
+<p>Основная гарантия, представленная здесь, заключается в том, что данные не будут уничтожены до тех пор, пока все ссылки на них не выйдут за рамки.</p>
+<p>Это следует использовать, когда вы хотите динамически распределять и совместно использовать некоторые данные (только для чтения) между различными частями вашей программы, когда неизвестно, какая часть завершит использование указателя последней. Это жизнеспособная альтернатива &amp;T, когда &amp;T либо невозможно статически проверить на правильность, либо создает крайне неэргономичный код, с которым программист не желает тратить затраты на разработку, работая с.</p>
+<p>Этот указатель не является потокобезопасным, и Rust не позволяет отправлять его или передавать другим потокам. Это позволяет избежать затрат на атомики в ситуациях, когда они не нужны.</p>
+<p>У этого есть родственный умный указатель, Weak<T>. Это не владеющий, но и не заимствованный умный указатель. Он также похож на &amp;T, но не ограничен временем жизни - Weak<T> может храниться вечно. Однако возможно, что попытка доступа к внутренним данным может потерпеть неудачу и вернуть None, так как это может пережить принадлежащие Rcs. Это полезно, когда кому-то нужны циклические структуры данных и другие вещи.</p>
+<h4 id="raskhody">Расходы</h4>
+<p>Что касается памяти, Rc<T> - это единичное выделение, хотя оно выделяет два дополнительных слова по сравнению с обычным Box<T>(для «сильного» и «слабого» счетчиков ссылок).</p>
+<p>Rc<T> имеет вычислительные затраты на увеличение / уменьшение счетчика ссылок всякий раз, когда он клонируется или выходит за пределы области видимости соответственно. Обратите внимание, что клон не будет выполнять глубокую копию, а просто увеличит счетчик внутренних ссылок и вернет копию Rc<T></p>
+<h2 id="tipy-iacheek">Типы ячеек</h2>
+<p>«Клетки» обеспечивают внутреннюю изменчивость. Другими словами, они содержат данные, которыми можно манипулировать, даже если тип не может быть получен в изменяемой форме (например, когда он стоит за &amp; -ptr или Rc<T>).</p>
+<p>В документации на модуль ячейки есть довольно хорошее объяснение этого.</p>
+<p>Эти типы обычно находятся в полях структуры, но их можно найти и в других местах.</p>
+<h3 id="iacheika">Ячейка<T></h3>
+<p>Cell<T> - это тип, который обеспечивает внутреннюю изменчивость с нулевой стоимостью, но только для типов копирования. Поскольку компилятор знает, что все данные, принадлежащие содержащемуся значению, находятся в стеке, можно не беспокоиться об утечке каких-либо данных за ссылками (или хуже!) Путем простой замены данных.</p>
+<p>С помощью этой оболочки все еще можно нарушить собственные инварианты, поэтому будьте осторожны при ее использовании. Если поле заключено в ячейку, это хороший показатель того, что фрагмент данных является изменяемым и может не оставаться неизменным между моментом, когда вы его впервые читаете, и тем, когда вы собираетесь его использовать. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span>Cell</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> y </span><span style="color:#f29668;">= &amp;</span><span>x</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> z </span><span style="color:#f29668;">= &amp;</span><span>x</span><span style="color:#bfbab0cc;">;
+</span><span>x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(</span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>y</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(</span><span style="color:#f29718;">3</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>z</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(</span><span style="color:#f29718;">4</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>())</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Обратите внимание, что здесь мы смогли изменить одно и то же значение из различных неизменяемых ссылок.</p>
+<p>Это имеет те же затраты времени выполнения, что и следующее: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> y </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> x</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> z </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> x</span><span style="color:#bfbab0cc;">;
+</span><span>x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">*</span><span>y </span><span style="color:#f29668;">= </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">*</span><span>z </span><span style="color:#f29668;">= </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>но у него есть дополнительное преимущество - фактическая успешная компиляция.</p>
+<h4 id="garantii-1">Гарантии</h4>
+<p>Это ослабляет ограничение «отсутствие псевдонимов с изменяемостью» там, где в этом нет необходимости. Однако это также ослабляет гарантии, предоставляемые ограничением; поэтому, если инварианты зависят от данных, хранящихся в Cell, следует быть осторожным.</p>
+<p>Это полезно для изменения примитивов и других типов копирования, когда нет простого способа сделать это в соответствии со статическими правилами &amp; и &amp;mut.</p>
+<p>Габор Лехель довольно кратко резюмировал гарантии, предоставленные Cell:</p>
+<blockquote>
+<p>Основная гарантия, которую мы должны гарантировать, - это то, что внутренние ссылки не могут быть признаны недействительными (оставлены висящими) в результате мутации внешней структуры. (Подумайте о ссылках на внутренности таких типов, как Option, Box, Vec и т.д.) &amp;, &amp;Mut и Cell делают здесь разные компромиссы. &amp; разрешает общие внутренние ссылки, но запрещает мутации; &amp;mut разрешает мутацию xor внутренних ссылок, но не разрешает совместное использование; Ячейка допускает общую изменчивость, но не внутренние ссылки.</p>
+</blockquote>
+<p>В конечном итоге, хотя общая изменчивость может вызвать множество логических ошибок (как описано в моем предыдущем посте
+), это может вызвать ошибки безопасности памяти только в сочетании с «внутренними ссылками». Это для тех, у кого есть «интерьер», тип / размер которого можно изменять. Одним из примеров этого является перечисление Rust; где, изменяя вариант, вы можете изменить, какой тип содержится. Если у вас есть псевдоним внутреннего типа во время изменения варианта, указатели внутри этого псевдонима могут быть недействительными. Точно так же, если вы измените длину вектора, когда у вас есть псевдоним для одного из его элементов, этот псевдоним может стать недействительным.</p>
+<p>Поскольку Cell не позволяет ссылаться на внутреннюю часть типа (вы можете только копировать и копировать обратно), перечисления и структуры могут быть одинаково изменяемыми в пределах этого псевдонима.</p>
+<p>Этот комментарий Эдди также касается гарантий Cell и альтернатив.</p>
+<h4 id="raskhody-1">Расходы</h4>
+<p>Использование Cell<T> не требует затрат времени выполнения, однако, если кто-то использует его для обертывания более крупных (копируемых) структур, может быть целесообразно вместо этого обернуть отдельные поля в Cell<T>, поскольку каждая запись является полной копией структуры .</p>
+<h3 id="refcell">RefCell<T></h3>
+<p>RefCell<T> также обеспечивает внутреннюю изменчивость, но не ограничивается типами копирования.</p>
+<p>Вместо этого у него есть затраты времени выполнения. RefCell<T> применяет шаблон RWLock во время выполнения (это похоже на однопоточный мьютекс), в отличие от &amp;T / &amp;mut T, которые делают это во время компиляции. Это осуществляется функциями заимствования() и заимствования_mut(), которые изменяют счетчик внутренних ссылок и возвращают интеллектуальные указатели, разыменование которых может быть неизменяемым и изменяемым соответственно. Refcount восстанавливается, когда интеллектуальные указатели выходят за пределы области видимости. С помощью этой системы мы можем динамически гарантировать, что никакие другие заимствования никогда не будут активными, когда активен изменяемый заем. Если программист попытается взять такой заем, поток запаникует. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span>RefCell</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">4</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>{
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">*</span><span>x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>())
+</span><span>}
+</span><span>
+</span><span>{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> my_ref </span><span style="color:#f29668;">=</span><span> x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow_mut</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    my_ref</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Подобно Cell, это в основном полезно в ситуациях, когда сложно или невозможно удовлетворить контролера заемных средств. Обычно известно, что такие мутации не происходят во вложенной форме, но это хорошо.</p>
+<p>Для больших и сложных программ становится полезным помещать некоторые вещи в RefCells, чтобы упростить работу. Например, многие карты в структуре ctxt во внутреннем устройстве компилятора Rust находятся внутри этой оболочки. Они изменяются только один раз (во время создания, а не сразу после инициализации) или пару раз в хорошо разделенных местах. Однако, поскольку эта структура повсеместно используется повсеместно, манипулирование изменяемыми и неизменяемыми указателями будет затруднено (возможно, невозможно) и, вероятно, образует суп из &amp; -ptrs, который будет трудно расширить. С другой стороны, RefCell предоставляет дешевый (не нулевой) способ безопасного доступа к ним. В будущем, если кто-то добавит код, который пытается изменить ячейку, когда она уже заимствована, это вызовет (обычно детерминированную) панику, которая может быть связана с ошибочным заимствованием.</p>
+<p>Точно так же в DOM Серво происходит множество мутаций, большая часть которых локальна для типа DOM, но некоторые из них пересекают DOM и изменяют различные вещи. Использование RefCell и Cell для защиты всех мутаций позволяет нам не беспокоиться об изменчивости повсюду, и одновременно выделяет места, где мутации действительно происходят.</p>
+<p>Обратите внимание, что RefCell следует избегать, если с помощью указателей &amp; возможно наиболее простое решение.</p>
+<h4 id="garantii-2">Гарантии</h4>
+<p>RefCell ослабляет статические ограничения, предотвращающие мутации с псевдонимом, и заменяет их динамическими. Таким образом, гарантии не изменились.</p>
+<h4 id="raskhody-2">Расходы</h4>
+<p>RefCell не выделяет, но содержит дополнительный индикатор «состояния заимствования» (размером в одно слово) вместе с данными.</p>
+<p>Во время выполнения каждое заимствование вызывает модификацию / проверку счетчика ссылок.</p>
+<h2 id="sinkhronnye-tipy">Синхронные типы</h2>
+<p>Многие из перечисленных выше типов нельзя использовать потокобезопасным образом. В частности, таким образом нельзя использовать Rc<T> и RefCell<T>, которые используют неатомарные счетчики ссылок. Это удешевляет их использование, но нужны и их поточно-ориентированные версии. Они существуют в виде Arc<T> и Mutex<T> / RWLock<T>.</p>
+<p>Обратите внимание, что типы, не связанные с потоками, не могут быть отправлены между потоками, и это проверяется во время компиляции. Я расскажу, как это делается, в одном из следующих сообщений блога.</p>
+<p>В модуле синхронизации есть много полезных оболочек для параллельного программирования, но я остановлюсь только на основных.</p>
+<h3 id="duga">Дуга<T></h3>
+<p>Arc<T> - это просто версия Rc<T>, в которой используется атомарный счетчик ссылок (отсюда «Arc»). Его можно свободно пересылать между потоками.</p>
+<p>Shared_ptr в C++ похож на Arc, однако в случае C++ внутренние данные всегда изменяемы. Для семантики, аналогичной семантике C++, мы должны использовать Arc&lt;Mutex<T>&gt;, Arc&lt;RwLock<T>&gt; или Arc&lt;UnsafeCell<T>&gt; 3 (UnsafeCell<T> - это тип ячейки, который можно использовать для хранят любые данные и не требуют затрат времени выполнения, но для доступа к ним требуются небезопасные блоки). Последний следует использовать только в том случае, если вы уверены, что его использование не вызовет небезопасности памяти. Помните, что запись в структуру не является атомарной операцией, и многие функции, такие как vec.push(), могут перераспределяться внутри и вызывать небезопасное поведение (поэтому даже монотонности4 может быть недостаточно, чтобы оправдать UnsafeCell)</p>
+<h4 id="garantii-3">Гарантии</h4>
+<p>Как и Rc, это обеспечивает (потокобезопасную) гарантию того, что деструктор для внутренних данных будет запущен, когда последняя дуга выйдет из области видимости (без каких-либо циклов).</p>
+<h4 id="raskhody-3">Расходы</h4>
+<p>Это связано с дополнительными затратами на использование атомики для изменения счетчика ссылок (что будет происходить всякий раз, когда он клонируется или выходит за рамки). При совместном использовании данных из Arc в одном потоке, по возможности, предпочтительнее предоставлять общий доступ к указателям. </p>
+<h3 id="mutex-i-rwlock">Mutex<T> и RwLock<T></h3>
+<p>Mutex<T> и RwLock<T> обеспечивают взаимное исключение через защиту RAII. Для обоих из них мьютекс непрозрачен до тех пор, пока на нем не будет вызвана функция lock(), после чего поток будет блокироваться до тех пор, пока не будет получена блокировка, а затем будет возвращена защита. Эту защиту можно использовать для доступа к внутренним данным (изменчиво), и блокировка будет снята, когда защита выйдет за пределы области видимости. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> guard </span><span style="color:#f29668;">=</span><span> mutex</span><span style="color:#f29668;">.</span><span style="color:#f07178;">lock</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// guard dereferences mutably to the inner type
+</span><span>    </span><span style="color:#f29668;">*</span><span>guard </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>} </span><span style="font-style:italic;color:#5c6773;">// lock released when destructor runs
+</span></code></pre>
+<p>RwLock имеет дополнительное преимущество в том, что он эффективен при многократном чтении. Всегда безопасно иметь несколько читателей для общих данных, пока нет писателей; а RwLock позволяет читателям получить «блокировку чтения». Такие блокировки могут быть получены одновременно и отслеживаются с помощью счетчика ссылок. Писатели должны получить «блокировку записи», которая может быть получена только тогда, когда все читатели выйдут за пределы области действия.</p>
+<h4 id="garantii-4">Гарантии</h4>
+<p>Оба они обеспечивают безопасную совместную изменчивость между потоками, однако они подвержены взаимоблокировкам. Некоторый уровень дополнительной безопасности протокола может быть получен с помощью системы типов. Примером этого является rust-sessions, экспериментальная библиотека, которая использует типы сессий для обеспечения безопасности протокола.</p>
+<h4 id="raskhody-4">Расходы</h4>
+<p>Они используют внутренние атомарные типы для поддержки блокировок, и они аналогичны довольно дорого (они могут блокировать все операции чтения памяти через процессоры, пока они не будут выполнены). Ожидание этих блокировок также может быть медленным при большом количестве одновременного доступа.</p>
+<h2 id="sochinenie">Сочинение</h2>
+<p>Распространенная проблема при чтении кода на Rust - это такие вещи, как Rc &lt;RefCell &lt;Vec<T>&gt;&gt; и более сложные композиции таких типов.</p>
+<p>Обычно это тот случай, когда нужно составить вместе необходимые гарантии, не платя за ненужные вещи.</p>
+<p>Например, Rc &lt;RefCell<T>&gt; - одна из таких композиций. Само по себе Rc не может быть разыменовано взаимно; поскольку Rc обеспечивает совместное использование, а общая изменчивость - это плохо, поэтому мы поместили RefCell внутрь, чтобы получить динамически проверяемую общую изменчивость. Теперь у нас есть общие изменяемые данные, но они разделены таким образом, что может быть только один мутатор (и не считыватели) или несколько считывателей.</p>
+<p>Теперь мы можем пойти дальше и иметь Rc &lt;RefCell &lt;Vec<T>&gt;&gt; или Rc &lt;Vec&lt;RefCell<T>&gt;&gt;. Оба эти вектора являются общими, изменяемыми, но это не одно и то же.</p>
+<p>В первом случае RefCell оборачивает Vec, поэтому Vec полностью является изменяемым. В то же время может быть только одно изменяемое заимствование всего Vec в данный момент времени. Это означает, что ваш код не может одновременно работать с разными элементами вектора из разных дескрипторов Rc. Тем не менее, мы можем нажимать и выталкивать из Vec по желанию. Это похоже на &amp;mut Vec<T> с проверкой заимствования, выполняемой во время выполнения.</p>
+<p>В последнем случае заимствованы отдельные элементы, но общий вектор неизменен. Таким образом, мы можем независимо заимствовать отдельные элементы, но не можем выталкивать или выталкивать из вектора. Это похоже на &amp;mut [T] 5, но, опять же, проверка заимствования выполняется во время выполнения.</p>
+<p>В параллельных программах мы имеем аналогичную ситуацию с Arc&lt;Mutex<T>&gt;, который обеспечивает общую изменчивость и владение.</p>
+<p>При чтении кода, который их использует, переходите к шагу за шагом и смотрите на предоставленные гарантии / затраты.</p>
+<p>Выбирая составной тип, мы должны делать обратное; выяснить, какие гарантии мы хотим, и в какой точке композиции они нам нужны. Например, если есть выбор между Vec&lt;RefCell<T>&gt; и RefCell &lt;Vec<T>&gt;, мы должны выяснить компромиссы, как сделано выше, и выбрать один.</p>
+<p>Обсудить: HN, Reddit</p>
+<ol>
+<li>
+<p>Я не уверен, что это технический термин для них, но я буду называть их так на протяжении всего поста.</p>
+</li>
+<li>
+<p>Под «представлением стека» я подразумеваю данные в стеке, когда в стеке хранится значение этого типа. Например, Vec<T> имеет стековое представление указателя и двух целых чисел (длина, емкость). Хотя за косвенным указателем стоит больше данных, они не являются частью хранимой в стеке части Vec. Если посмотреть на это с другой стороны, типом будет Копировать, если копия данных копирует все данные, которыми она владеет.</p>
+</li>
+<li>
+<p>Arc&lt;UnsafeCell<T>&gt; на самом деле не будет компилироваться, поскольку UnsafeCell<T> не является Send или Sync, но мы можем обернуть его в тип и реализовать Send / Sync для него вручную, чтобы получить Arc&lt;Wrapper<T>&gt; где Wrapper - это struct Wrapper<T>(UnsafeCell<T>).</p>
+</li>
+<li>
+<p>Под этим я подразумеваю часть данных, которая требует монотонной согласованности; т.е. счетчик или монотонно растущий стек</p>
+</li>
+<li>
+<p>&amp;[T] и &amp;mut [T] - срезы; они состоят из указателя и длины и могут относиться к части вектора или массива. Элементы &amp;mut [T] могут изменяться, однако его длина не может быть изменена. </p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

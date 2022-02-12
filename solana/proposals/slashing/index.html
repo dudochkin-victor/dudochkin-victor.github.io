@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Правила Слэшинга | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/slashing/#chastichnaia-kosaia-cherta">Частичная косая черта</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Правила Слэшинга</h1>
+
+<p>В отличие от Proof of Work (PoW), где капитальные затраты вне сети уже развернуты во время построения/голосования блока, системы PoS требуют капитала, подверженного риску, чтобы предотвратить логическую/оптимальную стратегию множественного голосования по цепочке.
+Мы намерены внедрить правила сокращения, в случае нарушения которых некоторая сумма депонированной доли валидатора-нарушителя будет удалена из обращения. Учитывая свойства упорядочения структуры данных PoH, мы считаем, что можем упростить наши правила сокращения до уровня времени блокировки голосования, назначенного для каждого голоса.</p>
+<p>т.е. Каждое голосование имеет связанное время блокировки (длительность PoH), которое представляет собой продолжительность любого дополнительного голоса от этого валидатора, который должен быть в PoH, который содержит исходный голос, или часть ставки этого валидатора может быть сокращена. Это время является функцией начального подсчета PoH для голосования и всех дополнительных подсчетов PoH для голосования. Скорее всего, это будет форма:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Lockouti\(PoHi, PoHj\) = PoHj + K \* exp\(\(PoHj - PoHi\) / K\)
+</span></code></pre>
+<p>Где PoHi — высота голосования, к которому должна быть применена блокировка, а PoHj — высота текущего голосования на той же вилке. Если валидатор отправляет голосование по другому форку PoH на любом PoHk, где k &gt; j &gt; i и PoHk &lt; Lockout(PoHi, PoHj), то часть доли этого валидатора может быть урезана.</p>
+<p>В дополнение к блокировке функциональной формы, описанной выше, ранняя реализация может быть числовым приближением, основанным на структуре данных «первым поступил — первым обслужен» (FIFO) и следующей логике:</p>
+<ul>
+<li>Очередь FIFO, содержащая 32 голоса на каждого активного валидатора</li>
+<li>новые голоса помещаются в начало очереди (<code>push_front</code>)</li>
+<li>голоса с истекшим сроком действия удаляются сверху (<code>pop_front</code>)</li>
+<li>по мере того, как голоса помещаются в очередь, блокировка каждого голоса в очереди удваивается</li>
+<li>голоса удаляются из конца очереди, если <code>queue.len() &gt; 32</code></li>
+<li>самая ранняя и самая последняя высота, которая была удалена из конца очереди, должна быть сохранена</li>
+</ul>
+<p>Вполне вероятно, что вознаграждение будет предложено в виде % от урезанной суммы любому узлу, который представит доказательство нарушения этого условия урезания в PoH.</p>
+<h3 id="chastichnaia-kosaia-cherta">Частичная косая черта</h3>
+<p>В схеме, описанной до сих пор, когда валидатор голосует за данный поток PoH, он связывает себя с этой вилкой на время, определяемое блокировкой голосования. Открытый вопрос заключается в том, будут ли валидаторы колебаться, чтобы начать голосование на доступном форке, если штрафы будут восприняты слишком суровыми за честную ошибку или перевернутый бит.</p>
+<p>Одним из способов решения этой проблемы может быть частичное сокращение, которое приводит к уменьшению суммы в зависимости от:</p>
+<ol>
+<li>доля валидаторов из общего пула валидаторов, которые также были сокращены за тот же период времени (как Casper)</li>
+<li>количество времени, прошедшее с момента подачи голоса (например, линейно увеличивающийся % от общей суммы, внесенной как сумма, которую можно сократить с течением времени), или и то, и другое.</li>
+</ol>
+<p>Это район, который в настоящее время находится в стадии разведки.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

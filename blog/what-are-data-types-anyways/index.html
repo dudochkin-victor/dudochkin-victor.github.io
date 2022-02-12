@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Что такое типы данных в любом случае? | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/what-are-data-types-anyways/#pravda-o-tipakh">Правда о типах</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/what-are-data-types-anyways/#prostoi-primer-vstroennye-tselochislennye-tipy">Простой пример (встроенные целочисленные типы)</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/what-are-data-types-anyways/#pol-zovatel-skie-tipy-massivy-i-vecs">Пользовательские типы, массивы и Vecs</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/what-are-data-types-anyways/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Что такое типы данных в любом случае?</h1>
+
+<p><a href="https://oswalt.dev/2020/11/what-are-data-types-anyways/">Перевод</a> | Автор оригинала: Matt Oswalt</p>
+<p>На самом деле существует довольно много ресурсов для начинающего программиста, чтобы узнать о таких типах данных, как строки, целые числа, числа с плавающей запятой и т.д. Страница Википедии, например, охватывает широкий спектр возможных значений. Практически любая книга или учебное пособие, посвященное конкретному языку программирования, начинается с перечисления типов, поддерживаемых этим языком. В этом есть смысл, поскольку они являются фундаментальным строительным блоком, позволяющим делать практически все на этом языке. Более того, как только вы изучите типы на одном языке, подавляющее большинство будет поддерживаться и на любом другом языке, а в худшем случае будет немного другое имя или синтаксис.</p>
+<p>В результате типы данных (по крайней мере, общие / простые) представляют собой концепцию, которую подавляющее большинство из нас - даже программисты с минимальным опытом - способны понять, что принимают это как должное. Программисты, освоившие современные технологии, могут быть удовлетворены тем, что строки предназначены для «серии символов», а целые числа - для «чисел», и им не нужно задаваться вопросом, что это на самом деле означает. И, честно говоря, я не уверен, что есть что-то плохое в том, чтобы в некоторых случаях оставить все как есть - множество совершенно функциональных программ было создано с помощью простого использования языковых инструментов, не задавая вопросов.</p>
+<p>Однако, стремясь погрузиться глубже, я стараюсь задавать эти вопросы всякий раз, когда могу, и в данном случае я думаю, что важно выявить фундаментальную истину, которая может быть не столь очевидна для тех, кто не прошел традиционную практику. образование в области информатики.</p>
+<h2 id="pravda-o-tipakh">Правда о типах</h2>
+<p>Поэтому, прежде чем я закопаю леде, я сразу скажу об этом, настолько лаконично, насколько мне хотелось бы, чтобы это было сказано мне на раннем этапе:</p>
+<blockquote>
+<p>Типы - это абстракция смещения памяти.</p>
+</blockquote>
+<p>Вот и все. Цель наличия таких типов, как целые числа, строки и числа с плавающей запятой, а также предоставления примитивов для определения ваших собственных типов (например, структур) состоит в том, чтобы компилятор знал, сколько памяти выделить для данного фрагмента данных. Это абстракция, которая полезна только во время компиляции и существует для того, чтобы программисту было проще рассуждать об этих выделениях, не осознавая этого.</p>
+<p>В следующих разделах мы рассмотрим несколько примеров, иллюстрирующих эту истину. Прежде чем мы туда доберемся, у меня есть два заявления об отказе от ответственности:</p>
+<ul>
+<li>
+<p>Я сосредоточусь на типах, поскольку они относятся к процедурному программированию и связанным с ними концепциям. Объектно-ориентированные языки добавляют дополнительную абстракцию к тому, что мы здесь обсудим. На самом деле есть и другие подобные кроличьи норы, в которые я мог бы нырнуть, но мы будем держаться подальше от всего этого во имя простоты.</p>
+</li>
+<li>
+<p>Я буду использовать Rust, чтобы проиллюстрировать некоторые примеры, но имейте в виду, что каждый язык имеет не только свой собственный синтаксис для встроенных и определяемых пользователем типов, но также может отличаться способом, которым эти типы проявляются в машинном коде. Также я буду использовать параметры отладки по умолчанию для Cargo, поэтому ваш код может компилироваться по-разному в зависимости от выбранных вами параметров. Специфика не так важна, как приобретение навыков «заглядывать за занавес».</p>
+</li>
+</ul>
+<h2 id="prostoi-primer-vstroennye-tselochislennye-tipy">Простой пример (встроенные целочисленные типы)</h2>
+<p>Выше я назвал типы «абстракцией смещения памяти». А пока давайте сосредоточимся на термине «смещение памяти» для тех, кто может быть не знаком. В моем предыдущем посте, исследуя дизассемблированные инструкции простой программы, мы могли видеть, что определенные инструкции были предоставлены с заданным байтовым смещением, что указывало на количество байтов от 0, в котором эта инструкция была расположена в файле.</p>
+<p>Точно так же для читателей, имеющих опыт работы в сети, протоколы, которые мы знаем и любим, такие как Интернет-протокол (IP), имеют стандартизованные форматы заголовков по той же причине. В заголовке Интернет-протокола (IP) нам не нужен какой-то «специальный сигнал», чтобы маршрутизатор знал, когда он прочитал полное поле адреса источника - мы указали в стандарте, что это поле имеет длину 32 бита. Итак, когда мы получаем этот 32-й бит, мы знаем, что поле закончилось, и мы начинаем получать следующее.</p>
+<p>В общем, причина, по которой нам нравится работать с хорошо известными смещениями памяти, заключается в том, что это упрощает написание программного обеспечения. Проблема в том, что в современных приложениях может быть очень утомительно работать только с этими смещениями памяти - поэтому большинство языков предлагают «типы данных» в качестве абстракции, чтобы программисту не приходилось постоянно думать о том, сколько байтов задано. type должен быть выделен - компилятор может сделать эту работу за нас.</p>
+<p>Например, следующий пример Rust создает переменную x и присваивает ей значение 5. Хотя Rust автоматически предполагает, что это 32-битное целое число, мы собираемся указать это явно для иллюстрации, поэтому мы добавим приведение типа к i32: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Если вы помните из моего предыдущего поста, мы можем изучить скомпилированный машинный код с помощью инструмента objdump. Я использую здесь почти то же самое, но я добавляю флаг --disassemble = rbin::main, чтобы я мог перейти непосредственно к соответствующему коду для этого примера. Я также использую флаг -S, который чередует исходный код Rust внутри машинного кода, чтобы мы могли более четко увидеть, как Rust и машинный код связаны друг с другом: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>~$ objdump --disassemble=rbin::main -S -C target/debug/rbin -EL -M intel --insn-width=8
+</span><span>target/debug/rbin:     file format elf64-x86-64
+</span><span>
+</span><span>...
+</span><span>
+</span><span>0000000000005310 &lt;rbin::main&gt;:
+</span><span>fn main() {
+</span><span>    5310:	48 83 ec 04             	sub    rsp,0x4
+</span><span>    let x: i32 = 5;
+</span><span>    5314:	c7 04 24 05 00 00 00    	mov    DWORD PTR [rsp],0x5
+</span><span>}
+</span><span>    531b:	48 83 c4 04             	add    rsp,0x4
+</span><span>    531f:	c3                      	ret    
+</span></code></pre>
+<p>Разборка раздела .fini:</p>
+<blockquote>
+<p>Обратите особое внимание на вывод, там есть и Rust, и машинный код из-за флага -S. Все, что следует за форматом из четырех столбцов (смещение, байты, инструкция, параметры), является машинным кодом, остальное - Rust (игнорируя любой вывод из самого objdump). Только машинный код попадает в итоговую скомпилированную программу, остальное предоставляется objdump, чтобы помочь нам разобраться в вещах.</p>
+</blockquote>
+<p>Первая инструкция выделяет четыре байта пространства стека для основной функции: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>sub    rsp,0x4
+</span></code></pre>
+<p>Почему компилятор выделяет 4 байта? Оказывается, именно столько требуется для 32-битного целого числа (4 байта x 8 = 32), и перемещение значения в это пространство памяти - единственная операция, выполняемая в этой функции, так что это все пространство нам нужно.</p>
+<p>Затем мы можем переместить шестнадцатеричный эквивалент 5 в это пространство памяти: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>mov    DWORD PTR [rsp],0x5
+</span></code></pre>
+<p>rsp - это указатель стека, и в этот момент программа указывает на то место в памяти, где начинается наше выделение, поэтому мы можем указать это как место в памяти, куда может быть записано наше значение.</p>
+<p>Этот пример был слишком простым, поэтому давайте добавим еще несколько присваиваний (y и z), чтобы подчеркнуть важность смещений памяти: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0000000000005310 &lt;rbin::main&gt;:
+</span><span>fn main() {
+</span><span>    5310:	48 83 ec 0c             	sub    rsp,0xc
+</span><span>    let x: i32 = 5;
+</span><span>    5314:	c7 04 24 05 00 00 00    	mov    DWORD PTR [rsp],0x5
+</span><span>    let y: i32 = 255;
+</span><span>    531b:	c7 44 24 04 ff 00 00 00 	mov    DWORD PTR [rsp+0x4],0xff
+</span><span>    let z: i32 = 0;
+</span><span>    5323:	c7 44 24 08 00 00 00 00 	mov    DWORD PTR [rsp+0x8],0x0
+</span><span>
+</span><span>}
+</span><span>    532b:	48 83 c4 0c             	add    rsp,0xc
+</span><span>    532f:	c3                      	ret    
+</span></code></pre>
+<p>Этот пример немного проясняет ситуацию. Размер нашего стека теперь намного превышает 4 байта; 0xc, преобразованный из шестнадцатеричного числа, равен 12. Опять же, это распределение выполняется в результате вычислений компилятором. Он знает, что мы присваиваем 3 переменным, каждая из которых является 32-битным целым числом. Поскольку каждому требуется 4 байта, нам потребуется всего 12 байтов для выполнения следующих операций: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>5310:	48 83 ec 0c             	sub    rsp,0xc
+</span></code></pre>
+<p>Наше присвоение x такое же, как и раньше, но обратите внимание, что машинный код для присвоения y имеет некоторый дополнительный синтаксис: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>531b:	c7 44 24 04 ff 00 00 00 	mov    DWORD PTR [rsp+0x4],0xff
+</span></code></pre>
+<p>Значение 0xff является шестнадцатеричным для 255, так что это фактические данные, которые мы храним, но расположение памяти предоставляется как смещение памяти от указателя стека rsp, а именно четыре байта (rsp + 0x4). На самом деле это гораздо меньше связано с y и больше связано с x. Типу, который мы используем для x, требуется четыре байта памяти, поэтому начальная ячейка памяти, которая должна использоваться для y, - это адрес, который представляет собой смещение на четыре байта от адреса, используемого для хранения этого значения, которое в данном случае было местоположением обозначается rsp.</p>
+<p>Смущенный? Попробуйте вместо этого использовать 16-битные целые числа: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0000000000005310 &lt;rbin::main&gt;:
+</span><span>fn main() {
+</span><span>    5310:	48 83 ec 06             	sub    rsp,0x6
+</span><span>    let x: i16 = 5;
+</span><span>    5314:	66 c7 04 24 05 00       	mov    WORD PTR [rsp],0x5
+</span><span>    let y: i16 = 255;
+</span><span>    531a:	66 c7 44 24 02 ff 00    	mov    WORD PTR [rsp+0x2],0xff
+</span><span>    let z: i16 = 0;
+</span><span>    5321:	66 c7 44 24 04 00 00    	mov    WORD PTR [rsp+0x4],0x0
+</span><span>}
+</span><span>    5328:	48 83 c4 06             	add    rsp,0x6
+</span><span>    532c:	c3                      	ret    
+</span></code></pre>
+<p>Распределение нашего стека теперь намного меньше, и байтовые смещения для каждого также уменьшены вдвое. y нужно хранить только на 2 байта перед x, так как x занимает только столько места. Между прочим, y имеет тот же размер, поэтому z может идти на 2 байта впереди (rsp плюс четыре байта).</p>
+<p>Это был простой пример, но детали здесь очень важны, если вы хотите понять, какая часть современного программного обеспечения действительно работает. Мы продолжим развивать это, но прежде чем продолжить, я хотел бы обратить внимание на два конкретных вывода:</p>
+<ul>
+<li>
+<p>Нам, программистам на Rust, не приходилось самостоятельно указывать смещение памяти. Мы указали тип i32, который является псевдонимом для 32-разрядного смещения памяти, которое требуется для этого типа, и компилятор позаботился о выделении памяти для нас и перемещении желаемых значений в правильные ячейки памяти, вычисляя необходимое смещение на основе размер, необходимый для каждого типа. Другие языки могут использовать даже более простые имена, такие как int, но обычно они имеют смещение памяти по умолчанию, и вам важно знать, что это такое.</p>
+</li>
+<li>
+<p>Также обратите внимание, что в машинном коде нет упоминания об i32 (в качестве пояснения мы видели это в выводе objdump, но помните, что это был просто хороший результат сравнения, предоставленный инструментом, поэтому мы знали, откуда пришел машинный код. из предварительной компиляции - в результирующем двоичном файле на самом деле не было никакого кода Rust). Типы - это инструмент компилятора, облегчающий жизнь программисту; программист использует эти типы, а компилятор интерпретирует их использование, чтобы знать, сколько памяти выделить и где разместить значения. Как только он это сделает, эта абстракция отпадет.</p>
+</li>
+</ul>
+<h2 id="pol-zovatel-skie-tipy-massivy-i-vecs">Пользовательские типы, массивы и Vecs</h2>
+<p>Оказывается, структуры на самом деле не такие уж и разные. Они представляют собой набор смещений памяти. Давайте создадим структуру Point с двумя целочисленными полями и создадим ее экземпляр: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> p </span><span style="color:#f29668;">=</span><span> Point { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">2 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Point </span><span>{
+</span><span>    x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>    y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>}
+</span></code></pre>
+<p>Когда дело доходит до базового машинного кода, каждое поле состоит из четырех байтов, поэтому первое поле сохраняется в местоположении rsp, а второе поле - через четыре байта после этого: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0000000000005310 &lt;rbin::main&gt;:
+</span><span>fn main() {
+</span><span>    5310:	50                      	push   rax
+</span><span>    let p = Point { x: 5, y: 2 };
+</span><span>    5311:	c7 04 24 05 00 00 00    	mov    DWORD PTR [rsp],0x5
+</span><span>    5318:	c7 44 24 04 02 00 00 00 	mov    DWORD PTR [rsp+0x4],0x2
+</span><span>}
+</span><span>    5320:	58                      	pop    rax
+</span><span>    5321:	c3                      	ret    
+</span></code></pre>
+<ul>
+<li>
+<p>Вы могли заметить в выходных данных выше, что первая инструкция - это push rax, а не инструкция выделения стека, которую мы видели (например, sub rsp, <bytes>). В моем первоначальном исследовании выяснилось, что это делается для целей выравнивания стека, но после этого нет инструкции по вызову, поэтому я не думаю, что здесь происходит именно это.</p>
+</li>
+<li>
+<p>Вместо этого я считаю, что это всего лишь ярлык, сделанный компилятором Rust для более эффективного выделения 8 байтов в стеке. Это размер нашей структуры, поэтому это имеет смысл - добавление или удаление полей приводит к подвызову. Когда вы это видите, для примера вы можете рассматривать это как эквивалент sub rsp, 0x8. Вы также заметите, что в конце следует вызов pop rax, который возвращает это пространство обратно в стек.</p>
+</li>
+</ul>
+<p>Массивы также следуют той же формуле: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0000000000005310 &lt;rbin::main&gt;:
+</span><span>fn main() {
+</span><span>    5310:       50                              push   rax
+</span><span>    let ints = [5, 2];
+</span><span>    5311:       c7 04 24 05 00 00 00            mov    DWORD PTR [rsp],0x5
+</span><span>    5318:       c7 44 24 04 02 00 00 00         mov    DWORD PTR [rsp+0x4],0x2
+</span><span>}
+</span><span>    5320:       58                              pop    rax
+</span><span>    5321:       c3                              ret
+</span></code></pre>
+<p>Здесь будет интересно попробовать использовать Vec вместо массива. Вы заметите, что все становится намного сложнее: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0000000000006330 &lt;rbin::main&gt;:
+</span><span>fn main() {
+</span><span>    6330:       48 83 ec 18                     sub    rsp,0x18
+</span><span>    let ints = vec![5, 2];
+</span><span>    6334:       bf 08 00 00 00                  mov    edi,0x8
+</span><span>    6339:       be 04 00 00 00                  mov    esi,0x4
+</span><span>    633e:       e8 dd f1 ff ff                  call   5520 &lt;alloc::alloc::exchange_malloc&gt;
+</span><span>    6343:       48 89 c1                        mov    rcx,rax
+</span><span>    6346:       c7 00 05 00 00 00               mov    DWORD PTR [rax],0x5
+</span><span>    634c:       c7 40 04 02 00 00 00            mov    DWORD PTR [rax+0x4],0x2
+</span><span>    6353:       48 89 e7                        mov    rdi,rsp
+</span><span>    6356:       48 89 ce                        mov    rsi,rcx
+</span><span>    6359:       ba 02 00 00 00                  mov    edx,0x2
+</span><span>    635e:       e8 dd fe ff ff                  call   6240 &lt;alloc::slice::&lt;impl [T]&gt;::into_vec&gt;
+</span><span>}
+</span><span>    6363:       48 89 e7                        mov    rdi,rsp
+</span><span>    6366:       e8 15 fc ff ff                  call   5f80 &lt;core::ptr::drop_in_place&gt;
+</span><span>    636b:       48 83 c4 18                     add    rsp,0x18
+</span><span>    636f:       c3                              ret   
+</span></code></pre>
+<p>Простой массив выделяется в стеке, тогда как Vec выделяется в куче, что требует дополнительного вызова и, следовательно, дополнительной сложности. Это ожидаемо, но следует отметить, что, несмотря на метод распределения, структура памяти для выделяемых типов идентична.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Несколько напутственных мыслей:</p>
+<ul>
+<li>
+<p>Это был простой, наглядный пример. Детали того, что вы читаете выше, не так важны, как выработка привычки копаться в машинном коде, чтобы увидеть, что на самом деле делает этот высокоуровневый код, который вы пишете. Это хорошая привычка, которую я пытаюсь усвоить, и я бы посоветовал вам поступить так же.</p>
+</li>
+<li>
+<p>Большая часть того, что мы рассматривали, было простыми значениями, распределенными в стеке. При выделении кучи памяти для данных процесс получения этой памяти может отличаться, но вам все равно необходимо знать форму ваших данных независимо от того, где они хранятся.</p>
+</li>
+<li>
+<p>Крейт memoffset полезен для получения смещения определенных типов с помощью макросов времени компиляции. Я встречал несколько случаев использования (особенно в графическом программировании), когда размер данного типа должен быть известен до его использования в определенных API, и это полезно для этого. </p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

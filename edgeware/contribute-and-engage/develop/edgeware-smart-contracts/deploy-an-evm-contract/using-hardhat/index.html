@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Использование Hardhat | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-hardhat/#vzaimodeistvie-s-edgeware-evm-s-pomoshch-iu-hardhat">Взаимодействие с Edgeware EVM с помощью Hardhat</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-hardhat/#zapusk-proekta-hardhat">Запуск проекта Hardhat</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-hardhat/#fail-kontrakta">Файл контракта</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-hardhat/#fail-konfiguratsii-kaski">Файл конфигурации каски</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-hardhat/#kompiliatsiia-solidity">Компиляция Solidity</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-hardhat/#razvertyvanie-kontrakta">Развертывание контракта</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-hardhat/#vzaimodeistvie-s-kontraktom">Взаимодействие с контрактом</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Использование Hardhat</h1>
+
+<blockquote>
+<p><strong>Эта страница все еще находится в разработке. Многие функции этой страницы все еще находятся в разработке до дальнейшего уведомления. По мере обновления стабильности добавляйте запрос на вытягивание с исправленными изменениями, спасибо.</strong></p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/32852637/118346510-0437d380-b50a-11eb-9fc2-267d0b20777b.png" alt="" /></p>
+<h2 id="vzaimodeistvie-s-edgeware-evm-s-pomoshch-iu-hardhat">Взаимодействие с Edgeware EVM с помощью Hardhat</h2>
+<p>В этом руководстве описан процесс развертывания <strong>смарт-контракта на основе Solidity</strong> в тестовой сети Edgeware Beresheet с использованием Hardhat. <a href="https://hardhat.org/">Hardhat</a> — это среда разработки для компиляции, развертывания, тестирования и отладки вашего программного обеспечения Ethereum. Это помогает разработчикам управлять и автоматизировать повторяющиеся задачи, присущие процессу создания смарт-контрактов и dApp, а также легко внедрять дополнительные функции в этот рабочий процесс. Это означает компиляцию, запуск и тестирование смарт-контрактов в самом ядре.</p>
+<p>В Hardhat встроена <strong>Hardhat Network</strong>, локальная сеть Ethereum, предназначенная для разработки. Его функциональность сосредоточена на отладке Solidity, включая трассировку стека, console.log() и явные сообщения об ошибках при сбое транзакций.</p>
+<p><strong>Hardhat Runner</strong>, команда командной строки для взаимодействия с Hardhat, представляет собой расширяемое средство запуска задач. Он разработан на основе концепций задач и плагинов. Каждый раз, когда вы запускаете Hardhat из CLI, вы запускаете задачу. Например. npx hardhat compile запускает встроенную задачу компиляции. Задачи могут вызывать другие задачи, что позволяет определять сложные рабочие процессы. Пользователи и плагины могут переопределять существующие задачи, делая эти рабочие процессы настраиваемыми и расширяемыми.</p>
+<p>Многие функции Hardhat обеспечиваются плагинами, и, как разработчик, вы можете выбирать, какие из них вы хотите использовать. Hardhat не имеет мнения относительно того, какие инструменты вы в конечном итоге будете использовать, но у него есть некоторые встроенные настройки по умолчанию. Все это можно переопределить.</p>
+<p>Чтобы следовать этому руководству, вы должны уметь:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics">Написать код на JavaScript</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Terminal_emulator">Управление терминалом</a></li>
+<li><a href="https://git-scm.com/doc">Использовать git</a></li>
+<li><a href="https://ethereum.org/learn/#smart-contracts">Понять основы работы смарт-контрактов</a></li>
+<li><a href="https://metamask.io/">Настроить кошелек Metamask</a>## Installation</li>
+</ul>
+<p>Нам нужно установить Node.js и менеджер пакетов npm. Вы можете скачать прямо с Node.js или в своем терминале.</p>
+<p>{% tabs %}
+{% tab title=&quot;Mac OS&quot; %}</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span># You can use homebrew (https://docs.brew.sh/Installation)
+</span><span>brew install node`
+</span><span>
+</span><span># Or you can use nvm (https://github.com/nvm-sh/nvm)
+</span><span>nvm install node
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>{% tabs %}
+{% tab title=&quot;Linux&quot; %}</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+</span><span>
+</span><span>sudo apt install -y nodejs
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>Вы можете убедиться, что все установлено правильно, запросив версию для каждого пакета:</p>
+<p><code>node -v</code></p>
+<p><code>npm -v</code></p>
+<p>На момент написания этого руководства использовались версии 15.7.0 и 7.4.3 соответственно.</p>
+<p>Также вам понадобится следующее:</p>
+<ul>
+<li>Установите MetaMask и подключитесь к Beresheet</li>
+<li>Иметь счет со средствами, которые вы можете получить от автоматического бота в дискорде Edgeware (<em>в строительстве</em>)
+Чтобы отправить средства на вашу метамаску, вы должны сначала преобразовать свой адрес EVM в адрес основной сети. вы можете сделать это здесь внизу страницы https://edgewa.re/keygen (преобразование адреса метамаски/EVM в адрес основной сети)</li>
+</ul>
+<p>Как только все требования будут выполнены, вы готовы строить с помощью Hardhat.</p>
+<h2 id="zapusk-proekta-hardhat">Запуск проекта Hardhat</h2>
+<p>Чтобы начать новый проект, создайте для него каталог:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>mkdir EDGhat &amp;&amp; cd EDGhat
+</span></code></pre>
+<p>Затем инициализируйте проект, запустив:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npm init -y
+</span></code></pre>
+<p>Вы заметите недавно созданный <code>package.json</code>, который будет продолжать расти по мере установки зависимостей проекта.</p>
+<p>Чтобы начать работу с Hardhat, мы установим его в наш только что созданный каталог проекта:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npm install hardhat
+</span></code></pre>
+<p>После установки запустите:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npx hardhat
+</span></code></pre>
+<p>Это создаст файл конфигурации Hardhat (hardhat.config.js) в каталоге нашего проекта.</p>
+<blockquote>
+<p><code>npx</code> используется для запуска исполняемых файлов, установленных локально в вашем проекте. Хотя Hardhat можно установить глобально, мы рекомендуем устанавливать его локально в каждом проекте, чтобы вы могли контролировать версию для каждого проекта отдельно.</p>
+</blockquote>
+<p>После запуска команды выберите «Создать пустой файл hardhat.config.js» с помощью клавиш со стрелками и введите:</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/118343678-4bb56400-b4f8-11eb-9a04-8c70b28423a9.PNG" alt="" /></p>
+<h2 id="fail-kontrakta">Файл контракта</h2>
+<p>Мы собираемся хранить наш контракт в каталоге <code>contracts</code>. Создать это:</p>
+<p><code>mkdir Contracts &amp;&amp; cd Contracts</code> или создав новый каталог в нашем корневом каталоге 'EDGHAT' в текстовом редакторе, таком как <a href="https://code.visualstudio.com/">Visual Studio Code</a></p>
+<blockquote>
+<p>Редактирование каталогов в терминале можно воспроизвести в текстовом редакторе в любой момент этого руководства.</p>
+</blockquote>
+<p>Смарт-контракт, который мы развернем в качестве примера, будет называться Box: он позволит людям хранить значение, которое впоследствии можно будет извлечь.</p>
+<p>Мы сохраним этот файл как <code>contracts/Box.sol</code>:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>// contracts/Box.sol
+</span><span>pragma solidity ^0.8.1;
+</span><span>
+</span><span>contract Box {
+</span><span>    uint256 private value;
+</span><span>
+</span><span>    // Emitted when the stored value changes
+</span><span>    event ValueChanged(uint256 newValue);
+</span><span>
+</span><span>    // Stores a new value in the contract
+</span><span>    function store(uint256 newValue) public {
+</span><span>        value = newValue;
+</span><span>        emit ValueChanged(newValue);
+</span><span>    }
+</span><span>
+</span><span>    // Reads the last stored value
+</span><span>    function retrieve() public view returns (uint256) {
+</span><span>        return value;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="fail-konfiguratsii-kaski">Файл конфигурации каски</h2>
+<p>Нам нужно изменить наш файл конфигурации Hardhat, чтобы мы могли компилировать и развертывать контракты в экосистеме Edgeware. Если вы еще этого не сделали, подключите свою учетную запись MetaMask к нашей экосистеме и пополните ее с помощью автоматического бота-сборщика в разногласиях. Мы будем использовать закрытый ключ учетной записи, созданной для развертывания контракта. Если вы не знаете закрытый ключ, вы можете экспортировать его из MetaMask.</p>
+<p>Начнем с запроса <a href="https://hardhat.org/plugins/nomiclabs-hardhat-ethers.html">плагина ethers</a>, который содержит библиотеку [ethers.js][/integrations/ethers/], которая позволяет вам взаимодействовать с блокчейном простым способом. Мы можем установить плагин ethers, запустив:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npm install @nomiclabs/hardhat-ethers ethers
+</span></code></pre>
+<p>Затем мы импортируем закрытый ключ, полученный из MetaMask, и сохраняем его в файле <code>.json</code>. Этот файл должен быть создан в корневом каталоге и называться <code>private.json</code>. Поскольку этот ключ является очень конфиденциальной информацией, очень важно, чтобы мы не раскрывали какую-либо информацию при развертывании. Чтобы гарантировать это, мы хотим создать файл <code>.gitignore</code> в нашем корневом каталоге. Затем вы можете игнорировать любые файлы, используя формат: <code>.filename</code>, или любые каталоги, используя: <code>directory/</code>. В нашем случае мы пытаемся игнорировать наш файл закрытого ключа, поэтому он должен выглядеть так:</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/119069678-929dd080-b9b4-11eb-96d0-accb05d1666b.PNG" alt="" /></p>
+<p>Файл private.json должен содержать запись privateKey, например:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{
+</span><span>  &quot;privateKey&quot;: &quot;YOUR-PRIVATE-KEY-HERE&quot;
+</span><span>}
+</span></code></pre>
+<p>Внутри <code>module.exports</code> нам нужно указать версию Solidity (<code>0.8.1</code> в соответствии с нашим файлом контракта) и сведения о сети. Здесь мы используем сеть testnet(Beresheet) для следующего примера:</p>
+<ul>
+<li>Сетевое имя: Берешит</li>
+<li>URL-адрес RPC: <a href="https://beresheet.edgewa.re/evm">https://beresheet.edgewa.re/evm</a> (В качестве альтернативы можно использовать <a href="https://beresheetX.edgewa.re/evm">https://beresheetX.edgewa.re/evm</a>, где X может быть любым числом от 1 до 8.)</li>
+<li>ID цепи: 2022</li>
+</ul>
+<p>Если вы хотите выполнить развертывание на локальном узле разработки Edgeware, вы можете использовать следующие сведения о сети:</p>
+<ul>
+<li>Сетевое имя: dev</li>
+<li>URL-адрес RPC: <a href="http://localhost:9933/">http://localhost:9933/</a></li>
+<li>ID цепи: 2022</li>
+</ul>
+<p>Если вы хотите выполнить развертывание в основной сети Edgeware, вы можете использовать следующие сведения о сети:</p>
+<ul>
+<li>Сетевое имя: Edgeware</li>
+<li>URL RPC: <a href="https://mainnet.edgewa.re/evm">https://mainnet.edgewa.re/evm</a> (В качестве альтернативы можно использовать <a href="https://mainnetX.edgewa.re/evm">https://mainnetX.edgewa.re/evm</a>, где X может быть любым числом от 1 до 20.)</li>
+<li>ID цепи: 2021</li>
+</ul>
+<p>Файл конфигурации Hardhat должен выглядеть так:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="font-style:italic;color:#5c6773;">// ethers plugin required to interact with the contract
+</span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;@nomiclabs/hardhat-ethers&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// private key from the pre-funded Beresheet testing account
+</span><span style="color:#ff7733;">const </span><span>{ privateKey } </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;./private.json&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">module</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">exports </span><span style="color:#f29668;">= </span><span>{
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// latest Solidity version
+</span><span>  solidity</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;0.8.1&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>
+</span><span>  networks</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Beresheet network specification
+</span><span>    Beresheet</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>      url</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">`https://beresheet2.edgewa.re/evm`</span><span style="color:#bfbab0cc;">,
+</span><span>      chainId</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">2021</span><span style="color:#bfbab0cc;">,
+</span><span>      accounts</span><span style="color:#bfbab0cc;">: </span><span>[privateKey]
+</span><span>    }
+</span><span>  }
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Здорово! Теперь мы готовы к развертыванию.</p>
+<h2 id="kompiliatsiia-solidity">Компиляция Solidity</h2>
+<p>Наш контракт Box.sol использует Solidity 0.8.1. Убедитесь, что файл конфигурации Hardhat правильно настроен для этой версии Solidity. Если это так, мы можем скомпилировать контракт, запустив:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npx hardhat compile
+</span></code></pre>
+<p><img src="https://user-images.githubusercontent.com/32852637/118344716-c92fa300-b4fd-11eb-86ff-c92ae08eb735.png" alt="" /></p>
+<p>После компиляции создается каталог «artifacts»: он содержит байт-код и метаданные контракта, которые представляют собой файлы «.json». Рекомендуется добавить этот каталог в ваш <code>.gitignore</code>.</p>
+<h2 id="razvertyvanie-kontrakta">Развертывание контракта</h2>
+<p>Чтобы развернуть смарт-контракт Box, нам нужно написать простой «скрипт развертывания». Во-первых, давайте создадим новый каталог (<code>scripts</code>). Внутри только что созданного каталога добавьте новый файл <code>deploy.js</code>.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>mkdir scripts &amp;&amp; cd scripts
+</span><span>touch deploy.js
+</span></code></pre>
+<p>Далее нам нужно написать наш сценарий развертывания, используя <code>эфиры</code>. Поскольку мы будем запускать его с помощью Hardhat, нам не нужно импортировать какие-либо библиотеки.</p>
+<p>Мы начинаем с создания локального экземпляра контракта с помощью метода <code>getContractFactory()</code>. Далее давайте воспользуемся методом <code>deploy()</code>, который существует в этом экземпляре, чтобы инициировать смарт-контракт. Наконец, мы ждем его развертывания с помощью <code>deployed()</code>. После развертывания мы можем получить адрес контракта внутри экземпляра коробки.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="font-style:italic;color:#5c6773;">// scripts/deploy.js
+</span><span style="color:#ff7733;">async function </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// We get the contract to deploy
+</span><span>   </span><span style="color:#ff7733;">const </span><span>Box </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>ethers</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getContractFactory</span><span>(</span><span style="color:#c2d94c;">&#39;Box&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&#39;Deploying Box...&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// Instantiating a new Box smart contract
+</span><span>   </span><span style="color:#ff7733;">const </span><span>box </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>Box</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">deploy</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// Waiting for the deployment to resolve
+</span><span>   </span><span style="color:#ff7733;">await </span><span>box</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">deployed</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&#39;Box deployed to:&#39;</span><span style="color:#bfbab0cc;">, </span><span>box</span><span style="color:#f29668;">.</span><span>address)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">main</span><span>()
+</span><span>   </span><span style="color:#f29668;">.</span><span style="color:#f07178;">then</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span>process</span><span style="color:#f29668;">.</span><span style="color:#f07178;">exit</span><span>(</span><span style="color:#f29718;">0</span><span>))
+</span><span>   </span><span style="color:#f29668;">.</span><span style="color:#f07178;">catch</span><span>((</span><span style="color:#f29718;">error</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">error</span><span>(error)</span><span style="color:#bfbab0cc;">;
+</span><span>      process</span><span style="color:#f29668;">.</span><span style="color:#f07178;">exit</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>   })</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Используя команду запуска, теперь мы можем развернуть контракт Box на Beresheet.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npx hardhat run --network Beresheet scripts/deploy.js
+</span></code></pre>
+<blockquote>
+<p>Чтобы выполнить развертывание на узле разработки Edgeware, замените Beresheet на dev в команде запуска.</p>
+</blockquote>
+<p>Через несколько секунд контракт развернут, и вы должны увидеть адрес в терминале.</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/119068621-8a449600-b9b2-11eb-8880-7cebaf9f41ee.PNG" alt="" /></p>
+<p>Поздравляем, ваш контракт активен! Сохраните адрес, так как мы будем использовать его для взаимодействия с этим экземпляром контракта на следующем шаге.</p>
+<h2 id="vzaimodeistvie-s-kontraktom">Взаимодействие с контрактом</h2>
+<blockquote>
+<p>Ограниченная функциональность</p>
+</blockquote>
+<p>Давайте используем Hardhat для взаимодействия с нашим недавно развернутым контрактом в Beresheet. Для этого запустите консоль каски, выполнив:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npx hardhat console --network Beresheet
+</span></code></pre>
+<blockquote>
+<p>Чтобы выполнить развертывание на узле разработки Edgeware, замените Beresheet на dev в команде запуска.</p>
+</blockquote>
+<p>Затем добавьте следующие строки кода по одной строке за раз. Во-первых, мы снова создаем локальный экземпляр контракта Box.sol. Не беспокойтесь о выводе <code>undefined</code>, который вы получите после выполнения каждой строки:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>const Box = await ethers.getContractFactory(&#39;Box&#39;);
+</span></code></pre>
+<p>Далее давайте подключим этот экземпляр к существующему, передав адрес, который мы получили при развертывании контракта:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>const box = await Box.attach(&#39;ADDRESS-GOES-HERE&#39;);
+</span></code></pre>
+<p>После привязки к договору мы готовы с ним взаимодействовать. Пока консоль все еще находится в сеансе, давайте вызовем метод store и сохраним простое значение:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>await box.store(5)
+</span></code></pre>
+<p>Транзакция будет подписана вашей учетной записью Beresheet и транслирована в сеть. Вывод должен выглядеть примерно так:</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/118345245-2547f680-b501-11eb-9acf-189e876d7a69.png" alt="" /></p>
+<p>Обратите внимание на свой адрес, помеченный от, адрес контракта и данные, которые передаются. Теперь давайте получим значение, запустив:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>(await box.retrieve()).toNumber()
+</span></code></pre>
+<p>Мы должны увидеть <code>5</code> или значение, которое вы сохранили изначально.</p>
+<p>Поздравляем, вы завершили обучение Hardhat!</p>
+<p>Для получения дополнительной информации о Hardhat, подключаемых модулях Hardhat и других интересных функциях посетите <a href="https://hardhat.org">hardhat.org</a>.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

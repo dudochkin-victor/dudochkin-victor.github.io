@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Краткое руководство по Rust для разработчиков Go | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-go-developers-quickstart-guide-to-rust/#nabor-instrumentov-rust">Набор инструментов Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-go-developers-quickstart-guide-to-rust/#sozdaem-proekt">Создаем проект</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-go-developers-quickstart-guide-to-rust/#privet-davai-eee-rust">привет, давай ... эээ ... Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-go-developers-quickstart-guide-to-rust/#ispol-zovanie-bibliotek-peremennykh-i-makrosov-pechati">использование библиотек, переменных и макросов печати</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-go-developers-quickstart-guide-to-rust/#s-ispol-zovaniem-vneshnikh-bibliotek">с использованием внешних библиотек</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-go-developers-quickstart-guide-to-rust/#sovpadenie">совпадение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-go-developers-quickstart-guide-to-rust/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Краткое руководство по Rust для разработчиков Go</h1>
+
+<p><a href="https://dzone.com/articles/the-go-developers-quickstart-guide-to-rust">Перевод</a> | Автор оригинала: Matt Butcher</p>
+<p>Вы писали на Go. Но вы чувствуете желание попробовать новое с помощью Rust. Это руководство, чтобы упростить этот переход.</p>
+<p><img src="/imgs/posts/c55adcfb_01.png" alt="самые любимые языки" /></p>
+<p>Как соавтор «Go in Practice», я чувствовал определенное обязательство поехать. Но я готов к переменам. Rust возглавил опрос удовлетворенности в обзоре языков (скриншот выше). Я решил попробовать. Хотя go и rust часто сравнивают, это совершенно разные языки.</p>
+<p>Исходя из прошлого опыта, в Rust есть вещи, которые кажутся очень естественными, и вещи (например, управление памятью), которые кажутся совершенно чужими. И так, как я изучаю Rust, я каталогизирую, каково это программисту Go. И вместо того, чтобы побуждать других «погрузиться в самую суть», как это сделал я (когда я пытался написать полноценный веб-сервис), я решил подойти к Rust, начав с сходства и работая над различиями.</p>
+<h2 id="nabor-instrumentov-rust">Набор инструментов Rust</h2>
+<p>В первую очередь следует начать с набора инструментов Rust. Как и положено, Rust (основной дистрибутив) поставляется с настоящим рогом изобилия инструментов. В отличие от go, rust считает управление пакетами важным, поэтому его инструментарий на самом деле намного легче освоить, чем go.</p>
+<p>Для начала установите Rust, как рекомендовано. Не придумывайте. Не пытайтесь найти альтернативные установщики. Инструмент rustup прост и широко используется. и, пользуясь популярным гоуизмом, это «идиоматический» способ работы с Rust. Позже вы можете пофантазировать, если захотите.</p>
+<p>Инструмент rustup попытается внести все необходимые изменения и установить необходимые переменные среды. Если вы будете следовать инструкциям, к концу настройки вы сможете открыть новый терминал, ввести cargo и распечатать путь.</p>
+<p>Если вы пройдете через руководства по Rust, они (как и руководства go) проведут вас по инструментам, которые вы вряд ли будете использовать непосредственно в повседневной жизни. Я пропущу это и сделаю одно смелое заявление:</p>
+<blockquote>
+<p>В мире Rust инструмент, который вам небезразличен, - это cargo.</p>
+</blockquote>
+<p>Вы будете использовать его для сборки, вы будете использовать его для управления зависимостями, вы будете использовать его для отладки и вы будете использовать его для выпуска. Да, вам, вероятно, когда-нибудь понадобится rustc, чтобы что-нибудь отладить. Но не сегодня.</p>
+<h2 id="sozdaem-proekt">Создаем проект</h2>
+<p>Во-первых, у Rust нет эквивалента $gopath. Программы Rust могут работать где угодно. Во-вторых, вам не нужно следовать какому-либо конкретному шаблону в именовании пути (хотя Cargo создаст вам идиоматическую структуру пакета).</p>
+<p>Так что cd туда, где вы хотите хранить свой код, и запустите это: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo new --bin hello
+</span><span>  created binary (application) `hello` project
+</span></code></pre>
+<p>Теперь у вас будет каталог с именем hello, в нем будут каталог src/и cargo.toml.</p>
+<p>Cargo.toml будет очень похож на файл gopkg.toml от dep (что неудивительно, учитывая, что на dep сильно повлиял Cargo). Если вы привыкли к glide, dep или godep, Cargo отслеживает зависимости, подобные этим инструментам. Если вы привыкли к идиоматическому методу go get, который позволяет вам «взлетать», то Cargo.toml - это то, что избавит вас от необходимости путешествовать по аду зависимостей каждый раз, когда кто-то обновляет свой код. добро пожаловать в лучшую жизнь!</p>
+<p>Позже мы добавим зависимости. А пока мы начнем с быстрого перевода программы go в программу rust.</p>
+<h2 id="privet-davai-eee-rust">привет, давай ... эээ ... Rust</h2>
+<p>Начнем с программы go с golang.org: </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#ff7733;">package </span><span>main
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&quot;fmt&quot;
+</span><span>
+</span><span style="color:#ff7733;">func </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">println</span><span>(</span><span style="color:#c2d94c;">&quot;hello, 世界&quot;</span><span>)
+</span><span>}
+</span></code></pre>
+<p>А пока поместите это в src/main.go, затем запустите свою верную старую команду go run:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ go run src/main.go
+</span><span>hello, 世界
+</span></code></pre>
+<p>Хорошо, давайте удалим кое-что и превратим это в программу для Rust. Сначала скопируйте программу в main.rs (который должен был быть создан для вас).</p>
+<p>Затем сделайте следующее:</p>
+<ul>
+<li>удалить строку пакета и строку импорта</li>
+<li>изменить func на fn</li>
+<li>измените fmt.println на println!</li>
+<li>добавьте точку с запятой в конце строки с println!</li>
+</ul>
+<p>Итак, ваша программа теперь должна выглядеть так: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;hello, 世界&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Помимо очевидного, из приведенного выше кода можно извлечь четыре вещи:</p>
+<ul>
+<li>rust не требует явных имен пакетов для некоторых вещей (см. мод для модулей rust).</li>
+<li>точки с запятой обычно требуются (тогда как на ходу они почти всегда необязательны). Подсказка: большинство моих ошибок компиляции при первом запуске - результат забытых точек с запятой.</li>
+<li>у Rust есть макросы, из которых println! тот, который встроен.</li>
+<li>на данный момент в сообществе rust все согласны с тем, что разработчики должны использовать пробелы, а не табуляции, с отступом в 4 пробела (да, есть rustfmt, и да, вы обычно запускаете его с Cargo fmt).
+теперь выполнить прогон cargo: </li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run
+</span><span>   compiling hello v0.1.0 (file:///users/mbutcher/code/rust/hello)
+</span><span>    finished dev [unoptimized + debuginfo] target(s) in 2.1 secs
+</span><span>    running `target/debug/hello`
+</span><span>hello, 世界
+</span></code></pre>
+<p>Команда Cargo run компилирует и выполняет вашу программу. Если вы посмотрите на содержимое вашего каталога hello, вы заметите, что на этапе компиляции Cargo просто добавил Cargo.lock и каталог target /.</p>
+<p>Файл cargo.lock выполняет те же важные функции, что и gopkg.lock или glide.lock в программах go.</p>
+<blockquote>
+<p>идиоматично отслеживать Cargo.lock в vcs только для исполняемых файлов, но опускается для библиотек.</p>
+</blockquote>
+<p>Каталог target/ будет содержать все ваши скомпилированные полезности, организованные по типу развертывания (отладка, выпуск, ...). поэтому, если мы посмотрим в target/debug, мы увидим наш двоичный файл.</p>
+<p>Хорошо, мы только что сделали основу. А теперь давайте углубимся еще немного.</p>
+<h2 id="ispol-zovanie-bibliotek-peremennykh-i-makrosov-pechati">использование библиотек, переменных и макросов печати</h2>
+<p>В конце концов, мы хотим создать программу, которая переходит от знакомой программы &quot;Hello world&quot; к программе, которая говорит &quot;Доброе утро, мир!&quot; или «добрый день, мир!», в зависимости от времени. Но сначала мы сделаем более короткий шаг.</p>
+<p>Давайте изменим нашу программу, чтобы распечатать время. Это даст нам представление о некоторых важных аспектах Rust, таких как использование библиотек. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>systemtime</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>systemtime</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>     </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;it is now </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> now)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Если мы запустим эту программу, то получим:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run
+</span><span>   compiling hello v0.1.0 (file:///users/mbutcher/code/rust/hello)
+</span><span>    finished dev [unoptimized + debuginfo] target(s) in 1.62 secs
+</span><span>     running `target/debug/hello`
+</span><span>it is now systemtime { tv_sec: 1527461839, tv_nsec: 389866000 }
+</span></code></pre>
+<p>Хорошо, теперь давайте посмотрим, что мы обнаружили на этом примере.</p>
+<p>Во-первых, мы хотим работать со стандартной библиотекой времени. Говоря языком Rust, мы используем использование, чтобы что-то осознать. поскольку нам нужно получить доступ к системному времени, мы вводим его в область видимости следующим образом: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>systemtime</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Технически говоря, нам не нужно использовать use, чтобы сделать библиотеку доступной для нас (другими словами, компоновщик не полагается на строки use). Поэтому мы можем опустить строку use и вызвать std::time::systemtime::new() в нашем коде. Или мы могли бы использовать std::time, а затем вызвать time::systemtime::new(). Но наиболее распространенной практикой является импорт того или иного артифакта или вещей, которые вы используете, чтобы сделать ваш код как можно более легким для чтения.</p>
+<p>systemtime - это структура. А systemtime::now() создает новое системное время с его содержимым, равным текущему системному времени. В отличие от go, но, как и в большинстве языков, rust представляет время как время, прошедшее с эпохи unix.</p>
+<p>Следующая полезная вещь, которую мы видим в этом примере, - это как объявить переменную: <code>let now = // ....</code> в Rust переменные по умолчанию неизменяемы. Это означает, что если бы мы сейчас попытались увеличить его на две секунды, это не удаласться: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>{systemtime</span><span style="color:#bfbab0cc;">,</span><span> duration}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>systemtime</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>    now </span><span style="color:#f29668;">=</span><span> now </span><span style="color:#f29668;">+ </span><span>duration</span><span style="color:#f29668;">::</span><span>from_secs(</span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;it is now </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> now)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Выполнение прогона cargo приведет к ошибке, в которой говорится, что нельзя дважды присвоить неизменной переменной <code>now</code>.</p>
+<blockquote>
+<p>Идиоматическое именование: модули в нижнем регистре. Конструкции camel_case. Переменные, методы и функции - это snake_case.</p>
+</blockquote>
+<p>Чтобы изменить переменную с неизменяемой на изменяемую, мы добавляем mut между let и оператором присваивания: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>{systemtime</span><span style="color:#bfbab0cc;">,</span><span> duration}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> now </span><span style="color:#f29668;">= </span><span>systemtime</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>    now </span><span style="color:#f29668;">=</span><span> now </span><span style="color:#f29668;">+ </span><span>duration</span><span style="color:#f29668;">::</span><span>from_secs(</span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;it is now </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> now)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Из этого примера можно быстро почерпнуть еще две вещи, а затем мы перейдем к печати.</p>
+<ul>
+<li>мы можем увидеть, как обрабатывать длительности в Rust (используя методы duration::from_ *).</li>
+<li>мы видим, что оператор + может использоваться на временах, которые не являются примитивными типами. Это потому, что systemtime::add реализует трейт add<duration> (вот так). Из этого Rust может определить, как применить системное время + продолжительность. это очень полезная функция, которой нет в go.</li>
+</ul>
+<blockquote>
+<p>Трэйты похожи на заряженные интерфейсы Go. Реализация трейта в Rust дает примерно тот же эффект, что и реализация интерфейса в go. В Rust, однако, реализация трейта должна выполняться явно (impl mytrait для mytype {}).</p>
+</blockquote>
+<p>Хорошо, мы подошли к последней интересной строке нашего принтера времени: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;it is now </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> now)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Как отмечалось ранее, println! это макрос. Он выполняет ту же роль, что и fmt.println в go, за исключением того, что он также позволяет форматировать строки (вроде как воображаемая функция fmt.printlnf).</p>
+<p>Все аналогичные функции реализованы в виде макросов:</p>
+<ul>
+<li>print! эквивалентно fmt.printf</li>
+<li>eprint! эквивалентно fmt.fprintf (os.stderr, ...)</li>
+<li>format! эквивалентно fmt.sprintf</li>
+</ul>
+<p>Форматирование в Rust немного сложнее, чем в пакете go fmt. но основы довольно просты:</p>
+<ul>
+<li>{} распечатает объект в &quot;режиме отображения&quot; (например, с намерением показать его пользователям).</li>
+<li>{:?} распечатает вещь в &quot;режиме отладки&quot;.</li>
+<li>{2} напечатает третий переданный параметр.</li>
+<li>{last} напечатает параметр, названный последним</li>
+</ul>
+<p>Вот краткий пример того, как все четыре используются вместе: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{} {:?} {2} {last}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;first&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;second&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;third&quot;</span><span style="color:#bfbab0cc;">,</span><span> last</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;fourth&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это производит: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>first &quot;second&quot; third fourth
+</span></code></pre>
+<p>В нашем коде мы использовали println! (&quot;{:?}&quot;), потому что структура std::time::systemtime не реализует отображение, что означает (на практике), что println! (&quot;{}&quot;) не работает. println! (&quot;сейчас {}&quot;, сейчас); приводит к ошибке std::time::systemtime не реализует std::fmt::display.</p>
+<p>Но он реализует <code>Debug</code>, поэтому мы можем использовать &quot;{:?}&quot; и увидеть представление объекта системного времени: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>it is now systemtime { tv_sec: 1527473298, tv_nsec: 570487000 }
+</span></code></pre>
+<h2 id="s-ispol-zovaniem-vneshnikh-bibliotek">с использованием внешних библиотек</h2>
+<p>Наша цель на данный момент - создать приложение «Доброе утро/добрый вечер». Мы только что увидели, как работать с необработанным временем, так что теперь мы можем заняться созданием нашего маленького инструмента.</p>
+<p>Я собираюсь в чем-то признаться. Пожалуйста, не злись. Я клянусь, что (а) это для вашего же блага, и (б) я действительно не понимал, когда начинал, что нам придется это сделать. но ... вот ... в отличие от пакета времени go, пакет rust std::time не имеет средства форматирования. На самом деле все немного хуже. Стандартная библиотека времени в Rust не имеет встроенной концепции единиц времени, кроме секунд и наносекунд.</p>
+<p>Так что ... мы собираемся заняться математикой!</p>
+<p>Просто шучу. Мы собираемся использовать библиотеку, которая дает более широкое представление о времени. Она называется <code>chrono</code>.</p>
+<p>В предыдущем примере мы использовали внутреннюю стандартную библиотеку. Теперь мы собираемся использовать внешнюю библиотеку. Это означает, что на практическом уровне нам придется сделать три вещи:</p>
+<ul>
+<li>указать Cargo, что нам нужна библиотека.</li>
+<li>сообщить компилятору / компоновщику, что мы используем эту внешнюю библиотеку (в main.rs).</li>
+<li>воспользоваться библиотекой.</li>
+</ul>
+<p>Начнем с первого. Rust использует стандартную систему управления пакетами, в которой на пакеты (крэйты) можно ссылаться по имени и автоматически отслеживать по версии. В мире Rust идиоматическим (он никогда не устареет!) местом для поиска пакетов является crates.io.</p>
+<p>Я просмотрел различные временные модули на crates.io и обнаружил, что крэйт chrono мне подходит для моих потребностей в дате/времени (разоблачение: все, что я действительно делал, это искал «time» и смотрел количество загрузок).</p>
+<p>Первая строка страницы <code>chrono</code> инструктирует меня поместить chrono = &quot;0.4.2&quot; в мой файл cargo.toml. Хорошо я следую указаниям. </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">package</span><span>]
+</span><span style="color:#59c2ff;">name </span><span>= </span><span style="color:#c2d94c;">&quot;hello&quot;
+</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.1.0&quot;
+</span><span style="color:#59c2ff;">authors </span><span>= [</span><span style="color:#c2d94c;">&quot;matt butcher &lt;me@example.com&gt;&quot;</span><span>]
+</span><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">chrono </span><span>= </span><span style="color:#c2d94c;">&quot;0.4.2&quot;
+</span></code></pre>
+<p>Он не говорит делать что-либо еще. Я умею не следовать несуществующим инструкциям.</p>
+<p>Затем пришло время добавить этот пакет в наш код, а затем провести небольшую модернизацию, чтобы наш последний пример снова заработал: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>local</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;it is now </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> now)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, что мы изменили всего пару вещей:</p>
+<p><code>use chrono::prelude::*</code> сообщает Rust о необходимости импорта всего содержимого модуля chrono, называемого prelude (удачно резюмированного как «материал, который вам обычно нужен»). На данный момент мы просто используем local, поэтому мы могли бы упростить это до chrono::prelude::local.
+local::now() - это конструктор <code>chrono</code> для создания нового локализованного времени (в отличие от utc::now(), который не устанавливает часовой пояс).
+Что-то интересное происходит, когда мы запускаем это: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo run
+</span><span>    updating registry `https://github.com/rust-lang/crates.io-index`
+</span><span> downloading chrono v0.4.2
+</span><span> downloading num-integer v0.1.38
+</span><span> downloading num-traits v0.2.4
+</span><span> downloading time v0.1.40
+</span><span> downloading libc v0.2.41
+</span><span>   compiling num-traits v0.2.4
+</span><span>   compiling num-integer v0.1.38
+</span><span>   compiling libc v0.2.41
+</span><span>   compiling time v0.1.40
+</span><span>   compiling chrono v0.4.2
+</span><span>   compiling hello v0.1.0 (file:///users/mbutcher/code/rust/hello)
+</span><span>    finished dev [unoptimized + debuginfo] target(s) in 7.50 secs
+</span><span>     running `target/debug/hello`
+</span><span>it is now 2018-05-27t20:35:07.581600-06:00
+</span></code></pre>
+<p>Напомним, что мы добавили chrono = &quot;0.4.2&quot; в наш cargo.toml, но больше ничего не сделали. На тот момент у нас фактически не было установленной библиотеки. Только после запуска Cargo Run система обнаружила, что нам нужна библиотека, которой не было. Сначала он получил копию индекса crates.io, нашел chrono, а затем установил его. chrono также имеет ряд зависимостей, поэтому Cargo загрузил и установил их.</p>
+<p>Затем, наконец, он скомпилировал нашу программу и запустил ее.</p>
+<p>Далее, вместо того, чтобы выводить время в секундах и наносекундах, наша новая версия распечатала дату rfc8601: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>it is now 2018-05-27t20:35:07.581600-06:00
+</span></code></pre>
+<p>Это отладочное представление метки времени <code>chrono</code>.</p>
+<p>Мы почти закончили с нашей программой.</p>
+<h2 id="sovpadenie">совпадение</h2>
+<p>Наш следующий проход будет иметь интересное отклонение с самого начала. У нас есть локализованная дата/время, и мы хотим определить, что сейчапас время до полудня (чтобы мы могли сказать «доброе утро, мир») или после полудня (чтобы мы могли сказать «добрый день, мир»).</p>
+<p>Объект chrono locale реализует временную трэйт (опять же, подумайте об интерфейсе go), которая имеет метод, называемый hour12(). а hour12() возвращает два значения: логическое значение для am(ложь) или pm(истина) и 32-разрядное целое число без знака (в Rust этот тип называется u32) со значением от 1 до 12.</p>
+<p>В Go мы бы справились с ситуацией следующим образом: </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#ff7733;">if </span><span>am_pm</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">_ </span><span style="color:#f29668;">:= </span><span style="color:#ffb454;">hour12</span><span>()</span><span style="color:#bfbab0cc;">; </span><span>am_pm {
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// it&#39;s pm
+</span><span>} </span><span style="color:#ff7733;">else </span><span>{
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// it&#39;s am
+</span><span>}
+</span></code></pre>
+<p>Идиоматически в Rust немного другая. Во-первых, у if в Rust нет отдельного инициализатора. Rust следует С-подобному формату if: if condition {} else if condition {} else {}.</p>
+<p>Чтобы мы могли обработать случай hour12 следующим образом: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>local</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(is_pm</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=</span><span> now</span><span style="color:#f29668;">.</span><span style="color:#f07178;">hour12</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">if</span><span> is_pm {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;good day, world!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;good morning, world!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Здесь мы просто выполняем присваивание в одной строке, а условие - в следующих строках. Обратите внимание, что для присвоения нескольких возвращаемых значений мы создаем кортеж (is_pm, _), сообщая rust присвоить логическое значение is_pm и игнорировать час. Нам, программистам, это более или менее удобно.</p>
+<p>Но теперь у нас есть почти повторяющиеся вызовы println!. А Rust позволяет нам присваивоить значение условно. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>local</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(is_pm</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=</span><span> now</span><span style="color:#f29668;">.</span><span style="color:#f07178;">hour12</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> am_pm </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">if</span><span> is_pm {
+</span><span>        </span><span style="color:#c2d94c;">&quot;day&quot;
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        </span><span style="color:#c2d94c;">&quot;morning&quot;
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;good </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">, world!&quot;</span><span style="color:#bfbab0cc;">,</span><span> am_pm)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Слегка изменив синтаксис нашего условного оператора, мы использовали его для присваивания. Обратите внимание, что «день» и «утро» не имеют точки с запятой, но что блок <code>if/else</code> заканчивается символом <code>};</code>. В основном, когда блок выполняется, возвращается последний оператор. Поэтому, когда выполняется блок if/else, присваиванию <code>let am_pm =</code> возвращается либо «день», либо «утро».</p>
+<p>Это круто и полезно. Yо мы можем сделать это более компактно без <code>if/else</code>: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>local</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> am_pm </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> now</span><span style="color:#f29668;">.</span><span style="color:#f07178;">hour12</span><span>() {
+</span><span>        (</span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;morning&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        (</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;day&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;good </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">, world!&quot;</span><span style="color:#bfbab0cc;">,</span><span> am_pm)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Теперь мы используем сопоставления вместо <code>if/else</code>. <code>match</code> структурно похож на оператор case в go. Фраза сопоставления сообщает нам, что мы пытаемся сопоставить, и каждая запись внутри сопоставления предоставляет критерии сопоставления. Но <code>match</code> должен охватывать все возможные случаи.</p>
+<p>Поэтому простое совпадение может выглядеть так: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span>    </span><span style="color:#ff7733;">let</span><span> int </span><span style="color:#f29668;">= </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">match</span><span> int {
+</span><span>        </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;first&quot;</span><span>)
+</span><span>        }</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29718;">2 </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;second&quot;</span><span>)
+</span><span>        }
+</span><span>        </span><span style="color:#f29668;">_ =&gt; </span><span>{
+</span><span>            </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;something else&quot;</span><span>)
+</span><span>        }
+</span><span>    }
+</span></code></pre>
+<p>Мы можем установить для int разные значения, чтобы увидеть, как это ведет себя. Но, по сути, он будет соответствовать значению int первому условию, которому оно удовлетворяет. Если <code>let int = 1</code>, то будет напечатано <code>first</code>, <code>2</code> - напечатает <code>second</code>. Любой другой номер (соответствующий <code>_</code>) напечатает <code>something else</code>.</p>
+<p>Мы используем наше соответствие для присвоения am_pm, и мы сопоставляем кортеж. Сделаем это: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span>    </span><span style="color:#ff7733;">let</span><span> am_pm </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> now</span><span style="color:#f29668;">.</span><span style="color:#f07178;">hour12</span><span>() {
+</span><span>        (</span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;morning&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        (</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;day&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>И что мы имеем в виду:</p>
+<p>Присвоить am_pm «утро», если первое возвращаемое значение hour12() ложно. Во всех остальных случаях присвойте &quot;день&quot; am_pm.</p>
+<p>Поскольку я одержим идеей сделать код компактным, есть еще один способ сделать этот код еще короче. Мы можем вернуться к нашему оператору <code>if</code>, но просто проиндексировать кортеж: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> now </span><span style="color:#f29668;">= </span><span>local</span><span style="color:#f29668;">::</span><span>now()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> am_pm </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">if</span><span> now</span><span style="color:#f29668;">.</span><span style="color:#f07178;">hour12</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0 </span><span>{ </span><span style="color:#c2d94c;">&quot;day&quot; </span><span>} </span><span style="color:#ff7733;">else </span><span>{ </span><span style="color:#c2d94c;">&quot;morning&quot; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;good </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">, world!&quot;</span><span style="color:#bfbab0cc;">,</span><span> am_pm)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Часть <code>.0</code> сообщает Rust использовать первого (0-й) элемента в кортеже, который вернул hour12().</p>
+<p>Так что наиболее идиоматично для Rust? Я просмотрел все документы, включая руководство по стилю, и пришел к выводу, что никого особенно не волнует, какое решение вы выберете. Просто выберите удобочитаемость. Это приятное чувство.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Go и Rust часто сравнивают друг с другом, вероятно, несправедливо. На самом деле, это очень разные языки, каждый из которых создан с разными целями. Но я попытался начать с некоторых общих черт и представить основы Rust, сравнивая ее с Go.</p>
+<p>Я хотел бы сделать последующие публикации, посвященные таким вещам, как тестирование, обработка ошибок и работа с типами и структурами данных. Но, возможно, вышеизложенного достаточно, чтобы заинтересовать вас чтением настоящей книги о Rust.</p>
+<p>Отказ от ответственности: я полный новичок в Rust и не очень хорошо знаю всю терминологию и механику. Мои извинения. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

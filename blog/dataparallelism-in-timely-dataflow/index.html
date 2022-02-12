@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Параллелизм данных в своевременном потоке данных | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#kommunikator">Коммуникатор</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#ispol-zovanie-kommunikatorov"><small>- Использование коммуникаторов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#sozdanie-kornia-grafa-potoka-dannykh"><small>- Создание корня графа потока данных</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#sozdanie-podgrafa-potoka-dannykh"><small>- Создание подграфа потока данных</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#intermission-parallelizm-dannykh"><small>- Intermission: параллелизм данных</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#dobavlenie-eshche-neskol-kikh-oblastei"><small>- Добавление еще нескольких областей</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#sobstvenno-dobavlenie-dopolnitel-nykh-oblastei"><small>- Собственно добавление дополнительных областей</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#unarnaia-oblast-vidimosti"><small>- Унарная область видимости</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/dataparallelism-in-timely-dataflow/#privodim-dela-v-dvizhenie"><small>- Приводим дела в движение</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Параллелизм данных в своевременном потоке данных</h1>
+
+<p><a href="http://www.frankmcsherry.org/dataflow/relational/join/2015/04/19/data-parallelism.html">Перевод</a> | Автор оригинала: Frank McSherry</p>
+<p>В предыдущем посте был описан изящный алгоритм Нго и др., А затем описано, как можно реализовать его в своевременном потоке данных. Было несколько бит кода Rust, несколько мест, где детали были замалчены, а затем утверждение, что теперь это была реализация аккуратного алгоритма с параллельными данными.</p>
+<p>В этом посте мы рассмотрим, как происходит бит параллелизма данных, и подробно рассмотрим некоторые из движущихся частей.</p>
+<p>Давайте начнем сверху, с некоторого кода, который мы не видели в предыдущем посте: основного метода: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> workers </span><span style="color:#f29668;">= </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// whatever you like here!
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> guards </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">for</span><span> communicator </span><span style="color:#f29668;">in </span><span>ProcessCommunicator</span><span style="color:#f29668;">::</span><span>new_vector(workers) {
+</span><span>        guards</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(thread</span><span style="color:#f29668;">::</span><span>Builder</span><span style="color:#f29668;">::</span><span>new()
+</span><span>                        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">name</span><span>(</span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;worker thread </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> communicator</span><span style="color:#f29668;">.</span><span style="color:#f07178;">index</span><span>()))
+</span><span>                        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">scoped</span><span>(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|| </span><span style="color:#f07178;">triangles</span><span>(communicator))
+</span><span>                        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Здесь мы определяем желаемое количество рабочих, просим ProcessCommunicator (кто бы то ни было) создать новый вектор (чего-то), и для каждого элемента этого вектора мы запускаем поток. Теперь элементы этого вектора были предположительно названы коммуникатором, и действительно, каждый из них реализует трэйту коммуникатора. Метод с заданной областью - это то место, где запускается поток, и, как вы можете видеть, единственный ввод, который он принимает, - это один из этих коммуникаторов. Что они могли сделать?</p>
+<h2 id="kommunikator">Коммуникатор</h2>
+<p>Трэйта Communicator обеспечивает единственную точку контакта между работниками в своевременном потоке данных. У него довольно простое определение, давайте посмотрим на него: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">Communicator </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">index</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">peers</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new_channel</span><span>&lt;T</span><span style="color:#bfbab0cc;">:</span><span style="font-style:italic;color:#39bae6;">Send</span><span style="color:#f29668;">+</span><span>Columnar</span><span style="color:#f29668;">+</span><span>Any&gt;(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>)
+</span><span>        </span><span style="color:#bfbab0cc;">-&gt; </span><span>(</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Pushable&lt;T&gt;&gt;&gt;, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Pullable&lt;T&gt;&gt;)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Единственная функциональность, которую коммуникатор предоставляет работникам, - это сообщить им их личность, количество других работников и установить каналы с другими работниками. Метод new_channel возвращает некоторые целевые объекты, в которые рабочий может отправлять типизированные данные (по одному на каждого рабочего), и один источник, из которого рабочий может извлекать данные.</p>
+<p>Когда работник извлекает данные из источника, он получает данные, отправленные другими работниками в соответствующие им цели. Ожидается, что рабочие создадут ту же последовательность каналов; все пойдет боком, если нет.</p>
+<p>Это все. Если работники хотят общаться другими способами, им нужно создать несколько каналов.</p>
+<h3 id="ispol-zovanie-kommunikatorov">Использование коммуникаторов</h3>
+<p>Давайте посмотрим на последний фрагмент кода из предыдущего поста, метод треугольников, упомянутый чуть выше, в котором мы определяем вычисление потока данных и запускаем его. Я собираюсь основывать это на коде, который в настоящее время существует в репозитории, который имеет несколько синтаксических отличий от предыдущего поста. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">triangles</span><span>&lt;C</span><span style="color:#bfbab0cc;">:</span><span> Communicator&gt;(</span><span style="color:#f29718;">communicator</span><span style="color:#bfbab0cc;">:</span><span> C) {
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// load up our fragment of the graph
+</span><span>    </span><span style="color:#ff7733;">let</span><span> graph </span><span style="color:#f29668;">= </span><span>Rc</span><span style="color:#f29668;">::</span><span>new(RefCell</span><span style="color:#f29668;">::</span><span>new( </span><span style="font-style:italic;color:#5c6773;">/* load up mmap&#39;d file */ </span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// define extenders for a -&gt; b and  (a, b) -&gt; c, respectively
+</span><span>    </span><span style="color:#ff7733;">let</span><span> b_extend </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29668;">&amp;</span><span>graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend_using</span><span>(|| { |</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">a</span><span>| a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>} )]</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let c_extend </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29668;">&amp;</span><span>graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend_using</span><span>(|| { |</span><span style="color:#f29668;">&amp;</span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">,</span><span>_)| a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>})</span><span style="color:#bfbab0cc;">,
+</span><span>                        </span><span style="color:#f29668;">&amp;</span><span>graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend_using</span><span>(|| { |</span><span style="color:#f29668;">&amp;</span><span>(_</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">b</span><span>)| b </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u64 </span><span>})]
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// create a new root dataflow context
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> root </span><span style="color:#f29668;">= </span><span>GraphRoot</span><span style="color:#f29668;">::</span><span>new(communicator)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> input </span><span style="color:#f29668;">= </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> builder </span><span style="color:#f29668;">=</span><span> root</span><span style="color:#f29668;">.</span><span style="color:#f07178;">new_subgraph</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let </span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> stream) </span><span style="color:#f29668;">=</span><span> builder</span><span style="color:#f29668;">.</span><span style="color:#f07178;">new_input</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// enable, extend, extend
+</span><span>        stream</span><span style="color:#f29668;">.</span><span style="color:#f07178;">enable</span><span>(builder)
+</span><span>              </span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(b_extend)
+</span><span>              </span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(</span><span style="color:#ff7733;">c_extend</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        input  </span><span style="font-style:italic;color:#5c6773;">// return the input handle
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// iterate until done
+</span><span>    </span><span style="color:#ff7733;">while</span><span> root</span><span style="color:#f29668;">.</span><span style="color:#f07178;">step</span><span>() {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// introduce input
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Возможно, самое важное, что нужно отметить в этом методе, - это то, что это логика для каждого коммуникатора. Каждый воркер будет вызывать этот метод независимо, поэтому им нужно убедиться, что они действуют согласованно. В основном это сводится к построению каналов в определенном последовательном порядке, а не к тому, чтобы делать что-то еще, пока другие работники ждут вас.</p>
+<p>В идеале код не слишком опасный. Первые несколько строк относятся к предыдущему посту, где мы загружаем некоторые графики и определяем «расширители префиксов», используемые для управления вышеупомянутым аккуратным алгоритмом.</p>
+<p>Однако есть несколько очень важных линий, поэтому давайте рассмотрим их более внимательно.</p>
+<h3 id="sozdanie-kornia-grafa-potoka-dannykh">Создание корня графа потока данных</h3>
+<p>Точка, в которой граф потока данных впервые появляется, - это когда мы помещаем наш надежный коммуникатор в GraphRoot. Это важная строка кода: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> root </span><span style="color:#f29668;">= </span><span>GraphRoot</span><span style="color:#f29668;">::</span><span>new(communicator)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>На самом деле GraphRoot довольно прост. Это простейший реализатор трейта GraphBuilder, основная роль которого в жизни - возвращать ссылки на коммуникатор, чтобы мы могли создавать каналы.</p>
+<p>Есть гораздо более продвинутые и интересные разработчики GraphBuilder. Посмотрим сейчас!</p>
+<h3 id="sozdanie-podgrafa-potoka-dannykh">Создание подграфа потока данных</h3>
+<p>Следующий фрагмент кода создает подграф потока данных. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> subgraph </span><span style="color:#f29668;">=</span><span> root</span><span style="color:#f29668;">.</span><span style="color:#f07178;">new_subgraph</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Метод new_subgraph(), определенный трейтом GraphBuilder, возвращает SubgraphBuilder. Это тот продвинутый и интересный разработчик GraphBuilder, о котором я упоминал выше.</p>
+<p>SubgraphBuilder предоставляет доступ к коммуникатору и возможность вызывать new_subgraph, но также имеет нетривиальную реализацию метода add_scope &lt;S: Scope&gt; (scope: S).</p>
+<p>Конечно, я уверен, что вы все помните, что такое Scope, верно? (щелкните! сделайте это. боже… щелкните! щелкните!).</p>
+<h4 id="napominanie-ob-oblastiakh">Напоминание об областях</h4>
+<p>Свойство Scope определяет методы, которые необходимо использовать различным компонентам графика своевременного потока данных для обсуждения хода выполнения на графике. Область видимости может объяснить своему родительскому объекту, сколько входов и выходов у нее есть, какие типы сообщений она может планировать отправлять по этим выходам, и, учитывая шанс, может быть, проделать небольшую работу, чтобы добиться прогресса, о чем она может затем сообщить. его родитель.</p>
+<p>По ссылке выше вы найдете более подробную информацию и многое другое о протоколе отслеживания прогресса.</p>
+<p>Наш первый пример области видимости фактически находится в следующей строке кода: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let </span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> stream) </span><span style="color:#f29668;">=</span><span> subgraph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">new_input</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Метод ввода предоставляется с помощью трэйта расширения в средствах реализации Graph Builder. Давай увидим это. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub trait </span><span style="color:#59c2ff;">InputExtensionTrait</span><span>&lt;G: GraphBuilder&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new_input</span><span>&lt;D</span><span style="color:#bfbab0cc;">:</span><span>Data&gt;(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>(InputHelper&lt;</span><span style="color:#ff7733;">G</span><span style="color:#f29668;">::</span><span>Timestamp, D&gt;,
+</span><span>                                        Stream&lt;</span><span style="color:#ff7733;">G</span><span style="color:#f29668;">::</span><span>Timestamp, D&gt;)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Хорошо, возможно, это было слишком много информации. Мы видим, что new_input действительно возвращает две вещи, и, по-видимому, это InputHelper и Stream, но что это такое, в настоящее время остается полной загадкой. Кроме того, что означает весь этот шум G::Timestamp?</p>
+<p>И последнее: G::Timestamp - это связанный тип построителя графов G. Каждый построитель графов имеет связанную временную метку, и все области, которые допускает построитель графиков, должны использовать эту временную метку. И InputHelper, и Stream определены в терминах конкретной общей временной метки, заданной параметром G. Каждый из них также имеет параметр второго типа, D, который представляет собой тип данных, которые будут передаваться входными данными.</p>
+<p>Реализация ввода не особо очевидна и не проясняет, поэтому я подведу итоги. Метод выполняет несколько функций, включая создание InputHelper (для отправки данных) и Stream (для подключения потока данных). Важно отметить, что он также создает InputScope, который реализует Scope и дает обещания о том, какие входные временные метки запечатаны. Он добавлен в конструктор подграфов.</p>
+<p>Реализация ввода также захватывает канал от коммуникатора и подключает его так, чтобы отправленные данные направлялись непосредственно потребителям Stream. За исключением отслеживания количества отправленных записей, которое требуется InputScope, вся логика находится за реализациями каналов.</p>
+<h3 id="intermission-parallelizm-dannykh">Intermission: параллелизм данных</h3>
+<p>Давайте поразмышляем над тем, где мы находимся. Мы определили некоторую инфраструктуру, которая позволит каждому воркеру отправлять записи в вычисление потока данных, и, если мы будем продолжать в том же духе, обмениваться этими записями с другими воркерами. Хотя большая часть нашего обсуждения здесь звучит так, будто мы просто говорим об одном потоке выполнения, это именно то, что мы хотим.</p>
+<p>Одно из основных достоинств программирования с параллельными данными заключается в том, что мы можем определять наши вычисления, как если бы они были однопоточными, зная, что если мы раскрутим произвольное количество копий рабочих процессов и обмениваемся данными между ними соответствующим образом, тот же результат выходит на другом конце.</p>
+<p>Этот шаблон программирования действительно имеет ограничения, в основном то, что все коммуникации должны быть явными и что структура коммуникации (сам граф потока данных) определяется заранее, но с учетом этих ограничений нам не нужно слишком много думать о параллелизме. Это действительно хорошие новости.</p>
+<h3 id="dobavlenie-eshche-neskol-kikh-oblastei">Добавление еще нескольких областей</h3>
+<p>Вернемся к работе. Наш рабочий должен определить, что он должен делать с этим входным потоком теперь, когда он у него есть.</p>
+<p>На этом этапе мы переходим к немного загадочной детали нашей текущей реализации, которая связана с серьезностью Rust в отношении совместного доступа к изменяемому состоянию. Rust действительно очень серьезно относится к этой теме.</p>
+<p>Построитель графа имеет множество изменяемых состояний, и нам нужно четко понимать, когда мы его используем, а когда не используем. Мы явно попросили строителя создать ввод для нас, что довольно ясно. В то же время мы, вероятно, предпочли бы не включать ссылку на построитель в каждый вызов метода, но мы должны знать, кто в настоящее время за это отвечает.</p>
+<p>На данный момент у нас есть понятие ActiveStream, который представляет собой информацию о потоке (в основном имя и список слушателей, к которому можно присоединиться) плюс построитель графов. ActiveStream владеет этим построителем графов в смысле Rust, поэтому он знает, что имеет эксклюзивный изменяемый доступ к своим сервисам.</p>
+<p>Мы создаем активные потоки из неактивных потоков, вызывая enable с аргументом построителя графов. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>stream</span><span style="color:#f29668;">.</span><span style="color:#f07178;">enable</span><span>(builder)
+</span><span>      </span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(b_extend)
+</span><span>      </span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(</span><span style="color:#ff7733;">c_extend</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Вы можете посмотреть на это и сказать: «Эй, строитель ушел?» В данном случае да. Однако вы всегда можете получить его обратно из активного потока; мы просто случайно отбросили результаты в этом случае.</p>
+<p>К тому же, это была чужая, а не моя идея: есть общая реализация. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;G</span><span style="color:#bfbab0cc;">:</span><span> GraphBuilder&gt; GraphBuilder </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">&amp;</span><span style="color:#59c2ff;">mut G </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// lots of &quot;fn func(&amp;mut self) { (**self).func() }&quot;
+</span><span>}
+</span></code></pre>
+<p>который говорит, что мы можем использовать изменяемую ссылку &amp;mut G везде, где мы бы использовали G: GraphBuilder. Так что мы могли бы заменить builder там на &amp;mut builder, не рискуя потерять его из виду.</p>
+<h3 id="sobstvenno-dobavlenie-dopolnitel-nykh-oblastei">Собственно добавление дополнительных областей</h3>
+<p>Написание расширения несколько раз - это своего рода отговорка как пример дополнительных возможностей. Не так уж и полезно.</p>
+<p>В предыдущем посте я пропустил реализацию StreamPrefixExtender, трэйта, обеспечивающего действия в ActiveStream, включая такие вещи, как подсчет количества расширений, предложение расширений и проверка расширений. Давайте рассмотрим одну из этих реализаций.</p>
+<p>Я собираюсь использовать предложение как простейшую реализацию. Два других примерно такие же, но с немного большей внутренней логикой. Предлагаемая реализация использует унарный метод расширения, который я написал, обертывая реализацию области с одним входом и одним выходом. Мы перейдем к его реализации через мгновение, но давайте посмотрим его аргументы, чтобы понять, что ему нужно знать. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;P, E, G, PE&gt; StreamPrefixExtender&lt;G, P, E&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Rc</span><span>&lt;RefCell&lt;PE&gt;&gt;
+</span><span style="color:#ff7733;">where</span><span> P</span><span style="color:#bfbab0cc;">:</span><span> Data+Columnar,
+</span><span>      E</span><span style="color:#bfbab0cc;">:</span><span> Data+Columnar,
+</span><span>      G</span><span style="color:#bfbab0cc;">:</span><span> GraphBuilder,
+</span><span>      PE</span><span style="color:#bfbab0cc;">: </span><span>PrefixExtender&lt;P, E&gt;+</span><span style="color:#ff7733;">&#39;static </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">propose</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">stream</span><span style="color:#bfbab0cc;">: </span><span>ActiveStream&lt;G, P&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>ActiveStream&lt;G, (P, </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;E&gt;)&gt; {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> clone </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> exch </span><span style="color:#f29668;">= </span><span>Exchange</span><span style="color:#f29668;">::</span><span>new(|</span><span style="color:#f29718;">x</span><span>| </span><span style="color:#f07178;">hash</span><span>(x))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &lt;-- minor lie
+</span><span>        stream</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unary</span><span>(exch</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;Propose&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|</span><span>handle</span><span style="color:#f29668;">| </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> extender </span><span style="color:#f29668;">=</span><span> clone</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">while let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>((time</span><span style="color:#bfbab0cc;">,</span><span> data)) </span><span style="color:#f29668;">=</span><span> handle</span><span style="color:#f29668;">.</span><span>input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">pull</span><span>() {
+</span><span>                </span><span style="color:#ff7733;">let mut</span><span> session </span><span style="color:#f29668;">=</span><span> handle</span><span style="color:#f29668;">.</span><span>output</span><span style="color:#f29668;">.</span><span style="color:#f07178;">session</span><span>(</span><span style="color:#f29668;">&amp;</span><span>time)</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="color:#ff7733;">for</span><span> datum </span><span style="color:#f29668;">in</span><span> data {  </span><span style="font-style:italic;color:#5c6773;">// send each extension
+</span><span>                    session</span><span style="color:#f29668;">.</span><span style="color:#f07178;">give</span><span>(p</span><span style="color:#bfbab0cc;">,</span><span> extender</span><span style="color:#f29668;">.</span><span style="color:#f07178;">propose</span><span>(</span><span style="color:#f29668;">&amp;</span><span>p))</span><span style="color:#bfbab0cc;">;
+</span><span>                }
+</span><span>            }
+</span><span>        })
+</span><span>    }
+</span></code></pre>
+<p>Унарный метод принимает три аргумента: описание того, как нужно обмениваться входными данными (чтобы убедиться, что данные поступают к нужному исполнителю), строка с именем оператора и логика, которая принимает дескриптор, с помощью которого входные данные могут быть прочитаны и выведены. послал.</p>
+<p>Если мы задумаемся на мгновение, то на самом деле не так уж много нужно сказать об операторе: *</p>
+<ol>
+<li>Какие записи должны идти к какому рабочему.</li>
+<li>Что рабочий должен делать с материалами, когда они поступают.</li>
+</ol>
+<p>В приведенном выше примере мы просто хотим последовательно направлять префиксы одному и тому же исполнителю, поэтому мы используем хеш префикса. При представлении некоторых префиксов правильнее всего расширить каждый из них и отправить пару префиксов и расширений. Больше нечего сказать о логике.</p>
+<p>*: На самом деле есть еще кое-что, о чем нужно знать, а именно об уведомлении, которое является чрезвычайно важной частью своевременного потока данных, но мы еще не дошли до этого. Последующий пост, точно.</p>
+<h3 id="unarnaia-oblast-vidimosti">Унарная область видимости</h3>
+<p>Унарный метод скрывает множество шаблонов, поэтому мы можем сосредоточиться на логике оператора потока данных.</p>
+<p>Что на самом деле происходит внутри этого метода? Ничего особо сложного. Это около 90 строк кода. Когда вызывается унарный, он использует первый аргумент, exch выше, для преобразования канала коммуникатора в простой интерфейс push / pull. Он регистрирует «выталкивающую» часть этого потока и прикрепляет «вытягивающую» часть к своему объекту-дескриптору. Он также подготавливает ActiveStream для вывода и подключает вывод дескриптора к (подлежащему заполнению) списку заинтересованных слушателей. Наконец, он создает UnaryScope, которому принадлежит дескриптор, который при необходимости будет вызывать для него логику пользователя и сообщать количество записей, полученных и отправленных в его родительскую область.</p>
+<p>Это был довольно длинный абзац, так что, может быть, все не так просто. Но это тоже не так уж сложно.</p>
+<h3 id="privodim-dela-v-dvizhenie">Приводим дела в движение</h3>
+<p>Последний фрагмент кода выглядит так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">while</span><span> root</span><span style="color:#f29668;">.</span><span style="color:#f07178;">step</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// introduce input
+</span><span>}
+</span></code></pre>
+<p>Это выглядит довольно просто и безвредно, но именно это приводит в движение все вычисления потока данных.</p>
+<p>Вызов root.step() рекурсивно просматривает области, спрашивая каждую о достигнутом прогрессе. Здесь каждая область осматривается, говорит: «Привет, у меня есть данные!», Выполняет небольшую работу, а затем сообщает своей родительской области, что она сделала. Возвращаемое значение указывает, осталось ли сделать еще работу.</p>
+<p>В нашем случае области начнут перемещать входные записи и начнут предлагать расширения и выполнять все элементы логики, которые мы запрограммировали. Они будут продолжать работать, пока входы остаются открытыми, а операторы сообщают, что они еще не завершены. , а протокол отслеживания прогресса сообщает о неразрешенной работе.</p>
+<p>Важно отметить, что весь этот бизнес написан так, чтобы каждый из этих рабочих работал независимо от других. Хотя они неявно координируются через обмен данными и протокол отслеживания прогресса, нам просто нужно включить каждый из них и запустить каждый из них, пока он не остановится.</p>
+<p>В идеале эта остановка происходит раньше, когда работает больше сотрудников, но ... ну, я не хочу портить сюрприз. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

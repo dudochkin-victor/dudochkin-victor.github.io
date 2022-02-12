@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>4. Наша первая инструкция | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/our-first-instruction/#opredelenie-konteksta">Определение контекста</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/our-first-instruction/#ogranicheniia-akkaunta">Ограничения аккаунта</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/our-first-instruction/#realizatsiia-logiki">Реализация логики</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/our-first-instruction/#zashchita-ot-nevernykh-dannykh">Защита от неверных данных</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/our-first-instruction/#instruktsii-protiv-tranzaktsii">Инструкции против транзакций</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/our-first-instruction/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>4. Наша первая инструкция</h1>
+
+<p><a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/our-first-instruction">Перевод</a> | Автор оригинала: Loris</p>
+<p>ЭПИЗОД 4</p>
+<p>2 МЕСЯЦА НАЗАД</p>
+<p>13 МИН ЧТЕНИЕ</p>
+<p>Теперь, когда наша учетная запись Tweet определена и готова к использованию, давайте реализуем инструкцию, позволяющую пользователям отправлять свои собственные твиты.</p>
+<h2 id="opredelenie-konteksta">Определение контекста</h2>
+<p>Как мы видели в предыдущем эпизоде, программы — это специальные учетные записи, которые хранят свой собственный код, но не могут хранить какую-либо другую информацию. Мы говорим, что <strong>программы в Солане не имеют гражданства</strong>.</p>
+<p>Из-за этого отправка инструкции программе требует предоставления всего необходимого контекста для ее успешного выполнения.</p>
+<p>Подобно тому, как мы определили нашу учетную запись «Tweet», контексты реализуются с использованием «структуры». Внутри этой <code>структуры</code> мы должны перечислить все учетные записи, необходимые для того, чтобы инструкция выполняла свою работу.</p>
+<p>В вашем файле <code>lib.rs</code>, прямо над структурой <code>Tweet</code>, которую мы определили в предыдущем эпизоде, вы должны увидеть пустой контекст <code>Initialize</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Accounts)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Initialize </span><span>{}
+</span></code></pre>
+<p>Давайте заменим этот контекст <code>Initialize</code> контекстом <code>SendTweet</code> и перечислим все нужные нам учетные записи.</p>
+<p>Удалите две строки выше и замените их следующим кодом.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Accounts)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">SendTweet</span><span>&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>tweet</span><span style="color:#bfbab0cc;">: </span><span>Account&lt;</span><span style="color:#ff7733;">&#39;info</span><span>, Tweet&gt;,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>author</span><span style="color:#bfbab0cc;">: </span><span>Signer&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>system_program</span><span style="color:#bfbab0cc;">: </span><span>AccountInfo&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>}
+</span></code></pre>
+<p>Здесь много нового, поэтому я сначала сосредоточусь на самих учетных записях, а затем объясню несколько функций Rust, которые могут показаться запутанными.</p>
+<p>Во-первых, добавление учетной записи в контекст просто означает, что <strong>ее открытый ключ должен быть предоставлен при отправке инструкции</strong>.</p>
+<p>Кроме того, мы также можем потребовать от учетной записи <strong>использовать свой закрытый ключ для подписи инструкций</strong> в зависимости от того, что мы планируем делать с учетной записью. Например, мы хотим, чтобы учетная запись «автор» подписала инструкцию, чтобы гарантировать, что кто-то не пишет в Твиттере от имени кого-то другого.</p>
+<p>Хорошо, давайте быстро просмотрим перечисленные аккаунты:</p>
+<ul>
+<li><code>tweet</code>: это учетная запись, которую создаст инструкция. Вам может быть интересно, почему мы даем учетную запись инструкции, если эта инструкция создает ее. Ответ прост: мы просто передаем открытый ключ, который следует использовать при создании учетной записи. Нам также нужно будет подписать, используя его закрытый ключ, чтобы сообщить инструкции, что мы владеем открытым ключом. По сути, мы даем инструкцию: «Вот открытый ключ, которым я владею, создайте для меня твит-аккаунт, пожалуйста».</li>
+<li><code>author</code>: как упоминалось выше, нам нужно знать, кто отправляет твит, и нам нужна его подпись, чтобы доказать это.</li>
+<li><code>system_program</code>: это официальная системная программа от Solana. Как видите, поскольку программы не имеют состояния, нам даже нужно пройти через официальную системную программу. Эта программа будет использоваться для инициализации учетной записи «Tweet» и определения того, сколько денег нам нужно, чтобы освободиться от арендной платы.</li>
+</ul>
+<p>Далее, давайте объясним некоторые особенности Rust, которые мы можем увидеть в приведенном выше коде.</p>
+<ul>
+<li><code>#[derive(Accounts)]</code>: это <a href="https://doc.rust-lang.org/reference/attributes/derive.html">атрибут производного</a>, предоставляемый Anchor, который позволяет фреймворку генерировать много кода и макросов для нашего контекста <code>struct</code>. Без него эти несколько строк кода были бы намного сложнее.</li>
+<li><code>&lt;'info&gt;</code>: это <a href="https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html">время жизни Rust</a>. Он определен как общий тип, но не является типом. Его цель — сообщить компилятору Rust, как долго будет существовать переменная.</li>
+</ul>
+<p>Будьте уверены, нет необходимости углубляться в эти функции Rust, чтобы следовать этой серии. Я просто бросаю некоторые ссылки для заинтересованных читателей.</p>
+<p>Наконец, давайте поговорим о типах. Каждое из этих свойств имеет свой тип учетной записи, так что с этим делать? Ну, все они представляют собой учетную запись, но с небольшими вариациями.</p>
+<ul>
+<li><code>AccountInfo</code>: это низкоуровневая структура Solana, которая может представлять любую учетную запись. При использовании <code>AccountInfo</code> данные учетной записи будут представлять собой неанализируемый массив байтов.</li>
+<li><code>Account</code>: это тип учетной записи, предоставляемый Anchor. Он оборачивает <code>AccountInfo</code> в другую <code>struct</code>, которая анализирует данные в соответствии со <code>struct</code> учетной записи, предоставленной как общий тип. В приведенном выше примере <code>Account&lt;'info, Tweet&gt;</code> означает, что это учетная запись типа <code>Tweet</code>, и данные должны быть проанализированы соответствующим образом.</li>
+<li><code>Signer</code>: это то же самое, что и тип <code>AccountInfo</code>, за исключением того, что мы также говорим, что эта учетная запись должна подписывать инструкцию.</li>
+</ul>
+<p>Обратите внимание, что если мы хотим убедиться, что учетная запись типа «Учетная запись» является подписывающей стороной, мы можем сделать это с помощью ограничений учетной записи.</p>
+<h2 id="ogranicheniia-akkaunta">Ограничения аккаунта</h2>
+<p>Помимо помощи в определении контекстов инструкций всего в нескольких строках кода, Anchor также предоставляет нам ограничения учетной записи, которые можно определить как атрибуты Rust в свойствах нашей учетной записи.</p>
+<p>Эти ограничения не только могут помочь нам с безопасностью и контролем доступа, но также могут помочь нам инициализировать учетную запись нужного размера.</p>
+<p>Это звучит идеально для нашего свойства <code>tweet</code>, поскольку в этой инструкции мы создаем новую учетную запись. Чтобы это работало, просто добавьте следующую строку поверх свойства <code>tweet</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Accounts)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">SendTweet</span><span>&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt; {
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">account</span><span>(init)]
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>tweet</span><span style="color:#bfbab0cc;">: </span><span>Account&lt;</span><span style="color:#ff7733;">&#39;info</span><span>, Tweet&gt;,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>author</span><span style="color:#bfbab0cc;">: </span><span>Signer&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>system_program</span><span style="color:#bfbab0cc;">: </span><span>AccountInfo&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>}
+</span></code></pre>
+<p>Однако приведенный выше код выдаст ошибку, потому что мы не сообщаем Anchor, сколько памяти требуется для нашей учетной записи <code>Tweet</code> и кто должен платить за освобождение от арендной платы. К счастью, для этой цели мы можем использовать аргументы <code>payer</code> и <code>space</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Accounts)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">SendTweet</span><span>&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt; {
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">account</span><span>(init</span><span style="color:#bfbab0cc;">,</span><span> payer </span><span style="color:#f29668;">=</span><span> author</span><span style="color:#bfbab0cc;">,</span><span> space </span><span style="color:#f29668;">=</span><span> Tweet::LEN)]
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>tweet</span><span style="color:#bfbab0cc;">: </span><span>Account&lt;</span><span style="color:#ff7733;">&#39;info</span><span>, Tweet&gt;,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>author</span><span style="color:#bfbab0cc;">: </span><span>Signer&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>system_program</span><span style="color:#bfbab0cc;">: </span><span>AccountInfo&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>}
+</span></code></pre>
+<p>Аргумент <code>payer</code> ссылается на учетную запись <code>author</code> в том же контексте, а аргумент <code>space</code> использует константу <code>Tweet::LEN</code>, которую мы определили в предыдущем эпизоде. Разве не удивительно, что мы можем сделать все это всего одной строкой кода?</p>
+<p>Теперь, поскольку мы говорим, что <code>author</code> должен платить за освобожденные от арендной платы деньги аккаунта <code>tweet</code>, нам нужно пометить свойство <code>author</code> как изменяемое. Это потому, что мы собираемся изменить сумму денег на их счету. Опять же, Anchor делает это очень простым для нас с ограничением учетной записи <code>mut</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Accounts)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">SendTweet</span><span>&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt; {
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">account</span><span>(init</span><span style="color:#bfbab0cc;">,</span><span> payer </span><span style="color:#f29668;">=</span><span> author</span><span style="color:#bfbab0cc;">,</span><span> space </span><span style="color:#f29668;">=</span><span> Tweet::LEN)]
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>tweet</span><span style="color:#bfbab0cc;">: </span><span>Account&lt;</span><span style="color:#ff7733;">&#39;info</span><span>, Tweet&gt;,
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">account</span><span>(mut)]
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>author</span><span style="color:#bfbab0cc;">: </span><span>Signer&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>system_program</span><span style="color:#bfbab0cc;">: </span><span>AccountInfo&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, что существует также ограничение учетной записи <code>signer</code>, которое мы могли бы использовать для свойства <code>author</code>, чтобы убедиться, что он подписал инструкцию, но в нашем случае это избыточно, потому что мы уже используем тип учетной записи <code>Signer</code>.</p>
+<p>Наконец, нам нужно ограничение на <code>system_program</code>, чтобы убедиться, что это действительно официальная системная программа от Solana. В противном случае ничто не мешает пользователям предоставить нам вредоносную системную программу.</p>
+<p>Для этого мы можем использовать ограничение учетной записи <code>address</code>, которое требует, чтобы открытый ключ учетной записи точно соответствовал предоставленному открытому ключу.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Accounts)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">SendTweet</span><span>&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt; {
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">account</span><span>(init</span><span style="color:#bfbab0cc;">,</span><span> payer </span><span style="color:#f29668;">=</span><span> author</span><span style="color:#bfbab0cc;">,</span><span> space </span><span style="color:#f29668;">=</span><span> Tweet::LEN)]
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>tweet</span><span style="color:#bfbab0cc;">: </span><span>Account&lt;</span><span style="color:#ff7733;">&#39;info</span><span>, Tweet&gt;,
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">account</span><span>(mut)]
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>author</span><span style="color:#bfbab0cc;">: </span><span>Signer&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">account</span><span>(address </span><span style="color:#f29668;">=</span><span> system_program::ID)]
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>system_program</span><span style="color:#bfbab0cc;">: </span><span>AccountInfo&lt;</span><span style="color:#ff7733;">&#39;info</span><span>&gt;,
+</span><span>}
+</span></code></pre>
+<p><code>system_program::ID</code> — это константа, определенная в кодовой базе Solana. По умолчанию он не включен в импорт Anchor <code>prelude::*</code>, поэтому нам нужно добавить следующую строку позже – в самый верх нашего файла <code>lib.rs</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>anchor_lang</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>anchor_lang</span><span style="color:#f29668;">::</span><span>solana_program</span><span style="color:#f29668;">::</span><span>system_program</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>И точно так же мы закончили с определением контекста нашей инструкции <code>SendTweet</code>.</p>
+<p>Обратите внимание, что Anchor предоставляет нам гораздо больше ограничений. <a href="https://docs.rs/anchor-lang/0.18.2/anchor_lang/derive.Accounts.html">Нажмите здесь</a> и прокрутите немного вниз, чтобы увидеть исчерпывающий список поддерживаемых ограничений.</p>
+<h2 id="realizatsiia-logiki">Реализация логики</h2>
+<p>Теперь, когда наш контекст готов, давайте реализуем реальную логику нашей инструкции <code>SendTweet</code>.</p>
+<p>Внутри модуля solana_twitter замените функцию инициализации следующим кодом.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Несколько замечаний:</p>
+<ul>
+<li>Мы переименовали инструкцию <code>initialize</code> в <code>send_tweet</code>. Имена функций в Rust имеют вид змеи.</li>
+<li>Мы заменили общий тип внутри <code>Context</code> на <code>SendTweet</code>, чтобы связать инструкцию с контекстом, который мы создали выше.</li>
+<li>Мы добавили два дополнительных аргумента: <code>topic</code> и <code>content</code>. Любой аргумент, не являющийся учетной записью, может быть предоставлен таким образом после контекста.</li>
+<li>Эта функция возвращает <code>ProgramResult</code>, который может быть либо <code>Ok</code>, либо <code>ProgramError</code>. В Rust нет концепции исключений. Вместо этого вам нужно обернуть возвращаемое значение в специальное перечисление, чтобы сообщить программе, было ли выполнение успешным («Ok») или нет («Err» и, более конкретно, здесь «ProgramError»). Поскольку мы пока ничего не делаем внутри этой функции, мы немедленно возвращаем <code>Ok(())</code>, который является типом <code>Ok</code> без возвращаемого значения внутри <code>()</code>. Также обратите внимание, что последняя строка функции используется в качестве возвращаемого значения без необходимости использования ключевого слова return.</li>
+</ul>
+<p>Теперь, когда сигнатура нашей функции готова, давайте извлечем из контекста все учетные записи, которые нам понадобятся.</p>
+<p>Во-первых, нам нужно получить доступ к учетной записи <code>tweet</code>, которая уже была инициализирована Anchor благодаря ограничению учетной записи <code>init</code>. Вы можете думать об ограничениях учетной записи как о промежуточном программном обеспечении, которое возникает до выполнения функции инструкции.</p>
+<p>Мы можем получить доступ к учетной записи <code>tweet</code> через <code>ctx.accounts.tweet</code>. Поскольку мы используем Rust, нам также нужно добавить префикс <code>&amp;</code>, чтобы получить доступ к учетной записи по ссылке, и <code>mut</code>, чтобы убедиться, что нам разрешено изменять ее данные.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> tweet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Account&lt;Tweet&gt; </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Точно так же нам нужно получить доступ к учетной записи <code>author</code>, чтобы сохранить его в учетной записи <code>tweet</code>. Здесь нам не нужен <code>mut</code>, потому что Anchor уже позаботился об освобождении от арендной платы.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> tweet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Account&lt;Tweet&gt; </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> author</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Signer </span><span style="color:#f29668;">= &amp;</span><span>ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Наконец, нам нужен доступ к системной переменной Solana Clock, чтобы определить текущую временную метку и сохранить ее в твите. Эта системная переменная доступна через <code>Clock::get()</code> и может работать только в том случае, если системная программа предоставляется в качестве учетной записи.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> tweet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Account&lt;Tweet&gt; </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> author</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Signer </span><span style="color:#f29668;">= &amp;</span><span>ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> clock</span><span style="color:#bfbab0cc;">:</span><span> Clock </span><span style="color:#f29668;">= </span><span>Clock</span><span style="color:#f29668;">::</span><span>get()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, что мы используем функцию <code>unwrap()</code>, потому что <code>Clock::get()</code> возвращает <code>Result</code>, который может быть <code>Ok</code> или <code>Err</code>. Развертка результата означает либо использование значения внутри <code>Ok</code> — в нашем случае часов — либо немедленное возвращение ошибки.</p>
+<p>Включая <code>topic</code> и <code>content</code>, переданные в качестве аргументов, теперь у нас есть все данные, необходимые для заполнения нашей новой учетной записи <code>tweet</code> правильными данными.</p>
+<p>Начнем с открытого ключа автора. Мы можем получить к нему доступ через <code>author.key</code>, но он содержит ссылку на открытый ключ, поэтому нам нужно разыменовать его, используя <code>*</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> tweet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Account&lt;Tweet&gt; </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> author</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Signer </span><span style="color:#f29668;">= &amp;</span><span>ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> clock</span><span style="color:#bfbab0cc;">:</span><span> Clock </span><span style="color:#f29668;">= </span><span>Clock</span><span style="color:#f29668;">::</span><span>get()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>author </span><span style="color:#f29668;">= *</span><span>author</span><span style="color:#f29668;">.</span><span>key</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Затем мы можем получить текущую метку времени UNIX из часов, используя <code>clock.unix_timestamp</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> tweet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Account&lt;Tweet&gt; </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> author</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Signer </span><span style="color:#f29668;">= &amp;</span><span>ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> clock</span><span style="color:#bfbab0cc;">:</span><span> Clock </span><span style="color:#f29668;">= </span><span>Clock</span><span style="color:#f29668;">::</span><span>get()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>author </span><span style="color:#f29668;">= *</span><span>author</span><span style="color:#f29668;">.</span><span>key</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>timestamp </span><span style="color:#f29668;">=</span><span> clock</span><span style="color:#f29668;">.</span><span>unix_timestamp</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Наконец, мы можем сохранить <code>topic</code> и <code>content</code> в их соответствующих свойствах.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> tweet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Account&lt;Tweet&gt; </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> author</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Signer </span><span style="color:#f29668;">= &amp;</span><span>ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> clock</span><span style="color:#bfbab0cc;">:</span><span> Clock </span><span style="color:#f29668;">= </span><span>Clock</span><span style="color:#f29668;">::</span><span>get()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>author </span><span style="color:#f29668;">= *</span><span>author</span><span style="color:#f29668;">.</span><span>key</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>timestamp </span><span style="color:#f29668;">=</span><span> clock</span><span style="color:#f29668;">.</span><span>unix_timestamp</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>topic </span><span style="color:#f29668;">=</span><span> topic</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>content </span><span style="color:#f29668;">=</span><span> content</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>На данный момент у нас есть рабочая инструкция, которая инициализирует для нас новую учетную запись <code>Tweet</code> и наполняет ее нужной информацией.</p>
+<h2 id="zashchita-ot-nevernykh-dannykh">Защита от неверных данных</h2>
+<p>Хотя ограничения учетной записи Anchor защищают нас от множества недопустимых сценариев, нам все равно нужно убедиться, что наша программа отклоняет данные, которые не соответствуют нашим собственным требованиям.</p>
+<p>В предыдущем эпизоде мы решили использовать тип <code>String</code> для свойств <code>topic</code> и <code>content</code> и выделить максимум 50 символов для первого и 280 символов для второго.</p>
+<p>Поскольку тип String является векторным типом и не имеет фиксированного ограничения, мы не ввели никаких ограничений на количество символов, которые может содержать тема и содержимое. Мы только выделили правильный объем хранилища для них.</p>
+<p>В настоящее время ничто не может помешать пользователю определить тему из 280 символов и содержание из 50 символов. Хуже того, поскольку для кодирования большинства символов требуется только один байт, и ничто не заставляет нас вводить тему, у нас может быть контент длиной (280 + 50) * 4 = 1320 символов.</p>
+<p>Поэтому, если мы хотим защитить себя от этих сценариев, нам нужно добавить несколько охранников.</p>
+<p>Давайте добавим пару операторов if, прежде чем увлажнять нашу учетную запись <code>tweet</code>. Мы проверим, что длина аргументов <code>topic</code> и <code>content</code> не превышает 50 и 280 символов соответственно. Мы можем получить доступ к количеству символов, содержащихся в строке, через my_string.chars().count(). Обратите внимание, что мы не используем <code>my_string.len()</code>, который возвращает длину вектора и, следовательно, дает нам количество байтов в строке.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> tweet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Account&lt;Tweet&gt; </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> author</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Signer </span><span style="color:#f29668;">= &amp;</span><span>ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> clock</span><span style="color:#bfbab0cc;">:</span><span> Clock </span><span style="color:#f29668;">= </span><span>Clock</span><span style="color:#f29668;">::</span><span>get()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">if</span><span> topic</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">count</span><span>() </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">50 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Return a error...
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">if</span><span> content</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">count</span><span>() </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">280 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Return a error...
+</span><span>    }
+</span><span>
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>author </span><span style="color:#f29668;">= *</span><span>author</span><span style="color:#f29668;">.</span><span>key</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>timestamp </span><span style="color:#f29668;">=</span><span> clock</span><span style="color:#f29668;">.</span><span>unix_timestamp</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>topic </span><span style="color:#f29668;">=</span><span> topic</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>content </span><span style="color:#f29668;">=</span><span> content</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Теперь, когда операторы if на месте, нам нужно вернуть внутри них ошибку, чтобы досрочно остановить выполнение инструкции.</p>
+<p>Anchor упрощает работу с ошибками, позволяя нам определить перечисление ErrorCode с помощью атрибута Rust <code>#[error]</code> . Для каждого типа ошибки внутри перечисления мы можем предоставить атрибут <code>#[msg(&quot;...&quot;)]</code>, который объясняет это.</p>
+<p>Давайте реализуем собственное перечисление ErrorCode и определим в нем две ошибки. Один, когда тема слишком длинная, и один, когда содержание слишком длинное.</p>
+<p>Вы можете скопировать/вставить следующий код в конец файла <code>lib.rs</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">error</span><span>]
+</span><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">ErrorCode </span><span>{
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">msg</span><span>(</span><span style="color:#c2d94c;">&quot;The provided topic should be 50 characters long maximum.&quot;</span><span>)]
+</span><span>    TopicTooLong</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">msg</span><span>(</span><span style="color:#c2d94c;">&quot;The provided content should be 280 characters long maximum.&quot;</span><span>)]
+</span><span>    ContentTooLong</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Now, let's use the errors we've just defined inside our if statements.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">send_tweet</span><span>(</span><span style="color:#f29718;">ctx</span><span style="color:#bfbab0cc;">: </span><span>Context&lt;SendTweet&gt;, </span><span style="color:#f29718;">topic</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">content</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> tweet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>Account&lt;Tweet&gt; </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> author</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Signer </span><span style="color:#f29668;">= &amp;</span><span>ctx</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> clock</span><span style="color:#bfbab0cc;">:</span><span> Clock </span><span style="color:#f29668;">= </span><span>Clock</span><span style="color:#f29668;">::</span><span>get()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">if</span><span> topic</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">count</span><span>() </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">50 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(ErrorCode</span><span style="color:#f29668;">::</span><span>TopicTooLong</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">if</span><span> content</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">count</span><span>() </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">280 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(ErrorCode</span><span style="color:#f29668;">::</span><span>ContentTooLong</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())
+</span><span>    }
+</span><span>
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>author </span><span style="color:#f29668;">= *</span><span>author</span><span style="color:#f29668;">.</span><span>key</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>timestamp </span><span style="color:#f29668;">=</span><span> clock</span><span style="color:#f29668;">.</span><span>unix_timestamp</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>topic </span><span style="color:#f29668;">=</span><span> topic</span><span style="color:#bfbab0cc;">;
+</span><span>    tweet</span><span style="color:#f29668;">.</span><span>content </span><span style="color:#f29668;">=</span><span> content</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>}
+</span></code></pre>
+<p>Как видите, сначала нам нужно получить доступ к типу ошибки как к константе — например. <code>ErrorCode::TopicTooLong</code> — и оберните его внутри типа перечисления <code>Err</code>. [Метод into()<code>(https://doc.rust-lang.org/rust-by-example/conversion/from_into.html) — это функция Rust, которая преобразует наш тип ErrorCode в любой требуемый тип. по коду, который здесь</code>Err<code>, а точнее </code>ProgramError`.</p>
+<p>Отлично, мы не только защищены от недопустимых размеров тем и контента, но также знаем, как добавить больше типов ошибок и средств защиты в будущем.</p>
+<h2 id="instruktsii-protiv-tranzaktsii">Инструкции против транзакций</h2>
+<p>Прежде чем закончить эту статью, я хотел бы упомянуть о разнице между инструкцией и транзакцией, потому что они обычно используются взаимозаменяемо, и поначалу это меня раздражало.</p>
+<p>Однако разница проста: <strong>транзакция состоит из одной или нескольких инструкций</strong>.</p>
+<p>Когда пользователь взаимодействует с блокчейном Solana, он может отправить множество инструкций в массив и отправить их все как одну транзакцию. Преимущество этого заключается в том, что <strong>транзакции являются атомарными</strong>, а это означает, что в случае сбоя какой-либо из инструкций вся операция откатывается, как будто ничего и не произошло.</p>
+<p>Инструкции также могут делегироваться другим инструкциям внутри той же программы или за пределами текущей программы. Последний называется <a href="https://docs.solana.com/developing/programming-model/calling-between-programs#cross-program-invocations">Cross-Program Invocations (CPI)</a>, и подписавшими текущую инструкцию являются автоматически передается во вложенные инструкции. У Anchor даже есть <a href="https://project-serum.github.io/anchor/tutorials/tutorial-3.html">полезный API для вызовов CPI</a>.</p>
+<p>Независимо от того, сколько инструкций и вложенных инструкций существует внутри транзакции, она всегда будет атомарной — т. е. все или ничего.</p>
+<p>Хотя мы не использовали и не будем напрямую использовать множественные и вложенные инструкции для каждой транзакции в этой серии, мы уже использовали их косвенно. При использовании ограничения учетной записи <code>init</code> от Anchor мы попросили Anchor инициализировать новую учетную запись для нас, и он сделал это, вызвав инструкцию <code>create_account</code> системной программы Solana, таким образом создав CPI.</p>
+<p>Прежде чем мы закроем эту длинную круглую скобку, полезно знать, что инструкции часто обозначаются аббревиатурой ix, тогда как транзакции часто обозначаются аббревиатурой <code>tx</code>.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Хотите верьте, хотите нет, но наша программа Солана завершена! 🥳</p>
+<p>Мы определили нашу учетную запись «Tweet» и внедрили инструкцию, которая создает новые по запросу и сохраняет всю необходимую информацию. Как обычно, вы можете найти код этого эпизода на GitHub.</p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/tree/episode-4">Просмотреть эпизод 4 на GitHub</a></p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/compare/episode-3...episode-4">Сравните с Эпизодом 3</a></p>
+<p>С этого момента мы сосредоточимся на <em>использовании</em> нашей программы, взаимодействуя с ее инструкциями и извлекая существующие учетные записи.</p>
+<p>В конце концов, мы сделаем это в полноценном приложении JavaScript, но сначала сделаем это в тестах, чтобы убедиться, что все работает правильно. Увидимся в следующем выпуске!</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

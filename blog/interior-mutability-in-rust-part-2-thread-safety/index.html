@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Внутренняя изменчивость в Rust, часть 2: безопасность потоков | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-part-2-thread-safety/#vvedenie">Введение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-part-2-thread-safety/#potochno-bezopasnaia-vnutrenniaia-izmenchivost">Поточно-безопасная внутренняя изменчивость</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-part-2-thread-safety/#dlia-znachenii-bez-kopirovaniia">Для значений без копирования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-part-2-thread-safety/#podschet-ssylok">Подсчет ссылок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-part-2-thread-safety/#zakliuchitel-nye-mysli">Заключительные мысли</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Внутренняя изменчивость в Rust, часть 2: безопасность потоков</h1>
+
+<p><a href="https://ricardomartins.cc/2016/06/25/interior-mutability-thread-safety">Перевод</a> | Автор оригинала: Ricardo Martins</p>
+<p>Ключевые выводы</p>
+<ul>
+<li>Мы можем обеспечить поточно-безопасную внутреннюю изменчивость с помощью Mutex, RwLock и различных типов Atomic * в std::sync.</li>
+<li>Mutex разрешает только один поток за раз, не имеет прямого аналога, небезопасного для потоков, но может рассматриваться как предоставление только ссылок &amp;mut T</li>
+<li>RwLock эквивалентен RefCell, а также позволяет использовать несколько считывателей или один модуль записи.</li>
+<li>Типы Atomic эквивалентны Cell</li>
+<li>std::sync::Arc - это поточно-ориентированная версия std::rc::Rc, необходимая для обмена ссылками между потоками</li>
+<li>Эти потокобезопасные типы требуют дополнительных затрат времени выполнения по сравнению с их несинхронизированными аналогами.</li>
+<li>В Rust мы блокируем / защищаем данные, а не код</li>
+</ul>
+<p>Эта статья является частью серии о внутренней изменчивости в Rust. Вы можете прочитать часть 1 здесь и часть 3 здесь.</p>
+<h2 id="vvedenie">Введение</h2>
+<p>В предыдущей статье мы рассмотрели Cell и RefCell как способ достижения внутренней изменчивости - способности изменять определенные поля в структуре независимо от ее внешней (явной или объявленной) изменчивости.</p>
+<p>Однако ни Cell, ни RefCell не подходят для обмена данными между потоками. Поскольку Cell не имеет механизмов проверки заимствования и ее операции не атомарны, возможны состояния гонки, при которых мы считываем устаревшие значения и теряем обновления. RefCell, с другой стороны, имеет проверку заимствования во время выполнения, но будет паниковать, когда есть конфликтующие заимствования, такие как заимствование изменяемого заимствованного значения. Кроме того, RefCell использует Cell для отслеживания состояния заимствования. Это означает, что даже если вы будете осторожны и проверите его перед заимствованием, вы рискуете взаимно заимствовать значение одновременно в нескольких потоках, потому что его проверки заимствования во время выполнения также не являются атомарными.</p>
+<p>Из-за этих проблем и Cell, и RefCell помечены! Sync, что означает, что их небезопасно использовать более чем в одном потоке1.</p>
+<p>Кроме того, нам нужно обмениваться ссылками на ячейку между потоками, но тип счетчика ссылок, который мы исследовали ранее, Rc, также не подходит для использования в этом сценарии. Поля счетчика ссылок внутри Rc заключены в оболочку Cell, поэтому рано или поздно они получат ошибочные значения в многопоточной программе. Наличие полей! Sync «заразительно». Поскольку Rc содержит два поля Cell, их маркеры! Sync распространяются на всю структуру Rc. Rc также отмечен! Отправить - небезопасно отправлять (перемещать) в другие потоки. Точно так же! Send так же «заразителен», как! Sync.</p>
+<p>Мы могли бы сами реализовать обе эти трэйты в наших типах, но, поскольку эти трэйты довольно важны, они помечены как небезопасные. Итак, нам нужно сообщить компилятору Rust, что мы знаем, что мы делаем, добавив к их объявлениям impl ключевое слово unsafe. Например, если мы хотим сделать узлы в примере из предыдущей статьи Send and Sync: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">unsafe impl</span><span>&lt;T&gt; Send </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Node</span><span>&lt;T&gt; {}
+</span><span style="color:#ff7733;">unsafe impl</span><span>&lt;T&gt; Sync </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Node</span><span>&lt;T&gt; {}
+</span></code></pre>
+<p>Это заставляет компилятор замолчать и позволяет нам продолжить работу, но что это означает?</p>
+<p>Отправка и синхронизация автоматически производятся компилятором для большинства типов. Если тип содержит поле! Send или! Sync, «зараза» всегда распространяется на родительские типы. Явно реализуя эти трэйты, мы неявно сообщаем пользователю нашего API, что наши типы поточно-ориентированы (Sync) и что их можно безопасно перемещать между потоками (Send).</p>
+<p>Когда мы говорим, что нашими типами являются отправка и синхронизация, фактически не вводя механизмы синхронизации, мы не уважаем «контракты», связанные с этими характеристиками, и вводим пользователя в заблуждение. У них может возникнуть паника во время выполнения или плохие результаты из-за условий гонки. Отнюдь не самая удачная ситуация.</p>
+<h2 id="potochno-bezopasnaia-vnutrenniaia-izmenchivost">Поточно-безопасная внутренняя изменчивость</h2>
+<p>К счастью, Rust дает нам хорошие инструменты для достижения внутренней изменяемости поточно-безопасным способом без особых усилий. Более того, он делает это таким образом, что проверяющий будет большую часть времени прикрыт нам спиной, поэтому мы не сможем прострелить себе ноги.</p>
+<p>Одним из действительно хороших аспектов Rust является то, что как только вы освоите систему заимствования, вы можете использовать те же рассуждения с внутренней изменчивостью в одном потоке (Cell и RefCell) и в параллельных программах.
+Для копирования значений</p>
+<p>Для значений копирования (например, целых чисел) вместо Cell у нас есть атомарные типы (std::sync::atomic::*), которые полагаются на инструкции сборки для предотвращения гонки данных:</p>
+<ul>
+<li>AtomicBool, логический тип,</li>
+<li>AtomicIsize, целочисленный тип со знаком,</li>
+<li>AtomicUsize, беззнаковый целочисленный тип и</li>
+<li>AtomicPtr, тип необработанного указателя.</li>
+</ul>
+<p>Несмотря на то, что существует всего четыре типа, вы можете использовать AtomicPtr для реализации дополнительных. В качестве альтернативы вы можете использовать крэйти, такие как атомный крэйт, чтобы сделать это с помощью простого API. Краткое заявление об отказе от ответственности: я не пробовал Atom, но пример в его README выглядит хорошо, и быстрый взгляд на исходный код выглядит именно так, как я ожидал.</p>
+<p>Использование атомарного типа немного сложнее, чем то же самое с Cell. Взяв снова наивный пример счетчика ссылок из предыдущей статьи, используя AtomicUsize, мы получим: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>atomic</span><span style="color:#f29668;">::</span><span>{AtomicUsize</span><span style="color:#bfbab0cc;">,</span><span> Ordering}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">NaiveRc</span><span>&lt;T&gt; {
+</span><span>    reference_count</span><span style="color:#bfbab0cc;">:</span><span> AtomicUsize,
+</span><span>    inner_value</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T&gt; Clone </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">NaiveRc</span><span>&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">clone</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>reference_count</span><span style="color:#f29668;">.</span><span style="color:#f07178;">fetch_add</span><span>(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span>Ordering</span><span style="color:#f29668;">::</span><span>Relaxed)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Как видите, вместо того, чтобы просто назначить новое значение для reference_count, мы вызвали fetch_add для его атомарного увеличения. Первый параметр - это размер приращения, а второй - новый. Порядок сообщает компилятору (и ЦП), сколько свободы он имеет для изменения порядка инструкций. Я не буду углубляться в это, так как официальная документация объясняет это достаточно подробно.</p>
+<h2 id="dlia-znachenii-bez-kopirovaniia">Для значений без копирования</h2>
+<p>Для значений, не являющихся копиями, std::sync::RwLock является эквивалентом RefCell. Подобно RefCell, RwLock имеет семантику, очень похожую на семантику нашего старого друга, систему заимствования, и допускает использование нескольких «читателей» или одного «писателя», но не обоих одновременно, или нескольких «писателей».</p>
+<p>Однако, в отличие от RefCell, RwLock не паникует, когда есть несовместимые заимствования: если потоку требуется изменяемая ссылка, ему просто нужно будет дождаться, пока другие потоки не снимут блокировку (т.е. прекратят использовать заимствованные значения).</p>
+<p>Мы можем получить общие ссылки только для чтения с помощью чтения (эквивалентно заимствованию в RefCell) или исключительные изменяемые ссылки с помощью записи (заимствовать_мута, соответственно) 2.</p>
+<p>Преобразование примера графа из предыдущей статьи для использования RwLock вместо RefCell несложно: замените объявления RefCell на RwLock, измените заимствование на чтение и заимствование_mut на запись. Нам также нужно заменить Rc на Arc, чтобы иметь возможность перемещать ссылки на другие потоки, но я опишу это позже. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>sync</span><span style="color:#f29668;">::</span><span>{Arc</span><span style="color:#bfbab0cc;">,</span><span> RwLock}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Represents a reference to a node.
+</span><span style="font-style:italic;color:#5c6773;">// This makes the code less repetitive to write and easier to read.
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">NodeRef</span><span style="color:#f29668;">&lt;</span><span>T</span><span style="color:#f29668;">&gt; = </span><span>Arc&lt;RwLock&lt;_Node&lt;T&gt;&gt;&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The private representation of a node.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">_Node</span><span>&lt;T&gt; {
+</span><span>    inner_value</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>    adjacent</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;NodeRef&lt;T&gt;&gt;,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The public representation of a node, with some syntactic sugar.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Node</span><span>&lt;T&gt;(NodeRef&lt;T&gt;)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T&gt; </span><span style="color:#59c2ff;">Node</span><span>&lt;T&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Creates a new node with no edges.
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">inner</span><span style="color:#bfbab0cc;">:</span><span> T) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Node&lt;T&gt; {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> node </span><span style="color:#f29668;">=</span><span> _Node { inner_value</span><span style="color:#bfbab0cc;">:</span><span> inner</span><span style="color:#bfbab0cc;">,</span><span> adjacent</span><span style="color:#bfbab0cc;">: </span><span style="color:#f07178;">vec!</span><span>[] }</span><span style="color:#bfbab0cc;">;
+</span><span>        Node(Arc</span><span style="color:#f29668;">::</span><span>new(RwLock</span><span style="color:#f29668;">::</span><span>new(node)))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Adds a directed edge from this node to other node.
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">other</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Node&lt;T&gt;) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">write</span><span>()
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Failed to acquire a write lock on node&quot;</span><span>)
+</span><span>            </span><span style="color:#f29668;">.</span><span>adjacent</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(other</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">clone</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Graph</span><span>&lt;T&gt; {
+</span><span>    nodes</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Node&lt;T&gt;&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T&gt; </span><span style="color:#59c2ff;">Graph</span><span>&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">with_nodes</span><span>(</span><span style="color:#f29718;">nodes</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Node&lt;T&gt;&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        Graph { nodes</span><span style="color:#bfbab0cc;">:</span><span> nodes }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Create some nodes
+</span><span>    </span><span style="color:#ff7733;">let</span><span> node_1 </span><span style="color:#f29668;">= </span><span>Node</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> node_2 </span><span style="color:#f29668;">= </span><span>Node</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> node_3 </span><span style="color:#f29668;">= </span><span>Node</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">3</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Connect some of the nodes (with directed edges)
+</span><span>    node_1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span>node_2)</span><span style="color:#bfbab0cc;">;
+</span><span>    node_1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span>node_3)</span><span style="color:#bfbab0cc;">;
+</span><span>    node_2</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span>node_1)</span><span style="color:#bfbab0cc;">;
+</span><span>    node_3</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span>node_1)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Add nodes to graph
+</span><span>    </span><span style="color:#ff7733;">let</span><span> graph </span><span style="color:#f29668;">= </span><span>Arc</span><span style="color:#f29668;">::</span><span>new(Graph</span><span style="color:#f29668;">::</span><span>with_nodes(</span><span style="color:#f07178;">vec!</span><span>[node_1</span><span style="color:#bfbab0cc;">,</span><span> node_2</span><span style="color:#bfbab0cc;">,</span><span> node_3]))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Spawn a new thread that will print information about every node in the
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// graph.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The new scope makes this block more obviously different from the code
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// surrounding it and lets us group variables that will be moved into the
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// new thread, such as &quot;graph&quot;.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> guard </span><span style="color:#f29668;">= </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let</span><span> graph </span><span style="color:#f29668;">=</span><span> graph</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> message </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Failed to acquire a read lock&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>        thread</span><span style="color:#f29668;">::</span><span>spawn(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|| </span><span>{
+</span><span>            </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">_ in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="color:#f29718;">10 </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#5c6773;">// Show every node in the graph and list their neighbors
+</span><span>                </span><span style="color:#ff7733;">for</span><span> node </span><span style="color:#f29668;">in &amp;</span><span>graph</span><span style="color:#f29668;">.</span><span>nodes {
+</span><span>                    </span><span style="color:#ff7733;">let</span><span> node </span><span style="color:#f29668;">=</span><span> node</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">read</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#f29668;">&amp;</span><span>message)</span><span style="color:#bfbab0cc;">;
+</span><span>                    </span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> node</span><span style="color:#f29668;">.</span><span>inner_value</span><span style="color:#bfbab0cc;">;
+</span><span>                    </span><span style="color:#ff7733;">let</span><span> neighbours </span><span style="color:#f29668;">=</span><span> node</span><span style="color:#f29668;">.</span><span>adjacent
+</span><span>                        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()
+</span><span>                        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span>| n</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#f29668;">&amp;</span><span>message)</span><span style="color:#f29668;">.</span><span>inner_value)
+</span><span>                        </span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt;&gt;()</span><span style="color:#bfbab0cc;">;
+</span><span>                    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;node (</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">) is connected to: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> value</span><span style="color:#bfbab0cc;">,</span><span> neighbours)</span><span style="color:#bfbab0cc;">;
+</span><span>                }
+</span><span>                </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;-------------&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="font-style:italic;color:#5c6773;">// Give the main thread a chance to run
+</span><span>                thread</span><span style="color:#f29668;">::</span><span>yield_now()</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>        })
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">_ in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="color:#f29718;">10 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Update the value of every node in the graph
+</span><span>        </span><span style="color:#ff7733;">for</span><span> node </span><span style="color:#f29668;">in &amp;</span><span>graph</span><span style="color:#f29668;">.</span><span>nodes {
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> node </span><span style="color:#f29668;">=</span><span> node</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">write</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Failed to acquire a write lock&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>            node</span><span style="color:#f29668;">.</span><span>inner_value </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">10</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Give the other thread a chance to run
+</span><span>        thread</span><span style="color:#f29668;">::</span><span>yield_now()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Wait for the other thread to end
+</span><span>    guard</span><span style="color:#f29668;">.</span><span style="color:#f07178;">join</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Error joining thread&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вы можете увидеть различия между однопоточной и многопоточной версиями в этом разделе.</p>
+<p>Помимо создания нового потока, который печатает информацию о графике, и нового цикла в основном потоке, который обновляет значения узла, единственными важными отличиями являются:</p>
+<ul>
+<li>Arc&lt;RwLock&lt;<em>&gt;&gt; вместо Rc &lt;RefCell &lt;</em>&gt;&gt;</li>
+<li>Каждый вызов заимствований и заимствований_mut был заменен на чтение и запись соответственно.</li>
+</ul>
+<p>Я рекомендую вам внести эти изменения самостоятельно, начиная с кода предыдущей статьи. Внесение небольших инкрементальных изменений и компиляция промежуточных версий обычно помогает мне интуитивно понять, как работает API.</p>
+<p>Обратите внимание, что, в отличие от заимствования и заимствования_mut, чтение и запись возвращают LockResult, который является псевдонимом типа для Result&lt;Guard, PoisonError <Guard>&gt; и требует от нас сопоставления, разворачивания или ожидания его. Guard автоматически превращается в ссылку, поэтому мы можем практически игнорировать ее.</p>
+<p>По моему опыту, вам редко нужно иметь дело с случаем ошибки для чтения или записи, поскольку это происходит только в том случае, если другой поток с изменяемой ссылкой (то есть успешной записью) паникует. В этом случае у вас есть более серьезная ошибка в другом месте, о которой вам нужно позаботиться.</p>
+<p>И чтение, и запись будут блокировать поток до тех пор, пока он не получит запрошенную блокировку. Поскольку вы, возможно, не захотите ждать бесконечно, вы также можете вместо этого вызвать try_read и try_write, которые не будут блокировать и возвращать ошибку, если они не могут получить блокировку.</p>
+<p>Помимо RwLock, существует также std::sync::Mutex, имя которого происходит от «взаимного исключения», поскольку он гарантирует взаимоисключающий доступ к обернутому значению, то есть только один поток может получить к нему доступ одновременно. Из-за этого всегда безопасно изменять значение после получения к нему доступа.</p>
+<p>Мы можем смотреть на Mutex, как если бы это был RwLock без чтения, способный только давать вызывающему изменяемые ссылки. В этом смысле она более ограничивающая, чем обычная система заимствования или RwLock, которые допускают одновременное использование нескольких считывателей (с неизменяемыми ссылками) или только одного писателя (изменяемая ссылка). Даже если нам нужна невинная неизменяемая ссылка, мы должны получить полное разрешение на внутреннее значение.</p>
+<p>Поскольку существует только один вид заимствования для значений Mutex, чтение и запись заменяются одним методом блокировки, который блокирует поток до тех пор, пока текущий владелец блокировки не освободит его (т. Е. Пока не закончится другое заимствование). Как и в случае с RwLock, если вы не хотите блокировать поток, когда значение недоступно, вы можете вместо этого вызвать try_lock, который либо выдаст вам ссылку на блокировку / изменяемость, либо ошибку (Err) .3</p>
+<h2 id="podschet-ssylok">Подсчет ссылок</h2>
+<p>Как я упоминал ранее, std::rc::Rc не контролирует синхронизацию, что делает его небезопасным для использования несколькими потоками. Его поточно-ориентированным аналогом является Arc, который живет в std::sync вместе с RwLock и Mutex.</p>
+<p>Arc очень похож на Rc, но полагается на AtomicUsize для счетчика ссылок, что делает его безопасным для обновления более чем одним потоком, в отличие от Rc, который использует Cell <usize>. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Rc</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff3333;">?</span><span>Sized&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>Shared&lt;RcBox&lt;T&gt;&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">RcBox</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff3333;">?</span><span>Sized&gt; {
+</span><span>    strong</span><span style="color:#bfbab0cc;">: </span><span>Cell&lt;</span><span style="color:#ff7733;">usize</span><span>&gt;,
+</span><span>    weak</span><span style="color:#bfbab0cc;">: </span><span>Cell&lt;</span><span style="color:#ff7733;">usize</span><span>&gt;,
+</span><span>    value</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Arc</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff3333;">?</span><span>Sized&gt; {
+</span><span>    ptr</span><span style="color:#bfbab0cc;">: </span><span>Shared&lt;ArcInner&lt;T&gt;&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">ArcInner</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff3333;">?</span><span>Sized&gt; {
+</span><span>    strong</span><span style="color:#bfbab0cc;">: </span><span>atomic</span><span style="color:#f29668;">::</span><span>AtomicUsize,
+</span><span>    weak</span><span style="color:#bfbab0cc;">: </span><span>atomic</span><span style="color:#f29668;">::</span><span>AtomicUsize,
+</span><span>    data</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>}
+</span></code></pre>
+<p>API Arc идентичен API Rc, что делает замену одного другим простым делом поиска и замены имени и исправления импорта.</p>
+<h2 id="zakliuchitel-nye-mysli">Заключительные мысли</h2>
+<p>В предыдущей статье мы узнали, что внутренняя изменчивость в Rust может быть достигнута с помощью Cell и RefCell в однопоточных программах, поддерживаемых Rc там, где это необходимо. В этой статье мы увидели, что то же самое можно безопасно сделать в параллельных программах с атомарными типами и RwLock с помощью Arc. </p>
+<table><thead><tr><th></th><th>Single thread</th><th>Multiple threads</th></tr></thead><tbody>
+<tr><td>Копировать значение</td><td>Cell</td><td>Atomic*</td></tr>
+<tr><td>Значение без копирования</td><td>RefCell</td><td>RwLock, Mutex</td></tr>
+<tr><td>Счетчик ссылок</td><td>Rc</td><td>Arc</td></tr>
+</tbody></table>
+<p>В приведенной выше таблице перечислены типы, которые будут использоваться в однопоточных и многопоточных сценариях. </p>
+<table><thead><tr><th>Type of access</th><th>Borrow checker</th><th>RefCell</th><th>RwLock</th><th>Mutex</th></tr></thead><tbody>
+<tr><td>shared / read-only</td><td>&amp;T</td><td>borrow</td><td>read</td><td>-</td></tr>
+<tr><td>exclusive / writable</td><td>&amp;mut T</td><td>borrow_mut</td><td>write</td><td>lock</td></tr>
+</tbody></table>
+<p>Эта вторая таблица подчеркивает сходство между программой проверки заимствований RefCell, RwLock и, в меньшей степени, Mutex.</p>
+<p>Вы можете спросить: «Зачем выбирать RefCell и Rc, если RwLock и Arc имеют идентичную семантику и очень похожие API?»</p>
+<p>К сожалению, типы, которые мы исследовали в этой статье (атомарные типы, RwLock, Mutex и Arc), зависят от примитивов синхронизации с более высокими затратами времени выполнения, чем их наивные аналоги, и мы по возможности стараемся избегать их.</p>
+<p>У нас может быть обычная комбинация Rc и RefCell для переменных, которые не используются другими потоками, и их синхронизированные версии для битов, которые вы хотите распараллелить. Поскольку API и семантика в обоих случаях схожи, у нас не будет больших когнитивных издержек при использовании обоих.</p>
+<p>Еще один важный момент, на который мы также должны обратить внимание, - это семантика упаковки. Например, Arc&lt;Vec&lt;RwLock<T>&gt;&gt; отличается от Arc&lt;RwLock&lt;Vec<T>&gt;&gt;. С первым мы не можем одновременно изменять сам вектор, но мы можем изменять его сохраненные значения. Это следствие того, что Arc реализует Deref, но не DerefMut, что означает, что мы можем получить только неизменяемые ссылки на вектор (который содержит блокируемые элементы). Во второй форме мы получаем неизменяемую ссылку на RwLock, но поскольку она может давать нам оба вида ссылок посредством чтения и записи, мы можем изменять вектор, добавляя или удаляя элементы. Однако мы теряем возможность одновременно изменять значения: как только поток получает изменяемую ссылку на вектор, другим придется ждать, в то время как первая форма позволяет нам иметь один поток, изменяющий каждый элемент параллельно.</p>
+<p>Короче говоря, Arc&lt;Vec&lt;RwLock<T>&gt;&gt; позволяет нам изменять все элементы вектора параллельно, если мы хотим это сделать, в то время как Arc&lt;RwLock&lt;Vec<T>&gt;&gt; позволяет только одному потоку изменять вектор. (и его значения), оставляя другие потоки ожидающими блокировки.</p>
+<p>Если T сам обернут Arc, мы вообще не сможем изменить сохраненные значения (потому что Arc приводит только к неизменяемым ссылкам). Нам понадобится чудовище вроде Arc&lt;RwLock&lt;Vec&lt;Arc&lt;RwLock<T>&gt;&gt;&gt;&gt;, чтобы иметь возможность одновременно изменять вектор и его элементы, но мы должны воспользоваться этим намеком, чтобы переосмыслить, как вы хотите распараллелить свой код.</p>
+<p>Изучение внутренней изменчивости в параллельной среде заставило меня понять, что Rust отличается от других языков в отношении блокировок. В то время как в других языках мы используем блокировки для защиты фрагментов кода, в Rust мы используем их для защиты доступа к данным.</p>
+<p>Вдобавок блокировки настолько похожи в использовании на механизмы заимствования в Rust, что кажутся поточно-ориентированным обобщением этих механизмов. Лично я считаю, что этот способ намного проще рассуждать, чем классический способ C.</p>
+<p>Наконец, я знаю, что это заманчиво, но не стоит бросать повсюду внутреннюю изменчивость только для того, чтобы программа проверки заемных средств заткнулась. Тщательно подумайте, действительно ли ситуация требует внутренней изменчивости или рефакторинга ваших структур данных. Это вдвойне справедливо для параллельных программ, не только потому, что RwLock, Mutex и Arc несут дополнительные затраты времени выполнения, но также потому, что синхронизацию легко испортить и оставить вас в условиях гонки. К счастью, программа проверки займов в Rust дает нам ценные рекомендации и снижает их вероятность. Условия гонки неприятны для отладки, будьте особенно осторожны, чтобы как можно скорее сбросить блокировки.</p>
+<p>Вот и все. Теперь вы знаете достаточно, чтобы эффективно использовать внутреннюю изменчивость в своих программах, будь то однопоточные или многопоточные. Отличная работа! 🎉</p>
+<p>Выражаю благодарность /u/Manishearth, /u/Steel_Neuron и /u/diwic за их отзывы.</p>
+<p>Надеюсь, вы нашли эту статью полезной и/или интересной. Как всегда, если вы обнаружили ошибку или у вас есть какие-либо вопросы, напишите мне в Twitter (@meqif) или отправьте мне электронное письмо (words@ricardomartins.cc). Вы также можете присоединиться к обсуждению на Reddit.</p>
+<ol>
+<li>
+<p>Мы можем реализовать маркерную трэйту или ее отрицание для типа. В настоящее время это работает только с характеристиками маркера, такими как Sync и Send, которые не имеют связанных методов, но предоставляют полезную информацию о типе. Ведется работа по обобщению этой особенности, называемой отрицательными трэйтами, на любую трэйту (rust-lang / rust # 13231).</p>
+</li>
+<li>
+<p>Фактически, чтение и запись вернут Result<RwLockReadGuard> или Result<RwLockWriteGuard> соответственно. RwLockReadGuard реализует Deref, а RwLockWriteGuard реализует как Deref, так и DerefMut, которые прозрачно переводятся в изменяемые (&amp;T) и неизменяемые (&amp;mut T) ссылки соответственно.</p>
+</li>
+<li>
+<p>Подобно RwLock, вызов блокировки на Mutex вернет Result<MutexGuard>, который реализует как Deref, так и DerefMut, и может быть принудительно преобразован в &amp;T или &amp;mut T соответственно. </p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

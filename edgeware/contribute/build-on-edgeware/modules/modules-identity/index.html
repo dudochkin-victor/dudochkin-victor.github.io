@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Модули: Идентификация (Устарело) | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/modules/modules-identity/#edge-identity">edge_identity</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/modules/modules-identity/#nastroika">Настройка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/modules/modules-identity/#zhiznennyi-tsikl-udostovereniia">Жизненный цикл удостоверения</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/modules/modules-identity/#registratsiia"><small>- Регистрация</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/modules/modules-identity/#attestovano"><small>- Аттестовано</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/modules/modules-identity/#provereno"><small>- Проверено</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Модули: Идентификация (Устарело)</h1>
+
+<p><em>Начиная с testnet V0.4.0, эта страница устарела. Пожалуйста, обратитесь к коду для справки.</em></p>
+<h2 id="edge-identity">edge_identity</h2>
+<p>В настоящее время модуль идентификации обрабатывает регистрацию, аттестацию и проверку внешних удостоверений в Edgeware. Типы удостоверений, которые могут быть интересны для регистрации через этот модуль, включают другие адреса блокчейна или открытые ключи, имена пользователей Github, адреса электронной почты и даже номера телефонов. Цель этого модуля — обеспечить максимальную расширяемость для внешних удостоверений в реальном мире или мире блокчейна для взаимодействия с Edgeware.</p>
+<h2 id="nastroika">Настройка</h2>
+<p>Установите rust или обновитесь до последних версий.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl https://sh.rustup.rs -sSf | sh
+</span><span>rustup update nightly
+</span><span>rustup target add wasm32-unknown-unknown --toolchain nightly
+</span><span>rustup update stable
+</span><span>cargo install --git https://github.com/alexcrichton/wasm-gc
+</span></code></pre>
+<p>Вам также потребуется установить следующие пакеты:</p>
+<p>Linux:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>sudo apt install cmake pkg-config libssl-dev git clang libclang-dev
+</span></code></pre>
+<p>Mac:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>brew install cmake pkg-config openssl git llvm
+</span></code></pre>
+<h2 id="zhiznennyi-tsikl-udostovereniia">Жизненный цикл удостоверения</h2>
+<p>Удостоверения в Edgeware проходят через простой конечный автомат:</p>
+<ol>
+<li>«Зарегистрировано»</li>
+<li>«Засвидетельствовано»</li>
+<li>«Проверено»</li>
+</ol>
+<h3 id="registratsiia">Регистрация</h3>
+<p>Внешнее удостоверение в Edgeware сначала запускается в процессе регистрации. Пользователь должен иметь действительный открытый ключ Edgeware и иметь возможность подписывать и отправлять транзакцию на подходящий узел Edgeware. Чтобы зарегистрировать удостоверение, нам требуется только передать тип удостоверения и удостоверение, отформатированное в виде байтовых массивов <code>Vec&lt;u8&gt;</code>, в функцию <code>register</code>. Как только транзакция включается в цепочку Edgeware, эта идентификация становится «Зарегистрированной».</p>
+<h3 id="attestovano">Аттестовано</h3>
+<p>Подтверждение внешнего удостоверения в Edgeware является убедительным доказательством того, что регистратор удостоверения действительно владеет указанным удостоверением. Мы обозначаем регистратора как владельца закрытого ключа Edgeware, отправившего регистрацию внешнего удостоверения. Если аттестующий и регистратор — одно и то же лицо, у них не должно возникнуть проблем с убеждением активного набора «верификаторов», что они на самом деле контролируют внешнюю идентификацию. Аттестация отформатирована как массив байтов <code>Vec&lt;u8&gt;</code>, который должен надежно указывать на URL-адрес или другое приемлемое доказательство контроля.</p>
+<p>Отправитель регистрации и аттестации должен быть одним и тем же. Это помогает смягчить ложные аттестации. Таким образом, блокчейн служит единственным источником достоверной информации о регистрации личности. Верификатор должен только сверяться с доказательством, хранящимся в цепочке, чтобы решить, является ли оно действительным или нет, а не с какой-либо другой формой или представлением аттестации.</p>
+<p>Примеры аттестаций для разных настроек:</p>
+<ol>
+<li>
+<p><strong>Гитхаб</strong></p>
+<p>Идентификацией является «имя пользователя» Github. Регистратор после регистрации имени пользователя должен опубликовать Gist под учетной записью «имя пользователя» со ссылкой на регистрацию в Edgeware.</p>
+</li>
+<li>
+<p><strong>Эфириум</strong></p>
+<p>Идентификатор представляет собой открытый ключ или адрес Ethereum. Регистратор после регистрации имени пользователя может отправить транзакцию со значением 0 на адрес записи, символизирующий открытый ключ соответствующей учетной записи Edgeware, и отправить хэш транзакции в качестве подтверждения. После проверки у верификатора должно быть достаточно доказательств того, что, если владелец учетной записи Ethereum не владеет также учетной записью Edgeware получателя \ (представленной как целевой адрес в Ethereum ), то он не будет выполнять такую ​​транзакцию.</p>
+</li>
+</ol>
+<h3 id="provereno">Проверено</h3>
+<p>Окончательное и постоянное состояние удостоверения в Edgeware в его нынешнем виде — это подтвержденное удостоверение. Поскольку люди по-прежнему могут регистрироваться и подтверждать личность, которую они не контролируют, отправляя ложные доказательства аттестации, они не смогут обмануть активный набор верификаторов. Работа активных верификаторов состоит в том, чтобы проверять доказательства аттестации и голосовать за или против проверки.</p>
+<p>Проверка личности принимается или отклоняется после того, как 2/3 активных верификаторов проголосовали за соответствующий результат. Однажды принятые идентификационные данные остаются проверенными навсегда, если в будущем не будут разработаны процедуры управления для изменения логики.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

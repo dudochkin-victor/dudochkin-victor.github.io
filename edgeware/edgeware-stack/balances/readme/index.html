@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Балансы | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/balances/readme/#format-adresa">Формат адреса</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/balances/readme/#balansirovochnyi-poddon">Балансировочный поддон</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/balances/readme/#ekzistentsial-nyi-depozit">Экзистенциальный депозит</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/balances/readme/#rezervirovanie-balansa">Резервирование баланса</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Балансы</h1>
+
+<p>В этом разделе будет рассказано, как учетные записи и балансы Edgeware и как они представлены в сети.</p>
+<h2 id="format-adresa">Формат адреса</h2>
+<p>У каждой учетной записи Edgeware есть «AccountID». Формат адреса, используемый в цепочках на основе субстрата, — SS58. SS58 — это модификация проверки Base-58 от Биткойн с небольшими изменениями. Все адреса Edgeware начинаются со <strong>строчной буквы</strong>, например j, m, l, i.</p>
+<p>Адреса, принадлежащие конкретной цепочке на основе субстрата, идентифицируются префиксом <em>address type</em>. Для Edgeware этот префикс равен 7.</p>
+<p>Вы можете найти другие сетевые префиксы <a href="https://github.com/paritytech/substrate/wiki/External-Address-Format-%28SS58%29">здесь</a>, вот некоторые примечательные из них:</p>
+<ul>
+<li>Адреса Polkadot всегда начинаются с цифры 1.</li>
+<li>Адреса Kusama всегда начинаются с заглавной буквы, например C, D, F, G, H, J...</li>
+<li>Общие адреса субстрата начинаются с 5.</li>
+</ul>
+<p>Важно понимать, что разные форматы для разных сетей — это просто разные представления одного и того же открытого ключа в паре закрытый-открытый ключ, сгенерированной инструментом генерации адресов. Хотя в настоящее время рекомендуется использовать разные пары открытых и закрытых ключей в разных цепочках, их можно использовать повторно. Адреса совместимы между цепочками на основе субстрата, если вы конвертируете формат. Дополнительную информацию о переносимости адресов в сетях Substrate и Polkadot можно найти <a href="https://wiki.polkadot.network/docs/en/learn-accounts#address-generation-derivation-and-portability">здесь</a>.</p>
+<h2 id="balansirovochnyi-poddon">Балансировочный поддон</h2>
+<p>Палитра балансов определяет EDG, собственный токен для Edgeware. В частности, он определяет элементы хранилища, которые отслеживают токены, которые есть у пользователя, функции, которые пользователи могут вызывать для передачи этих токенов и управления ими, API-интерфейсы, которые позволяют другим модулям сжигать или чеканить эти токены, и хуки, которые позволяют другим поддонам запускать функции, когда баланс пользователя меняется.</p>
+<p>Палитра балансов используется во время выполнения Edgeware. Предоставление цепочке возможности отслеживать голоса руководства и совета, балансы казначейства, получать вознаграждения за стекинг и вносить EDG в контракт и поддон <a href="https://docs.edgewa.re/edgeware-runtime/evm">EVM</a> для работы без разрешения смарт-контракты.</p>
+<h2 id="ekzistentsial-nyi-depozit">Экзистенциальный депозит</h2>
+<p>Когда вы создаете учетную запись (адрес), вы создаете только <em>key</em>, который позволяет вам получить к ней доступ. Аккаунт еще не существует в сети. Для этого ему нужен экзистенциальный депозит: 0,001 EDG. При текущих рыночных ценах это означает, что почти любой человек в мире может иметь учетную запись Edgeware.</p>
+<p>Если учетная запись опускается ниже экзистенциального депозита, эта учетная запись становится <em>пожатой</em>. Учетная запись будет удалена из состояния блокчейна для экономии места вместе со всеми средствами на этом адресе. Вы не теряете доступ к полученному адресу — пока у вас есть свой закрытый ключ или фраза восстановления, вы все еще можете использовать адрес — но для взаимодействия с цепочкой требуется пополнение другого экзистенциального депозита.</p>
+<p>Вот еще один способ думать об экзистенциальных депозитах. Вы когда-нибудь замечали эти файлы <code>Thumbs.db</code> в Windows или файлы <code>.DS_Store</code> в Mac? Это мусор, они не служат никакой конкретной цели, кроме как немного ускорить превью. Если папка полностью пуста, за исключением такого файла, вы можете удалить папку, чтобы очистить жесткий диск от мусора. Это не означает, что вы навсегда потеряете доступ к этой папке — вы всегда можете создать ее заново. В конце концов, у вас есть <em>key</em> - вы владелец компьютера. Это просто означает, что вы хотите сохранить свой компьютер в чистоте до тех пор, пока вам снова не понадобится эта папка, а затем воссоздайте ее. Ваш адрес похож на эту папку - он удаляется из цепочки, когда в нем ничего нет, но возвращается, когда в нем есть хотя бы экзистенциальный депозит.</p>
+<h2 id="rezervirovanie-balansa">Резервирование баланса</h2>
+<p>Когда происходит взаимодействие с другими поддонами, определенные резервы могут быть вызваны балансом отдельного человека. Несколько терминов полезно определить.</p>
+<p>«Всего»: общая сумма EDG на любом адресе.</p>
+<p>«Бесплатно»: общая сумма EDG, которую пользователь может перевести на другую учетную запись. Мы получаем это, вычитая «Всего» из любых «зарезервированных» токенов.</p>
+<p>«Зарезервировано»: количество EDG, которое было использовано другими поддонами. Это будет включать голосование за управление, а также участие в стейкинге. Хотя эти токены по-прежнему принадлежат владельцу учетной записи, они могут быть сокращены другой подсистемой или поддоном. Например, когда пользователь назначает валидатора, он ставит токены для возможности проверки транзакций. В палитре балансов их токены будут «зарезервированы», в случае сокращения эта сумма может быть вычтена из баланса пользователя.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

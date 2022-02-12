@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Разработка на C | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#maket-proekta">Макет проекта</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#kak-postroit">Как построить</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#kak-testirovat">Как тестировать</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#tochka-vkhoda-v-programmu">Точка входа в программу</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#serializatsiia"><small>- Сериализация</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#tipy-dannykh">Типы данных</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#kucha">Куча</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#logirovanie">Логирование</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#raschet-biudzheta">Расчет бюджета</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#el-f-damp">ЭЛЬФ Дамп</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-c/#primery">Примеры</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Разработка на C</h1>
+
+<p>Solana поддерживает написание сетевых программ с использованием языков программирования C и C++.</p>
+<h2 id="maket-proekta">Макет проекта</h2>
+<p>C-проекты расположены следующим образом:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>/src/&lt;program name&gt;
+</span><span>/makefile
+</span></code></pre>
+<p>Makefile должен содержать следующее:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">OUT_DIR</span><span> := </span><span style="color:#f29668;">&lt;</span><span>path to place to resulting shared object</span><span style="color:#f29668;">&gt;
+</span><span style="color:#ffb454;">include </span><span style="font-style:italic;color:#39bae6;">~</span><span>/.local/share/solana/install/active_release/bin/sdk/bpf/c/bpf.mk
+</span></code></pre>
+<p>Bpf-sdk может находиться не в точном месте, указанном выше, но если вы настроите свою среду в соответствии с Как собрать, тогда он должен быть.</p>
+<p>Взгляните на <a href="https://github.com/solana-labs/example-helloworld/tree/master/src/program-c">helloworld</a> для примера программы C.</p>
+<h2 id="kak-postroit">Как построить</h2>
+<p>Сначала настройте среду:</p>
+<ul>
+<li>Установите последнюю стабильную версию Rust с https://rustup.rs</li>
+<li>Установите последние инструменты командной строки Solana с https://docs.solana.com/cli/install-solana-cli-tools.</li>
+</ul>
+<p>Затем соберите с помощью make:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">make</span><span style="color:#f29718;"> -C </span><span style="color:#f29668;">&lt;</span><span>program directory</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<h2 id="kak-testirovat">Как тестировать</h2>
+<p>Solana использует среду тестирования <a href="https://github.com/Snaipe/Criterion">Criterion</a>, и тесты выполняются каждый раз при сборке программы Как построить.</p>
+<p>Чтобы добавить тесты, создайте новый файл рядом с исходным файлом с именем <code>test_&lt;имя программы&gt;.c</code> и заполните его тестовыми примерами критериев. Пример см. в <a href="https://github.com/solana-labs/example-helloworld/blob/master/src/program-c/src/helloworld/test_helloworld.c">тестах helloworld C</a> или в <a href="https://criterion.readthedocs.io/en/master">документах Criterion </a> для получения информации о том, как написать тестовый пример.</p>
+<h2 id="tochka-vkhoda-v-programmu">Точка входа в программу</h2>
+<p>Программы экспортируют известный символ точки входа, который среда выполнения Solana ищет и вызывает при вызове программы. Solana поддерживает несколько <a href="overview.md#versions">версий загрузчика BPF</a>, и точки входа могут различаться между ними. Программы должны быть написаны и развернуты для одного и того же загрузчика. Подробнее см. <a href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80#%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B8">обзор</a>.</p>
+<p>В настоящее время поддерживаются два загрузчика <a href="https://github.com/solana-labs/solana/blob/7ddf10e602d2ed87a9e3737aa8c32f1db9f909d8/sdk/program/src/bpf_loader.rs#L17">BPF Loader</a> и [загрузчик BPF устарел](https: //github.com/solana-labs/solana/blob/7ddf10e602d2ed87a9e3737aa8c32f1db9f909d8/sdk/program/src/bpf_loader_deprecated.rs#L14).</p>
+<p>Они оба имеют одно и то же необработанное определение точки входа, ниже приведен необработанный символ, который ищет и вызывает среда выполнения:</p>
+<pre data-lang="c" style="background-color:#0f1419;color:#bfbab0;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#ff7733;">extern </span><span style="font-style:italic;color:#39bae6;">uint64_t </span><span style="color:#ffb454;">entrypoint</span><span>(</span><span style="color:#ff7733;">const </span><span style="font-style:italic;color:#39bae6;">uint8_t </span><span style="color:#f29668;">*</span><span style="color:#f29718;">input</span><span>)
+</span></code></pre>
+<p>Эта точка входа принимает общий массив байтов, который содержит сериализованные параметры программы (идентификатор программы, учетные записи, данные инструкций и т. д.). Для десериализации параметров каждый загрузчик содержит свою вспомогательную функцию.</p>
+<p>См. <a href="https://github.com/solana-labs/example-helloworld/blob/bc0b25c0ccebeff44df9760ddb97011558b7d234/src/program-c/src/helloworld/helloworld.c#L37">использование точки входа в helloworld</a> в качестве примера как вещи сочетаются друг с другом.</p>
+<h3 id="serializatsiia">Сериализация</h3>
+<p>См. <a href="https://github.com/solana-labs/example-helloworld/blob/bc0b25c0ccebeff44df9760ddb97011558b7d234/src/program-c/src/helloworld/helloworld.c#L43">Helloworld использует функцию десериализации</a>.</p>
+<p>Каждый загрузчик предоставляет вспомогательную функцию, которая десериализует входные параметры программы в типы C:</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/solana_sdk.h#L304">Десериализация загрузчика BPF</a></li>
+<li><a href="https://github.com/solana-labs/solana/blob/8415c22b593f164020adc7afe782e8041d756ddf/sdk/bpf/c/inc/deserialize_deprecated.h#L25">Загрузчик BPF устарел от десериализации</a></li>
+</ul>
+<p>Некоторым программам может потребоваться выполнить десериализацию самостоятельно, и они могут это сделать, предоставив собственную реализацию необработанной точки входа.
+Обратите внимание, что предоставленные функции десериализации сохраняют ссылки на сериализованный массив байтов для переменных, которые программа может изменять (lamports, данные учетной записи). Причина этого в том, что по возвращении загрузчик прочитает эти изменения, чтобы их можно было зафиксировать. Если программа реализует свою собственную функцию десериализации, она должна гарантировать, что любые изменения, которые программа хочет зафиксировать, должны быть записаны обратно во входной массив байтов.</p>
+<p>Подробности о том, как загрузчик сериализует входные данные программы, можно найти в документах <a href="overview.md#input-parameter-serialization">Сериализация входных параметров</a>.</p>
+<h2 id="tipy-dannykh">Типы данных</h2>
+<p>Вспомогательная функция десериализации загрузчика заполняет структуру <a href="https://github.com/solana-labs/solana/blob/8415c22b593f164020adc7afe782e8041d756ddf/sdk/bpf/c/inc/solana_sdk.h#L276">SolParameters</a>:</p>
+<pre data-lang="c" style="background-color:#0f1419;color:#bfbab0;" class="language-c "><code class="language-c" data-lang="c"><span style="font-style:italic;color:#5c6773;">/**
+</span><span style="font-style:italic;color:#5c6773;"> * Structure that the program&#39;s entrypoint input data is deserialized into.
+</span><span style="font-style:italic;color:#5c6773;"> */
+</span><span style="color:#ff7733;">typedef struct </span><span>{
+</span><span>  SolAccountInfo</span><span style="color:#f29668;">*</span><span> ka</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/** Pointer to an array of SolAccountInfo, must already
+</span><span style="font-style:italic;color:#5c6773;">                          point to an array of SolAccountInfos */
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">uint64_t</span><span> ka_num</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/** Number of SolAccountInfo entries in `ka` */
+</span><span>  </span><span style="color:#ff7733;">const </span><span style="font-style:italic;color:#39bae6;">uint8_t </span><span style="color:#f29668;">*</span><span>data</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/** pointer to the instruction data */
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">uint64_t</span><span> data_len</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/** Length in bytes of the instruction data */
+</span><span>  </span><span style="color:#ff7733;">const</span><span> SolPubkey </span><span style="color:#f29668;">*</span><span>program_id</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/** program_id of the currently executing program */
+</span><span>} </span><span style="color:#59c2ff;">SolParameters</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>«ka» — это упорядоченный массив учетных записей, на которые ссылается инструкция и представленный в виде [SolAccountInfo](https://github.com/solana-labs/solana/blob/8415c22b593f164020adc7afe782e8041d756ddf/sdk/bpf/c/inc/solana_sdk. h#L173) структуры. Место счета в массиве указывает на его значение, например, при передаче лэмпортов инструкция может определить первый счет как источник, а второй как место назначения.</p>
+<p>Члены структуры <code>SolAccountInfo</code> доступны только для чтения, за исключением <code>lamports</code> и <code>data</code>. Оба могут быть изменены программой в соответствии с <a href="developing/programming-model/accounts.md#policy">политикой применения во время выполнения</a>. Когда инструкция ссылается на одну и ту же учетную запись несколько раз, в массиве могут быть повторяющиеся записи <code>SolAccountInfo</code>, но обе они указывают на исходный массив входных байтов. Программа должна деликатно обрабатывать эти случаи, чтобы избежать перекрывающихся операций чтения/записи в один и тот же буфер. Если программа реализует собственную функцию десериализации, следует позаботиться о правильной обработке повторяющихся учетных записей.</p>
+<p><code>data</code> - это массив байтов общего назначения из <a href="developing/programming-model/transactions.md#instruction-data">данных инструкции инструкции</a>, которые обрабатываются.</p>
+<p><code>program_id</code> - это открытый ключ выполняемой в данный момент программы.</p>
+<h2 id="kucha">Куча</h2>
+<p>Программы на C могут выделять память с помощью системного вызова <a href="https://github.com/solana-labs/solana/blob/c3d2d2134c93001566e1e56f691582f379b5ae55/sdk/bpf/c/inc/solana_sdk.h#L245"><code>calloc</code></a> или реализовывать свои собственную кучу поверх области кучи размером 32 КБ, начиная с виртуального адреса x300000000. Область кучи также используется <code>calloc</code>, поэтому, если программа реализует свою собственную кучу, она не должна также вызывать <code>calloc</code>.</p>
+<h2 id="logirovanie">Логирование</h2>
+<p>Среда выполнения предоставляет два системных вызова, которые принимают данные и регистрируют их в журналах программы.</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/solana_sdk.h#L128"><code>sol_log(const char*)</code></a></li>
+<li><a href="https://github.com/solana-labs/solana/blob/d2ee9db2143859fa5dc26b15ee6da9c25cc0429c/sdk/bpf/c/inc/solana_sd3k4"><code>sol_log_64(uint64_t, uint64_t, uint64_t, uint64_t, uint64_t)</code></a>#1sd3k4)</li>
+</ul>
+<p>Раздел <a href="debugging.md#logging">debugging</a> содержит дополнительную информацию о работе с журналами программы.</p>
+<h2 id="raschet-biudzheta">Расчет бюджета</h2>
+<p>Для регистрации сообщения, оставшееся количество вычислительных единиц, которые программа может использовать, прежде чем выполнение будет остановлено</p>
+<p>См. <a href="developing/programming-model/runtime.md#compute-budget">вычислить бюджет</a> для получения дополнительной информации.</p>
+<h2 id="el-f-damp">ЭЛЬФ Дамп</h2>
+<p>Внутреннее устройство общего объекта BPF можно сбросить в текстовый файл, чтобы получить более полное представление о составе программы и о том, что она может делать во время выполнения. Дамп будет содержать как информацию об ELF, так и список всех символов и инструкций, которые их реализуют. Некоторые из сообщений журнала ошибок загрузчика BPF будут ссылаться на определенные номера инструкций, в которых произошла ошибка. Эти ссылки можно найти в дампе ELF, чтобы идентифицировать нарушающую инструкцию и ее контекст.</p>
+<p>Чтобы создать файл дампа:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> cd </span><span style="color:#f29668;">&lt;</span><span>program directory</span><span style="color:#f29668;">&gt;
+</span><span style="color:#ffb454;">$</span><span> make dump_</span><span style="color:#f29668;">&lt;</span><span>program name</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<h2 id="primery">Примеры</h2>
+<p>Репозиторий <a href="https://github.com/solana-labs/solana-program-library/tree/master/examples/c">Solana Program Library github</a> содержит коллекцию примеров C</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

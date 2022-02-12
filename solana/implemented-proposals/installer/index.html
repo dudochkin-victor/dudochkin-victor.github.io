@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cluster Software Installation and Updates | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#motiviruiushchie-primery">Мотивирующие примеры</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#poluchite-i-zapustite-gotovyi-ustanovshchik-s-pomoshch-iu-zagruzochnogo-skripta-curl-shell"><small>- Получите и запустите готовый установщик с помощью загрузочного скрипта curl&#x2F;shell</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#poluchite-i-zapustite-predvaritel-no-sozdannyi-ustanovshchik-iz-vypuska-github"><small>- Получите и запустите предварительно созданный установщик из выпуска Github.</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#soberite-i-zapustite-ustanovshchik-iz-iskhodnikov"><small>- Соберите и запустите установщик из исходников</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#razvernite-novoe-obnovlenie-v-klastere"><small>- Разверните новое обновление в кластере</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#zapustite-uzel-proverki-kotoryi-avtomaticheski-obnovliaetsia"><small>- Запустите узел проверки, который автоматически обновляется</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#manifest-obnovleniia-v-seti">Манифест обновления в сети</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#vypusk-soderzhimogo-arkhiva">Выпуск содержимого архива</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#instrument-ustanovki-solana">Инструмент установки solana</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/installer/#interfeis-komandnoi-stroki"><small>- Интерфейс командной строки</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Cluster Software Installation and Updates</h1>
+
+<p>В настоящее время пользователям необходимо самостоятельно собирать программное обеспечение кластера solana из репозитория git и обновлять его вручную, что чревато ошибками и неудобно.</p>
+<p>В этом документе предлагается простая в использовании программа установки и обновления программного обеспечения, которую можно использовать для развертывания готовых двоичных файлов для поддерживаемых платформ. Пользователи могут выбрать использование двоичных файлов, предоставленных Solana или любым другим сторонним поставщиком. Развертывание обновлений управляется с помощью встроенной программы манифеста обновлений.</p>
+<h2 id="motiviruiushchie-primery">Мотивирующие примеры</h2>
+<h3 id="poluchite-i-zapustite-gotovyi-ustanovshchik-s-pomoshch-iu-zagruzochnogo-skripta-curl-shell">Получите и запустите готовый установщик с помощью загрузочного скрипта curl/shell</h3>
+<p>Самый простой способ установки для поддерживаемых платформ:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> curl</span><span style="color:#f29718;"> -sSf</span><span> https://raw.githubusercontent.com/solana-labs/solana/v1.0.0/install/solana-install-init.sh </span><span style="color:#f29668;">| </span><span style="color:#ffb454;">sh
+</span></code></pre>
+<p>Этот скрипт проверит github на наличие последней версии с тегами, загрузит и запустит оттуда двоичный файл solana-install-init.</p>
+<p>Если во время установки необходимо указать дополнительные аргументы, используется следующий синтаксис оболочки:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> init_args=.... </span><span style="font-style:italic;color:#5c6773;"># arguments for `solana-install-init ...`
+</span><span style="color:#ffb454;">$</span><span> curl</span><span style="color:#f29718;"> -sSf</span><span> https://raw.githubusercontent.com/solana-labs/solana/v1.0.0/install/solana-install-init.sh </span><span style="color:#f29668;">| </span><span style="color:#ffb454;">sh</span><span style="color:#f29718;"> -s</span><span> - ${init_args}
+</span></code></pre>
+<h3 id="poluchite-i-zapustite-predvaritel-no-sozdannyi-ustanovshchik-iz-vypuska-github">Получите и запустите предварительно созданный установщик из выпуска Github.</h3>
+<p>Имея общеизвестный URL-адрес выпуска, можно получить готовый двоичный файл для поддерживаемых платформ:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> curl</span><span style="color:#f29718;"> -o</span><span> solana-install-init https://github.com/solana-labs/solana/releases/download/v1.0.0/solana-install-init-x86_64-apple-darwin
+</span><span style="color:#ffb454;">$</span><span> chmod +x ./solana-install-init
+</span><span style="color:#ffb454;">$</span><span> ./solana-install-init</span><span style="color:#f29718;"> --help
+</span></code></pre>
+<h3 id="soberite-i-zapustite-ustanovshchik-iz-iskhodnikov">Соберите и запустите установщик из исходников</h3>
+<p>Если предварительно собранный двоичный файл недоступен для данной платформы, всегда можно собрать установщик из исходного кода:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> git clone https://github.com/solana-labs/solana.git
+</span><span style="color:#ffb454;">$</span><span> cd solana/install
+</span><span style="color:#ffb454;">$</span><span> cargo run</span><span style="color:#f29668;"> --</span><span> --help
+</span></code></pre>
+<h3 id="razvernite-novoe-obnovlenie-v-klastere">Разверните новое обновление в кластере</h3>
+<p>Имея tar-архив релиза solana \ (созданный с помощью ci/publish-tarball.sh`), который уже был загружен по общедоступному URL-адресу, следующие команды развернут обновление:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-keygen new</span><span style="color:#f29718;"> -o</span><span> update-manifest.json  </span><span style="font-style:italic;color:#5c6773;"># &lt;-- only generated once, the public key is shared with users
+</span><span style="color:#ffb454;">$</span><span> solana-install deploy http://example.com/path/to/solana-release.tar.bz2 update-manifest.json
+</span></code></pre>
+<h3 id="zapustite-uzel-proverki-kotoryi-avtomaticheski-obnovliaetsia">Запустите узел проверки, который автоматически обновляется</h3>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-install init</span><span style="color:#f29718;"> --pubkey</span><span> 92DMonmBYXwEMHJ99c9ceRSpAmk9v6i3RdvDdXaVcrfj  </span><span style="font-style:italic;color:#5c6773;"># &lt;-- pubkey is obtained from whoever is deploying the updates
+</span><span style="color:#ffb454;">$</span><span> export PATH=</span><span style="font-style:italic;color:#39bae6;">~</span><span>/.local/share/solana-install/bin:$PATH
+</span><span style="color:#ffb454;">$</span><span> solana-keygen ...  </span><span style="font-style:italic;color:#5c6773;"># &lt;-- runs the latest solana-keygen
+</span><span style="color:#ffb454;">$</span><span> solana-install run solana-validator ...  </span><span style="font-style:italic;color:#5c6773;"># &lt;-- runs a validator, restarting it as necesary when an update is applied
+</span></code></pre>
+<h2 id="manifest-obnovleniia-v-seti">Манифест обновления в сети</h2>
+<p>Манифест обновления используется для объявления о развертывании архивов новых выпусков в кластере solana. Манифест обновления сохраняется с помощью программы <code>config</code>, и каждая учетная запись манифеста обновления описывает логический канал обновления для данной целевой тройки (например, <code>x86_64-apple-darwin</code>). Открытый ключ учетной записи известен между организацией, развертывающей новые обновления, и пользователями, использующими эти обновления.</p>
+<p>Сам архив обновлений размещен в другом месте, вне сети, и его можно получить по указанному <code>download_url</code>.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>use solana_sdk::signature::Signature;
+</span><span>
+</span><span>/// Information required to download and apply a given update
+</span><span>pub struct UpdateManifest {
+</span><span>    pub timestamp_secs: u64, // When the release was deployed in seconds since UNIX EPOCH
+</span><span>    pub download_url: String, // Download URL to the release tar.bz2
+</span><span>    pub download_sha256: String, // SHA256 digest of the release tar.bz2 file
+</span><span>}
+</span><span>
+</span><span>/// Data of an Update Manifest program Account.
+</span><span>#[derive(Serialize, Deserialize, Default, Debug, PartialEq)]
+</span><span>pub struct SignedUpdateManifest {
+</span><span>    pub manifest: UpdateManifest,
+</span><span>    pub manifest_signature: Signature,
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, что само поле <code>manifest</code> содержит соответствующую подпись (<code>manifest_signature</code>) для защиты от атак &quot;человек посередине&quot; между инструментом <code>solana-install</code> и RPC API кластера solana.</p>
+<p>Чтобы защититься от атак с откатом, solana-install откажется устанавливать обновление с более старым значением timestamp_secs, чем то, что установлено в данный момент.</p>
+<h2 id="vypusk-soderzhimogo-arkhiva">Выпуск содержимого архива</h2>
+<p>Ожидается, что архив выпуска будет представлять собой файл tar, сжатый с помощью bzip2, со следующей внутренней структурой:</p>
+<ul>
+<li>
+<p><code>/version.yml</code> - простой файл YAML, содержащий поле <code>&quot;target&quot;</code> - целевой кортеж. Любые дополнительные поля игнорируются.</p>
+</li>
+<li>
+<p><code>/bin/</code> -- каталог, содержащий доступные программы в релизе.</p>
+<p>solana-install создаст символическую ссылку на этот каталог на <code>~/.local/share/solana-install/bin</code> для использования переменной окружения PATH.</p>
+</li>
+<li>
+<p><code>...</code> -- разрешены любые дополнительные файлы и каталоги</p>
+</li>
+</ul>
+<h2 id="instrument-ustanovki-solana">Инструмент установки solana</h2>
+<p>Инструмент solana-install используется пользователем для установки и обновления программного обеспечения своего кластера.</p>
+<p>Он управляет следующими файлами и каталогами в домашнем каталоге пользователя:</p>
+<ul>
+<li><code>~/.config/solana/install/config.yml</code> - конфигурация пользователя и информация о текущей установленной версии программного обеспечения</li>
+<li><code>~/.local/share/solana/install/bin</code> - символическая ссылка на текущий релиз. например, <code>~/.local/share/solana-update/&lt;update-pubkey&gt;-&lt;manifest_signature&gt;/bin</code></li>
+<li><code>~/.local/share/solana/install/releases/&lt;download_sha256&gt;/</code> - содержимое релиза</li>
+</ul>
+<h3 id="interfeis-komandnoi-stroki">Интерфейс командной строки</h3>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-install 0.16.0
+</span><span>The solana cluster software installer
+</span><span>
+</span><span>USAGE:
+</span><span>    solana-install [OPTIONS] &lt;SUBCOMMAND&gt;
+</span><span>
+</span><span>FLAGS:
+</span><span>    -h, --help       Prints help information
+</span><span>    -V, --version    Prints version information
+</span><span>
+</span><span>OPTIONS:
+</span><span>    -c, --config &lt;PATH&gt;    Configuration file to use [default: .../Library/Preferences/solana/install.yml]
+</span><span>
+</span><span>SUBCOMMANDS:
+</span><span>    deploy    deploys a new update
+</span><span>    help      Prints this message or the help of the given subcommand(s)
+</span><span>    info      displays information about the current installation
+</span><span>    init      initializes a new installation
+</span><span>    run       Runs a program while periodically checking and applying software updates
+</span><span>    update    checks for an update, and if available downloads and applies it
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-install-init
+</span><span>initializes a new installation
+</span><span>
+</span><span>USAGE:
+</span><span>    solana-install init [OPTIONS]
+</span><span>
+</span><span>FLAGS:
+</span><span>    -h, --help    Prints help information
+</span><span>
+</span><span>OPTIONS:
+</span><span>    -d, --data_dir &lt;PATH&gt;    Directory to store install data [default: .../Library/Application Support/solana]
+</span><span>    -u, --url &lt;URL&gt;          JSON RPC URL for the solana cluster [default: http://api.devnet.solana.com]
+</span><span>    -p, --pubkey &lt;PUBKEY&gt;    Public key of the update manifest [default: 9XX329sPuskWhH4DQh6k16c87dHKhXLBZTL3Gxmve8Gp]
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-install info
+</span><span>displays information about the current installation
+</span><span>
+</span><span>USAGE:
+</span><span>    solana-install info [FLAGS]
+</span><span>
+</span><span>FLAGS:
+</span><span>    -h, --help     Prints help information
+</span><span>    -l, --local    only display local information, don&#39;t check the cluster for new updates
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-install deploy
+</span><span>deploys a new update
+</span><span>
+</span><span>USAGE:
+</span><span>    solana-install deploy &lt;download_url&gt; &lt;update_manifest_keypair&gt;
+</span><span>
+</span><span>FLAGS:
+</span><span>    -h, --help    Prints help information
+</span><span>
+</span><span>ARGS:
+</span><span>    &lt;download_url&gt;               URL to the solana release archive
+</span><span>    &lt;update_manifest_keypair&gt;    Keypair file for the update manifest (/path/to/keypair.json)
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-install update
+</span><span>checks for an update, and if available downloads and applies it
+</span><span>
+</span><span>USAGE:
+</span><span>    solana-install update
+</span><span>
+</span><span>FLAGS:
+</span><span>    -h, --help    Prints help information
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-install run
+</span><span>Runs a program while periodically checking and applying software updates
+</span><span>
+</span><span>USAGE:
+</span><span>    solana-install run &lt;program_name&gt; [program_arguments]...
+</span><span>
+</span><span>FLAGS:
+</span><span>    -h, --help    Prints help information
+</span><span>
+</span><span>ARGS:
+</span><span>    &lt;program_name&gt;            program to run
+</span><span>    &lt;program_arguments&gt;...    arguments to supply to the program
+</span><span>
+</span><span>The program will be restarted upon a successful software update
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>1. Что мы строим? | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/what-are-we-building/#detsentralizovannyi-twitter">Децентрализованный Twitter</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/what-are-we-building/#predposylki">Предпосылки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/what-are-we-building/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>1. Что мы строим?</h1>
+
+<p><a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/what-are-we-building">Перевод</a> | Автор оригинала: Loris</p>
+<p>ЭПИЗОД 1</p>
+<p>2 МЕСЯЦА НАЗАД</p>
+<p>ЧТЕНИЕ 3 МИН.</p>
+<p>Прежде чем мы углубимся в эту серию, давайте начнем с краткого обзора того, чего мы пытаемся достичь. Я также перечислю несколько предварительных условий, которые должны помочь в продолжении серии, но не беспокойтесь, ничего особенно радикального — в конце концов, мы строим «с нуля».</p>
+<h2 id="detsentralizovannyi-twitter">Децентрализованный Twitter</h2>
+<p>К концу этой серии у нас будет полнофункциональное приложение, похожее на Twitter, где каждый может использовать свой кошелек, чтобы подключиться и начать публиковать твиты.</p>
+<p>Обратите внимание, что я уже развернул этот проект в devnet, так что вы можете немного поиграть.</p>
+<p><a href="https://solana-twitter.netlify.app/">Демо на Solana devnet</a></p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1116-solana-1-intro/solana-twitter-1.png" alt="Screenshot of the Twitter Solana dApp" /></p>
+<p>Вот краткий обзор функций, которые он будет иметь:</p>
+<ul>
+<li>Он сможет интегрироваться с любым из <a href="https://github.com/solana-labs/wallet-adapter#wallets">кошельков в этом списке</a>.</li>
+<li>Пользователи подключат свой кошелек для входа в приложение.</li>
+<li>Вошедшие пользователи смогут отправлять твиты длиной до 280 символов.</li>
+<li>Они также смогут добавить необязательное поле «тема», чтобы облегчить поиск твитов.</li>
+<li>Пользователи смогут читать твиты, не входя в систему.</li>
+<li>Пользователи смогут просматривать все твиты (от всех) или фильтровать результаты поиска по автору или темам.</li>
+</ul>
+<p>По поводу реализации:</p>
+<ul>
+<li>Твиты будут храниться как их собственная учетная запись Solana, поэтому они станут общедоступными в блокчейне.</li>
+<li>При отправке новых твитов пользователи будут платить за транзакцию и хранилище, необходимое для хранения их твита в блокчейне.</li>
+<li>Мы будем использовать платформу Anchor, чтобы улучшить опыт нашего разработчика.</li>
+<li>Мы будем совершать вызовы RPC к блокчейну Solana — через библиотеку JavaScript Anchor — для извлечения и фильтрации твитов в блокчейне.</li>
+</ul>
+<p>Не волнуйтесь, если не все вышеперечисленные пункты вам понятны, мы рассмотрим их в этой серии.</p>
+<p>Кроме того, как только мы реализуем все эти функции, мы, вероятно, будем использовать их в качестве дополнительных статей. Например, мы могли бы позволить пользователям редактировать свои твиты или даже удалять их, чтобы они могли вернуть свои деньги, освобожденные от арендной платы — опять же, мы объясним, что такое «Аренда» и как она работает в Солане в этой серии.</p>
+<p>Ты взволнован? Я в предвкушении! Хорошо, давайте пройдемся по нескольким предварительным условиям и начнем.</p>
+<h2 id="predposylki">Предпосылки</h2>
+<p>Для этой серии не так много предварительных условий, так как мы собираемся создавать все с нуля. Однако некоторые приобретенные знания могут сделать ваше путешествие более плавным, и поэтому о них стоит упомянуть.</p>
+<ul>
+<li><strong>Некоторый опыт программирования</strong>. Это может быть само собой разумеющимся, но мы собираемся создать приложение с нуля, и если у вас нет опыта программирования или у вас очень мало опыта, вы можете начать с более простого руководства, прежде чем отправиться в это путешествие.</li>
+<li><strong>Знания блокчейна на высоком уровне</strong>. Хотя я постараюсь изо всех сил объяснить все концепции Соланы, с которыми мы сталкиваемся, наличие некоторых знаний высокого уровня о том, как работают блокчейны, очень поможет. Если вы еще новичок в мире Web 3, вам может быть полезно прочитать «<a href="https://lorisleiva.com/my-journey-into-web-3">Мое путешествие в Web 3</a>».</li>
+<li><strong>Rust</strong> опыт не требуется. Программы Solana написаны на Rust. Несмотря на то, что Rust обладает некоторыми довольно уникальными функциями, если у вас есть некоторый опыт программирования, вы сможете без особых проблем понять, что делает код Rust. Я обязательно кратко объясню некоторые из его особенностей, когда мы их рассмотрим, и предоставлю ссылки на дополнительную документацию, если вы заинтересованы.</li>
+<li><strong>JavaScript</strong>. Помимо создания нашей программы Solana, мы создадим клиент JavaScript, который с ней взаимодействует. Точнее, мы создадим одностраничное приложение Vue 3 (SPA) для нашего внешнего интерфейса. Этот курс не посвящен созданию внешнего интерфейса, поэтому я очень быстро пройдусь по созданию внешнего интерфейса, но некоторые знания JavaScript/Vue 3 будут для вас ценным активом.</li>
+</ul>
+<h2 id="vyvod">Вывод</h2>
+<p>Демо... проверить! Предпосылки... проверить! <a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/getting-started-with-solana-and-anchor">В следующем выпуске</a> мы удостоверимся, что на нашей локальной машине есть все ему нужно начать работать с Solana и ее самым популярным фреймворком: Anchor.</p>
+<p>И последнее важное замечание: проект, который мы создаем, имеет открытый исходный код и уже доступен на GitHub. Итак, если вам не терпится ознакомиться с кодом, вот ссылка.</p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/tree/first-build">Посмотреть Твиттер Соланы на GitHub</a></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Почему вам стоит изучить язык программирования Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#rust-i-ee-genealogiia">Rust и ее генеалогия</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#kliuchevye-kontseptsii-v-rust">Ключевые концепции в Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#kod-mnogokratnogo-ispol-zovaniia-cherez-moduli"><small>- Код многократного использования через модули</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#proverki-bezopasnosti-dlia-koda-ochistki"><small>- Проверки безопасности для кода очистки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#luchshaia-obrabotka-oshibok"><small>- Лучшая обработка ошибок</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#podderzhka-parallelizma-i-potokov"><small>- Поддержка параллелизма и потоков</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#podderzhka-slozhnykh-tipov-dannykh-kollektsii"><small>- Поддержка сложных типов данных (коллекций)</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#ustanovka-rust-i-ego-instrumentov">Установка Rust и его инструментов</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#osobennosti-windows"><small>- Особенности Windows</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/why-you-should-learn-the-rust-programming-language/#chto-dal-she">Что дальше</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Почему вам стоит изучить язык программирования Rust</h1>
+
+<p><a href="https://developer.ibm.com/articles/os-developers-know-rust/">Перевод</a> | Автор оригинала: M. Tim Jones</p>
+<p>Откройте для себя историю, ключевые концепции и инструменты использования Rust</p>
+<p>Недавний опрос Stack Overflow показал, что многим разработчикам нравится использовать язык Rust или он хочет разрабатывать на нем. Это невероятное число! Итак, что же такого хорошего в Rust? В этой статье исследуются основные трэйты этого C-подобного языка и объясняется, почему он должен быть следующим в вашем списке языков для изучения.</p>
+<h2 id="rust-i-ee-genealogiia">Rust и ее генеалогия</h2>
+<p>Во-первых, давайте начнем с небольшого урока истории. Rust - новый язык по сравнению со своими предшественниками (в первую очередь C, который предшествовал ему на 38 лет), но его генеалогия создает его мультипарадигмальный подход. Rust считается C-подобным языком, но другие функции, которые он включает, создают преимущества по сравнению с его предшественниками (см. Рисунок 1).</p>
+<p>Во-первых, Rust находится под сильным влиянием Cyclone (безопасный диалект C и императивный язык) с некоторыми аспектами объектно-ориентированных функций C++. Но он также включает в себя функциональные возможности таких языков, как Haskell и OCaml. Результатом стал C-подобный язык, поддерживающий многопарадигмальное программирование (императивное, функциональное и объектно-ориентированное).</p>
+<p><img src="/imgs/posts/d15468a6_01.png" alt="Rust и его генеалогическое древо" /></p>
+<p>Хронология исходных языков, ведущих к языку программирования Rust</p>
+<h2 id="kliuchevye-kontseptsii-v-rust">Ключевые концепции в Rust</h2>
+<p>Rust имеет множество функций, которые делают его полезным, но разработчики и их потребности различаются. Я раскрываю пять ключевых концепций, которые делают Rust достойным изучения, и показываю эти идеи в исходном коде Rust.</p>
+<p>Во-первых, чтобы почувствовать код, давайте посмотрим на каноническую программу «Hello World», которая просто отправляет это сообщение пользователю (см. Листинг 1).</p>
+<p>Листинг 1. «Hello World» в Rust </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>()
+</span><span>{
+</span><span>   </span><span style="color:#f07178;">println!</span><span>( </span><span style="color:#c2d94c;">&quot;Hello World.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Эта простая программа, похожая на C, определяет основную функцию, которая является назначенной точкой входа для программы (а она есть в каждой программе). Функция определяется ключевым словом fn, за которым следует необязательный набор параметров в круглых скобках (()). Фигурные скобки ({}) очерчивают функцию; эта функция состоит из вызова функции println! макрос, который выводит на консоль форматированный текст (stdout), как определено строковым параметром.</p>
+<p>Rust включает в себя множество функций, которые делают его интересным и стоящим вложений. Вы найдете такие концепции, как модули для повторного использования, безопасность и гарантии памяти (безопасные и небезопасные операции), невосстановимые и исправимые функции обработки ошибок, поддержка параллелизма и сложные типы данных (называемые коллекциями).</p>
+<h3 id="kod-mnogokratnogo-ispol-zovaniia-cherez-moduli">Код многократного использования через модули</h3>
+<p>Rust позволяет вам организовать код таким образом, чтобы его можно было повторно использовать. Вы добиваетесь такой организации, используя модули, которые содержат функции, структуры и даже другие модули, которые вы можете сделать общедоступными (то есть открытыми для пользователей модуля) или частными (то есть использовать только внутри модуля, а не самим модулем). пользователи - по крайней мере, не напрямую). Модуль организует код как пакет, который могут использовать другие.</p>
+<p>Вы используете три ключевых слова для создания модулей, использования модулей и изменения видимости элементов в модулях.</p>
+<ul>
+<li>Ключевое слово mod создает новый модуль</li>
+<li>Ключевое слово use позволяет использовать модуль (выставить определения в область видимости, чтобы использовать их)</li>
+<li>Ключевое слово pub делает элементы модуля общедоступными (в противном случае они становятся частными).</li>
+</ul>
+<p>В листинге 2 представлен простой пример. Он начинается с создания нового модуля, называемого битами, который содержит три функции. Первая функция, называемая pos, является частной функцией, которая принимает аргумент u32 и возвращает u32 (как указано стрелкой -&gt;), которое представляет собой значение 1, сдвинутое влево бит раз. Обратите внимание, что ключевое слово возврата здесь не требуется. Это значение вызывается двумя общедоступными функциями (обратите внимание на ключевое слово pub): десятичной и шестнадцатеричной. Эти функции вызывают функцию private pos и выводят значение позиции бита в десятичном или шестнадцатеричном формате (обратите внимание на использование: x для обозначения шестнадцатеричного формата). Наконец, он объявляет основную функцию, которая вызывает две общедоступные функции модуля бит, с выводом, показанным в конце листинга 2 в виде комментариев.</p>
+<p>Листинг 2. Пример простого модуля в Rust </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">bits </span><span>{
+</span><span>   </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">pos</span><span>(</span><span style="color:#f29718;">bit</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) ‑</span><span style="color:#f29668;">&gt; </span><span style="color:#ff7733;">u32 </span><span>{
+</span><span>      </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">&lt;&lt;</span><span> bit
+</span><span>   }
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">decimal</span><span>(</span><span style="color:#f29718;">bit</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) {
+</span><span>      </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Bits decimal </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">pos</span><span>(bit))</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">hex</span><span>(</span><span style="color:#f29718;">bit</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) {
+</span><span>      </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Bits decimal 0x</span><span style="color:#f29718;">{:x}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">pos</span><span>(bit))</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>( ) {
+</span><span>   bits</span><span style="color:#f29668;">::</span><span>decimal(</span><span style="color:#f29718;">8</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>   bits</span><span style="color:#f29668;">::</span><span>hex(</span><span style="color:#f29718;">8</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Bits decimal 256
+</span><span style="font-style:italic;color:#5c6773;">// Bits decimal 0x100
+</span></code></pre>
+<p>Модули позволяют собирать функциональные возможности общедоступными или частными способами, но вы также можете связывать методы с объектами с помощью ключевого слова impl.</p>
+<h3 id="proverki-bezopasnosti-dlia-koda-ochistki">Проверки безопасности для кода очистки</h3>
+<p>Компилятор Rust обеспечивает гарантии безопасности памяти и другие проверки, которые делают язык программирования безопасным (в отличие от C, который может быть небезопасным). Итак, в Rust вам никогда не придется беспокоиться о зависших указателях или использовании объекта после того, как он был освобожден. Эти вещи являются частью основного языка Rust. Но в таких областях, как встраиваемая разработка, важно размещать структуру по адресу, который представляет собой набор аппаратных регистров.</p>
+<p>Rust включает ключевое слово unsafe, с помощью которого вы можете отключить проверки, которые обычно приводят к ошибке компиляции. Как показано в листинге 3, ключевое слово unsafe позволяет объявить небезопасный блок. В этом примере я объявляю неизменяемую переменную x, а затем указатель на эту переменную с именем raw. Затем, чтобы отменить ссылку на необработанный файл (который в этом случае будет выводить на консоль 1), я использую ключевое слово unsafe, чтобы разрешить эту операцию, которая в противном случае была бы помечена при компиляции.</p>
+<p>Листинг 3. Небезопасные операции в Rust </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>   </span><span style="color:#ff7733;">let</span><span> rawp </span><span style="color:#f29668;">= &amp;</span><span>a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">const i32</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">unsafe </span><span>{
+</span><span>      </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;rawp is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> rawp)</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>}
+</span></code></pre>
+<p>Вы можете применять ключевое слово unsafe к функциям, а также к блокам кода внутри функции Rust. Ключевое слово чаще всего используется при написании привязок к функциям, отличным от Rust. Эта функция делает Rust полезным для таких вещей, как разработка операционных систем или встраиваемое (голое железо) программирование.</p>
+<h3 id="luchshaia-obrabotka-oshibok">Лучшая обработка ошибок</h3>
+<p>Ошибки случаются независимо от того, какой язык программирования вы используете. В Rust ошибки делятся на два лагеря: неисправимые ошибки (плохие) и исправимые ошибки (неплохие).</p>
+<h4 id="neustranimye-oshibki">Неустранимые ошибки</h4>
+<p>Rust паника! Функция аналогична макросу assert C. Он генерирует выходные данные, чтобы помочь пользователю отладить проблему (а также остановить выполнение до того, как произойдут более катастрофические события). Паника! Функция показана в листинге 4 с ее исполняемым выводом в комментариях.</p>
+<p>Листинг 04. Паническая обработка неисправимых ошибок в Rust! </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#f07178;">panic!</span><span>(</span><span style="color:#c2d94c;">&quot;Bad things happening.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// thread &#39;main&#39; panicked at &#39;Bad things happening.&#39;, panic.rs:2:4
+</span><span style="font-style:italic;color:#5c6773;">// note: Run with RUST_BACKTRACE=1 for a backtrace.
+</span></code></pre>
+<p>Из выходных данных вы можете видеть, что среда выполнения Rust указывает, где именно возникла проблема (строка 2), и отправила предоставленное сообщение (которое может содержать более описательную информацию). Как указано в выходном сообщении, вы можете сгенерировать трассировку стека, запустив специальную переменную окружения RUST_BACKTRACE. Вы также можете вызвать панику! внутренне на основе обнаруживаемых ошибок (таких как доступ к недопустимому индексу вектора).</p>
+<h4 id="ispravimye-oshibki">Исправимые ошибки</h4>
+<p>Обработка исправимых ошибок - стандартная часть программирования, и Rust включает удобную функцию для проверки ошибок (см. Листинг 5). Взгляните на эту функцию в контексте файловой операции. Функция File::open возвращает тип Result&lt;T, E&gt;, где T и E представляют параметры универсального типа (в этом контексте они представляют std::fs::File и std::io::Error). Итак, когда вы вызываете File::open и никаких ошибок не произошло (E - это нормально), T будет представлять тип возвращаемого значения (std::fs::File). Если произошла ошибка, E будет представлять тип возникшей ошибки (с использованием типа std::io::Error). (Обратите внимание, что в моей файловой переменной <em>f используется символ подчеркивания [</em>], чтобы опустить предупреждение о неиспользуемой переменной, сгенерированное компилятором.)</p>
+<p>Затем я использую специальную функцию в Rust, называемую match, которая похожа на оператор switch в C, но более эффективна. В этом контексте я сравниваю _f с возможными значениями ошибок (Ok и Err). Для Ok я возвращаю файл на переуступку; вместо Err я использую panic !.</p>
+<p>Листинг 5. Обработка исправимых ошибок в Rust с помощью Result&lt;t, e&gt; </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fs</span><span style="color:#f29668;">::</span><span>File</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let</span><span> _f </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(</span><span style="color:#c2d94c;">&quot;file.txt&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">let</span><span> _f </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> _f {
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(file) </span><span style="color:#f29668;">=&gt;</span><span> file</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(why) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">panic!</span><span>(</span><span style="color:#c2d94c;">&quot;Error opening the file {:?}&quot;</span><span style="color:#bfbab0cc;">,</span><span> why)</span><span style="color:#bfbab0cc;">,
+</span><span>   }</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// thread &#39;main&#39; panicked at &#39;Error opening the file Error { repr: Os 
+</span><span style="font-style:italic;color:#5c6773;">// { code: 2, message: &quot;No such file or directory&quot; } }&#39;, recover.rs:8:23
+</span><span style="font-style:italic;color:#5c6773;">// note: Run with RUST_BACKTRACE=1 for a backtrace.
+</span></code></pre>
+<p>Исправимые ошибки упрощаются в Rust, когда вы используете перечисление Result; они еще более упрощены за счет использования match. Также обратите внимание на отсутствие в этом примере операции File::close: файл автоматически закрывается, когда область действия _f заканчивается.</p>
+<h3 id="podderzhka-parallelizma-i-potokov">Поддержка параллелизма и потоков</h3>
+<p>Параллелизм обычно сопровождается проблемами (например, гонка данных и взаимоблокировки). Rust предоставляет средства для создания потоков с помощью собственной операционной системы, но также пытается смягчить негативные эффекты многопоточности. Rust включает передачу сообщений, позволяющую потокам общаться друг с другом (через send и recv, а также через мьютексы). Rust также предоставляет возможность разрешить потоку заимствовать значение, что дает ему право владения и эффективно передает область действия значения (и его владение) новому потоку. Таким образом, Rust обеспечивает безопасность памяти наряду с параллелизмом без гонок данных.</p>
+<p>Рассмотрим простой пример многопоточности в Rust, который вводит некоторые новые элементы (векторные операции) и возвращает некоторые ранее обсуждавшиеся концепции (сопоставление с образцом). В листинге 6 я начинаю с импорта пространств имен thread и Duration в свою программу. Затем я объявляю новую функцию my_thread, которая представляет поток, который я создам позже. В этом потоке я просто передаю идентификатор потока, а затем засыпаю на короткое время, чтобы планировщик разрешил запуск другого потока.</p>
+<p>Моя основная функция - это суть этого примера. Я начинаю с создания пустого изменяемого вектора, который я могу использовать для хранения значений одного и того же типа. Затем я создаю 10 потоков с помощью функции spawn и помещаю полученный дескриптор соединения в вектор (подробнее об этом позже). Этот пример порождения отсоединен от текущего потока, что позволяет потоку жить после выхода из родительского потока. После отправки короткого сообщения из родительского потока я, наконец, перебираю вектор типов JoinHandle и жду завершения каждого дочернего потока. Для каждого JoinHandle в векторе я вызываю функцию соединения, которая ожидает выхода этого потока перед продолжением. Если функция соединения возвращает ошибку, я обнаружу эту ошибку с помощью вызова сопоставления.</p>
+<p>Листинг 6. Потоки в Rust </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">mythread</span><span>() {
+</span><span>   </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Thread </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;"> is running&quot;</span><span style="color:#bfbab0cc;">, </span><span>std</span><span style="color:#f29668;">::</span><span>thread</span><span style="color:#f29668;">::</span><span>current()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">id</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>   thread</span><span style="color:#f29668;">::</span><span>sleep(Duration</span><span style="color:#f29668;">::</span><span>from_millis(</span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>   </span><span style="color:#ff7733;">let mut</span><span> v </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">for</span><span> _i </span><span style="color:#f29668;">in </span><span style="color:#f29718;">1</span><span style="color:#f29668;">..</span><span style="color:#f29718;">10 </span><span>{
+</span><span>      v</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>( thread</span><span style="color:#f29668;">::</span><span>spawn(|| { </span><span style="color:#f07178;">my_thread</span><span>()</span><span style="color:#bfbab0cc;">; </span><span>} ) )</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>
+</span><span>   </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;main() waiting.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">for</span><span> child </span><span style="color:#f29668;">in</span><span> v {
+</span><span>      </span><span style="color:#ff7733;">match</span><span> child</span><span style="color:#f29668;">.</span><span style="color:#f07178;">join</span><span>() {
+</span><span>         </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>() </span><span style="color:#f29668;">=&gt;</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>         </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(why) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Join failure </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> why)</span><span style="color:#bfbab0cc;">,
+</span><span>      }</span><span style="color:#bfbab0cc;">;
+</span><span>   }
+</span><span>}
+</span></code></pre>
+<p>При выполнении я вижу результат, представленный в листинге 7. Обратите внимание, что основной поток продолжал выполняться до тех пор, пока не начался процесс соединения. Затем потоки выполнялись и завершались в разное время, что указывает на асинхронный характер потоков.</p>
+<p>Листинг 7. Вывод потока из примера кода в листинге 6.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>main() waiting.
+</span><span>Thread ThreadId(7) is running
+</span><span>Thread ThreadId(9) is running
+</span><span>Thread ThreadId(8) is running
+</span><span>Thread ThreadId(6) is running
+</span><span>Thread ThreadId(5) is running
+</span><span>Thread ThreadId(4) is running
+</span><span>Thread ThreadId(3) is running
+</span><span>Thread ThreadId(2) is running
+</span><span>Thread ThreadId(1) is running
+</span></code></pre>
+<h3 id="podderzhka-slozhnykh-tipov-dannykh-kollektsii">Поддержка сложных типов данных (коллекций)</h3>
+<p>Стандартная библиотека Rust включает несколько популярных и полезных структур данных, которые вы можете использовать при разработке, включая четыре типа структур данных: последовательности, карты, наборы и разные типы.</p>
+<p>Для последовательностей вы можете использовать векторный тип (Vec), который я использовал в примере многопоточности. Этот тип предоставляет массив с динамически изменяемым размером и полезен для сбора данных для последующей обработки. Структура VecDeque похожа на структуру Vec, но вы можете вставить ее на обоих концах последовательности. Структура LinkedList аналогична структуре Vec, но с ее помощью вы можете разделять и добавлять списки.</p>
+<p>Для карт у вас есть структуры HashMap и BTreeMap. Вы используете структуру HashMap для создания пар ключ-значение, и вы можете ссылаться на элементы по их ключу (для получения значения). BTreeMap похож на HashMap, но может сортировать ключи, и вы можете легко перебирать все записи.</p>
+<p>Для наборов у вас есть структуры HashSet и BTreeSet (которые, как вы заметите, следуют за структурами карт). Эти структуры полезны, когда у вас нет значений (только ключи) и вы легко можете вспомнить вставленные ключи.</p>
+<p>Наконец, разная структура в настоящее время - это BinaryHeap. Эта структура реализует приоритетную очередь с двоичной кучей.</p>
+<h2 id="ustanovka-rust-i-ego-instrumentov">Установка Rust и его инструментов</h2>
+<p>Один из самых простых способов установить Rust - использовать curl через установочный скрипт. Просто выполните следующую строку из командной строки Linux®: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>curl -sSf https://static.rust-lang.org/rustup.sh | sh
+</span></code></pre>
+<p>Эта строка передает сценарий оболочки rustup с rust-lang.org, а затем передает сценарий оболочке для выполнения. По завершении вы можете выполнить rustc -v, чтобы показать установленную вами версию Rust. Установив Rust, вы можете поддерживать его с помощью утилиты rustup, которую вы также можете использовать для обновления вашей установки Rust.</p>
+<p>Компилятор Rust называется rustc. В показанных здесь примерах процесс сборки просто определяется как: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>rustc threads.rs
+</span></code></pre>
+<p>… Где компилятор Rust создает собственный исполняемый файл, называемый потоками. Вы можете символически отлаживать программы на Rust, используя rust-lldb или rust-gdb.</p>
+<p>Вы, наверное, заметили, что программы на Rust, которые я здесь продемонстрировал, имеют уникальный стиль. Вы можете изучить этот стиль с помощью автоматического форматирования исходного кода Rust с помощью утилиты rustfmt. Эта утилита, выполняемая с именем исходного файла, автоматически форматирует ваш источник в единообразном стандартизованном стиле.</p>
+<p>Наконец, хотя Rust довольно строг в том, что он принимает в качестве исходного кода, вы можете использовать программу rust-clippy, чтобы глубже погрузиться в исходный код и выявить элементы плохой практики. Думайте о rust-clippy как о служебной программе C. lint.</p>
+<h3 id="osobennosti-windows">Особенности Windows</h3>
+<p>В Windows Rust дополнительно требует инструментов сборки C++ для Visual Studio 2013 или новее. Самый простой способ получить инструменты сборки - это установить Microsoft Visual C++ Build Tools 2017, который предоставляет только инструменты сборки Visual C++. Кроме того, вы можете установить Visual Studio 2017, Visual Studio 2015 или Visual Studio 2013 и во время установки выбрать инструменты C++.</p>
+<p>Для получения дополнительной информации о настройке Rust в Windows см. Документацию по rustup для Windows.</p>
+<h2 id="chto-dal-she">Что дальше</h2>
+<p>В середине февраля 2018 года команда Rust выпустила версию 1.24. Эта версия включает инкрементную компиляцию, автоматическое форматирование исходного кода с помощью rustfmt, новые оптимизации и стабилизацию библиотеки. Вы можете узнать больше о Rust и его развитии в блоге Rust и загрузить Rust с веб-сайта Rust Language. Там вы можете прочитать о многих других функциях, которые предлагает Rust, включая сопоставление с образцом, итераторы, замыкания и интеллектуальные указатели. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

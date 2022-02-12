@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Комплексные вычислительные сборы | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#motivatsiia">Мотивация</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#predlozhennoe-reshenie">Предложенное решение</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#platezh"><small>- Платеж</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#model-zatrat"><small>- Модель затрат</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#keshirovat-razmery-uchetnykh-zapisei-i-ispol-zovat-ikh-vmesto-maksimal-nykh"><small>- Кэшировать размеры учетных записей и использовать их вместо максимальных</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#ogranicheniia-vychislitel-nykh-resursov-dlia-vsei-tranzaktsii"><small>- Ограничения вычислительных ресурсов для всей транзакции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#zaprashivaemye-ogranicheniia-biudzheta-vychislenii-i-razmery-kuchi"><small>- Запрашиваемые ограничения бюджета вычислений и размеры кучи</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#plata-za-sboi-predvaritel-no-skompilirovannoi-programmy"><small>- Плата за сбои предварительно скомпилированной программы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#regulirovanie-stavok"><small>- Регулирование ставок</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/comprehensive-compute-fees/#determinirovannye-sbory"><small>- Детерминированные сборы</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Комплексные вычислительные сборы</h1>
+
+<h2 id="motivatsiia">Мотивация</h2>
+<p>В текущей структуре комиссий отсутствует исчерпывающий учет работы, необходимой валидатору для обработки транзакции. Структура комиссии основана только на количестве подписей в транзакции, но предназначена для учета работы, которую должен выполнить валидатор для проверки каждой транзакции. Валидатор выполняет гораздо больше определяемой пользователем работы, чем просто проверка подписи. Обработка транзакции обычно включает проверку подписи, блокировку учетной записи, загрузку учетной записи и обработку инструкций.</p>
+<h2 id="predlozhennoe-reshenie">Предложенное решение</h2>
+<p>В следующем решении не указано, какие собственные затраты на токены должны быть связаны с новой структурой сборов. Вместо этого он устанавливает критерии и предоставляет ручки, которые модель затрат может использовать для определения этих затрат.</p>
+<h3 id="platezh">Платеж</h3>
+<p>Цель сборов — покрыть вычислительные затраты на обработку транзакции. Каждая из приведенных ниже категорий комиссий будет представлена ​​как стоимость вычислительной единицы, которая при суммировании включает полную стоимость обработки транзакции. Рассчитывая общую стоимость транзакции, среда выполнения может взимать более репрезентативную комиссию и принимать более эффективные решения по планированию транзакций.</p>
+<p>Плата будет рассчитываться исходя из:</p>
+<ol>
+<li>Количество подписей
+<ul>
+<li>Фиксированная ставка за подпись</li>
+</ul>
+</li>
+<li>Количество блокировок записи
+<ul>
+<li>Фиксированная ставка за перезаписываемую учетную запись</li>
+</ul>
+</li>
+<li>Стоимость байта данных
+<ul>
+<li>Фиксированная скорость за байт суммы длин всех данных инструкций по транзакциям</li>
+</ul>
+</li>
+<li>Размеры аккаунта
+<ul>
+<li>Размеры счетов не могут быть известны заранее, но могут составлять значительную часть нагрузки, которую транзакция несет в сети. С плательщика будет взиматься плата за максимальный размер счета (10 млн) авансом, а разница будет возмещена после того, как станут известны фактические размеры счета.</li>
+</ul>
+</li>
+<li>Рассчитать бюджет
+<ul>
+<li>Каждой транзакции будет предоставлен бюджет вычислений по умолчанию для всей транзакции в размере 200 000 единиц с возможностью запроса большего бюджета с помощью инструкции по бюджету вычислений, но не более 1 млн единиц. Этот бюджет используется для ограничения времени, необходимого для обработки транзакции. Часть платы за бюджет вычислений будет взиматься авансом на основе суммы по умолчанию или запрошенной суммы. После обработки будет известно фактическое количество потребленных единиц, а плательщику будет возвращена разница, поэтому плательщик платит только за то, что использовал. Встроенные программы будут иметь фиксированную стоимость, в то время как стоимость программы BPF будет измеряться во время выполнения.</li>
+</ul>
+</li>
+<li>Предварительно скомпилированные программы
+<ul>
+<li>Предварительно скомпилированные программы выполняют ресурсоемкие операции. Работа, выполняемая предварительно скомпилированной программой, предсказуема на основе массива данных инструкции. Следовательно, стоимость будет назначена для каждой предварительно скомпилированной программы на основе анализа данных инструкции. Поскольку предварительно скомпилированные программы обрабатываются вне банка, стоимость их вычислений не будет отражаться в бюджете вычислений и не будет использоваться при принятии решений о планировании транзакций. Методы, используемые для определения фиксированной стоимости вышеуказанных компонентов, описаны в <a href="https://github.com/solana-labs/solana/issues/19627">#19627</a>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="model-zatrat">Модель затрат</h3>
+<p>Модель стоимости используется для оценки нагрузки на транзакцию во время обработки в слоте, а затем для принятия решений о том, как лучше всего запланировать транзакцию на пакеты.</p>
+<p>Критерии стоимостной модели идентичны критериям платы, за исключением подписей и предварительно скомпилированных программ. Эти две затраты возникают до того, как транзакция запланирована, и поэтому не влияют на то, сколько времени занимает обработка транзакции в слоте.</p>
+<h3 id="keshirovat-razmery-uchetnykh-zapisei-i-ispol-zovat-ikh-vmesto-maksimal-nykh">Кэшировать размеры учетных записей и использовать их вместо максимальных</h3>
+<p>https://github.com/solana-labs/solana/issues/20511</p>
+<h3 id="ogranicheniia-vychislitel-nykh-resursov-dlia-vsei-tranzaktsii">Ограничения вычислительных ресурсов для всей транзакции</h3>
+<p>Текущие ограничения бюджета вычислений независимо применяются к каждой инструкции в рамках транзакции. Это означает, что общий предел транзакции зависит от количества инструкций в транзакции. Для более точного планирования транзакции бюджет вычислений будет применяться ко всей транзакции. Одна из проблем, связанных с ограничением для всей транзакции, заключается в том, что каждая инструкция (программа) больше не может рассчитывать на получение равного количества вычислительных единиц. Каждой инструкции будут предоставлены оставшиеся единицы, оставшиеся после обработки предыдущих инструкций. Это создаст некоторые дополнительные проблемы с настройкой и компоновкой для разработчиков.</p>
+<h3 id="zaprashivaemye-ogranicheniia-biudzheta-vychislenii-i-razmery-kuchi">Запрашиваемые ограничения бюджета вычислений и размеры кучи</h3>
+<p>Предварительно скомпилированный <a href="https://github.com/solana-labs/solana/blob/00929f836348d76cb3503d0ba5f76f0d275bcc66/sdk/src/compute_budget.rs#L34">ComputeBudget</a>
+программа может использоваться для запроса более высоких пределов вычислительного бюджета для всей транзакции и размеров программной кучи. Запрошенное увеличение будет отражено в комиссии за транзакцию.</p>
+<h3 id="plata-za-sboi-predvaritel-no-skompilirovannoi-programmy">Плата за сбои предварительно скомпилированной программы</h3>
+<p>https://github.com/solana-labs/solana/issues/20481</p>
+<h3 id="regulirovanie-stavok">Регулирование ставок</h3>
+<p>Текущее регулирование ставок нуждается в переоценке. Плата регулируется до минимума, потому что количество подписей в каждом слоте намного меньше, чем «целевые» подписи на слот.</p>
+<p>Вместо того, чтобы использовать количество подписей для управления рейтингом, модель затрат будет возвращать информацию на основе наблюдаемой загрузки пакетов/очередей. Сборы будут установлены на целевой ставке и будут увеличиваться только в том случае, если нагрузка превысит указанный порог, который еще предстоит определить. Регулирование будет применяться ко всем критериям оплаты.</p>
+<h3 id="determinirovannye-sbory">Детерминированные сборы</h3>
+<p>В настоящее время сборы Соланы детерминированы в зависимости от заданного хэша. Этот детерминизм — хорошая функция, упрощающая взаимодействие с клиентом. Например, при списании средств со счета, который также является плательщиком, эмитент транзакции может предварительно вычислить комиссию, а затем установить весь оставшийся баланс для перевода, не беспокоясь о том, что комиссия изменится, и на счету останется очень небольшая сумма. Другим примером является автономная подпись: подписывающий плательщик может гарантировать, какая комиссия будет взиматься за транзакцию на основе хэша одноразового номера.</p>
+<p>Детерминизм достигается двумя способами:</p>
+<ul>
+<li>очередь хэшей блоков содержит список последних (&lt;=~2 минут) хэшей блоков и значение <code>lamports_per_signature</code>. Очередь хэшей блоков является одним из сериализованных членов моментального снимка, и поэтому хэш банка зависит от него.</li>
+<li>Учетные записи Nonce, используемые для автономной подписи, содержат значение <code>lampports_per_signature</code> в данных своей учетной записи.</li>
+</ul>
+<p>В обоих случаях, когда за транзакцию взимается комиссия, ищется используемый <code>lampports_per_signature</code> (либо в очереди, либо в данных учетной записи nonce) с использованием хэша транзакции.</p>
+<p>В настоящее время это сопряжено со следующими проблемами:</p>
+<ul>
+<li>Предоставление клиентам объекта <code>FeeCalculator</code> (содержит <code>lampports_per_signature</code>) затрудняет разработку критериев оплаты из-за обратной совместимости. Эта проблема решается путем отказа от объекта <code>FeeCalculator</code>, и вместо этого новый API принимает сообщение и возвращает комиссию.</li>
+<li>Записи очереди Blockhash содержат специфику критериев комиссии и являются частью банковского хэша, поэтому изменение комиссий с течением времени требует больше работы / риска.</li>
+<li>Учетные записи одноразового использования хранят критерии комиссии непосредственно в данных своей учетной записи, поэтому изменение сборов с течением времени требует внесения изменений в данные учетной записи одноразового использования и размер данных.</li>
+</ul>
+<p>Два решения последних двух проблем</p>
+<ul>
+<li>Избавьтесь от концепции детерминированных комиссий. Клиенты просят через RPC рассчитать текущую оценку комиссии, и фактическая комиссия оценивается при обработке транзакции. Изменения комиссий будут регулироваться и изменяться медленно в зависимости от нагрузки на сеть, поэтому разница в комиссиях будет небольшой в течение 2-минутного окна. Учетные записи Nonce больше не хранят критерии комиссий, а вместо этого сохраняют предельную комиссию.
+Если оцененная комиссия во время обработки превышает предел, транзакция не выполняется. Это решение полностью удаляет критерии оплаты из очереди хэшей и учетных записей одноразовых номеров, а также устраняет необходимость в развитии любого из них, если есть необходимость в изменении критериев оплаты.</li>
+<li>Сохранить концепцию детерминированных комиссий. Клиенты просят через RPC рассчитать текущую комиссию и передать блок-хеш, с которым будет связана эта комиссия.
+Очередь Blockhash и учетные записи nonce переключаются на версионный, но внутренний объект «Fee» (аналогичный «FeeCalculator»). Каждый раз, когда возникает необходимость в сборах для развития, объект сбора будет добавлять новую версию и новые записи очереди хэшей, а новые учетные записи nonce будут использовать новую версию.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

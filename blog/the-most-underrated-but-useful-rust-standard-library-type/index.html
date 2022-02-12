@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Самый недооцененный, но полезный тип стандартной библиотеки Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-most-underrated-but-useful-rust-standard-library-type/#chto-takoe-korova">Что такое корова?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-most-underrated-but-useful-rust-standard-library-type/#pochemu-eto-polezno">Почему это полезно?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-most-underrated-but-useful-rust-standard-library-type/#pochemu-eto-sbivaet-s-tolku">Почему это сбивает с толку?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-most-underrated-but-useful-rust-standard-library-type/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Самый недооцененный, но полезный тип стандартной библиотеки Rust</h1>
+
+<p><a href="https://dev.to/thepuzzlemaker/the-most-underrated-but-useful-rust-standard-library-type-59b1">Перевод</a> | Автор оригинала: James <code>[Undefined]</code></p>
+<p>Стандартная библиотека Rust полна множества полезных типов, свойств и абстракций. Сегодня я расскажу об одном, который, на мой взгляд, недооценен, но весьма полезен. Это Корова.</p>
+<h2 id="chto-takoe-korova">Что такое корова?</h2>
+<p>Согласно документации стандартной библиотеки, std::заимствовать::Cow:</p>
+<blockquote>
+<p>интеллектуальный указатель, обеспечивающий функциональность клонирования при записи: он может заключать и обеспечивать неизменный доступ к заимствованным данным, а также лениво клонировать данные, когда требуется изменение или владение. Тип предназначен для работы с общими заимствованными данными через трейт Borrow.</p>
+</blockquote>
+<p>Мне кажется, это описание точное, но оно не дает ему должного.</p>
+<p>Cow на самом деле просто перечисление: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">Cow</span><span>&lt;&#39;a, B: ?Sized + &#39;a&gt;
+</span><span>where
+</span><span>    B: ToOwned,
+</span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Borrowed data.
+</span><span>    Borrowed(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> B)</span><span style="color:#bfbab0cc;">,
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Owned data.
+</span><span>    Owned(</span><span style="color:#f29668;">&lt;</span><span>B </span><span style="color:#f29668;">as </span><span style="font-style:italic;color:#39bae6;">ToOwned</span><span style="color:#f29668;">&gt;::</span><span>Owned)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Это определение не только позволяет иметь семантику клонирования при записи (где, если данные заимствованы, они превращаются в собственные данные до того, как становятся доступными изменчиво), но также позволяет хранить данные, которые потенциально принадлежат. Абстракция с ToOwned позволяет использовать Cow &lt;'_, str&gt;, сохраняя либо &amp;str, либо String. Без этой абстракции Cow не была бы такой полезной, потому что вы могли бы только удерживать, например, str и Box<str> (что определенно не так полезно, как String).</p>
+<p>Конечно, вы могли бы просто написать собственное определение типа PotentialOwned &lt;'a, T&gt;, но если оно уже существует в стандартной библиотеке, вы также можете его использовать! Кроме того, семантика клонирования при записи является полезным дополнением к типу «потенциально принадлежащий».</p>
+<h2 id="pochemu-eto-polezno">Почему это полезно?</h2>
+<p>Семантика «потенциально принадлежащего» Cow делает его полезным в некоторых случаях, когда у вас может быть большая строка, которую вам нужно изменить, но вы не хотите клонировать без необходимости. Это пример, который не упоминается в документации стандартной библиотеки (я утверждаю, что это определенно должно быть).</p>
+<p>Вот простой (хотя и несколько надуманный) пример того, как это полезно: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>(</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>, </span><span style="color:#f29718;">some_condition</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str </span><span>{
+</span><span>    </span><span style="color:#ff7733;">if</span><span> some_condition {
+</span><span>        </span><span style="color:#f29668;">&amp;</span><span>s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">replace</span><span>(</span><span style="color:#c2d94c;">&quot;foo&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;bar&quot;</span><span>)
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        s
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Позвольте мне объяснить этот код. Эта функция может заменить все экземпляры «foo» на «bar» в строке s, если условие some_condition истинно. Но есть проблема!</p>
+<p>Функция возвращает &amp;str, но str.replace возвращает String, и вы не можете вернуть ссылку на данные, принадлежащие функции!</p>
+<p>Хорошо, давайте заставим функцию возвращать String. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>(</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>, </span><span style="color:#f29718;">some_condition</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String {
+</span><span>    </span><span style="color:#ff7733;">if</span><span> some_condition {
+</span><span>        s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">replace</span><span>(</span><span style="color:#c2d94c;">&quot;foo&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;bar&quot;</span><span>)
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Эта функция работает, но обратите внимание, что она всегда клонирует строку. Обычно это плохо, потому что, если строка длинная, это может быть очень дорого! Итак, что нам делать, если мы не хотим без надобности клонировать?</p>
+<p>Что ж, мы можем использовать Cow! Это позволяет нам возвращать данные, которые потенциально принадлежат.</p>
+<p>Вот версия функции, которая без необходимости не клонируется: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>borrow</span><span style="color:#f29668;">::</span><span>Cow</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>, </span><span style="color:#f29718;">some_condition</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, </span><span style="color:#ff7733;">str</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">if</span><span> some_condition {
+</span><span>        Cow</span><span style="color:#f29668;">::</span><span>from(s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">replace</span><span>(</span><span style="color:#c2d94c;">&quot;foo&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;bar&quot;</span><span>))
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        Cow</span><span style="color:#f29668;">::</span><span>from(s)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>И это работает! Наш код проходит проверку заимствований и не тратит впустую память!</p>
+<h2 id="pochemu-eto-sbivaet-s-tolku">Почему это сбивает с толку?</h2>
+<blockquote>
+<p>Примечание: этот раздел в основном является моими предположениями, поэтому не принимайте его как факт.</p>
+</blockquote>
+<p>Я лично считаю, что Cow намного больше сбивает с толку, чем должно быть, благодаря программе проверки заимствований. Не поймите меня неправильно, счетчик займов просто потрясающий. Это определенно предотвращает ошибки безопасности памяти, которые в противном случае существовали бы без него. Но для новых пользователей Rust время жизни - это бумажная вырезка, и я думаю, что это одна из причин, по которой Cow в некотором роде недооценивают - ее довольно сложно использовать.</p>
+<p>Все, что производит или использует корову, должно иметь привязку к жизни, и это лишь усложняет использование. Новым пользователям также потенциально сложно рассуждать о типах без размера, поэтому использование Cow &lt;'_, str&gt; может не иметь смысла для нового пользователя, поскольку они могут подумать что-то вроде «но подождите, я думал, вы только использовать &amp;str, а не только str? &quot;</p>
+<p>На самом деле это не те проблемы, которые можно решить с помощью «быстрого решения», так что это по-прежнему будет потенциальным вырезом из бумаги.</p>
+<p>Другая причина, по которой я нахожу, что Cow сбивает с толку, заключается в том, что название и документация затуманивают его потенциальное использование для потенциально принадлежащих данных. Новый пользователь, который задается вопросом: «Могу ли я позаимствовать данные, возвращаемые этой частью функции, и данные, которыми владеет эта часть?», Вероятно, не сразу подумает: «О, мне нужен интеллектуальный указатель клонирования при записи» (и они могут в конечном итоге попытаться для реализации принадлежащего им типа данных &quot;частично принадлежащего&quot;, и могут достичь некоторых сокращений со сроками жизни или отсутствием ToOwned). Я не думаю, что действительно есть способ исправить часть именования без большой обратной несовместимости, но определенно есть способ исправить документацию.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Корова - очень полезный тип со скрытыми способностями. Я считаю, что эти возможности следует более подробно описать в документации и книгах по Rust. Насколько я знаю, в Rust Book или Rust By Example нет упоминания о коровах.</p>
+<p>Спасибо, что прочитали это, и желаю доброго утра / дня / вечера / ночи / и т.д.
+-Джеймс </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

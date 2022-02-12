@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Зачем разрабатывать на Edgeware | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#edgeware-dostupen">Edgeware доступен!</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#zhivaia-polnaia-sreda-vypolneniia-kontrakta-evm-wasm">Живая полная среда выполнения контракта EVM + WASM</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#chast-ekosistemy-polkadot">Часть экосистемы Polkadot</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#nizkie-komissii-za-tranzaktsii">Низкие комиссии за транзакции</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#most-ethereum-evm">Мост Ethereum EVM</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#bol-shoe-i-aktivnoe-soobshchestvo">Большое и активное сообщество</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#finansirovanie-i-stimuly">Финансирование и стимулы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#rastushchaia-ekosistema">Растущая экосистема</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#rabochie-gruppy">Рабочие группы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/readme/why-develop-on-edgeware/#rasshirennye-vozmozhnosti-dlia-razrabotchikov">Расширенные возможности для разработчиков</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Зачем разрабатывать на Edgeware</h1>
+
+<h2 id="edgeware-dostupen">Edgeware доступен!</h2>
+<p>Edgeware была запущена в феврале 2020 года как первая сеть смарт-контрактов с работающей основной сетью. Сеть прошла через три обновления в сети. Вы можете развернуть свои контракты в Edgeware уже сегодня!</p>
+<h2 id="zhivaia-polnaia-sreda-vypolneniia-kontrakta-evm-wasm">Живая полная среда выполнения контракта EVM + WASM</h2>
+<p>Edgeware имеет <a href="https://github.com/hicommonwealth/evm/blob/master/README.md">развернутый уровень полной совместимости EVM</a> и поддержку инструментов. Кроме того, вы можете развернуть контракты WASM, написанные чернилами!, AssemblyScript. <a href="https://main.edgeware.wiki/contribute-and-engage/develop/edgeware-smart-contracts">Подробнее о развертывании контрактов EVM и WASM в Edgeware.</a></p>
+<h2 id="chast-ekosistemy-polkadot">Часть экосистемы Polkadot</h2>
+<p><a href="https://blog.edgewa.re/edgeware-2020/">Edgeware планирует использовать парачейн на Kusama и Polkadot</a>, вы можете прочитать [последний проект предложения по объединению Edgeware Parachain](https://commonwealth.im/edgeware /proposal/discussion/830-draft-proposal-edgeware-parachain-bonding). Когда Edgeware станет парачейном, он сможет использовать DOT, KSM, ACA, Stafi Derivatives в проектах Edgeware DeFi, интегрироваться со слоями конфиденциальности и другими решениями Oracle.</p>
+<h2 id="nizkie-komissii-za-tranzaktsii">Низкие комиссии за транзакции</h2>
+<p>Из-за другой и лучшей архитектуры, чем Ethereum, [Edgeware имеет низкую комиссию за транзакции.]</p>
+<h2 id="most-ethereum-evm">Мост Ethereum EVM</h2>
+<p>Постоянные усилия по переносу dApps из сети Ethereum в Edgeware и получение того же опыта работы с dApp, что и в Ethereum. <a href="https://main.edgeware.wiki/edgeware-runtime/evm">Вы можете развернуть свое dApp на Edgeware уже сегодня</a>.</p>
+<h2 id="bol-shoe-i-aktivnoe-soobshchestvo">Большое и активное сообщество</h2>
+<p>Более 1,2 млн ETH приняли участие в нашей разблокировке, в которой участвовали фонды, частные лица и проекты. Вы будете выпускать свой проект в активную экосистему. 8 тысяч активных адресов с ~10 миллионами [для получения EDG через партнеров](https://www.binance.com/en/blog/376024539711221760/Did-You-Hold-ETH-on-Binance-Congratulations-Youll-Get-Free -Edgeware-токены). В настоящее время Edgeware насчитывает 100 активных участников в голосовании, обсуждениях и разработке, и это количество растет.</p>
+<h2 id="finansirovanie-i-stimuly">Финансирование и стимулы</h2>
+<ul>
+<li>5 миллионов долларов плюс финансирование в год в виде грантов, инвестиций и т. д.</li>
+<li>Обычно <a href="https://github.com/edgeware-builders/construction-projects">Edgeware имеет строительные проекты</a> для казначейского финансирования, доступного для вашей идеи, инструментов или существующего проекта. Вы можете запросить сумму до 100 тысяч долларов за проект.
+— BuildDAO — <a href="https://www.notion.so/hicommonwealth/BuilDAO-Incubator-Paper-35d451f814014f9cbff96b6c8ab443a4">стремится стать ончейн-инкубатором</a>. Подайте заявку с идеей и получите 50 000 долларов США, чтобы запустить свой стартап или протокол на базе Edgeware.</li>
+<li><a href="https://commonwealth.im/edgeware/proposal/discussion/798-developer-incentive-dev-mining-by-uma">Экспериментальный майнинг для разработчиков</a> - Получайте вознаграждения за использование комиссий, генерируемых вашим смарт-контрактом. Потенциально 2% комиссий, генерируемых вашим смарт-контрактом.</li>
+<li><a href="https://commonwealth.im/edgeware/proposal/discussion/864-recruiting-developers-in-residence-to-edgeware">Программа Developer in Residence</a> - для лиц, которые хотят использовать свои навыки и владеть своими время и работа. Это включает в себя производство инструментов, продуктов или протоколов.</li>
+</ul>
+<h2 id="rastushchaia-ekosistema">Растущая экосистема</h2>
+<p>Несколько венчурных проектов, недавно разработанных на Edgeware, растущая экосистема участников сообщества и многое другое.</p>
+<h2 id="rabochie-gruppy">Рабочие группы</h2>
+<p><a href="https://commonwealth.im/edgeware/">В Commonwealth вы можете найти активные рабочие группы, работающие поверх Edgeware</a>. Здесь вы можете найти такие категории, как DeFi, Gaming, Social/DAO и Tooling &amp; Ecosystem. <a href="https://github.com/edgeware-builders/awesome-edgeware#working-groups---engage-with-focused-community">Вы можете взаимодействовать с целевыми членами сообщества через чаты</a></p>
+<h2 id="rasshirennye-vozmozhnosti-dlia-razrabotchikov">Расширенные возможности для разработчиков</h2>
+<ul>
+<li>Примитивы с нулевым разглашением</li>
+<li><a href="https://github.com/edgeware-builders/anon">Анонимные групповые действия</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>9. Получение твитов в интерфейсе | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#poluchenie-vsekh-tvitov">Получение всех твитов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#model-tvita">Модель твита</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#kliuch"><small>- Ключ</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#otobrazhenie-avtora"><small>- Отображение автора</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#svoistva-created-at-i-created-ago"><small>- Свойства created_at и created_ago</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#vozvrat-modelei-tweet"><small>- Возврат моделей Tweet</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#dobavleni-ssylki-v-kartochku-tvita">Добавлени ссылки в карточку твита</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#ssylka-avtora"><small>- Ссылка автора</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#ssylka-na-tvit"><small>- Ссылка на твит</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#sylka-na-temu"><small>- Сылка на тему</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#vspomogatel-nye-fil-try">Вспомогательные фильтры</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#poluchenie-tvitov-po-teme">Получение твитов по теме</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#poluchenie-tvitov-po-avtoru">Получение твитов по автору</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#poluchenie-tol-ko-odnogo-tvita">Получение только одного твита</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-in-the-frontend/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>9. Получение твитов в интерфейсе</h1>
+
+<p><a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/fetching-tweets-in-the-frontend">Перевод</a> | Автор оригинала: Loris</p>
+<p>ЭПИЗОД 9</p>
+<p>2 МЕСЯЦА НАЗАД</p>
+<p>ЧТЕНИЕ 17 МИН.</p>
+<p>В предыдущем эпизоде мы усердно работали над тем, чтобы пользователи могли подключать свои кошельки, и в итоге получили объект «программа» от Anchor, позволяющий нам взаимодействовать с нашей программой Solana. Теперь пришло время использовать эту «программу», чтобы удалить все фиктивные данные и получить настоящие твиты из блокчейна.</p>
+<p>Часть работы, которую мы проделаем в этой статье, будет вам знакома, потому что мы уже видели, как получать твиты из блокчейна при тестировании нашей программы Solana.</p>
+<p>Ладно, приступим!</p>
+<h2 id="poluchenie-vsekh-tvitov">Получение всех твитов</h2>
+<p>Мы начнем с простого, собрав все существующие твиты и отобразив их на главной странице.</p>
+<p>Откройте файл <code>api/fetch-tweets.js</code> и вставьте следующий код.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">fetchTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>({ </span><span style="color:#f29718;">program </span><span>}) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">return </span><span>tweets
+</span><span>}
+</span></code></pre>
+<p>Несколько вещей, на которые следует обратить внимание:</p>
+<ul>
+<li>Во-первых, мы ожидаем, что вся «рабочая область» (workspace), определенная в предыдущем эпизоде, будет указана в качестве первого параметра. Таким образом, у нас есть все необходимое для взаимодействия с нашей программой. Обратите внимание, что мы можем получить доступ к рабочей области непосредственно в файле API через <code>useWorkspace</code>, но это может вызвать проблемы в зависимости от того, где мы вызываем этот метод API, потому что inject/provide в VueJS работает только при вызове внутри метода <code>setup</code> компонента.</li>
+<li>Поскольку нам нужен доступ только к объекту <code>program</code> из рабочей области, мы деструктурируем его из первого параметра.</li>
+<li>Мы обращаемся к программе, используя <code>program.value</code>, потому что <code>program</code> является реактивной переменной и обернута в объект <code>Ref</code>.</li>
+<li>Наконец, мы получаем доступ ко всем учетным записям <code>Tweet</code>, используя <code>account.tweet.all()</code>, точно так же, как мы делали это при тестировании нашей программы.</li>
+</ul>
+<p>Хорошо, давайте попробуем это в нашем компоненте <code>PageHome.vue</code>. Внутри скриптовой части компонента мы импортируем компонуемый <code>useWorkspace</code> и передаем его в наш метод fetchTweets в качестве параметра.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ ref } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ fetchTweets } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetForm </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetForm&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetList </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetList&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>([])
+</span><span style="color:#ff7733;">const </span><span>loading </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#f29718;">true</span><span>)
+</span><span style="color:#ffb454;">fetchTweets</span><span>(</span><span style="color:#ffb454;">useWorkspace</span><span>())
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">then</span><span>(</span><span style="color:#f29718;">fetchedTweets </span><span style="color:#ff7733;">=&gt; </span><span>tweets</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span>fetchedTweets)
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">finally</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span>loading</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// ...
+</span></code></pre>
+<p>На этом этапе все должно быть правильно подключено к нашей домашней странице, поэтому давайте посмотрим, все ли работает.</p>
+<p>Во-первых, вам нужно запустить новый локальный валидатор. Вы можете сделать это, запустив solana-test-validator в своем терминале или, альтернативно, запустив <code>anchor localnet</code>, который также пересоберет и повторно развернет вашу программу.</p>
+<p>Чтобы мы могли видеть некоторые твиты в нашем приложении, нам нужно иметь несколько учетных записей <code>Tweet</code> в нашем локальном реестре. К счастью для нас, мы знаем, что при выполнении тестов будет создано 3 из них, поэтому давайте запустим <code>anchor run test</code>, чтобы добавить их в нашу локальную книгу.</p>
+<p>Хорошо, теперь у нас есть работающая локальная книга, содержащая всего 3 твита. Поэтому мы должны увидеть эти твиты на главной странице.</p>
+<p>Однако, если вы перейдете на домашнюю страницу и откроете инструменты разработчика <code>Network</code> в своем браузере, вы должны увидеть следующее.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1203-solana-9-frontend-fetch-tweets/home-page-1.png" alt="Screenshot of the app with the dev tools open showing that we are getting 3 tweets but they are not displayed properly." /></p>
+<p>Как мы видим на вкладке сети, мы действительно получаем 3 твит-аккаунта, но они не отображаются должным образом на главной странице.</p>
+<p>Это потому, что наш интерфейс ожидает получить объект с определенной структурой, которая не соответствует тому, что мы получаем от вызова API.</p>
+<p>Поэтому вместо того, чтобы менять весь наш интерфейс, чтобы приспособиться к этой структуре, давайте создадим новую модель <code>Tweet</code>, которая работает для нашего интерфейса и абстрагирует данные, полученные от API.</p>
+<h2 id="model-tvita">Модель твита</h2>
+<p>Внутри папки <code>src</code> нашего внешнего приложения создадим новую папку с именем <code>models</code>. В эту новую папку мы добавим два файла:</p>
+<ul>
+<li><code>Tweet.js</code>. Это позволит структурировать наши учетные записи твитов с помощью класса «Tweet».</li>
+<li><code>index.js</code>. Это зарегистрирует модель «Tweet», чтобы мы могли импортировать ее так же, как мы импортируем составные объекты и конечные точки API.</li>
+</ul>
+<p>Как только эта папка и эти два файла будут созданы, вставьте следующий код в файл index.js.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./Tweet&#39;
+</span></code></pre>
+<p>И вставьте следующее в файл <code>Tweet.js</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export class </span><span style="color:#59c2ff;">Tweet
+</span><span>{
+</span><span>    </span><span style="color:#ff7733;">constructor </span><span>(</span><span style="color:#f29718;">publicKey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">accountData</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>publicKey </span><span style="color:#f29668;">= </span><span>publicKey
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>author </span><span style="color:#f29668;">= </span><span>accountData</span><span style="color:#f29668;">.</span><span>author
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>timestamp </span><span style="color:#f29668;">= </span><span>accountData</span><span style="color:#f29668;">.</span><span>timestamp</span><span style="color:#f29668;">.</span><span style="color:#f07178;">toString</span><span>()
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>topic </span><span style="color:#f29668;">= </span><span>accountData</span><span style="color:#f29668;">.</span><span>topic
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>content </span><span style="color:#f29668;">= </span><span>accountData</span><span style="color:#f29668;">.</span><span>content
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Как видите, для создания нового объекта <code>Tweet</code> нам нужно предоставить:</p>
+<ul>
+<li><code>publicKey</code>, который будет экземпляром класса <code>PublicKey</code> Соланы.</li>
+<li>И объект <code>accountData</code>, предоставленный конечной точкой API.</li>
+</ul>
+<p>При создании нового объекта <code>Tweet</code> мы сохраняем его открытый ключ и все свойства внутри объекта <code>accountData</code> по отдельности. Таким образом, мы можем получить доступ, скажем, к теме через <code>tweet.topic</code>. Мы также анализируем отметку времени в строку, потому что конечная точка API предоставляет нам отметку времени в виде массива байтов.</p>
+<p>Вдобавок к этим свойствам, наш интерфейс полагается на объекты <code>Tweet</code>, которые имеют следующие дополнительные свойства: <code>key</code>, <code>author_display</code>, <code>created_at</code> и <code>created_ago</code>.</p>
+<h3 id="kliuch">Ключ</h3>
+<p>Свойство <code>key</code> должно быть уникальным идентификатором, представляющим наш твит. Он используется в некоторых шаблонах VueJS при переборе массивов твитов. Поскольку открытый ключ уникален для каждого твита, мы будем использовать его формат base-58, чтобы предоставить уникальную строку.</p>
+<p>Мы будем использовать функцию-получатель, чтобы предоставить это свойство <code>key</code>. Вы можете добиться этого, добавив следующий геттер в конце класса <code>Tweet</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export class </span><span style="color:#59c2ff;">Tweet
+</span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">get </span><span style="color:#ffb454;">key </span><span>() {
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="otobrazhenie-avtora">Отображение автора</h3>
+<p>Хотя у нас уже есть доступ к открытому ключу автора через свойство author, интерфейс использует сжатую версию этого адреса в компоненте <code>TweetCard.vue</code>, чтобы визуально не перегружать пользователя.</p>
+<p>Эта сокращенная версия представляет собой просто первые 4 символа и последние 4 символа открытого ключа с парой точек посередине.</p>
+<p>Таким образом, давайте добавим еще одну функцию-получатель с именем <code>author_display</code> и используем метод <code>slice</code> для сжатия открытого ключа автора.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export class </span><span style="color:#59c2ff;">Tweet
+</span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">get </span><span style="color:#ffb454;">author_display </span><span>() {
+</span><span>        </span><span style="color:#ff7733;">const </span><span>author </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()
+</span><span>        </span><span style="color:#ff7733;">return </span><span>author</span><span style="color:#f29668;">.</span><span style="color:#f07178;">slice</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">4</span><span>) </span><span style="color:#f29668;">+ </span><span style="color:#c2d94c;">&#39;..&#39; </span><span style="color:#f29668;">+ </span><span>author</span><span style="color:#f29668;">.</span><span style="color:#f07178;">slice</span><span>(</span><span style="color:#f29668;">-</span><span style="color:#f29718;">4</span><span>)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="svoistva-created-at-i-created-ago">Свойства <code>created_at</code> и <code>created_ago</code></h3>
+<p>Последние два свойства, которые нам нужны, являются удобочитаемыми версиями временной метки, предоставляемой нашей программой. <code>created_at</code> должна быть локализованной удобочитаемой датой, включая время, тогда как <code>created_ago</code> должна кратко описывать, как давно был опубликован твит.</p>
+<p>К счастью, существует множество библиотек JavaScript для управления датами. <a href="https://momentjs.com/">Moment.js</a>, вероятно, является самым популярным, но я бы сказал, что это слишком много для наших целей. Вместо этого я часто предпочитаю использовать <a href="https://day.js.org/">Day.js</a>, который по умолчанию очень легкий и расширяемый в соответствии с нашими потребностями.</p>
+<p>Итак, давайте начнем с установки Day.js с помощью npm.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">npm</span><span> install dayjs
+</span></code></pre>
+<p>Затем нам нужно импортировать его и немного расширить, чтобы он поддерживал локализованные форматы и относительное время — используемые для <code>created_at</code> и <code>created_ago</code> соответственно.</p>
+<p>В файле main.js добавьте следующий код после раздела «CSS».</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// CSS.
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue-ui/styles.css&#39;
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&#39;./main.css&#39;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Day.js
+</span><span style="color:#ff7733;">import </span><span>dayjs </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;dayjs&#39;
+</span><span style="color:#ff7733;">import </span><span>localizedFormat </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;dayjs/plugin/localizedFormat&#39;
+</span><span style="color:#ff7733;">import </span><span>relativeTime </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;dayjs/plugin/relativeTime&#39;
+</span><span>dayjs</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">extend</span><span>(localizedFormat)
+</span><span>dayjs</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">extend</span><span>(relativeTime)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// ...
+</span></code></pre>
+<p>Теперь вернемся к нашей модели <code>Tweet.js</code>, мы можем импортировать Day.js и предоставить две функции получения для <code>created_at</code> и <code>created_ago</code>. Оба они могут использовать <code>dayjs.unix(this.timestamp)</code>, чтобы преобразовать наше свойство <code>timestamp</code> в объект Day.js. Затем мы можем использовать методы <code>format('lll')</code> и <code>fromNow()</code>, чтобы получить локализованную дату и относительное время соответственно.</p>
+<p>В итоге мы получаем следующую модель Tweet.js!</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>dayjs </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&quot;dayjs&quot;
+</span><span>
+</span><span style="color:#ff7733;">export class </span><span style="color:#59c2ff;">Tweet
+</span><span>{
+</span><span>    </span><span style="color:#ff7733;">constructor </span><span>(</span><span style="color:#f29718;">publicKey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">accountData</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>publicKey </span><span style="color:#f29668;">= </span><span>publicKey
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>author </span><span style="color:#f29668;">= </span><span>accountData</span><span style="color:#f29668;">.</span><span>author
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>timestamp </span><span style="color:#f29668;">= </span><span>accountData</span><span style="color:#f29668;">.</span><span>timestamp</span><span style="color:#f29668;">.</span><span style="color:#f07178;">toString</span><span>()
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>topic </span><span style="color:#f29668;">= </span><span>accountData</span><span style="color:#f29668;">.</span><span>topic
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>content </span><span style="color:#f29668;">= </span><span>accountData</span><span style="color:#f29668;">.</span><span>content
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">get </span><span style="color:#ffb454;">key </span><span>() {
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">get </span><span style="color:#ffb454;">author_display </span><span>() {
+</span><span>        </span><span style="color:#ff7733;">const </span><span>author </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()
+</span><span>        </span><span style="color:#ff7733;">return </span><span>author</span><span style="color:#f29668;">.</span><span style="color:#f07178;">slice</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">4</span><span>) </span><span style="color:#f29668;">+ </span><span style="color:#c2d94c;">&#39;..&#39; </span><span style="color:#f29668;">+ </span><span>author</span><span style="color:#f29668;">.</span><span style="color:#f07178;">slice</span><span>(</span><span style="color:#f29668;">-</span><span style="color:#f29718;">4</span><span>)
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">get </span><span style="color:#ffb454;">created_at </span><span>() {
+</span><span>        </span><span style="color:#ff7733;">return </span><span>dayjs</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">unix</span><span>(</span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>timestamp)</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">format</span><span>(</span><span style="color:#c2d94c;">&#39;lll&#39;</span><span>)
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">get </span><span style="color:#ffb454;">created_ago </span><span>() {
+</span><span>        </span><span style="color:#ff7733;">return </span><span>dayjs</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">unix</span><span>(</span><span style="font-style:italic;color:#39bae6;">this</span><span style="color:#f29668;">.</span><span>timestamp)</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromNow</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h3 id="vozvrat-modelei-tweet">Возврат моделей <code>Tweet</code></h3>
+<p>Теперь, когда наша модель «Tweet» готова, давайте используем ее в нашей конечной точке API <code>fetch-tweets.js</code>, чтобы она возвращала объекты <code>Tweet</code> вместо того, что возвращает API.</p>
+<p>Для этого мы можем использовать <code>map</code> в массиве <code>tweets</code> для преобразования каждого элемента внутри него. Как мы видели в предыдущем эпизоде, API возвращает объект, содержащий <code>publicKey</code> и объект <code>account</code>, а это именно то, что нам нужно для создания нового объекта <code>Tweet</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ Tweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/models&#39;
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">fetchTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>({ </span><span style="color:#f29718;">program </span><span>}) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">return </span><span>tweets</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">map</span><span>(</span><span style="color:#f29718;">tweet </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Tweet</span><span>(tweet</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>tweet</span><span style="color:#f29668;">.</span><span>account))
+</span><span>}
+</span></code></pre>
+<p>Хорошо, на данный момент мы должны увидеть, что все твиты правильно отображаются на главной странице. На изображении ниже я также записал возвращаемое значение метода <code>fetchTweets</code>, чтобы мы могли убедиться, что все наши пользовательские геттеры работают правильно.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1203-solana-9-frontend-fetch-tweets/home-page-2.png" alt="Screenshot of the home page with our 3 test tweets properly displayed and the console showing an array of Tweet objects with all the relevant data." /></p>
+<p>Все хорошо! Переходим к следующему заданию.</p>
+<h2 id="dobavleni-ssylki-v-kartochku-tvita">Добавлени ссылки в карточку твита</h2>
+<p>Просматривая твиты на главной странице, вы могли заметить, что каждый твит содержит 3 ссылки:</p>
+<ul>
+<li>Один на адрес автора, который должен привести вас на страницу этого автора.</li>
+<li>Один во время твита, который должен привести вас на страницу, которая показывает только этот твит, чтобы пользователи могли поделиться им.</li>
+<li>Один на тему твита, который должен привести вас на страницу этой темы.</li>
+</ul>
+<p>Однако, если вы попытаетесь нажать на них, они всегда отправят вас на домашнюю страницу. Это просто потому, что эти ссылки еще не реализованы, и это то, что мы собираемся сделать сейчас.</p>
+<p>Если вы заглянете внутрь компонента <code>TweetCard.vue</code>, то увидите несколько комментариев к шаблону, которые выглядят примерно так: <code>&lt;!-- TODO: Link to... --&gt;</code>. Итак, давайте рассмотрим каждый из этих комментариев один за другим, начиная со ссылки автора.</p>
+<h3 id="ssylka-avtora">Ссылка автора</h3>
+<p>Эта ссылка немного сложнее, чем другие, потому что маршрут, на который она ведет, зависит от того, является ли это одним из наших твитов или нет. Под этим я подразумеваю, что если мы нажмем на свой собственный адрес, он должен направить нас на страницу профиля, тогда как, если мы нажмем на адрес кого-то другого, он должен привести нас на страницу пользователя с уже предварительно заполненным адресом.</p>
+<p>Поэтому мы собираемся создать вычисляемое свойство с именем authorRoute, которое будет использовать подключенный кошелек, чтобы определить, на какой маршрут нас следует направить.</p>
+<p>Обновите часть скрипта компонента <code>TweetCard.vue</code> следующими строками.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ toRefs</span><span style="color:#bfbab0cc;">, </span><span>computed } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>props </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">defineProps</span><span>({
+</span><span>    tweet</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Object</span><span style="color:#bfbab0cc;">,
+</span><span>})
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>{ tweet } </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">toRefs</span><span>(props)
+</span><span style="color:#ff7733;">const </span><span>{ wallet } </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWorkspace</span><span>()
+</span><span style="color:#ff7733;">const </span><span>authorRoute </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">computed</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">if </span><span>(wallet</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">&amp;&amp; </span><span>wallet</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>() </span><span style="color:#f29668;">=== </span><span>tweet</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()) {
+</span><span>        </span><span style="color:#ff7733;">return </span><span>{ name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;Profile&#39; </span><span>}
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        </span><span style="color:#ff7733;">return </span><span>{ name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;Users&#39;</span><span style="color:#bfbab0cc;">, </span><span>params</span><span style="color:#bfbab0cc;">: </span><span>{ author</span><span style="color:#bfbab0cc;">: </span><span>tweet</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>() } }
+</span><span>    }
+</span><span>})
+</span></code></pre>
+<p>Давайте пройдемся по этому фрагменту кода:</p>
+<ul>
+<li>Мы начинаем с импорта метода <code>computed</code> из VueJS, который мы будем использовать для создания нашего вычисляемого свойства <code>authorRoute</code>.</li>
+<li>Мы также импортируем наше рабочее пространство через компонуемый useWorkspace и получаем доступ к подключенному кошельку из него.</li>
+<li>Внутри вычисляемого метода мы сначала проверяем, есть ли у автора твита тот же открытый ключ, что и у подключенного кошелька.</li>
+<li>Если это так, мы просто перенаправляем на страницу профиля, возвращая <code>{ name: 'Profile' }</code>. В Vue Router именно так вы можете определить маршрут с именем «Профиль».</li>
+<li>В противном случае нам нужно перенаправить пользователя на «страницу пользователей», предварительно заполнив ее адрес автором твита. В Vue Router мы можем предоставить параметры маршрута через объект params. Таким образом, мы можем получить доступ к странице «Пользователи» автора твита, вернув: <code>{ name: 'Users', params: { author: tweet.value.author.toBase58() } }</code></li>
+</ul>
+<p>Теперь, когда наше вычисляемое свойство authorRoute доступно, мы можем передать его соответствующему компоненту <code>&lt;router-link&gt;</code> и удалить комментарий выше.</p>
+<pre data-lang="diff" style="background-color:#0f1419;color:#bfbab0;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="color:#f07178;">- &lt;!-- TODO: Link to author page or the profile page if it&#39;s our own tweet. --&gt;
+</span><span style="color:#f07178;">- &lt;router-link :to=&quot;{ name: &#39;Home&#39; }&quot; class=&quot;hover:underline&quot;&gt;
+</span><span style="color:#c2d94c;">+ &lt;router-link :to=&quot;authorRoute&quot; class=&quot;hover:underline&quot;&gt;
+</span><span>      {{ tweet.author_display }}
+</span><span>  &lt;/router-link&gt;
+</span></code></pre>
+<h3 id="ssylka-na-tvit">Ссылка на твит</h3>
+<p>Далее давайте реализуем ссылку на страницу твита. Для этого мы можем использовать формат base-58 открытого ключа твита в качестве параметра маршрута <code>Tweet</code>. В итоге мы получаем следующий объект маршрута.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span>{ </span><span style="color:#59c2ff;">name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;Tweet&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">params</span><span style="color:#bfbab0cc;">: </span><span>{ </span><span style="color:#59c2ff;">tweet</span><span style="color:#bfbab0cc;">: </span><span>tweet</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>() } }
+</span></code></pre>
+<p>На этот раз мы можем использовать этот объект непосредственно внутри соответствующей <code>&lt;router-link&gt;</code> без необходимости в новой переменной.</p>
+<pre data-lang="diff" style="background-color:#0f1419;color:#bfbab0;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="color:#f07178;">- &lt;!-- TODO: Link to the tweet page. --&gt;
+</span><span style="color:#f07178;">- &lt;router-link :to=&quot;{ name: &#39;Home&#39; }&quot; class=&quot;hover:underline&quot;&gt;
+</span><span style="color:#c2d94c;">+ &lt;router-link :to=&quot;{ name: &#39;Tweet&#39;, params: { tweet: tweet.publicKey.toBase58() } }&quot; class=&quot;hover:underline&quot;&gt;
+</span><span>      {{ tweet.created_ago }}
+</span><span>  &lt;/router-link&gt;
+</span></code></pre>
+<h3 id="sylka-na-temu">Сылка на тему</h3>
+<p>Наконец, нам нужно реализовать ссылку на страницу темы. Как и в предыдущих ссылках, мы можем передать тему как параметр маршрута «Темы» и получить следующий объект маршрута…</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span>{ </span><span style="color:#59c2ff;">name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;Topics&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">params</span><span style="color:#bfbab0cc;">: </span><span>{ </span><span style="color:#59c2ff;">topic</span><span style="color:#bfbab0cc;">: </span><span>tweet</span><span style="color:#f29668;">.</span><span>topic } }
+</span></code></pre>
+<p>… который мы можем использовать непосредственно в финальном <code>&lt;router-link&gt;</code>, который нуждается в обновлении.</p>
+<pre data-lang="diff" style="background-color:#0f1419;color:#bfbab0;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="color:#f07178;">- &lt;!-- TODO: Link to the topic page. --&gt;
+</span><span style="color:#f07178;">- &lt;router-link v-if=&quot;tweet.topic&quot; :to=&quot;{ name: &#39;Home&#39; }&quot; class=&quot;inline-block mt-2 text-pink-500 hover:underline&quot;&gt;
+</span><span style="color:#c2d94c;">+ &lt;router-link v-if=&quot;tweet.topic&quot; :to=&quot;{ name: &#39;Topics&#39;, params: { topic: tweet.topic } }&quot; class=&quot;inline-block mt-2 text-pink-500 hover:underline&quot;&gt;
+</span><span>      {{ tweet.created_ago }}
+</span><span>  &lt;/router-link&gt;
+</span></code></pre>
+<p>И просто свяжите это, наш компонент <code>TweetCard.vue</code> завершен, и все его ссылки указывают на нужные места.</p>
+<p>К сожалению, если вы сейчас попытаетесь перейти по этим ссылкам, они не сработают. Это просто потому, что мы изменили конечную точку API  <code>fetchTweets</code> для нашего компонента <code>PageHome.vue</code>, но еще не обновили другие страницы.</p>
+<p>Итак, давайте исправим это. Мы начнем со страниц <code>Topics</code> и <code>Users</code>. Обеим этим страницам потребуется доступ ко всем твитам из нашей программы, которые соответствуют определенному критерию. Однако наша конечная точка API fetchTweets еще не поддерживает фильтры. Поэтому мы должны сначала разобраться с этим.</p>
+<h2 id="vspomogatel-nye-fil-try">Вспомогательные фильтры</h2>
+<p>Поскольку [мы уже видели, как фильтровать аккаунты в Солане](https://lorisleiva.com/create-a-solana-dapp-from-scratch/fetching-tweets-from-the-program#filtering-tweets-by -author), поддержка фильтров в нашей конечной точке API должна быть приятной и простой.</p>
+<p>Первое, что нам нужно сделать, это добавить новый параметр <code>filters</code> в метод <code>fetchTweets</code> нашего файла <code>fetch-tweets.js</code>, что позволит нам дополнительно предоставлять фильтры при получении твитов.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ Tweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/models&#39;
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">fetchTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>({ program }</span><span style="color:#bfbab0cc;">, </span><span>filters </span><span style="color:#f29668;">= </span><span>[]) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>(filters)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">return </span><span>tweets</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">map</span><span>(</span><span style="color:#f29718;">tweet </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Tweet</span><span>(tweet</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>tweet</span><span style="color:#f29668;">.</span><span>account))
+</span><span>}
+</span></code></pre>
+<p>Теперь написание фильтров Соланы может быть немного утомительным, и такая логика, разбросанная повсюду в наших компонентах, может быть не идеальной для поддержки. Было бы неплохо, если бы мы могли предложить несколько вспомогательных методов, которые будут генерировать фильтры, чтобы наши компоненты могли использовать эти методы вместо того, чтобы сами генерировать фильтры. Итак, давайте сделаем это!</p>
+<p>Мы начнем с экспорта функции authorFilter, которая принимает открытый ключ в формате base 58 и возвращает соответствующий фильтр memcmp, как мы видели [в эпизоде 5 этой серии](<a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/fetching-tweets-from-the-program#use-the-memcmp-filter-on-the-authors-public-key">Fetching tweets from the program | Create a Solana dApp from scratch | Loris</a>.</p>
+<p>Вот упомянутая функция, которую теперь вы можете добавить в конец вашего файла fetch-tweets.js.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">authorFilter </span><span style="color:#f29668;">= </span><span style="color:#f29718;">authorBase58PublicKey </span><span style="color:#ff7733;">=&gt; </span><span>({
+</span><span>    memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>        bytes</span><span style="color:#bfbab0cc;">: </span><span>authorBase58PublicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>})
+</span></code></pre>
+<p>Затем мы сделаем то же самое для тем, экспортировав функцию <code>topicFilter</code>, которая принимает тему в виде строки и возвращает фильтр <code>memcmp</code>, который правильно кодирует тему и предоставляет для нее правильное смещение.</p>
+<p>Добавьте следующую функцию <code>topicFilter</code> в конец вашего файла <code>fetch-tweets.js</code> и не забудьте импортировать библиотеку <code>bs58</code>, чтобы она могла кодировать заданную строку темы в массив байтов, отформатированный по основанию 58.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ Tweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/models&#39;
+</span><span style="color:#ff7733;">import </span><span>bs58 </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;bs58&#39;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">topicFilter </span><span style="color:#f29668;">= </span><span style="color:#f29718;">topic </span><span style="color:#ff7733;">=&gt; </span><span>({
+</span><span>    memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>            </span><span style="color:#f29718;">32 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Author public key.
+</span><span>            </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Timestamp.
+</span><span>            </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Topic string prefix.
+</span><span>        bytes</span><span style="color:#bfbab0cc;">: </span><span>bs58</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">encode</span><span>(</span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>(topic))</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>})
+</span></code></pre>
+<p>Если вам интересно, почему мы используем именно это смещение, это по тем же причинам, которые мы описали [в эпизоде 5 при фильтрации твитов по темам в наших тестах](<a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/fetching-tweets-from-the-program#filtering-tweets-by-topic">Fetching tweets from the program | Create a Solana dApp from scratch | Loris</a>.</p>
+<p>И это все! Теперь у нас есть конечная точка fetchTweets, которая не только поддерживает фильтры, но и упрощает их использование нашими компонентами. Ваш окончательный файл fetch-tweets.js должен выглядеть так.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ Tweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/models&#39;
+</span><span style="color:#ff7733;">import </span><span>bs58 </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;bs58&#39;
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">fetchTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>({ program }</span><span style="color:#bfbab0cc;">, </span><span>filters </span><span style="color:#f29668;">= </span><span>[]) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>(filters)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">return </span><span>tweets</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">map</span><span>(</span><span style="color:#f29718;">tweet </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Tweet</span><span>(tweet</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>tweet</span><span style="color:#f29668;">.</span><span>account))
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">authorFilter </span><span style="color:#f29668;">= </span><span style="color:#f29718;">authorBase58PublicKey </span><span style="color:#ff7733;">=&gt; </span><span>({
+</span><span>    memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>        bytes</span><span style="color:#bfbab0cc;">: </span><span>authorBase58PublicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>})
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">topicFilter </span><span style="color:#f29668;">= </span><span style="color:#f29718;">topic </span><span style="color:#ff7733;">=&gt; </span><span>({
+</span><span>    memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>            </span><span style="color:#f29718;">32 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Author public key.
+</span><span>            </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Timestamp.
+</span><span>            </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Topic string prefix.
+</span><span>        bytes</span><span style="color:#bfbab0cc;">: </span><span>bs58</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">encode</span><span>(</span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>(topic))</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>})
+</span></code></pre>
+<p>Теперь наши компоненты могут использовать эту конечную точку API для получения и фильтрации подобных твитов.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ fetchTweets</span><span style="color:#bfbab0cc;">, </span><span>authorFilter</span><span style="color:#bfbab0cc;">, </span><span>topicFilter } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span style="color:#ff7733;">const </span><span>workspace </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWorkspace</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Fetch all tweets.
+</span><span style="color:#ff7733;">const </span><span>allTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">fetchTweets</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Filter tweets by author.
+</span><span style="color:#ff7733;">const </span><span>myTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">fetchTweets</span><span>([
+</span><span>    </span><span style="color:#ffb454;">authorFilter</span><span>(</span><span style="color:#c2d94c;">&#39;B1AfN7AgpMyctfFbjmvRAvE1yziZFDb9XCwydBjJwtRN&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>])
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Filter tweets by topic.
+</span><span style="color:#ff7733;">const </span><span>solanaTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">fetchTweets</span><span>([
+</span><span>    </span><span style="color:#ffb454;">topicFilter</span><span>(</span><span style="color:#c2d94c;">&#39;solana&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>])
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Filter tweets by author and topic.
+</span><span style="color:#ff7733;">const </span><span>mySolanaTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">fetchTweets</span><span>([
+</span><span>    </span><span style="color:#ffb454;">authorFilter</span><span>(</span><span style="color:#c2d94c;">&#39;B1AfN7AgpMyctfFbjmvRAvE1yziZFDb9XCwydBjJwtRN&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#ffb454;">topicFilter</span><span>(</span><span style="color:#c2d94c;">&#39;solana&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>])
+</span></code></pre>
+<p>Нойс! Давайте используем эту новую блестящую конечную точку API на наших страницах <code>Topics</code> и <code>Users</code>.</p>
+<h2 id="poluchenie-tvitov-po-teme">Получение твитов по теме</h2>
+<p>Внутри нашего компонента PageTopics.vue давайте импортируем функцию <code>topicFilter</code> и компонуемый <code>useWorkspace</code>, которые мы можем немедленно использовать для доступа к нашему рабочему пространству.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ ref } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useRouter } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue-router&#39;
+</span><span style="color:#ff7733;">import </span><span>{ fetchTweets</span><span style="color:#bfbab0cc;">, </span><span>topicFilter } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useSlug</span><span style="color:#bfbab0cc;">, </span><span>useFromRoute</span><span style="color:#bfbab0cc;">, </span><span>useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetForm </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetForm&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetList </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetList&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetSearch </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetSearch&#39;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Data.
+</span><span style="color:#ff7733;">const </span><span>router </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useRouter</span><span>()
+</span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>([])
+</span><span style="color:#ff7733;">const </span><span>loading </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#f29718;">true</span><span>)
+</span><span style="color:#ff7733;">const </span><span>topic </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#c2d94c;">&#39;&#39;</span><span>)
+</span><span style="color:#ff7733;">const </span><span>slugTopic </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useSlug</span><span>(topic)
+</span><span style="color:#ff7733;">const </span><span>viewedTopic </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#c2d94c;">&#39;&#39;</span><span>)
+</span><span style="color:#ff7733;">const </span><span>workspace </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWorkspace</span><span>()
+</span></code></pre>
+<p>Затем давайте прокрутим немного вниз и предоставим соответствующие параметры методу <code>fetchTweet</code>. Здесь мы будем использовать значение вычисляемого свойства <code>slugTopic</code> в качестве темы для фильтрации твитов.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span style="color:#ffb454;">fetchTopicTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">if </span><span>(slugTopic</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">=== </span><span>viewedTopic</span><span style="color:#f29668;">.</span><span>value) </span><span style="color:#ff7733;">return
+</span><span>    </span><span style="color:#ff7733;">try </span><span>{
+</span><span>        loading</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true
+</span><span>        </span><span style="color:#ff7733;">const </span><span>fetchedTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">fetchTweets</span><span>(workspace</span><span style="color:#bfbab0cc;">, </span><span>[</span><span style="color:#ffb454;">topicFilter</span><span>(slugTopic</span><span style="color:#f29668;">.</span><span>value)])
+</span><span>        tweets</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span>fetchedTweets
+</span><span>        viewedTopic</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span>slugTopic</span><span style="color:#f29668;">.</span><span>value
+</span><span>    } </span><span style="color:#ff7733;">finally </span><span>{
+</span><span>        loading</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Страница темы… Готово! </p>
+<p>Теперь вы сможете щелкнуть ссылку на тему и просмотреть все твиты из этой темы.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1203-solana-9-frontend-fetch-tweets/topics-page.png" alt="Screenshot of the topics page showing two of our tweets from the “veganism” topic." /></p>
+<h2 id="poluchenie-tvitov-po-avtoru">Получение твитов по автору</h2>
+<p>Давайте сделаем то же самое для нашего компонента <code>PageUsers.vue</code>.</p>
+<p>Точно так же мы импортируем функцию <code>authorFilter</code> и компонуемый <code>useWorkspace</code>, прежде чем использовать последний для доступа к нашему рабочему пространству.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ ref } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useRouter } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue-router&#39;
+</span><span style="color:#ff7733;">import </span><span>{ fetchTweets</span><span style="color:#bfbab0cc;">, </span><span>authorFilter } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useFromRoute</span><span style="color:#bfbab0cc;">, </span><span>useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetList </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetList&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetSearch </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetSearch&#39;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Data.
+</span><span style="color:#ff7733;">const </span><span>router </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useRouter</span><span>()
+</span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>([])
+</span><span style="color:#ff7733;">const </span><span>loading </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#f29718;">true</span><span>)
+</span><span style="color:#ff7733;">const </span><span>author </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#c2d94c;">&#39;&#39;</span><span>)
+</span><span style="color:#ff7733;">const </span><span>viewedAuthor </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#c2d94c;">&#39;&#39;</span><span>)
+</span><span style="color:#ff7733;">const </span><span>workspace </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWorkspace</span><span>()
+</span></code></pre>
+<p>Затем мы передаем <code>workspace</code> нашей функции <code>fetchTweets</code> в качестве параметра и предоставляем <code>authorFilter</code>, используя свойство <code>author</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span style="color:#ffb454;">fetchAuthorTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">if </span><span>(author</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">=== </span><span>viewedAuthor</span><span style="color:#f29668;">.</span><span>value) </span><span style="color:#ff7733;">return
+</span><span>    </span><span style="color:#ff7733;">try </span><span>{
+</span><span>        loading</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true
+</span><span>        </span><span style="color:#ff7733;">const </span><span>fetchedTweets </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">fetchTweets</span><span>(workspace</span><span style="color:#bfbab0cc;">, </span><span>[</span><span style="color:#ffb454;">authorFilter</span><span>(author</span><span style="color:#f29668;">.</span><span>value)])
+</span><span>        tweets</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span>fetchedTweets
+</span><span>        viewedAuthor</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span>author</span><span style="color:#f29668;">.</span><span>value
+</span><span>    } </span><span style="color:#ff7733;">finally </span><span>{
+</span><span>        loading</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Бум, страница пользователя… Готово!</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1203-solana-9-frontend-fetch-tweets/users-page.png" alt="Screenshot of the users page showing two tweets from a given author." /></p>
+<p>Прежде чем мы двинемся дальше, есть еще одна страница, на которой необходимо использовать функцию <code>authorFilter</code>, и это страница профиля.</p>
+<p>Давайте сделаем то же самое с нашим компонентом <code>PageProfile.vue</code>. На этот раз компонуемый <code>useWorkspace</code> уже используется для доступа к свойству <code>wallet</code>. Таким образом, мы обязательно получим доступ ко всему рабочему пространству, прежде чем деструктурировать его для доступа к подключенному кошельку.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ ref</span><span style="color:#bfbab0cc;">, </span><span>watchEffect } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ fetchTweets</span><span style="color:#bfbab0cc;">, </span><span>authorFilter } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetForm </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetForm&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetList </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetList&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>([])
+</span><span style="color:#ff7733;">const </span><span>loading </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#f29718;">true</span><span>)
+</span><span style="color:#ff7733;">const </span><span>workspace </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWorkspace</span><span>()
+</span><span style="color:#ff7733;">const </span><span>{ wallet } </span><span style="color:#f29668;">= </span><span>workspace
+</span></code></pre>
+<p>Затем мы можем предоставить <code>workspace</code> и <code>authorFilter</code> в качестве параметров функции <code>fetchTweets</code>». Поскольку это страница профиля, мы будем использовать открытый ключ подключенного кошелька в фильтре автора.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ffb454;">watchEffect</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">if </span><span>(</span><span style="color:#f29668;">! </span><span>wallet</span><span style="color:#f29668;">.</span><span>value) </span><span style="color:#ff7733;">return
+</span><span>    </span><span style="color:#ffb454;">fetchTweets</span><span>(workspace</span><span style="color:#bfbab0cc;">, </span><span>[</span><span style="color:#ffb454;">authorFilter</span><span>(wallet</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>())])
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">then</span><span>(</span><span style="color:#f29718;">fetchedTweets </span><span style="color:#ff7733;">=&gt; </span><span>tweets</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span>fetchedTweets)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">finally</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span>loading</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false</span><span>)
+</span><span>})
+</span></code></pre>
+<p>Обратите внимание, что в дополнение к изменениям, внесенным в вызов метода <code>fetchTweets</code>, мы добавили строку, которая гарантирует, что у нас есть подключенный кошелек, прежде чем продолжить, то есть <code>if (! wallet.value) return</code>. Несмотря на то, что страница профиля скрыта, когда кошелек не подключен, нам все равно нужно добавить эту дополнительную проверку, потому что после обновления будет небольшая задержка перед автоматическим повторным подключением кошелька.</p>
+<h2 id="poluchenie-tol-ko-odnogo-tvita">Получение только одного твита</h2>
+<p>Есть последняя страница, на которой пользователи могут получить доступ к твитам, и это страница <code>Tweet</code>. Эта страница немного особенная, потому что вместо отображения нескольких твитов она просто извлекает содержимое учетной записи <code>Tweet</code> по заданному адресу.</p>
+<p>Поэтому мы не можем использовать здесь конечную точку API <code>fetchTweets</code>. Вместо этого есть конечная точка API getTweet, расположенная в файле <code>get-tweet.js</code>, которую нам нужно обновить.</p>
+<p>Замените все внутри этого файла следующим кодом.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ Tweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/models&#39;
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">getTweet </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>({ </span><span style="color:#f29718;">program </span><span>}</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">publicKey</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>account </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fetch</span><span>(publicKey)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Tweet</span><span>(publicKey</span><span style="color:#bfbab0cc;">, </span><span>account)
+</span><span>}
+</span></code></pre>
+<p>Как и наш метод fetchTweets, getTweet ожидает получить наш объект workspace в качестве первого параметра. Кроме того, он принимает параметр <code>publicKey</code>, который должен быть экземпляром класса <code>PublicKey</code> Соланы.</p>
+<p>Затем он использует метод <code>fetch</code> из API <code>account.tweet</code>, предоставляемого программой Anchor, для получения содержимого учетной записи. Затем мы можем объединить эти данные учетной записи с предоставленным открытым ключом, чтобы вернуть новый объект <code>Tweet</code>.</p>
+<p>Теперь, когда наша конечная точка API <code>getTweet</code> готова, давайте используем ее внутри нашего компонента <code>PageTweet.vue</code>.</p>
+<p>Если вы посмотрите на его импорт, вы заметите, что он уже импортирован, потому что именно так мы отображали фиктивные данные раньше. Однако нам нужно будет передать объект рабочей области в качестве первого параметра, поэтому давайте импортируем составной объект <code>useWorkspace</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ ref</span><span style="color:#bfbab0cc;">, </span><span>watchEffect } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ PublicKey } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;
+</span><span style="color:#ff7733;">import </span><span>{ getTweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useFromRoute</span><span style="color:#bfbab0cc;">, </span><span>useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetCard </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetCard&#39;
+</span></code></pre>
+<p>Далее, давайте прокрутим немного вниз и получим доступ к свойству <code>workspace</code>, прежде чем передать его вызову метода <code>getTweet</code>. Что касается открытого ключа, мы можем использовать реактивное свойство tweetAddress, которое динамически извлекается из текущего URL. Однако нам нужно будет обернуть его <code>value</code> внутри объекта <code>PublicKey</code>, так как это то, что ожидает получить наша конечная точка API.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>loading </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#f29718;">false</span><span>)
+</span><span style="color:#ff7733;">const </span><span>tweet </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#f29718;">null</span><span>)
+</span><span style="color:#ff7733;">const </span><span>workspace </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWorkspace</span><span>()
+</span><span style="color:#ffb454;">watchEffect</span><span>(</span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">try </span><span>{
+</span><span>        loading</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true
+</span><span>        tweet</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">getTweet</span><span>(workspace</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">PublicKey</span><span>(tweetAddress</span><span style="color:#f29668;">.</span><span>value))
+</span><span>    } </span><span style="color:#ff7733;">catch </span><span>(e) {
+</span><span>        tweet</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">null
+</span><span>    } </span><span style="color:#ff7733;">finally </span><span>{
+</span><span>        loading</span><span style="color:#f29668;">.</span><span>value </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false
+</span><span>    }
+</span><span>})
+</span></code></pre>
+<p>Все готово! </p>
+<p>Если вы нажмете на отметку времени твита, у вас появится доступ к странице, которую можно использовать, чтобы поделиться им.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1203-solana-9-frontend-fetch-tweets/tweet-page.png" alt="Screenshot of the tweet page showing one of the tweets generated by our tests." /></p>
+<h2 id="vyvod">Вывод</h2>
+<p>Наше приложение действительно начинает обретать форму! На этом этапе вы должны быть в состоянии осмотреться и прочитать все твиты, присутствующие в блокчейне.</p>
+<p>Единственное, чего не хватает, прежде чем мы сможем поделиться нашим приложением со всем миром, — это позволить пользователям отправлять твиты напрямую через наше внешнее приложение, что мы и сделаем в следующем эпизоде. 🙌</p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/tree/episode-9">Просмотреть эпизод 9 на GitHub</a></p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/compare/episode-8...episode-9">Сравните с Эпизодом 8</a></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ротация лидеров | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#rotatsiia-grafika-liderov">Ротация графика лидеров</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#rotatsiia-raspisaniia-liderov-s-razdelami-razmerom-v-epokhu"><small>- Ротация расписания лидеров с разделами размером в эпоху.</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#generatsiia-raspisaniia-liderov-v-genesis">Генерация расписания лидеров в Genesis</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#algoritm-generatsii-raspisaniia-liderov">Алгоритм генерации расписания лидеров</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#vektory-ataki-po-raspisaniiu">Векторы атаки по расписанию</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#semia"><small>- Семя</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#aktivnyi-nabor"><small>- Активный набор</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#steiking"><small>- Стейкинг</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#poteria-rabochego-kliucha-validatora"><small>- Потеря рабочего ключа валидатора</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/leader-rotation/#dobavlenie-zapisei">Добавление записей</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Ротация лидеров</h1>
+
+<p>В любой момент кластер ожидает, что только один валидатор создаст записи в реестре. Имея одновременно только одного лидера, все валидаторы могут воспроизводить идентичные копии реестра. Однако недостатком одновременного использования только одного лидера является то, что злонамеренный лидер способен подвергать цензуре голоса и транзакции. Поскольку цензуру нельзя отличить от потери сетевых пакетов, кластер не может просто выбрать один узел, который будет играть роль лидера на неопределенный срок. Вместо этого кластер минимизирует влияние злонамеренного лидера, чередуя узлы, которые берут на себя инициативу.</p>
+<p>Каждый валидатор выбирает ожидаемого лидера по одному и тому же алгоритму, описанному ниже. Когда валидатор получает новую подписанную запись в реестре, он может быть уверен, что запись была создана ожидаемым лидером. Порядок слотов, в котором каждому лидеру назначается слот, называется <em>расписанием</em> лидера.</p>
+<h2 id="rotatsiia-grafika-liderov">Ротация графика лидеров</h2>
+<p>Валидатор отклоняет блоки, не подписанные <em>слотом-лидером</em>. Список личностей всех лидеров слотов называется <em>расписанием лидеров</em>. Расписание лидера пересчитывается локально и периодически. Он назначает лидеров слотов на время, называемое <em>эпохой</em>. Расписание должно быть рассчитано задолго до назначенных им слотов, чтобы состояние реестра, используемое для расчета расписания, было завершено. Эта продолжительность называется <em>смещением графика лидера</em>. Солана устанавливает смещение продолжительности слотов до следующей эпохи. То есть график лидера для эпохи рассчитывается на основе состояния реестра в начале предыдущей эпохи. Смещение одной эпохи является довольно произвольным и считается достаточно длинным, чтобы все валидаторы завершили свое состояние реестра до того, как будет сгенерировано следующее расписание. Кластер может сократить смещение, чтобы сократить время между изменениями ставок и обновлениями расписания лидера.</p>
+<p>При работе без разделов, длящихся дольше, чем эпоха, расписание нужно генерировать только тогда, когда корневая вилка пересекает границу эпохи. Поскольку расписание относится к следующей эпохе, любые новые доли, переданные в корневой форк, не будут активны до следующей эпохи. Блок, используемый для генерации расписания лидера, является первым блоком, пересекающим границу эпохи.</p>
+<p>Без раздела, длящегося дольше эпохи, кластер будет работать следующим образом:</p>
+<ol>
+<li>Валидатор постоянно обновляет свою корневую вилку по мере голосования.</li>
+<li>Валидатор обновляет свое расписание лидера каждый раз, когда высота слота пересекает границу эпохи.</li>
+</ol>
+<p>Например:</p>
+<p>Предположим, что продолжительность эпохи составляет 100 слотов, что на самом деле на порядок больше. Корневая вилка обновляется с вилки, рассчитанной на высоте слота 99, на вилку, вычисленную на высоте слота 102. Вилки со слотами на высоте 100, 101 были пропущены из-за сбоев. Новое расписание лидера вычисляется с использованием разветвления на высоте слота 102. Оно активно со слота 200 до тех пор, пока не будет обновлено снова.</p>
+<p>Никакой несогласованности быть не может, потому что каждый валидатор, который голосует с кластером, пропустил 100 и 101, когда его корень проходит 102. Все валидаторы, независимо от шаблона голосования, будут фиксироваться на корне, который равен либо 102, либо потомку 102.</p>
+<h3 id="rotatsiia-raspisaniia-liderov-s-razdelami-razmerom-v-epokhu">Ротация расписания лидеров с разделами размером в эпоху.</h3>
+<p>Продолжительность смещения графика лидера имеет прямое отношение к вероятности того, что кластер будет иметь противоречивое представление о правильном графике лидера.</p>
+<p>Рассмотрим следующий сценарий:</p>
+<p>Два раздела, каждый из которых генерирует половину блоков. Ни один из них не подходит к окончательной развилке квалифицированного большинства. Оба пересекут эпохи 100 и 200 без фактической фиксации корня и, следовательно, приверженности всего кластера новому расписанию лидера.</p>
+<p>В этом нестабильном сценарии существует несколько действительных расписаний лидеров.</p>
+<ul>
+<li>Расписание лидера создается для каждой вилки, чей прямой родитель находится в предыдущей эпохе.</li>
+<li>Расписание лидеров действует после начала следующей эпохи для вилок-потомков до тех пор, пока оно не будет обновлено.</li>
+</ul>
+<p>Расписание каждого раздела будет расходиться после того, как раздел продлится более эпохи. По этой причине продолжительность эпохи должна быть выбрана намного больше, чем время слота и ожидаемая длина вилки, которая будет зафиксирована в корне.</p>
+<p>После наблюдения за кластером в течение достаточного времени смещение графика лидера может быть выбрано на основе средней продолжительности раздела и его стандартного отклонения. Например, смещение, превышающее медианную продолжительность раздела плюс шесть стандартных отклонений, уменьшит вероятность несогласованного расписания реестра в кластере до 1 на 1 миллион.</p>
+<h2 id="generatsiia-raspisaniia-liderov-v-genesis">Генерация расписания лидеров в Genesis</h2>
+<p>Конфигурация генезиса объявляет первого лидера для первой эпохи. Этот лидер оказывается запланированным для первых двух эпох, потому что расписание лидера также генерируется в слоте 0 для следующей эпохи. Длина первых двух эпох также может быть указана в конфигурации генезиса. Минимальная длина первых эпох должна быть больше или равна максимальной глубине отката, определенной в <a href="../implemented-proposals/tower-bft/">Tower BFT</a>.</p>
+<h2 id="algoritm-generatsii-raspisaniia-liderov">Алгоритм генерации расписания лидеров</h2>
+<p>Расписание лидера генерируется с использованием предопределенного начального числа. Процесс выглядит следующим образом:</p>
+<ol>
+<li>Периодически используйте высоту тика PoH (монотонно возрастающий счетчик) для создания стабильного псевдослучайного алгоритма.</li>
+<li>На этой высоте отберите в банке выборку для всех счетов с стейкингом с личностью лидера, которые проголосовали в пределах настроенного кластером количества тиков. Образец называется <em>активным набором</em>.</li>
+<li>Отсортируйте активный набор по весу ставки.</li>
+<li>Используйте случайное начальное число для выбора узлов, взвешенных по доле, чтобы создать взвешенный по доле порядок.</li>
+<li>Этот порядок вступает в силу после заданного кластером количества тиков.</li>
+</ol>
+<h2 id="vektory-ataki-po-raspisaniiu">Векторы атаки по расписанию</h2>
+<h3 id="semia">Семя</h3>
+<p>Выбранное семя предсказуемо, но непредвзято. Нет шлифовальной атаки, влияющей на ее исход.</p>
+<h3 id="aktivnyi-nabor">Активный набор</h3>
+<p>Лидер может повлиять на активное множество, подвергая цензуре голоса валидаторов. Лидеры могут цензурировать активное множество двумя возможными способами:</p>
+<ul>
+<li>Игнорировать голоса от валидаторов</li>
+<li>Отказаться голосовать за блоки голосами от валидаторов</li>
+</ul>
+<p>Чтобы снизить вероятность цензуры, активный набор вычисляется на границе смещения графика лидера в течение <em>длительности выборки активного набора</em>. Продолжительность выборки активного набора достаточно велика, чтобы голоса были собраны несколькими лидерами.</p>
+<h3 id="steiking">Стейкинг</h3>
+<p>Лидеры могут подвергать цензуре новые транзакции ставок или отказываться проверять блоки с новыми ставками. Эта атака похожа на цензуру голосов валидатора.</p>
+<h3 id="poteria-rabochego-kliucha-validatora">Потеря рабочего ключа валидатора</h3>
+<p>Ожидается, что лидеры и валидаторы будут использовать эфемерные ключи для работы, а владельцы доли разрешают валидаторам выполнять работу со своей долей посредством делегирования.</p>
+<p>Кластер должен иметь возможность восстановиться после потери всех эфемерных ключей, используемых лидерами и валидаторами, что может произойти из-за общей уязвимости программного обеспечения, общей для всех узлов. Владельцы доли должны иметь возможность голосовать напрямую, подписав голос валидатора, даже если доля в настоящее время делегирована валидатору.</p>
+<h2 id="dobavlenie-zapisei">Добавление записей</h2>
+<p>Срок жизни ведущего расписания называется <em>эпохой</em>. Эпоха разделена на <em>slots</em>, где каждый слот имеет продолжительность <code>T</code> тиков PoH.</p>
+<p>Лидер передает записи во время своего слота. После тика <code>T</code> все валидаторы переключаются на следующего запланированного лидера. Валидаторы должны игнорировать записи, отправленные за пределы слота, назначенного лидером.</p>
+<p>Все тики <code>T</code> должны наблюдаться следующим лидером, чтобы он мог строить свои собственные записи. Если записи не наблюдаются (лидер недоступен) или записи недействительны (лидер глючит или вредоносен), следующий лидер должен произвести тики, чтобы заполнить слот предыдущего лидера. Обратите внимание, что следующий лидер должен выполнять запросы на исправление параллельно и откладывать отправку тиков до тех пор, пока не будет уверен, что другие валидаторы также не смогли наблюдать записи предыдущего лидера. Если лидер неправильно строит на своих тиках, следующий за ним лидер должен заменить все свои тики.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Обработка ошибок в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#delaem-nevozmozhnye-sostoianiia-nevozmozhnymi">Делаем невозможные состояния невозможными</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#obrabotka-sostoianiia-oshibki">Обработка состояния ошибки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#ignorirovat-oshibki">Игнорировать ошибки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#panika">Паника!</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#rezervnye-znacheniia">Резервные значения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#rasprostranenie-oshibki">Распространение ошибки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#rasprostranenie-razlichnykh-oshibok">Распространение различных ошибок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#pol-zovatel-skie-oshibki">Пользовательские ошибки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#anyhow">Anyhow…</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/error-handling-in-rust/#nizhniaia-liniia">Нижняя линия</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Обработка ошибок в Rust</h1>
+
+<p><a href="https://fettblog.eu/rust-error-handling/">Перевод</a> | Автор оригинала: Stefan Baumgartner</p>
+<p>Я начал читать университетские лекции по Rust, а также проводить семинары и тренинги. Одной из частей, которая превратилась из пары слайдов в полноценный сеанс, было все, что касалось обработки ошибок в Rust, поскольку это невероятно хорошо!</p>
+<p>Это не только помогает сделать невозможные состояния невозможными, но и содержит так много деталей, что обработка ошибок - как и все в Rust - становится очень эргономичной и простой для чтения и использования.</p>
+<h2 id="delaem-nevozmozhnye-sostoianiia-nevozmozhnymi">Делаем невозможные состояния невозможными</h2>
+<p>В Rust нет таких вещей, как undefined или null, и у вас нет исключений, как вы знаете из языков программирования, таких как Java или C#. Вместо этого вы используете встроенные перечисления для моделирования состояния:</p>
+<ul>
+<li>Option<T> для привязок, которые могут не иметь значения (например, Some(x) или None)</li>
+<li>Result&lt;T, E&gt; для результатов операций, которые могут привести к ошибке (например, Ok(val) vs Err(error))</li>
+</ul>
+<p>Разница между ними очень тонкая и во многом зависит от семантики вашего кода. Однако способ работы обоих перечислений очень похож. На мой взгляд, наиболее важным является то, что оба типа просят вас разобраться с ними. Либо явно обрабатывая все состояния, либо явно игнорируя их.</p>
+<p>В этой статье я хочу сосредоточиться на Result&lt;T, E&gt;, поскольку он действительно содержит ошибки.</p>
+<p>Result&lt;T, E&gt; - это перечисление с двумя вариантами: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Result</span><span>&lt;T, E&gt; {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(T)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(E)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>T, E являются дженериками. T может быть любым значением, E может быть любой ошибкой. Два варианта Ok и Err доступны во всем мире.</p>
+<p>Используйте <code>Result&lt;T, E&gt;</code>, когда у вас есть что-то, что может пойти не так. Ожидается, что операция будет успешной, но могут быть случаи, когда это не удается. Когда у вас есть значение Result, вы можете сделать следующее:</p>
+<ul>
+<li>Разберитесь с государствами!</li>
+<li>Игнорируй это</li>
+<li>Паника!</li>
+<li>Используйте запасные варианты</li>
+<li>Распространять ошибки</li>
+</ul>
+<p>Давайте подробно рассмотрим, что я имею в виду.</p>
+<h2 id="obrabotka-sostoianiia-oshibki">Обработка состояния ошибки</h2>
+<p>Напишем небольшой фрагмент, в котором мы хотим прочитать строку из файла. Это требует от нас</p>
+<ol>
+<li>Прочтите файл</li>
+<li>Прочтите строку из этого файла.</li>
+</ol>
+<p>Обе операции могут вызвать ошибку std::io::Error, потому что может произойти что-то непредвиденное (файл не существует, его нельзя прочитать и т.д.). Таким образом, функция, которую мы пишем, может возвращать либо String, либо io::Error. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>io</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fs</span><span style="color:#f29668;">::</span><span>File</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_username_from_file</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, io</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> f </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(path)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> f </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> f {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(file) </span><span style="color:#f29668;">=&gt;</span><span> file</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e)</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> s </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/* 2 */
+</span><span>    </span><span style="color:#ff7733;">match</span><span> f</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_to_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> s) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(s)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err) </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err)</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Вот что происходит:</p>
+<ol>
+<li>Когда мы открываем файл по пути, он либо может вернуть дескриптор файла для работы с Ok(файл), либо вызывает ошибку Err(e). При использовании match f мы вынуждены иметь дело с двумя возможными состояниями. Либо мы назначаем дескриптор файла f (обратите внимание на затенение f), либо возвращаемся из функции, возвращая ошибку. Оператор return здесь важен, поскольку мы хотим выйти из функции.</li>
+<li>Затем мы хотим прочитать содержимое только что созданной строки s. Он снова может либо завершиться успешно, либо выдать ошибку. Функция f.read_to_string возвращает длину прочитанных байтов, поэтому мы можем спокойно игнорировать значение и вернуть Ok(s) с прочитанной строкой. В противном случае мы просто возвращаем ту же ошибку. Обратите внимание, что я не ставил точку с запятой в конце выражения соответствия. Поскольку это выражение, это то, что мы возвращаем из функции в этот момент.</li>
+</ol>
+<p>Это может показаться очень многословным (это…), но вы видите два очень важных аспекта обработки ошибок:</p>
+<ol>
+<li>В обоих случаях ожидается, что вы будете иметь дело с двумя возможными состояниями. Вы не можете продолжить, если ничего не сделаете</li>
+<li>Такие функции, как затенение (привязка значения к существующему имени) и выражения, позволяют легко читать и использовать даже подробный код.</li>
+</ol>
+<p>Операцию, которую мы только что сделали, часто называют разворачиванием. Потому что вы разворачиваете значение, заключенное внутри перечисления.</p>
+<p>Кстати о разворачивании…</p>
+<h2 id="ignorirovat-oshibki">Игнорировать ошибки</h2>
+<p>Если вы абсолютно уверены, что ваша программа не потерпит неудачу, вы можете просто .unwrap() свои значения, используя встроенные функции: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_username_from_file</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, io</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> f </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(path)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> s </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    f</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_to_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> s)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(s) </span><span style="font-style:italic;color:#5c6773;">/* 2 */
+</span><span>}
+</span></code></pre>
+<p>Вот что происходит:</p>
+<ol>
+<li>Во всех случаях, которые могут вызвать ошибку, мы вызываем unwrap(), чтобы получить значение</li>
+<li>Оборачиваем результат в вариант Ok, который возвращаем. Мы могли бы просто вернуть s и оставить Result&lt;T, E&gt; в сигнатуре нашей функции. Мы сохраняем его, потому что снова используем его в других примерах.</li>
+</ol>
+<p>Сама функция unwrap() очень похожа на то, что мы делали на первом шаге, когда мы работали со всеми состояниями: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// result.rs
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T, E</span><span style="color:#bfbab0cc;">: </span><span>fmt</span><span style="color:#f29668;">::</span><span>Debug&gt; </span><span style="color:#59c2ff;">Result</span><span>&lt;T, E&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">unwrap</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> T {
+</span><span>        </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(t) </span><span style="color:#f29668;">=&gt;</span><span> t</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">unwrap_failed</span><span>(</span><span style="color:#c2d94c;">&quot;called `Result::unwrap()` on an `Err` value&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>e)</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span></code></pre>
+<p>unwrap_failed - это ярлык к панике! макрос. Это означает, что если вы используете .unwrap() и не получите успешного результата, ваше программное обеспечение выйдет из строя.</p>
+<p>Вы можете спросить себя: чем это отличается от ошибок, которые просто приводят к сбою программного обеспечения на других языках программирования? Ответ прост: вы должны четко заявить об этом. Rust требует, чтобы вы что-то делали, даже если он явно позволяет паниковать.</p>
+<p>Существует множество различных функций .unwrap_, которые можно использовать в различных ситуациях. Мы рассмотрим один или два из них дальше.</p>
+<h2 id="panika">Паника!</h2>
+<p>Говоря о панике, вы также можете паниковать своим собственным паническим сообщением: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_username_from_file</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, io</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> f </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(path)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Error opening file&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> s </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    f</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_to_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> s)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>(</span><span style="color:#c2d94c;">&quot;Error reading file to string&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(s) 
+</span><span>}
+</span></code></pre>
+<p>То, что делает .expect (...), очень похоже на unwrap() </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;T, E</span><span style="color:#bfbab0cc;">: </span><span>fmt</span><span style="color:#f29668;">::</span><span>Debug&gt; </span><span style="color:#59c2ff;">Result</span><span>&lt;T, E&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">expect</span><span>(</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">msg</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> T {
+</span><span>        </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(t) </span><span style="color:#f29668;">=&gt;</span><span> t</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">unwrap_failed</span><span>(msg</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>e)</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Но у вас в руках свои панические сообщения, которые могут вам понравиться!</p>
+<p>Но даже если мы всегда будем откровенны, мы можем захотеть, чтобы наше программное обеспечение не паниковало и не падало всякий раз, когда мы сталкиваемся с ошибкой. Возможно, мы захотим сделать что-нибудь полезное, например, предоставить запасные варианты или… ну… собственноручно обработать ошибки.</p>
+<h2 id="rezervnye-znacheniia">Резервные значения</h2>
+<p>Rust имеет возможность использовать значения по умолчанию в своих перечислениях Result (и Option). </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_username_from_file</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, io</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> f </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(path)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Error opening file&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> s </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    f</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_to_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> s)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#c2d94c;">&quot;admin&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(s) 
+</span><span>}
+</span></code></pre>
+<ol>
+<li>«admin» может быть не лучшим вариантом для имени пользователя, но идею вы поняли. Вместо сбоя мы возвращаем значение по умолчанию в случае результата ошибки. Метод .unwrap_or_else принимает закрытие для более сложных значений по умолчанию.</li>
+</ol>
+<p>Так-то лучше! Тем не менее, то, что мы до сих пор узнали, - это компромисс между слишком подробным описанием или допуском явных сбоев или, возможно, наличием резервных значений. Но можем ли мы получить и то, и другое? Краткий код и безопасность от ошибок? Мы можем!</p>
+<h2 id="rasprostranenie-oshibki">Распространение ошибки</h2>
+<p>Одна из функций, которые мне больше всего нравятся в типах результатов Rust, - это возможность распространения ошибки. Обе функции, которые могут вызвать ошибку, имеют один и тот же тип ошибки: io::Error. Мы можем использовать оператор вопросительного знака после каждой операции, чтобы писать код для счастливого пути (только успешные результаты) и возвращать результаты ошибок, если что-то пойдет не так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_username_from_file</span><span>(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, io</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> f </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(path)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> s </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    f</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_to_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> s)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(s) 
+</span><span>}
+</span></code></pre>
+<p>В этом фрагменте f - обработчик файла, f.read_to_string сохраняет в s. Если что-то пойдет не так, мы вернемся из функции с Err(io::Error). Краткий код, но мы имеем дело с ошибкой на один уровень выше: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">read_username_from_file</span><span>(</span><span style="color:#c2d94c;">&quot;user.txt&quot;</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(username) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Welcome </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> username)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Whoopsie! </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> err)
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Что в этом хорошего?</p>
+<ol>
+<li>Мы по-прежнему недвусмысленны, мы должны что-то делать! Вы все еще можете найти все места, где могут произойти ошибки!</li>
+<li>Мы можем писать краткий код, как если бы ошибок не было. Ошибки еще предстоит исправить! Либо от нас, либо от пользователей нашей функции.</li>
+</ol>
+<p>Оператор вопросительного знака также работает с Option<T>, это также позволяет создать действительно красивый и элегантный код!</p>
+<h2 id="rasprostranenie-razlichnykh-oshibok">Распространение различных ошибок</h2>
+<p>Проблема в том, что подобные методы работают только при одинаковом типе ошибок. Если у нас есть два разных типа ошибок, мы должны проявить творческий подход. Посмотрите на эту слегка измененную функцию, в которой мы открываем и читаем файлы, а затем анализируем прочитанное содержимое в u64 </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_number_from_file</span><span>(</span><span style="color:#f29718;">filename</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">u64</span><span>, </span><span style="color:#ff3333;">?</span><span style="color:#f29668;">??&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> file </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(filename)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> buffer </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    file</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_to_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> buffer)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> parsed</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64 </span><span style="color:#f29668;">=</span><span> buffer</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">parse</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 2 */
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(parsed)
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Эти две точки могут вызвать io::Error, как мы знаем из предыдущих примеров.</li>
+<li>Однако эта операция может вызвать ошибку ParseIntError.</li>
+</ol>
+<p>Проблема в том, что мы не знаем, какую ошибку получаем во время компиляции. Это полностью зависит от запуска нашего кода. Мы можем обрабатывать каждую ошибку с помощью выражений сопоставления и возвращать собственный тип ошибки. Что верно, но снова делает наш код многословным. Или мы готовимся к «вещам, которые происходят во время выполнения»!</p>
+<p>Ознакомьтесь с нашей слегка измененной функцией </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>error</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">read_number_from_file</span><span>(</span><span style="color:#f29718;">filename</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">u64</span><span>, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn error</span><span style="color:#f29668;">::</span><span>Error&gt;&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> file </span><span style="color:#f29668;">= </span><span>File</span><span style="color:#f29668;">::</span><span>open(filename)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> buffer </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    file</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_to_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> buffer)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> parsed</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64 </span><span style="color:#f29668;">=</span><span> buffer</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">parse</span><span>()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 2 */
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(parsed)
+</span><span>}
+</span></code></pre>
+<p>Вот что происходит:</p>
+<ul>
+<li>Вместо того, чтобы возвращать реализацию ошибки, мы сообщаем Rust, что идет что-то, реализующее трэйту ошибки Error.</li>
+<li>Поскольку мы не знаем, что это может быть во время компиляции, мы должны сделать его типажным объектом: dyn std::error::Error.</li>
+<li>А поскольку мы не знаем, насколько это будет большим, мы упаковываем его в Box. Умный указатель, указывающий на данные, которые в конечном итоге будут в куче</li>
+</ul>
+<p>Box<dyn Trait> включает динамическую отправку в Rust: возможность динамически вызывать функцию, которая неизвестна во время компиляции. Для этого Rust представляет виртуальную таблицу, в которой хранятся указатели на фактические реализации. Во время выполнения мы используем эти указатели для вызова соответствующих реализаций функций.</p>
+<p><img src="/imgs/posts/ce34d253_01.svg" alt="Схема памяти Box и Box" /></p>
+<p>И теперь наш код снова лаконичен, и нашим пользователям приходится иметь дело с возможной ошибкой.</p>
+<p>Первый вопрос, который я задаю, когда показываю это людям на моих курсах: но можем ли мы в конечном итоге проверить, какой тип ошибки произошел? Мы можем! Метод downcast_ref() позволяет нам вернуться к исходному типу. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">read_number_from_file</span><span>(</span><span style="color:#c2d94c;">&quot;number.txt&quot;</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(v) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Your number is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> v)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#ff7733;">if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(io_err) </span><span style="color:#f29668;">=</span><span> err</span><span style="color:#f29668;">.</span><span>downcast_ref</span><span style="color:#f29668;">::</span><span>&lt;std</span><span style="color:#f29668;">::</span><span>io</span><span style="color:#f29668;">::</span><span>Error&gt;() {
+</span><span>                </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Error during IO! </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> io_err)
+</span><span>            } </span><span style="color:#ff7733;">else if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(pars_err) </span><span style="color:#f29668;">=</span><span> err</span><span style="color:#f29668;">.</span><span>downcast_ref</span><span style="color:#f29668;">::</span><span>&lt;ParseIntError&gt;() {
+</span><span>                </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Error during parsing </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> pars_err)
+</span><span>            }
+</span><span>        }
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Отлично!</p>
+<h2 id="pol-zovatel-skie-oshibki">Пользовательские ошибки</h2>
+<p>Он становится еще лучше и гибче, если вы хотите создавать собственные ошибки для своих операций. Чтобы использовать настраиваемые ошибки, ваши структуры ошибок должны реализовывать трэйту std::error::Error. Это может быть классическая структура, кортежная структура или даже единичная структура.</p>
+<p>Вам не нужно реализовывать какие-либо функции std::error::Error, но вам нужно реализовать как трейт Debug, так и свойство Display. Причина в том, что ошибки хотят где-то печатать. Вот как выглядит пример: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug)] </span><span style="font-style:italic;color:#5c6773;">/* 1 */
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">ParseArgumentsError</span><span>(String)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">/* 2 */
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>std</span><span style="color:#f29668;">::</span><span>error</span><span style="color:#f29668;">::</span><span>Error </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">ParseArgumentsError </span><span>{} </span><span style="font-style:italic;color:#5c6773;">/* 3 */
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/* 4 */
+</span><span style="color:#ff7733;">impl </span><span>Display </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">ParseArgumentsError </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">fmt</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>std</span><span style="color:#f29668;">::</span><span>fmt</span><span style="color:#f29668;">::</span><span>Formatter&lt;&#39;</span><span style="color:#f29668;">_</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>std</span><span style="color:#f29668;">::</span><span>fmt</span><span style="color:#f29668;">::</span><span>Result {
+</span><span>        </span><span style="color:#f07178;">write!</span><span>(f, </span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0</span><span>)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Мы выводим трэйту Debug.</li>
+<li>Наша ParseArgumentsError - это структура кортежа с одним элементом: настраиваемое сообщение.</li>
+<li>Реализуем std::error::Error для ParseArgumentsError. Больше ничего реализовывать не нужно</li>
+<li>Мы реализуем Display, где выводим единственный элемент нашего кортежа.</li>
+</ol>
+<p>И это все! </p>
+<h2 id="anyhow">Anyhow…</h2>
+<p>Поскольку многие вещи, которые вы только что выучили, очень распространены, конечно, существуют крэйти, которые абстрагируют большую часть из них. Фантастический крэйт Anyhow Crate - один из них, который дает вам возможность обрабатывать ошибки на основе объектов с помощью удобных макросов и типов.</p>
+<h2 id="nizhniaia-liniia">Нижняя линия</h2>
+<p>Это очень быстрое руководство по обработке ошибок в Rust. Конечно, это еще не все, но это должно помочь вам начать! Это также моя первая техническая статья по Rust, и я надеюсь, что ее будет еще много. Дайте мне знать, если вам это понравилось, и если вы обнаружите какие-либо… ха-ха… ошибки (ба-дум-ц 🥁), я просто напишу твит. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

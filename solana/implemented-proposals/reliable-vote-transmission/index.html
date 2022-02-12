@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Надежная передача голоса | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/reliable-vote-transmission/#problemy">Проблемы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/reliable-vote-transmission/#dizain">Дизайн</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/reliable-vote-transmission/#kak-etot-dizain-reshaet-problemy">Как этот дизайн решает проблемы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/reliable-vote-transmission/#predstavlenie">Представление</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/reliable-vote-transmission/#vnedrenie-v-dva-etapa">Внедрение в два этапа</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/reliable-vote-transmission/#set-validatorov-sub-1k"><small>- Сеть валидаторов Sub 1k</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/reliable-vote-transmission/#set-nizhe-20-tys"><small>- Сеть ниже 20 тыс.</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Надежная передача голоса</h1>
+
+<p>Голоса валидатора — это сообщения, которые имеют критическую функцию для достижения консенсуса и непрерывной работы сети. Поэтому крайне важно, чтобы они были надежно доставлены и закодированы в реестре.</p>
+<h2 id="problemy">Проблемы</h2>
+<ol>
+<li>Ротация лидера запускается PoH, т.е. часами с большим дрейфом. Так много узлов, вероятно, будут иметь неправильное представление о том, активен ли следующий лидер в реальном времени или нет.</li>
+<li>Следующий лидер может быть легко затоплен. Таким образом, DDOS будет препятствовать не только доставке обычных транзакций, но и согласованным сообщениям.</li>
+<li>UDP ненадежен, и наш асинхронный протокол требует повторной передачи любого передаваемого сообщения до тех пор, пока оно не будет обнаружено в реестре. Повторная передача потенциально может вызвать непреднамеренное <em>громкое стадо</em> против лидера с большим количеством валидаторов. В худшем случае флуд будет <code>(num_nodes * num_retransmits)</code>.</li>
+<li>Отслеживание того, был ли голос передан или нет через реестр, не гарантирует, что он появится в подтвержденном блоке. Текущий наблюдаемый блок может быть развернут. Валидаторы должны будут поддерживать состояние для каждого голосования и форка.</li>
+</ol>
+<h2 id="dizain">Дизайн</h2>
+<ol>
+<li>Отправляйте голоса как push-сообщение через сплетни. Это обеспечивает передачу голоса всем следующим лидерам, а не только следующему будущему.</li>
+<li>Лидеры прочитают таблицу Crds на наличие новых голосов и закодируют любые новые полученные голоса в блоки, которые они предлагают. Это позволяет включать голоса валидаторов в вилки отката всеми будущими лидерами.</li>
+<li>Валидаторы, получившие голоса в леджере, добавят их в свою локальную таблицу crds не как push-запрос, а просто добавят их в таблицу. Это сокращает протокол push-сообщений, поэтому сообщения проверки не нужно дважды повторно передавать по сети.</li>
+<li>CrdsValue для голосования должно выглядеть так: <code>Votes(Vec&lt;Transaction&gt;)</code></li>
+</ol>
+<p>Каждая транзакция голосования должна поддерживать «настенные часы» в своих данных. Стратегия слияния для голосов сохранит последние N наборов голосов, настроенных локальным клиентом. Для push/pull вектор проходится рекурсивно, и каждая транзакция рассматривается как отдельная CrdsValue со своими собственными локальными часами и подписью.</p>
+<p>Сплетни предназначены для эффективной пропаганды государства. Сообщения, отправляемые через gossip-push, группируются и распространяются с минимальным связующим деревом в остальную часть сети. Любые частичные сбои в дереве активно исправляются с помощью протокола gossip-pull, сводя к минимуму объем данных, передаваемых между любыми узлами.</p>
+<h2 id="kak-etot-dizain-reshaet-problemy">Как этот дизайн решает проблемы</h2>
+<ol>
+<li>Поскольку у валидаторов нет простого способа синхронизироваться с лидерами в «активном» состоянии лидера, сплетни допускают возможную доставку независимо от этого состояния.</li>
+<li>Gossip будет доставлять сообщения всем последующим лидерам, поэтому, если текущий лидер будет затоплен, следующий лидер уже получит эти голоса и сможет их закодировать.</li>
+<li>Gossip минимизирует количество запросов через сеть, поддерживая эффективное связующее дерево и используя фильтры Блума для восстановления состояния. Таким образом, отсрочка повторной передачи не требуется, и сообщения группируются.</li>
+<li>Лидеры, которые читают таблицу crds для голосов, будут кодировать все новые действительные голоса, которые появляются в таблице. Даже если блок этого лидера развернут, следующий лидер попытается добавить те же самые голоса без какой-либо дополнительной работы со стороны валидатора. Таким образом обеспечивается не только возможная доставка, но и возможная кодировка в реестр.</li>
+</ol>
+<h2 id="predstavlenie">Представление</h2>
+<ol>
+<li>В худшем случае время распространения до следующего лидера составляет Log(N) переходов с базой, зависящей от разветвления. С нашим текущим разветвлением по умолчанию, равным 6, это около 6 переходов на 20 тыс. узлов.</li>
+<li>Лидер должен получить 20 000 проверочных голосов, объединенных сплетнями в клочья размером с MTU. Что уменьшит количество пакетов для сети 20k до 80 фрагментов.</li>
+<li>Голоса каждого валидатора реплицируются по всей сети. Чтобы сохранить очередь из 5 предыдущих голосов, таблица Crds увеличилась бы на 25 мегабайт. <code>(20 000 узлов * 256 байтов * 5)</code>.</li>
+</ol>
+<h2 id="vnedrenie-v-dva-etapa">Внедрение в два этапа</h2>
+<p>Первоначально сеть может надежно работать только с одним голосом, передаваемым и поддерживаемым через сеть с текущей реализацией Vote. Для небольших сетей достаточно разветвления 6. В небольшой сети память и накладные расходы незначительны.</p>
+<h3 id="set-validatorov-sub-1k">Сеть валидаторов Sub 1k</h3>
+<ol>
+<li>Crds просто поддерживает последнее голосование валидатора.</li>
+<li>Голоса отправляются и повторно передаются независимо от того, появляются ли они в реестре.</li>
+<li>Разветвление 6.</li>
+<li>В худшем случае 256 КБ памяти на узел.</li>
+<li>В худшем случае 4 прыжка для распространения на каждый узел.</li>
+<li>Лидер должен получить весь набор голосов валидатора в 4 фрагментах push-сообщений.</li>
+</ol>
+<h3 id="set-nizhe-20-tys">Сеть ниже 20 тыс.</h3>
+<p>Все вышеперечисленное плюс следующее:</p>
+<ol>
+<li>Таблица CRDS поддерживает вектор из 5 последних голосов валидатора.</li>
+<li>Голоса кодируют настенные часы. CrdsValue::Votes — это тип, который рекурсивно входит в вектор транзакций для всех протоколов сплетен.</li>
+<li>Увеличьте разветвление до 20.</li>
+<li>В худшем случае 25 МБ памяти на узел.</li>
+<li>В наихудшем случае для доставки по всей сети требуется 4 прыжка.</li>
+<li>80 клочков, полученных лидером за все сообщения валидатора.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

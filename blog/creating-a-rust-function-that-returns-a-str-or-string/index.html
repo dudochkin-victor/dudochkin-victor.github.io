@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Создание функции Rust, возвращающей &amp;str или String | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/creating-a-rust-function-that-returns-a-str-or-string/#klonirovanie-pri-zapisi">Клонирование при записи</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/creating-a-rust-function-that-returns-a-str-or-string/#ispol-zovanie-svoistva-into-trait">Использование свойства Into Trait</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/creating-a-rust-function-that-returns-a-str-or-string/#ispol-zovanie-korovy-v-real-nom-mire">Использование коровы в реальном мире</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/creating-a-rust-function-that-returns-a-str-or-string/#sviazannyi">Связанный</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Создание функции Rust, возвращающей &amp;str или String</h1>
+
+<p><a href="https://hermanradtke.com/2015/05/29/creating-a-rust-function-that-returns-string-or-str.html">Перевод</a> | Автор оригинала: Herman J. Radtke III</p>
+<p>Мы узнали, как создать функцию, которая принимает в качестве аргумента String или &amp;str. Теперь я хочу показать вам, как создать функцию, возвращающую либо String, либо &amp;str. Я также хочу обсудить, почему мы хотим это сделать. Для начала давайте напишем функцию для удаления всех пробелов из данной строки. Наша функция может выглядеть примерно так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">remove_spaces</span><span>(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String {
+</span><span>   </span><span style="color:#ff7733;">let mut</span><span> buf </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>with_capacity(input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>   </span><span style="color:#ff7733;">for</span><span> c </span><span style="color:#f29668;">in</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>() {
+</span><span>      </span><span style="color:#ff7733;">if</span><span> c </span><span style="color:#f29668;">!= </span><span style="color:#c2d94c;">&#39; &#39; </span><span>{
+</span><span>         buf</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(c)</span><span style="color:#bfbab0cc;">;
+</span><span>      }
+</span><span>   }
+</span><span>
+</span><span>   buf
+</span><span>}
+</span></code></pre>
+<p>Эта функция выделяет память для строкового буфера, перебирает каждый символ ввода и добавляет все непробельные символы в строковый буфер. Теперь я спрашиваю: а что, если мой ввод вообще не содержит пробелов? Ввод значения будет таким же, как у buf. В этом случае было бы эффективнее вообще не создавать buf. Вместо этого мы хотели бы просто вернуть заданный ввод обратно вызывающей стороне. Тип ввода - &amp;str, но наша функция возвращает String. Мы могли бы изменить тип ввода на String: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">remove_spaces</span><span>(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> String { </span><span style="color:#f29668;">... </span><span>}
+</span></code></pre>
+<p>но это вызывает две проблемы. Во-первых, вводя тип String, мы заставляем вызывающего объекта передать право владения вводом в нашу функцию. Это предотвращает использование вызывающей стороной этого значения в будущем. Мы должны брать на себя ответственность за ввод только в том случае, если он нам действительно нужен. Во-вторых, входные данные могут уже иметь тип &amp;str, и теперь мы заставляем вызывающую сторону преобразовывать его в String, что препятствует нашим попыткам не выделять новую память при создании buf.</p>
+<h2 id="klonirovanie-pri-zapisi">Клонирование при записи</h2>
+<p>Что нам действительно нужно, так это возможность возвращать нашу входную строку (&amp;str), если нет пробелов, и возвращать новую строку (String), если есть пробелы, которые нам нужно удалить. Здесь можно использовать тип «клонирование при записи» или «Корова». Тип «Корова» позволяет нам абстрагироваться от того, принадлежит что-то или заимствовано. В нашем примере &amp;str - это ссылка на существующую строку, так что это будут заимствованные данные. Если есть пробелы, нам нужно выделить память для новой строки. Эта новая строка принадлежит переменной buf. Обычно мы передаем право собственности на buf, возвращая его вызывающей стороне. При использовании Cow мы хотим передать владение buf типу Cow и вернуть его. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>borrow</span><span style="color:#f29668;">::</span><span>Cow</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">remove_spaces</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, </span><span style="color:#ff7733;">str</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">if</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">contains</span><span>(</span><span style="color:#c2d94c;">&#39; &#39;</span><span>) {
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> buf </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>with_capacity(input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">for</span><span> c </span><span style="color:#f29668;">in</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>() {
+</span><span>            </span><span style="color:#ff7733;">if</span><span> c </span><span style="color:#f29668;">!= </span><span style="color:#c2d94c;">&#39; &#39; </span><span>{
+</span><span>                buf</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(c)</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">return </span><span>Cow</span><span style="color:#f29668;">::</span><span>Owned(buf)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">return </span><span>Cow</span><span style="color:#f29668;">::</span><span>Borrowed(input)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Наша функция теперь проверяет, содержит ли данный ввод пробел, и только затем выделяет память для нового буфера. Если ввод не содержит пробела, ввод просто возвращается. Мы немного усложняем время выполнения, чтобы оптимизировать распределение памяти. Обратите внимание, что у нашего типа Cow такое же время жизни, как у типа &amp;str. Как мы обсуждали ранее, компилятор должен отслеживать ссылку &amp;str, чтобы знать, когда он может безопасно освободить (или удалить) память.</p>
+<p>Прелесть Cow в том, что он реализует трейт Deref, поэтому вы можете вызывать неизменяемые функции, не зная, является ли результат новым строковым буфером или нет. Пример:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> s </span><span style="color:#f29668;">= </span><span style="color:#f07178;">remove_spaces</span><span>(</span><span style="color:#c2d94c;">&quot;Herman Radtke&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Length of string is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>())</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Если мне нужно изменить s, я могу преобразовать его в принадлежащую переменную с помощью функции into_owned(). Если вариант Cow уже был в собственности, мы просто перемещаем право собственности. Если вариант Cow заимствован, то мы выделяем память. Это позволяет нам лениво клонировать (выделять память) только тогда, когда мы хотим записать (или изменить) переменную.</p>
+<p>Пример мутации Cow::Borrowed: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> s </span><span style="color:#f29668;">= </span><span style="color:#f07178;">remove_spaces</span><span>(</span><span style="color:#c2d94c;">&quot;Herman&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// s is a Cow::Borrowed variant
+</span><span style="color:#ff7733;">let</span><span> len </span><span style="color:#f29668;">=</span><span> s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// immutable function call using Deref
+</span><span style="color:#ff7733;">let</span><span> owned</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">String </span><span style="color:#f29668;">=</span><span> s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_owned</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// memory is allocated for a new string
+</span></code></pre>
+<p>Пример мутации Cow::Owned: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> s </span><span style="color:#f29668;">= </span><span style="color:#f07178;">remove_spaces</span><span>(</span><span style="color:#c2d94c;">&quot;Herman Radtke&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// s is a Cow::Owned variant
+</span><span style="color:#ff7733;">let</span><span> len </span><span style="color:#f29668;">=</span><span> s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// immutable function call using Deref
+</span><span style="color:#ff7733;">let</span><span> owned</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">String </span><span style="color:#f29668;">=</span><span> s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_owned</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// no new memory allocated as we already had a String
+</span></code></pre>
+<p>Идея Cow двоякая:</p>
+<ol>
+<li>Отложите выделение памяти как можно дольше. В лучшем случае нам никогда не придется выделять новую память.</li>
+<li>Позвольте вызывающей стороне нашей функции remove_spaces не заботиться о том, была выделена память или нет. В любом случае использование типа «Корова» одинаково.</li>
+</ol>
+<h2 id="ispol-zovanie-svoistva-into-trait">Использование свойства Into Trait</h2>
+<p>Ранее мы обсуждали использование трейта Into для преобразования &amp;str в String. Мы также можем использовать типаж Into, чтобы преобразовать &amp;str или String в правильный вариант Cow. Вызов .into() компилятор выполнит преобразование автоматически. Использование .into() не ускорит или не замедлит код. Это просто вариант, позволяющий избежать явного указания Cow::Owned или Cow::Borrowed. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">remove_spaces</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, </span><span style="color:#ff7733;">str</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">if</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">contains</span><span>(</span><span style="color:#c2d94c;">&#39; &#39;</span><span>) {
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> buf </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>with_capacity(input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> v</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">char</span><span>&gt; </span><span style="color:#f29668;">=</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">for</span><span> c </span><span style="color:#f29668;">in</span><span> v {
+</span><span>            </span><span style="color:#ff7733;">if</span><span> c </span><span style="color:#f29668;">!= </span><span style="color:#c2d94c;">&#39; &#39; </span><span>{
+</span><span>                buf</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(c)</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">return</span><span> buf</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">return</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Мы также можем немного очистить это, используя только итераторы: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">remove_spaces</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, </span><span style="color:#ff7733;">str</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">if</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">contains</span><span>(</span><span style="color:#c2d94c;">&#39; &#39;</span><span>) {
+</span><span>        input
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">filter</span><span>(|</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">x</span><span>| x </span><span style="color:#f29668;">!= </span><span style="color:#c2d94c;">&#39; &#39;</span><span>)
+</span><span>        </span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;std</span><span style="color:#f29668;">::</span><span>string</span><span style="color:#f29668;">::</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="ispol-zovanie-korovy-v-real-nom-mire">Использование коровы в реальном мире</h2>
+<p>Мой пример удаления пробелов может показаться немного надуманным, но у этой стратегии есть несколько отличных практических применений. Внутри ядра Rust есть функция, которая конвертирует байты в UTF-8 с потерями, и функция, которая переводит CRLF в LF. Обе эти функции имеют случай, когда &amp;str может быть возвращен в оптимальном случае, и другой случай, когда необходимо выделить String. Другие примеры, которые я могу придумать, - это правильное кодирование строки xml / html или правильное экранирование SQL-запроса. Во многих случаях ввод уже правильно закодирован или экранирован. В таких случаях лучше просто вернуть строку ввода обратно вызывающей стороне. Когда необходимо изменить ввод, мы вынуждены выделить новую память в виде строкового буфера и вернуть ее вызывающей стороне.
+Зачем использовать String::with_capacity()?</p>
+<p>Пока мы обсуждаем тему эффективного управления памятью, обратите внимание, что я использовал String::with_capacity() вместо String::new() при создании строкового буфера. Вы можете использовать String::new() вместо String::with_capacity(), но более эффективно выделять память для буфера сразу, а не повторно выделять память, когда мы помещаем в буфер больше символов. Давайте рассмотрим, что делает Rust, когда мы используем String::new(), а затем помещаем символы в строку.</p>
+<p>Строка на самом деле представляет собой Vec кодовых точек UTF-8. Когда вызывается String::new(), Rust создает вектор с нулевой емкостью в байтах. Если мы затем поместим символ a в строковый буфер, например input.push ('a'), Rust должен увеличить емкость вектора. В этом случае будет выделено 2 байта памяти. По мере того, как мы помещаем больше символов и превышаем емкость, Rust удваивает размер строки за счет перераспределения памяти. Он будет продолжать увеличиваться вдвое каждый раз при превышении емкости. Последовательность распределения памяти: 0, 2, 4, 8, 16, 32 ... 2 ^ n, где n - количество раз, когда Rust обнаруживал превышение емкости. Перераспределение памяти происходит очень медленно (edit: kmc_v3 объяснил, что это может быть не так медленно, как я думал). Rust не только должен запрашивать у ядра новую память, он также должен копировать содержимое вектора из старой области памяти в новую область памяти. Ознакомьтесь с исходным кодом Vec::push, чтобы увидеть логику изменения размера из первых рук.</p>
+<p>В общем, мы хотим выделять новую память только тогда, когда она нам нужна, и выделять столько, сколько нам нужно. Для небольших строк, таких как remove_spaces («Герман Радтке»), случайное перераспределение памяти не имеет большого значения. Что, если бы я хотел удалить все пробелы в каждом файле JavaScript для своего веб-сайта? Накладные расходы на перераспределение памяти для буфера намного выше. При передаче данных в вектор (String или другой) может быть хорошей идеей указать емкость для начала. Лучшая ситуация, когда вы уже знаете длину и емкость можно точно установить. Комментарии к коду Vec содержат аналогичное предупреждение.</p>
+<h2 id="sviazannyi">Связанный</h2>
+<ul>
+<li>String vs &amp;str в функциях Rust</li>
+<li>Создание функции Rust, которая принимает String или &amp;str </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

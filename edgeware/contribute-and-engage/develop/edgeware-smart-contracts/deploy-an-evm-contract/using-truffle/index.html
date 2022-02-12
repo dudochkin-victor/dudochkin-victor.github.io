@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Использование Truffle | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-truffle/#vzaimodeistvie-s-edgeware-evm-s-pomoshch-iu-truffle">Взаимодействие с Edgeware EVM с помощью Truffle </a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-truffle/#vvedenie"><small>- Введение </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-truffle/#usloviia-sredy"><small>- Условия среды </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-truffle/#kontrakt-erc-20"><small>- [Контракт ERC-20]</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-truffle/#kompiliatsiia-kontrakta-erc-20"><small>- Компиляция контракта ERC-20 </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-truffle/#razvertyvanie-kontrakta-v-edgeware-evm-s-pomoshch-iu-truffle"><small>- Развертывание контракта в Edgeware EVM с помощью Truffle </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-truffle/#sviazhites-s-nami-chtoby-uznat-bol-she"><small>- Свяжитесь с нами, чтобы узнать больше </small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Использование Truffle</h1>
+
+<h2 id="vzaimodeistvie-s-edgeware-evm-s-pomoshch-iu-truffle">Взаимодействие с Edgeware EVM с помощью Truffle <a id="interacting-with-edgeware-evm-using-truffle"></a></h2>
+<h3 id="vvedenie">Введение <a id="introduction"></a></h3>
+<p>В этом руководстве рассматривается процесс развертывания смарт-контракта на основе Solidity на узле Edgeware с использованием <a href="https://www.trufflesuite.com/docs">Truffle</a>. Truffle — один из наиболее часто используемых инструментов разработки смарт-контрактов на Ethereum. Учитывая возможности совместимости Edgeware с Ethereum, Truffle можно использовать напрямую с узлом Edgeware.</p>
+<p>В этом руководстве предполагается, что у вас есть [работающий локальный узел Edgeware EVM, работающий в режиме --dev]. контракт-evm/настройка-узла-edgeware-evm).</p>
+<h3 id="usloviia-sredy">Условия среды <a id="environment-prerequisites"></a></h3>
+<p>Установлен <a href="https://nodejs.org/en/">Nodejs</a> и конкретный менеджер пакетов, например <a href="https://classic.yarnpkg.com/en/docs/install/#mac-stable">yarn</a> или <a href="https://www.npmjs.com/get-npm">npm</a>, остальные батареи включены в это руководство. Когда вы будете готовы, клонируйте наш учебный репозиторий с подготовленным стеком для вас.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">git</span><span> clone https://github.com/edgeware-builders/tutorials tutorials</span><span style="color:#f29668;">;</span><span style="color:#f07178;">cd</span><span> tutorials/truffle</span><span style="color:#f29668;">;</span><span style="color:#ffb454;">yarn
+</span></code></pre>
+<p>Он переместится в ваш клонированный репозиторий, установит необходимые пакеты, и вы готовы к работе!</p>
+<p>Давайте рассмотрим <code>truffle-config.js</code> в каталоге <code>truffle/</code></p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">const</span><span> HDWalletProvider </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@truffle/hdwallet-provider&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const</span><span> privKey </span><span style="color:#f29668;">= &#39;</span><span style="color:#f29718;">1111111111111111111111111111111111111111111111111111111111111111</span><span style="color:#f29668;">&#39;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>module</span><span style="color:#f29668;">.</span><span>exports </span><span style="color:#f29668;">= </span><span>{
+</span><span>  compilers</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>    solc</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>      version</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;^0.6.0&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>  }</span><span style="color:#bfbab0cc;">,
+</span><span>  networks</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>    development</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>      provider</span><span style="color:#bfbab0cc;">: </span><span>() </span><span style="color:#f29668;">=&gt;</span><span> new HDWalletProvider({
+</span><span>        privateKeys</span><span style="color:#bfbab0cc;">: </span><span>[ privKey ]</span><span style="color:#bfbab0cc;">,
+</span><span>        providerOrUrl</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;http://localhost:9933/&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>      })</span><span style="color:#bfbab0cc;">,
+</span><span>      network_id</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">2021</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>  } 
+</span><span>}
+</span></code></pre>
+<p>Вы заметили несколько фактов отсюда, наш chainId — «2021», и мы используем версию solc выше «^0.6.0».</p>
+<blockquote>
+<p><strong>Примечание</strong> Мы используем тот же закрытый ключ, который мы использовали в других руководствах, который предварительно финансируется токенами <code>tEDG</code> через конфигурацию генезиса узла Edgeware EVM, работающего в режиме <code>--dev</code>. Открытый ключ для этой учетной записи: <code>0x19e7e376e7c213b7e7e7e46cc70a5dd086daff2a</code>.</p>
+</blockquote>
+<p>Контракт, который мы будем развертывать с Truffle, — это простой контракт ERC-20. Вы можете найти этот контракт в <code>truffle/contracts/HedgeToken.sol</code>, его содержание показано здесь.</p>
+<h3 id="kontrakt-erc-20">[Контракт ERC-20]</h3>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="font-style:italic;color:#5c6773;">// SPDX-License-Identifier: MIT
+</span><span>pragma solidity </span><span style="color:#f29668;">^</span><span style="color:#f29718;">0.6</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&quot;@openzeppelin/contracts/token/ERC20/ERC20.sol&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>contract HedgeToken is ERC20 {
+</span><span>    </span><span style="color:#ffb454;">constructor</span><span>(uint256 initialSupply) public </span><span style="color:#ffb454;">ERC20</span><span>(</span><span style="color:#c2d94c;">&quot;HedgeToken&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;HEDGE&quot;</span><span>) {
+</span><span>        </span><span style="color:#ffb454;">_mint</span><span>(msg</span><span style="color:#f29668;">.</span><span>sender</span><span style="color:#bfbab0cc;">, </span><span>initialSupply)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Это простой контракт ERC-20, основанный на контракте OpenZeplin ERC20, который создает «HedgeToken» и присваивает созданный первоначальный запас токенов создателю контракта.</p>
+<p>Вы можете заметить начальную поставку в <code>migrations/2_deploy.contracts.js</code>, она содержит следующее:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">var </span><span>HedgeToken </span><span style="color:#f29668;">= </span><span>artifacts</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">require</span><span>(</span><span style="color:#c2d94c;">&quot;HedgeToken&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">module</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">exports </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">function </span><span>(</span><span style="color:#f29718;">deployer</span><span>) {
+</span><span>  deployer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">deploy</span><span>(HedgeToken</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;21000000000000000000000000&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p><code>21000000000000000000000000</code> — это количество токенов, которое будет первоначально отчеканено с контрактом, то есть 21 миллион с 18 знаками после запятой. <a href="https://docs.openzeppelin.com/contracts/3.x/api/token/erc20#ERC20-_setupDecimals-uint8-">Начиная с OpenZeplin v3.0+, по умолчанию для SimpleToken.sol используется десятичное число 18</a></p>
+<p>Теперь давайте перейдем к основной части! После того, как вы установили необходимые пакеты, продолжите работу в терминале с помощью следующей команды</p>
+<h3 id="kompiliatsiia-kontrakta-erc-20">Компиляция контракта ERC-20 <a id="compile-erc-20-contract"></a></h3>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npx truffle compile
+</span></code></pre>
+<p><img src="https://user-images.githubusercontent.com/32852637/122429916-24bbd900-cf61-11eb-98bd-faa07d223e68.PNG" alt="" /></p>
+<p>Что делает id, он берет токен OpenZepplin ERC20.sol, компилирует его с другим кодом, на который ссылаются, в другом коде OpenZeplin, создает артефакт (байт-код) и ABI (контрактный интерфейс)</p>
+<h3 id="razvertyvanie-kontrakta-v-edgeware-evm-s-pomoshch-iu-truffle">Развертывание контракта в Edgeware EVM с помощью Truffle <a id="deploying-a-contract-to-edgeware-evm-using-truffle"></a></h3>
+<p>Теперь давайте перейдем к горячим вещам, развернем их на нашу EVM Edgeware.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npx truffle --network development migrate
+</span></code></pre>
+<p><img src="https://user-images.githubusercontent.com/32852637/122431469-7ca70f80-cf62-11eb-8684-114f0323ff83.PNG" alt="Truffle_2" /></p>
+<p>Как видите, мы используем нашу сеть разработки из truffle-config.js. Из миграции вы заметите, какой у нас контрактный адрес нашего контракта.</p>
+<h3 id="sviazhites-s-nami-chtoby-uznat-bol-she">Свяжитесь с нами, чтобы узнать больше <a id="reach-us-for-more-engagement"></a></h3>
+<p>Рад, что вы прошли через это! 🥰 Мы стремимся помочь вам в ваших исследованиях с помощью функции расчесывания Edgeware Ethereum. Мы <strong>будем рады узнать о вашем опыте и предложениях, которые вы можете нам предложить.</strong>. Вы можете свободно <a href="https://linktr.ee/edg_developers">общаться с нами в каналах Edgeware, таких как Discord, Element и Telegram</a>, мы можем помочь вам с проблемами, которые могут у вас возникнуть, или с проектом, который вы хотите финансировать. через нашу <a href="https://docs.edgewa.re/edgeware-runtime/treasury">программу казначейства</a>. Не стесняйтесь делиться своими отзывами на наших каналах, всегда есть место для улучшения! 🙌</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

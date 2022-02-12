@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Передача токенов | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/transferring-tokens/#funktsiia-peredachi">Функция передачи </a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/transferring-tokens/#transfer-from-to"><small>- transfer_from_to() </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/transferring-tokens/#transfer"><small>- transfer() </small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/transferring-tokens/#peredacha-matematiki">Передача математики </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute-and-engage/develop/edgeware-smart-contracts/wasm-erc20/transferring-tokens/#tvoia-ochered">Твоя очередь! </a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Передача токенов</h1>
+
+<p>Итак, на данный момент у нас есть один пользователь, которому принадлежат все токены для контракта. Тем не менее, это не <em>действительно</em> полезный токен, если вы не можете передать его другим людям...</p>
+<p>Давайте сделаем это!</p>
+<h2 id="funktsiia-peredachi">Функция передачи <a id="the-transfer-function"></a></h2>
+<p>Функция «перевод» делает именно то, что вы могли ожидать: она позволяет пользователю, вызывающему контракт, перевести некоторые средства, которыми он владеет, другому пользователю.</p>
+<p>Вы заметите, что в коде нашего шаблона есть общедоступная функция «transfer» и внутренняя функция «transfer_from_to». Мы сделали это, потому что в будущем мы будем повторно использовать логику для передачи токенов, когда мы разрешаем сторонние разрешения и расходы от имени.</p>
+<h3 id="transfer-from-to">transfer_from_to() <a id="transfer_from_to"></a></h3>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer_from_to</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">from</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{</span><span style="font-style:italic;color:#5c6773;">/* --snip-- */</span><span>}
+</span></code></pre>
+<p>Функция <code>transfer_from_to</code> будет построена без каких-либо проверок <em>авторизации</em>. Поскольку это внутренняя функция, мы полностью контролируем ее вызов. Тем не менее, он будет иметь все логические проверки для управления балансами между счетами.</p>
+<p>На самом деле нам просто нужно проверить одну вещь: убедиться, что на счете «от» достаточно средств для отправки на счет «на»:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">if</span><span> balance_from </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false
+</span><span>}
+</span></code></pre>
+<p>Помните, что функция «передача» и другие общедоступные функции возвращают логическое значение, указывающее на успех. Если на счете «от» недостаточно баланса для выполнения перевода, мы выйдем досрочно и вернем false, не внося никаких изменений в состояние контракта. Наш <code>transfer_from_to</code> просто перенаправит &quot;успех&quot; <code>bool</code> в функцию, которая его вызывает.</p>
+<h3 id="transfer">transfer() <a id="transfer"></a></h3>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)] 
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">transfer</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{</span><span style="font-style:italic;color:#5c6773;">/* --snip-- */</span><span>}
+</span></code></pre>
+<p>Наконец, функция «transfer» просто вызовет «transfer_from_to» с параметром «from», автоматически установленным на «self.env().caller()». Это наша «проверка авторизации», поскольку вызывающий контракт всегда имеет право перемещать свои собственные средства.</p>
+<h2 id="peredacha-matematiki">Передача математики <a id="transfer-math"></a></h2>
+<p>На самом деле мало что можно сказать о простой математике, выполняемой при передаче токена.</p>
+<ol>
+<li>Сначала мы получаем текущий баланс как <code>от</code>, так и <code>до</code> счета, обязательно используя наш геттер <code>balance_of_or_zero()</code>.</li>
+<li>Затем мы выполняем логическую проверку, упомянутую выше, чтобы убедиться, что на балансе «от» достаточно средств для отправки «значения».</li>
+<li>Наконец, мы вычитаем это «значение» из баланса «от», добавляем его к балансу «до» и вставляем эти новые значения обратно.</li>
+</ol>
+<h2 id="tvoia-ochered">Твоя очередь! <a id="your-turn"></a></h2>
+<p>Следуйте «ДЕЙСТВИЯМ» в коде шаблона, чтобы создать передаточную функцию.</p>
+<p>Не забудьте запустить <code>cargo +nightly test</code>, чтобы проверить свою работу.</p>
+<p>{% tabs %}
+{% tab title=&quot;🔨Starting Point&quot; %}</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">cfg_attr</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;std&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> no_std)]
+</span><span>
+</span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">contract</span><span>]
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">erc20 </span><span>{
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;ink-as-dependency&quot;</span><span>))]
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// The total supply.
+</span><span>        total_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// The balance of each user.
+</span><span>        balances</span><span style="color:#bfbab0cc;">: </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap&lt;AccountId, Balance&gt;,
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">initial_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> balances </span><span style="color:#f29668;">= </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>env()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> initial_supply)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>                total_supply</span><span style="color:#bfbab0cc;">:</span><span> initial_supply</span><span style="color:#bfbab0cc;">,
+</span><span>                balances
+</span><span>            }
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">total_supply</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>total_supply
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">balance_of</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>owner)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">transfer</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ACTION: Call the `transfer_from_to` with `from` as `self.env().caller()`
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer_from_to</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">from</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ACTION: Get the balance for `from` and `to`
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//   HINT: Use the `balance_of_or_zero` function to do this
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ACTION: If `from_balance` is less than `value`, return `false`
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ACTION: Insert new values for `from` and `to`
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//         * from_balance - value
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">//         * to_balance + value
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ACTION: Return `true`
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="color:#f29668;">*</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(owner)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">0</span><span>)
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(test)]
+</span><span>    </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">tests </span><span>{
+</span><span>        </span><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>{% endtab %}</p>
+<p>{% tab title=&quot;✅Potential Solution&quot; %}</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">cfg_attr</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;std&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> no_std)]
+</span><span>
+</span><span style="color:#ff7733;">use</span><span> ink_lang </span><span style="color:#f29668;">as</span><span> ink</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>::</span><span style="color:#ffb454;">contract</span><span>]
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">erc20 </span><span>{
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(</span><span style="color:#ffb454;">not</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;ink-as-dependency&quot;</span><span>))]
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(storage)]
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// The total supply.
+</span><span>        total_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/// The balance of each user.
+</span><span>        balances</span><span style="color:#bfbab0cc;">: </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap&lt;AccountId, Balance&gt;,
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Erc20 </span><span>{
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(constructor)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">initial_supply</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let mut</span><span> balances </span><span style="color:#f29668;">= </span><span>ink_storage</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>            balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>env()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> initial_supply)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>                total_supply</span><span style="color:#bfbab0cc;">:</span><span> initial_supply</span><span style="color:#bfbab0cc;">,
+</span><span>                balances
+</span><span>            }
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">total_supply</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>total_supply
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">balance_of</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">:</span><span> AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>owner)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">ink</span><span>(message)]
+</span><span>        </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">transfer</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">transfer_from_to</span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">env</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">caller</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> to</span><span style="color:#bfbab0cc;">,</span><span> value)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer_from_to</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">from</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">to</span><span style="color:#bfbab0cc;">:</span><span> AccountId, </span><span style="color:#f29718;">value</span><span style="color:#bfbab0cc;">:</span><span> Balance) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> from_balance </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>from)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">if</span><span> from_balance </span><span style="color:#f29668;">&lt;</span><span> value {
+</span><span>                </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">false
+</span><span>            }
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Update the sender&#39;s balance.
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(from</span><span style="color:#bfbab0cc;">,</span><span> from_balance </span><span style="color:#f29668;">-</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Update the receiver&#39;s balance.
+</span><span>            </span><span style="color:#ff7733;">let</span><span> to_balance </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span>to)</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(to</span><span style="color:#bfbab0cc;">,</span><span> to_balance </span><span style="color:#f29668;">+</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#f29718;">true
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">balance_of_or_zero</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>AccountId) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Balance {
+</span><span>            </span><span style="color:#f29668;">*</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>balances</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(owner)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">0</span><span>)
+</span><span>        }
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

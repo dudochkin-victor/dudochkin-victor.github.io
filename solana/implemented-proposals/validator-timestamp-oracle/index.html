@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Валидатор оракла Отметки времени | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/validator-timestamp-oracle/#vremia-zapisi">Время записи</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/validator-timestamp-oracle/#akkaunty-dlia-golosovaniia"><small>- Аккаунты для голосования</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/validator-timestamp-oracle/#programma-golosovaniia"><small>- Программа голосования</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/validator-timestamp-oracle/#vychislenie-srednevzveshennoi-vremennoi-metki">Вычисление средневзвешенной временной метки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/validator-timestamp-oracle/#raschet-predpolagaemogo-vremeni-dlia-opredelennogo-bloka">Расчет предполагаемого времени для определенного блока</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Валидатор оракла Отметки времени</h1>
+
+<p>Сторонним пользователям Solana иногда необходимо знать реальное время создания блока, как правило, для выполнения требований соответствия для внешних аудиторов или правоохранительных органов. В этом предложении описывается оракул временных меток валидатора, который позволит кластеру Solana удовлетворить эту потребность.</p>
+<p>Общая схема предлагаемой реализации выглядит следующим образом:</p>
+<ul>
+<li>
+<p>Через регулярные промежутки времени каждый валидатор записывает наблюдаемое время для известного слота в цепочке (через временную метку, добавленную к голосованию слота).</p>
+</li>
+<li>
+<p>Клиент может запросить время блока для корневого блока, используя RPC-метод getBlockTime. Когда клиент запрашивает метку времени для блока N:</p>
+<ol>
+<li>
+<p>Валидатор определяет отметку времени «кластера» для последнего слота с отметкой времени перед блоком N, наблюдая за всеми инструкциями Голосования с отметкой времени, записанными в реестре, которые ссылаются на этот слот, и определяя средневзвешенную отметку времени по доле.</p>
+</li>
+<li>
+<p>Эта недавняя средняя временная метка затем используется для вычисления временной метки блока N с использованием установленной длительности слота кластера.</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>Требования:</p>
+<ul>
+<li>Любой валидатор, воспроизводящий реестр в будущем, должен указывать одинаковое время для каждого блока с момента его создания.</li>
+<li>Расчетное время блока не должно смещаться более чем на час или около того, прежде чем оно будет преобразовано в реальные данные (оракула).</li>
+<li>Время блока не контролируется одним централизованным оракулом, а в идеале основано на функции, которая использует входные данные от всех валидаторов.</li>
+<li>Каждый валидатор должен поддерживать оракул временной метки</li>
+</ul>
+<p>Та же реализация может предоставить оценку временной метки для еще не укоренившегося блока. Однако, поскольку самый последний слот с временной меткой может быть еще не внедрен, эта временная метка будет нестабильной (потенциально несоответствующей требованию 1). Первоначальная реализация будет нацелена на корневые блоки, но если есть вариант использования временной метки последнего блока, в будущем будет несложно добавить API RPC.</p>
+<h2 id="vremia-zapisi">Время записи</h2>
+<p>Через регулярные промежутки времени, когда он голосует в определенном слоте, каждый валидатор записывает наблюдаемое время, включая временную метку в свои инструкции по голосованию. Соответствующий слот для метки времени является самым новым слотом в векторе голосования (<code>Vote::slots.iter().max()</code>). Он подписывается парой ключей идентификации валидатора как обычное голосование. Чтобы включить эту отчетность, структуру Vote необходимо расширить, включив в нее поле временной метки <code>timestamp: Option&lt;UnixTimestamp&gt;</code>, для которого будет установлено значение <code>None</code> в большинстве голосов.</p>
+<p>Начиная с https://github.com/solana-labs/solana/pull/10630, валидаторы отправляют метку времени для каждого голосования. Это позволяет реализовать службу кэширования времени блока, которая позволяет узлам вычислять предполагаемую временную метку сразу после того, как блок укоренен, и кэшировать это значение в Blockstore. Это обеспечивает постоянные данные и быстрые запросы, но при этом удовлетворяет требованию 1) выше.</p>
+<h3 id="akkaunty-dlia-golosovaniia">Аккаунты для голосования</h3>
+<p>Учетная запись для голосования валидатора будет содержать самую последнюю временную метку слота в VoteState.</p>
+<h3 id="programma-golosovaniia">Программа голосования</h3>
+<p>Программу голосования в цепочке необходимо расширить для обработки метки времени, отправленной с инструкцией по голосованию от валидаторов. В дополнение к своей текущей функциональности process_vote (включая загрузку правильной учетной записи Vote и проверку того, что лицо, подписывающее транзакцию, является ожидаемым валидатором), этому процессу необходимо сравнить метку времени и соответствующий слот с текущими сохраненными значениями, чтобы убедиться, что они оба монотонно увеличиваются. и сохраните новый слот и метку времени в учетной записи.</p>
+<h2 id="vychislenie-srednevzveshennoi-vremennoi-metki">Вычисление средневзвешенной временной метки</h2>
+<p>Чтобы рассчитать предполагаемую отметку времени для конкретного блока, валидатору сначала необходимо определить слот с самой последней отметкой времени:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>let timestamp_slot = floor(current_slot / timestamp_interval);
+</span></code></pre>
+<p>Затем валидатору необходимо собрать все транзакции Vote WithTimestamp из реестра, которые ссылаются на этот слот, используя <code>Blockstore::get_slot_entries()</code>. Поскольку для достижения этих транзакций и их обработки лидером могло потребоваться некоторое время, валидатору необходимо просканировать несколько завершенных блоков после timestamp_slot, чтобы получить разумный набор временных меток. Необходимо настроить точное количество слотов: большее количество слотов позволит увеличить участие кластера и увеличить количество точек данных с отметками времени; меньшее количество слотов ускорит фильтрацию временных меток.</p>
+<p>Из этой коллекции транзакций валидатор вычисляет средневзвешенную временную метку, ссылаясь на доли эпохи из <code>staking_utils::staked_nodes_at_epoch()</code>.</p>
+<p>Любой валидатор, воспроизводящий реестр, должен получить одну и ту же средневзвешенную временную метку, обрабатывая транзакции временной метки из одного и того же количества слотов.</p>
+<h2 id="raschet-predpolagaemogo-vremeni-dlia-opredelennogo-bloka">Расчет предполагаемого времени для определенного блока</h2>
+<p>После того как рассчитана средняя временная метка для известного слота, вычислить предполагаемую временную метку для последующего блока N несложно:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>let block_n_timestamp = mean_timestamp + (block_n_slot_offset * slot_duration);
+</span></code></pre>
+<p>где <code>block_n_slot_offset</code> — это разница между слотом блока N и <code>timestamp_slot</code>, а <code>slot_duration</code> получается из кластера <code>slots_per_year</code>, хранящегося в каждом банке.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Использование потоков WebAssembly из C, C++ и Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#kak-rabotaiut-potoki-webassembly">Как работают потоки WebAssembly</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#veb-vorkery"><small>- Веб-воркеры</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#sharedarraybuffer"><small>- SharedArrayBuffer</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#atomika-webassembly"><small>- Атомика WebAssembly</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#kak-ispol-zovat-potoki-webassembly">Как использовать потоки WebAssembly</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#obnaruzhenie-funktsii"><small>- Обнаружение функции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#c"><small>- C</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#proxy-to-pthread"><small>- PROXY_TO_PTHREAD</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#c-1"><small>- C++</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#rust"><small>- Rust</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-webassembly-threads-from-c-cpp-and-rust/#real-nye-varianty-ispol-zovaniia">Реальные варианты использования</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Использование потоков WebAssembly из C, C++ и Rust</h1>
+
+<p><a href="https://web.dev/webassembly-threads/">Перевод</a> | Автор оригинала: Ingvar Stepanyan</p>
+<p>Узнайте, как перенести в WebAssembly многопоточные приложения, написанные на других языках.</p>
+<p>Поддержка потоков WebAssembly - одно из наиболее важных улучшений производительности WebAssembly. Это позволяет вам либо запускать части вашего кода параллельно на отдельных ядрах, либо один и тот же код над независимыми частями входных данных, масштабируя его до такого количества ядер, которое есть у пользователя, и значительно сокращая общее время выполнения.</p>
+<p>В этой статье вы узнаете, как использовать потоки WebAssembly для переноса в Интернет многопоточных приложений, написанных на таких языках, как C, C++ и Rust.</p>
+<h2 id="kak-rabotaiut-potoki-webassembly">Как работают потоки WebAssembly</h2>
+<p>Потоки WebAssembly - это не отдельная функция, а комбинация нескольких компонентов, которая позволяет приложениям WebAssembly использовать традиционные парадигмы многопоточности в Интернете.</p>
+<h3 id="veb-vorkery">Веб-воркеры</h3>
+<p>Первый компонент - это обычные воркеры, которых вы знаете и любите по JavaScript. Потоки WebAssembly используют конструктор new Worker для создания новых базовых потоков. Каждый поток загружает клей JavaScript, а затем основной поток использует метод Worker # postMessage для совместного использования скомпилированного WebAssembly.Module, а также общего WebAssembly.Memory (см. Ниже) с этими другими потоками. Это устанавливает связь и позволяет всем этим потокам запускать один и тот же код WebAssembly в одной и той же общей памяти без повторного использования JavaScript.</p>
+<p>Веб-воркеры существуют уже более десяти лет, широко поддерживаются и не требуют каких-либо специальных флагов.</p>
+<h3 id="sharedarraybuffer">SharedArrayBuffer</h3>
+<p>Память WebAssembly представлена объектом WebAssembly.Memory в API JavaScript. По умолчанию WebAssembly.Memory является оболочкой для ArrayBuffer - буфера необработанных байтов, доступ к которому может получить только один поток. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&gt; new WebAssembly.Memory({ initial:1, maximum:10 }).buffer
+</span><span>ArrayBuffer { … }
+</span></code></pre>
+<p>Для поддержки многопоточности WebAssembly.Memory также получил общий вариант. При создании с общим флагом через API JavaScript или самим двоичным файлом WebAssembly он вместо этого становится оболочкой вокруг SharedArrayBuffer. Это вариант ArrayBuffer, который можно использовать совместно с другими потоками и читать или изменять одновременно с любой стороны. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&gt; new WebAssembly.Memory({ initial:1, maximum:10, shared:true }).buffer
+</span><span>SharedArrayBuffer { … }
+</span></code></pre>
+<p>В отличие от postMessage, обычно используемого для связи между основным потоком и веб-воркерами, SharedArrayBuffer не требует копирования данных или даже ожидания цикла событий для отправки и получения сообщений. Вместо этого любые изменения практически мгновенно видны всем потокам, что делает его гораздо лучшей целью компиляции для традиционных примитивов синхронизации.</p>
+<p>SharedArrayBuffer имеет сложную историю. Первоначально он был поставлен в нескольких браузерах в середине 2017 года, но его пришлось отключить в начале 2018 года из-за обнаружения уязвимостей Spectre. Конкретная причина заключалась в том, что извлечение данных в Spectre основывается на временных атаках - измерении времени выполнения определенного фрагмента кода. Чтобы усложнить этот вид атаки, браузеры снизили точность стандартных API-интерфейсов синхронизации, таких как Date.now и performance.now. Однако совместно используемая память в сочетании с простым циклом счетчика, работающим в отдельном потоке, также является очень надежным способом получения высокоточной синхронизации, и ее гораздо труднее смягчить без значительного снижения производительности во время выполнения.</p>
+<p>Вместо этого Chrome 68 (середина 2018 г.) снова включил SharedArrayBuffer, используя изоляцию сайтов - функцию, которая помещает разные веб-сайты в разные процессы и значительно затрудняет использование атак по побочным каналам, таких как Spectre. Однако это смягчение последствий по-прежнему ограничивалось только настольным компьютером Chrome, поскольку изоляция сайтов - довольно дорогостоящая функция и не могла быть включена по умолчанию для всех сайтов на мобильных устройствах с низким объемом памяти, а также не была реализована другими поставщиками.</p>
+<p>Перенесемся в 2020 год: в Chrome и Firefox есть реализация изоляции сайта и стандартный способ для веб-сайтов подключиться к этой функции с заголовками COOP и COEP. Механизм согласия позволяет использовать изоляцию сайтов даже на устройствах с низким энергопотреблением, где включение ее для всех веб-сайтов было бы слишком дорогостоящим. Чтобы подписаться, добавьте следующие заголовки в основной документ в конфигурации вашего сервера: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Cross-Origin-Embedder-Policy: require-corp
+</span><span>Cross-Origin-Opener-Policy: same-origin
+</span></code></pre>
+<p>После регистрации вы получаете доступ к SharedArrayBuffer (включая WebAssembly.Memory, поддерживаемый SharedArrayBuffer), точным таймерам, измерению памяти и другим API, которые требуют изолированного источника по соображениям безопасности. Ознакомьтесь с разделом «Как сделать ваш веб-сайт« изолированным от разных источников »с помощью COOP и COEP», чтобы получить более подробную информацию.</p>
+<h3 id="atomika-webassembly">Атомика WebAssembly</h3>
+<p>Хотя SharedArrayBuffer позволяет каждому потоку читать и записывать в одну и ту же память, для правильного взаимодействия вы хотите, чтобы они не выполняли конфликтующие операции одновременно. Например, один поток может начать чтение данных с общего адреса, в то время как другой поток записывает в него, поэтому первый поток теперь получит искаженный результат. Эта категория ошибок известна как условия гонки. Чтобы предотвратить состояние гонки, вам нужно как-то синхронизировать эти обращения. Вот тут-то и пригодятся атомарные операции.</p>
+<p>WebAssembly atomics - это расширение набора инструкций WebAssembly, которое позволяет «атомарно» читать и записывать небольшие ячейки данных (обычно 32- и 64-битные целые числа). То есть таким образом, чтобы гарантировать, что никакие два потока не читают или записывают в одну и ту же ячейку одновременно, предотвращая такие конфликты на низком уровне. Кроме того, атомики WebAssembly содержат еще два вида инструкций - «ждать» и «уведомлять», которые позволяют одному потоку «засыпать» («ждать») по заданному адресу в общей памяти до тех пор, пока другой поток не разбудит его с помощью «уведомления».</p>
+<p>Все примитивы синхронизации более высокого уровня, включая каналы, мьютексы и блокировки чтения-записи, основываются на этих инструкциях.</p>
+<h2 id="kak-ispol-zovat-potoki-webassembly">Как использовать потоки WebAssembly</h2>
+<h3 id="obnaruzhenie-funktsii">Обнаружение функции</h3>
+<p>WebAssembly atomics и SharedArrayBuffer являются относительно новыми функциями и пока доступны не во всех браузерах с поддержкой WebAssembly. Вы можете найти, какие браузеры поддерживают новые функции WebAssembly, в дорожной карте webassembly.org.</p>
+<p>Чтобы гарантировать, что все пользователи могут загружать ваше приложение, вам необходимо реализовать прогрессивное улучшение, создав две разные версии Wasm - одну с поддержкой многопоточности, а другую - без нее. Затем загрузите поддерживаемую версию в зависимости от результатов обнаружения функции. Чтобы определить поддержку потоков WebAssembly во время выполнения, используйте библиотеку wasm-feature-detect и загрузите модуль следующим образом: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ threads } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;wasm-feature-detect&#39;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>hasThreads </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">threads</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>module </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>(
+</span><span>  hasThreads
+</span><span>    </span><span style="color:#f29668;">? import</span><span>(</span><span style="color:#c2d94c;">&#39;./module-with-threads.js&#39;</span><span>)
+</span><span>    </span><span style="color:#f29668;">: import</span><span>(</span><span style="color:#c2d94c;">&#39;./module-without-threads.js&#39;</span><span>)
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// …now use `module` as you normally would
+</span></code></pre>
+<p>Теперь давайте посмотрим, как создать многопоточную версию модуля WebAssembly.</p>
+<h3 id="c">C</h3>
+<p>В C, особенно в Unix-подобных системах, общий способ использования потоков - это потоки POSIX, предоставляемые библиотекой pthread. Emscripten предоставляет API-совместимую реализацию библиотеки pthread, созданной поверх Web Workers, разделяемой памяти и атомики, так что один и тот же код может работать в сети без изменений.</p>
+<p>Давайте посмотрим на пример: </p>
+<pre data-lang="c" style="background-color:#0f1419;color:#bfbab0;" class="language-c "><code class="language-c" data-lang="c"><span style="font-style:italic;color:#5c6773;">// example.c
+</span><span>
+</span><span style="color:#ff7733;">#include </span><span style="color:#c2d94c;">&lt;stdio.h&gt;
+</span><span style="color:#ff7733;">#include </span><span style="color:#c2d94c;">&lt;unistd.h&gt;
+</span><span style="color:#ff7733;">#include </span><span style="color:#c2d94c;">&lt;pthread.h&gt;
+</span><span>
+</span><span style="color:#ff7733;">void </span><span style="color:#f29668;">*</span><span style="color:#ffb454;">thread_callback</span><span>(</span><span style="color:#ff7733;">void </span><span style="color:#f29668;">*</span><span style="color:#f29718;">arg</span><span>)
+</span><span>{
+</span><span>    </span><span style="color:#ffb454;">sleep</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">printf</span><span>(</span><span style="color:#c2d94c;">&quot;Inside the thread: </span><span style="color:#f29718;">%d</span><span style="color:#95e6cb;">\n</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">*</span><span>(</span><span style="color:#ff7733;">int </span><span style="color:#f29668;">*</span><span>)arg)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">NULL</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">int </span><span style="color:#ffb454;">main</span><span>()
+</span><span>{
+</span><span>    </span><span style="color:#f07178;">puts</span><span>(</span><span style="color:#c2d94c;">&quot;Before the thread&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">pthread_t</span><span> thread_id</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">int</span><span> arg </span><span style="color:#f29668;">= </span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ffb454;">pthread_create</span><span>(</span><span style="color:#f29668;">&amp;</span><span>thread_id</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">NULL</span><span style="color:#bfbab0cc;">,</span><span> thread_callback</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>arg)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ffb454;">pthread_join</span><span>(thread_id</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">NULL</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">puts</span><span>(</span><span style="color:#c2d94c;">&quot;After the thread&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Здесь заголовки библиотеки pthread включаются через pthread.h. Вы также можете увидеть несколько важных функций для работы с потоками.</p>
+<p>pthread_create создаст фоновый поток. Требуется место назначения для хранения дескриптора потока, некоторые атрибуты создания потока (здесь они не передаются, поэтому просто NULL), обратный вызов, который должен выполняться в новом потоке (здесь thread_callback), и необязательный указатель аргумента для передачи этому обратный вызов в случае, если вы хотите поделиться некоторыми данными из основного потока - в этом примере мы передаем указатель на переменную arg.</p>
+<p>pthread_join можно вызвать позже в любое время, чтобы дождаться, пока поток завершит выполнение, и получить результат, возвращенный обратным вызовом. Он принимает ранее назначенный дескриптор потока, а также указатель для сохранения результата. В этом случае результатов нет, поэтому функция принимает в качестве аргумента NULL.</p>
+<p>Чтобы скомпилировать код с использованием потоков с Emscripten, вам необходимо вызвать emcc и передать параметр -pthread, как при компиляции того же кода с Clang или GCC на других платформах: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>emcc -pthread example.c -o example.js
+</span></code></pre>
+<p>Однако, когда вы попытаетесь запустить его в браузере или на Node.js, вы увидите предупреждение, а затем программа зависнет: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Before the thread
+</span><span>Tried to spawn a new thread, but the thread pool is exhausted.
+</span><span>This might result in a deadlock unless some threads eventually exit or the code
+</span><span>explicitly breaks out to the event loop.
+</span><span>If you want to increase the pool size, use setting `-s PTHREAD_POOL_SIZE=...`.
+</span><span>If you want to throw an explicit error instead of the risk of deadlocking in those
+</span><span>cases, use setting `-s PTHREAD_POOL_SIZE_STRICT=2`.
+</span><span>[…hangs here…]
+</span></code></pre>
+<p>Что случилось? Проблема в том, что большинство трудоемких API-интерфейсов в Интернете являются асинхронными и зависят от цикла событий для выполнения. Это ограничение является важным отличием по сравнению с традиционными средами, где приложения обычно выполняют операции ввода-вывода в синхронном, блокирующем режиме. Прочтите сообщение в блоге об использовании асинхронных веб-API от WebAssembly, если вы хотите узнать больше.</p>
+<p>В этом случае код синхронно вызывает pthread_create для создания фонового потока, а за ним следует другой синхронный вызов pthread_join, который ожидает завершения выполнения фоновым потоком. Однако веб-воркеры, которые используются за кулисами, когда этот код компилируется с Emscripten, являются асинхронными. Итак, что происходит: pthread_create только планирует новый рабочий поток, который будет создан при следующем запуске цикла событий, но затем pthread_join немедленно блокирует цикл событий, чтобы дождаться этого рабочего, и тем самым предотвращает его создание. Это классический пример тупика.</p>
+<p>Один из способов решить эту проблему - создать пул рабочих заранее, еще до запуска программы. Когда вызывается pthread_create, он может взять готовый к использованию Worker из пула, запустить предоставленный обратный вызов в своем фоновом потоке и вернуть Worker обратно в пул. Все это можно делать синхронно, поэтому тупиковых ситуаций не будет, пока пул достаточно велик.</p>
+<p>Именно это позволяет Emscripten с параметром -s PTHREAD_POOL_SIZE = ... Он позволяет указать количество потоков - либо фиксированное число, либо выражение JavaScript, такое как navigator.hardwareConcurrency, чтобы создать столько потоков, сколько ядер на ЦП. Последний вариант полезен, когда ваш код может масштабироваться до произвольного количества потоков.</p>
+<p>В приведенном выше примере создается только один поток, поэтому вместо резервирования всех ядер достаточно использовать -s PTHREAD_POOL_SIZE = 1: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>emcc -pthread -s PTHREAD_POOL_SIZE=1 example.c -o example.js
+</span></code></pre>
+<p>На этот раз, когда вы его выполняете, все работает успешно: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Before the thread
+</span><span>Inside the thread: 42
+</span><span>After the thread
+</span><span>Pthread 0x701510 exited.
+</span></code></pre>
+<p>Однако есть еще одна проблема: видите, что sleep (1) в примере кода? Он выполняется в обратном вызове потока, то есть вне основного потока, так что все должно быть в порядке, верно? Что ж, это не так.</p>
+<p>Когда вызывается pthread_join, он должен дождаться завершения выполнения потока, что означает, что если созданный поток выполняет длительные задачи - в данном случае спит 1 секунду, - то основной поток также должен будет заблокироваться на такое же количество времени, пока результаты не вернутся. Когда этот JS выполняется в браузере, он блокирует поток пользовательского интерфейса на 1 секунду, пока обратный вызов потока не вернется. Это приводит к ухудшению пользовательского опыта.</p>
+<p>Для этого есть несколько решений:</p>
+<ul>
+<li>pthread_detach</li>
+<li>-s PROXY_TO_PTHREAD</li>
+<li>Custom Worker и Comlink</li>
+</ul>
+<p>pthread_detach #</p>
+<p>Во-первых, если вам нужно запустить только некоторые задачи из основного потока, но не нужно ждать результатов, вы можете использовать pthread_detach вместо pthread_join. Это оставит обратный вызов потока в фоновом режиме. Если вы используете эту опцию, вы можете отключить предупреждение с помощью -s PTHREAD_POOL_SIZE_STRICT = 0.</p>
+<h3 id="proxy-to-pthread">PROXY_TO_PTHREAD</h3>
+<p>Во-вторых, если вы компилируете приложение C, а не библиотеку, вы можете использовать параметр -s PROXY_TO_PTHREAD, который выгружает основной код приложения в отдельный поток в дополнение к любым вложенным потокам, созданным самим приложением. Таким образом, основной код может безопасно блокироваться в любое время без зависания пользовательского интерфейса. Между прочим, при использовании этой опции вам также не нужно предварительно создавать пул потоков - вместо этого Emscripten может использовать основной поток для создания новых базовых Workers, а затем заблокировать вспомогательный поток в pthread_join без взаимоблокировки.</p>
+<h4 id="comlink">Comlink</h4>
+<p>В-третьих, если вы работаете с библиотекой и вам все еще нужно блокировать, вы можете создать своего собственного Worker, импортировать сгенерированный Emscripten код и предоставить его с помощью Comlink в основной поток. Основной поток сможет вызывать любые экспортированные методы как асинхронные функции, что также позволит избежать блокировки пользовательского интерфейса.</p>
+<p>В простом приложении, таком как предыдущий пример, -s PROXY_TO_PTHREAD - лучший вариант: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>emcc -pthread -s PROXY_TO_PTHREAD example.c -o example.js
+</span></code></pre>
+<h3 id="c-1">C++</h3>
+<p>Все те же предостережения и логика одинаково применимы и к C++. Единственное, что вы получаете, - это доступ к API более высокого уровня, таким как std::thread и std::async, которые используют ранее обсуждавшуюся библиотеку pthread под капотом.</p>
+<p>Таким образом, приведенный выше пример можно переписать на более идиоматическом языке C++ следующим образом: </p>
+<pre data-lang="cpp" style="background-color:#0f1419;color:#bfbab0;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="font-style:italic;color:#5c6773;">// example.cpp
+</span><span>
+</span><span style="color:#ff7733;">#include </span><span style="color:#c2d94c;">&lt;iostream&gt;
+</span><span style="color:#ff7733;">#include </span><span style="color:#c2d94c;">&lt;thread&gt;
+</span><span style="color:#ff7733;">#include </span><span style="color:#c2d94c;">&lt;chrono&gt;
+</span><span>
+</span><span style="color:#ff7733;">int </span><span style="color:#ffb454;">main</span><span>()
+</span><span>{
+</span><span>    </span><span style="color:#f07178;">puts</span><span>(</span><span style="color:#c2d94c;">&quot;Before the thread&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">int</span><span> arg </span><span style="color:#f29668;">= </span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">;
+</span><span>    std</span><span style="color:#f29668;">::</span><span>thread </span><span style="color:#ffb454;">thread</span><span>([</span><span style="color:#f29668;">&amp;</span><span>]() {
+</span><span>        std</span><span style="color:#f29668;">::</span><span>this_thread</span><span style="color:#f29668;">::</span><span style="color:#ffb454;">sleep_for</span><span>(std</span><span style="color:#f29668;">::</span><span>chrono</span><span style="color:#f29668;">::</span><span style="color:#ffb454;">seconds</span><span>(</span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        std</span><span style="color:#f29668;">::</span><span>cout </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#c2d94c;">&quot;Inside the thread: &quot; </span><span style="color:#f29668;">&lt;&lt;</span><span> arg </span><span style="color:#f29668;">&lt;&lt;</span><span> std</span><span style="color:#f29668;">::</span><span>endl</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    thread</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">join</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    std</span><span style="color:#f29668;">::</span><span>cout </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#c2d94c;">&quot;After the thread&quot; </span><span style="color:#f29668;">&lt;&lt;</span><span> std</span><span style="color:#f29668;">::</span><span>endl</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>При компиляции и выполнении с аналогичными параметрами он будет вести себя так же, как пример C: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>emcc -std=c++11 -pthread -s PROXY_TO_PTHREAD example.cpp -o example.js
+</span></code></pre>
+<p>Вывод: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Before the thread
+</span><span>Inside the thread: 42
+</span><span>Pthread 0xc06190 exited.
+</span><span>After the thread
+</span><span>Proxied main thread 0xa05c18 finished with return code 0. EXIT_RUNTIME=0 set, so
+</span><span>keeping main thread alive for asynchronous event operations.
+</span><span>Pthread 0xa05c18 exited.
+</span></code></pre>
+<h3 id="rust">Rust</h3>
+<p>В отличие от Emscripten, Rust не имеет специализированной сквозной веб-цели, но вместо этого предоставляет общую цель wasm32-unknown-unknown для общего вывода WebAssembly.</p>
+<p>Если Wasm предназначен для использования в веб-среде, любое взаимодействие с API JavaScript остается на усмотрение внешних библиотек и инструментов, таких как wasm-bindgen и wasm-pack. К сожалению, это означает, что стандартная библиотека не знает о веб-воркерах, а стандартные API, такие как std::thread, не будут работать при компиляции в WebAssembly.</p>
+<p>К счастью, большая часть экосистемы зависит от высокоуровневых библиотек, которые заботятся о многопоточности. На этом уровне намного проще абстрагироваться от всех различий платформ.</p>
+<p>В частности, наиболее популярным выбором для параллелизма данных в Rust является Rayon. Он позволяет вам использовать цепочки методов на обычных итераторах и, обычно с изменением одной строки, преобразовывать их таким образом, чтобы они выполнялись параллельно во всех доступных потоках, а не последовательно. Например: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">sum_of_squares</span><span>(</span><span style="color:#f29718;">numbers</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">i32</span><span>]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>  numbers
+</span><span>  </span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()
+</span><span>  </span><span style="color:#f29668;">.</span><span style="color:#f07178;">par_iter</span><span>()
+</span><span>  </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">x</span><span>| x </span><span style="color:#f29668;">*</span><span> x)
+</span><span>  </span><span style="color:#f29668;">.</span><span style="color:#f07178;">sum</span><span>()
+</span><span>}
+</span></code></pre>
+<p>С этим небольшим изменением код разделит входные данные, вычислит x * x и частичные суммы в параллельных потоках и, в конце концов, сложит эти частичные результаты вместе.</p>
+<p>Чтобы приспособиться к платформам без рабочего std::thread, Rayon предоставляет хуки, которые позволяют определять настраиваемую логику для создания и выхода из потоков.</p>
+<p>wasm-bindgen-rayon подключается к этим перехватчикам, чтобы порождать потоки WebAssembly в качестве веб-воркеров. Чтобы использовать его, вам необходимо добавить его как зависимость и выполнить шаги настройки, описанные в документации. Приведенный выше пример будет выглядеть так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub use </span><span>wasm_bindgen_rayon</span><span style="color:#f29668;">::</span><span>init_thread_pool</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">sum_of_squares</span><span>(</span><span style="color:#f29718;">numbers</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">i32</span><span>]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>  numbers
+</span><span>  </span><span style="color:#f29668;">.</span><span style="color:#f07178;">par_iter</span><span>()
+</span><span>  </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">x</span><span>| x </span><span style="color:#f29668;">*</span><span> x)
+</span><span>  </span><span style="color:#f29668;">.</span><span style="color:#f07178;">sum</span><span>()
+</span><span>}
+</span></code></pre>
+<p>После этого сгенерированный JavaScript экспортирует дополнительную функцию initThreadPool. Эта функция создаст пул рабочих и повторно использует их на протяжении всего жизненного цикла программы для любых многопоточных операций, выполняемых Rayon.</p>
+<p>Этот механизм пула аналогичен параметру -s PTHREAD_POOL_SIZE = ... в описанном ранее Emscripten, и его также необходимо инициализировать перед основным кодом, чтобы избежать взаимоблокировок: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>init</span><span style="color:#bfbab0cc;">, </span><span>{ initThreadPool</span><span style="color:#bfbab0cc;">, </span><span>sum_of_squares } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./pkg/index.js&#39;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Regular wasm-bindgen initialization.
+</span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">init</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Thread pool initialization with the given number of threads
+</span><span style="font-style:italic;color:#5c6773;">// (pass `navigator.hardwareConcurrency` if you want to use all cores).
+</span><span style="color:#ff7733;">await </span><span style="color:#ffb454;">initThreadPool</span><span>(navigator</span><span style="color:#f29668;">.</span><span>hardwareConcurrency)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// ...now you can invoke any exported functions as you normally would
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#ffb454;">sum_of_squares</span><span>(</span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Int32Array</span><span>([</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span>])))</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// 14
+</span></code></pre>
+<p>Обратите внимание, что здесь действуют те же предостережения о блокировке основного потока. Даже в примере sum_of_squares все еще необходимо заблокировать основной поток, чтобы дождаться частичных результатов от других потоков.</p>
+<p>Это может быть очень короткое или долгое ожидание, в зависимости от сложности итераторов и количества доступных потоков, но на всякий случай движки браузера активно предотвращают блокировку основного потока, и такой код выдает ошибку. Вместо этого вы должны создать Worker, импортировать туда код, созданный с помощью wasm-bindgen, и предоставить его API с библиотекой, такой как Comlink, для основного потока.</p>
+<p>Посмотрите пример wasm-bindgen-rayon, чтобы увидеть сквозную демонстрацию:</p>
+<ul>
+<li>Функция обнаружения потоков.</li>
+<li>Создание однопоточных и многопоточных версий одного и того же приложения Rust.</li>
+<li>Загрузка JS + Wasm, созданного с помощью wasm-bindgen, в Worker.</li>
+<li>Использование wasm-bindgen-rayon для инициализации пула потоков.</li>
+<li>Использование Comlink для предоставления доступа к API Worker'а основному потоку.</li>
+</ul>
+<h2 id="real-nye-varianty-ispol-zovaniia">Реальные варианты использования</h2>
+<p>Мы активно используем потоки WebAssembly в Squoosh.app для сжатия изображений на стороне клиента, в частности, для таких форматов, как AVIF (C++), JPEG-XL (C++), OxiPNG (Rust) и WebP v2 (C++). Только благодаря многопоточности мы наблюдали последовательное ускорение в 1,5–3 раза (точное соотношение различается для разных кодеков) и смогли еще больше увеличить эти цифры, объединив потоки WebAssembly с WebAssembly SIMD!</p>
+<p>Google Планета Земля - еще один примечательный сервис, использующий потоки WebAssembly для своей веб-версии.</p>
+<p>FFMPEG.WASM - это WebAssembly-версия популярной мультимедийной цепочки инструментов FFmpeg, которая использует потоки WebAssembly для эффективного кодирования видео непосредственно в браузере.</p>
+<p>Есть еще много интересных примеров использования потоков WebAssembly. Обязательно ознакомьтесь с демонстрациями и внесите в Интернет свои собственные многопоточные приложения и библиотеки! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

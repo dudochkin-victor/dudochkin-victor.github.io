@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Вызовы между программами | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#mezhprogrammnye-vyzovy">Межпрограммные вызовы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#instruktsii-trebuiushchie-privilegii"><small>- Инструкции, требующие привилегий</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#akkaunty-podpisannye-programmoi"><small>- Аккаунты, подписанные программой</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#glubina-vyzova"><small>- Глубина вызова</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#povtornyi-vkhod"><small>- Повторный вход</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#adresa-proizvodnye-ot-programmy">Адреса, производные от программы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#zakrytye-kliuchi-dlia-programmnykh-adresov"><small>- Закрытые ключи для программных адресов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#adresa-programm-sgenerirovannye-na-osnove-khesha"><small>- Адреса программ, сгенерированные на основе хэша</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#ispol-zovanie-programmnykh-adresov"><small>- Использование программных адресов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#instruktsii-trebuiushchie-podpisantov"><small>- Инструкции, требующие подписантов</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/calling-between-programs/#primery">Примеры</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Вызовы между программами</h1>
+
+<h2 id="mezhprogrammnye-vyzovy">Межпрограммные вызовы</h2>
+<p>Среда выполнения Solana позволяет программам вызывать друг друга с помощью механизма, называемого межпрограммным вызовом. Вызов между программами достигается тем, что одна программа вызывает инструкцию другой. Вызывающая программа останавливается до тех пор, пока вызванная программа не завершит обработку инструкции.</p>
+<p>Например, клиент может создать транзакцию, которая изменяет две учетные записи, каждая из которых принадлежит отдельным программам в сети:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> message </span><span style="color:#f29668;">= </span><span>Message</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f07178;">vec!</span><span>[
+</span><span>    token_instruction</span><span style="color:#f29668;">::</span><span>pay(</span><span style="color:#f29668;">&amp;</span><span>alice_pubkey)</span><span style="color:#bfbab0cc;">,
+</span><span>    acme_instruction</span><span style="color:#f29668;">::</span><span>launch_missiles(</span><span style="color:#f29668;">&amp;</span><span>bob_pubkey)</span><span style="color:#bfbab0cc;">,
+</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>client</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send_and_confirm_message</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>alice_keypair</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>bob_keypair]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>message)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Вместо этого клиент может разрешить программе acme удобно вызывать инструкции токена от имени клиента:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> message </span><span style="color:#f29668;">= </span><span>Message</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f07178;">vec!</span><span>[
+</span><span>    acme_instruction</span><span style="color:#f29668;">::</span><span>pay_and_launch_missiles(</span><span style="color:#f29668;">&amp;</span><span>alice_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>bob_pubkey)</span><span style="color:#bfbab0cc;">,
+</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>client</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send_and_confirm_message</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>alice_keypair</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>bob_keypair]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>message)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Имея две ончейн-программы <code>token</code> и <code>acme</code>, каждая из которых реализует инструкции <code>pay()</code> и <code>launch_missiles()</code> соответственно, acme можно реализовать с помощью вызова функции, определенной в модуле <code>token</code>, путем выдачи межпрограммный вызов:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">acme </span><span>{
+</span><span>    </span><span style="color:#ff7733;">use</span><span> token_instruction</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">launch_missiles</span><span>(</span><span style="color:#f29718;">accounts</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[AccountInfo]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;()&gt; {
+</span><span>        </span><span style="color:#f29668;">...
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">pay_and_launch_missiles</span><span>(</span><span style="color:#f29718;">accounts</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[AccountInfo]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;()&gt; {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> alice_pubkey </span><span style="color:#f29668;">=</span><span> accounts[</span><span style="color:#f29718;">1</span><span>]</span><span style="color:#f29668;">.</span><span>key</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> instruction </span><span style="color:#f29668;">= </span><span>token_instruction</span><span style="color:#f29668;">::</span><span>pay(</span><span style="color:#f29668;">&amp;</span><span>alice_pubkey)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">invoke</span><span>(</span><span style="color:#f29668;">&amp;</span><span>instruction</span><span style="color:#bfbab0cc;">,</span><span> accounts)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">launch_missiles</span><span>(accounts)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span></code></pre>
+<p><code>invoke()</code> встроен в среду выполнения Solana и отвечает за маршрутизацию данной инструкции в программу <code>token</code> через поле <code>program_id</code> инструкции.</p>
+<p>Обратите внимание, что <code>invoke</code> требует, чтобы вызывающая сторона передала все учетные записи, требуемые вызываемой инструкцией, за исключением исполняемой учетной записи (<code>program_id</code>).</p>
+<p>Прежде чем вызывать <code>pay()</code>, среда выполнения должна убедиться, что <code>acme</code> не изменил ни одной учетной записи, принадлежащей <code>token</code>. Он делает это, применяя политику среды выполнения к текущему состоянию учетных записей в момент вызова <code>acme</code> invoke по сравнению с начальным состоянием учетных записей в начале инструкции <code>acme</code>. После завершения <code>pay()</code> среда выполнения снова должна убедиться, что <code>token</code> не изменил ни одну учетную запись, принадлежащую <code>acme</code>, снова применив политику среды выполнения, но на этот раз с идентификатором программы <code>token</code>. Наконец, после завершения <code>pay_and_launch_missiles()</code> среда выполнения должна применить политику выполнения еще раз, как обычно, но с использованием всех обновленных переменных <code>pre_*</code>. Если выполнение <code>pay_and_launch_missiles()</code> до <code>pay()</code> не привело к недействительным изменениям учетной записи, <code>pay()</code> не произвело недопустимых изменений, и выполнение от <code>pay()</code> до возврата <code>pay_and_launch_missiles()</code> не произвело недопустимых изменений, тогда среда выполнения может транзитивно предположить, что <code>pay_and_launch_missiles()</code> в целом не внесла недопустимых изменений учетной записи, и, следовательно, зафиксирует все эти модификации учетной записи.</p>
+<h3 id="instruktsii-trebuiushchie-privilegii">Инструкции, требующие привилегий</h3>
+<p>Среда выполнения использует привилегии, предоставленные вызывающей программе, чтобы определить, какие привилегии могут быть расширены для вызываемой программы. Привилегии в этом контексте относятся к подписавшим и записываемым учетным записям. Например, если инструкция, которую обрабатывает вызывающая сторона, содержит подписывающую или записываемую учетную запись, то вызывающая сторона может вызвать инструкцию, которая также содержит эту подписывающую и/или записываемую учетную запись.</p>
+<p>Это расширение привилегий основано на том факте, что программы неизменяемы, за исключением особого случая обновления программы.</p>
+<p>В случае с программой «acme» среда выполнения может безопасно рассматривать подпись транзакции как подпись инструкции «токен». Когда среда выполнения видит, что инструкция «token» ссылается на «alice_pubkey», она ищет ключ в инструкции «acme», чтобы определить, соответствует ли этот ключ подписанной учетной записи. В этом случае он делает это и тем самым разрешает программе «токен» модифицировать учетную запись Алисы.</p>
+<h3 id="akkaunty-podpisannye-programmoi">Аккаунты, подписанные программой</h3>
+<p>Программы могут выдавать инструкции, содержащие подписанные учетные записи, которые не были подписаны в исходной транзакции, с помощью Программно-производных адресов.</p>
+<p>Чтобы подписать учетную запись с адресами, производными от программы, программа может вызвать <code>invoke_signed()</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>        </span><span style="color:#f07178;">invoke_signed</span><span>(
+</span><span>            </span><span style="color:#f29668;">&amp;</span><span>instruction</span><span style="color:#bfbab0cc;">,
+</span><span>            accounts</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;First addresses seed&quot;</span><span>]</span><span style="color:#bfbab0cc;">,
+</span><span>              </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;Second addresses first seed&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;Second addresses second seed&quot;</span><span>]]</span><span style="color:#bfbab0cc;">,
+</span><span>        )</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="glubina-vyzova">Глубина вызова</h3>
+<p>Вызовы между программами позволяют программам напрямую вызывать другие программы, но в настоящее время глубина ограничена 4.</p>
+<h3 id="povtornyi-vkhod">Повторный вход</h3>
+<p>Повторный вход в настоящее время ограничен прямой саморекурсией, ограниченной фиксированной глубиной. Это ограничение предотвращает ситуации, когда программа может вызывать другую программу из промежуточного состояния, не зная, что позже она может быть вызвана обратно. Прямая рекурсия дает программе полный контроль над своим состоянием в момент обратного вызова.</p>
+<h2 id="adresa-proizvodnye-ot-programmy">Адреса, производные от программы</h2>
+<p>Адреса, производные от программы, позволяют использовать программно сгенерированные подписи при вызовах между программами.</p>
+<p>Используя адрес, производный от программы, программа может получить права доступа к учетной записи, а затем передать эти права другому пользователю. Это возможно, потому что программа может действовать как подписывающая сторона в транзакции, которая дает полномочия.</p>
+<p>Например, если два пользователя хотят сделать ставку на исход игры в Солане, каждый из них должен передать активы своей ставки какому-либо посреднику, который будет соблюдать их соглашение. В настоящее время нет возможности реализовать этого посредника как программу в Солане, потому что программа посредника не может передать активы победителю.</p>
+<p>Эта возможность необходима для многих приложений DeFi, поскольку они требуют передачи активов агенту условного депонирования до тех пор, пока не произойдет какое-либо событие, определяющее нового владельца.</p>
+<ul>
+<li>
+<p>Децентрализованные биржи, которые передают активы между соответствующими ордерами на покупку и продажу.</p>
+</li>
+<li>
+<p>Аукционы, на которых активы передаются победителю.</p>
+</li>
+<li>
+<p>Игры или рынки предсказаний, которые собирают и распределяют призы среди победителей.</p>
+</li>
+</ul>
+<p>Адрес, производный от программы:</p>
+<ol>
+<li>
+<p>Разрешить программам управлять определенными адресами, называемыми программными адресами, таким образом, чтобы ни один внешний пользователь не мог генерировать действительные транзакции с подписями для этих адресов.</p>
+</li>
+<li>
+<p>Разрешить программам программно подписывать адреса программ, присутствующие в инструкциях, вызываемых с помощью кросс-программных вызовов.</p>
+</li>
+</ol>
+<p>С учетом этих двух условий пользователи могут безопасно передавать или назначать полномочия сетевых активов на адреса программ, а затем программа может назначать эти полномочия в другом месте по своему усмотрению.</p>
+<h3 id="zakrytye-kliuchi-dlia-programmnykh-adresov">Закрытые ключи для программных адресов</h3>
+<p>Адрес программы не лежит на кривой ed25519 и, следовательно, не имеет связанного с ним действительного закрытого ключа, поэтому создание подписи для него невозможно. Хотя у него нет собственного закрытого ключа, он может использоваться программой для выдачи инструкции, включающей адрес Программы в качестве подписавшего.</p>
+<h3 id="adresa-programm-sgenerirovannye-na-osnove-khesha">Адреса программ, сгенерированные на основе хэша</h3>
+<p>Адреса программ детерминистически выводятся из набора начальных значений и
+идентификатор программы с использованием 256-битной хэш-функции, устойчивой к прообразу. Адрес программы не должен лежать на кривой ed25519, чтобы гарантировать отсутствие связанного закрытого ключа. Во время генерации будет возвращена ошибка, если будет обнаружено, что адрес лежит на кривой. Вероятность того, что это произойдет для данной коллекции семян и идентификатора программы, составляет примерно 50/50. Если это происходит, можно использовать другой набор начальных значений или начальное значение (дополнительное 8-битное начальное число), чтобы найти допустимый программный адрес вне кривой.</p>
+<p>Детерминированные программные адреса для программ следуют тому же пути вывода, что и учетные записи, созданные с помощью <code>SystemInstruction::CreateAccountWithSeed</code>, который реализован с помощью <code>Pubkey::create_with_seed</code>.</p>
+<p>Для справки, реализация выглядит следующим образом:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">create_with_seed</span><span>(
+</span><span>    </span><span style="color:#f29718;">base</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>    </span><span style="color:#f29718;">seed</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>,
+</span><span>    </span><span style="color:#f29718;">program_id</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;Pubkey, SystemError&gt; {
+</span><span>    </span><span style="color:#ff7733;">if</span><span> seed</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">MAX_ADDRESS_SEED_LEN </span><span>{
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(SystemError</span><span style="color:#f29668;">::</span><span>MaxSeedLengthExceeded)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(Pubkey</span><span style="color:#f29668;">::</span><span>new(
+</span><span>        </span><span style="color:#f07178;">hashv</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[base</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> seed</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()</span><span style="color:#bfbab0cc;">,</span><span> program_id</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()])</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    ))
+</span><span>}
+</span></code></pre>
+<p>Программы могут детерминировано получить любое количество адресов, используя начальные значения. Эти семена могут символически идентифицировать, как используются адреса.</p>
+<p>Из <code>Pubkey</code>::</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">/// Generate a derived program address
+</span><span style="font-style:italic;color:#5c6773;">///     * seeds, symbolic keywords used to derive the key
+</span><span style="font-style:italic;color:#5c6773;">///     * program_id, program that the address is derived for
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">create_program_address</span><span>(
+</span><span>    </span><span style="color:#f29718;">seeds</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">u8</span><span>]],
+</span><span>    </span><span style="color:#f29718;">program_id</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;Pubkey, PubkeyError&gt;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/// Find a valid off-curve derived program address and its bump seed
+</span><span style="font-style:italic;color:#5c6773;">///     * seeds, symbolic keywords used to derive the key
+</span><span style="font-style:italic;color:#5c6773;">///     * program_id, program that the address is derived for
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">find_program_address</span><span>(
+</span><span>    </span><span style="color:#f29718;">seeds</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">u8</span><span>]],
+</span><span>    </span><span style="color:#f29718;">program_id</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;(Pubkey, </span><span style="color:#ff7733;">u8</span><span>)&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> bump_seed </span><span style="color:#f29668;">= </span><span>[std</span><span style="color:#f29668;">::</span><span>u8</span><span style="color:#f29668;">::</span><span style="color:#f29718;">MAX</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">_ in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>std</span><span style="color:#f29668;">::</span><span>u8</span><span style="color:#f29668;">::</span><span style="color:#f29718;">MAX </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> seeds_with_bump </span><span style="color:#f29668;">=</span><span> seeds</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_vec</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        seeds_with_bump</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(</span><span style="color:#f29668;">&amp;</span><span>bump_seed)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">if let </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(address) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">create_program_address</span><span>(</span><span style="color:#f29668;">&amp;</span><span>seeds_with_bump</span><span style="color:#bfbab0cc;">,</span><span> program_id) {
+</span><span>            </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Some</span><span>((address</span><span style="color:#bfbab0cc;">,</span><span> bump_seed[</span><span style="color:#f29718;">0</span><span>]))</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>        bump_seed[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">-= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>}
+</span></code></pre>
+<h3 id="ispol-zovanie-programmnykh-adresov">Использование программных адресов</h3>
+<p>Клиенты могут использовать функцию create_program_address для создания адреса назначения. В этом примере мы предполагаем, что <code>create_program_address(&amp;[&amp;[&quot;escrow&quot;]], &amp;escrow_program_id)</code> создает действительный программный адрес, который не соответствует действительности.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// deterministically derive the escrow key
+</span><span style="color:#ff7733;">let</span><span> escrow_pubkey </span><span style="color:#f29668;">= </span><span style="color:#f07178;">create_program_address</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;escrow&quot;</span><span>]]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>escrow_program_id)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// construct a transfer message using that key
+</span><span style="color:#ff7733;">let</span><span> message </span><span style="color:#f29668;">= </span><span>Message</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f07178;">vec!</span><span>[
+</span><span>    token_instruction</span><span style="color:#f29668;">::</span><span>transfer(</span><span style="color:#f29668;">&amp;</span><span>alice_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>escrow_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// process the message which transfer one 1 token to the escrow
+</span><span>client</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send_and_confirm_message</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>alice_keypair]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>message)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Программы могут использовать одну и ту же функцию для генерации одного и того же адреса. В приведенной ниже функции программа выдает <code>token_instruction::transfer</code> с адреса программы, как если бы у нее был закрытый ключ для подписи транзакции.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer_one_token_from_escrow</span><span>(
+</span><span>    </span><span style="color:#f29718;">program_id</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>    </span><span style="color:#f29718;">accounts</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[AccountInfo],
+</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// User supplies the destination
+</span><span>    </span><span style="color:#ff7733;">let</span><span> alice_pubkey </span><span style="color:#f29668;">=</span><span> keyed_accounts[</span><span style="color:#f29718;">1</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unsigned_key</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Deterministically derive the escrow pubkey.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> escrow_pubkey </span><span style="color:#f29668;">= </span><span style="color:#f07178;">create_program_address</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;escrow&quot;</span><span>]]</span><span style="color:#bfbab0cc;">,</span><span> program_id)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Create the transfer instruction
+</span><span>    </span><span style="color:#ff7733;">let</span><span> instruction </span><span style="color:#f29668;">= </span><span>token_instruction</span><span style="color:#f29668;">::</span><span>transfer(</span><span style="color:#f29668;">&amp;</span><span>escrow_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>alice_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The runtime deterministically derives the key from the currently
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// executing program ID and the supplied keywords.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// If the derived address matches a key marked as signed in the instruction
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// then that key is accepted as signed.
+</span><span>    </span><span style="color:#f07178;">invoke_signed</span><span>(</span><span style="color:#f29668;">&amp;</span><span>instruction</span><span style="color:#bfbab0cc;">,</span><span> accounts</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;escrow&quot;</span><span>]])
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, что адрес, сгенерированный с помощью <code>create_program_address</code>, не обязательно будет допустимым программным адресом, выходящим за рамки кривой. Например, предположим, что начальное значение <code>&quot;escrow2&quot;</code> не генерирует действительный программный адрес.</p>
+<p>Чтобы сгенерировать допустимый программный адрес, используя <code>&quot;escrow2</code> в качестве начального значения, используйте <code>find_program_address</code>, перебирая возможные начальные значения до тех пор, пока не будет найдена действительная комбинация. Предыдущий пример становится таким:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// find the escrow key and valid bump seed
+</span><span style="color:#ff7733;">let </span><span>(escrow_pubkey2</span><span style="color:#bfbab0cc;">,</span><span> escrow_bump_seed) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">find_program_address</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;escrow2&quot;</span><span>]]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>escrow_program_id)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// construct a transfer message using that key
+</span><span style="color:#ff7733;">let</span><span> message </span><span style="color:#f29668;">= </span><span>Message</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f07178;">vec!</span><span>[
+</span><span>    token_instruction</span><span style="color:#f29668;">::</span><span>transfer(</span><span style="color:#f29668;">&amp;</span><span>alice_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>escrow_pubkey2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// process the message which transfer one 1 token to the escrow
+</span><span>client</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send_and_confirm_message</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>alice_keypair]</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>message)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>В программе это становится:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transfer_one_token_from_escrow2</span><span>(
+</span><span>    </span><span style="color:#f29718;">program_id</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>    </span><span style="color:#f29718;">accounts</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[AccountInfo],
+</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// User supplies the destination
+</span><span>    </span><span style="color:#ff7733;">let</span><span> alice_pubkey </span><span style="color:#f29668;">=</span><span> keyed_accounts[</span><span style="color:#f29718;">1</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unsigned_key</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Iteratively derive the escrow pubkey
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(escrow_pubkey2</span><span style="color:#bfbab0cc;">,</span><span> bump_seed) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">find_program_address</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;escrow2&quot;</span><span>]]</span><span style="color:#bfbab0cc;">,</span><span> program_id)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Create the transfer instruction
+</span><span>    </span><span style="color:#ff7733;">let</span><span> instruction </span><span style="color:#f29668;">= </span><span>token_instruction</span><span style="color:#f29668;">::</span><span>transfer(</span><span style="color:#f29668;">&amp;</span><span>escrow_pubkey2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>alice_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Include the generated bump seed to the list of all seeds
+</span><span>    </span><span style="color:#f07178;">invoke_signed</span><span>(</span><span style="color:#f29668;">&amp;</span><span>instruction</span><span style="color:#bfbab0cc;">,</span><span> accounts</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;escrow2&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>[bump_seed]]])
+</span><span>}
+</span></code></pre>
+<p>Поскольку <code>find_program_address</code> требует повторения ряда вызовов <code>create_program_address</code>, он может использовать больше <a href="developing/programming-model/runtime.md#compute-budget">вычислительного бюджета</a> при использовании в цепочке. Чтобы снизить стоимость вычислений, используйте <code>find_program_address</code> вне цепочки и передайте полученное начальное значение в программу.</p>
+<h3 id="instruktsii-trebuiushchie-podpisantov">Инструкции, требующие подписантов</h3>
+<p>Адреса, сгенерированные с помощью <code>create_program_address</code> и <code>find_program_address</code>, неотличимы от любого другого открытого ключа. Единственный способ для среды выполнения проверить, что адрес принадлежит программе, — предоставить программе начальные значения, используемые для генерации адреса.</p>
+<p>Среда выполнения вызовет <code>create_program_address</code> и сравнит результат с адресами, указанными в инструкции.</p>
+<h2 id="primery">Примеры</h2>
+<p>См. [Разработка на Rust](разработка/программы в сети/../../../программы в сети/разработка-rust.md#examples) и [Разработка на C](разработка/в сети). chain-programs/../../../on-chain-programs/developing-c.md#examples) для примеров того, как использовать межпрограммный вызов.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

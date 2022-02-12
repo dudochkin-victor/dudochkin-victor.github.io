@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Как создать простой REST API в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-create-a-simple-rest-api-in-rust/#vvedenie">Введение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-create-a-simple-rest-api-in-rust/#ustanovka-rust-nightly">Установка Rust Nightly</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-create-a-simple-rest-api-in-rust/#zavisimosti">Зависимости</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-create-a-simple-rest-api-in-rust/#nastroika-dizel-nogo-topliva">Настройка дизельного топлива</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-create-a-simple-rest-api-in-rust/#kruto-vot-i-chast-rust">Круто, вот и часть Rust</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Как создать простой REST API в Rust</h1>
+
+<p><a href="https://morioh.com/p/d4b5c0ca1174">Перевод</a> | Автор оригинала: Alexey Kartsev</p>
+<h2 id="vvedenie">Введение</h2>
+<p>Rust - это язык программирования с несколькими парадигмами, ориентированный на производительность и безопасность, особенно на безопасный параллелизм. Rust синтаксически похож на C++, но обеспечивает безопасность памяти без использования сборки мусора.</p>
+<p>Язык программирования Rust помогает писать более быстрое и надежное программное обеспечение. Эргономика высокого уровня и управление на низком уровне часто противоречат друг другу при разработке языков программирования; Rust бросает вызов этому конфликту. Благодаря уравновешиванию мощных технических возможностей и отличного опыта разработчика, Rust дает вам возможность управлять низкоуровневыми деталями (такими как использование памяти) без всех хлопот, традиционно связанных с таким контролем.
+Узнайте, как создать REST API в Rust - пошаговое руководство</p>
+<p>Для этого мы собираемся использовать фреймворк Rocket для API и фреймворк Diesel ORM для сохранения функций. Этот фреймворк будет охватывать все, что упомянуто ниже. Так что это будет намного проще, чем реализовать с нуля.</p>
+<ul>
+<li>Запустите веб-сервер и откройте ПОРТ.</li>
+<li>Слушайте запросы по этому ПОРТУ.</li>
+<li>Если поступает запрос, посмотрите Путь в заголовке HTTP.</li>
+<li>Направьте запрос обработчику в соответствии с Path.</li>
+<li>Помогу извлечь информацию из запроса.</li>
+<li>Упакуйте сгенерированные данные (созданные вами) и сформируйте ответ.</li>
+<li>Отправить ответ обратно отправителю.</li>
+</ul>
+<h2 id="ustanovka-rust-nightly">Установка Rust Nightly</h2>
+<p>Поскольку Rocket широко использует расширения синтаксиса Rust и другие продвинутые, нестабильные функции, мы должны устанавливать его каждую ночь. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>rustup default nightly
+</span></code></pre>
+<p>Если вы предпочитаете устанавливать каждую ночь только в каталоге вашего проекта, вы можете использовать следующее: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>rustup override set nightly
+</span></code></pre>
+<h2 id="zavisimosti">Зависимости</h2>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">rocket </span><span>= </span><span style="color:#c2d94c;">&quot;0.4.4&quot;
+</span><span style="color:#59c2ff;">rocket_codegen </span><span>= </span><span style="color:#c2d94c;">&quot;0.4.4&quot;
+</span><span style="color:#59c2ff;">diesel </span><span>= { </span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;1.4.0&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">features </span><span>= [</span><span style="color:#c2d94c;">&quot;postgres&quot;</span><span>] }
+</span><span style="color:#59c2ff;">dotenv </span><span>= </span><span style="color:#c2d94c;">&quot;0.9.0&quot;
+</span><span style="color:#59c2ff;">r2d2-diesel </span><span>= </span><span style="color:#c2d94c;">&quot;1.0&quot;
+</span><span style="color:#59c2ff;">r2d2 </span><span>= </span><span style="color:#c2d94c;">&quot;0.8&quot;
+</span><span style="color:#59c2ff;">serde </span><span>= </span><span style="color:#c2d94c;">&quot;1.0&quot;
+</span><span style="color:#59c2ff;">serde_derive </span><span>= </span><span style="color:#c2d94c;">&quot;1.0&quot;
+</span><span style="color:#59c2ff;">serde_json </span><span>= </span><span style="color:#c2d94c;">&quot;1.0&quot;
+</span><span style="color:#59c2ff;">custom_derive </span><span>=</span><span style="color:#c2d94c;">&quot;0.1.7&quot;
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">dependencies</span><span style="color:#bfbab0cc;">.</span><span style="color:#59c2ff;">rocket_contrib</span><span>]
+</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;*&quot;
+</span><span style="color:#59c2ff;">default-features </span><span>= </span><span style="color:#f29718;">false
+</span><span style="color:#59c2ff;">features </span><span>= [</span><span style="color:#c2d94c;">&quot;json&quot;</span><span>]
+</span></code></pre>
+<p>Я объясню эти крэйти, когда мы их воспользуемся.</p>
+<h2 id="nastroika-dizel-nogo-topliva">Настройка дизельного топлива</h2>
+<p>Итак, следующее, что я собираюсь сделать, это настроить Дизель. Diesel предоставляет собственный интерфейс командной строки, поэтому сначала необходимо его установить. (Предполагая, что вы используете PostgreSQL.) </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo install diesel_cli — no-default-features — features postgre
+</span></code></pre>
+<p>Затем вам нужно сообщить Diesel, какие у вас учетные данные в БД. Эта команда сгенерирует файл .env. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>echo DATABASE_URL=postgres://username:password@localhost:port/diesel_demo &gt; .env
+</span></code></pre>
+<p>После этого запустите эту команду: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>diesel setup
+</span></code></pre>
+<p>Это создаст нашу базу данных (если она еще не существует) и создаст пустой каталог миграции, который мы можем использовать для управления нашей схемой (подробнее об этом позже).</p>
+<p>При выполнении приведенного выше кода может быть несколько ошибок. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>= note: LINK : fatal error LNK1181: cannot open input file ‘libpq.lib’
+</span></code></pre>
+<p>Вы можете легко это исправить, добавив путь к папке PG lib в переменные среды. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>setx PQ_LIB_DIR “[path to pg lib folder]”
+</span></code></pre>
+<p>Я удивлен, что эти ошибки не упоминаются в документации Diesel.</p>
+<p>Я настоятельно рекомендую запускать эти команды в CMD или Powershell. Если вы используете терминал IDE, у вас не будет таких ошибок, и вы потратите два часа, пытаясь понять, что, черт возьми, происходит.</p>
+<p><img src="/imgs/posts/f82f7d6e_01.png" alt="" /></p>
+<p>Чтобы исправить это, вы можете добавить путь к папке bin PG в переменные Path. Проблема решена? Хорошо!</p>
+<p>Давайте создадим таблицу пользователей и создадим для этого миграцию: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>diesel migration generate users
+</span></code></pre>
+<p>После выполнения этой команды вы увидите, что в папке миграции сгенерированы два файла.</p>
+<p>Далее мы напишем SQL для миграций: </p>
+<p>up.sql</p>
+<pre data-lang="sql" style="background-color:#0f1419;color:#bfbab0;" class="language-sql "><code class="language-sql" data-lang="sql"><span style="color:#ff7733;">CREATE TABLE </span><span style="color:#ffb454;">users
+</span><span>(
+</span><span>    id         </span><span style="color:#ff7733;">SERIAL PRIMARY KEY</span><span>,
+</span><span>    username   </span><span style="color:#ff7733;">VARCHAR </span><span style="color:#f29668;">NOT </span><span style="color:#f29718;">NULL</span><span>,
+</span><span>    password   </span><span style="color:#ff7733;">VARCHAR </span><span style="color:#f29668;">NOT </span><span style="color:#f29718;">NULL</span><span>,
+</span><span>    first_name </span><span style="color:#ff7733;">VARCHAR </span><span style="color:#f29668;">NOT </span><span style="color:#f29718;">NULL
+</span><span>)
+</span></code></pre>
+<p>down.sql</p>
+<pre data-lang="sql" style="background-color:#0f1419;color:#bfbab0;" class="language-sql "><code class="language-sql" data-lang="sql"><span style="color:#ff7733;">DROP TABLE</span><span> users
+</span></code></pre>
+<p>Чтобы применить нашу миграцию, вы можете использовать: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>diesel migration run
+</span></code></pre>
+<p>Хорошо убедиться, что down.sql верен. Вы можете быстро убедиться, что ваш down.sql правильно откатывает миграцию, повторив миграцию: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>diesel migration redo
+</span></code></pre>
+<p>Как видите, в вашей БД есть таблица пользователей. Правильно!</p>
+<p>Я забыл упомянуть, если вы заметили, что после запуска программы установки Diesel создается файл с именем schema.rs. Должно получиться вот так. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>table! {
+</span><span>    users (id) {
+</span><span>        id -&gt; Int4,
+</span><span>        username -&gt; Varchar,
+</span><span>        password -&gt; Varchar,
+</span><span>        first_name -&gt; Varchar,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="kruto-vot-i-chast-rust">Круто, вот и часть Rust</h2>
+<p>Поскольку мы собираемся использовать ORM, очевидно, что нам нужно сопоставить пользовательскую таблицу с чем-то в Rust. В Java мы используем Class для сопоставления таблиц. В Java **, ** мы обычно называем их Бобами. В Rust мы используем структуры. Давайте создадим структуру. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use</span><span> diesel</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>diesel</span><span style="color:#f29668;">::</span><span>pg</span><span style="color:#f29668;">::</span><span>PgConnection</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>diesel</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::</span><span>schema</span><span style="color:#f29668;">::</span><span>users</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::</span><span>schema</span><span style="color:#f29668;">::</span><span>users</span><span style="color:#f29668;">::</span><span>dsl</span><span style="color:#f29668;">::</span><span>users </span><span style="color:#f29668;">as</span><span> all_users</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// this is to get users from the database
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Serialize</span><span style="color:#bfbab0cc;">,</span><span> Queryable)] 
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">User </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>id</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>username</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>password</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>first_name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span></code></pre>
+<p>Теперь вы можете задаться вопросом, что это за аннотации, как это определение структуры выше.</p>
+<p>Они называются производными. Итак, эта строка будет выводить сериализованные и запрашиваемые трэйты. #[derive(Serialize)] и #[derive(Deserialize)] используются для сопоставления данных с ответом и запросом.</p>
+<p>Теперь я собираюсь создать еще две структуры. Вы получите их позже. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// decode request data
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Deserialize)] 
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">UserData </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>username</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span><span style="font-style:italic;color:#5c6773;">// this is to insert users to database
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Serialize</span><span style="color:#bfbab0cc;">,</span><span> Deserialize</span><span style="color:#bfbab0cc;">,</span><span> Insertable)]
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">table_name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;users&quot;</span><span>]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">NewUser </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>username</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>password</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>first_name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span></code></pre>
+<p>Следующее, что мы собираемся сделать, это реализовать User. Таким образом, у него будет несколько методов для операций с базой данных.</p>
+<p>Здесь, как вы можете видеть, мы передали соединение методу и вернули вектор пользователей. Мы получаем все строки в пользовательской таблице и сопоставляем их со структурой User.</p>
+<p>Конечно, мы ждем ошибок. В случае паники будет распечатано сообщение «ошибка». </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">User </span><span>{
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_all_users</span><span>(</span><span style="color:#f29718;">conn</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>PgConnection) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;User&gt; {
+</span><span>        all_users
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">order</span><span>(users</span><span style="color:#f29668;">::</span><span>id</span><span style="color:#f29668;">.</span><span style="color:#f07178;">desc</span><span>())
+</span><span>            </span><span style="color:#f29668;">.</span><span>load</span><span style="color:#f29668;">::</span><span>&lt;User&gt;(conn)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;error!&quot;</span><span>)
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">insert_user</span><span>(</span><span style="color:#f29718;">user</span><span style="color:#bfbab0cc;">:</span><span> NewUser, </span><span style="color:#f29718;">conn</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>PgConnection) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>        diesel</span><span style="color:#f29668;">::</span><span>insert_into(users</span><span style="color:#f29668;">::</span><span>table)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">values</span><span>(</span><span style="color:#f29668;">&amp;</span><span>user)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">execute</span><span>(conn)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_ok</span><span>()
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_user_by_username</span><span>(</span><span style="color:#f29718;">user</span><span style="color:#bfbab0cc;">:</span><span> UserData, </span><span style="color:#f29718;">conn</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>PgConnection) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;User&gt; {
+</span><span>        all_users
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">filter</span><span>(users</span><span style="color:#f29668;">::</span><span>username</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(user</span><span style="color:#f29668;">.</span><span>username))
+</span><span>            </span><span style="color:#f29668;">.</span><span>load</span><span style="color:#f29668;">::</span><span>&lt;User&gt;(conn)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;error!&quot;</span><span>)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Теперь мы создали таблицу и структуры для сопоставления этой таблицы. Следующее, что мы собираемся сделать, это создать методы для его использования. Итак, мы собираемся создать файл маршрутов. Обычно мы называем это обработчиком. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::</span><span>db</span><span style="color:#f29668;">::</span><span>Conn </span><span style="color:#f29668;">as</span><span> DbConn</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>rocket_contrib</span><span style="color:#f29668;">::</span><span>json</span><span style="color:#f29668;">::</span><span>Json</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::</span><span>models</span><span style="color:#f29668;">::</span><span>{User</span><span style="color:#bfbab0cc;">,</span><span> NewUser}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>serde_json</span><span style="color:#f29668;">::</span><span>Value</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use crate</span><span style="color:#f29668;">::</span><span>models</span><span style="color:#f29668;">::</span><span>UserData</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">post</span><span>(</span><span style="color:#c2d94c;">&quot;/users&quot;</span><span style="color:#bfbab0cc;">,</span><span> format </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;application/json&quot;</span><span>)]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get_all</span><span>(</span><span style="color:#f29718;">conn</span><span style="color:#bfbab0cc;">:</span><span> DbConn) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Json&lt;Value&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> users </span><span style="color:#f29668;">= </span><span>User</span><span style="color:#f29668;">::</span><span>get_all_users(</span><span style="color:#f29668;">&amp;</span><span>conn)</span><span style="color:#bfbab0cc;">;
+</span><span>    Json(</span><span style="color:#f07178;">json!</span><span>({
+</span><span>        </span><span style="color:#c2d94c;">&quot;status&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">200</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#bfbab0cc;">:</span><span> users</span><span style="color:#bfbab0cc;">,
+</span><span>    }))
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">post</span><span>(</span><span style="color:#c2d94c;">&quot;/newUser&quot;</span><span style="color:#bfbab0cc;">,</span><span> format </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;application/json&quot;</span><span style="color:#bfbab0cc;">,</span><span> data </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;&lt;new_user&gt;&quot;</span><span>)]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new_user</span><span>(</span><span style="color:#f29718;">conn</span><span style="color:#bfbab0cc;">:</span><span> DbConn, </span><span style="color:#f29718;">new_user</span><span style="color:#bfbab0cc;">: </span><span>Json&lt;NewUser&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Json&lt;Value&gt; {
+</span><span>    Json(</span><span style="color:#f07178;">json!</span><span>({
+</span><span>        </span><span style="color:#c2d94c;">&quot;status&quot;</span><span style="color:#bfbab0cc;">: </span><span>User</span><span style="color:#f29668;">::</span><span>insert_user(new_user</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_inner</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>conn)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#bfbab0cc;">: </span><span>User</span><span style="color:#f29668;">::</span><span>get_all_users(</span><span style="color:#f29668;">&amp;</span><span>conn)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">first</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    }))
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">post</span><span>(</span><span style="color:#c2d94c;">&quot;/getUser&quot;</span><span style="color:#bfbab0cc;">,</span><span> format </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;application/json&quot;</span><span style="color:#bfbab0cc;">,</span><span> data </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;&lt;user_data&gt;&quot;</span><span>)]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">find_user</span><span>(</span><span style="color:#f29718;">conn</span><span style="color:#bfbab0cc;">:</span><span> DbConn, </span><span style="color:#f29718;">user_data</span><span style="color:#bfbab0cc;">: </span><span>Json&lt;UserData&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Json&lt;Value&gt; {
+</span><span>    Json(</span><span style="color:#f07178;">json!</span><span>({
+</span><span>        </span><span style="color:#c2d94c;">&quot;status&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">200</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;result&quot;</span><span style="color:#bfbab0cc;">: </span><span>User</span><span style="color:#f29668;">::</span><span>get_user_by_username(user_data</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_inner</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>conn)</span><span style="color:#bfbab0cc;">,
+</span><span>    }))
+</span><span>}
+</span></code></pre>
+<p>Теперь все, что нам нужно сделать, это настроить пул соединений. Вот краткое объяснение пула соединений из документации Rocket.</p>
+<blockquote>
+<p>Rocket включает встроенную, не зависящую от ORM поддержку баз данных. В частности, Rocket предоставляет процедурный макрос, который позволяет легко подключать приложение Rocket к базам данных через пулы соединений. Пул соединений с базой данных - это структура данных, которая поддерживает активные соединения с базой данных для последующего использования в приложении. </p>
+</blockquote>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>diesel</span><span style="color:#f29668;">::</span><span>pg</span><span style="color:#f29668;">::</span><span>PgConnection</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use</span><span> r2d2</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>r2d2_diesel</span><span style="color:#f29668;">::</span><span>ConnectionManager</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>rocket</span><span style="color:#f29668;">::</span><span>http</span><span style="color:#f29668;">::</span><span>Status</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>rocket</span><span style="color:#f29668;">::</span><span>request</span><span style="color:#f29668;">::</span><span>{</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#bfbab0cc;">,</span><span> FromRequest}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>rocket</span><span style="color:#f29668;">::</span><span>{Outcome</span><span style="color:#bfbab0cc;">,</span><span> Request</span><span style="color:#bfbab0cc;">,</span><span> State}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>ops</span><span style="color:#f29668;">::</span><span>Deref</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">pub type </span><span style="color:#59c2ff;">Pool </span><span style="color:#f29668;">= </span><span>r2d2</span><span style="color:#f29668;">::</span><span>Pool&lt;ConnectionManager&lt;PgConnection&gt;&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">init_pool</span><span>(</span><span style="color:#f29718;">db_url</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Pool {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> manager </span><span style="color:#f29668;">= </span><span>ConnectionManager</span><span style="color:#f29668;">::</span><span>&lt;PgConnection&gt;</span><span style="color:#f29668;">::</span><span>new(db_url)</span><span style="color:#bfbab0cc;">;
+</span><span>    r2d2</span><span style="color:#f29668;">::</span><span>Pool</span><span style="color:#f29668;">::</span><span>new(manager)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;db pool failure&quot;</span><span>)
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Conn</span><span>(pub r2d2</span><span style="color:#f29668;">::</span><span>PooledConnection&lt;ConnectionManager&lt;PgConnection&gt;&gt;)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, </span><span style="color:#ff7733;">&#39;r</span><span>&gt; FromRequest&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, </span><span style="color:#ff7733;">&#39;r</span><span>&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Conn </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Error </span><span style="color:#f29668;">=</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from_request</span><span>(</span><span style="color:#f29718;">request</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>Request&lt;</span><span style="color:#ff7733;">&#39;r</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>request</span><span style="color:#f29668;">::</span><span>Outcome&lt;Conn,()&gt; {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> pool </span><span style="color:#f29668;">=</span><span> request</span><span style="color:#f29668;">.</span><span>guard</span><span style="color:#f29668;">::</span><span>&lt;State&lt;Pool&gt;&gt;()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">match</span><span> pool</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>() {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(conn) </span><span style="color:#f29668;">=&gt; </span><span>Outcome</span><span style="color:#f29668;">::</span><span>Success(Conn(conn))</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span>Outcome</span><span style="color:#f29668;">::</span><span>Failure((Status</span><span style="color:#f29668;">::</span><span>ServiceUnavailable</span><span style="color:#bfbab0cc;">,</span><span>()))</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Deref </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Conn </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Target </span><span style="color:#f29668;">=</span><span> PgConnection</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">inline</span><span>(always)]
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">deref</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Target {
+</span><span>        </span><span style="color:#f29668;">&amp;</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Наконец, нам нужно запустить наш сервер в основном файле. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">feature</span><span>(plugin</span><span style="color:#bfbab0cc;">,</span><span> const_fn</span><span style="color:#bfbab0cc;">,</span><span> decl_macro</span><span style="color:#bfbab0cc;">,</span><span> proc_macro_hygiene)]
+</span><span style="color:#bfbab0cc;">#!</span><span>[</span><span style="color:#ffb454;">allow</span><span>(proc_macro_derive_resolution_fallback</span><span style="color:#bfbab0cc;">,</span><span> unused_attributes)]
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> diesel</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> rocket</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> serde_derive</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> serde_json</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">use </span><span>dotenv</span><span style="color:#f29668;">::</span><span>dotenv</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>env</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>routes</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>process</span><span style="color:#f29668;">::</span><span>Command</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">db</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">models</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">routes</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">schema</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">rocket</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span>rocket</span><span style="color:#f29668;">::</span><span>Rocket {
+</span><span>    </span><span style="color:#f07178;">dotenv</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">ok</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> database_url </span><span style="color:#f29668;">= </span><span>env</span><span style="color:#f29668;">::</span><span>var(</span><span style="color:#c2d94c;">&quot;DATABASE_URL&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;set DATABASE_URL&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> pool </span><span style="color:#f29668;">= </span><span>db</span><span style="color:#f29668;">::</span><span>init_pool(database_url)</span><span style="color:#bfbab0cc;">;
+</span><span>    rocket</span><span style="color:#f29668;">::</span><span>ignite()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">manage</span><span>(pool)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">mount</span><span>(
+</span><span>            </span><span style="color:#c2d94c;">&quot;/api/v1/&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#f07178;">routes!</span><span>[get_all</span><span style="color:#bfbab0cc;">,</span><span> new_user</span><span style="color:#bfbab0cc;">,</span><span> find_user]</span><span style="color:#bfbab0cc;">,
+</span><span>        )
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> _output </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">if </span><span style="color:#f07178;">cfg!</span><span>(target_os </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;windows&quot;</span><span>) {
+</span><span>        Command</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;cmd&quot;</span><span>)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">args</span><span>(</span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#c2d94c;">&quot;/C&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;cd ui &amp;&amp; npm start&quot;</span><span>])
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">spawn</span><span>()
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Failed to start UI Application&quot;</span><span>)
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        Command</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;sh&quot;</span><span>)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">arg</span><span>(</span><span style="color:#c2d94c;">&quot;-c&quot;</span><span>)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">arg</span><span>(</span><span style="color:#c2d94c;">&quot;cd ui &amp;&amp; npm start&quot;</span><span>)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">spawn</span><span>()
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Failed to start UI Application&quot;</span><span>)
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">rocket</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">launch</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Внутри моего проекта я также добавил интерфейс Angular. Я также буду использовать нашу серверную часть Rust, чтобы обслуживать его.</p>
+<p>Для запуска приложения → Cargo run.</p>
+<p><img src="/imgs/posts/f82f7d6e_02.png" alt="" /></p>
+<p>Давайте протестируем наш сервер с помощью Insomnia.</p>
+<p><img src="/imgs/posts/f82f7d6e_03.png" alt="" /></p>
+<p>Надеюсь, это поможет. Ваше здоровье! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

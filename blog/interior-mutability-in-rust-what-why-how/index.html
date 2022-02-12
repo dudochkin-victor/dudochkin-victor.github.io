@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Внутренняя изменчивость в Rust: что, почему, как? | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#vvedenie">Введение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#chto">Что?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#kak">Как?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#pochemu">Почему?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#vvedenie-izmenchivosti-vnutri-chego-to-neizmennogo"><small>- Введение изменчивости внутри чего-то неизменного</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#mutiruiushchie-realizatsii-clone"><small>- Мутирующие реализации Clone</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#detali-realizatsii-logicheski-neizmeniaemykh-metodov"><small>- Детали реализации логически неизменяемых методов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#mutiruiushchie-peremennye-so-schetchikom-ssylok"><small>- Мутирующие переменные со счетчиком ссылок</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#chto-vybrat">Что выбрать?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/interior-mutability-in-rust-what-why-how/#wrapping-up">Wrapping up</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Внутренняя изменчивость в Rust: что, почему, как?</h1>
+
+<p><a href="https://ricardomartins.cc/2016/06/08/interior-mutability">Перевод</a> | Автор оригинала: Ricardo Martins</p>
+<blockquote>
+<p>Rust похожа на паркур, подвешенный на струнах и в защитном снаряжении. Да, иногда это будет выглядеть немного нелепо, но вы сможете делать всевозможные крутые движения, не причинив себе вреда. - llogiq на Reddit</p>
+</blockquote>
+<p>Ключевые выводы</p>
+<ul>
+<li>Внутренняя изменчивость - это когда у вас есть неизменяемая ссылка (&amp;T), но вы можете изменить место назначения</li>
+<li>Это полезно, когда вам нужны изменяемые поля внутри неизменяемых структур данных.</li>
+<li>std::cell::Cell<T> и std::cell::RefCell<T> можно использовать для достижения внутренней изменчивости</li>
+<li>Ячейка обертывает Копирование значений и не имеет проверки заимствования</li>
+<li>RefCell оборачивает любые значения, имеет проверку заимствования во время выполнения и требует «блокировки» с помощью заимствования или заимствования_mut, которые дают вам неизменяемую или изменяемую ссылку, соответственно.</li>
+<li>Ни один из них не безопасен для непосредственного использования в многопоточной среде. Вместо этого используйте Mutex или RwLock.</li>
+</ul>
+<p>Эта статья является частью серии о внутренней изменчивости в Rust. Вы можете прочитать часть 2 здесь и часть 3 здесь.</p>
+<h2 id="vvedenie">Введение</h2>
+<p>Иногда структурам данных необходимо изменить одно или несколько своих полей, даже если они объявлены неизменяемыми. Сначала это может показаться удивительным, но вы, вероятно, раньше полагались на это поведение, например, когда вы клонируете оболочку с подсчетом ссылок, такую как Rc, или когда вы блокируете мьютекс. Однако в Rust изменчивость - это атрибут «все или ничего»: либо переменная объявлена как изменяемая, и все ее поля также изменяемы (если это структура), либо она объявлена неизменной, как и все ее поля. Как добиться селективной изменчивости поля? Что-то загадочное происходит.</p>
+<p>Вы когда-нибудь задумывались, как реализован Rc? Давай попробуем! Наивное первое решение было бы примерно таким: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">NaiveRc</span><span>&lt;T&gt; {
+</span><span>    reference_count</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    inner_value</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Clone </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">NaiveRc</span><span>&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">clone</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>reference_count </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Вероятно, вы сразу заметили проблему: clone принимает ссылку только для чтения на себя, поэтому счетчик ссылок не может быть обновлен! Трэйт возьми.</p>
+<p>Мы могли бы реализовать специальную функцию клонирования с другим именем, которая принимает &amp;mut self, но это ужасно для удобства использования (потому что это противоречит соглашению о простой проверке того, реализует ли тип Clone) и заставляет пользователя нашего API всегда объявлять изменяемые экземпляры. такого типа. Мы также знаем, что оболочки с подсчетом ссылок в стандартной библиотеке (std::rc::Rc и std::sync::Arc) не полагаются на это решение, что предполагает другой способ.</p>
+<p>Итак, как они решили эту проблему в Rc и Arc? Стандартная библиотека полагается на какую-то особо неприятную магию? Нисколько!</p>
+<p>Это пример внутренней изменчивости, и язык Rust предоставляет вам инструменты, позволяющие легко и четко решить подобные ситуации.</p>
+<h2 id="chto">Что?</h2>
+<p>Внутренняя изменчивость - это концепция, с которой многие программисты, плохо знакомые с Rust, никогда раньше не сталкивались или даже не задумывались над этим. Это также более заметно в Rust, чем в большинстве других языков программирования, потому что мы должны думать об изменчивости переменных и аргументов функций. Это становится еще более очевидным, когда мы смотрим на неизменяемый и изменяемый как общий и монопольный доступ к объектам. Невысказанная эвристика состоит в том, что избегать изменчивости, когда это возможно, - это хорошо.</p>
+<p>И все же в некоторых случаях вам нужно несколько изменяемых полей в структурах данных, независимо от того, являются ли они изменяемыми или нет. Внутренняя изменчивость дает вам дополнительную гибкость и позволяет скрыть детали реализации от пользователя вашего API, сохраняя при этом (в некоторой степени) безопасность доступа.</p>
+<p>Чтобы объяснить, что такое внутренняя изменчивость, лучше немного отступить и начать с того, что вам знакомо: внешней изменчивости.</p>
+<p>Внешняя изменчивость - это вид изменяемости, который вы получаете из изменяемых ссылок (&amp;mut T). Тип объявления, &amp;T или &amp;mut T, дает понять, можете ли вы обновлять переменную или вызывать методы изменения для объектов. Как вы знаете, внешняя изменчивость проверяется и применяется во время компиляции: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Foo </span><span>{ x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> foo </span><span style="color:#f29668;">=</span><span> Foo { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// The borrow checker will complain about this and abort compilation
+</span><span>foo</span><span style="color:#f29668;">.</span><span>x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let mut</span><span> bar </span><span style="color:#f29668;">=</span><span> Foo { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// &#39;bar&#39; is mutable, so you can change the content of any of its fields
+</span><span>bar</span><span style="color:#f29668;">.</span><span>x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Если у вас есть неизменяемая ссылка, вы не можете изменить значение. И наоборот, поскольку в Rust нет изменяемости на уровне полей, если вы хотите изменить одно поле, вам нужно сделать изменяемой всю структуру, и все. Либо это? Не так быстро.</p>
+<p>Напротив, внутренняя изменчивость - это когда у вас есть неизменяемая ссылка (например, &amp;T), но вы можете изменять структуру данных. Как я упоминал ранее, вот что происходит, когда вы клонируете Rc или блокируете Mutex (и Mutex::lock, и Mutex::try_lock работают в неизменяемых экземплярах).</p>
+<p>Простой пример прояснит разницу. Предположим, у нас есть простая структура, подобная следующей: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Point </span><span>{ x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>, y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32 </span><span>}
+</span></code></pre>
+<p>Неизменяемый Point можно рассматривать как неизменяемый фрагмент памяти, в полях которого (разделах фрагмента памяти) вообще нельзя изменять свое содержимое. Когда вы объявляете неизменный Point, ваши руки связаны.</p>
+<p>Рассмотрим теперь немного другой MagicPoint с магическими улучшениями: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">MagicPoint </span><span>{ x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>, y</span><span style="color:#bfbab0cc;">: </span><span>Magic&lt;</span><span style="color:#ff7733;">i32</span><span>&gt; }
+</span></code></pre>
+<p><img src="/imgs/posts/0b5ea796_01.png" alt="Point и MagicPoint" /></p>
+<p>Пока не обращайте внимания на то, как работает Magic, и думайте об этом как об указателе на изменяемый адрес памяти, о новом уровне косвенного обращения. Как и раньше, если у вас есть неизменяемый MagicPoint, вы не можете назначать новые значения ни одному из его полей. Однако в этом случае вам не нужно изменять содержимое y, только место назначения этого волшебного указателя, то есть другой фрагмент памяти, и этот фрагмент является изменяемым! 1</p>
+<p>Чтобы было ясно, даже несмотря на то, что API для Magic создаст впечатление, будто вы полагаетесь на косвенный доступ для доступа и обновления обернутого значения, представление MagicPoint в памяти на самом деле будет плоским.</p>
+<p>Обратите внимание: когда вы полагаетесь на внутреннюю изменчивость, вы отказываетесь от гарантий безопасности времени компиляции, которые дает вам внешняя изменчивость. Как мы увидим дальше, все не так уж плохо, если вы будете осторожны.</p>
+<h2 id="kak">Как?</h2>
+<p>Итак, как мы можем получить волшебные изменяемые указатели? К счастью для нас, стандартная библиотека Rust предоставляет две оболочки, std::cell::Cell и std::cell::RefCell, которые позволяют нам вводить внутреннюю изменчивость во внешне неизменяемые экземпляры структур данных. С Cell<T> и RefCell<T> в наших коллективных наборах инструментов мы можем использовать силу внутренней изменчивости.</p>
+<p>Обе оболочки обеспечивают внутреннюю изменчивость и отказываются от проверки внутреннего значения во время компиляции, но дают разные гарантии безопасности и служат разным целям. Наиболее очевидное различие между ними состоит в том, что RefCell выполняет проверки заимствования во время выполнения, а Cell - нет.</p>
+<p>Cell довольно прост в использовании: вы можете читать и записывать внутреннее значение Cell, вызывая для него get или set. Поскольку здесь нет проверок во время компиляции или выполнения, вы должны быть осторожны, чтобы избежать некоторых ошибок, которые программа проверки заимствований может остановить вас от записи, таких как случайная перезапись обернутого значения: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>cell</span><span style="color:#f29668;">::</span><span>Cell</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>(</span><span style="color:#f29718;">cell</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Cell&lt;</span><span style="color:#ff7733;">u32</span><span>&gt;) {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> cell</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    cell</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(value </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> cell </span><span style="color:#f29668;">= </span><span>Cell</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">0</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> cell</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> new_value </span><span style="color:#f29668;">=</span><span> cell</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>() </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">foo</span><span>(</span><span style="color:#f29668;">&amp;</span><span>cell)</span><span style="color:#bfbab0cc;">;
+</span><span>    cell</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(new_value)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// oops, we clobbered the work done by foo
+</span><span>}
+</span></code></pre>
+<p>Напротив, RefCell требует, чтобы вы вызывали заимствование или заимствование_mut (неизменяемые и изменяемые заимствования) перед его использованием, давая указатель на значение. Его семантика заимствования идентична внешне изменяемым переменным: вы можете иметь либо изменяемое заимствование внутреннего значения, либо несколько неизменяемых заимствований, поэтому тип ошибки, о которой я упоминал ранее, обнаруживается во время выполнения. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>cell</span><span style="color:#f29668;">::</span><span>Cell</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">NaiveRc</span><span>&lt;T&gt; {
+</span><span>    inner_value</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>    references</span><span style="color:#bfbab0cc;">: </span><span>Cell&lt;</span><span style="color:#ff7733;">usize</span><span>&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T&gt; </span><span style="color:#59c2ff;">NaiveRc</span><span>&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">inner</span><span style="color:#bfbab0cc;">:</span><span> T) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        NaiveRc {
+</span><span>            inner_value</span><span style="color:#bfbab0cc;">:</span><span> inner</span><span style="color:#bfbab0cc;">,
+</span><span>            references</span><span style="color:#bfbab0cc;">: </span><span>Cell</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">references</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>references</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>()
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Clone</span><span>&gt; Clone </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">NaiveRc</span><span>&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">clone</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>references</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>references</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>() </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        NaiveRc {
+</span><span>            inner_value</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>inner_value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>            references</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>references</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> wrapped </span><span style="color:#f29668;">= </span><span>NaiveRc</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;Hello!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;references before cloning: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> wrapped</span><span style="color:#f29668;">.</span><span style="color:#f07178;">references</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> wrapped_clone </span><span style="color:#f29668;">=</span><span> wrapped</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;references after cloning: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> wrapped</span><span style="color:#f29668;">.</span><span style="color:#f07178;">references</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;clone references: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> wrapped_clone</span><span style="color:#f29668;">.</span><span style="color:#f07178;">references</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вызов заимствования или заимствования_mut для изменяемого заимствования RefCell вызовет панику, как и вызов заимствования_mut для неизменяемого заимствованного значения. Этот аспект делает RefCell непригодным для использования в параллельном сценарии; вместо этого вам следует использовать потокобезопасный тип (например, Mutex или RwLock).</p>
+<p>RefCell будет оставаться «заблокированным» до тех пор, пока полученный вами указатель не выйдет за пределы области видимости, поэтому вы можете захотеть объявить новую область видимости блока (например, {...}) при работе с заимствованным значением или даже явно отбросить заимствованное. цените, когда вы закончите с этим, чтобы избежать неприятных сюрпризов.</p>
+<p>Еще одно существенное различие между Cell и RefCell заключается в том, что Cell<T> требует, чтобы внутреннее значение T реализовывало Copy, тогда как RefCell<T> не имеет такого ограничения. Часто вам не нужно копировать семантику для ваших обернутых типов, поэтому вам придется использовать RefCell.</p>
+<p>Короче говоря, Cell имеет семантику копирования и предоставляет значения, а RefCell имеет семантику перемещения и предоставляет ссылки.</p>
+<h2 id="pochemu">Почему?</h2>
+<p>Есть несколько общих случаев, требующих внутренней изменчивости, например:</p>
+<ol>
+<li>Введение изменчивости внутри чего-то неизменного</li>
+<li>Мутирующие реализации Clone</li>
+<li>Детали реализации логически неизменяемых методов.</li>
+<li>Преобразование переменных с подсчетом ссылок</li>
+</ol>
+<h3 id="vvedenie-izmenchivosti-vnutri-chego-to-neizmennogo">Введение изменчивости внутри чего-то неизменного</h3>
+<p>Возвращаясь к примеру NaiveRc во введении, указатели подсчета ссылок, такие как Rc и Arc, нуждаются во внутренней изменчивости. Когда вы клонируете эти указатели, счетчик ссылок внутри них должен быть обновлен независимо от того, являются ли они изменяемыми или нет. Без внутренней изменчивости вы были бы вынуждены всегда использовать изменяемые указатели, которые допускали бы изменение внутреннего значения и могут быть нежелательными.</p>
+<p>Например, рассмотрим следующую наивную оболочку с подсчетом ссылок: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>cell</span><span style="color:#f29668;">::</span><span>Cell</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">NaiveRc</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, T</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">&#39;a</span><span>&gt; {
+</span><span>    inner_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> T,
+</span><span>    references</span><span style="color:#bfbab0cc;">: </span><span>Cell&lt;</span><span style="color:#ff7733;">usize</span><span>&gt;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">=</span><span> NaiveRc { inner_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> references</span><span style="color:#bfbab0cc;">: </span><span>Cell</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">1</span><span>) }</span><span style="color:#bfbab0cc;">;
+</span><span>x</span><span style="color:#f29668;">.</span><span>references</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(</span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// it works!
+</span><span>x</span><span style="color:#f29668;">.</span><span>inner_value </span><span style="color:#f29668;">= &amp;</span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;  </span><span style="font-style:italic;color:#5c6773;">// beep boop, x is immutable,
+</span><span>                     </span><span style="font-style:italic;color:#5c6773;">// you can&#39;t assign a new value to any of its fields!
+</span></code></pre>
+<h3 id="mutiruiushchie-realizatsii-clone">Мутирующие реализации Clone</h3>
+<p>Еще во введении мы заметили, что клонирование значения со счетчиком ссылок (Rc<T>) требует увеличения счетчика ссылок. Это просто частный случай предыдущего пункта, но он заслуживает повторения.</p>
+<p>С другой стороны, удаление такого значения требует уменьшения счетчика ссылок, но drop работает с изменяемыми ссылками (fn drop (&amp;mut self)), так что здесь нет никаких проблем.</p>
+<h3 id="detali-realizatsii-logicheski-neizmeniaemykh-metodov">Детали реализации логически неизменяемых методов</h3>
+<p>Например, вы можете захотеть амортизировать время работы дорогостоящего алгоритма, работающего с вашей структурой данных, используя кеш внутри него. Кэш должен иметь возможность обновляться, даже если сама структура данных неизменна.</p>
+<h3 id="mutiruiushchie-peremennye-so-schetchikom-ssylok">Мутирующие переменные со счетчиком ссылок</h3>
+<p>Предположим, нам нужно несколько ссылок на некоторые объекты. Например, при соединении узлов в графе. «О, это просто», - думаете вы. «Я просто заверну свои узлы в Rc или Arc и закончу». Это вполне разумная линия, и она сработает ... если вам никогда не понадобится изменять узлы. Как только вы попытаетесь построить граф, постепенно добавляя и соединяя узлы, компилятор вас огорчит. О нет, что происходит? К сожалению для нас, Rc сохраняет безопасность, предоставляя вам только общие (т. Е. Неизменяемые) ссылки, когда вы вызываете clone. Процитируйте документацию модуля std::rc:</p>
+<blockquote>
+<p>Тип Rc<T> обеспечивает совместное владение неизменным значением. Уничтожение детерминировано и произойдет, как только уйдет последний владелец.</p>
+</blockquote>
+<p>Вы можете вызвать get_mut, чтобы получить Option&lt;&amp;mut T&gt;, но это сработает только один раз: get_mut возвращает только изменяемую ссылку, как если бы есть только одна «сильная» ссылка на значение.</p>
+<p>К счастью, здесь можно использовать внутреннюю изменчивость: используйте Rc &lt;Cell<T>&gt; или Rc &lt;RefCell<T>&gt;. Таким образом, вы можете клонировать оболочку с подсчетом ссылок столько, сколько захотите, и при этом изменять самое внутреннее значение, заключенное в оболочку Cell или RefCell.</p>
+<p>Вы можете увидеть первую попытку решения в этом примере на Rust Playground. Как видите, проблема решена, но решение многословное и некрасивое. Мало того, пользователь нашего API знает детали реализации! Что дает? Где элегантная абстракция, которую я обещал несколькими абзацами выше?</p>
+<p>Теперь, когда вы увидели и поняли, как это работает, я могу показать вам более понятную версию: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>cell</span><span style="color:#f29668;">::</span><span>RefCell</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>rc</span><span style="color:#f29668;">::</span><span>Rc</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// A graph can be represented in several ways. For the sake of illustrating how
+</span><span style="font-style:italic;color:#5c6773;">// interior mutability works in practice, let&#39;s go with the simplest
+</span><span style="font-style:italic;color:#5c6773;">// representation: a list of nodes.
+</span><span style="font-style:italic;color:#5c6773;">// Each node has an inner value and a list of adjacent nodes it is connected to
+</span><span style="font-style:italic;color:#5c6773;">// (through a directed edge).
+</span><span style="font-style:italic;color:#5c6773;">// That list of adjacent nodes cannot be the exclusive owner of those nodes, or
+</span><span style="font-style:italic;color:#5c6773;">// else each node would have at most one edge to another node and the graph
+</span><span style="font-style:italic;color:#5c6773;">// couldn&#39;t also own these nodes.
+</span><span style="font-style:italic;color:#5c6773;">// We need to wrap Node with a reference-counted box, such as Rc or Arc. We&#39;ll
+</span><span style="font-style:italic;color:#5c6773;">// go with Rc, because this is a toy example.
+</span><span style="font-style:italic;color:#5c6773;">// However, Rc&lt;T&gt; and Arc&lt;T&gt; enforce memory safety by only giving out shared
+</span><span style="font-style:italic;color:#5c6773;">// (i.e., immutable) references to the wrapped object, and we need mutability to
+</span><span style="font-style:italic;color:#5c6773;">// be able to connect nodes together.
+</span><span style="font-style:italic;color:#5c6773;">// The solution for this problem is wrapping Node in either Cell or RefCell, to
+</span><span style="font-style:italic;color:#5c6773;">// restore mutability. We&#39;re going to use RefCell because Node&lt;T&gt; doesn&#39;t
+</span><span style="font-style:italic;color:#5c6773;">// implement Copy (we don&#39;t want to have independent copies of nodes!).
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Represents a reference to a node.
+</span><span style="font-style:italic;color:#5c6773;">// This makes the code less repetitive to write and easier to read.
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">NodeRef</span><span style="color:#f29668;">&lt;</span><span>T</span><span style="color:#f29668;">&gt; = </span><span>Rc&lt;RefCell&lt;_Node&lt;T&gt;&gt;&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The private representation of a node.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">_Node</span><span>&lt;T&gt; {
+</span><span>    inner_value</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>    adjacent</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;NodeRef&lt;T&gt;&gt;,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The public representation of a node, with some syntactic sugar.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Node</span><span>&lt;T&gt;(NodeRef&lt;T&gt;)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T&gt; </span><span style="color:#59c2ff;">Node</span><span>&lt;T&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Creates a new node with no edges.
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">inner</span><span style="color:#bfbab0cc;">:</span><span> T) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Node&lt;T&gt; {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> node </span><span style="color:#f29668;">=</span><span> _Node { inner_value</span><span style="color:#bfbab0cc;">:</span><span> inner</span><span style="color:#bfbab0cc;">,</span><span> adjacent</span><span style="color:#bfbab0cc;">: </span><span style="color:#f07178;">vec!</span><span>[] }</span><span style="color:#bfbab0cc;">;
+</span><span>        Node(Rc</span><span style="color:#f29668;">::</span><span>new(RefCell</span><span style="color:#f29668;">::</span><span>new(node)))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Adds a directed edge from this node to other node.
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">other</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Node&lt;T&gt;) {
+</span><span>        (</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">borrow_mut</span><span>())</span><span style="color:#f29668;">.</span><span>adjacent</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(other</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">clone</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Graph</span><span>&lt;T&gt; {
+</span><span>    nodes</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Node&lt;T&gt;&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T&gt; </span><span style="color:#59c2ff;">Graph</span><span>&lt;T&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">with_nodes</span><span>(</span><span style="color:#f29718;">nodes</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Node&lt;T&gt;&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        Graph { nodes</span><span style="color:#bfbab0cc;">:</span><span> nodes }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Create some nodes
+</span><span>    </span><span style="color:#ff7733;">let</span><span> node_1 </span><span style="color:#f29668;">= </span><span>Node</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> node_2 </span><span style="color:#f29668;">= </span><span>Node</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> node_3 </span><span style="color:#f29668;">= </span><span>Node</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">3</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Connect some of the nodes (with directed edges)
+</span><span>    node_1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span>node_2)</span><span style="color:#bfbab0cc;">;
+</span><span>    node_1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span>node_3)</span><span style="color:#bfbab0cc;">;
+</span><span>    node_2</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span>node_1)</span><span style="color:#bfbab0cc;">;
+</span><span>    node_3</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add_adjacent</span><span>(</span><span style="color:#f29668;">&amp;</span><span>node_1)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Add nodes to graph
+</span><span>    </span><span style="color:#ff7733;">let</span><span> graph </span><span style="color:#f29668;">= </span><span>Graph</span><span style="color:#f29668;">::</span><span>with_nodes(</span><span style="color:#f07178;">vec!</span><span>[node_1</span><span style="color:#bfbab0cc;">,</span><span> node_2</span><span style="color:#bfbab0cc;">,</span><span> node_3])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Show every node in the graph and list their neighbors
+</span><span>    </span><span style="color:#ff7733;">for</span><span> node </span><span style="color:#f29668;">in</span><span> graph</span><span style="color:#f29668;">.</span><span>nodes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span>| n</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">borrow</span><span>()) {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> node</span><span style="color:#f29668;">.</span><span>inner_value</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> neighbours </span><span style="color:#f29668;">=</span><span> node</span><span style="color:#f29668;">.</span><span>adjacent</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">n</span><span>| n</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#f29668;">.</span><span>inner_value)
+</span><span>            </span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt;&gt;()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;node (</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">) is connected to: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> value</span><span style="color:#bfbab0cc;">,</span><span> neighbours)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Если вы проигнорируете цикл, который распечатывает информацию о графике, теперь пользователь не знает, как реализован узел. Удобство использования этой версии еще можно улучшить, реализовав, например, свойство std::fmt::Debug для Node и Graph.</p>
+<p>Вы можете поиграть с этим примером в Rust Playground. Попробуйте сами изменить что-нибудь! Я считаю, что сломанные вещи помогают мне закрепить новые знания. Я предлагаю:</p>
+<ol>
+<li>Замена RefCell на Cell</li>
+<li>Удаление RefCell и использование Rc &lt;Node<T>&gt;</li>
+<li>Удаление Rc и использование RefCell &lt;Node<T>&gt;</li>
+</ol>
+<p>Вы также можете попробовать заменить Rc на Arc, но вы не заметите ничего другого. Arc - это поточно-ориентированная версия Rc, которая требует снижения производительности и не имеет смысла в однопоточных программах.</p>
+<p>Альтернативное решение может включать в себя обертывание вектора соседнего узла в RefCell вместо обертывания самого узла. Это также может работать, в зависимости от того, что вы собираетесь делать, но семантически отличается от предыдущего решения, так как вы не сможете изменить внутреннее значение узла в дополнение к его списку соседних узлов.</p>
+<h2 id="chto-vybrat">Что выбрать?</h2>
+<p>Если RefCell может взорваться вам прямо в лицо, и его нельзя использовать «в чистом виде» в многопоточной программе, зачем его использовать?</p>
+<p>Хотя Cell является хорошим выбором во многих случаях, есть несколько причин, по которым вы можете захотеть использовать RefCell:</p>
+<ol>
+<li>Обернутое значение не реализует Copy.</li>
+<li>Только RefCell имеет проверки во время выполнения. В некоторых случаях вы предпочтете убить программу, чем рискуете испортить данные.</li>
+<li>RefCell предоставляет указатели на сохраненное значение, Cell - нет.</li>
+</ol>
+<p>Как правило, выбирайте Cell, если ваше значение в оболочке реализует Copy (например, примитивные значения, такие как целые числа и числа с плавающей запятой). Если обернутое значение является структурой, не реализует Copy или вам нужны динамически проверяемые заимствования, используйте вместо этого RefCell. </p>
+<h2 id="wrapping-up">Wrapping up</h2>
+<table><thead><tr><th></th><th>Cell</th><th>RefCell</th></tr></thead><tbody>
+<tr><td>Semantics</td><td>Copy</td><td>Move</td></tr>
+<tr><td>Provides</td><td>Values</td><td>References</td></tr>
+<tr><td>Panics?</td><td>Never</td><td>Mixed borrows or more than one mutable borrow</td></tr>
+<tr><td>Use with</td><td>Primitive types</td><td>Structures or non-Copy types</td></tr>
+</tbody></table>
+<p>В приведенной выше таблице обобщено то, что вы узнали из этого сообщения в блоге.</p>
+<p>Надеюсь, вы нашли эту статью полезной и/или интересной. Как всегда, если вы обнаружили ошибку или у вас есть какие-либо вопросы, напишите мне в Twitter (@meqif) или отправьте мне электронное письмо (words@ricardomartins.cc). Вы также можете присоединиться к обсуждению на Reddit.</p>
+<p>Как любезно отметили Стив Клабник, /u/crisiqjo и /u/birkenfield, Mutex и RwLock уже имеют внутреннюю изменчивость, поэтому нет необходимости помещать в них Cell. В многопоточных сценариях следует использовать Mutex и RwLock без дополнительных Cell или RefCell.</p>
+<p>/u/krdln предложил альтернативную реализацию графа выше.</p>
+<ol>
+<li>
+<p>Если вы знакомы с C и это напоминает вам константные указатели (значение которых также не может измениться, но содержимое целевого адреса памяти может), вы на правильном пути. y будет чем-то вроде int * const.</p>
+</li>
+<li>
+<p>Я действительно не хочу сейчас вдаваться в подробности о сильных и слабых ссылках. Достаточно сказать, что сильные ссылки предотвращают уничтожение объектов, а слабые - нет. </p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

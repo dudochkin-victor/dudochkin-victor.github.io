@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Использование Web3.js | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-web3/#introduction">Introduction </a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-web3/#checking-prerequisites"><small>- Checking Prerequisites </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-web3/#creating-transaction"><small>- Creating Transaction </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-web3/#check-balance-on-accounts"><small>- Check balance on accounts </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-web3/#play-time"><small>- Play time </small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-web3/#reach-us-for-more-engagement"><small>- Reach us for more engagement </small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Использование Web3.js</h1>
+
+<h2 id="introduction">Introduction <a id="introduction"></a></h2>
+<p>This guide walks through the process of using Web3 to manually sign and send a transaction to an Edgeware EVM dev node. For this example, we will use Node.js and straightforward JavaScript code.</p>
+<blockquote>
+<p><strong>Note</strong> This tutorial was created using the release of Edgeware EVM. The Edgeware EVM platform, and the <a href="https://github.com/paritytech/frontier">Frontier</a> components it relies on for Substrate-based Ethereum compatibility, are still under very active development. We have created this tutorial so you can test out Edgeware's Ethereum compatibility features. Even though we are still in development, we believe it’s important that interested community members and developers have the opportunity to start to try things with Edgeware and provide feedback.</p>
+</blockquote>
+<h3 id="checking-prerequisites">Checking Prerequisites <a id="checking-prerequisities"></a></h3>
+<p>Installed <a href="https://nodejs.org/en/">Nodejs</a> and a particular package manager like <a href="https://classic.yarnpkg.com/en/docs/install/#mac-stable">yarn</a> or <a href="https://www.npmjs.com/get-npm">npm</a>, rest we have batteries included in this tutorial. This guide assumes that you have a <a href="https://docs.edgewa.re/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/setting-up-a-edgeware-evm-node">running local Edgeware EVM node running in <code>--dev</code> mode.</a>.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>git clone https://github.com/edgeware-builders/tutorials tutorials;cd tutorials/web3;yarn
+</span></code></pre>
+<p>It will move to your cloned repository, install required packages and you are ready to go!</p>
+<h3 id="creating-transaction">Creating Transaction <a id="creating-transaction"></a></h3>
+<p>For this example, we only need a single JavaScript file to create the transaction, which we will run using the <code>node</code> command in the terminal. The script will transfer 1337 ETH from the genesis account to another address. For simplicity, the file is divided into three sections: variable definition, create transactions, and broadcast transaction.</p>
+<p>We need to set a couple of values in the variables definitions:</p>
+<ul>
+<li>Create our Web3 constructor (<code>web3</code>)</li>
+<li>Define the <code>privKey</code> variable as the private key of our genesis account, which is where all the funds are stored when deploying your local Edgeware EVM node and what is used to sign the transactions</li>
+<li>Set the &quot;from&quot; and &quot;to&quot; address, making sure to set the value of <code>toAddress</code> to a different address, for example, the one created by Metamask when setting up a local wallet</li>
+</ul>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>Web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;web3&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// genesis private key
+</span><span style="color:#ff7733;">const </span><span>privKey </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;1111111111111111111111111111111111111111111111111111111111111111&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>addressFrom </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;0x19e7e376e7c213b7e7e7e46cc70a5dd086daff2a&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>addressTo </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;0x6bB5423f0Dd01B8C5028a1bc01e1f1bDe4523e72&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Web3</span><span>(</span><span style="color:#c2d94c;">&#39;http://localhost:9933/&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Both the <em>create transaction</em> and <em>deploy transaction</em> sections are wrapped in an asynchronous function that handles the promises from our Web3 instance. To create the transaction, we use the <code>web3.eth.accounts.signTransaction(tx, privKey)</code> command, where we have to define the tx object with some parameters such as: <code>addressFrom</code>, <code>addressTo</code>, <code>number of tokens to send</code>, and the <code>gas limit</code>.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span style="color:#ffb454;">deploy </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(
+</span><span>    </span><span style="color:#c2d94c;">`Attempting to make transaction from ${</span><span>addressFrom</span><span style="color:#c2d94c;">} to ${</span><span>addressTo</span><span style="color:#c2d94c;">}`
+</span><span>  )</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">const </span><span>createTransaction </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span>eth</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">signTransaction</span><span>(
+</span><span>    {
+</span><span>      from</span><span style="color:#bfbab0cc;">: </span><span>addressFrom</span><span style="color:#bfbab0cc;">,
+</span><span>      to</span><span style="color:#bfbab0cc;">: </span><span>addressTo</span><span style="color:#bfbab0cc;">,
+</span><span>      value</span><span style="color:#bfbab0cc;">: </span><span>web3</span><span style="color:#f29668;">.</span><span>utils</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toWei</span><span>(</span><span style="color:#c2d94c;">&#39;1337&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;ether&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>      gas</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">21000</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    privKey
+</span><span>  )</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Complete <code>createTransaction.js</code> should look like this!</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>Web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;web3&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// genesis private key
+</span><span style="color:#ff7733;">const </span><span>privKey </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;1111111111111111111111111111111111111111111111111111111111111111&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>addressFrom </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;0x19e7e376e7c213b7e7e7e46cc70a5dd086daff2a&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>addressTo </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;0x6bB5423f0Dd01B8C5028a1bc01e1f1bDe4523e72&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Web3</span><span>(</span><span style="color:#c2d94c;">&#39;http://localhost:9933/&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create transaction
+</span><span style="color:#ff7733;">const </span><span style="color:#ffb454;">deploy </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(
+</span><span>    </span><span style="color:#c2d94c;">`Attempting to make transaction from ${</span><span>addressFrom</span><span style="color:#c2d94c;">} to ${</span><span>addressTo</span><span style="color:#c2d94c;">}`
+</span><span>  )</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">const </span><span>createTransaction </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span>eth</span><span style="color:#f29668;">.</span><span>accounts</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">signTransaction</span><span>(
+</span><span>    {
+</span><span>      from</span><span style="color:#bfbab0cc;">: </span><span>addressFrom</span><span style="color:#bfbab0cc;">,
+</span><span>      to</span><span style="color:#bfbab0cc;">: </span><span>addressTo</span><span style="color:#bfbab0cc;">,
+</span><span>      value</span><span style="color:#bfbab0cc;">: </span><span>web3</span><span style="color:#f29668;">.</span><span>utils</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toWei</span><span>(</span><span style="color:#c2d94c;">&#39;1337&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;ether&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>      gas</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">21000</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    privKey
+</span><span>  )</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// Deploy transaction
+</span><span>  </span><span style="color:#ff7733;">const </span><span>createReceipt </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span>eth</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendSignedTransaction</span><span>(
+</span><span>    createTransaction</span><span style="color:#f29668;">.</span><span>rawTransaction
+</span><span>  )</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(
+</span><span>    </span><span style="color:#c2d94c;">`Transaction successful with hash: ${</span><span>createReceipt</span><span style="color:#f29668;">.</span><span>transactionHash</span><span style="color:#c2d94c;">}`
+</span><span>  )</span><span style="color:#bfbab0cc;">;
+</span><span>  process</span><span style="color:#f29668;">.</span><span style="color:#f07178;">exit</span><span>(</span><span style="color:#f29718;">0</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">deploy</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="check-balance-on-accounts">Check balance on accounts <a id="check-balance-on-accounts"></a></h3>
+<p>Before running the script, we need another file to check the balances of both addresses before and after the transaction is executed. We can easily do this by leveraging the Ethereum compatibility features of Edgeware.</p>
+<p><code>balances.js</code> looks like this:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>Web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;web3&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Variables definition
+</span><span style="color:#ff7733;">const </span><span>addressFrom </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;0x19e7e376e7c213b7e7e7e46cc70a5dd086daff2a&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>addressTo </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;0x6bB5423f0Dd01B8C5028a1bc01e1f1bDe4523e72&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Web3</span><span>(</span><span style="color:#c2d94c;">&#39;http://127.0.0.1:9933&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Balance call
+</span><span style="color:#ff7733;">const </span><span style="color:#ffb454;">balances </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>  </span><span style="color:#ff7733;">const </span><span>balanceFrom </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>utils</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromWei</span><span>(
+</span><span>    </span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span>eth</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getBalance</span><span>(addressFrom)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&#39;ether&#39;
+</span><span>  )</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">const </span><span>balanceTo </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span>utils</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromWei</span><span>(
+</span><span>    </span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span>eth</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getBalance</span><span>(addressTo)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&#39;ether&#39;
+</span><span>  )</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`The balance of ${</span><span>addressFrom</span><span style="color:#c2d94c;">} is: ${</span><span>balanceFrom</span><span style="color:#c2d94c;">} ETH.`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`The balance of ${</span><span>addressTo</span><span style="color:#c2d94c;">} is: ${</span><span>balanceTo</span><span style="color:#c2d94c;">} ETH.`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">balances</span><span>()</span><span style="color:#bfbab0cc;">;</span><span>Copy to clipboardErrorCopied
+</span></code></pre>
+<h3 id="play-time">Play time <a id="play-time"></a></h3>
+<p>Run <code>node balances.js</code> to check initial balance on accounts</p>
+<p><img src="https://contracts.edgewa.re/4/assets/web3-init-balance.png" alt="" /> *web3-init-balance</p>
+<p>Run <code>node createTransaction.js</code> to transfer some stuff around chain</p>
+<p><img src="https://contracts.edgewa.re/4/assets/web3-makeTransaction.png" alt="" /> *web3-make-transaction</p>
+<p>Run <code>node balances.js</code> to check result balances</p>
+<p><img src="https://contracts.edgewa.re/4/assets/web3-result-balance.png" alt="" /> *web3-result-balance</p>
+<h3 id="reach-us-for-more-engagement">Reach us for more engagement <a id="reach-us-for-more-engagement"></a></h3>
+<p>Glad you've made it through! 🥰 We are eager to guide your more on your exploration through Edgeware Ethereum combability feature. We are <strong>keen to hear your experience and suggestions you may have for us.</strong>. You can feel free to <a href="https://linktr.ee/edg_developers">chat with us in the Edgeware's channels like Discord, Element and Telegram</a>, we can help you out with issues you may have or project you may want to be funded through our <a href="https://docs.edgewa.re/edgeware-runtime/treasury">Treasury program</a>. Don't hesitate to share your feedback on our channels, there is always space to improve! 🙌</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

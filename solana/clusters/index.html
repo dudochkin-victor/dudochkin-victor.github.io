@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Кластеры Solana | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#devnet">Девнет</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#primer-konfiguratsii-komandnoi-stroki-solana"><small>- Пример конфигурации командной строки solana</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#primer-komandnoi-stroki-solana-validator"><small>- Пример командной строки solana-validator</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#testovaia-set">Тестовая сеть</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#primer-konfiguratsii-komandnoi-stroki-solana-1"><small>- Пример конфигурации командной строки solana</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#primer-komandnoi-stroki-solana-validator-1"><small>- Пример командной строки solana-validator</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#beta-versiia-osnovnoi-seti">Бета-версия основной сети</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#primer-konfiguratsii-komandnoi-stroki-solana-2"><small>- Пример конфигурации командной строки solana</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/clusters/#primer-komandnoi-stroki-solana-validator-2"><small>- Пример командной строки solana-validator</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Кластеры Solana</h1>
+
+<p>Solana поддерживает несколько разных кластеров с разными целями.</p>
+<p>Прежде чем начать, убедитесь, что вы сначала <a href="cli/install-solana-cli-tools/">установили инструменты командной строки Solana</a></p>
+<p>Исследователи:</p>
+<ul>
+<li><a href="https://explorer.solana.com/">http://explorer.solana.com/</a>.</li>
+<li><a href="http://solanabeach.io/">http://solanabeach.io/</a>.</li>
+</ul>
+<h2 id="devnet">Девнет</h2>
+<ul>
+<li>Devnet служит игровой площадкой для всех, кто хочет протестировать Солану в качестве пользователя, владельца токена, разработчика приложения или валидатора.</li>
+<li>Разработчики приложений должны ориентироваться на Devnet.</li>
+<li>Потенциальные валидаторы должны сначала ориентироваться на Devnet.</li>
+<li>Ключевые различия между Devnet и Mainnet Beta:
+<ul>
+<li>Токены Devnet <strong>не настоящие</strong></li>
+<li>Devnet включает сборщик токенов для аирдропов для тестирования приложений.</li>
+<li>Devnet может подлежать сбросу реестра.</li>
+<li>Devnet обычно использует более новую версию программного обеспечения, чем бета-версия Mainnet.</li>
+</ul>
+</li>
+<li>Точка входа сплетен для Devnet: <code>entrypoint.devnet.solana.com:8001</code></li>
+<li>Переменная среды Metrics для Devnet:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ff7733;">export </span><span>SOLANA_METRICS_CONFIG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;host=https://metrics.solana.com:8086,db=devnet,u=scratch_writer,p=topsecret&quot;
+</span></code></pre>
+<ul>
+<li>RPC URL для Devnet: <code>https://api.devnet.solana.com</code></li>
+</ul>
+<h5 id="primer-konfiguratsii-komandnoi-stroki-solana">Пример конфигурации командной строки solana</h5>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> config set</span><span style="color:#f29718;"> --url</span><span> https://api.devnet.solana.com
+</span></code></pre>
+<h5 id="primer-komandnoi-stroki-solana-validator">Пример командной строки <code>solana-validator</code></h5>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-validator </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --identity</span><span> validator-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --vote-account</span><span> vote-account-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> dv1ZAGvdsz5hHLwWXsVnM94hWf1pjbKVau1QVkaMJ92 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> dv2eQHeP4RFrJZ6UeiZWoc3XTtmtZCUKxxCApCDcRNV </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> dv4ACNkpYPcE3aKmYDqZm9G5EB3J4MRoeE7WNDRBVJB </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> dv3qDFk1DTF36Z62bNvrCXe9sKATA6xvVy6A798xxAS </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --only-known-rpc </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --ledger</span><span> ledger </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --rpc-port</span><span> 8899 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --dynamic-port-range</span><span> 8000-8020 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint.devnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint2.devnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint3.devnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint4.devnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint5.devnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --expected-genesis-hash</span><span> EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --wal-recovery-mode</span><span> skip_any_corrupted_record </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --limit-ledger-size
+</span></code></pre>
+<p><a href="running-validator/validator-start.md#known-validators"><code>--known-validator</code>s</a> управляются Solana Labs.</p>
+<h2 id="testovaia-set">Тестовая сеть</h2>
+<ul>
+<li>Тестовая сеть — это место, где мы проводим стресс-тестирование функций последних выпусков на действующем кластере, уделяя особое внимание производительности сети, стабильности и поведению валидатора.</li>
+<li>Токены тестовой сети <strong>не настоящие</strong></li>
+<li>Testnet может подлежать сбросу реестра.</li>
+<li>Testnet включает сборщик токенов для аирдропов для тестирования приложений.</li>
+<li>Testnet обычно использует более новую версию программного обеспечения, чем бета-версия Devnet и Mainnet.</li>
+<li>Точка входа для сплетен для Testnet: <code>entrypoint.testnet.solana.com:8001</code></li>
+<li>Переменная среды Metrics для Testnet:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ff7733;">export </span><span>SOLANA_METRICS_CONFIG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea&quot;
+</span></code></pre>
+<ul>
+<li>RPC URL для Testnet: <code>https://api.testnet.solana.com</code></li>
+</ul>
+<h5 id="primer-konfiguratsii-komandnoi-stroki-solana-1">Пример конфигурации командной строки solana</h5>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> config set</span><span style="color:#f29718;"> --url</span><span> https://api.testnet.solana.com
+</span></code></pre>
+<h5 id="primer-komandnoi-stroki-solana-validator-1">Пример командной строки <code>solana-validator</code></h5>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-validator </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --identity</span><span> validator-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --vote-account</span><span> vote-account-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> 7XSY3MrYnK8vq693Rju17bbPkCN3Z7KvvfvJx4kdrsSY </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> 9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --only-known-rpc </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --ledger</span><span> ledger </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --rpc-port</span><span> 8899 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --dynamic-port-range</span><span> 8000-8020 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint.testnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint2.testnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint3.testnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --expected-genesis-hash</span><span> 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --wal-recovery-mode</span><span> skip_any_corrupted_record </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --limit-ledger-size
+</span></code></pre>
+<p>Личности
+<a href="running-validator/validator-start.md#known-validators"><code>--known-validator</code>s</a>:</p>
+<ul>
+<li><code>5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on</code> - Solana Labs (testnet.solana.com)</li>
+<li><code>Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN</code> - Certus One</li>
+<li><code>9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv</code> - Algo|Stake</li>
+</ul>
+<h2 id="beta-versiia-osnovnoi-seti">Бета-версия основной сети</h2>
+<p>Постоянный кластер без разрешений для первых держателей токенов и партнеров по запуску.</p>
+<ul>
+<li>Токены, выпущенные в бета-версии основной сети, являются <strong>настоящими</strong> SOL.</li>
+<li>Если вы заплатили деньги за покупку/выпуск токенов, например, через наш аукцион CoinList, эти токены будут переведены в бета-версию основной сети.
+<ul>
+<li>Примечание. Если вы используете кошелек без командной строки, такой как <a href="wallet-guide/solflare/">Solflare</a>, кошелек всегда будет подключаться к бета-версии основной сети.</li>
+</ul>
+</li>
+<li>Точка входа сплетен для бета-версии основной сети: <code>entrypoint.mainnet-beta.solana.com:8001</code></li>
+<li>Переменная среды Metrics для бета-версии основной сети:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ff7733;">export </span><span>SOLANA_METRICS_CONFIG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">&quot;host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password&quot;
+</span></code></pre>
+<ul>
+<li>RPC URL для Mainnet Beta: <code>https://api.mainnet-beta.solana.com</code></li>
+</ul>
+<h5 id="primer-konfiguratsii-komandnoi-stroki-solana-2">Пример конфигурации командной строки solana</h5>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> config set</span><span style="color:#f29718;"> --url</span><span> https://api.mainnet-beta.solana.com
+</span></code></pre>
+<h5 id="primer-komandnoi-stroki-solana-validator-2">Пример командной строки <code>solana-validator</code></h5>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-validator </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --identity </span><span style="font-style:italic;color:#39bae6;">~</span><span>/validator-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --vote-account </span><span style="font-style:italic;color:#39bae6;">~</span><span>/vote-account-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --known-validator</span><span> CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --only-known-rpc </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --ledger</span><span> ledger </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --rpc-port</span><span> 8899 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --private-rpc </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --dynamic-port-range</span><span> 8000-8020 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint.mainnet-beta.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint2.mainnet-beta.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint3.mainnet-beta.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint4.mainnet-beta.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --entrypoint</span><span> entrypoint5.mainnet-beta.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --expected-genesis-hash</span><span> 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --wal-recovery-mode</span><span> skip_any_corrupted_record </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --limit-ledger-size
+</span></code></pre>
+<p>Все четыре <a href="running-validator/validator-start.md#known-validators"><code>--known-validator</code>s</a> управляются Solana Labs.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

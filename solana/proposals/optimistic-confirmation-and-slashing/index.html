@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Оптимистическое подтверждение и слэшинг | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation-and-slashing/#kak-eto-rabotaet">Как это работает?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation-and-slashing/#kompromissy">Компромиссы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation-and-slashing/#bezopasnost">Безопасность</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation-and-slashing/#pochemu-solana">Почему Солана?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation-and-slashing/#sokrashchenie-dorozhnoi-karty">Сокращение дорожной карты</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Оптимистическое подтверждение и слэшинг</h1>
+
+<p>Прогресс по оптимистичному подтверждению можно отслеживать здесь</p>
+<p>https://github.com/solana-labs/solana/projects/52</p>
+<p>В конце мая бета-версия основной сети переходит на версию 1.1, а тестовая сеть — на версию 1.2. С 1.2 тестовая сеть будет вести себя так, как если бы у нее была оптимистичная завершенность, пока не более 4,66% валидаторов действуют злонамеренно. Приложения могут предположить, что 2/3+ голосов, наблюдаемых в сплетнях, подтверждают блокировку или что не менее 4,66% сети нарушают протокол.</p>
+<h2 id="kak-eto-rabotaet">Как это работает?</h2>
+<p>Общая идея заключается в том, что валидаторы должны продолжать голосование после своего последнего форка, если только валидатор не сможет создать доказательство того, что их текущий форк может не достичь окончательности. Способ, которым валидаторы строят это доказательство, заключается в сборе голосов за все форки, кроме их собственных. Если набор действительных голосов составляет более 1/3+X от веса ставки эпохи, у текущего форка валидаторов может не быть возможности достичь окончательности 2/3+.
+Валидатор хэширует доказательство (создает свидетеля) и отправляет его своим голосом за альтернативный форк. Но если 2/3+ проголосуют за один и тот же блок, ни один из валидаторов не сможет построить это доказательство, и, следовательно, ни один валидатор не сможет переключать форки, и этот блок в конечном итоге будет завершен.</p>
+<h2 id="kompromissy">Компромиссы</h2>
+<p>Запас прочности составляет 1/3+X, где X представляет собой минимальную сумму ставки, которая будет сокращена в случае нарушения протокола. Компромисс заключается в том, что живучесть теперь снижается в 2 раза в худшем случае. Если недоступно более 1/3–2X сети, сеть может остановиться и возобновит финализацию блоков только после того, как сеть восстановится ниже 1/3–2X отказавших узлов. До сих пор мы не наблюдали серьезной недоступности в нашей основной сети, космосе или tezos. Для нашей сети, которая в основном состоит из систем высокой доступности, это кажется маловероятным. В настоящее время мы установили пороговый процент на 4,66%, что означает, что если 23,68% не пройдены, сеть может прекратить финализацию блоков. Для нашей сети, которая в основном состоит из систем высокой доступности, снижение доступности на 23,68% кажется маловероятным. Коэффициент 1:10^12, при условии пяти узлов с 4,7% ставок и временем безотказной работы 0,995.</p>
+<h2 id="bezopasnost">Безопасность</h2>
+<p>Долгосрочное среднее количество голосов на слот составило 670 000 000 голосов / 12 000 000 слотов, или 55 из 64 валидаторов для голосования. Сюда входят пропущенные блоки из-за сбоев производителя блоков. Когда клиент видит 55/64, или ~86%, подтверждающих блок, он может ожидать, что ~24% или <code>(86 - 66,666.. + 4,666..)%</code> сети должны быть перерезаны, чтобы этот блок не завершился. доработка.</p>
+<h2 id="pochemu-solana">Почему Солана?</h2>
+<p>Этот подход можно реализовать и в других сетях, но сложность реализации в Solana значительно снижается, поскольку наши голоса имеют доказуемые тайм-ауты на основе VDF. Неясно, можно ли легко построить доказательства переключения в сетях со слабыми предположениями о времени.</p>
+<h2 id="sokrashchenie-dorozhnoi-karty">Сокращение дорожной карты</h2>
+<p>Слэшинг — сложная проблема, и она становится еще сложнее, когда цель сети — иметь минимально возможную задержку. Компромиссы особенно очевидны при оптимизации задержки. Например, в идеале валидаторы должны подавать и распространять свои голоса до того, как память будет синхронизирована с диском, а это означает, что риск повреждения локального состояния намного выше.</p>
+<p>По сути, наша цель слэшинга — 100% слеш в тех случаях, когда нода злонамеренно пытается нарушить правила безопасности и 0% во время обычной работы. Как мы стремимся достичь этого, так это сначала внедрить доказательства косой черты без какой-либо автоматической косой черты.</p>
+<p>Прямо сейчас, для регулярного консенсуса, после нарушения безопасности сеть остановится. Мы можем проанализировать данные и выяснить, кто виноват, и предложить урезать ставку после перезапуска. Аналогичный подход будет использоваться с оптимистичной конф.
+Нарушение безопасности оптимистичной конфигурации легко заметить, но при нормальных обстоятельствах нарушение безопасности оптимистического подтверждения может не остановить работу сети. Как только нарушение будет обнаружено, валидаторы заморозят затронутую долю в следующей эпохе и примут решение о следующем обновлении, если нарушение требует сокращения.</p>
+<p>В долгосрочной перспективе транзакции должны иметь возможность вернуть часть залога, если будет доказано нарушение оптимистичной безопасности. В этом сценарии каждый блок эффективно застрахован сетью.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>За пределами &#x27;Hello World&#x27;: алгоритмы сортировки в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beyond-hello-world-sorting-algorithms-in-rust/#puzyr-kovaia-sortirovka">Пузырьковая сортировка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beyond-hello-world-sorting-algorithms-in-rust/#sortirovka-sliianiem">Сортировка слиянием</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beyond-hello-world-sorting-algorithms-in-rust/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>За пределами &#x27;Hello World&#x27;: алгоритмы сортировки в Rust</h1>
+
+<p><a href="https://oswalt.dev/2020/05/beyond-hello-world-sorting-algorithms-in-rust/">Перевод</a> | Автор оригинала: Matt Oswalt</p>
+<p>В этом году я использовал Rust не только как новую возможность для обучения, но и как услугу для нескольких побочных проектов, в которых я принимал участие.</p>
+<p>Как и многие разработчики, я учусь на собственном опыте. Проведя несколько недель за чтением книги Rust и просмотром видеороликов, я стал искать несколько простых идей для проектов, которые я мог бы использовать для изучения языка, который идет дальше простого «Hello World», который часто на самом деле не дает вам большого разнообразия. .</p>
+<p>Друг предположил, что полезным проектом может быть реализация некоторых популярных алгоритмов сортировки. Это показалось мне действительно удобным инструментом при изучении любого языка. В зависимости от того, на что вы смотрите, вам нужно будет выйти за рамки простых операторов печати и перейти к итерации, рекурсии, функциям, определениям типов и, возможно, многому другому.</p>
+<p><img src="/imgs/posts/1b47232f_01.png" alt="" /></p>
+<p>Это может не охватывать даже половины языковых функций, но это определенно лучшее введение, чем просто вывод текста на экран.</p>
+<p>Кроме того, прежде чем мы начнем: это не предназначено для начинающих по алгоритмам. В любом случае я попытался сделать это несколько лет назад, но также есть огромное количество других бесплатных ресурсов по этому поводу. Вместо этого, это быстрое исследование того, как я реализовал несколько распространенных примеров в Rust, и краткое изложение того, что я узнал о языке в процессе.</p>
+<blockquote>
+<p>Перейдите в мой репозиторий GitHub, если вы хотите увидеть (или запустить) готовую работу из приведенных ниже упражнений.</p>
+</blockquote>
+<h2 id="puzyr-kovaia-sortirovka">Пузырьковая сортировка</h2>
+<p>Большинство курсов по алгоритмам начинаются с «пузырьковой сортировки». Напомню, что этот алгоритм работает путем итерации по массиву значений, меняя местами любую пару значений, которые не соответствуют порядку. Конечно, за один проход с первого раза вряд ли можно будет отсортировать весь массив, поэтому эта итерация повторяется снова и снова, пока массив не будет отсортирован. Из-за этих вложенных циклов пузырьковая сортировка работает с временной сложностью O (n ^ 2), что довольно плохо. Тем не менее, это простой пример для начала, который хорошо показывает влияние плохо оптимизированного алгоритма.</p>
+<p>Давайте попробуем это сделать в Rust. </p>
+<p>Моя первая попытка была довольно дерьмовой. Он успешно реализовал алгоритм пузырьковой сортировки, но сразу же я обнаружил, что борюсь с концепцией заимствования Rust (которую я все еще пытаюсь понять), а также с тем, что нельзя / нельзя изменять. Исходя из моего опыта работы с Go и Python, моим «по умолчанию», когда дело доходит до циклов, является цикл «for», поэтому я попытался использовать его здесь.</p>
+<p>Это решение имело неприятный волновой эффект, который заставил меня принять другие плохие решения только для того, чтобы код скомпилировался:</p>
+<ul>
+<li>Внесение изменений в вектор во время итерации по нему было невозможно, поэтому я создал vec_mut с помощью функции vec.to_vec(), создав изменяемую копию. Изначально я разместил это в верхней части функции, вне цикла.</li>
+<li>Создание vec_mut вне цикла дало мне ошибку «значение перемещено», о которой я расскажу ниже. Единственный способ заставить это работать - это переместить это внутрь цикла, что, очевидно, неэффективно и бессмысленно, но это сработало.</li>
+<li>Изначально я объявил vec, входной параметр этой функции, неизменяемым (просто vec: Vec<i32>). Причина, по которой я создавал эту копию, заключалась в том, чтобы иметь изменяемую копию, на которой я мог бы менять местами элементы. Я надеялся, что смогу вернуть vec_mut из этой функции, но это было невозможно, потому что, как упоминалось выше, это должно было быть объявлено внутри функции и было недоступно за пределами этой области. Это означало, что мне пришлось сделать vec = vec_mut;, что, конечно же, означало, что vec должен быть изменяемым (оглядываясь назад, я, вероятно, мог бы вернуть vec_mut из внешнего цикла вместо того, чтобы ломаться, но это имеет свои проблемы и является моя любимая мозоль).</li>
+</ul>
+<p>Фу. Вот функциональный, но уродливый результат во всей красе: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bubble_sort</span><span>(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">vec</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt; {
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">loop </span><span>{
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// We can&#39;t change items of a vector while iterating, so let&#39;s create
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// a copy of it first, and we&#39;ll make changes here while iterating over
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// the immutable original
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> vec_mut </span><span style="color:#f29668;">=</span><span> vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_vec</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> swapped </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> i </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">for</span><span> _item </span><span style="color:#f29668;">in</span><span> vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>            </span><span style="color:#ff7733;">if</span><span> i </span><span style="color:#f29668;">&gt;=</span><span> vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()</span><span style="color:#f29668;">-</span><span style="color:#f29718;">1 </span><span>{ </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">if</span><span> vec[i] </span><span style="color:#f29668;">&gt;</span><span> vec[i</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span>] {
+</span><span>                swapped </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> vec[i]</span><span style="color:#bfbab0cc;">;
+</span><span>                vec_mut</span><span style="color:#f29668;">.</span><span style="color:#f07178;">remove</span><span>(i)</span><span style="color:#bfbab0cc;">;
+</span><span>                vec_mut</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(i</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>            i </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        vec </span><span style="color:#f29668;">=</span><span> vec_mut</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// no swaps? Then we&#39;re sorted
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">!</span><span>swapped { </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>    }
+</span><span>
+</span><span>    vec
+</span><span>}
+</span></code></pre>
+<p>Как упоминалось выше, создание копии vec_mut вне цикла оказалось невозможным, поскольку компилятор выдавал мне следующие ошибки: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>RUST_BACKTRACE=1 cargo run --example bubblesort
+</span><span>   Compiling rust-algorithms v0.1.0 (/home/mierdin/Code/rust-algorithms)
+</span><span>error[E0382]: borrow of moved value: `vec_mut`
+</span><span>  --&gt; examples/bubblesort.rs:36:17
+</span><span>   |
+</span><span>20 |     let mut vec_mut = vec.to_vec();
+</span><span>   |         ----------- move occurs because `vec_mut` has type `std::vec::Vec&lt;i32&gt;`, which does not implement the `Copy` trait
+</span><span>...
+</span><span>36 |                 vec_mut.remove(i);
+</span><span>   |                 ^^^^^^^ value borrowed here after move
+</span><span>...
+</span><span>43 |         vec = vec_mut;
+</span><span>   |               ------- value moved here, in previous iteration of loop
+</span></code></pre>
+<p>Из-за того, что я возвращал vec_mut к vec, я передал право владения значением vec вместо того, чтобы делать копию. Это означало, что на следующей итерации цикла я больше не мог удалять значения из vec_mut. Если бы я хотел, я мог бы сделать еще одну копию с vec = vec_mut.to_vec(); вместо этого, но потом я делаю копии с копий, а это уже выходит из-под контроля. Технически это также происходило, когда у меня было создание vec_mut во внешнем цикле, но в этом случае право собственности было повторно установлено, и я смог снова удалить значения из него, поэтому это сработало. Это маскировало мои плохие права собственности.</p>
+<p>Итак, теперь я уверен, что убедил вас, что я способен писать плохой Rust. Давайте двигаться дальше.</p>
+<p>Простое использование цикла while со счетчиком немного упрощает ситуацию. Я знаю, что во многих случаях использование цикла for, как и раньше, помогает избежать таких вещей, как ошибки выхода за границы индекса, но в данном случае я думаю, что простота стоит того. При этом мне все равно нужно передать vec как изменяемый, но, поскольку я не повторяю его, я могу выполнить необходимые замены напрямую и вернуть результат по завершении. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bubble_sort</span><span>(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">vec</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">loop </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Default to false, so we know by the end if we had any swaps,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// which indicates we need to do another pass
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> swapped </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">;
+</span><span>        
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Iterate over the length of vec, swapping any values that are out of order.
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> i </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">while</span><span> i </span><span style="color:#f29668;">&lt;</span><span> vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() {
+</span><span>            </span><span style="color:#ff7733;">if</span><span> i </span><span style="color:#f29668;">&gt;=</span><span> vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()</span><span style="color:#f29668;">-</span><span style="color:#f29718;">1 </span><span>{ </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>            </span><span style="color:#ff7733;">if</span><span> vec[i] </span><span style="color:#f29668;">&gt;</span><span> vec[i</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span>] {
+</span><span>                swapped </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> vec[i]</span><span style="color:#bfbab0cc;">;
+</span><span>                vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">remove</span><span>(i)</span><span style="color:#bfbab0cc;">;
+</span><span>                vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(i</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>            i </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// no swaps? Then we&#39;re sorted, and we can exit and return the final `vec`
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">!</span><span>swapped { </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>    }
+</span><span>
+</span><span>    vec
+</span><span>}
+</span></code></pre>
+<p>Реализация этого алгоритма дала мне реальный, Rust опыт работы с:</p>
+<ul>
+<li>Векторы</li>
+<li>Итераторы</li>
+<li>Заимствование</li>
+</ul>
+<p>Неплохо для одного из простейших алгоритмов сортировки. Давайте перейдем к чему-то более сложному (и эффективному).</p>
+<h2 id="sortirovka-sliianiem">Сортировка слиянием</h2>
+<p>Я также хотел заняться «сортировкой слиянием», в основном потому, что это один из моих любимых. Помимо того, что она намного эффективнее пузырьковой сортировки, мне нравится ее принцип работы.</p>
+<p>«Разделяй и властвуй» природа сортировки слиянием означает, что мы используем рекурсию для разделения задачи на все меньшие и меньшие подмассивы до такой степени, что они имеют только один элемент и, следовательно, сортируются. Создание окончательного отсортированного массива сводится к объединению этих меньших массивов в более крупные, пока, наконец, у нас не будет один большой отсортированный массив того же размера, что и несортированный, с которого мы начали. Объединение этих подмассивов выполняется путем взятия меньшего значения из начала каждого массива и продвижения по ним до тех пор, пока не останется больше значений.</p>
+<p>Я думаю, что это то, что мне нравится в сортировке слиянием - мы разбираем проблему до тех пор, пока фундаментальная истина не становится неизбежной (что два массива отсортированы), и мы снова объединяем их вместе, используя процесс, который эксплуатирует и полностью основан на этой истине. Я всегда считал, что это очень элегантный и даже красивый способ решения проблемы.</p>
+<p>В любом случае, независимо от языка, первое, что вам нужно сделать, это определить, имеет ли входящий массив (в нашем случае вектор) только один элемент. Если так, мы можем вернуться сразу же, потому что делить больше нечего; в этот момент пора побеждать. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// If we&#39;re already down to the atomic level, return right away
+</span><span style="color:#ff7733;">if</span><span> vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">== </span><span style="color:#f29718;">1 </span><span>{
+</span><span>  </span><span style="color:#ff7733;">return</span><span> vec</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Предполагая, что мы прошли мимо этого, мы знаем, что наш вектор содержит как минимум два элемента, что означает, что мы можем разделить его на два «подвектора» как часть «разделяющей» части нашей стратегии.</p>
+<p>Я объявил, что d устанавливается равным результату деления длины нашего входного вектора vec на 2. Частное для этой операции является целым числом, которое было закрыто, что означает, что если был остаток, он отбрасывается, и мы остаемся с меньшим целым значением. Итак, если наша длина 4, d равно 2. Если длина 5, d все равно 2. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Get a &quot;divider&quot;, which represents the halfway point of vec
+</span><span style="color:#ff7733;">let</span><span> d </span><span style="color:#f29668;">=</span><span> vec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">/ </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create sub-vectors to be used in further recursions, by using `d` to create slices,
+</span><span style="font-style:italic;color:#5c6773;">// and using `to_vec()` to copy these into new vectors.
+</span><span style="color:#ff7733;">let</span><span> v1 </span><span style="color:#f29668;">=</span><span> vec[</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>d]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_vec</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> v2 </span><span style="color:#f29668;">=</span><span> vec[d</span><span style="color:#f29668;">..</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_vec</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Изначально я преобразовал d в целое число, ожидая, что это приведет к типу с плавающей запятой, но это вызвало проблемы при использовании d в приведенных выше фрагментах, поскольку эта нотация предполагает тип, называемый типом usize. Оказывается, что без приведения приведенная выше операция деления также возвращает частное с типом usize, поэтому я могу использовать ее напрямую, как указано выше. Из моего ограниченного понимания, usize похож на целые числа, но их емкость полностью зависит от архитектуры компьютера (т.е. 32 против 64 бит), тогда как для таких типов, как u32 и u64, очевидно, есть заданные размеры.</p>
+<blockquote>
+<p>Я буду копаться в этом в будущем - я заметил, что это широко используется в Rust и стандартной библиотеке, поэтому я предполагаю, что для этого есть причина, а не использование предсказуемых типов. Если у вас есть здесь полезные советы, напишите мне</p>
+</blockquote>
+<p>Теперь, когда у нас есть «подвекторы», мы можем перейти к нашей функции сортировки. Синтаксис для этого такой, как ожидалось, хотя важно подчеркнуть, что в приведенном ниже примере эффективно заменяются несортированные v1 и v2 их отсортированными аналогами, полученными из merge_sort. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> v1 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">merge_sort</span><span>(v1)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> v2 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">merge_sort</span><span>(v2)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>На этом этапе мы можем рассматривать v1 и v2 как отсортированные векторы, но нам все равно нужно объединить их в один вектор, чтобы этот конечный продукт также был отсортирован. Для начала я создал вектор с именем retvec, который изначально должен был быть пустым, но чтобы я вставлял в них значения при повторении v1 и v2.</p>
+<p>let mut retvec = Vec::new();</p>
+<p>То, что произошло потом, было действительно интересно. Этот синтаксис действительно действителен, но компилятор Rust недоволен этим утверждением; нам также нужно вставить значения в вектор, чего я в то время не удосужился сделать. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>RUST_BACKTRACE=1 cargo run --example mergesort
+</span><span>   Compiling rust-algorithms v0.1.0 (/home/mierdin/Code/rust-algorithms)
+</span><span>error[E0282]: type annotations needed for `std::vec::Vec&lt;T&gt;`
+</span><span>  --&gt; examples/mergesort.rs:34:21
+</span><span>   |
+</span><span>34 |   let mut retvec = Vec::new();
+</span><span>   |       ----------   ^^^^^^^^ cannot infer type for type parameter `T`
+</span><span>   |       |
+</span><span>   |       consider giving `retvec` the explicit type `std::vec::Vec&lt;T&gt;`, where the type parameter `T` is specified
+</span></code></pre>
+<p>Как только я продолжил свою реализацию и начал передавать значения в вектор, компилятор Rust перестал жаловаться, поскольку нажатие значения неявно сообщило Rust, что нам нужен определенный тип для этих векторных элементов (в данном случае целые числа из v1 и v2). Я мог бы также сделать то, что просил компилятор, и сам установить тип с помощью let mut retvec: Vec<i32> = Vec::new();, но краткая борьба здесь напомнила мне, что у меня была возможность быть более Расти.</p>
+<p>Что мне нравится в Rust, так это то, что он побуждает вас механически сочувствовать, то есть работать с базовым оборудованием, а не против. Иногда это выполняется компилятором, иногда это настоятельно рекомендуется в соответствии с соглашением или инструментами, доступными на языке. Конечно, мы могли бы создать пустой вектор и «протолкнуть» его, когда у нас будет готово новое значение, но это часто может привести к крайне неэффективному распределению памяти. Вместо того, чтобы увеличивать вектор по одному значению за раз, в этом случае мы действительно точно знаем, насколько большим станет retvec: сумма длин v1 и v2! </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>  </span><span style="color:#ff7733;">let</span><span> size </span><span style="color:#f29668;">=</span><span> v1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">+</span><span> v2</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>С этим мы можем использовать vec! макрос для создания вектора с точным размером, который мы хотим. Это означает, что во время выполнения мы будем запрашивать выделение памяти для этого вектора только один раз, и этого выделения будет достаточно на протяжении всего времени существования этого вызова функции. Мы также передаем 0 этому макросу, чтобы предварительно заполнить каждый индекс значением 0, но мы перезапишем каждый из них соответствующими значениями во время слияния. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>  </span><span style="color:#ff7733;">let</span><span> size </span><span style="color:#f29668;">=</span><span> v1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">+</span><span> v2</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let mut</span><span> retvec </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;</span><span> size]</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<blockquote>
+<p>Обратите внимание, что мы также могли использовать Vec::with_capacity (size); для достижения той же цели. Если вы используете это, вам все равно нужно будет убедиться, что вы используете retvec.push() для передачи значений в вектор (который, опять же, также устанавливает тип для значений вектора). Вместо этого я решил предварительно заполнить нулями с помощью vec! макрос, и установить значения retvec через индекс, управляемый переменной счетчика. Кажется, что в любом случае все работает нормально, важно то, что мы заранее выполнили только одно выделение памяти.</p>
+</blockquote>
+<p>Помните, что ключевым аспектом сортировки слиянием является то, что мы можем с уверенностью предположить, что v1 и v2 уже отсортированы к этому моменту. Именно благодаря этому факту мы можем выполнить простую логику слияния, описанную ниже. Поскольку мы знаем, что меньшие значения уже находятся в начале каждого вектора, мы просто просматриваем каждый, по одному индексу за раз. Мы берем меньшее из двух, увеличиваем соответствующий счетчик и добавляем это значение к следующему индексу retvec. В конце концов, ретвек тоже будет отсортирован. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">while</span><span> i </span><span style="color:#f29668;">&lt;</span><span> v1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">&amp;&amp;</span><span> j </span><span style="color:#f29668;">&lt;</span><span> v2</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">if</span><span> v1[i] </span><span style="color:#f29668;">&lt;</span><span> v2[j] {
+</span><span>    retvec[k] </span><span style="color:#f29668;">=</span><span> v1[i]</span><span style="color:#bfbab0cc;">;
+</span><span>    i</span><span style="color:#f29668;">+=</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>  } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>    retvec[k] </span><span style="color:#f29668;">=</span><span> v2[j]</span><span style="color:#bfbab0cc;">;
+</span><span>    j</span><span style="color:#f29668;">+=</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>  k</span><span style="color:#f29668;">+=</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Наконец, добавьте все оставшиеся значения. Фактически будет запущен только один из этих блоков (поскольку предыдущий цикл не завершился бы, если бы один из счетчиков не достиг длины соответствующего вектора). Кроме того, поскольку мы сравнивали значения в предыдущем цикле, мы можем с уверенностью предположить, что любой вектор, у которого есть оставшиеся значения для использования, сортируется, а также содержит значения, которые больше любого из другого вектора. Поэтому мы просто перебираем их и добавляем в retvec. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">while</span><span> i </span><span style="color:#f29668;">&lt;</span><span> v1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() {
+</span><span>  retvec[k] </span><span style="color:#f29668;">=</span><span> v1[i]</span><span style="color:#bfbab0cc;">;
+</span><span>  i</span><span style="color:#f29668;">+=</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>  k</span><span style="color:#f29668;">+=</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span style="color:#ff7733;">while</span><span> j </span><span style="color:#f29668;">&lt;</span><span> v2</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() {
+</span><span>  retvec[k] </span><span style="color:#f29668;">=</span><span> v2[j]</span><span style="color:#bfbab0cc;">;
+</span><span>  j</span><span style="color:#f29668;">+=</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>  k</span><span style="color:#f29668;">+=</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>На этом этапе retvec должен представлять объединенный отсортированный вектор, который мы можем вернуть.</p>
+<p>Реализация этого алгоритма дала мне реальный, Rust опыт работы с:</p>
+<ul>
+<li>Тип usize</li>
+<li>Рекурсия</li>
+<li>Механически симпатичное распределение памяти</li>
+</ul>
+<h2 id="vyvod">Вывод</h2>
+<p>Я не уверен, продолжу ли я эту серию, потому что у меня есть другие подпроекты, которые помогут мне глубже погрузиться не только в Rust, но и на другие темы. На данный момент это было действительно забавное введение, дающее мне реальный опыт работы с Rust и начало наращивания мышечной памяти. Я думаю, что многие из того, что заставляет людей уклоняться от новых языков, заключается в том, что они их еще не знают.</p>
+<p>Мне все еще очень неудобно работать с Rust, но я знаю, что это потому, что язык для меня еще очень нов. Однако я чувствую себя намного увереннее, чем в начале года, и напоминаю себе, что я чувствовал то же самое в отношении Go и даже Python, когда начинал их изучать. Подобные примеры позволяют мне заставить себя избавиться от этого страха и начать знакомство, необходимое для действительно продуктивной работы. Для начала важно читать и смотреть видео, но в какой-то момент вам просто нужно начать пачкать руки.</p>
+<p>Надеюсь, это было полезно и для вас! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

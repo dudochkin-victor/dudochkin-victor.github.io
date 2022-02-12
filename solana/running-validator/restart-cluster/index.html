@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Перезапуск кластера | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/restart-cluster/#shag-1-opredelite-slot-v-kotorom-budet-perezapushchen-klaster">Шаг 1. Определите слот, в котором будет перезапущен кластер</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/restart-cluster/#shag-2-ostanovit-validator-y">Шаг 2. Остановить валидатор(ы)</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/restart-cluster/#shag-3-pri-zhelanii-ustanovite-novuiu-versiiu-solana">Шаг 3. При желании установите новую версию solana</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/restart-cluster/#shag-4-sozdaite-novyi-snimok-dlia-slota-slot-x-s-khard-forkom-v-slote-slot-x">Шаг 4. Создайте новый снимок для слота SLOT_X с хард-форком в слоте SLOT_X</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/restart-cluster/#shag-5-obiavite-o-perezapuske-v-discord">Шаг 5. Объявите о перезапуске в Discord:</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/restart-cluster/#shag-7-podozhdite-i-slushaite">Шаг 7. Подождите и слушайте</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/restart-cluster/#ispravlenie-problem">Исправление проблем</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/restart-cluster/#80-doli-ne-uchastvovali-v-perezapuske-chto-teper"><small>- 80% доли не участвовали в перезапуске, что теперь?</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Перезапуск кластера</h1>
+
+<h3 id="shag-1-opredelite-slot-v-kotorom-budet-perezapushchen-klaster">Шаг 1. Определите слот, в котором будет перезапущен кластер</h3>
+<p>Самый высокий оптимистически подтвержденный слот — это лучший слот для начала, который можно найти, выполнив поиск [это](https://github.com/solana-labs/solana/blob/0264147d42d506fb888f5c4c021a998e231a3e74/core/src/optimistic_confirmation_verifier.rs# L71) точка данных метрик. В противном случае используйте последний корень.</p>
+<p>Назовите этот слот SLOT_X.</p>
+<h3 id="shag-2-ostanovit-validator-y">Шаг 2. Остановить валидатор(ы)</h3>
+<h3 id="shag-3-pri-zhelanii-ustanovite-novuiu-versiiu-solana">Шаг 3. При желании установите новую версию solana</h3>
+<h3 id="shag-4-sozdaite-novyi-snimok-dlia-slota-slot-x-s-khard-forkom-v-slote-slot-x">Шаг 4. Создайте новый снимок для слота <code>SLOT_X</code> с хард-форком в слоте <code>SLOT_X</code></h3>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-ledger-tool</span><span style="color:#f29718;"> -l</span><span> ledger create-snapshot SLOT_X ledger</span><span style="color:#f29718;"> --hard-fork</span><span> SLOT_X
+</span></code></pre>
+<p>Каталог бухгалтерской книги теперь должен содержать новый снимок.
+<code>solana-ledger-tool create-snapshot</code> также выведет новую версию уничтожения и значение хэша банка, назовите это NEW_SHRED_VERSION и NEW_BANK_HASH соответственно.</p>
+<p>Настройте аргументы вашего валидатора:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span> </span><span style="color:#ffb454;">--wait-for-supermajority</span><span> SLOT_X
+</span><span> </span><span style="color:#ffb454;">--expected-bank-hash</span><span> NEW_BANK_HASH
+</span></code></pre>
+<p>Затем перезапустите валидатор.</p>
+<p>Подтвердите с помощью журнала, что валидатор загрузился и теперь находится в шаблоне ожидания в <code>SLOT_X</code>, ожидая супербольшинства.</p>
+<p>Как только NEW_SHRED_VERSION будет определена, подтолкните операторов точки входа фонда к обновлению точек входа.</p>
+<h3 id="shag-5-obiavite-o-perezapuske-v-discord">Шаг 5. Объявите о перезапуске в Discord:</h3>
+<p>Разместите что-то вроде следующего в #announcements (при необходимости изменив текст):</p>
+<blockquote>
+<p>Привет @Validators,</p>
+<p>Мы выпустили версию 1.1.12 и готовы снова запустить тестовую сеть.</p>
+<p>Шаги:</p>
+<ol>
+<li>Установите выпуск v1.1.12: https://github.com/solana-labs/solana/releases/tag/v1.1.12.</li>
+<li>а. Предпочтительный метод, начните с вашей локальной книги с помощью:</li>
+</ol>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-validator
+</span><span>  </span><span style="color:#ffb454;">--wait-for-supermajority</span><span> SLOT_X     </span><span style="font-style:italic;color:#5c6773;"># &lt;-- NEW! IMPORTANT! REMOVE AFTER THIS RESTART
+</span><span>  </span><span style="color:#ffb454;">--expected-bank-hash</span><span> NEW_BANK_HASH  </span><span style="font-style:italic;color:#5c6773;"># &lt;-- NEW! IMPORTANT! REMOVE AFTER THIS RESTART
+</span><span>  </span><span style="color:#ffb454;">--hard-fork</span><span> SLOT_X                  </span><span style="font-style:italic;color:#5c6773;"># &lt;-- NEW! IMPORTANT! REMOVE AFTER THIS RESTART
+</span><span>  </span><span style="color:#ffb454;">--no-snapshot-fetch                 </span><span style="font-style:italic;color:#5c6773;"># &lt;-- NEW! IMPORTANT! REMOVE AFTER THIS RESTART
+</span><span>  </span><span style="color:#ffb454;">--entrypoint</span><span> entrypoint.testnet.solana.com:8001
+</span><span>  </span><span style="color:#ffb454;">--known-validator</span><span> 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on
+</span><span>  </span><span style="color:#ffb454;">--expected-genesis-hash</span><span> 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY
+</span><span>  </span><span style="color:#ffb454;">--only-known-rpc
+</span><span>  </span><span style="color:#ffb454;">--limit-ledger-size
+</span><span>  </span><span style="color:#ffb454;">...                                </span><span style="font-style:italic;color:#5c6773;"># &lt;-- your other --identity/--vote-account/etc arguments
+</span></code></pre>
+<p>b. Если у вашего валидатора нет реестра до слота SLOT_X или если вы удалили свой реестр, вместо этого загрузите снимок с помощью:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-validator
+</span><span>  </span><span style="color:#ffb454;">--wait-for-supermajority</span><span> SLOT_X     </span><span style="font-style:italic;color:#5c6773;"># &lt;-- NEW! IMPORTANT! REMOVE AFTER THIS RESTART
+</span><span>  </span><span style="color:#ffb454;">--expected-bank-hash</span><span> NEW_BANK_HASH  </span><span style="font-style:italic;color:#5c6773;"># &lt;-- NEW! IMPORTANT! REMOVE AFTER THIS RESTART
+</span><span>  </span><span style="color:#ffb454;">--entrypoint</span><span> entrypoint.testnet.solana.com:8001
+</span><span>  </span><span style="color:#ffb454;">--known-validator</span><span> 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on
+</span><span>  </span><span style="color:#ffb454;">--expected-genesis-hash</span><span> 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY
+</span><span>  </span><span style="color:#ffb454;">--only-known-rpc
+</span><span>  </span><span style="color:#ffb454;">--limit-ledger-size
+</span><span>  </span><span style="color:#ffb454;">...                                </span><span style="font-style:italic;color:#5c6773;"># &lt;-- your other --identity/--vote-account/etc arguments
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span> You can check for which slots your ledger has with: `solana-ledger-tool -l path/to/ledger bounds`
+</span></code></pre>
+<ol start="3">
+<li>Подождите, пока 80% ставки не перейдет в онлайн.</li>
+</ol>
+<p>Чтобы подтвердить, что ваш перезапущенный валидатор правильно ожидает 80%:
+а. Ищите «N% активной доли, видимой в сообщениях журнала сплетен».
+б. Спросите его через RPC, в каком слоте он находится: <code>solana --url http://127.0.0.1:8899 slot</code>. Он должен возвращать <code>SLOT_X</code>, пока мы не достигнем доли 80%.</p>
+<p>Спасибо!</p>
+</blockquote>
+<h3 id="shag-7-podozhdite-i-slushaite">Шаг 7. Подождите и слушайте</h3>
+<p>Следите за валидаторами по мере их перезапуска. Отвечайте на вопросы, помогайте людям,</p>
+<h2 id="ispravlenie-problem">Исправление проблем</h2>
+<h3 id="80-doli-ne-uchastvovali-v-perezapuske-chto-teper">80% доли не участвовали в перезапуске, что теперь?</h3>
+<p>Если менее 80% ставки присоединится к перезапуску через разумное время, необходимо будет повторить попытку перезапуска с удалением ставки от не отвечающих валидаторов.</p>
+<p>Сообщество должно определить и прийти к общественному консенсусу в отношении набора неотзывчивых валидаторов. Затем все участвующие валидаторы возвращаются к шагу 4 и создают новый снимок с дополнительными аргументами <code>--detake-vote-account &lt;PUBKEY&gt;</code> для каждого адреса учетной записи для голосования не отвечающего валидатора.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-ledger-tool</span><span style="color:#f29718;"> -l</span><span> ledger create-snapshot SLOT_X ledger</span><span style="color:#f29718;"> --hard-fork</span><span> SLOT_X </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --destake-vote-account </span><span style="color:#f29668;">&lt;</span><span>VOTE_ACCOUNT_1</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">    --destake-vote-account </span><span style="color:#f29668;">&lt;</span><span>VOTE_ACCOUNT_2</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">\
+</span><span>    .
+</span><span>    </span><span style="color:#f07178;">.
+</span><span>    </span><span style="color:#ffb454;">--destake-vote-account </span><span style="color:#f29668;">&lt;</span><span>VOTE_ACCOUNT_N</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">\
+</span></code></pre>
+<p>Это приведет к немедленной деактивации всех ставок, связанных с не отвечающими на запросы валидаторами. Все их участники должны будут повторно делегировать свои доли после успешного перезапуска кластера.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

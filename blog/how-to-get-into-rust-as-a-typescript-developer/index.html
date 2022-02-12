@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Как войти в Rust как разработчик JavaScript&#x2F;TypeScript | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#skorost-rust">Скорость Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#predvaritel-nye-trebovaniia">Предварительные требования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#vash-novyi-npm-cargo">Ваш новый НПМ, Cargo</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#privet-mir">Привет мир</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#tipy">Типы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#struktury-i-perechisleniia">Структуры и перечисления</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#parametry-i-sootvetstvie">Параметры и соответствие</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#funktsii">Функции</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#massivy-i-vladenie">Массивы и владение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/how-to-get-into-rust-as-a-typescript-developer/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Как войти в Rust как разработчик JavaScript&#x2F;TypeScript</h1>
+
+<p><a href="https://www.thisdot.co/blog/how-to-get-into-rust-as-a-typescript-developer">Перевод</a> | Автор оригинала: Matthew Pagan</p>
+<p>Rust - это язык моей мечты. Я работаю в основном как разработчик JavaScript, поэтому мой набор навыков в основном включает в себя Интернет, а также среды NodeJS. Я люблю JavaScript, но мне хотелось погрузиться в новый язык. На этом новом языке нужно было отметить несколько флажков:</p>
+<ul>
+<li>Rich Type System (TypeScript заставил меня увидеть ценность этого)</li>
+<li>Быстрый / Низкий уровень (JavaScript ТАК МЕДЛЕННЫЙ, дальше мне нужна скорость)</li>
+<li>Отличная документация</li>
+<li>Сообщество</li>
+</ul>
+<p>Изначально я думал, что моим новым языком будет C++. У него желаемая скорость, и это язык со строгой типизацией, который также имеет статическую типизацию. Однако большая проблема с C++ заключалась в том, что не было никаких трэйтов официальной документации, и сообщество кажется гораздо менее дружелюбным к новичкам, чем я надеялся.</p>
+<p>Затем появился Rust. Rust проверяет все флажки. Если говорить только об их документации, то это ЗАМЕЧАТЕЛЬНО! Это универсальный магазин для всех моих языковых потребностей. Для новичка это ТАКАЯ экономия времени. Спасибо mdbook за один из самых чистых форматов документации, которые я когда-либо видел.</p>
+<h2 id="skorost-rust">Скорость Rust</h2>
+<p>Я вкратце упомянул о своем желании получить отличную документацию, но теперь давайте посмотрим на скорость!</p>
+<p>Это сообщение в блоге Шона Рэгга подводит итог скорости Rust в сравнении с веб-фреймворками. В своей статье он сравнил Rocket (веб-фреймворк, написанный на Rust) с Restify (еще один веб-фреймворк, написанный на NodeJS). Он измерил, сколько запросов в секунду может обработать каждая служба, и результаты оказались ошеломляющими.</p>
+<p><img src="/imgs/posts/64fde5fa_01.png" alt="Rocket vs Restify ответов в секунду" /></p>
+<p>Количество запросов в секунду, которые может обработать каждая служба: </p>
+<p>Restify: 7,996.19
+Rocket: 72,133.75</p>
+<p>Основываясь на этих результатах тестирования, служба на базе Rocket смогла обработать в 9 раз больше запросов, чем Restify. Это дико!</p>
+<p>Давайте погрузимся в Rust и посмотрим, как мы можем переключить наши мысли с JavaScript на Rust.</p>
+<h2 id="predvaritel-nye-trebovaniia">Предварительные требования</h2>
+<p>Нам нужно будет установить Rust на наш компьютер для локальной разработки Rust. Этот процесс невероятно прост. Перейдите сюда, и их документация даст вам способ установить Rust, адаптированный к любой ОС, которую вы используете, когда вы нажимаете эту ссылку.</p>
+<p>Выполнение процесса установки установит всю цепочку инструментов Rust на ваш компьютер:</p>
+<ul>
+<li>rustc: компилятор Rust, обычно вызывается не напрямую, а через Cargo.</li>
+<li>Cargo: подумайте об этом как о версии Rust сверхмощного npm. Он загружает зависимости, компилирует и запускает наш код, а также может распространять наши пакеты в реестр крэйтов сообщества Rust.</li>
+<li>rustup: устанавливает и обновляет Rust.</li>
+</ul>
+<p>Самым важным компонентом этой цепочки инструментов является Cargo.</p>
+<h2 id="vash-novyi-npm-cargo">Ваш новый НПМ, Cargo</h2>
+<p>Из книги Cargo</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Cargo - это пакетный менеджер Rust. Cargo загружает зависимости вашего пакета Rust, компилирует ваши пакеты, создает распространяемые пакеты и загружает их в crates.io, реестр пакетов сообщества Rust. Вы можете внести свой вклад в эту книгу на GitHub.
+</span></code></pre>
+<p>В основном мы собираемся использовать 3 команды cargo: </p>
+<ul>
+<li>cargo new</li>
+<li>cargo build</li>
+<li>cargo run</li>
+</ul>
+<p>Как разработчик JavaScript, я чувствую себя как дома. Такое ощущение, что я работаю со сценариями npm в файле package.json.</p>
+<h2 id="privet-mir">Привет мир</h2>
+<p>Наконец-то создадим проект на Rust. Выполните следующую команду, чтобы инициализировать новый пакет. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo new hello_world
+</span></code></pre>
+<p><img src="/imgs/posts/64fde5fa_02.png" alt="Новое в VSCode Cargo" /></p>
+<p>Это создаст нашу структуру папок для пакета rust и создаст два важных файла:</p>
+<ul>
+<li>Cargo.toml</li>
+<li>main.rs</li>
+</ul>
+<p>Считайте Cargo.toml версией package.json для Rust. Однако главный файл, который нас интересует, - это файл main.rs. Этот файл содержит основную функцию - отправную точку во всех программах на Rust. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello, world!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>За несколько секунд мы уже создали нашу программу Hello World. Это отличная основа, с которой мы можем глубже погрузиться в основы Rust.</p>
+<h2 id="tipy">Типы</h2>
+<p>Один из инструментов экосистемы JavaScript, который мне понравился, - TypeScript. Недавно было время, когда я работал над проектом, чувствительным ко времени, и просто не было времени тестировать приложение в той мере, в какой я хотел.</p>
+<p>Я решил использовать TypeScript вместо JavaScript для написания интерфейса, и он вылавливал ТАКОЕ много ошибок, когда я печатал свой код. Я был уверен, что понимаю структуру всех моих данных, и в целом я чувствовал себя более уверенным в кодовой базе, поскольку она строго типизирована.</p>
+<p>Вот несколько простых типов из TypeScript: </p>
+<pre data-lang="ts" style="background-color:#0f1419;color:#bfbab0;" class="language-ts "><code class="language-ts" data-lang="ts"><span style="color:#ff7733;">const </span><span>anInt</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">number </span><span style="color:#f29668;">= </span><span style="color:#f29718;">17</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>aString</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">string </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Hello&quot;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>aBoolean</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">boolean </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>anArray</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">number</span><span>[] </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Система набора текста в Rust похожа на написание кода TypeScript. Вот аналогичное объявление переменных, но на этот раз на Rust. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> _an_int</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> _a_string</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Hello, world!&quot;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> _a_bool</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> _an_array</span><span style="color:#bfbab0cc;">: </span><span>[</span><span style="color:#ff7733;">i32</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">3</span><span>] </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span>]</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Написание этого кода дает мне то же чувство, что и TypeScript, огромный плюс, учитывая, насколько я люблю его использовать.</p>
+<h2 id="struktury-i-perechisleniia">Структуры и перечисления</h2>
+<p>Давайте посмотрим на более сложный тип. Допустим, я хотел объявить форму объекта, представляющего человека. Вот пример того, как я бы реализовал этот тип объекта в TypeScript. </p>
+<pre data-lang="ts" style="background-color:#0f1419;color:#bfbab0;" class="language-ts "><code class="language-ts" data-lang="ts"><span style="color:#ff7733;">export interface </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">;
+</span><span>    age</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">number</span><span style="color:#bfbab0cc;">;
+</span><span>    hobby</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">;
+</span><span>    job_title</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вот как я мог бы реализовать подобный объект, используя структуры Rust. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>age</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>hobby</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>job_title</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span></code></pre>
+<p>Опять же, это дает мне опыт, очень похожий на написание TypeScript.</p>
+<p>Давайте создадим экземпляр объекта типа Person с помощью Rust и распечатаем его на стандартный вывод. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> me</span><span style="color:#bfbab0cc;">:</span><span> Person </span><span style="color:#f29668;">=</span><span> Person {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Matthew Pagan&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">,
+</span><span>    hobby</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Coding&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    job_title</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Software Developer&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> me)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p><img src="/imgs/posts/64fde5fa_03.png" alt="Среда разработки Rust" /></p>
+<p>Это Rust, но он очень похож на то, что я уже использую изо дня в день. Обожаю TypeScript, а Rust чешет, что чешется.</p>
+<p>Давайте реализуем поле избранного цвета в структуре Person и ограничим доступные цвета, реализовав перечисление Color для этого типа.</p>
+<p><img src="/imgs/posts/64fde5fa_04.png" alt="Добавление цветного перечисления" /></p>
+<h2 id="parametry-i-sootvetstvie">Параметры и соответствие</h2>
+<p>Rust действительно начинает сиять, когда мы начинаем работать с логикой, которая включает в себя необязательные значения, и как обрабатывать необязательные данные.</p>
+<p>Давайте расширим наш тип Person. Вот как в настоящее время определяется наш тип Person: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::</span><span>Color</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>age</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>hobby</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>job_title</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>favorite_color</span><span style="color:#bfbab0cc;">:</span><span> Color,
+</span><span>}
+</span></code></pre>
+<p>Не у всех людей есть работа. Возможно, некоторые из этих объектов представляют ребенка, который недостаточно взрослый, чтобы работать, или кого-то постарше, который уже вышел на пенсию.</p>
+<p>TypeScript имеет один способ справиться с этим сценарием, используя необязательные свойства.</p>
+<p>Вот как мы могли бы реализовать необязательный job_title в интерфейсе Person в TypeScript. </p>
+<pre data-lang="ts" style="background-color:#0f1419;color:#bfbab0;" class="language-ts "><code class="language-ts" data-lang="ts"><span style="color:#ff7733;">export interface </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">;
+</span><span>    age</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">number</span><span style="color:#bfbab0cc;">;
+</span><span>    hobby</span><span style="color:#f29668;">: </span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">;
+</span><span>    job_title</span><span style="color:#f29668;">?: </span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">;
+</span><span>    favorite_color</span><span style="color:#f29668;">: </span><span style="color:#59c2ff;">Color</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>В приведенной выше реализации TypeScript говорит, что job_title является либо строкой, либо нулем. Решение Rust блестяще элегантно. Нет понятия null. Вместо этого мы будем использовать перечисление Option для обработки реализации.</p>
+<p>Вот как мы определяем Person с необязательным job_title. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>age</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>hobby</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>job_title</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>favorite_color</span><span style="color:#bfbab0cc;">:</span><span> Color,
+</span><span>}
+</span></code></pre>
+<p>Теперь мы можем написать логику, которая зависит от состояния job_title. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> me</span><span style="color:#bfbab0cc;">:</span><span> Person </span><span style="color:#f29668;">=</span><span> Person {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Matthew Pagan&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">,
+</span><span>    hobby</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Coding&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    job_title</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#c2d94c;">&quot;Software Developer&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">,
+</span><span>    favorite_color</span><span style="color:#bfbab0cc;">: </span><span>Color</span><span style="color:#f29668;">::</span><span>Cyan</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> noah</span><span style="color:#bfbab0cc;">:</span><span> Person </span><span style="color:#f29668;">=</span><span> Person {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Noah Pagan&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">,
+</span><span>    hobby</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Lego&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    job_title</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>    favorite_color</span><span style="color:#bfbab0cc;">: </span><span>Color</span><span style="color:#f29668;">::</span><span>Blue</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">match</span><span> me</span><span style="color:#f29668;">.</span><span>job_title {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(title) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> is a </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> me</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#bfbab0cc;">,</span><span> title)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> doesn&#39;t have a job&quot;</span><span style="color:#bfbab0cc;">,</span><span> me</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">match</span><span> noah</span><span style="color:#f29668;">.</span><span>job_title {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(title) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> is a </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> noah</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#bfbab0cc;">,</span><span> title)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> doesn&#39;t have a job&quot;</span><span style="color:#bfbab0cc;">,</span><span> noah</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p><img src="/imgs/posts/64fde5fa_05.png" alt="Вариант Enum" /></p>
+<p>Перечисления Option<T> могут быть 1 из 2 вариантов</p>
+<ul>
+<li>Some<T>: представляют наличие значения типа T</li>
+<li>Нет: указывает на отсутствие значения.</li>
+</ul>
+<p>Использование сопоставления для выполнения действий в зависимости от значения перечисления - один из наиболее распространенных шаблонов, которые я испытал при погружении в мир Rust, и обеспечивает эффективный способ обработки потока управления с помощью перечислений.</p>
+<h2 id="funktsii">Функции</h2>
+<p>Как и в других языках, мы можем инкапсулировать повторяющуюся логику в функциях. Мы повторяем нашу логику, когда обрабатываем, что печатать, в зависимости от значения job_title. Давайте создадим функцию, которая принимает Person и регистрирует стандартное правильное сообщение. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">handle_job_title</span><span>(</span><span style="color:#f29718;">person</span><span style="color:#bfbab0cc;">:</span><span> Person) </span><span style="color:#bfbab0cc;">-&gt;</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">match</span><span> person</span><span style="color:#f29668;">.</span><span>job_title {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(title) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> is a </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> person</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#bfbab0cc;">,</span><span> title)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> doesn&#39;t have a job&quot;</span><span style="color:#bfbab0cc;">,</span><span> person</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> me</span><span style="color:#bfbab0cc;">:</span><span> Person </span><span style="color:#f29668;">=</span><span> Person {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Matthew Pagan&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">,
+</span><span>    hobby</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Coding&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    job_title</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#c2d94c;">&quot;Software Developer&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">,
+</span><span>    favorite_color</span><span style="color:#bfbab0cc;">: </span><span>Color</span><span style="color:#f29668;">::</span><span>Cyan</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> noah</span><span style="color:#bfbab0cc;">:</span><span> Person </span><span style="color:#f29668;">=</span><span> Person {
+</span><span>    name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Noah Pagan&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">,
+</span><span>    hobby</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Lego&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    job_title</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>    favorite_color</span><span style="color:#bfbab0cc;">: </span><span>Color</span><span style="color:#f29668;">::</span><span>Blue</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">handle_job_title</span><span>(me)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">handle_job_title</span><span>(noah)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Я даже получаю хороший IntelliSense для всего, пока использую VSCode, если импортирую эту функцию из модуля.</p>
+<p><img src="/imgs/posts/64fde5fa_06.png" alt="Функция Intellisense" /></p>
+<h2 id="massivy-i-vladenie">Массивы и владение</h2>
+<p>Мы можем еще больше очистить этот код. Мы объявляем и инициализируем 2 объекта Person. Мы могли бы сохранить это в массиве, а затем перебирать этот массив, выполняя функцию на каждой итерации.</p>
+<p>Вот пример того, как это реализовать с помощью Rust. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> people</span><span style="color:#bfbab0cc;">: </span><span>[Person</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">2</span><span>] </span><span style="color:#f29668;">= </span><span>[
+</span><span>    Person {
+</span><span>        name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Matthew Pagan&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">,
+</span><span>        hobby</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Coding&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        job_title</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#c2d94c;">&quot;Software Developer&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">,
+</span><span>        favorite_color</span><span style="color:#bfbab0cc;">: </span><span>Color</span><span style="color:#f29668;">::</span><span>Cyan</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    Person {
+</span><span>        name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Noah Pagan&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        age</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">,
+</span><span>        hobby</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Lego&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        job_title</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">None</span><span style="color:#bfbab0cc;">,
+</span><span>        favorite_color</span><span style="color:#bfbab0cc;">: </span><span>Color</span><span style="color:#f29668;">::</span><span>Blue</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">for</span><span> person </span><span style="color:#f29668;">in</span><span> people</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>    </span><span style="color:#f07178;">handle_job_title</span><span>(person)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p><img src="/imgs/posts/64fde5fa_07.png" alt="Реализация массива" /></p>
+<p>Чтобы это заработало, нам нужно внести некоторые незначительные изменения в реализацию нашей функции и указать функции на заимствование аргумента Person, добавив &amp; перед типом аргумента. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use super</span><span style="color:#f29668;">::</span><span style="color:#ff7733;">super</span><span style="color:#f29668;">::</span><span>types</span><span style="color:#f29668;">::</span><span>Person</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">handle_job_title</span><span>(</span><span style="color:#f29718;">person</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Person) </span><span style="color:#bfbab0cc;">-&gt;</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f29668;">&amp;</span><span>person</span><span style="color:#f29668;">.</span><span>job_title {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(title) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> is a </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> person</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#bfbab0cc;">,</span><span> title)</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">None </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> doesn&#39;t have a job&quot;</span><span style="color:#bfbab0cc;">,</span><span> person</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Это затрагивает основную функцию Rust, тему владения. Право собственности имеет 3 основных правила:</p>
+<ol>
+<li>Каждое значение в Rust имеет переменную, которая называется его владельцем.</li>
+<li>Единовременно может быть только один владелец.</li>
+<li>Когда владелец выходит за рамки, значение будет сброшено.</li>
+</ol>
+<p>Давайте создадим пару примеров, чтобы продемонстрировать идеи владения. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">add_numbers</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29718;">y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>    x </span><span style="color:#f29668;">+</span><span> y
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> number </span><span style="color:#f29668;">= </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> + </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> = </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">add_numbers</span><span>(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> number))</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> + </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> = </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">add_numbers</span><span>(</span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">,</span><span> number))</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это работает так же, как мы и ожидали, распечатывая результаты обоих вызовов функций. Поскольку целые числа являются простыми значениями с известным фиксированным размером, это работает путем помещения копии целого числа i32 в стек для значения аргумента функции.</p>
+<p>Поскольку мы делаем копии целого числа в стеке, мы придерживаемся правил владения, и число является единственным владельцем своей копии целого числа 3.</p>
+<p>Давайте попробуем это с помощью функции, которая принимает String. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_string</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">:</span><span> String) {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> x)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> name</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">String </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Matthew Pagan&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#f07178;">print_string</span><span>(name)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">print_string</span><span>(name)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это не работает. VS Code сразу выдает ошибку, когда мы пробуем это при втором вызове функции print_string.</p>
+<p><img src="/imgs/posts/64fde5fa_08.png" alt="Ошибка владения" /></p>
+<p>Ошибка говорит о том, что мы использовали перемещенное значение. Если мы посмотрим на третье правило владения, оно гласит: «Когда владелец выходит за рамки, значение теряется».</p>
+<p>В отличие от целых чисел, тип String является растущим, изменяемым, принадлежащим ему строковым типом в кодировке UTF-8. В отличие от скалярного целого числа, String помещается в кучу, гораздо более дорогое место для хранения памяти.</p>
+<p>Из-за этих затрат компилятор Rust не просто копирует значение в аргумент функции. Вместо этого функция arg становится новым владельцем этих данных.</p>
+<p>Повторюсь, когда мы вызывали print_string, мы покинули область, в которой мы объявили имя String, а аргумент функции x стал новым владельцем значения «Мэтью Пэган». После того, как функция зарегистрировала мое имя и мы покинули ее область действия, имя больше не было владельцем данных, что вызывало ошибку, когда мы пытались использовать его снова.</p>
+<p>Чтобы исправить это, нам нужно указать функции, чтобы она заимствовала только значение String и возвращала право собственности на это значение переменной name, когда мы выходим из области действия функции. Мы делаем это, добавляя &amp; перед типом аргумента функции. Ниже представлена реализация для исправления нашей ошибки перемещения. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_string</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>String) {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> x)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Matthew Pagan&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">print_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span>name)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f07178;">print_string</span><span>(</span><span style="color:#f29668;">&amp;</span><span>name)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h2 id="vyvod">Вывод</h2>
+<p>Кажется, что Rust взял лучшие части экосистемы JavaScript и превратил их в многофункциональный язык программирования, специально созданный для привлечения разработчиков к системному программированию. Я твердо признателен, что это определенно сработало со мной и привлекло нездоровое количество моего внимания.</p>
+<p>Нам остается еще очень много сделать с нашими растущими знаниями о Rust. В моем следующем сообщении в блоге мы рассмотрим, как построить этот фундамент знаний и начать работу с внешними пакетами (крэйтами) Rust для создания веб-сервера, который будет выполнять внутреннюю роль полнофункционального приложения.</p>
+<p>А пока установите, если вы еще этого не сделали, установите Rust и начните играть с ним сегодня же! На самом деле это самый простой способ заняться программированием нижнего уровня, особенно если вы из мира веб-разработки, как я.</p>
+<p>Dot Labs - это современная веб-консалтинговая компания, цель которой - помочь компаниям реализовать свои усилия по цифровой трансформации. Чтобы получить руководство по архитектуре, обучение или консультации по React, Angular, Vue, веб-компонентам, GraphQL, Node, Bazel или Polymer, посетите thisdotlabs.com.</p>
+<p>Этот Dot Media ориентирован на создание инклюзивной и образовательной сети для всех. Мы держим вас в курсе достижений современной сети с помощью мероприятий, подкастов и бесплатного контента. Чтобы узнать, посетите thisdot.co. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

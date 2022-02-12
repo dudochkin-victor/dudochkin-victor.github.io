@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Руководство для начинающих по обработке ошибок в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#ignorirovat-oshibku">Игнорировать ошибку</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#zavershit-programmu">Завершить программу</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#ispol-zuite-rezervnoe-znachenie">Используйте резервное значение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#razbeite-oshibku">Разбейте ошибку</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#svernite-neskol-ko-oshibok">Сверните несколько ошибок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#oshibki-pomeshchennye-v-ramki">Ошибки, помещенные в рамки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#prilozheniia-protiv-bibliotek">Приложения против библиотек</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#primenenie"><small>- Применение</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#biblioteka"><small>- Библиотека</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#sozdanie-pol-zovatel-skikh-oshibok">Создание пользовательских ошибок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#sozdanie-puzyrei-pol-zovatel-skikh-oshibok">Создание пузырей пользовательских ошибок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#sootvetstvie-pol-zovatel-skim-oshibkam">Соответствие пользовательским ошибкам</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-error-handling-in-rust/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Руководство для начинающих по обработке ошибок в Rust</h1>
+
+<p><a href="https://www.sheshbabu.com/posts/rust-error-handling/">Перевод</a> | Автор оригинала: Shesh</p>
+<p>Обработка ошибок в Rust сильно отличается, если вы переходите с других языков. В таких языках, как Java, JS, Python и т.д., Вы обычно генерируете исключения и возвращаете успешные значения. В Rust вы возвращаете то, что называется Result.</p>
+<p>Тип Result&lt;T, E&gt; - это перечисление, которое имеет два варианта - Ok(T) для успешного значения или Err(E) для значения ошибки: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Result</span><span>&lt;T, E&gt; {
+</span><span>   </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(T)</span><span style="color:#bfbab0cc;">,
+</span><span>   </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(E)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Возврат ошибок вместо их выдачи - это сдвиг парадигмы в обработке ошибок. Если вы новичок в Rust, сначала возникнут некоторые трения, так как это потребует от вас другого подхода к ошибкам.</p>
+<p>В этом посте я рассмотрю некоторые распространенные шаблоны обработки ошибок, чтобы вы постепенно познакомились с тем, как это делается в Rust:</p>
+<ul>
+<li>Не обращайте внимания на ошибку</li>
+<li>Завершить программу</li>
+<li>Используйте запасное значение</li>
+<li>Взрыв ошибки</li>
+<li>Множество ошибок в пузырях</li>
+<li>Ошибки в коробке</li>
+<li>Библиотеки против приложений</li>
+<li>Создавать собственные ошибки</li>
+<li>Пузырьки пользовательских ошибок</li>
+<li>Соответствие пользовательским ошибкам</li>
+</ul>
+<h2 id="ignorirovat-oshibku">Игнорировать ошибку</h2>
+<p>Начнем с простейшего сценария, при котором мы просто игнорируем ошибку. Это звучит небрежно, но имеет несколько законных вариантов использования:</p>
+<ul>
+<li>Мы создаем прототип нашего кода и не хотим тратить время на обработку ошибок.</li>
+<li>Мы уверены, что ошибки не будет.</li>
+</ul>
+<p>Допустим, мы читаем файл, который, как мы уверены, присутствует: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fs</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> content </span><span style="color:#f29668;">= </span><span>fs</span><span style="color:#f29668;">::</span><span>read_to_string(</span><span style="color:#c2d94c;">&quot;./Cargo.toml&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> content)
+</span><span>}
+</span></code></pre>
+<p>Несмотря на то, что мы знаем, что файл будет присутствовать, компилятор не имеет возможности узнать об этом. Поэтому мы используем unwrap, чтобы сообщить компилятору, что он нам доверяет и возвращает значение внутри. Если функция read_to_string возвращает значение Ok(), unwrap получит содержимое Ok и назначит его переменной содержимого. Если он вернет ошибку, он «запаникует». Panic либо завершает программу, либо выходит из текущего потока.</p>
+<p>Обратите внимание, что развёртка используется во многих примерах Rust, чтобы пропустить обработку ошибок. Это в основном сделано для удобства и не должно использоваться в реальном коде.</p>
+<h2 id="zavershit-programmu">Завершить программу</h2>
+<p>Некоторые ошибки невозможно исправить или исправить. В этих случаях лучше быстро потерпеть неудачу, прервав программу.</p>
+<p>Давайте возьмем тот же пример, что и выше - мы читаем файл, который обязательно присутствует. Представим, что для этой программы абсолютно важен этот файл, без которого он не будет работать должным образом. Если по каким-то причинам этот файл отсутствует, лучше прекратить работу программы.</p>
+<p>Мы можем использовать развёртку, как раньше, или ожидать - это то же самое, что разворачивание, но позволяет добавить дополнительное сообщение об ошибке. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fs</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> content </span><span style="color:#f29668;">= </span><span>fs</span><span style="color:#f29668;">::</span><span>read_to_string(</span><span style="color:#c2d94c;">&quot;./Cargo.toml&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(</span><span style="color:#c2d94c;">&quot;Can&#39;t read Cargo.toml&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> content)
+</span><span>}
+</span></code></pre>
+<p>См. Также: panic!</p>
+<h2 id="ispol-zuite-rezervnoe-znachenie">Используйте резервное значение</h2>
+<p>В некоторых случаях вы можете исправить ошибку, вернувшись к значению по умолчанию.</p>
+<p>Например, предположим, что мы пишем сервер, и порт, который он слушает, можно настроить с помощью переменной среды. Если переменная среды не установлена, доступ к этому значению приведет к ошибке. Но мы можем легко справиться с этим, вернувшись к значению по умолчанию. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>env</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> port </span><span style="color:#f29668;">= </span><span>env</span><span style="color:#f29668;">::</span><span>var(</span><span style="color:#c2d94c;">&quot;PORT&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#c2d94c;">&quot;3000&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> port)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Здесь мы использовали вариант разворачивания под названием unwrap_or, который позволяет нам указывать значения по умолчанию.</p>
+<p>См. Также: unwrap_or_else, unwrap_or_default</p>
+<h2 id="razbeite-oshibku">Разбейте ошибку</h2>
+<p>Если у вас недостаточно контекста для обработки ошибки, вы можете передать ошибку в вызывающую функцию.</p>
+<p>Вот надуманный пример, который использует веб-сервис для получения текущего года: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">get_current_date</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;We&#39;ve time travelled to </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">!!&quot;</span><span style="color:#bfbab0cc;">,</span><span> date)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Oh noes, we don&#39;t know which era we&#39;re in! :( </span><span style="color:#95e6cb;">\n  </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, reqwest</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;https://postman-echo.com/time/object&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let</span><span> result </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let</span><span> response </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> result {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(res) </span><span style="color:#f29668;">=&gt;</span><span> res</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err) </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err)</span><span style="color:#bfbab0cc;">,
+</span><span>  }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let</span><span> body </span><span style="color:#f29668;">=</span><span> response</span><span style="color:#f29668;">.</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let</span><span> json </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> body {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(json) </span><span style="color:#f29668;">=&gt;</span><span> json</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err) </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err)</span><span style="color:#bfbab0cc;">,
+</span><span>  }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> json[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date)
+</span><span>}
+</span></code></pre>
+<p>Внутри функции get_current_date есть два вызова функций (get и json), которые возвращают значения Result. Поскольку get_current_date не имеет контекста, что делать, когда они возвращают ошибки, он использует сопоставление с образцом для передачи ошибок в main.</p>
+<p>Использование сопоставления с образцом для обработки множественных или вложенных ошибок может сделать ваш код «зашумленным». Вместо этого мы можем переписать приведенный выше код с помощью символа? оператор: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">get_current_date</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;We&#39;ve time travelled to </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">!!&quot;</span><span style="color:#bfbab0cc;">,</span><span> date)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Oh noes, we don&#39;t know which era we&#39;re in! :( </span><span style="color:#95e6cb;">\n  </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, reqwest</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;https://postman-echo.com/time/object&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)</span><span style="color:#f29668;">?.</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> res[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date)
+</span><span>}
+</span></code></pre>
+<p>Это выглядит намного чище!</p>
+<p>? Оператор похож на разворачивание, но вместо паники он передает ошибку вызывающей функции. Следует иметь в виду, что мы можем использовать оператор? только для функций, возвращающих тип результата или параметра.</p>
+<h2 id="svernite-neskol-ko-oshibok">Сверните несколько ошибок</h2>
+<p>В предыдущем примере функции get и json возвращают ошибку reqwest::Error, которую мы передали с помощью? оператор. Но что, если вызов другой функции вернул другое значение ошибки?</p>
+<p>Давайте расширим предыдущий пример, вернув отформатированную дату вместо года: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f29668;">+ </span><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>NaiveDate</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">get_current_date</span><span>() {
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;We&#39;ve time travelled to </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">!!&quot;</span><span style="color:#bfbab0cc;">,</span><span> date)</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Oh noes, we don&#39;t know which era we&#39;re in! :( </span><span style="color:#95e6cb;">\n  </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, reqwest</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;https://postman-echo.com/time/object&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)</span><span style="color:#f29668;">?.</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">-   </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> res[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">let</span><span> formatted_date </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;months&quot;</span><span>] </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;date&quot;</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">let</span><span> parsed_date </span><span style="color:#f29668;">= </span><span>NaiveDate</span><span style="color:#f29668;">::</span><span>parse_from_str(formatted_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;%Y-%m-%d&quot;</span><span>)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> parsed_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">format</span><span>(</span><span style="color:#c2d94c;">&quot;%Y %B %d&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date)
+</span><span>  }
+</span></code></pre>
+<p>Приведенный выше код не компилируется, поскольку parse_from_str возвращает ошибку chrono::format::ParseError, а не reqwest::Error.</p>
+<p>Мы можем исправить это, упаковав ошибки: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>  </span><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>NaiveDate</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">get_current_date</span><span>() {
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;We&#39;ve time travelled to </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">!!&quot;</span><span style="color:#bfbab0cc;">,</span><span> date)</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Oh noes, we don&#39;t know which era we&#39;re in! :( </span><span style="color:#95e6cb;">\n  </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>  }
+</span><span>
+</span><span style="color:#f29668;">- </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, reqwest</span><span style="color:#f29668;">::</span><span>Error&gt; {
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn std</span><span style="color:#f29668;">::</span><span>error</span><span style="color:#f29668;">::</span><span>Error&gt;&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;https://postman-echo.com/time/object&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)</span><span style="color:#f29668;">?.</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> formatted_date </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;months&quot;</span><span>] </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;date&quot;</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> parsed_date </span><span style="color:#f29668;">= </span><span>NaiveDate</span><span style="color:#f29668;">::</span><span>parse_from_str(formatted_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;%Y-%m-%d&quot;</span><span>)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> parsed_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">format</span><span>(</span><span style="color:#c2d94c;">&quot;%Y %B %d&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date)
+</span><span>  }
+</span></code></pre>
+<p>Возврат объекта-трэйта Box<dyn std::error::Error> очень удобен, когда мы хотим вернуть несколько ошибок!</p>
+<p>Также: во всяком случае, эйр</p>
+<h2 id="oshibki-pomeshchennye-v-ramki">Ошибки, помещенные в рамки</h2>
+<p>Пока что мы только распечатали ошибки в основной функции, но не обработали их. Если мы хотим обрабатывать и восстанавливать ошибки в штучной упаковке, нам нужно «уменьшить» их: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>  </span><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>NaiveDate</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">get_current_date</span><span>() {
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;We&#39;ve time travelled to </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">!!&quot;</span><span style="color:#bfbab0cc;">,</span><span> date)</span><span style="color:#bfbab0cc;">,
+</span><span style="color:#f29668;">-     </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Oh noes, we don&#39;t know which era we&#39;re in! :( </span><span style="color:#95e6cb;">\n  </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span style="color:#f29668;">+     </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span style="color:#f29668;">+       </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Oh noes, we don&#39;t know which era we&#39;re in! :(&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+       </span><span style="color:#ff7733;">if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(err) </span><span style="color:#f29668;">=</span><span> e</span><span style="color:#f29668;">.</span><span>downcast_ref</span><span style="color:#f29668;">::</span><span>&lt;reqwest</span><span style="color:#f29668;">::</span><span>Error&gt;() {
+</span><span style="color:#f29668;">+         </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Request Error: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> err)
+</span><span style="color:#f29668;">+       </span><span>} </span><span style="color:#ff7733;">else if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(err) </span><span style="color:#f29668;">=</span><span> e</span><span style="color:#f29668;">.</span><span>downcast_ref</span><span style="color:#f29668;">::</span><span>&lt;chrono</span><span style="color:#f29668;">::</span><span>format</span><span style="color:#f29668;">::</span><span>ParseError&gt;() {
+</span><span style="color:#f29668;">+         </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Parse Error: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> err)
+</span><span style="color:#f29668;">+       </span><span>}
+</span><span style="color:#f29668;">+     </span><span>}
+</span><span>    }
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn std</span><span style="color:#f29668;">::</span><span>error</span><span style="color:#f29668;">::</span><span>Error&gt;&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;https://postman-echo.com/time/object&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)</span><span style="color:#f29668;">?.</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> formatted_date </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;months&quot;</span><span>] </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;date&quot;</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> parsed_date </span><span style="color:#f29668;">= </span><span>NaiveDate</span><span style="color:#f29668;">::</span><span>parse_from_str(formatted_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;%Y-%m-%d&quot;</span><span>)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> parsed_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">format</span><span>(</span><span style="color:#c2d94c;">&quot;%Y %B %d&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date)
+</span><span>  }
+</span></code></pre>
+<p>Обратите внимание, как нам нужно знать детали реализации (различные ошибки внутри) get_current_date, чтобы иметь возможность понижать их внутри main.</p>
+<p>См. Также: downcast, downcast_mut</p>
+<h2 id="prilozheniia-protiv-bibliotek">Приложения против библиотек</h2>
+<p>Как упоминалось ранее, обратная сторона упакованных ошибок заключается в том, что если мы хотим обрабатывать лежащие в основе ошибки, нам необходимо знать детали реализации. Когда мы возвращаем что-то как Box<dyn std::error::Error>, информация о конкретном типе стирается. Чтобы обрабатывать различные ошибки по-разному, нам нужно преобразовать их в конкретные типы, и это приведение может завершиться ошибкой во время выполнения.</p>
+<p>Однако говорить, что что-то является «обратной стороной», без контекста бесполезно. Хорошее практическое правило - задать вопрос, является ли код, который вы пишете, «приложением» или «библиотекой»:</p>
+<h3 id="primenenie">Применение</h3>
+<ul>
+<li>Код, который вы пишете, будет использоваться конечными пользователями.</li>
+<li>Большинство ошибок, генерируемых кодом приложения, не обрабатываются, а регистрируются в журнале или сообщаются пользователю.</li>
+<li>Это нормально, если ошибки помещены в рамки.</li>
+</ul>
+<h3 id="biblioteka">Библиотека</h3>
+<ul>
+<li>Код, который вы пишете, будет использоваться другим кодом. «Библиотекой» могут быть крэйти с открытым исходным кодом, внутренние библиотеки и т.д.</li>
+<li>Ошибки являются частью API вашей библиотеки, поэтому ваши потребители знают, каких ошибок ожидать и от которых следует исправляться.</li>
+<li>Ошибки из вашей библиотеки часто обрабатываются вашими потребителями, поэтому они должны быть структурированы и просты для выполнения исчерпывающего сопоставления.</li>
+<li>Если вы возвращаете ошибки в коробках, ваши потребители должны знать об ошибках, созданных вашим кодом, вашими зависимостями и т.д.!</li>
+<li>Вместо ошибок в штучной упаковке мы можем возвращать пользовательские ошибки.</li>
+</ul>
+<h2 id="sozdanie-pol-zovatel-skikh-oshibok">Создание пользовательских ошибок</h2>
+<p>Для кода библиотеки мы можем преобразовать все ошибки в наши собственные ошибки и распространять их вместо ошибок в коробках. В нашем примере в настоящее время есть две ошибки - reqwest::Error и chrono::format::ParseError. Мы можем преобразовать их в MyCustomError::HttpError и MyCustomError::ParseError соответственно.</p>
+<p>Начнем с создания перечисления для хранения двух наших вариантов ошибок: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// error.rs
+</span><span>
+</span><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">MyCustomError </span><span>{
+</span><span>  HttpError</span><span style="color:#bfbab0cc;">,
+</span><span>  ParseError</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Трэйта Error требует, чтобы мы реализовали трэйты Debug и Display: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// error.rs
+</span><span>
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fmt</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug)]
+</span><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">MyCustomError </span><span>{
+</span><span>  HttpError</span><span style="color:#bfbab0cc;">,
+</span><span>  ParseError</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>std</span><span style="color:#f29668;">::</span><span>error</span><span style="color:#f29668;">::</span><span>Error </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyCustomError </span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>fmt</span><span style="color:#f29668;">::</span><span>Display </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyCustomError </span><span>{
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">fmt</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>fmt</span><span style="color:#f29668;">::</span><span>Formatter) </span><span style="color:#bfbab0cc;">-&gt; </span><span>fmt</span><span style="color:#f29668;">::</span><span>Result {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self </span><span>{
+</span><span>      MyCustomError</span><span style="color:#f29668;">::</span><span>HttpError </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">write!</span><span>(f, </span><span style="color:#c2d94c;">&quot;HTTP Error&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>      MyCustomError</span><span style="color:#f29668;">::</span><span>ParseError </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">write!</span><span>(f, </span><span style="color:#c2d94c;">&quot;Parse Error&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Мы создали собственную ошибку!</p>
+<p>Очевидно, что это простой пример, поскольку варианты ошибки не содержат много информации об ошибке. Но этого должно быть достаточно в качестве отправной точки для создания более сложных и реалистичных пользовательских ошибок. Вот несколько примеров из реальной жизни: ripgrep, reqwest, csv и serde_json.</p>
+<p>См. Также: thiserror, snafu</p>
+<h2 id="sozdanie-puzyrei-pol-zovatel-skikh-oshibok">Создание пузырей пользовательских ошибок</h2>
+<p>Давайте обновим наш код, чтобы он возвращал только что созданные пользовательские ошибки: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>  </span><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span>
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">error</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>NaiveDate</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">use </span><span>error</span><span style="color:#f29668;">::</span><span>MyCustomError</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// skipped, will get back later
+</span><span>  }
+</span><span>
+</span><span style="color:#f29668;">- </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;dyn std</span><span style="color:#f29668;">::</span><span>error</span><span style="color:#f29668;">::</span><span>Error&gt;&gt; {
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, MyCustomError&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;https://postman-echo.com/time/object&quot;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">-   </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)</span><span style="color:#f29668;">?.</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)
+</span><span style="color:#f29668;">+     .</span><span style="color:#f07178;">map_err</span><span>(|_| MyCustomError</span><span style="color:#f29668;">::</span><span>HttpError)</span><span style="color:#f29668;">?
+</span><span style="color:#f29668;">+     .</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()
+</span><span style="color:#f29668;">+     .</span><span style="color:#f07178;">map_err</span><span>(|_| MyCustomError</span><span style="color:#f29668;">::</span><span>HttpError)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> formatted_date </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;months&quot;</span><span>] </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;date&quot;</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">-   </span><span style="color:#ff7733;">let</span><span> parsed_date </span><span style="color:#f29668;">= </span><span>NaiveDate</span><span style="color:#f29668;">::</span><span>parse_from_str(formatted_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;%Y-%m-%d&quot;</span><span>)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">let</span><span> parsed_date </span><span style="color:#f29668;">= </span><span>NaiveDate</span><span style="color:#f29668;">::</span><span>parse_from_str(formatted_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;%Y-%m-%d&quot;</span><span>)
+</span><span style="color:#f29668;">+     .</span><span style="color:#f07178;">map_err</span><span>(|_| MyCustomError</span><span style="color:#f29668;">::</span><span>ParseError)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> parsed_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">format</span><span>(</span><span style="color:#c2d94c;">&quot;%Y %B %d&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date)
+</span><span>  }
+</span></code></pre>
+<p>Обратите внимание, как мы используем map_err для преобразования ошибки из одного типа в другой.</p>
+<p>Но в результате все стало многословным - наша функция завалена этими вызовами map_err. Мы можем реализовать трейт From для автоматического определения типов ошибок, когда мы используем? оператор: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>  </span><span style="font-style:italic;color:#5c6773;">// error.rs
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>fmt</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug)]
+</span><span>  </span><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">MyCustomError </span><span>{
+</span><span>    HttpError</span><span style="color:#bfbab0cc;">,
+</span><span>    ParseError</span><span style="color:#bfbab0cc;">,
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">impl </span><span>std</span><span style="color:#f29668;">::</span><span>error</span><span style="color:#f29668;">::</span><span>Error </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyCustomError </span><span>{}
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">impl </span><span>fmt</span><span style="color:#f29668;">::</span><span>Display </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyCustomError </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">fmt</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>fmt</span><span style="color:#f29668;">::</span><span>Formatter) </span><span style="color:#bfbab0cc;">-&gt; </span><span>fmt</span><span style="color:#f29668;">::</span><span>Result {
+</span><span>      </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self </span><span>{
+</span><span>        MyCustomError</span><span style="color:#f29668;">::</span><span>HttpError </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">write!</span><span>(f, </span><span style="color:#c2d94c;">&quot;HTTP Error&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        MyCustomError</span><span style="color:#f29668;">::</span><span>ParseError </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">write!</span><span>(f, </span><span style="color:#c2d94c;">&quot;Parse Error&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>      }
+</span><span>    }
+</span><span>  }
+</span><span>
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;reqwest</span><span style="color:#f29668;">::</span><span>Error&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyCustomError </span><span>{
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29668;">_</span><span>: reqwest</span><span style="color:#f29668;">::</span><span>Error) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span style="color:#f29668;">+     </span><span>MyCustomError</span><span style="color:#f29668;">::</span><span>HttpError
+</span><span style="color:#f29668;">+   </span><span>}
+</span><span style="color:#f29668;">+ </span><span>}
+</span><span>
+</span><span style="color:#f29668;">+ </span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;chrono</span><span style="color:#f29668;">::</span><span>format</span><span style="color:#f29668;">::</span><span>ParseError&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">MyCustomError </span><span>{
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29668;">_</span><span>: chrono</span><span style="color:#f29668;">::</span><span>format</span><span style="color:#f29668;">::</span><span>ParseError) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span style="color:#f29668;">+     </span><span>MyCustomError</span><span style="color:#f29668;">::</span><span>ParseError
+</span><span style="color:#f29668;">+   </span><span>}
+</span><span style="color:#f29668;">+ </span><span>}
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">error</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>NaiveDate</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">use </span><span>error</span><span style="color:#f29668;">::</span><span>MyCustomError</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// skipped, will get back later
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, MyCustomError&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;https://postman-echo.com/time/object&quot;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">-   </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)
+</span><span style="color:#f29668;">-     .</span><span style="color:#f07178;">map_err</span><span>(|_| MyCustomError</span><span style="color:#f29668;">::</span><span>HttpError)</span><span style="color:#f29668;">?
+</span><span style="color:#f29668;">-     .</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()
+</span><span style="color:#f29668;">-     .</span><span style="color:#f07178;">map_err</span><span>(|_| MyCustomError</span><span style="color:#f29668;">::</span><span>HttpError)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)</span><span style="color:#f29668;">?.</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> formatted_date </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;months&quot;</span><span>] </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;date&quot;</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">-   </span><span style="color:#ff7733;">let</span><span> parsed_date </span><span style="color:#f29668;">= </span><span>NaiveDate</span><span style="color:#f29668;">::</span><span>parse_from_str(formatted_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;%Y-%m-%d&quot;</span><span>)
+</span><span style="color:#f29668;">-     .</span><span style="color:#f07178;">map_err</span><span>(|_| MyCustomError</span><span style="color:#f29668;">::</span><span>ParseError)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">+   </span><span style="color:#ff7733;">let</span><span> parsed_date </span><span style="color:#f29668;">= </span><span>NaiveDate</span><span style="color:#f29668;">::</span><span>parse_from_str(formatted_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;%Y-%m-%d&quot;</span><span>)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> parsed_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">format</span><span>(</span><span style="color:#c2d94c;">&quot;%Y %B %d&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date)
+</span><span>  }
+</span></code></pre>
+<p>Мы удалили map_err, и код выглядит намного чище!</p>
+<p>Однако трейт From не является магическим, и бывают случаи, когда нам нужно использовать map_err. В приведенном выше примере мы переместили преобразование типа из функции get_current_date в From<X> для реализации MyCustomError. Это хорошо работает, когда информацию, необходимую для преобразования одной ошибки в MyCustomError, можно получить из исходного объекта ошибки. Если нет, нам нужно использовать map_err внутри get_current_date.</p>
+<h2 id="sootvetstvie-pol-zovatel-skim-oshibkam">Соответствие пользовательским ошибкам</h2>
+<p>До сих пор мы игнорировали изменения в main. Вот как мы можем обрабатывать пользовательские ошибки: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>  </span><span style="font-style:italic;color:#5c6773;">// main.rs
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">error</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">use </span><span>chrono</span><span style="color:#f29668;">::</span><span>NaiveDate</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">use </span><span>error</span><span style="color:#f29668;">::</span><span>MyCustomError</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>collections</span><span style="color:#f29668;">::</span><span>HashMap</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f07178;">get_current_date</span><span>() {
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;We&#39;ve time travelled to </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">!!&quot;</span><span style="color:#bfbab0cc;">,</span><span> date)</span><span style="color:#bfbab0cc;">,
+</span><span>      </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>        </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Oh noes, we don&#39;t know which era we&#39;re in! :(&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#f29668;">-       </span><span style="color:#ff7733;">if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(err) </span><span style="color:#f29668;">=</span><span> e</span><span style="color:#f29668;">.</span><span>downcast_ref</span><span style="color:#f29668;">::</span><span>&lt;reqwest</span><span style="color:#f29668;">::</span><span>Error&gt;() {
+</span><span style="color:#f29668;">-         </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Request Error: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> err)
+</span><span style="color:#f29668;">-       </span><span>} </span><span style="color:#ff7733;">else if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(err) </span><span style="color:#f29668;">=</span><span> e</span><span style="color:#f29668;">.</span><span>downcast_ref</span><span style="color:#f29668;">::</span><span>&lt;chrono</span><span style="color:#f29668;">::</span><span>format</span><span style="color:#f29668;">::</span><span>ParseError&gt;() {
+</span><span style="color:#f29668;">-         </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Parse Error: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> err)
+</span><span style="color:#f29668;">-       </span><span>}
+</span><span style="color:#f29668;">+       </span><span style="color:#ff7733;">match</span><span> e {
+</span><span style="color:#f29668;">+         </span><span>MyCustomError</span><span style="color:#f29668;">::</span><span>HttpError </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Request Error: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span style="color:#f29668;">+         </span><span>MyCustomError</span><span style="color:#f29668;">::</span><span>ParseError </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">eprintln!</span><span>(</span><span style="color:#c2d94c;">&quot;Parse Error: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#bfbab0cc;">,
+</span><span style="color:#f29668;">+       </span><span>}
+</span><span>      }
+</span><span>    }
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_current_date</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, MyCustomError&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> url </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;https://postman-echo.com/time/object&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>reqwest</span><span style="color:#f29668;">::</span><span>blocking</span><span style="color:#f29668;">::</span><span>get(url)</span><span style="color:#f29668;">?.</span><span>json</span><span style="color:#f29668;">::</span><span>&lt;HashMap&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, </span><span style="color:#ff7733;">i32</span><span>&gt;&gt;()</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> formatted_date </span><span style="color:#f29668;">= </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">-</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;years&quot;</span><span>]</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;months&quot;</span><span>] </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,</span><span> res[</span><span style="color:#c2d94c;">&quot;date&quot;</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> parsed_date </span><span style="color:#f29668;">= </span><span>NaiveDate</span><span style="color:#f29668;">::</span><span>parse_from_str(formatted_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;%Y-%m-%d&quot;</span><span>)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> date </span><span style="color:#f29668;">=</span><span> parsed_date</span><span style="color:#f29668;">.</span><span style="color:#f07178;">format</span><span>(</span><span style="color:#c2d94c;">&quot;%Y %B %d&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(date)
+</span><span>  }
+</span></code></pre>
+<p>Обратите внимание, как, в отличие от ошибок в штучной упаковке, мы можем сопоставить варианты внутри перечисления MyCustomError.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Спасибо за чтение! Надеюсь, этот пост был полезен для ознакомления с основами обработки ошибок в Rust. Я добавил примеры в репозиторий на GitHub, который вы можете использовать на практике. Если у вас возникнут дополнительные вопросы, свяжитесь со мной по адресу sheshbabu [at] gmail.com. Не стесняйтесь подписываться на меня в Twitter, чтобы увидеть больше подобных сообщений :) </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

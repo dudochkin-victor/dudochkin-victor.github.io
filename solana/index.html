@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Документация Solana | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#obshchaia-informatsiia">Общая информация</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#koshel-ki">Кошельки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#steiking">Стэйкинг</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#interfeis-komandnoi-stroki">Интерфейс командной строки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#razrabotka">Разработка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#integratsiia">Интеграция</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#validatsiia">Валидация</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#klastery">Кластеры</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#arkhitektura">Архитектура</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#ekonomika">Экономика</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/#design-proposals">Design proposals</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<div class="heading-text">Документация Solana</div>
+<h2 id="obshchaia-informatsiia">Общая информация</h2>
+<ul>
+<li><a href="introduction/">Введение</a></li>
+<li><a href="terminology/">Терминология</a></li>
+<li><a href="history/">История</a></li>
+</ul>
+<h2 id="koshel-ki">Кошельки</h2>
+<ul>
+<li><a href="wallet-guide/">Руководство по кошельку Solana</a></li>
+<li><a href="wallet-guide/apps/">Кошельки для мобильных приложений</a></li>
+<li>Веб-кошельки
+<ul>
+<li><a href="wallet-guide/web-wallets/">Веб-кошельки</a></li>
+<li><a href="wallet-guide/solflare/">Веб-кошелек SolFlare</a></li>
+</ul>
+</li>
+<li>Hardware Wallets
+<ul>
+<li><a href="wallet-guide/ledger-live/">Ledger Nano S и Nano X</a></li>
+</ul>
+</li>
+<li>Command-line Wallets
+<ul>
+<li><a href="wallet-guide/cli/">Кошельки командной строки</a></li>
+<li><a href="wallet-guide/paper-wallet/">Бумажный кошелек</a></li>
+<li>Hardware Wallets
+<ul>
+<li><a href="wallet-guide/hardware-wallets/">Использование аппаратных кошельков в Solana CLI</a></li>
+<li><a href="wallet-guide/hardware-wallets/ledger/">Ledger Nano</a></li>
+</ul>
+</li>
+<li><a href="wallet-guide/file-system-wallet/">Кошелек файловой системы</a></li>
+</ul>
+</li>
+<li><a href="wallet-guide/support/">Поддержка / устранение неполадок</a></li>
+</ul>
+<h2 id="steiking">Стэйкинг</h2>
+<ul>
+<li><a href="staking/">Стэйкинг на Solana</a></li>
+<li><a href="staking/stake-accounts/">Структура стейкинг-счета</a></li>
+</ul>
+<h2 id="interfeis-komandnoi-stroki">Интерфейс командной строки</h2>
+<ul>
+<li><a href="cli/">Руководство по командной строке</a></li>
+<li><a href="cli/install-solana-cli-tools/">Установка набора инструментов Solana</a></li>
+<li><a href="cli/conventions/">Использование Solana CLI</a></li>
+<li><a href="cli/choose-a-cluster/">Подключение к кластеру</a></li>
+<li><a href="cli/transfer-tokens/">Отправка и получение токенов</a></li>
+<li><a href="cli/delegate-stake/">Стэйкинг</a></li>
+<li><a href="cli/deploy-a-program/">Деплой программ</a></li>
+<li><a href="offline-signing/">Подписание офлайн-транзакций</a></li>
+<li><a href="offline-signing/durable-nonce/">Одноразовые номера устойчивых транзакций</a></li>
+<li><a href="cli/usage/">CLI Usage Reference</a></li>
+</ul>
+<h2 id="razrabotka">Разработка</h2>
+<ul>
+<li>Programming Model
+<ul>
+<li><a href="developing/programming-model/overview/">Обзор</a></li>
+<li><a href="developing/programming-model/transactions/">Транзакции</a></li>
+<li><a href="developing/programming-model/accounts/">Учетные записи</a></li>
+<li><a href="developing/programming-model/runtime/">Runtime</a></li>
+<li><a href="developing/programming-model/calling-between-programs/">Вызовы между программами</a></li>
+</ul>
+</li>
+<li>Clients
+<ul>
+<li><a href="developing/clients/jsonrpc-api/">JSON RPC API</a></li>
+<li><a href="developing/clients/javascript-api/">Web3 JavaScript API</a></li>
+<li><a href="developing/clients/javascript-reference/">Справочник по Web3 API</a></li>
+<li><a href="developing/clients/rust-api/">Rust API</a></li>
+</ul>
+</li>
+<li>Runtime Facilities
+<ul>
+<li><a href="developing/runtime-facilities/programs/">Нативные программы</a></li>
+<li><a href="developing/runtime-facilities/sysvars/">Sysvar Cluster Data</a></li>
+</ul>
+</li>
+<li>On-Chain Programs
+<ul>
+<li><a href="developing/on-chain-programs/overview/">Обзор</a></li>
+<li><a href="developing/on-chain-programs/developing-rust/">Разработка на Rust</a></li>
+<li><a href="developing/on-chain-programs/developing-c/">Разработка на C</a></li>
+<li><a href="developing/on-chain-programs/deploying/">Развертывание</a></li>
+<li><a href="developing/on-chain-programs/debugging/">Отладка</a></li>
+<li><a href="developing/on-chain-programs/examples/">Примеры</a></li>
+<li><a href="developing/on-chain-programs/faq/">FAQ</a></li>
+</ul>
+</li>
+<li><a href="developing/test-validator/">Тестовый валидатор Solana</a></li>
+<li><a href="developing/backwards-compatibility/">Политика обратной совместимости</a></li>
+<li><a href="developing/plugins/accountsdb-plugin/">Плагины</a></li>
+<li>Учебники
+<ul>
+<li><a href="from-scratch/">Создание Solana dApp c нуля</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="integratsiia">Интеграция</h2>
+<ul>
+<li><a href="integrations/exchange/">Добавьте Солану на свою биржу</a></li>
+</ul>
+<h2 id="validatsiia">Валидация</h2>
+<ul>
+<li><a href="running-validator/">Работа валидатора</a></li>
+<li><a href="running-validator/validator-reqs/">Требования к валидатору</a></li>
+<li><a href="running-validator/validator-start/">Запуск валидатора</a></li>
+<li><a href="running-validator/vote-accounts/">Управление учетными записями для голосования</a></li>
+<li><a href="running-validator/validator-stake/">Стэйкинг</a></li>
+<li><a href="running-validator/validator-monitor/">Мониторинг валидатора</a></li>
+<li><a href="running-validator/validator-info/">Публикация информации о валидаторе</a></li>
+<li><a href="running-validator/validator-failover/">Настройка аварийного переключения</a></li>
+<li><a href="running-validator/validator-troubleshoot/">Исправление проблем</a></li>
+</ul>
+<h2 id="klastery">Кластеры</h2>
+<ul>
+<li><a href="clusters/">Кластеры Solana</a></li>
+<li><a href="cluster/rpc-endpoints/">Конечные точки RPC кластера Solana</a></li>
+<li><a href="cluster/bench-tps/">Бенчмарк кластера</a></li>
+<li><a href="cluster/performance-metrics/">Показатели эффективности</a></li>
+</ul>
+<h2 id="arkhitektura">Архитектура</h2>
+<ul>
+<li>Cluster
+<ul>
+<li><a href="cluster/overview/">Кластер Solana</a></li>
+<li><a href="cluster/synchronization/">Синхронизация</a></li>
+<li><a href="cluster/leader-rotation/">Ротация лидеров</a></li>
+<li><a href="cluster/fork-generation/">Генерация форков</a></li>
+<li><a href="cluster/managing-forks/">Управление форками</a></li>
+<li><a href="cluster/turbine-block-propagation/">Распространение блока турбины</a></li>
+<li><a href="cluster/vote-signing/">Безопасное подписание голосов</a></li>
+<li><a href="cluster/stake-delegation-and-rewards/">Делегирование ставок и вознаграждения</a></li>
+</ul>
+</li>
+<li>Validator
+<ul>
+<li><a href="validator/anatomy/">Анатомия валидатора</a></li>
+<li><a href="validator/tpu/">TPU</a></li>
+<li><a href="validator/tvu/">TVU</a></li>
+<li><a href="validator/blockstore/">Blockstore</a></li>
+<li><a href="validator/gossip/">Сервис Gossip</a></li>
+<li><a href="validator/runtime/">Runtime</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="ekonomika">Экономика</h2>
+<ul>
+<li><a href="economics-overview/">Обзор экономики Соланы</a></li>
+<li>Inflation Design
+<ul>
+<li><a href="inflation/terminology/">Терминология</a></li>
+<li><a href="inflation/inflation-schedule/">Предлагаемый график инфляции Solana</a></li>
+<li><a href="inflation/adjusted-staking-yield/">Скорректированная доходность по стейкингу</a></li>
+</ul>
+</li>
+<li><a href="transaction-fees/">Transaction Fees</a></li>
+<li><a href="storage-rent-economics/">Экономика аренды хранилища</a></li>
+</ul>
+<h2 id="design-proposals">Design proposals</h2>
+<ul>
+<li>Implemented
+<ul>
+<li><a href="implemented-proposals/implemented-proposals/">Реализованные проектные предложения</a></li>
+<li><a href="implemented-proposals/abi-management/">Процесс управления Solana ABI</a></li>
+<li><a href="implemented-proposals/bank-timestamp-correction/">Коррекция метки времени банка</a></li>
+<li><a href="implemented-proposals/commitment/">Обязательство</a></li>
+<li><a href="implemented-proposals/durable-tx-nonces/">Одноразовые номера устойчивых транзакций</a></li>
+<li><a href="implemented-proposals/installer/">Cluster Software Installation and Updates</a></li>
+<li><a href="implemented-proposals/instruction-introspection/">Интроспекция инструкций</a></li>
+<li><a href="implemented-proposals/leader-leader-transition/">Переход от лидера к лидеру</a></li>
+<li><a href="implemented-proposals/leader-validator-transition/">Переход от лидера к валидатору</a></li>
+<li><a href="implemented-proposals/persistent-account-storage/">Постоянное хранилище учетных записей</a></li>
+<li><a href="implemented-proposals/readonly-accounts/">Аккаунты только для чтения</a></li>
+<li><a href="implemented-proposals/reliable-vote-transmission/">Надежная передача голоса</a></li>
+<li><a href="implemented-proposals/rent/">Аренда</a></li>
+<li><a href="implemented-proposals/repair-service/">Служба восстановления</a></li>
+<li><a href="implemented-proposals/rpc-transaction-history/">Долгосрочная история транзакций RPC</a></li>
+<li><a href="implemented-proposals/snapshot-verification/">Проверка снапшотов</a></li>
+<li><a href="implemented-proposals/staking-rewards/">Награды за стекинг</a></li>
+<li><a href="implemented-proposals/testing-programs/">Программы тестирования</a></li>
+<li><a href="implemented-proposals/tower-bft/">Tower BFT</a></li>
+<li><a href="implemented-proposals/transaction-fees/">Детерминированные комиссии за транзакции</a></li>
+<li><a href="implemented-proposals/validator-timestamp-oracle/">Валидатор оракла Отметки времени</a></li>
+</ul>
+</li>
+<li>Accepted
+<ul>
+<li><a href="proposals/accepted-design-proposals/">Принятые предложения по дизайну</a></li>
+<li><a href="proposals/bankless-leader/">Безбанковский лидер</a></li>
+<li><a href="proposals/block-confirmation/">Подтверждение блокировки</a></li>
+<li><a href="proposals/cluster-test-framework/">Платформа кластерного тестирования</a></li>
+<li><a href="proposals/embedding-move/">Встраивание языка перемещения</a></li>
+<li><a href="proposals/interchain-transaction-verification/">Межсетевая проверка транзакций</a></li>
+<li><a href="proposals/ledger-replication-to-implement/">Репликация леджера</a></li>
+<li><a href="proposals/optimistic-confirmation-and-slashing/">Оптимистическое подтверждение и слэшинг</a></li>
+<li><a href="proposals/optimistic-confirmation/">Optimistic Confirmation</a></li>
+<li><a href="proposals/rip-curl/">RiP Curl: RPC с малой задержкой, ориентированный на транзакции</a></li>
+<li><a href="proposals/rust-clients/">Rust Клиенты</a></li>
+<li><a href="proposals/simple-payment-and-state-verification/">Простая оплата и проверка состояния</a></li>
+<li><a href="proposals/slashing/">Правила Слэшинга</a></li>
+<li><a href="proposals/snapshot-verification/">Проверка снапшотов</a></li>
+<li><a href="proposals/tick-verification/">Проверка отметок</a></li>
+<li><a href="proposals/transactions-v2/">Transactions v2 — таблицы поиска адресов в цепочке</a></li>
+<li><a href="proposals/validator-proposal/">Валидатор</a></li>
+<li><a href="proposals/vote-signing-to-implement/">Безопасное подписание голосов</a></li>
+</ul>
+</li>
+</ul>
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web3 JavaScript API | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#chto-takoe-solana-web3-js">Что такое Solana-Web3.js?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#obshchaia-terminologiia">Общая терминология</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#nachinaia">Начиная</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#ustanovka"><small>- Установка</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#ispol-zovanie"><small>- Использование</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#bystryi-start">Быстрый старт</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#podkliuchenie-k-koshel-ku"><small>- Подключение к кошельку</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#sozdanie-i-otpravka-tranzaktsii"><small>- Создание и отправка транзакций</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-api/#vzaimodeistvie-s-pol-zovatel-skimi-programmami"><small>- Взаимодействие с пользовательскими программами</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Web3 JavaScript API</h1>
+
+<h2 id="chto-takoe-solana-web3-js">Что такое Solana-Web3.js?</h2>
+<p>Библиотека Solana-Web3.js призвана обеспечить полное покрытие Solana. Библиотека была создана на основе <a href="https://docs.solana.com/developing/clients/jsonrpc-api">JSON RPC API Solana</a>.</p>
+<h2 id="obshchaia-terminologiia">Общая терминология</h2>
+<table><thead><tr><th>Term</th><th>Definition</th></tr></thead><tbody>
+<tr><td>Program</td><td>Исполняемый код без сохранения состояния, написанный для интерпретации инструкций. Программы способны выполнять действия на основе предоставленных инструкций.</td></tr>
+<tr><td>Instruction</td><td>Наименьшая единица программы, которую клиент может включить в транзакцию. В своем коде обработки инструкция может содержать один или несколько межпрограммных вызовов.</td></tr>
+<tr><td>Transaction</td><td>Одна или несколько инструкций, подписанных клиентом с использованием одной или нескольких пар ключей и выполняемых атомарно только с двумя возможными результатами: успех или неудача.</td></tr>
+</tbody></table>
+<p>Полный список терминов см. в разделе <a href="https://docs.solana.com/terminology#cross-program-invocation">Терминология Solana</a>.</p>
+<h2 id="nachinaia">Начиная</h2>
+<h3 id="ustanovka">Установка</h3>
+<h4 id="yarn">yarn</h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> yarn add @solana/web3.js
+</span></code></pre>
+<h4 id="npm">npm</h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> npm install</span><span style="color:#f29718;"> --save</span><span> @solana/web3.js
+</span></code></pre>
+<h4 id="bandl">Бандл</h4>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="font-style:italic;color:#5c6773;">&lt;!-- Development (un-minified) --&gt;
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">script </span><span style="color:#ffb454;">src</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js&quot;</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">script</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">&lt;!-- Production (minified) --&gt;
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">script </span><span style="color:#ffb454;">src</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js&quot;</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">script</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<h3 id="ispol-zovanie">Использование</h3>
+<h4 id="javascript">Javascript</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>solanaWeb3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(solanaWeb3)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h4 id="es6">ES6</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">import </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">as </span><span>solanaWeb3 </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(solanaWeb3)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h4 id="bandl-dlia-brauzera">Бандл для браузера</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="font-style:italic;color:#5c6773;">// solanaWeb3 is provided in the global namespace by the bundle script
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(solanaWeb3)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h2 id="bystryi-start">Быстрый старт</h2>
+<h3 id="podkliuchenie-k-koshel-ku">Подключение к кошельку</h3>
+<p>Чтобы пользователи могли использовать ваше dApp или приложение на Solana, им необходимо получить доступ к своей паре ключей. Keypair — это закрытый ключ с соответствующим открытым ключом, используемый для подписи транзакций.</p>
+<p>Есть два способа получить пару ключей:</p>
+<ol>
+<li>Создайте новую пару ключей</li>
+<li>Получите пару ключей, используя секретный ключ</li>
+</ol>
+<p>Вы можете получить новую пару ключей следующим образом:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{Keypair} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>keypair </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Это создаст новую пару ключей, которую пользователь сможет финансировать и использовать в вашем приложении.</p>
+<p>Вы можете разрешить ввод секретного ключа с помощью текстового поля и получить пару ключей с помощью <code>Keypair.fromSecretKey(secretKey)</code>.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{Keypair} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>secretKey </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Uint8Array</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>([
+</span><span>  </span><span style="color:#f29718;">202</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">171</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">192</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">129</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">150</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">189</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">204</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">241</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">142</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">71</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">205</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">81</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">97</span><span style="color:#bfbab0cc;">,   </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">176</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">48</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">81</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">45</span><span style="color:#bfbab0cc;">,   </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">96</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">138</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="color:#f29718;">220</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">132</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">231</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">131</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">120</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">77</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">66</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">40</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">97</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">172</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">91</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="color:#f29718;">245</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">84</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">221</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">157</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">190</span><span style="color:#bfbab0cc;">,   </span><span style="color:#f29718;">9</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">145</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">176</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">130</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">25</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">43</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="color:#f29718;">72</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">107</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">190</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">229</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">75</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">88</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">191</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">136</span><span style="color:#bfbab0cc;">,   </span><span style="color:#f29718;">7</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">167</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">109</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="color:#f29718;">91</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">170</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">164</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">186</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">15</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">142</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">36</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">12</span><span style="color:#bfbab0cc;">,  </span><span style="color:#f29718;">23
+</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>keypair </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromSecretKey</span><span>(secretKey)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Сегодня многие кошельки позволяют пользователям использовать свою пару ключей с помощью различных расширений или веб-кошельков. Общая рекомендация — использовать для подписи транзакций кошельки, а не пары ключей. Кошелек создает слой разделения между dApp и парой ключей, гарантируя, что dApp никогда не получит доступ к секретному ключу. Вы можете найти способы подключения к внешним кошелькам с помощью библиотеки <a href="https://github.com/solana-labs/wallet-adapter">wallet-adapter</a>.</p>
+<h3 id="sozdanie-i-otpravka-tranzaktsii">Создание и отправка транзакций</h3>
+<p>Чтобы взаимодействовать с программами на Solana, вы создаете, подписываете и отправляете транзакции в сеть. Транзакции представляют собой наборы инструкций с подписями. Порядок, в котором инструкции существуют в транзакции, определяет порядок их выполнения.</p>
+<p>Транзакция в Solana-Web3.js создается с использованием объекта <a href="javascript-api.md#Transaction"><code>Transaction</code></a> и добавления желаемых сообщений, адресов или инструкций.</p>
+<p>Возьмем пример транзакции перевода:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{Keypair</span><span style="color:#bfbab0cc;">, </span><span>Transaction</span><span style="color:#bfbab0cc;">, </span><span>SystemProgram</span><span style="color:#bfbab0cc;">, </span><span>LAMPORTS_PER_SOL} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>fromKeypair </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>toKeypair </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>transaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>transaction</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(
+</span><span>  SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">transfer</span><span>({
+</span><span>    fromPubkey</span><span style="color:#bfbab0cc;">: </span><span>fromKeypair</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    toPubkey</span><span style="color:#bfbab0cc;">: </span><span>toKeypair</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span>LAMPORTS_PER_SOL
+</span><span>  })
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Приведенный выше код позволяет создать транзакцию, готовую к подписанию и передаче в сеть. В транзакцию была добавлена инструкция SystemProgram.transfer, содержащая количество отправляемых ламппортов, а также открытые ключи «куда» и «от».</p>
+<p>Остается только подписать транзакцию парой ключей и отправить ее по сети. Вы можете выполнить отправку транзакции, используя <code>sendAndConfirmTransaction</code>, если вы хотите предупредить пользователя или сделать что-то после завершения транзакции, или использовать <code>sendTransaction</code>, если вам не нужно ждать подтверждения транзакции.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{sendAndConfirmTransaction</span><span style="color:#bfbab0cc;">, </span><span>clusterApiUrl</span><span style="color:#bfbab0cc;">, </span><span>Connection} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>keypair </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Connection</span><span>(</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;testnet&#39;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(
+</span><span>  connection</span><span style="color:#bfbab0cc;">,
+</span><span>  transaction</span><span style="color:#bfbab0cc;">,
+</span><span>  [keypair]
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Приведенный выше код принимает TransactionInstruction с помощью SystemProgram, создает Transaction и отправляет ее по сети. Вы используете «Соединение», чтобы определить сеть Solana, к которой вы подключаетесь, а именно «mainnet-beta», «testnet» или «devnet».</p>
+<h3 id="vzaimodeistvie-s-pol-zovatel-skimi-programmami">Взаимодействие с пользовательскими программами</h3>
+<p>В предыдущем разделе рассматривается отправка основных транзакций. В Solana все, что вы делаете, взаимодействует с различными программами, включая транзакцию перевода из предыдущего раздела. На момент написания программы на Solana написаны либо на Rust, либо на C.</p>
+<p>Давайте посмотрим на <code>SystemProgram</code>. Сигнатура метода для выделения места в вашем аккаунте на Solana в Rust выглядит так:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">allocate</span><span>(
+</span><span>    </span><span style="color:#f29718;">pubkey</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>    </span><span style="color:#f29718;">space</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64
+</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Instruction
+</span></code></pre>
+<p>В Solana, когда вы хотите взаимодействовать с программой, вы должны сначала знать все учетные записи, с которыми вы будете взаимодействовать.</p>
+<p>Вы должны всегда предоставлять каждую учетную запись, с которой программа будет взаимодействовать в инструкции. Кроме того, вы должны указать, является ли учетная запись isSigner или isWritable.</p>
+<p>В приведенном выше методе «выделения» требуется один «публичный ключ» учетной записи, а также объем «пространства» для выделения. Мы знаем, что метод allocate записывает в учетную запись, выделяя пространство внутри нее, делая pubkey обязательным для записи isWritable. <code>isSigner</code> требуется, когда вы назначаете учетную запись, которая выполняет инструкцию. В этом случае подписывающая сторона — это учетная запись, призывающая выделить пространство внутри себя.</p>
+<p>Давайте посмотрим, как вызвать эту инструкцию с помощью solana-web3.js:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">let </span><span>keypair </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>payer </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;testnet&#39;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>airdropSignature </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">requestAirdrop</span><span>(
+</span><span>  payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>  web3</span><span style="color:#f29668;">.</span><span>LAMPORTS_PER_SOL</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">confirmTransaction</span><span>(airdropSignature)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Во-первых, мы настраиваем пару ключей учетной записи и соединение, чтобы у нас была учетная запись для выделения в тестовой сети. Мы также создаем пару ключей плательщика и раздаем несколько солей, чтобы мы могли оплатить транзакцию распределения.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">let </span><span>allocateTransaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>({
+</span><span>    feePayer</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey
+</span><span>  })</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>keys </span><span style="color:#f29668;">= </span><span>[{pubkey</span><span style="color:#bfbab0cc;">: </span><span>keypair</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>isSigner</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">, </span><span>isWritable</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">true</span><span>}]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>params </span><span style="color:#f29668;">= </span><span>{ space</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">100 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Мы создаем транзакцию allocateTransaction, объекты ключей и параметров. <code>feePayer</code> — это необязательное поле при создании транзакции, в котором указывается, кто платит за транзакцию, по умолчанию это публичный ключ первого лица, подписавшего транзакцию. <code>keys</code> представляет все учетные записи, с которыми будет взаимодействовать функция <code>allocate</code> программы. Так как функция allocate также требует места, мы создали params, которые будут использоваться позже при вызове функции allocate.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">let </span><span>allocateStruct </span><span style="color:#f29668;">= </span><span>{
+</span><span>  index</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">,
+</span><span>  layout</span><span style="color:#bfbab0cc;">: </span><span style="color:#ffb454;">struct</span><span>([
+</span><span>    </span><span style="color:#ffb454;">u32</span><span>(</span><span style="color:#c2d94c;">&#39;instruction&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#ffb454;">ns64</span><span>(</span><span style="color:#c2d94c;">&#39;space&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>  ])
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Вышеприведенное создано с использованием u32 и ns64 из <code>@solana/buffer-layout</code> для облегчения создания полезной нагрузки. Функция «allocate» принимает параметр «пробел». Чтобы взаимодействовать с функцией, мы должны предоставить данные в формате буфера. Библиотека <code>buffer-layout</code> помогает выделить буфер и правильно закодировать его для интерпретации программами Rust на Solana.</p>
+<p>Давайте разберем эту структуру.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>{
+</span><span>  </span><span style="color:#59c2ff;">index</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">/* &lt;-- */
+</span><span>  </span><span style="color:#59c2ff;">layout</span><span style="color:#bfbab0cc;">: </span><span style="color:#ffb454;">struct</span><span>([
+</span><span>    </span><span style="color:#ffb454;">u32</span><span>(</span><span style="color:#c2d94c;">&#39;instruction&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#ffb454;">ns64</span><span>(</span><span style="color:#c2d94c;">&#39;space&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>  ])
+</span><span>}
+</span></code></pre>
+<p><code>index</code> установлен на 8, потому что функция <code>allocate</code> находится на 8-й позиции в перечислении инструкций для <code>SystemProgram</code>.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">/* https://github.com/solana-labs/solana/blob/21bc43ed58c63c827ba4db30426965ef3e807180/sdk/program/src/system_instruction.rs#L142-L305 */
+</span><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">SystemInstruction </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 0 **/</span><span>CreateAccount {</span><span style="font-style:italic;color:#5c6773;">/**/</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 1 **/</span><span>Assign {</span><span style="font-style:italic;color:#5c6773;">/**/</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 2 **/</span><span>Transfer {</span><span style="font-style:italic;color:#5c6773;">/**/</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 3 **/</span><span>CreateAccountWithSeed {</span><span style="font-style:italic;color:#5c6773;">/**/</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 4 **/</span><span>AdvanceNonceAccount</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 5 **/</span><span>WithdrawNonceAccount(</span><span style="color:#ff7733;">u64</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 6 **/</span><span>InitializeNonceAccount(Pubkey)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 7 **/</span><span>AuthorizeNonceAccount(Pubkey)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 8 **/</span><span>Allocate {</span><span style="font-style:italic;color:#5c6773;">/**/</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 9 **/</span><span>AllocateWithSeed {</span><span style="font-style:italic;color:#5c6773;">/**/</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 10 **/</span><span>AssignWithSeed {</span><span style="font-style:italic;color:#5c6773;">/**/</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/** 11 **/</span><span>TransferWithSeed {</span><span style="font-style:italic;color:#5c6773;">/**/</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Далее идет <code>u32('instruction')</code>.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>{
+</span><span>  </span><span style="color:#59c2ff;">index</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="color:#59c2ff;">layout</span><span style="color:#bfbab0cc;">: </span><span style="color:#ffb454;">struct</span><span>([
+</span><span>    </span><span style="color:#ffb454;">u32</span><span>(</span><span style="color:#c2d94c;">&#39;instruction&#39;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">/* &lt;-- */
+</span><span>    </span><span style="color:#ffb454;">ns64</span><span>(</span><span style="color:#c2d94c;">&#39;space&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>  ])
+</span><span>}
+</span></code></pre>
+<p><code>layout</code> в структуре распределения всегда должен иметь <code>u32('instruction')</code> первым, когда вы используете его для вызова инструкции.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>{
+</span><span>  </span><span style="color:#59c2ff;">index</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">,
+</span><span>  </span><span style="color:#59c2ff;">layout</span><span style="color:#bfbab0cc;">: </span><span style="color:#ffb454;">struct</span><span>([
+</span><span>    </span><span style="color:#ffb454;">u32</span><span>(</span><span style="color:#c2d94c;">&#39;instruction&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#ffb454;">ns64</span><span>(</span><span style="color:#c2d94c;">&#39;space&#39;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">/* &lt;-- */
+</span><span>  ])
+</span><span>}
+</span></code></pre>
+<p><code>ns64('space')</code> - это аргумент для функции <code>allocate</code>. Вы можете видеть, что в оригинальной функции <code>allocate</code> в Rust пространство имеет тип <code>u64</code>. <code>u64</code> - это 64-битное целое число без знака. Javascript по умолчанию предоставляет только до 53-битных целых чисел. <code>ns64</code> происходит от <code>@solana/buffer-layout</code>, чтобы помочь с преобразованием типов между Rust и Javascript. Вы можете найти больше преобразований типов между Rust и Javascript по адресу <a href="https://github.com/solana-labs/buffer-layout">solana-labs/buffer-layout</a>.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">let </span><span>data </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">alloc</span><span>(allocateStruct</span><span style="color:#f29668;">.</span><span>layout</span><span style="color:#f29668;">.</span><span>span)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>layoutFields </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Object</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">assign</span><span>({instruction</span><span style="color:#bfbab0cc;">: </span><span>allocateStruct</span><span style="color:#f29668;">.</span><span>index}</span><span style="color:#bfbab0cc;">, </span><span>params)</span><span style="color:#bfbab0cc;">;
+</span><span>allocateStruct</span><span style="color:#f29668;">.</span><span>layout</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">encode</span><span>(layoutFields</span><span style="color:#bfbab0cc;">, </span><span>data)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>С помощью созданного ранее bufferLayout мы можем выделить буфер данных. Затем мы назначаем нашим параметрам <code>{space: 100}</code>, чтобы они правильно отображались в макете, и кодируем их в буфер данных. Теперь данные готовы для отправки в программу.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>allocateTransaction</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(</span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">TransactionInstruction</span><span>({
+</span><span>  keys</span><span style="color:#bfbab0cc;">,
+</span><span>  programId</span><span style="color:#bfbab0cc;">: </span><span>web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span>programId</span><span style="color:#bfbab0cc;">,
+</span><span>  data</span><span style="color:#bfbab0cc;">,
+</span><span>}))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>allocateTransaction</span><span style="color:#bfbab0cc;">, </span><span>[payer</span><span style="color:#bfbab0cc;">, </span><span>keypair])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Наконец, мы добавляем инструкцию транзакции со всеми ключами учетной записи, плательщиком, данными и идентификатором программы и транслируем транзакцию в сеть.</p>
+<p>Полный код можно найти ниже.</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{struct</span><span style="color:#bfbab0cc;">, </span><span>u32</span><span style="color:#bfbab0cc;">, </span><span>ns64} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/buffer-layout&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>{Buffer} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;buffer&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>keypair </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>payer </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;testnet&#39;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>airdropSignature </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">requestAirdrop</span><span>(
+</span><span>  payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>  web3</span><span style="color:#f29668;">.</span><span>LAMPORTS_PER_SOL</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">confirmTransaction</span><span>(airdropSignature)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>allocateTransaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>({
+</span><span>  feePayer</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>keys </span><span style="color:#f29668;">= </span><span>[{pubkey</span><span style="color:#bfbab0cc;">: </span><span>keypair</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>isSigner</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">, </span><span>isWritable</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">true</span><span>}]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>params </span><span style="color:#f29668;">= </span><span>{ space</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">100 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>allocateStruct </span><span style="color:#f29668;">= </span><span>{
+</span><span>  index</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">,
+</span><span>  layout</span><span style="color:#bfbab0cc;">: </span><span style="color:#ffb454;">struct</span><span>([
+</span><span>    </span><span style="color:#ffb454;">u32</span><span>(</span><span style="color:#c2d94c;">&#39;instruction&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#ffb454;">ns64</span><span>(</span><span style="color:#c2d94c;">&#39;space&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>  ])
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>data </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">alloc</span><span>(allocateStruct</span><span style="color:#f29668;">.</span><span>layout</span><span style="color:#f29668;">.</span><span>span)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>layoutFields </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Object</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">assign</span><span>({instruction</span><span style="color:#bfbab0cc;">: </span><span>allocateStruct</span><span style="color:#f29668;">.</span><span>index}</span><span style="color:#bfbab0cc;">, </span><span>params)</span><span style="color:#bfbab0cc;">;
+</span><span>allocateStruct</span><span style="color:#f29668;">.</span><span>layout</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">encode</span><span>(layoutFields</span><span style="color:#bfbab0cc;">, </span><span>data)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>allocateTransaction</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(</span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">TransactionInstruction</span><span>({
+</span><span>  keys</span><span style="color:#bfbab0cc;">,
+</span><span>  programId</span><span style="color:#bfbab0cc;">: </span><span>web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span>programId</span><span style="color:#bfbab0cc;">,
+</span><span>  data</span><span style="color:#bfbab0cc;">,
+</span><span>}))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>allocateTransaction</span><span style="color:#bfbab0cc;">, </span><span>[payer</span><span style="color:#bfbab0cc;">, </span><span>keypair])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

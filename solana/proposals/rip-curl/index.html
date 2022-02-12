@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RiP Curl: RPC с малой задержкой, ориентированный на транзакции | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/rip-curl/#problema">Проблема</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/rip-curl/#predlozhennoe-reshenie">Предложенное решение</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>RiP Curl: RPC с малой задержкой, ориентированный на транзакции</h1>
+
+<h2 id="problema">Проблема</h2>
+<p>Первоначальная реализация RPC в Solana была создана для того, чтобы пользователи могли подтверждать транзакции, которые только что были отправлены в кластер.
+Он был разработан с учетом использования памяти, поэтому любой валидатор должен иметь возможность поддерживать API, не опасаясь DoS-атак.</p>
+<p>Позже стало желательным использовать тот же API для поддержки обозревателя Solana. Первоначальный дизайн поддерживал только минуты истории, поэтому мы изменили его, чтобы вместо этого хранить статусы транзакций в локальном экземпляре RocksDB и предлагать дни истории. Затем мы продлили этот срок до 6 месяцев с помощью BigTable.</p>
+<p>С каждой модификацией API становился все более подходящим для приложений, обслуживающих статический контент, и менее привлекательным для обработки транзакций. Клиенты опрашивают статус транзакции вместо того, чтобы получать уведомления, создавая ложное впечатление о более длительном времени подтверждения. Кроме того, то, что клиенты могут опрашивать, ограничено, что не позволяет им принимать разумные решения в режиме реального времени, например, признать транзакцию подтвержденной, как только определенные известные валидаторы проголосуют за нее.</p>
+<h2 id="predlozhennoe-reshenie">Предложенное решение</h2>
+<p>Удобный для Интернета, ориентированный на транзакции, потоковый API, построенный на основе ReplayStage валидатора.</p>
+<p>Улучшенный клиентский опыт:</p>
+<ul>
+<li>Поддержка подключений непосредственно из приложений WebAssembly.</li>
+<li>Клиенты могут быть уведомлены о ходе подтверждения в режиме реального времени, включая голоса и вес ставки избирателя.</li>
+<li>Клиенты могут быть уведомлены при изменении самого тяжелого форка, если это влияет на количество подтверждений транзакций.</li>
+</ul>
+<p>Валидаторам проще поддерживать:</p>
+<ul>
+<li>Каждый валидатор поддерживает некоторое количество одновременных подключений и в остальном не имеет существенных ограничений по ресурсам.</li>
+<li>Статус транзакции никогда не сохраняется в памяти и не может быть опрошен.</li>
+<li>Подписи хранятся в памяти только до достижения желаемого уровня фиксации или до истечения срока действия блок-хэша, в зависимости от того, что наступит позднее.</li>
+</ul>
+<p>Как это работает:</p>
+<ol>
+<li>Клиент подключается к валидатору, используя надежный канал связи, такой как веб-сокет.</li>
+<li>Валидатор регистрирует подпись в ReplayStage.</li>
+<li>Валидатор отправляет транзакцию в Гольфстрим и повторяет все известные форки до тех пор, пока не истечет срок действия хэша (но не до тех пор, пока транзакция не будет принята только на самом тяжелом форке). Если срок действия хэша истекает, подпись отменяется, клиент уведомляется и соединение закрывается.</li>
+<li>Поскольку ReplayStage обнаруживает события, влияющие на статус транзакции, он уведомляет клиента в режиме реального времени.</li>
+<li>После подтверждения того, что транзакция укоренена (<code>CommitmentLevel::Max</code>), подпись снимается с регистрации, и сервер закрывает восходящий канал.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

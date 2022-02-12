@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Валидация | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/validating/readme/#protsess-vybora-validatora">Процесс выбора валидатора </a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Валидация</h1>
+
+<h2 id="protsess-vybora-validatora">Процесс выбора валидатора <a href="the-election-process" id="the-election-process"></a></h2>
+<p>Вы можете ознакомиться с нашим кратким руководством, чтобы начать участвовать в проверке</p>
+<p>Как выбрать валидаторов, учитывая голоса номинаторов? В отличие от других проектов на основе PoS, где валидаторы взвешиваются по доле, NPoS дает избранным валидаторам равное право голоса в протоколе консенсуса.</p>
+<p>Чтобы добиться пропорционального представительства, независимо от этого факта, общий пул доли их номинаторов должен быть распределен между избранными валидаторами как можно более равномерно, НО при этом уважать предпочтения номинаторов. Конечный результат, эвристика выборов, должен способствовать двум ключевым характеристикам: справедливому представительству и безопасности.</p>
+<p><strong>Добросовестное представительство</strong></p>
+<p>В конце 19 века шведский математик Ларс Эдвард Фрагмен предложил метод избрания членов парламента своей страны. Он заметил, что методы выборов в то время, как правило, отдавали все места самой популярной политической партии; Напротив, его новый метод гарантировал, что количество мест, отведенных каждой партии, было пропорционально отданным им голосам, поэтому он давал больше представительства меньшинствам. Свойство, достигаемое его методом, формально известно как <strong>пропорциональное обоснованное представительство</strong>, и очень подходит для выборов NPoS, поскольку гарантирует, что любой пул узлов не будет ни чрезмерно представлен, ни недопредставлен избранными валидаторами, пропорционально их ставка. NPoS основывается на методе, предложенном Фрагменом, и обеспечивает это свойство на каждых выборах.</p>
+<p>Иллюстрация представляет собой типичный вход в избирательный процесс, где номинаторы слева имеют разные доли и связаны линиями с теми кандидатами-валидаторами справа, которым они доверяют (для простоты, в этом примере валидаторы не имеют собственной доли). , хотя они будут в реальном сценарии).</p>
+<p><img src="../../../../.gitbook/assets/image%20(6)%20(2)%20(2)%20(2)%20(2).png" alt="" /></p>
+<p>Предположим, нам нужно выбрать n=4 валидаторов. Свойство справедливого представительства грубо переводится в правило, согласно которому любой номинатор, владеющий хотя бы одной n-й частью общей доли, гарантированно изберет хотя бы одного из своих доверенных валидаторов. Поскольку общая ставка составляет 40 EDG, а четверть от нее составляет 10 EDG, первые два номинатора гарантированно будут представлены валидатором. На изображении ниже мы видим три возможных результата выборов: один, который нарушает свойство справедливого представительства, и два, которые его достигают.</p>
+<p><img src="../../../../.gitbook/assets/image%20(2)%20(1).png" alt="" /></p>
+<p><strong>Безопасность</strong></p>
+<p>Если номинатор избирает двух или более своих доверенных валидаторов, нам необходимо распределить ** их долю наследников между ними таким образом, чтобы поддержка валидаторов была максимально сбалансированной. Напомним, что мы хотим максимально затруднить выбор валидатора состязательным пулом, и они могут добиться этого, только если получат достаточно высокую поддержку. Поэтому мы приравниваем уровень безопасности результата выборов к <em>минимальной сумме поддержки любого избранного валидатора</em>. Для двух последних результатов выборов со справедливым представительством мы предоставляем распределение ставок, которое показывает, что они достигают уровней безопасности 6 и 9 соответственно.</p>
+<p>Результат выборов справа обеспечивает более высокий уровень безопасности и явно лучше справляется с разделением доли номинаторов на поддержку валидаторов примерно одинакового размера. Таким образом, цель процесса выборов NPoS состоит в том, чтобы обеспечить результат, обеспечивающий справедливое представительство и максимально высокий уровень безопасности. Это порождает довольно сложную задачу оптимизации (она <a href="https://www.britannica.com/science/NP-complete-problem">NP-complete</a>), для которой мы разработали быстрые приближенные эвристики с сильными гарантиями на безопасность и масштабируемость.</p>
+<p>Чтобы узнать больше об операционной стороне проблемы выбора валидаторов в NPoS, просмотрите Web3 Foundation Research <a href="https://research.web3.foundation/en/latest/polkadot/NPoS/1.%20Overview.html">технический обзор.</a></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Служба восстановления | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/repair-service/#uslugi-po-remontu">Услуги по ремонту</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/repair-service/#problemy">Проблемы:</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/repair-service/#primitivy-sviazannye-s-remontom">Примитивы, связанные с ремонтом</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/repair-service/#protokoly-zaprosov-na-vosstanovlenie">Протоколы запросов на восстановление</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/repair-service/#vosstanovit-protokol-otveta">Восстановить протокол ответа</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Служба восстановления</h1>
+
+<h2 id="uslugi-po-remontu">Услуги по ремонту</h2>
+<p>RepairService отвечает за извлечение недостающих фрагментов, которые не удалось доставить с помощью основных протоколов связи, таких как Turbine. Он отвечает за управление протоколами, описанными ниже в разделе «Протоколы восстановления».</p>
+<h2 id="problemy">Проблемы:</h2>
+<p>1) Валидаторы могут не получить определенные фрагменты из-за сетевых сбоев.</p>
+<p>2) Рассмотрим сценарий, в котором блочный магазин содержит набор слотов {1, 3, 5}.
+Затем Blockstore получает фрагменты для некоторого слота 7, где для каждого из фрагментов b, b.parent == 6, поэтому отношение родитель-потомок 6 -&gt; gt; 7 хранится в блочном хранилище. Однако нет возможности привязать эти слоты к какому-либо из существующих банков в Blockstore, и поэтому протокол «Shred Repair» не будет восстанавливать эти слоты. Если эти слоты окажутся частью основной цепочки, это остановит процесс воспроизведения на этом узле.</p>
+<h2 id="primitivy-sviazannye-s-remontom">Примитивы, связанные с ремонтом</h2>
+<p>Слоты эпохи:
+Каждый валидатор отдельно рекламирует в сплетнях различные части «слотов эпохи»:</p>
+<ul>
+<li><code>Тайник</code>: сжатый набор всех завершенных слотов длиной в эпоху.</li>
+<li><code>Кэш</code>: кодирование длин серий (RLE) последних <code>N</code> завершенных слотов, начиная с какого-то слота <code>M</code>, где <code>N</code> – это количество слотов, которые помещаются в пакет размера MTU.</li>
+</ul>
+<p>«Слоты эпохи» в сплетнях обновляются каждый раз, когда валидатор получает полный слот в течение эпохи. Завершенные слоты обнаруживаются блочным магазином и отправляются по каналу в RepairService. Важно отметить, что мы знаем, что к моменту завершения слота «X» расписание эпох должно существовать для эпохи, содержащей слот «X», потому что WindowService отклонит фрагменты для неподтвержденных эпох.</p>
+<p>Каждые <code>N/2</code> заполненных слотов, самые старые <code>N/2</code> слотов перемещаются из <code>кеша</code> в <code>тайник</code>. Базовое значение <code>M</code> для RLE также должно быть обновлено.</p>
+<h2 id="protokoly-zaprosov-na-vosstanovlenie">Протоколы запросов на восстановление</h2>
+<p>Протокол восстановления делает все возможное для развития структуры разветвления Blockstore.</p>
+<p>Различные стратегии протокола для решения вышеуказанных проблем:</p>
+<ol>
+<li>
+<p>Shred Repair (Addresss Challenge #1): Это самый простой протокол восстановления, предназначенный для обнаружения и заполнения «дыр» в бухгалтерской книге.
+Blockstore отслеживает последний корневой слот. Затем RepairService будет периодически повторять каждую вилку в блочном хранилище, начиная с корневого слота, отправляя запросы на восстановление валидаторам для любых недостающих фрагментов. Он будет отправлять не более N запросов на ремонт за итерацию. При ремонте клоков приоритет должен отдаваться ремонту вилок в зависимости от веса вилки лидера. Валидаторы должны отправлять запросы на исправление только тем валидаторам, которые отметили этот слот как завершенный в своих EpochSlots. Валидаторы должны отдавать приоритет восстановлению фрагментов в каждом слоте, за ретрансляцию которого они отвечают через турбину. Валидаторы могут вычислить, какие фрагменты они несут ответственность за повторную передачу, поскольку начальное значение для турбины основано на идентификаторе лидера, слоте и индексе фрагмента.</p>
+<p>Примечание. Валидаторы будут принимать фрагменты только в течение текущей поддающейся проверке эпохи (эпоха, для которой у валидатора есть график лидера).</p>
+</li>
+<li>
+<p>Упреждающее восстановление слотов (Решение задачи #2): Цель этого протокола состоит в том, чтобы обнаружить отношение цепочки «сиротских» слотов, которые в настоящее время не связаны ни с одним известным ответвлением. Ремонт клока должен отдавать приоритет ремонту потерянных слотов в зависимости от веса вилки лидера.</p>
+<ul>
+<li>
+<p>Blockstore будет отслеживать набор «сиротских» слотов в отдельном семействе столбцов.</p>
+</li>
+<li>
+<p>RepairService будет периодически делать запросы «сироты» для каждого из сирот в блочном магазине.</p>
+<p>Запрос «сирота (сирота)» — «сирота» — это слот-сирота, который запрашивающая сторона хочет узнать.</p>
+<p>При получении ответов <code>p</code>, где <code>p</code> — это какой-то фрагмент в родительском слоте, валидаторы будут:</p>
+<ul>
+<li>Вставьте пустой <code>SlotMeta</code> в хранилище блоков для <code>p.slot</code>, если он еще не существует.</li>
+<li>Если <code>p.slot</code> существует, обновите родителя <code>p</code> на основе <code>parents</code></li>
+</ul>
+<p>Примечание: как только эти пустые слоты будут добавлены в хранилище, протокол «Shred Repair» должен попытаться заполнить эти слоты.</p>
+<p>Примечание. Валидаторы будут принимать ответы, содержащие фрагменты, только в течение текущей поддающейся проверке эпохи \ (эпоха, для которой у валидатора есть расписание лидера).</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Валидаторам следует попытаться отправить потерянные запросы тем валидаторам, которые пометили этот потерянный запрос как выполненный в своих EpochSlots. Если таких валидаторов не существует, выберите валидатора случайным образом с учетом ставок.</p>
+<h2 id="vosstanovit-protokol-otveta">Восстановить протокол ответа</h2>
+<p>Когда валидатор получает запрос на клочок «S», он отвечает клоком, если он у них есть.</p>
+<p>Когда валидатор получает фрагмент в ответ на восстановление, он проверяет EpochSlots, чтобы убедиться, что &lt;= 1/3 сети пометила этот слот как завершенный. Если это так, они повторно отправляют этот фрагмент через связанный с ним путь турбины, но только в том случае, если этот валидатор ранее не передал этот фрагмент повторно.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust: константы, переменные и изменчивость - о боже! | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-constants-variables-and-mutability/#peremennye-i-izmenchivost">Переменные и изменчивость</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-constants-variables-and-mutability/#konstanty-mertvy-podozhdi-net">Константы мертвы? Подожди, нет.</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-constants-variables-and-mutability/#zatenenie">Затенение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-constants-variables-and-mutability/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust: константы, переменные и изменчивость - о боже!</h1>
+
+<p><a href="https://oswalt.dev/2020/03/rust-constants-variables-and-mutability-oh-my/">Перевод</a> | Автор оригинала: Matt Oswalt</p>
+<p>В прошлом посте я написал о своем пути от Python к Go в качестве основного языка и о том, как я сейчас изучаю Rust.</p>
+<p>Это будет первая из серии статей о Rust, в основном написанных с этой точки зрения. Я понимаю, что не все перейдут на Rust с Go, но это моя точка зрения, и будет невозможно не допустить, чтобы эта перспектива просматривалась и не проводила сравнения между Rust и Go или Python. Я считаю, что лучше всего мы учимся, опираясь на то, что мы знаем, поэтому я буду проводить много таких сравнений для собственного назидания. Смирись с этим. :)</p>
+<p>Я буду писать эту серию, просматривая книгу Rust и в основном комментируя ее. Я буду наблюдать за тем, что вижу, и извлекаю уроки, а также делаю некоторые сравнения с концепциями, с которыми я уже знаком. Для этого лучше всего начать с главы 3 «Общие концепции программирования», где я могу провести некоторые сравнения с тем, что мне известно.</p>
+<blockquote>
+<p>Я действительно рекомендую пройти главу 1 на реальном примере hello, world и последующую главу 2, которая представляет собой немного более продвинутый пример hello world, который не погружается очень глубоко, но представляет собой приятный вихревой тур по базовым, базовым концепциям в Rust. Я думаю, они проделали хорошую работу, продемонстрировав вам практический пример, вызывающий интерес, прежде чем погрузиться в более глубокое справочное содержание глав 3+.</p>
+</blockquote>
+<h2 id="peremennye-i-izmenchivost">Переменные и изменчивость</h2>
+<p>Как я уже упоминал в своем предыдущем посте, что мне больше всего нравится в Rust, так это то, насколько он заставляет вас позволить компилятору делать всю работу. Уменьшение неопределенности времени выполнения и принуждение программиста к преднамеренному использованию того, что они выделяют, поддаются более стабильному приложению. Это становится очевидным даже в фундаментальных концепциях, таких как определение переменных.</p>
+<p>В Go и многих других языках обычно есть возможность определять переменные или константы. Обычно это предлагается, потому что базовая реализация для констант проще и дешевле, поэтому, если вы знаете, что определенное значение не изменится после того, как вы его установите, лучшим вариантом будет объявление его как константы. Однако, как правило, вы должны явно объявить это таким образом. Например, в Go вы должны использовать ключевое слово var или const соответственно: </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="font-style:italic;color:#5c6773;">// (go)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// This is a constant. If we try to re-assign to this,
+</span><span style="font-style:italic;color:#5c6773;">// we&#39;ll get a compiler error.
+</span><span style="color:#ff7733;">const </span><span>strConst </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Hello!&quot;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// This is a variable. We can re-assign to this to our
+</span><span style="font-style:italic;color:#5c6773;">// heart&#39;s delight.
+</span><span style="color:#ff7733;">var </span><span>strVar </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Hello!&quot;
+</span></code></pre>
+<p>Так работают многие языки. Однако Rust по умолчанию использует неизменяемость, то есть, если вы не укажете иное, предполагается, что то, что вы создаете, следует рассматривать как константу. Чтобы облегчить это, можно использовать ключевое слово mut, чтобы указать, что переменная должна быть изменяемой: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// (rust)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// This is an integer without the &quot;mut&quot; keyword, and therefore
+</span><span style="font-style:italic;color:#5c6773;">// defaults to immutable. We will get a compiler error if we try
+</span><span style="font-style:italic;color:#5c6773;">// to change this.
+</span><span style="color:#ff7733;">let</span><span> intConst </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The &quot;mut&quot; keyword means we&#39;re &quot;opting in&quot; to mutability here,
+</span><span style="font-style:italic;color:#5c6773;">// so &quot;intVar&quot; will act like a traditional variable. We can change it.
+</span><span style="color:#ff7733;">let mut</span><span> intVar </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Мне действительно нравится, что это заставляет меня тщательно думать каждый раз, когда я что-то выделяю, о том, должно ли то, с чем я работаю, быть изменяемым, или я могу избежать наказания за неизменность. Похоже, что большинство вещей в Rust именно так; немного подумать перед компиляцией означает гораздо большую безопасность во время выполнения. Использование неизменяемого значения по умолчанию может показаться препятствием, но если это устраняет целый класс ошибок, я за это.</p>
+<blockquote>
+<p>Меня действительно беспокоит то, что это означает, что оксюморонический термин «неизменяемая переменная» теперь используется, но я думаю, что переживу это.</p>
+</blockquote>
+<h2 id="konstanty-mertvy-podozhdi-net">Константы мертвы? Подожди, нет.</h2>
+<p>Я начал писать этот раздел до того, как прокрутил страницу вниз и увидел «Различия между константами и переменными». Оказывается, даже несмотря на то, что мы можем создавать «неизменяемые переменные», в Rust все еще есть концепция «константы», и в этом разделе перечислены несколько ключевых различий между ними.</p>
+<p>Если честно, первые три сначала заставили меня фыркнуть. Короче:</p>
+<ul>
+<li>Константы необязательно неизменяемы.</li>
+<li>Как и следовало ожидать, синтаксис констант другой.</li>
+<li>Константы можно объявлять где угодно.</li>
+</ul>
+<p>Когда я говорю, что это заставило меня фыркнуть, я имею в виду, что, хотя этого и следовало ожидать, я не видел достаточного оправдания для сохранения констант, пока у нас есть возможность создавать неизменяемые переменные. Но затем я прочитал четвертое и последнее различие между ними:</p>
+<blockquote>
+<p>«Последнее отличие состоит в том, что константы могут быть установлены только для константного выражения, а не для результата вызова функции или любого другого значения, которое может быть вычислено только во время выполнения».</p>
+</blockquote>
+<p>Это говорит мне о том, что, хотя мы можем оптимизировать наш код, установив переменные по умолчанию на «неизменяемые», Rust все равно нужно проделать небольшую дополнительную работу, чтобы сделать эту структуру доступной во время выполнения для заполнения значением, которое может исходить от чего-то вроде функции вызов. Таким образом, хотя мы устраняем большую часть изменчивости, связанной с изменением переменной, все же остается некоторое динамическое поведение во время выполнения.</p>
+<p>Тот факт, что константа должна быть установлена с помощью константного выражения и не может быть установлена с помощью вызова функции, говорит мне, что с точки зрения реализации такой способ дает некоторую дополнительную эффективность.</p>
+<p>Хотя сначала это сбивает с толку, мне действительно нравится, что теперь у нас есть три уровня изменчивости:</p>
+<ul>
+<li>Константы (самые негибкие, самые эффективные)</li>
+<li>Неизменяемые переменные (эффективны, но все же полезны во многих случаях использования)</li>
+<li>Изменяемые переменные (наиболее гибкие)</li>
+</ul>
+<p>Опять же, это явно более сложный процесс, чем другие языки, но в результате вы получаете больший контроль над размером вашего приложения. </p>
+<h2 id="zatenenie">Затенение</h2>
+<p>Когда я прочитал этот раздел, Shadowing немного поразил меня, но на самом деле это довольно просто. И это очень актуально для Rust, поскольку он разработан, чтобы дать нам дополнительную гибкость без слишком большого ущерба для безопасности во время компиляции.</p>
+<p>В общем, затенение можно использовать как способ повторного объявления переменной. В частности, это полезно, когда вы хотите, чтобы переменная оставалась неизменной, но вы все равно хотели бы иметь возможность ее изменять.</p>
+<p>В книге они приводят пример того, что они устанавливают x равным целому числу 5, а затем выполняют над ним математические вычисления, изменяя его по ходу дела, каждый раз заново объявляя. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// First declaration of x
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// At this point, x is 5, so this is like saying
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// x = 5 + 1, which result in 6
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">=</span><span> x </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// At this point, x is 6, so this is like saying
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// x = 6 * 2, which results in 12.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">=</span><span> x </span><span style="color:#f29668;">* </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// &quot;The value of x is: 12&quot;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;The value of x is: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> x)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Кстати, это еще одна вещь, которую нельзя сделать с константами. Попробуйте скомпилировать эту программу: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">const</span><span> X</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> X </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &lt;---- compiler error here
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;The value of X is: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> X)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>и вы получите: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0005]: refutable pattern in local binding: `std::i32::MIN..=99i32` and `101i32..=std::i32::MAX` not covered
+</span><span> --&gt; src/main.rs:4:9
+</span><span>  |
+</span><span>4 |     let X = 5;
+</span><span>  |         ^ interpreted as a constant pattern, not new variable
+</span></code></pre>
+<h2 id="vyvod">Вывод</h2>
+<p>Я делаю множество выводов, основываясь на том, что вижу о синтаксисе, о том, насколько определенные объявления могут быть более или менее эффективными. Когда-нибудь я могу погрузиться глубже и выяснить, как Rust на самом деле реализует эти вещи для достижения этих целей, но пока я буду доволен идиомами языка.</p>
+<p>На данный момент я хочу сделать следующие выводы:</p>
+<ul>
+<li>
+<p>Три варианта изменчивости, о которых я говорил выше, дают немного больше контроля над размером наших данных. Поначалу использование неизменяемости по умолчанию немного раздражает, но, честно говоря, в первую очередь, когда я перешел с Python на Go, была сильная типизация. Я начал ценить его преимущества и надеюсь, что буду чувствовать то же самое здесь.</p>
+</li>
+<li>
+<p>Ключевое слово let является постоянным напоминанием о том, что вы что-то объявляете (или, в случае слежки, повторно объявляете). Это небольшой дополнительный синтаксис, напоминающий вам о том, что происходит. Если то, что вы пытаетесь сделать, - это затенение переменной, у него есть способ напомнить вам, что необходимо повторно объявить переменную, что дает вам возможность подумать, правильно ли вы поступаете. </p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

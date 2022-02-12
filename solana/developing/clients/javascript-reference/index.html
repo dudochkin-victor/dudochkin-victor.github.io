@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Справочник по Web3 API | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#spravochnoe-rukovodstvo-po-api-web3">Справочное руководство по API Web3</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#obshchii">Общий</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#sviaz"><small>- Связь</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#tranzaktsiia"><small>- Транзакция</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#kliuchevaia-para"><small>- Ключевая пара</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#publichnyi-kliuch"><small>- Публичный ключ</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#systemprogram"><small>- SystemProgram</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#secp256k1program"><small>- Secp256k1Program</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#message"><small>- Message</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#struct"><small>- Struct</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#enum"><small>- Enum</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#nonceaccount"><small>- NonceAccount</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#voteaccount"><small>- VoteAccount</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#steiking">Стэйкинг</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#stakeprogram"><small>- StakeProgram</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#authorized"><small>- Authorized</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/clients/javascript-reference/#lockup"><small>- Lockup</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Справочник по Web3 API</h1>
+
+<h2 id="spravochnoe-rukovodstvo-po-api-web3">Справочное руководство по API Web3</h2>
+<h2 id="obshchii">Общий</h2>
+<h3 id="sviaz">Связь</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Connection.html">Исходная документация</a></p>
+<p>Соединение используется для взаимодействия с <a href="https://docs.solana.com/developing/clients/jsonrpc-api">Solana JSON RPC</a>. Вы можете использовать Connection для подтверждения транзакций, получения информации об учетной записи и многого другого.</p>
+<p>Вы создаете соединение, определяя конечную точку кластера JSON RPC и требуемое обязательство. Как только это будет завершено, вы можете использовать этот объект подключения для взаимодействия с любым из Solana JSON RPC API.</p>
+<h4 id="primer-ispol-zovaniia">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;devnet&#39;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;confirmed&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>slot </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getSlot</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(slot)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// 93186439
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>blockTime </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getBlockTime</span><span>(slot)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(blockTime)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// 1630747045
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>block </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getBlock</span><span>(slot)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(block)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/*
+</span><span style="font-style:italic;color:#5c6773;">{
+</span><span style="font-style:italic;color:#5c6773;">    blockHeight: null,
+</span><span style="font-style:italic;color:#5c6773;">    blockTime: 1630747045,
+</span><span style="font-style:italic;color:#5c6773;">    blockhash: &#39;AsFv1aV5DGip9YJHHqVjrGg6EKk55xuyxn2HeiN9xQyn&#39;,
+</span><span style="font-style:italic;color:#5c6773;">    parentSlot: 93186438,
+</span><span style="font-style:italic;color:#5c6773;">    previousBlockhash: &#39;11111111111111111111111111111111&#39;,
+</span><span style="font-style:italic;color:#5c6773;">    rewards: [],
+</span><span style="font-style:italic;color:#5c6773;">    transactions: []
+</span><span style="font-style:italic;color:#5c6773;">}
+</span><span style="font-style:italic;color:#5c6773;">*/
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>slotLeader </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getSlotLeader</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(slotLeader)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">//49AqLYbpJYc2DrzGUAH1fhWJy62yxBxpLEkfJwjKy2jr
+</span></code></pre>
+<p>В приведенном выше примере показаны лишь некоторые из методов Connection. Полный список см. в <a href="https://solana-labs.github.io/solana-web3.js/classes/Connection.html">документах, сгенерированных исходным кодом</a>.</p>
+<h3 id="tranzaktsiia">Транзакция</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Transaction.html">Исходная документация</a></p>
+<p>Транзакция используется для взаимодействия с программами на блокчейне Solana. Эти транзакции создаются с помощью инструкций TransactionInstructions, содержащих все учетные записи, с которыми можно взаимодействовать, а также любые необходимые данные или адреса программ. Каждая TransactionInstruction состоит из ключей, данных и идентификатора программы. Вы можете выполнять несколько инструкций в одной транзакции, взаимодействуя с несколькими программами одновременно.</p>
+<h4 id="primer-ispol-zovaniia-1">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>nacl </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;tweetnacl&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Airdrop SOL for paying transactions
+</span><span style="color:#ff7733;">let </span><span>payer </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;devnet&#39;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;confirmed&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>airdropSignature </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">requestAirdrop</span><span>(
+</span><span>    payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>LAMPORTS_PER_SOL</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">confirmTransaction</span><span>(airdropSignature)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>toAccount </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create Simple Transaction
+</span><span style="color:#ff7733;">let </span><span>transaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Add an instruction to execute
+</span><span>transaction</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">transfer</span><span>({
+</span><span>    fromPubkey</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    toPubkey</span><span style="color:#bfbab0cc;">: </span><span>toAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1000</span><span style="color:#bfbab0cc;">,
+</span><span>}))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Send and confirm transaction
+</span><span style="font-style:italic;color:#5c6773;">// Note: feePayer is by default the first signer, or payer, if the parameter is not set
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>transaction</span><span style="color:#bfbab0cc;">, </span><span>[payer])
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Alternatively, manually construct the transaction
+</span><span style="color:#ff7733;">let </span><span>recentBlockhash </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getRecentBlockhash</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>manualTransaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>({
+</span><span>    recentBlockhash</span><span style="color:#bfbab0cc;">: </span><span>recentBlockhash</span><span style="color:#f29668;">.</span><span>blockhash</span><span style="color:#bfbab0cc;">,
+</span><span>    feePayer</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span>manualTransaction</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">transfer</span><span>({
+</span><span>    fromPubkey</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    toPubkey</span><span style="color:#bfbab0cc;">: </span><span>toAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1000</span><span style="color:#bfbab0cc;">,
+</span><span>}))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>transactionBuffer </span><span style="color:#f29668;">= </span><span>manualTransaction</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">serializeMessage</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>signature </span><span style="color:#f29668;">= </span><span>nacl</span><span style="color:#f29668;">.</span><span>sign</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">detached</span><span>(transactionBuffer</span><span style="color:#bfbab0cc;">, </span><span>payer</span><span style="color:#f29668;">.</span><span>secretKey)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>manualTransaction</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">addSignature</span><span>(payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>signature)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>isVerifiedSignature </span><span style="color:#f29668;">= </span><span>manualTransaction</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">verifySignatures</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`The signatures were verifed: ${</span><span>isVerifiedSignature</span><span style="color:#c2d94c;">}`</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The signatures were verified: true
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>rawTransaction </span><span style="color:#f29668;">= </span><span>manualTransaction</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">serialize</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmRawTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>rawTransaction)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="kliuchevaia-para">Ключевая пара</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Keypair.html">Исходная документация</a></p>
+<p>Пара ключей используется для создания учетной записи с открытым ключом и секретным ключом в Solana. Вы можете сгенерировать, сгенерировать из семени или создать из секретного ключа.</p>
+<h4 id="primer-ispol-zovaniia-2">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{Keypair} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>account </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(account</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(account</span><span style="color:#f29668;">.</span><span>secretKey)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// 2DVaHtcdTf7cm18Zm9VV8rKK4oSnjmTkKE6MiXe18Qsb
+</span><span style="font-style:italic;color:#5c6773;">// Uint8Array(64) [
+</span><span style="font-style:italic;color:#5c6773;">//   152,  43, 116, 211, 207,  41, 220,  33, 193, 168, 118,
+</span><span style="font-style:italic;color:#5c6773;">//    24, 176,  83, 206, 132,  47, 194,   2, 203, 186, 131,
+</span><span style="font-style:italic;color:#5c6773;">//   197, 228, 156, 170, 154,  41,  56,  76, 159, 124,  18,
+</span><span style="font-style:italic;color:#5c6773;">//    14, 247,  32, 210,  51, 102,  41,  43,  21,  12, 170,
+</span><span style="font-style:italic;color:#5c6773;">//   166, 210, 195, 188,  60, 220, 210,  96, 136, 158,   6,
+</span><span style="font-style:italic;color:#5c6773;">//   205, 189, 165, 112,  32, 200, 116, 164, 234
+</span><span style="font-style:italic;color:#5c6773;">// ]
+</span><span>
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>seed </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Uint8Array</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>([</span><span style="color:#f29718;">70</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">60</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">102</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">70</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">60</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">102</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">70</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">60</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">102</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">70</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">60</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">102</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">70</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">60</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">102</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">70</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">60</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">102</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">70</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">60</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">102</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">70</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">60</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">102</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">100</span><span>])</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>accountFromSeed </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromSeed</span><span>(seed)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(accountFromSeed</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(accountFromSeed</span><span style="color:#f29668;">.</span><span>secretKey)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// 3LDverZtSC9Duw2wyGC1C38atMG49toPNW9jtGJiw9Ar
+</span><span style="font-style:italic;color:#5c6773;">// Uint8Array(64) [
+</span><span style="font-style:italic;color:#5c6773;">//    70,  60, 102, 100,  70,  60, 102, 100,  70,  60, 102,
+</span><span style="font-style:italic;color:#5c6773;">//   100,  70,  60, 102, 100,  70,  60, 102, 100,  70,  60,
+</span><span style="font-style:italic;color:#5c6773;">//   102, 100,  70,  60, 102, 100,  70,  60, 102, 100,  34,
+</span><span style="font-style:italic;color:#5c6773;">//   164,   6,  12,   9, 193, 196,  30, 148, 122, 175,  11,
+</span><span style="font-style:italic;color:#5c6773;">//    28, 243, 209,  82, 240, 184,  30,  31,  56, 223, 236,
+</span><span style="font-style:italic;color:#5c6773;">//   227,  60,  72, 215,  47, 208, 209, 162,  59
+</span><span style="font-style:italic;color:#5c6773;">// ]
+</span><span>
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>accountFromSecret </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromSecretKey</span><span>(account</span><span style="color:#f29668;">.</span><span>secretKey)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(accountFromSecret</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(accountFromSecret</span><span style="color:#f29668;">.</span><span>secretKey)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// 2DVaHtcdTf7cm18Zm9VV8rKK4oSnjmTkKE6MiXe18Qsb
+</span><span style="font-style:italic;color:#5c6773;">// Uint8Array(64) [
+</span><span style="font-style:italic;color:#5c6773;">//   152,  43, 116, 211, 207,  41, 220,  33, 193, 168, 118,
+</span><span style="font-style:italic;color:#5c6773;">//    24, 176,  83, 206, 132,  47, 194,   2, 203, 186, 131,
+</span><span style="font-style:italic;color:#5c6773;">//   197, 228, 156, 170, 154,  41,  56,  76, 159, 124,  18,
+</span><span style="font-style:italic;color:#5c6773;">//    14, 247,  32, 210,  51, 102,  41,  43,  21,  12, 170,
+</span><span style="font-style:italic;color:#5c6773;">//   166, 210, 195, 188,  60, 220, 210,  96, 136, 158,   6,
+</span><span style="font-style:italic;color:#5c6773;">//   205, 189, 165, 112,  32, 200, 116, 164, 234
+</span><span style="font-style:italic;color:#5c6773;">// ]
+</span></code></pre>
+<p>Использование <code>generate</code> генерирует случайную пару ключей для использования в качестве учетной записи на Solana. Используя <code>fromSeed</code>, вы можете сгенерировать пару ключей с помощью детерминированного конструктора. <code>fromSecret</code> создает пару ключей из секретного массива Uint8. Вы можете видеть, что publicKey для пары ключей «сгенерировать» и пары ключей «fromSecret» одинаковы, потому что секрет из пары ключей «сгенерировать» используется в «fromSecret».</p>
+<p><strong>Предупреждение</strong>: не используйте fromSeed, если только вы не создаете семя с высокой энтропией. Не делитесь своим семенем. Относитесь к семени так же, как к закрытому ключу.</p>
+<h3 id="publichnyi-kliuch">Публичный ключ</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html">Исходная документация</a></p>
+<p>PublicKey используется в <code>@solana/web3.js</code> в транзакциях, парах ключей и программах. Публичный ключ требуется при перечислении каждой учетной записи в транзакции и в качестве общего идентификатора в Solana.</p>
+<p>PublicKey может быть создан с помощью строки в кодировке base58, буфера, Uint8Array, числа и массива чисел.</p>
+<h4 id="primer-ispol-zovaniia-3">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{Buffer} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;buffer&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>crypto </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;crypto&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create a PublicKey with a base58 encoded string
+</span><span style="color:#ff7733;">let </span><span>base58publicKey </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">PublicKey</span><span>(</span><span style="color:#c2d94c;">&#39;5xot9PVkphiX2adznghwrAuxGs2zeWisNSxMW6hU6Hkj&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(base58publicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// 5xot9PVkphiX2adznghwrAuxGs2zeWisNSxMW6hU6Hkj
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create a Program Address
+</span><span style="color:#ff7733;">let </span><span>highEntropyBuffer </span><span style="color:#f29668;">= </span><span>crypto</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">randomBytes</span><span>(</span><span style="color:#f29718;">31</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>programAddressFromKey </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span>PublicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">createProgramAddress</span><span>([highEntropyBuffer</span><span style="color:#f29668;">.</span><span style="color:#f07178;">slice</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">31</span><span>)]</span><span style="color:#bfbab0cc;">, </span><span>base58publicKey)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`Generated Program Address: ${</span><span>programAddressFromKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span style="color:#c2d94c;">()}`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Generated Program Address: 3thxPEEz4EDWHNxo1LpEpsAxZryPAHyvNVXJEJWgBgwJ
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Find Program address given a PublicKey
+</span><span style="color:#ff7733;">let </span><span>validProgramAddress </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span>PublicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">findProgramAddress</span><span>([</span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#c2d94c;">&#39;&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;utf8&#39;</span><span>)]</span><span style="color:#bfbab0cc;">, </span><span>programAddressFromKey)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`Valid Program Address: ${</span><span>validProgramAddress</span><span style="color:#c2d94c;">}`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Valid Program Address: C14Gs3oyeXbASzwUpqSymCKpEyccfEuSe8VRar9vJQRE,253
+</span></code></pre>
+<h3 id="systemprogram">SystemProgram</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/SystemProgram.html">Исходная документация</a></p>
+<p>SystemProgram предоставляет возможность создавать учетные записи, распределять данные учетных записей, назначать учетную запись программам, работать с одноразовыми учетными записями и передавать лампы. Вы можете использовать класс SystemInstruction, чтобы помочь с расшифровкой и чтением отдельных инструкций.</p>
+<h4 id="primer-ispol-zovaniia-4">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Airdrop SOL for paying transactions
+</span><span style="color:#ff7733;">let </span><span>payer </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;devnet&#39;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;confirmed&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>airdropSignature </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">requestAirdrop</span><span>(
+</span><span>    payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>LAMPORTS_PER_SOL</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">confirmTransaction</span><span>(airdropSignature)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Allocate Account Data
+</span><span style="color:#ff7733;">let </span><span>allocatedAccount </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>allocateInstruction </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">allocate</span><span>({
+</span><span>    accountPubkey</span><span style="color:#bfbab0cc;">: </span><span>allocatedAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    space</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">,
+</span><span>})
+</span><span style="color:#ff7733;">let </span><span>transaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(allocateInstruction)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>transaction</span><span style="color:#bfbab0cc;">, </span><span>[payer</span><span style="color:#bfbab0cc;">, </span><span>allocatedAccount])
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create Nonce Account
+</span><span style="color:#ff7733;">let </span><span>nonceAccount </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>minimumAmountForNonceAccount </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getMinimumBalanceForRentExemption</span><span>(
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>NONCE_ACCOUNT_LENGTH</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>createNonceAccountTransaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(
+</span><span>web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">createNonceAccount</span><span>({
+</span><span>    fromPubkey</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    noncePubkey</span><span style="color:#bfbab0cc;">: </span><span>nonceAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    authorizedPubkey</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span>minimumAmountForNonceAccount</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>createNonceAccountTransaction</span><span style="color:#bfbab0cc;">, </span><span>[payer</span><span style="color:#bfbab0cc;">, </span><span>nonceAccount])
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Advance nonce - Used to create transactions as an account custodian
+</span><span style="color:#ff7733;">let </span><span>advanceNonceTransaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">nonceAdvance</span><span>({
+</span><span>        noncePubkey</span><span style="color:#bfbab0cc;">: </span><span>nonceAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>        authorizedPubkey</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    })</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>advanceNonceTransaction</span><span style="color:#bfbab0cc;">, </span><span>[payer])
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Transfer lamports between accounts
+</span><span style="color:#ff7733;">let </span><span>toAccount </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>transferTransaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(
+</span><span>web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">transfer</span><span>({
+</span><span>    fromPubkey</span><span style="color:#bfbab0cc;">: </span><span>payer</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    toPubkey</span><span style="color:#bfbab0cc;">: </span><span>toAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1000</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>transferTransaction</span><span style="color:#bfbab0cc;">, </span><span>[payer])
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Assign a new account to a program
+</span><span style="color:#ff7733;">let </span><span>programId </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>assignedAccount </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>assignTransaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(
+</span><span>web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">assign</span><span>({
+</span><span>    accountPubkey</span><span style="color:#bfbab0cc;">: </span><span>assignedAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    programId</span><span style="color:#bfbab0cc;">: </span><span>programId</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>assignTransaction</span><span style="color:#bfbab0cc;">, </span><span>[payer</span><span style="color:#bfbab0cc;">, </span><span>assignedAccount])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="secp256k1program">Secp256k1Program</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Secp256k1Program.html">Исходная документация</a></p>
+<p>Secp256k1Program используется для проверки подписей Secp256k1, которые используются как Биткойном, так и Эфириумом.</p>
+<h4 id="primer-ispol-zovaniia-5">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{keccak_256} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;js-sha3&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>secp256k1 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;secp256k1&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create a Ethereum Address from secp256k1
+</span><span style="color:#ff7733;">let </span><span>secp256k1PrivateKey</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">do </span><span>{
+</span><span>    secp256k1PrivateKey </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#f29668;">.</span><span>secretKey</span><span style="color:#f29668;">.</span><span style="color:#f07178;">slice</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">32</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>} </span><span style="color:#ff7733;">while </span><span>(</span><span style="color:#f29668;">!</span><span>secp256k1</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">privateKeyVerify</span><span>(secp256k1PrivateKey))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>secp256k1PublicKey </span><span style="color:#f29668;">= </span><span>secp256k1</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">publicKeyCreate</span><span>(secp256k1PrivateKey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">false</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">slice</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>ethAddress </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Secp256k1Program</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">publicKeyToEthAddress</span><span>(secp256k1PublicKey)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`Ethereum Address: 0x${</span><span>ethAddress</span><span style="color:#f29668;">.</span><span style="color:#f07178;">toString</span><span style="color:#c2d94c;">(&#39;hex&#39;)}`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Ethereum Address: 0xadbf43eec40694eacf36e34bb5337fba6a2aa8ee
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Fund a keypair to create instructions
+</span><span style="color:#ff7733;">let </span><span>fromPublicKey </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;devnet&#39;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;confirmed&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>airdropSignature </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">requestAirdrop</span><span>(
+</span><span>    fromPublicKey</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>LAMPORTS_PER_SOL</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">confirmTransaction</span><span>(airdropSignature)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Sign Message with Ethereum Key
+</span><span style="color:#ff7733;">let </span><span>plaintext </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#c2d94c;">&#39;string address&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>plaintextHash </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>(keccak_256</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">update</span><span>(plaintext)</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">digest</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>{signature</span><span style="color:#bfbab0cc;">, </span><span>recid: recoveryId} </span><span style="color:#f29668;">= </span><span>secp256k1</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ecdsaSign</span><span>(
+</span><span>    plaintextHash</span><span style="color:#bfbab0cc;">,
+</span><span>    secp256k1PrivateKey
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create transaction to verify the signature
+</span><span style="color:#ff7733;">let </span><span>transaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>Secp256k1Program</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">createInstructionWithEthAddress</span><span>({
+</span><span>        ethAddress</span><span style="color:#bfbab0cc;">: </span><span>ethAddress</span><span style="color:#f29668;">.</span><span style="color:#f07178;">toString</span><span>(</span><span style="color:#c2d94c;">&#39;hex&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        plaintext</span><span style="color:#bfbab0cc;">,
+</span><span>        signature</span><span style="color:#bfbab0cc;">,
+</span><span>        recoveryId</span><span style="color:#bfbab0cc;">,
+</span><span>    })</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Transaction will succeed if the message is verified to be signed by the address
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>transaction</span><span style="color:#bfbab0cc;">, </span><span>[fromPublicKey])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="message">Message</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Message.html">Исходная документация</a></p>
+<p>Сообщение используется как еще один способ построения транзакций. Вы можете создать сообщение, используя учетные записи, заголовок, инструкции и недавний блокхеш, которые являются частью транзакции. <a href="javascript-api.md#Transaction">Транзакция</a> — это сообщение и список подписей, необходимых для выполнения транзакции.</p>
+<h4 id="primer-ispol-zovaniia-6">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{Buffer} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;buffer&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>bs58 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;bs58&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>toPublicKey </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>fromPublicKey </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(
+</span><span>    web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;devnet&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&#39;confirmed&#39;
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>airdropSignature </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">requestAirdrop</span><span>(
+</span><span>    fromPublicKey</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>LAMPORTS_PER_SOL</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">confirmTransaction</span><span>(airdropSignature)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>type </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>SYSTEM_INSTRUCTION_LAYOUTS</span><span style="color:#f29668;">.</span><span>Transfer</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>data </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">alloc</span><span>(type</span><span style="color:#f29668;">.</span><span>layout</span><span style="color:#f29668;">.</span><span>span)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>layoutFields </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Object</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">assign</span><span>({instruction</span><span style="color:#bfbab0cc;">: </span><span>type</span><span style="color:#f29668;">.</span><span>index})</span><span style="color:#bfbab0cc;">;
+</span><span>type</span><span style="color:#f29668;">.</span><span>layout</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">encode</span><span>(layoutFields</span><span style="color:#bfbab0cc;">, </span><span>data)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>recentBlockhash </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getRecentBlockhash</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>messageParams </span><span style="color:#f29668;">= </span><span>{
+</span><span>    accountKeys</span><span style="color:#bfbab0cc;">: </span><span>[
+</span><span>        fromPublicKey</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#f07178;">toString</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        toPublicKey</span><span style="color:#f29668;">.</span><span style="color:#f07178;">toString</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span>programId</span><span style="color:#f29668;">.</span><span style="color:#f07178;">toString</span><span>()
+</span><span>    ]</span><span style="color:#bfbab0cc;">,
+</span><span>    header</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        numReadonlySignedAccounts</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,
+</span><span>        numReadonlyUnsignedAccounts</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,
+</span><span>        numRequiredSignatures</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    instructions</span><span style="color:#bfbab0cc;">: </span><span>[
+</span><span>        {
+</span><span>        accounts</span><span style="color:#bfbab0cc;">: </span><span>[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>]</span><span style="color:#bfbab0cc;">,
+</span><span>        data</span><span style="color:#bfbab0cc;">: </span><span>bs58</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">encode</span><span>(data)</span><span style="color:#bfbab0cc;">,
+</span><span>        programIdIndex</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">,
+</span><span>        }</span><span style="color:#bfbab0cc;">,
+</span><span>    ]</span><span style="color:#bfbab0cc;">,
+</span><span>    recentBlockhash</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>message </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Message</span><span>(messageParams)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>transaction </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Transaction</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">populate</span><span>(
+</span><span>    message</span><span style="color:#bfbab0cc;">,
+</span><span>    [fromPublicKey</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#f29668;">.</span><span style="color:#f07178;">toString</span><span>()]
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>transaction</span><span style="color:#bfbab0cc;">, </span><span>[fromPublicKey])
+</span></code></pre>
+<h3 id="struct">Struct</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Struct.html">Исходная документация</a></p>
+<p>Класс struct используется для создания совместимых с Rust структур в javascript. Этот класс совместим только со структурами Rust, закодированными Borsh.</p>
+<h4 id="primer-ispol-zovaniia-7">Пример использования</h4>
+<p>Структура в Rust:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Fee </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>denominator</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64</span><span>,
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>numerator</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64</span><span>,
+</span><span>}
+</span></code></pre>
+<p>Использование web3:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">import </span><span>BN </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;bn.js&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">import </span><span>{Struct} </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">export class </span><span style="color:#59c2ff;">Fee </span><span style="color:#ff7733;">extends </span><span style="text-decoration:underline;color:#59c2ff;">Struct </span><span>{
+</span><span>  denominator</span><span style="color:#f29668;">: </span><span style="color:#59c2ff;">BN</span><span style="color:#bfbab0cc;">;
+</span><span>  numerator</span><span style="color:#f29668;">: </span><span style="color:#59c2ff;">BN</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h3 id="enum">Enum</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Enum.html">Исходная документация</a></p>
+<p>Класс Enum используется для представления Enum, совместимого с Rust, в javascript. Перечисление будет просто строковым представлением, если оно зарегистрировано, но может быть правильно закодировано/декодировано при использовании в сочетании с <a href="javascript-api.md#Struct">Struct</a>. Этот класс совместим только с перечислениями Rust, закодированными Borsh.</p>
+<h4 id="primer-ispol-zovaniia-8">Пример использования</h4>
+<p>Rust:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">AccountType </span><span>{
+</span><span>    Uninitialized</span><span style="color:#bfbab0cc;">,
+</span><span>    StakePool</span><span style="color:#bfbab0cc;">,
+</span><span>    ValidatorList</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Web3:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">import </span><span>{Enum} </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">export class </span><span style="color:#59c2ff;">AccountType </span><span style="color:#ff7733;">extends </span><span style="text-decoration:underline;color:#59c2ff;">Enum </span><span>{}
+</span></code></pre>
+<h3 id="nonceaccount">NonceAccount</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/NonceAccount.html">Исходная документация</a></p>
+<p>Обычно транзакция отклоняется, если поле <code>recentBlockhash</code> транзакции слишком старое. Для предоставления определенных кастодиальных услуг используются одноразовые учетные записи. Срок действия транзакций, в которых используется <code>recentBlockhash</code>, захваченный в цепочке учетной записью Nonce, не истекает до тех пор, пока учетная запись Nonce не будет продвинута.</p>
+<p>Вы можете создать одноразовую учетную запись, сначала создав обычную учетную запись, а затем используя <code>SystemProgram</code>, чтобы сделать учетную запись одноразовой учетной записью.</p>
+<h4 id="primer-ispol-zovaniia-9">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create connection
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(
+</span><span>    web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;devnet&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&#39;confirmed&#39;</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Generate accounts
+</span><span style="color:#ff7733;">let </span><span>account </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>nonceAccount </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Fund account
+</span><span style="color:#ff7733;">let </span><span>airdropSignature </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">requestAirdrop</span><span>(
+</span><span>    account</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>LAMPORTS_PER_SOL</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">confirmTransaction</span><span>(airdropSignature)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Get Minimum amount for rent exemption
+</span><span style="color:#ff7733;">let </span><span>minimumAmount </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getMinimumBalanceForRentExemption</span><span>(
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>NONCE_ACCOUNT_LENGTH</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Form CreateNonceAccount transaction
+</span><span style="color:#ff7733;">let </span><span>transaction </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Transaction</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(
+</span><span>web3</span><span style="color:#f29668;">.</span><span>SystemProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">createNonceAccount</span><span>({
+</span><span>    fromPubkey</span><span style="color:#bfbab0cc;">: </span><span>account</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    noncePubkey</span><span style="color:#bfbab0cc;">: </span><span>nonceAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    authorizedPubkey</span><span style="color:#bfbab0cc;">: </span><span>account</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span>minimumAmount</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// Create Nonce Account
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(
+</span><span>    connection</span><span style="color:#bfbab0cc;">,
+</span><span>    transaction</span><span style="color:#bfbab0cc;">,
+</span><span>    [account</span><span style="color:#bfbab0cc;">, </span><span>nonceAccount]
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>nonceAccountData </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getNonce</span><span>(
+</span><span>    nonceAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&#39;confirmed&#39;</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(nonceAccountData)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// NonceAccount {
+</span><span style="font-style:italic;color:#5c6773;">//   authorizedPubkey: PublicKey {
+</span><span style="font-style:italic;color:#5c6773;">//     _bn: &lt;BN: 919981a5497e8f85c805547439ae59f607ea625b86b1138ea6e41a68ab8ee038&gt;
+</span><span style="font-style:italic;color:#5c6773;">//   },
+</span><span style="font-style:italic;color:#5c6773;">//   nonce: &#39;93zGZbhMmReyz4YHXjt2gHsvu5tjARsyukxD4xnaWaBq&#39;,
+</span><span style="font-style:italic;color:#5c6773;">//   feeCalculator: { lamportsPerSignature: 5000 }
+</span><span style="font-style:italic;color:#5c6773;">// }
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>nonceAccountInfo </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getAccountInfo</span><span>(
+</span><span>    nonceAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&#39;confirmed&#39;
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>nonceAccountFromInfo </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>NonceAccount</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromAccountData</span><span>(
+</span><span>    nonceAccountInfo</span><span style="color:#f29668;">.</span><span>data
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(nonceAccountFromInfo)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// NonceAccount {
+</span><span style="font-style:italic;color:#5c6773;">//   authorizedPubkey: PublicKey {
+</span><span style="font-style:italic;color:#5c6773;">//     _bn: &lt;BN: 919981a5497e8f85c805547439ae59f607ea625b86b1138ea6e41a68ab8ee038&gt;
+</span><span style="font-style:italic;color:#5c6773;">//   },
+</span><span style="font-style:italic;color:#5c6773;">//   nonce: &#39;93zGZbhMmReyz4YHXjt2gHsvu5tjARsyukxD4xnaWaBq&#39;,
+</span><span style="font-style:italic;color:#5c6773;">//   feeCalculator: { lamportsPerSignature: 5000 }
+</span><span style="font-style:italic;color:#5c6773;">// }
+</span></code></pre>
+<p>В приведенном выше примере показано, как создать <code>NonceAccount</code> с помощью <code>SystemProgram.createNonceAccount</code>, а также как получить <code>NonceAccount</code> из accountInfo. Используя одноразовый номер, вы можете создавать транзакции в автономном режиме с одноразовым номером вместо <code>recentBlockhash</code>.</p>
+<h3 id="voteaccount">VoteAccount</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/VoteAccount.html">Исходная документация</a></p>
+<p>Учетная запись для голосования — это объект, предоставляющий возможность декодирования учетных записей для голосования из собственной программы учетной записи для голосования в сети.</p>
+<h4 id="primer-ispol-zovaniia-10">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>voteAccountInfo </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getProgramAccounts</span><span>(web3</span><span style="color:#f29668;">.</span><span>VOTE_PROGRAM_ID)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>voteAccountFromData </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>VoteAccount</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromAccountData</span><span>(voteAccountInfo[</span><span style="color:#f29718;">0</span><span>]</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>data)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(voteAccountFromData)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">/*
+</span><span style="font-style:italic;color:#5c6773;">VoteAccount {
+</span><span style="font-style:italic;color:#5c6773;">  nodePubkey: PublicKey {
+</span><span style="font-style:italic;color:#5c6773;">    _bn: &lt;BN: cf1c635246d4a2ebce7b96bf9f44cacd7feed5552be3c714d8813c46c7e5ec02&gt;
+</span><span style="font-style:italic;color:#5c6773;">  },
+</span><span style="font-style:italic;color:#5c6773;">  authorizedWithdrawer: PublicKey {
+</span><span style="font-style:italic;color:#5c6773;">    _bn: &lt;BN: b76ae0caa56f2b9906a37f1b2d4f8c9d2a74c1420cd9eebe99920b364d5cde54&gt;
+</span><span style="font-style:italic;color:#5c6773;">  },
+</span><span style="font-style:italic;color:#5c6773;">  commission: 10,
+</span><span style="font-style:italic;color:#5c6773;">  rootSlot: 104570885,
+</span><span style="font-style:italic;color:#5c6773;">  votes: [
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570886, confirmationCount: 31 },
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570887, confirmationCount: 30 },
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570888, confirmationCount: 29 },
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570889, confirmationCount: 28 },
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570890, confirmationCount: 27 },
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570891, confirmationCount: 26 },
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570892, confirmationCount: 25 },
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570893, confirmationCount: 24 },
+</span><span style="font-style:italic;color:#5c6773;">    { slot: 104570894, confirmationCount: 23 },
+</span><span style="font-style:italic;color:#5c6773;">    ...
+</span><span style="font-style:italic;color:#5c6773;">  ],
+</span><span style="font-style:italic;color:#5c6773;">  authorizedVoters: [ { epoch: 242, authorizedVoter: [PublicKey] } ],
+</span><span style="font-style:italic;color:#5c6773;">  priorVoters: [
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object], [Object],
+</span><span style="font-style:italic;color:#5c6773;">      [Object], [Object]
+</span><span style="font-style:italic;color:#5c6773;">   ],
+</span><span style="font-style:italic;color:#5c6773;">  epochCredits: [
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 179, credits: 33723163, prevCredits: 33431259 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 180, credits: 34022643, prevCredits: 33723163 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 181, credits: 34331103, prevCredits: 34022643 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 182, credits: 34619348, prevCredits: 34331103 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 183, credits: 34880375, prevCredits: 34619348 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 184, credits: 35074055, prevCredits: 34880375 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 185, credits: 35254965, prevCredits: 35074055 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 186, credits: 35437863, prevCredits: 35254965 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 187, credits: 35672671, prevCredits: 35437863 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 188, credits: 35950286, prevCredits: 35672671 },
+</span><span style="font-style:italic;color:#5c6773;">    { epoch: 189, credits: 36228439, prevCredits: 35950286 },
+</span><span style="font-style:italic;color:#5c6773;">    ...
+</span><span style="font-style:italic;color:#5c6773;">  ],
+</span><span style="font-style:italic;color:#5c6773;">  lastTimestamp: { slot: 104570916, timestamp: 1635730116 }
+</span><span style="font-style:italic;color:#5c6773;">}
+</span><span style="font-style:italic;color:#5c6773;">*/
+</span></code></pre>
+<h2 id="steiking">Стэйкинг</h2>
+<h3 id="stakeprogram">StakeProgram</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/StakeProgram.html">Исходная документация</a></p>
+<p>StakeProgram упрощает размещение SOL и делегирование их любым валидаторам в сети. Вы можете использовать StakeProgram для создания стейк-аккаунта, ставки SOL, авторизации аккаунтов для снятия вашей ставки, деактивации вашей ставки и вывода средств. Класс StakeInstruction используется для декодирования и чтения дополнительных инструкций из транзакций, вызывающих StakeProgram.</p>
+<h4 id="primer-ispol-zovaniia-11">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>web3 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Fund a key to create transactions
+</span><span style="color:#ff7733;">let </span><span>fromPublicKey </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Connection</span><span>(web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">clusterApiUrl</span><span>(</span><span style="color:#c2d94c;">&#39;devnet&#39;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;confirmed&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>airdropSignature </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">requestAirdrop</span><span>(
+</span><span>    fromPublicKey</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    web3</span><span style="color:#f29668;">.</span><span>LAMPORTS_PER_SOL</span><span style="color:#bfbab0cc;">,
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">confirmTransaction</span><span>(airdropSignature)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create Account
+</span><span style="color:#ff7733;">let </span><span>stakeAccount </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>authorizedAccount </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">/* Note: This is the minimum amount for a stake account -- Add additional Lamports for staking
+</span><span style="font-style:italic;color:#5c6773;">    For example, we add 50 lamports as part of the stake */
+</span><span style="color:#ff7733;">let </span><span>lamportsForStakeAccount </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getMinimumBalanceForRentExemption</span><span>(web3</span><span style="color:#f29668;">.</span><span>StakeProgram</span><span style="color:#f29668;">.</span><span>space)) </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">50</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>createAccountTransaction </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>StakeProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">createAccount</span><span>({
+</span><span>    fromPubkey</span><span style="color:#bfbab0cc;">: </span><span>fromPublicKey</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    authorized</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Authorized</span><span>(authorizedAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>authorizedAccount</span><span style="color:#f29668;">.</span><span>publicKey)</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span>lamportsForStakeAccount</span><span style="color:#bfbab0cc;">,
+</span><span>    lockup</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">Lockup</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span>fromPublicKey</span><span style="color:#f29668;">.</span><span>publicKey)</span><span style="color:#bfbab0cc;">,
+</span><span>    stakePubkey</span><span style="color:#bfbab0cc;">: </span><span>stakeAccount</span><span style="color:#f29668;">.</span><span>publicKey
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>createAccountTransaction</span><span style="color:#bfbab0cc;">, </span><span>[fromPublicKey</span><span style="color:#bfbab0cc;">, </span><span>stakeAccount])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Check that stake is available
+</span><span style="color:#ff7733;">let </span><span>stakeBalance </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getBalance</span><span>(stakeAccount</span><span style="color:#f29668;">.</span><span>publicKey)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`Stake balance: ${</span><span>stakeBalance</span><span style="color:#c2d94c;">}`</span><span>)
+</span><span style="font-style:italic;color:#5c6773;">// Stake balance: 2282930
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// We can verify the state of our stake. This may take some time to become active
+</span><span style="color:#ff7733;">let </span><span>stakeState </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getStakeActivation</span><span>(stakeAccount</span><span style="color:#f29668;">.</span><span>publicKey)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`Stake Stake: ${</span><span>stakeState</span><span style="color:#f29668;">.</span><span>state</span><span style="color:#c2d94c;">}`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// Stake State: inactive
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// To delegate our stake, we get the current vote accounts and choose the first
+</span><span style="color:#ff7733;">let </span><span>voteAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>connection</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getVoteAccounts</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>voteAccount </span><span style="color:#f29668;">= </span><span>voteAccounts</span><span style="color:#f29668;">.</span><span>current</span><span style="color:#f29668;">.</span><span style="color:#f07178;">concat</span><span>(
+</span><span>    voteAccounts</span><span style="color:#f29668;">.</span><span>delinquent</span><span style="color:#bfbab0cc;">,
+</span><span>)[</span><span style="color:#f29718;">0</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>votePubkey </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">web3</span><span style="color:#f29668;">.</span><span style="color:#59c2ff;">PublicKey</span><span>(voteAccount</span><span style="color:#f29668;">.</span><span>votePubkey)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// We can then delegate our stake to the voteAccount
+</span><span style="color:#ff7733;">let </span><span>delegateTransaction </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>StakeProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">delegate</span><span>({
+</span><span>    stakePubkey</span><span style="color:#bfbab0cc;">: </span><span>stakeAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    authorizedPubkey</span><span style="color:#bfbab0cc;">: </span><span>authorizedAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    votePubkey</span><span style="color:#bfbab0cc;">: </span><span>votePubkey</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>delegateTransaction</span><span style="color:#bfbab0cc;">, </span><span>[fromPublicKey</span><span style="color:#bfbab0cc;">, </span><span>authorizedAccount])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// To withdraw our funds, we first have to deactivate the stake
+</span><span style="color:#ff7733;">let </span><span>deactivateTransaction </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>StakeProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">deactivate</span><span>({
+</span><span>    stakePubkey</span><span style="color:#bfbab0cc;">: </span><span>stakeAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    authorizedPubkey</span><span style="color:#bfbab0cc;">: </span><span>authorizedAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>deactivateTransaction</span><span style="color:#bfbab0cc;">, </span><span>[fromPublicKey</span><span style="color:#bfbab0cc;">, </span><span>authorizedAccount])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Once deactivated, we can withdraw our funds
+</span><span style="color:#ff7733;">let </span><span>withdrawTransaction </span><span style="color:#f29668;">= </span><span>web3</span><span style="color:#f29668;">.</span><span>StakeProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">withdraw</span><span>({
+</span><span>    stakePubkey</span><span style="color:#bfbab0cc;">: </span><span>stakeAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    authorizedPubkey</span><span style="color:#bfbab0cc;">: </span><span>authorizedAccount</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    toPubkey</span><span style="color:#bfbab0cc;">: </span><span>fromPublicKey</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span>stakeBalance</span><span style="color:#bfbab0cc;">,
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">await </span><span>web3</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sendAndConfirmTransaction</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>withdrawTransaction</span><span style="color:#bfbab0cc;">, </span><span>[fromPublicKey</span><span style="color:#bfbab0cc;">, </span><span>authorizedAccount])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="authorized">Authorized</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Authorized.html">Исходная документация</a></p>
+<p>Authorized — это объект, используемый при создании авторизованной учетной записи для ставок в Solana. Вы можете указать «стейкера» и «выводчика» отдельно, что позволит снимать средства с другой учетной записи, отличной от стейкера.</p>
+<p>Вы можете узнать больше об использовании объекта <code>Authorized</code> в <a href="javascript-api.md#StakeProgram"><code>StakeProgram</code></a></p>
+<h3 id="lockup">Lockup</h3>
+<p><a href="https://solana-labs.github.io/solana-web3.js/classes/Lockup.html">Исходная документация</a></p>
+<p>Блокировка используется вместе с <a href="javascript-api.md#StakeProgram">StakeProgram</a> для создания учетной записи. Блокировка используется для определения того, как долго ставка будет заблокирована или не может быть извлечена. Если для блокировки установлено значение 0 как для эпохи, так и для временной метки Unix, блокировка будет отключена для учетной записи доли.</p>
+<h4 id="primer-ispol-zovaniia-12">Пример использования</h4>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{Authorized</span><span style="color:#bfbab0cc;">, </span><span>Keypair</span><span style="color:#bfbab0cc;">, </span><span>Lockup</span><span style="color:#bfbab0cc;">, </span><span>StakeProgram} </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@solana/web3.js&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>account </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>stakeAccount </span><span style="color:#f29668;">= </span><span>Keypair</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">generate</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>authorized </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Authorized</span><span>(account</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">, </span><span>account</span><span style="color:#f29668;">.</span><span>publicKey)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>lockup </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Lockup</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span>account</span><span style="color:#f29668;">.</span><span>publicKey)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let </span><span>createStakeAccountInstruction </span><span style="color:#f29668;">= </span><span>StakeProgram</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">createAccount</span><span>({
+</span><span>    fromPubkey</span><span style="color:#bfbab0cc;">: </span><span>account</span><span style="color:#f29668;">.</span><span>publicKey</span><span style="color:#bfbab0cc;">,
+</span><span>    authorized</span><span style="color:#bfbab0cc;">: </span><span>authorized</span><span style="color:#bfbab0cc;">,
+</span><span>    lamports</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1000</span><span style="color:#bfbab0cc;">,
+</span><span>    lockup</span><span style="color:#bfbab0cc;">: </span><span>lockup</span><span style="color:#bfbab0cc;">,
+</span><span>    stakePubkey</span><span style="color:#bfbab0cc;">: </span><span>stakeAccount</span><span style="color:#f29668;">.</span><span>publicKey
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Приведенный выше код создает <code>createStakeAccountInstruction</code>, которая будет использоваться при создании учетной записи с помощью <code>StakeProgram</code>. Для блокировки установлено значение 0 как для эпохи, так и для временной метки Unix, что отключает блокировку для учетной записи.</p>
+<p>См. <a href="javascript-api.md#StakeProgram">StakeProgram</a> для получения дополнительной информации.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

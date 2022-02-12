@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Безопасное подписание голосов | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/vote-signing-to-implement/#bezopasnoe-podpisanie-golosov">Безопасное подписание голосов</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/vote-signing-to-implement/#potok-soobshchenii"><small>- Поток сообщений</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/vote-signing-to-implement/#proverka-poh"><small>- Проверка PoH</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/vote-signing-to-implement/#proverka-predkov"><small>- Проверка предков</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/vote-signing-to-implement/#5-vyshe">5 выше).</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/vote-signing-to-implement/#opredelenie-forka"><small>- Определение форка</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/vote-signing-to-implement/#konfiguratsiia-anklava"><small>- Конфигурация анклава</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/vote-signing-to-implement/#problemy"><small>- Проблемы</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Безопасное подписание голосов</h1>
+
+<h2 id="bezopasnoe-podpisanie-golosov">Безопасное подписание голосов</h2>
+<p>Этот дизайн описывает дополнительное поведение при подписании голосов, которое сделает процесс более безопасным.</p>
+<p>В настоящее время Solana реализует службу подписи голосов, которая оценивает каждый голос, чтобы убедиться, что он не нарушает условие косой черты. Услуга потенциально может иметь различные варианты в зависимости от возможностей аппаратной платформы. В частности, его можно использовать вместе с безопасным анклавом (например, SGX). Анклав может генерировать асимметричный ключ, открывая API для пользовательского (ненадежного) кода для подписи транзакций голосования, сохраняя при этом закрытый ключ для подписи голосования в своей защищенной памяти.</p>
+<p>В следующих разделах описывается, как эта архитектура будет работать:</p>
+<h3 id="potok-soobshchenii">Поток сообщений</h3>
+<ol>
+<li>Узел инициализирует анклав при запуске
+<ul>
+<li>Анклав генерирует асимметричный ключ и возвращает открытый ключ узлу.</li>
+<li>Пара ключей является эфемерной. Новая пара ключей создается при загрузке узла. Новая пара ключей также может быть сгенерирована во время выполнения на основе некоторых критериев, которые необходимо определить.</li>
+<li>Анклав возвращает свой отчет об аттестации узлу.</li>
+</ul>
+</li>
+<li>Узел выполняет аттестацию анклава (например, с помощью IAS API от Intel)
+<ul>
+<li>Узел гарантирует, что Secure Enclave работает на TPM и подписан доверенной стороной.</li>
+</ul>
+</li>
+<li>Заинтересованная сторона узла предоставляет эфемерному ключу разрешение на использование своей доли. Этот процесс подлежит определению.</li>
+<li>Ненадежное, неанклавное программное обеспечение узла вызывает доверенное анклавное программное обеспечение, используя его интерфейс для подписи транзакций и других данных.
+<ul>
+<li>В случае подписания голосования узлу необходимо проверить PoH. Проверка PoH является неотъемлемой частью подписания. Анклаву будут представлены некоторые поддающиеся проверке данные для проверки перед подписанием голосования.</li>
+<li>Необходимо определить процесс генерации проверяемых данных в ненадежном пространстве.</li>
+</ul>
+</li>
+</ol>
+<h3 id="proverka-poh">Проверка PoH</h3>
+<ol>
+<li>
+<p>Когда узел голосует за запись en <code>X</code>, существует период блокировки <code>N</code>, в течение которого он не может голосовать за ответвление, которое не содержит <code>X</code> в своей истории.</p>
+</li>
+<li>
+<p>Каждый раз, когда узел голосует за производную от <code>X</code>, скажем, <code>X+y</code>, период блокировки для <code>X</code> увеличивается на коэффициент <code>F</code> \ (т. е. узел продолжительности не может голосовать за ответвление, которое не содержат <code>X</code> увеличивается).</p>
+<ul>
+<li>Период блокировки для <code>X+y</code> по-прежнему равен <code>N</code>, пока узел снова не проголосует.</li>
+</ul>
+</li>
+<li>
+<p>Увеличение периода блокировки ограничено \ (например, фактор <code>F</code> применяется максимум 32 раза).</p>
+</li>
+<li>
+<p>Подписывающий анклав не должен подписывать голосование, нарушающее эту политику. Это означает</p>
+<ul>
+<li>Анклав инициализируется с помощью <code>N</code>, <code>F</code> и <code>Factor cap</code></li>
+<li>Enclave хранит количество идентификаторов входа, по которому ранее голосовал узел.</li>
+<li>Запрос на подпись содержит идентификатор записи для нового голосования.</li>
+<li>Enclave проверяет, что идентификатор записи нового голосования находится в правильном форке \ (в соответствии с правилами #1 и #2 выше)</li>
+</ul>
+</li>
+</ol>
+<h3 id="proverka-predkov">Проверка предков</h3>
+<p>Это альтернативный, хотя и менее надежный подход к проверке вилки для голосования. 1. Валидатор поддерживает активный набор узлов в кластере 2. Он наблюдает за голосами из активного набора в последний период голосования 3. Он сохраняет ancestor/last_tick, на котором голосовал каждый узел 4. Он отправляет новый запрос на голосование для голосования -сервис подписи</p>
+<ul>
+<li>Он включает в себя предыдущие голоса от узлов в активном наборе и их соответствующих предков.
+<ol>
+<li>Подписывающая сторона проверяет, содержит ли предыдущие голоса голос валидатора, а предок голоса совпадает с большинством узлов.</li>
+</ol>
+</li>
+<li>Подписывает новое голосование, если проверка прошла успешно</li>
+<li>Он утверждает (поднимает какую-то тревогу), если проверка не удалась</li>
+</ul>
+<p>Предпосылка заключается в том, что валидатор можно подделать не более одного раза, чтобы проголосовать за неверные данные. Если кто-то захватит валидатор и отправит запрос на голосование за поддельные данные, это голосование не будет включено в PoH (поскольку оно будет отклонено кластером). В следующий раз, когда валидатор отправит запрос на подпись голоса, служба подписи обнаружит, что последний голос валидатора отсутствует (как часть</p>
+<h2 id="5-vyshe">5 выше).</h2>
+<h3 id="opredelenie-forka">Определение форка</h3>
+<p>Из-за того, что анклав не может обрабатывать PoH, он не имеет прямых сведений об истории форка отправленного голоса валидатора. Каждый анклав следует инициировать с текущим <em>активным набором</em> открытых ключей. Валидатор должен отправить свой текущий голос вместе с голосами активного набора (включая самого себя), которые он наблюдал в слоте своего предыдущего голоса. Таким образом, анклав может предположить голоса, сопровождающие предыдущий голос валидатора, и, таким образом, голосовать за форк. Это невозможно для изначально отправленного голоса валидатора, так как у него не будет «предыдущего» слота для ссылки. Чтобы учесть это, должна применяться короткая заморозка голосования до тех пор, пока не будет отправлено второе голосование, содержащее голоса из активного набора вместе со своим собственным голосом, на пике первоначального голосования.</p>
+<h3 id="konfiguratsiia-anklava">Конфигурация анклава</h3>
+<p>Клиент стейкинга должен иметь возможность настройки, чтобы предотвратить голосование на неактивных форках. Этот механизм должен использовать известный активный набор клиента <code>N_active</code> вместе с пороговым числом голосов <code>N_vote</code> и пороговой глубиной <code>N_depth</code>, чтобы определить, следует ли продолжать голосование по представленному ответвлению. Эта конфигурация должна принимать форму правила, согласно которому клиент будет голосовать за разветвление только в том случае, если он наблюдает больше, чем <code>N_vote</code> на <code>N_depth</code>. На практике это означает, что клиент подтверждает, что он наблюдает некоторую вероятность экономической завершенности представленного форка на такой глубине, когда дополнительное голосование может привести к блокировке на нежелательный период времени, если этот форк окажется недействующим.</p>
+<h3 id="problemy">Проблемы</h3>
+<ol>
+<li>Генерация проверяемых данных в недоверенном пространстве для проверки PoH в анклаве.</li>
+<li>Нужна инфраструктура для выдачи доли на эфемерный ключ.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

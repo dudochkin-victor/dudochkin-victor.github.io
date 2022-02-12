@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Операционные издержки | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/economics/transaction-fees/#operatsionnye-izderzhki">Операционные издержки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/economics/transaction-fees/#raschet-komissii">Расчет комиссии</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/economics/transaction-fees/#limity-blokov-i-prioritet-tranzaktsii">Лимиты блоков и приоритет транзакций</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/economics/transaction-fees/#korrektirovka-komissii">Корректировка комиссии</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/economics/transaction-fees/#shardovye-tranzaktsii">Шардовые транзакции</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/economics/transaction-fees/#drugie-strategii-ogranicheniia-resursov">Другие стратегии ограничения ресурсов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/economics/transaction-fees/#peredovoi">Передовой</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/economics/transaction-fees/#resursy"><small>- Ресурсы</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Операционные издержки</h1>
+
+<h2 id="operatsionnye-izderzhki">Операционные издержки</h2>
+<p>Некоторые ресурсы в сети блокчейн ограничены, например, хранение и вычисления. Плата за транзакции не позволяет отдельным пользователям потреблять слишком много ресурсов. Edgeware использует модель оплаты на основе веса, а не модель учета газа. Таким образом, сборы взимаются до выполнения транзакции; после оплаты комиссии узлы выполнят транзакцию.</p>
+<p><a href="https://research.web3.foundation/en/latest/polkadot/Token%20Economics.html">Web3 Foundation Research</a> разработала систему комиссий Polkadot со следующими целями:</p>
+<ul>
+<li>Каждый блок Relay Chain должен обрабатываться эффективно, чтобы избежать задержек в производстве блоков.</li>
+<li>Скорость роста релейной цепи должна быть ограничена.</li>
+<li>В каждом блоке должно быть место для специальных высокоприоритетных транзакций, таких как отчеты о неправомерных действиях.</li>
+<li>Система должна быть в состоянии справляться с резкими скачками спроса.</li>
+<li>Комиссии должны меняться медленно, чтобы отправители могли точно предсказать комиссию за данную транзакцию.</li>
+</ul>
+<h2 id="raschet-komissii">Расчет комиссии</h2>
+<p>Плата за Edgeware рассчитывается на основе трех параметров:</p>
+<ul>
+<li>Плата за байт (также известная как &quot;плата за длину&quot;)</li>
+<li>Плата за вес</li>
+<li>чаевые (по желанию)</li>
+</ul>
+<p>Плата за длину является произведением постоянной платы за байт и размера транзакции в байтах.</p>
+<p>Веса — это фиксированное число, предназначенное для управления временем, которое требуется для проверки блока. Каждая транзакция имеет базовый вес, учитывающий накладные расходы на включение (например, проверку подписи), а также вес отправки, учитывающий время выполнения транзакции. Общий вес умножается на комиссию за вес для расчета комиссии за вес транзакции.</p>
+<p>Чаевые — это необязательная плата за транзакцию, которую пользователи могут добавить, чтобы повысить приоритет транзакции.</p>
+<p>Вместе эти три сбора составляют плату за включение. Эта комиссия списывается со счета отправителя до выполнения транзакции. Часть комиссии пойдет производителю блоков, а оставшаяся часть пойдет в Казначейство. При происхождении Edgeware это установлено на 20% и 80% соответственно.</p>
+<h2 id="limity-blokov-i-prioritet-tranzaktsii">Лимиты блоков и приоритет транзакций</h2>
+<p>Блоки в Edgeware имеют как максимальную длину (в байтах), так и максимальный вес. Производители блоков будут заполнять блоки транзакциями до этих пределов. Часть каждого блока — в настоящее время 25% — зарезервирована для важных транзакций, связанных с работой сети. Производители блоков будут заполнять только до 75% блока обычными транзакциями. Некоторые примеры операционных транзакций:</p>
+<ul>
+<li>Отчеты о ненадлежащем поведении</li>
+<li>Работа совета</li>
+<li>Действия участников на выборах (например, отказ от кандидатуры)</li>
+</ul>
+<p>Производители блоков расставляют приоритеты транзакций на основе общей комиссии за каждую транзакцию. Поскольку часть комиссии будет идти производителю блока, производители будут включать транзакции с самой высокой комиссией, чтобы максимизировать свое вознаграждение.</p>
+<h2 id="korrektirovka-komissii">Корректировка комиссии</h2>
+<p>Объем транзакций в блокчейне очень нерегулярен, поэтому комиссия за транзакцию нуждается в механизме для корректировки. Однако пользователи должны иметь возможность прогнозировать комиссию за транзакцию.</p>
+<p>Edgeware использует механизм медленной корректировки платы с подсказками, чтобы сбалансировать эти два соображения. В дополнение к ограничениям по блокам Edgeware также имеет цель заполнения блока. Комиссии увеличиваются или уменьшаются для следующего блока в зависимости от заполнения текущего блока по отношению к цели. Плата за вес может меняться до 30% в течение 24 часов. Этот показатель отражает долгосрочные тенденции спроса, но не краткосрочные всплески. Чтобы учесть краткосрочные всплески, Edgeware использует чаевые в дополнение к плате за длину и вес. Пользователи могут дополнительно добавить чаевые к комиссии, чтобы придать транзакции более высокий приоритет.</p>
+<h2 id="shardovye-tranzaktsii">Шардовые транзакции</h2>
+<p>Транзакции, которые происходят в шардах Polkadot — парачейнах и паратредах — не взимают комиссию за транзакцию Relay Chain. Пользователям шардовых приложений даже не нужно держать токены DOT, поскольку каждый шард имеет свою экономическую модель и может иметь или не иметь токен. Однако бывают ситуации, когда сами осколки совершают транзакции в цепочке ретрансляции.</p>
+<p>У парачейнов есть выделенный слот в цепочке реле для выполнения, поэтому их составителям не нужно владеть DOT, чтобы включать блоки. Парачейн сам совершает некоторые транзакции, например, открывает или закрывает канал XCMP, участвует в аукционе по обновлению своего слота или обновляет время выполнения. Парачейны имеют свои собственные счета в релейной цепочке, и им нужно будет использовать эти средства для совершения транзакций от имени парачейна.</p>
+<p>Паратреды также будут выполнять все те же транзакции, что и парачейн. Кроме того, составители должны участвовать в аукционе каждого блока, чтобы продвигать свою цепочку. Для участия в этих аукционах сборщики должны иметь DOT.</p>
+<h2 id="drugie-strategii-ogranicheniia-resursov">Другие стратегии ограничения ресурсов</h2>
+<p>Вес транзакции должен быть вычислим до выполнения и, следовательно, может представлять только фиксированную логику. Некоторые транзакции требуют ограничения ресурсов с помощью других стратегий. Например:</p>
+<ul>
+<li>Облигации: для некоторых транзакций, таких как голосование, может потребоваться облигация, которая будет возвращена или сокращена после события в сети. В примере с голосованием возвращается в конце выборов или сокращается, если избиратель пытался сделать что-то злонамеренное.</li>
+<li>Депозиты: для некоторых транзакций, таких как установка личности или получение индекса, пространство для хранения используется неограниченное время. Для этого требуется депозит, который будет возвращен, если пользователь решит освободить хранилище (например, очистить свою ide).</li>
+<li>Сжигание: транзакция может сжечь средства внутри на основе своей логики. Например, транзакция может сжечь средства отправителя, если она создаст новые записи в хранилище, тем самым увеличив размер состояния.</li>
+<li>Ограничения: некоторые ограничения являются частью протокола. Например, номинаторы могут номинировать только 16 валидаторов. Это ограничивает сложность Phragmén.</li>
+</ul>
+<h2 id="peredovoi">Передовой</h2>
+<p>На этой странице рассматриваются только транзакции, которые исходят от обычных пользователей. Однако, если вы посмотрите на блоки в обозревателе блоков, вы можете увидеть некоторые «внешние элементы», которые отличаются от этих транзакций. В Edgeware внешняя часть — это часть информации, которая поступает из-за пределов цепочки. Внешние элементы делятся на три категории:</p>
+<ul>
+<li>Подписанные транзакции</li>
+<li>Неподписанные транзакции</li>
+<li>Неотъемлемые</li>
+</ul>
+<p>На этой странице рассматриваются только подписанные транзакции, так как большинство пользователей будут взаимодействовать с Edgeware. Подписанные транзакции поступают со счета, на котором есть средства, поэтому Edgeware может взимать комиссию за транзакцию для предотвращения спама.</p>
+<p>Неподписанные транзакции предназначены для особых случаев, когда пользователю необходимо отправить внешний ключ из пары ключей, которая не контролирует средства. Например, когда пользователи требуют свои токены DOT после генезиса, на их адресе DOT еще нет средств, поэтому используется неподписанная транзакция. Валидаторы также отправляют неподписанные транзакции в виде сообщений «пульса», чтобы указать, что они находятся в сети. Эти такты должны быть подписаны одним из сеансовых ключей валидатора. Сеансовые ключи никогда не контролируют средства. Неподписанные транзакции используются только в особых случаях, потому что, поскольку Edgeware не может взимать плату за них, каждая из них нуждается в собственной настраиваемой логике проверки.</p>
+<p>Наконец, неотъемлемые части — это фрагменты информации, которые не подписаны и не включены в очередь транзакций. Таким образом, только автор блока может добавлять свойства к блоку. Неотъемлемые свойства считаются «истинными» просто потому, что достаточно большое количество валидаторов согласились с тем, что они разумны. Например, блоки Edgeware включают встроенную временную метку. Невозможно доказать, что временная метка верна, как доказывают желание отправить средства подписью. Скорее, валидаторы принимают или отклоняют блок в зависимости от того, насколько разумной они считают отметку времени. В Edgeware оно должно быть в допустимом диапазоне собственных системных часов.</p>
+<h3 id="resursy">Ресурсы</h3>
+<ul>
+<li><a href="https://wiki.polkadot.network/docs/en/learn-transaction-fees">Происхождение</a></li>
+<li><a href="https://substrate.dev/docs/en/knowledgebase/learn-substrate/weight">Вес подложки</a></li>
+<li><a href="https://substrate.dev/docs/en/knowledgebase/runtime/fees">Плата за субстрат</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Optimistic Confirmation | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation/#primitives">Primitives</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation/#definitions">Definitions:</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation/#guarantees">Guarantees:</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation/#proof">Proof:</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation/#lemma-1"><small>- Lemma 1:</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation/#lemma-2"><small>- Lemma 2:</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-confirmation/#proof-of-safety"><small>- Proof of Safety:</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Optimistic Confirmation</h1>
+
+<h2 id="primitives">Primitives</h2>
+<p><code>vote(X, S)</code> - Votes will be augmented with a &quot;reference&quot; slot, <code>X</code> which is the <strong>latest</strong> ancestor of this fork that this validator voted on with a proof of switching. As long as the validator makes consecutive votes that are all descended from each other, the same <code>X</code> should be used for all those votes. When the validator makes a vote for a slot <code>s</code> that is not descended from the previous, <code>X</code> will be set to the new slot <code>s</code>. All votes will then be of the form <code>vote(X, S)</code>, where <code>S</code> is the sorted list of slots <code>(s, s.lockout)</code> being voted for.</p>
+<p>Given a vote <code>vote(X, S)</code>, let <code>S.last == vote.last</code> be the last slot in <code>S</code>.</p>
+<p>Now we define some &quot;Optimistic Slashing&quot; slashing conditions. The intuition for these is described below:</p>
+<ul>
+<li><code>Intuition</code>: If a validator submits <code>vote(X, S)</code>, the same validator should not have voted on a different fork that &quot;overlaps&quot; this fork.
+More concretely, this validator should not have cast another vote <code>vote(X', S')</code> where the range <code>[X, S.last]</code> overlaps the range <code>[X', S'.last]</code>, <code>X != X'</code>, as shown below:</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>                                  +-------+
+</span><span>                                  |       |
+</span><span>                        +---------+       +--------+
+</span><span>                        |         |       |        |
+</span><span>                        |         +-------+        |
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                    +---+---+                      |
+</span><span>                    |       |                      |
+</span><span>                X   |       |                      |
+</span><span>                    |       |                      |
+</span><span>                    +---+---+                      |
+</span><span>                        |                          |
+</span><span>                        |                      +---+---+
+</span><span>                        |                      |       |
+</span><span>                        |                      |       |  X&#39;
+</span><span>                        |                      |       |
+</span><span>                        |                      +---+---+
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                      +---+---+
+</span><span>                        |                      |       |
+</span><span>                        |                      |       |  S&#39;.last
+</span><span>                        |                      |       |
+</span><span>                        |                      +-------+
+</span><span>                        |
+</span><span>                    +---+---+
+</span><span>                    |       |
+</span><span>                 s  |       |
+</span><span>                    |       |
+</span><span>                    +---+---+
+</span><span>                        |
+</span><span>                        |
+</span><span>                        |
+</span><span>                        |
+</span><span>                    +---+---+
+</span><span>                    |       |
+</span><span>             S.last |       |
+</span><span>                    |       |
+</span><span>                    +-------+
+</span></code></pre>
+<p>(Example of slashable votes vote(X', S') and vote(X, S))</p>
+<p>In the diagram above, note that the vote for <code>S.last</code> must have been sent after the vote for <code>S'.last</code> (due to lockouts, the higher vote must have been sent later). Thus, the sequence of votes must have been: <code>X ... S'.last ... S.last</code>.
+This means after the vote on <code>S'.last</code>, the validator must have switched back to the other fork at some slot <code>s &gt; S'.last &gt; X</code>. Thus, the vote for <code>S.last</code> should have used <code>s</code> as the &quot;reference&quot; point, not <code>X</code>, because that was the last &quot;switch&quot; on the fork.</p>
+<p>To enforce this, we define the &quot;Optimistic Slashing&quot; slashing conditions. Given any two distinct votes <code>vote(X, S)</code>and <code>vote(X', S')</code> by the same validator, the votes must satisfy:</p>
+<ul>
+<li><code>X &lt;= S.last</code>, <code>X' &lt;= S'.last</code></li>
+<li>All <code>s</code> in <code>S</code> are ancestors/descendants of one another, all <code>s'</code> in <code>S'</code> are ancsestors/descendants of one another,</li>
+<li></li>
+<li><code>X == X'</code> implies <code>S</code> is parent of <code>S'</code> or <code>S'</code> is a parent of <code>S</code></li>
+<li><code>X' &gt; X</code> implies <code>X' &gt; S.last</code> and <code>S'.last &gt; S.last</code> and for all <code>s</code> in <code>S</code>, <code>s + lockout(s) &lt; X'</code></li>
+<li><code>X &gt; X'</code> implies <code>X &gt; S'.last</code> and <code>S.last &gt; S'.last</code>
+and for all <code>s</code> in <code>S'</code>, <code>s + lockout(s) &lt; X</code></li>
+</ul>
+<p>(The last two rules imply the ranges cannot overlap):
+Otherwise the validator is slashed.</p>
+<p><code>Range(vote)</code> - Given a vote <code>v = vote(X, S)</code>, define <code>Range(v)</code> to be the range of slots <code>[X, S.last]</code>.</p>
+<p><code>SP(old_vote, new_vote)</code> - This is the &quot;Switching Proof&quot; for <code>old_vote</code>, the validator's latest vote. Such a proof is necessary anytime a validator switches their &quot;reference&quot; slot (see vote section above). The switching proof includes a reference to <code>old_vote</code>, so that there's a record of what the &quot;range&quot; of that <code>old_vote</code> was (to make other conflicting switches in this range slashable).
+Such a switch must still respect lockouts.</p>
+<p>A switching proof shows that <code>&gt; 1/3</code> of the network is locked out at slot <code>old_vote.last</code>.</p>
+<p>The proof is a list of elements <code>(validator_id, validator_vote(X, S))</code>, where:</p>
+<ol>
+<li>
+<p>The sum of the stakes of all the validator id's <code>&gt; 1/3</code></p>
+</li>
+<li>
+<p>For each <code>(validator_id, validator_vote(X, S))</code>, there exists some slot <code>s</code> in <code>S</code> where:
+a.<code>s</code> is not a common ancestor of both <code>validator_vote.last</code> and <code>old_vote.last</code> and <code>new_vote.last</code>.
+b. <code>s</code> is not a descendant of <code>validator_vote.last</code>. * c. <code>s + s.lockout() &gt;= old_vote.last</code> (implies validator is still locked out on slot <code>s</code> at slot <code>old_vote.last</code>).</p>
+</li>
+</ol>
+<p>Switching forks without a valid switching proof is slashable.</p>
+<h2 id="definitions">Definitions:</h2>
+<p>Optimistic Confirmation - A block <code>B</code> is then said to have achieved &quot;optimistic confirmation&quot; if <code>&gt;2/3</code> of stake have voted with votes <code>v</code> where <code>Range(v)</code> for each such <code>v</code> includes <code>B.slot</code>.</p>
+<p>Finalized - A block <code>B</code> is said to be finalized if at least one correct validator has rooted <code>B</code> or a descendant of <code>B</code>.</p>
+<p>Reverted - A block <code>B</code> is said to be reverted if another block <code>B'</code> that is not a parent or descendant of <code>B</code> was finalized.</p>
+<h2 id="guarantees">Guarantees:</h2>
+<p>A block <code>B</code> that has reached optimistic confirmation will not be reverted unless at least one validator is slashed.</p>
+<h2 id="proof">Proof:</h2>
+<p>Assume for the sake of contradiction, a block <code>B</code> has achieved <code>optimistic confirmation</code> at some slot <code>B + n</code> for some <code>n</code>, and:</p>
+<ul>
+<li>Another block <code>B'</code> that is not a parent or descendant of <code>B</code> was finalized.</li>
+<li>No validators violated any slashing conditions.</li>
+</ul>
+<p>By the definition of <code>optimistic confirmation</code>, this means <code>&gt; 2/3</code> of validators have each shown some vote <code>v</code> of the form <code>Vote(X, S)</code> where <code>X &lt;= B &lt;= v.last</code>. 
+Call this set of validators the <code>Optimistic Validators</code>.</p>
+<p>Now given a validator <code>v</code> in <code>Optimistic Validators</code>, given two votes made by <code>v</code>, <code>Vote(X, S)</code> and <code>Vote(X', S')</code> where <code>X &lt;= B &lt;= S.last</code>, and <code>X' &lt;= B &lt;= S'.last</code>, then <code>X == X'</code> otherwise an &quot;Optimistic Slashing&quot; condition is violated (the &quot;ranges&quot; of each vote would overlap at <code>B</code>).</p>
+<p>Thus define the <code>Optimistic Votes</code> to be the set of votes made by <code>Optimistic Validators</code>, where for each optimistic validator <code>v</code>, the vote made by <code>v</code> included in the set is the <code>maximal</code> vote <code>Vote(X, S)</code> with the greatest <code>S.last</code> out of any votes made by <code>v</code> that satisfy <code>X &lt;= B &lt;= S.last</code>.
+Because we know from above <code>X</code> for all such votes made by <code>v</code> is unique, we know there is such a unique <code>maximal</code> vote.</p>
+<h3 id="lemma-1">Lemma 1:</h3>
+<p><code>Claim:</code> Given a vote <code>Vote(X, S)</code> made by a validator <code>V</code> in the <code>Optimistic Validators</code> set, and <code>S</code> contains a vote for a slot <code>s</code>
+for which:</p>
+<ul>
+<li><code>s + s.lockout &gt; B</code>,</li>
+<li><code>s</code> is not an ancestor or descendant of <code>B</code>,</li>
+</ul>
+<p>then <code>X &gt; B</code>.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>                                  +-------+
+</span><span>                                  |       |
+</span><span>                        +---------+       +--------+
+</span><span>                        |         |       |        |
+</span><span>                        |         +-------+        |
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                      +---+---+
+</span><span>                        |                      |       |
+</span><span>                        |                      |       |  X&#39;
+</span><span>                        |                      |       |
+</span><span>                        |                      +---+---+
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                      +---+---+
+</span><span>                        |                      |       |
+</span><span>                        |                      |       |  B (Optimistically Confirmed)
+</span><span>                        |                      |       |
+</span><span>                        |                      +---+---+
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                          |
+</span><span>                        |                      +---+---+
+</span><span>                        |                      |       |
+</span><span>                        |                      |       |  S&#39;.last
+</span><span>                        |                      |       |
+</span><span>                        |                      +-------+
+</span><span>                        |
+</span><span>                    +---+---+
+</span><span>                    |       |
+</span><span>                 X  |       |
+</span><span>                    |       |
+</span><span>                    +---+---+
+</span><span>                        |
+</span><span>                        |
+</span><span>                        |
+</span><span>                        |
+</span><span>                        |
+</span><span>                        |
+</span><span>                    +---+---+
+</span><span>                    |       |
+</span><span>            S.last  |       |
+</span><span>                    |       |
+</span><span>                    +---+---+
+</span><span>                        |
+</span><span>                        |
+</span><span>                        |
+</span><span>                        |
+</span><span>                    +---+---+
+</span><span>                    |       |
+</span><span>      s + s.lockout |       |
+</span><span>                    +-------+
+</span></code></pre>
+<p><code>Proof</code>: Assume for the sake of contradiction a validator <code>V</code> from the &quot;Optimistic Validators&quot; set made such a vote <code>Vote(X, S)</code> where <code>S</code> contains a vote for a slot <code>s</code> not an ancestor or descendant of <code>B</code>, where <code>s + s.lockout &gt; B</code>, but <code>X &lt;= B</code>.</p>
+<p>Let <code>Vote(X', S')</code> be the vote in <code>Optimistic Votes</code> set made by validator <code>V</code>. By definition of that set (all votes optimistically confirmed <code>B</code>), <code>X' &lt;= B &lt;= S'.last</code> (see diagram above).</p>
+<p>This implies that because it's assumed above <code>X &lt;= B</code>, then <code>X &lt;= S'.last</code>, so by the slashing rules, either <code>X == X'</code> or <code>X &lt; X'</code> (otherwise would overlap the range <code>(X', S'.last)</code>).</p>
+<p><code>Case X == X'</code>:</p>
+<p>Consider <code>s</code>. We know <code>s != X</code> because it is assumed <code>s</code> is not an ancestor or descendant of <code>B</code>, and <code>X</code> is an ancestor of <code>B</code>. Because <code>S'.last</code> is a descendant of <code>B</code>, this means <code>s</code> is also not an ancestor or descendant of <code>S'.last</code>. Then because <code>S.last</code> is descended from <code>s</code>, then <code>S'.last</code> cannot be an ancestor or descendant of <code>S.last</code> either. This implies <code>X != X'</code> by the &quot;Optimistic Slashing&quot; rules.</p>
+<p><code>Case X &lt; X'</code>:</p>
+<p>Intuitively, this implies that <code>Vote(X, S)</code> was made &quot;before&quot; <code>Vote(X', S')</code>.</p>
+<p>From the assumption above, <code>s + s.lockout &gt; B &gt; X'</code>. Because <code>s</code> is not an ancestor of <code>X'</code>, lockouts would have been violated when this validator first attempted to submit a switching vote to <code>X'</code> with some vote of the form <code>Vote(X', S'')</code>.</p>
+<p>Since none of these cases are valid, the assumption must have been invalid, and the claim is proven.</p>
+<h3 id="lemma-2">Lemma 2:</h3>
+<p>Recall <code>B'</code> was the block finalized on a different fork than &quot;optimistically&quot; confirmed&quot; block <code>B</code>.</p>
+<p><code>Claim</code>: For any vote <code>Vote(X, S)</code> in the <code>Optimistic Votes</code> set, it must be true that <code>B' &gt; X</code></p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>                                +-------+
+</span><span>                                |       |
+</span><span>                       +--------+       +---------+
+</span><span>                       |        |       |         |
+</span><span>                       |        +-------+         |
+</span><span>                       |                          |
+</span><span>                       |                          |
+</span><span>                       |                          |
+</span><span>                       |                      +---+---+
+</span><span>                       |                      |       |
+</span><span>                       |                      |       |  X
+</span><span>                       |                      |       |
+</span><span>                       |                      +---+---+
+</span><span>                       |                          |
+</span><span>                       |                          |
+</span><span>                       |                      +---+---+
+</span><span>                       |                      |       |
+</span><span>                       |                      |       |  B (Optimistically Confirmed)
+</span><span>                       |                      |       |
+</span><span>                       |                      +---+---+
+</span><span>                       |                          |
+</span><span>                       |                          |
+</span><span>                       |                          |
+</span><span>                       |                      +---+---+
+</span><span>                       |                      |       |
+</span><span>                       |                      |       |  S.last
+</span><span>                       |                      |       |
+</span><span>                       |                      +-------+
+</span><span>                       |
+</span><span>                   +---+---+
+</span><span>                   |       |
+</span><span>    B&#39;(Finalized)  |       |
+</span><span>                   |       |
+</span><span>                   +-------+
+</span></code></pre>
+<p><code>Proof</code>: Let <code>Vote(X, S)</code> be a vote in the <code>Optimistic Votes</code> set. Then by definition, given the &quot;optimistcally confirmed&quot; block <code>B</code>, <code>X &lt;= B &lt;= S.last</code>.</p>
+<p>Because <code>X</code> is a parent of <code>B</code>, and <code>B'</code> is not a parent or ancestor of <code>B</code>, then:</p>
+<ul>
+<li><code>B' != X</code></li>
+<li><code>B'</code> is not a parent of <code>X</code></li>
+</ul>
+<p>Now consider if <code>B'</code> &lt; <code>X</code>:</p>
+<p><code>Case B' &lt; X</code>: We wll show this is a violation of lockouts.
+From above, we know <code>B'</code> is not a parent of <code>X</code>. Then because <code>B'</code> was rooted, and <code>B'</code> is not a parent of <code>X</code>, then the validator should not have been able to vote on the higher slot <code>X</code> that does not descend from <code>B'</code>.</p>
+<h3 id="proof-of-safety">Proof of Safety:</h3>
+<p>We now aim to show at least one of the validators in the <code>Optimistic Validators</code> set violated a slashing rule.</p>
+<p>First note that in order for <code>B'</code> to have been rooted, there must have been <code>&gt; 2/3</code> stake that voted on <code>B'</code> or a descendant of <code>B'</code>. Given that the <code>Optimistic Validator</code> set also contains <code>&gt; 2/3</code> of the staked validators, it follows that <code>&gt; 1/3</code> of the staked validators:</p>
+<ul>
+<li>Rooted <code>B'</code> or a descendant of <code>B'</code></li>
+<li>Also submitted a vote <code>v</code> of the form <code>Vote(X, S)</code> where <code>X &lt;= B &lt;= v.last</code>.</li>
+</ul>
+<p>Let the <code>Delinquent</code> set be the set of validators that meet the above
+criteria.</p>
+<p>By definition, in order to root <code>B'</code>, each validator <code>V</code> in <code>Delinquent</code> must have each made some &quot;switching vote&quot; of the form <code>Vote(X_v, S_v)</code> where:</p>
+<ul>
+<li><code>S_v.last &gt; B'</code></li>
+<li><code>S_v.last</code> is a descendant of <code>B'</code>, so it can't be a descendant of <code>B</code> </li>
+<li>Because <code>S_v.last</code> is not a descendant of <code>B</code>, then <code>X_v</code> cannot be a descendant or ancestor of <code>B</code>.</li>
+</ul>
+<p>By definition, this delinquent validator <code>V</code> also made some vote <code>Vote(X, S)</code> in the <code>Optimistic Votes</code> where by definition of that set (optimistically confirmed <code>B</code>), we know <code>S.last &gt;= B &gt;= X</code>.</p>
+<p>By <code>Lemma 2</code> we know <code>B' &gt; X</code>, and from above <code>S_v.last &gt; B'</code>, so then <code>S_v.last &gt; X</code>. Because <code>X_v != X</code> (cannot be a descendant or ancestor of <code>B</code> from above), then by the slashing rules then, we know <code>X_v &gt; S.last</code>.
+From above, <code>S.last &gt;= B &gt;= X</code> so for all such &quot;switching votes&quot;, <code>X_v &gt; B</code>.</p>
+<p>Now ordering all these &quot;switching votes&quot; in time, let <code>V</code> to be the validator in <code>Optimistic Validators</code> that first submitted such a &quot;swtching vote&quot; <code>Vote(X', S')</code>, where <code>X' &gt; B</code>. We know that such a validator exists because we know from above that all delinquent validators must have submitted such a vote, and the delinquent validators are a subset of the <code>Optimistic Validators</code>.</p>
+<p>Let <code>Vote(X, S)</code> be the unique vote in <code>Optimistic Votes</code> made by validator <code>V</code> (maximizing <code>S.last</code>).</p>
+<p>Given <code>Vote(X, S)</code> because <code>X' &gt; B &gt;= X</code>, then <code>X' &gt; X</code>, so by the &quot;Optimistic Slashing&quot; rules, <code>X' &gt; S.last</code>.</p>
+<p>In order to perform such a &quot;switching vote&quot; to <code>X'</code>, a switching proof <code>SP(Vote(X, S), Vote(X', S'))</code> must show <code>&gt; 1/3</code> of stake being locked out at this validator's latest vote, <code>S.last</code>. Combine this <code>&gt;1/3</code> with the fact that the set of validators in the <code>Optimistic Voters</code> set consists of <code>&gt; 2/3</code> of the stake, implies at least one optimistic validator <code>W</code> from the <code>Optimistic Voters</code> set must have submitted a vote (recall the definition of a switching proof),<code>Vote(X_w, S_w)</code> that was included in validator <code>V</code>'s switching proof for slot <code>X'</code>, where <code>S_w</code> contains a slot <code>s</code> such that:</p>
+<ul>
+<li><code>s</code> is not a common ancestor of <code>S.last</code> and <code>X'</code></li>
+<li><code>s</code> is not a descendant of <code>S.last</code>.</li>
+<li><code>s' + s'.lockout &gt; S.last</code></li>
+</ul>
+<p>Because <code>B</code> is an ancestor of <code>S.last</code>, it is also true then:</p>
+<ul>
+<li><code>s</code> is not a common ancestor of <code>B</code> and <code>X'</code></li>
+<li><code>s' + s'.lockout &gt; B</code></li>
+</ul>
+<p>which was included in <code>V</code>'s switching proof.</p>
+<p>Now because <code>W</code> is also a member of <code>Optimistic Voters</code>, then by the <code>Lemma 1</code> above, given a vote by <code>W</code>, <code>Vote(X_w, S_w)</code>, where <code>S_w</code> contains a vote for a slot <code>s</code> where <code>s + s.lockout &gt; B</code>, and <code>s</code> is not an ancestor of <code>B</code>, then <code>X_w &gt; B</code>.</p>
+<p>Because validator <code>V</code> included vote <code>Vote(X_w, S_w)</code> in its proof of switching for slot <code>X'</code>, then his implies validator <code>V'</code> submitted vote <code>Vote(X_w, S_w)</code> <strong>before</strong> validator <code>V</code> submitted its switching vote for slot <code>X'</code>, <code>Vote(X', S')</code>.</p>
+<p>But this is a contradiction because we chose <code>Vote(X', S')</code> to be the first vote made by any validator in the <code>Optimistic Voters</code> set where <code>X' &gt; B</code> and <code>X'</code> is not a descendant of <code>B</code>.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

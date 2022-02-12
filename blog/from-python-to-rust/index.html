@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>От Python до Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+
+        <div class="content text">
+            
+<h1>От Python до Rust</h1>
+
+<p><a href="https://levelup.gitconnected.com/from-python-to-rust-fc43d6985670">Перевод</a> | Автор оригинала: Maxwell Flitton</p>
+<p>Моим первым языком был Python. Я начал заниматься программированием серверных веб-систем Python в области финансовых технологий, а затем - машинным обучением в области машиностроения. Я помогал преподавать питон в университетах и использовал его в сторонних проектах. Мне нравится Python. С ним легко справиться, это непринужденно, и вы можете сосредоточиться на проблеме, которую пытаетесь решить. Его гибкость позволяет создавать всевозможные странные и чудесные шаблоны дизайна, а его волшебные методы позволяют окунуться в воду с помощью механизмов очистки и т.д.</p>
+<p><img src="/imgs/posts/c58ac531_01.png" alt="" /></p>
+<p>Я очень редко чувствовал себя сдержанным при использовании Python. Однако я понял, что просто глубоко полагаюсь на один язык. После изучения ряда учебников Python по чистому объектно-ориентированному программированию, расширенным шаблонам проектирования, параллелизму, рефакторингу устаревшего кода и разработке через тестирование я освоился с созданием гибких, многоразовых, тестируемых модулей Python, импортированных другими разработчиками и используется на работе. Может быть… я мог бы найти более быстрый и более сложный инструмент, который можно было бы добавить к своему поясу. Мой план состоял в том, чтобы попытаться Rust, и если это будет слишком сложно, я спущусь на Голанг. В конце концов, я прекрасно понимал, что Python - не самый сложный язык для освоения. Хотя Rust был быстрее, имел отличные возможности параллелизма, меньшую память и заставлял вас думать по-другому, я также отметил множество предупреждений о крутой кривой обучения.</p>
+<p>Однако на самом деле предупреждения не сбылись. Самым сложным было придумать какой-нибудь полезный проект, в который можно загнать Rust. Сначала я поигрался с гипер-веб-фреймворком. Не имея реальной цели, я создал базовые API, которые на самом деле мало что сделали. Некоторая документация была немного скудной, и я в конечном итоге опубликовал разочаровывающий вопрос о StackOverflow по сериализации JSON, но в конечном итоге пнул себя, когда получил ответ. Переводчик слегка ударил меня по голове, но ничего особенного. В основном он жаловался, что тип непоследователен, но это больше похоже на «о, спасибо, что указали на это», а не на борьбу с компилятором. Я бы предпочел обнаруживать ошибки во время компиляции, а не молчаливо давать сбой в продакшене. Другая ошибка заключалась в том, что в заявлении о совпадении не учитывались все возможные результаты. Опять же, это было «спасибо», потому что вы все равно должны это делать. Проверка кредита была легкой головной болью, но я должен подчеркнуть, она была легкой. Кратко это можно описать следующим образом:</p>
+<p><img src="/imgs/posts/c58ac531_02.png" alt="" /></p>
+<p>Иногда вас могут остановить, но компилятор очень полезен для определения этого. Если следовать приведенным выше правилам, это действительно несложно.</p>
+<p>«Хорошо, это не так уж плохо, - подумал я. Однако эффект Даннинга-Крюгера мог сыграть со мной злую шутку. Я напомнил себе, что я новичок в Rust и играх. Игра отличается от решения конкретной проблемы. Поэтому я решил написать программу командной строки, которая взаимодействовала бы с API-интерфейсом docker и автоматизировала ряд команд git и docker для работы. Может быть, попытка решить проблему из конца в конец приведет к разочарованию, которое выдергивает волосы.</p>
+<p>Это не так. С конструкцией крэйтов приятно работать. Если вы с самого начала сведете количество предупреждений к нулю, это будет легко поддерживать. Хотя я определенно не мастер Rust, я нашел его безопасным, быстрым и забавным в работе. Если у вас есть сильные основы программной инженерии, я рекомендую вам сразу погрузиться в нее. Если вы не чувствуете себя готовым, я рекомендую следующие книги: </p>
+<ul>
+<li>Python 3: объектно-ориентированное программирование, второе издание (Дасти Филлипс)</li>
+<li>Чистый код в Python: реорганизуйте устаревшую кодовую базу (Мариано Анайя)</li>
+<li>Расширенное программирование на Python: создавайте высокопроизводительные, параллельные и многопоточные приложения с помощью python (д-р Габриэле Ланаро)</li>
+</ul>
+<p>Итак, помимо своего приятного удивления, что еще я узнал:</p>
+<p>Да, он быстрый, эффективный и описывается как системный язык. Люди отбрасывают этот ярлык, а затем откидываются назад, как будто это лишает его права на веб-разработку. Что на самом деле означает системное программирование? Что ж, лучший консенсус, который я смог найти по этому определению, заключался в следующем: программирование с распределением ресурсов является большой частью внимания. Это определенно играет роль в некоторых веб-разработках.</p>
+<p>Другие сравнивают его с C++. Есть некоторые сравнения, но они определенно не идентичны. Я бы не сказал, что если бы вы не использовали C++ для решения проблемы, вы бы не использовали Rust. Rust безопасен для памяти, а компилятор действительно хорош и понимает, что вы делаете, и помечает ошибки. Безопасность памяти - важная вещь. 70% проблем безопасности Microsoft в ходе одного известного аудита были связаны с проблемами управления памятью. Таким образом, потенциальные проблемы безопасности, возникающие при кодировании веб-сервера на C++, отсутствуют при кодировании на Rust.</p>
+<p>Абстракции высокого уровня легко кодировать из-за безопасности памяти. Если вы посмотрите на фреймворк Rocket, вы увидите, что он в значительной степени имитирует фреймворк Flask в python для создания веб-сервера. Функции с декоратором определяют маршруты. Как только вы поймете язык, с ним будет довольно легко работать. Когда ему удается скомпилировать, вы очень уверены, что это безопасно. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

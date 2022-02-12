@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Интерфейс командной строки Edgeware (Устаревший) | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/untitled/readme/#konfiguratsiia">Конфигурация</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/untitled/readme/#sborka">Сборка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/untitled/readme/#ispol-zovanie">Использование</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/untitled/readme/#optsii">Опции</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/contribute/build-on-edgeware/untitled/readme/#primery">Примеры</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Интерфейс командной строки Edgeware (Устаревший)</h1>
+
+<blockquote>
+<p>Интерфейс командной строки Edgeware работает, однако он устарел. Пожалуйста, используйте интерфейсы polkadot.js. CLI <a href="https://github.com/hicommonwealth/edgeware-cli">можно найти на Github.</a></p>
+</blockquote>
+<p>Интерфейс командной строки Edgeware позволяет легко взаимодействовать с локальным или удаленным узлом Edgeware или любым общим узлом субстрата. API требует, чтобы вы создали файл <code>.env</code> с информацией о вашей паре ключей, которая будет описана ниже.</p>
+<h2 id="konfiguratsiia">Конфигурация</h2>
+<p>Создайте файл <code>.env</code> со следующей информацией:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>MNEMONIC_PHRASE=...
+</span><span>DERIVATION_PATH=...
+</span></code></pre>
+<p>Примеры некоторых значений:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>MNEMONIC_PHRASE=&quot;bottom drive obey lake curtain smoke basket hold race lonely fit walk&quot;
+</span><span>DERIVATION_PATH=//Alice
+</span></code></pre>
+<h2 id="sborka">Сборка</h2>
+<ol>
+<li>Требуется: typescript версии 3.2 или выше, Node версии 12.3 или выше.</li>
+<li>Клонируйте репозиторий git.</li>
+<li>Соберите, запустив <code>tsc</code> в клонированном репозитории.</li>
+<li>Запустите с <code>./bin/edge</code>.</li>
+</ol>
+<h2 id="ispol-zovanie">Использование</h2>
+<ol>
+<li>Установите пакет с помощью <code>yarn</code> или <code>npm</code></li>
+<li>Если вы столкнулись с ошибками, запустите <code>tsc</code> в репозитории, чтобы скомпилировать машинописный текст.</li>
+<li>Если вы хотите отправлять транзакции, подготовьте ключ в шестнадцатеричном формате.</li>
+<li>Вызовите <code>edge &lt;module&gt; &lt;func&gt; [...args]</code> с желаемой функцией модуля и аргументами.</li>
+</ol>
+<h2 id="optsii">Опции</h2>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Options:
+</span><span>  -V, --version           output the version number
+</span><span>  -A, --argfile &lt;file&gt;    A JSON-formatted file containing an array of args
+</span><span>  -s, --seed &lt;key&gt;        Public/private keypair seed
+</span><span>  -r, --remoteNode &lt;url&gt;  Remote node url (default: &quot;localhost:9944&quot;).
+</span><span>  -T, --types             Print types instead of performing action.
+</span><span>  -t, --tail              Tail output rather than exiting immediately.
+</span><span>  -h, --help              output usage information
+</span></code></pre>
+<h2 id="primery">Примеры</h2>
+<ul>
+<li>Перевод токенов со своего баланса</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>edge balances transfer 5FmE1Adpwp1bT1oY95w59RiSPVu9QwzBGjKsE2hxemD2AFs8 1000
+</span></code></pre>
+<ul>
+<li>Получение баланса учетной записи из тестовой сети Edgeware</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>edge -r ws://testnet1.edgewa.re:9944 balances freeBalance 5FTyhanHHymJ2FQ2ZWMwhoKcUXuNcBfNaqufrFvwDR8Mf1mG
+</span></code></pre>
+<ul>
+<li>Регистрация личности</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>edge identity register github drewstone
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

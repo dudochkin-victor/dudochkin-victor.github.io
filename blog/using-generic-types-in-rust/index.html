@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Использование универсальных типов в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-generic-types-in-rust/#parametry-tipa">Параметры типа</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-generic-types-in-rust/#opredelenie-universal-nykh-tipov-v-rust">Определение универсальных типов в Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-generic-types-in-rust/#generics-predlagaiut-prostye-i-avtomaticheskie-ogranicheniia-tipa">Generics предлагают простые и автоматические ограничения типа</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-generic-types-in-rust/#generics-trait-bounds-sverkhsposobnosti">Generics + Trait Bounds == Сверхспособности</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-generic-types-in-rust/#obobshcheniia-v-opredeleniiakh-metodov">Обобщения в определениях методов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/using-generic-types-in-rust/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Использование универсальных типов в Rust</h1>
+
+<p><a href="https://oswalt.dev/2021/06/using-generic-types-in-rust/">Перевод</a> | Автор оригинала: Matt Oswalt</p>
+<p>В предыдущем посте я исследовал «общее программирование» с целью выделить не зависящие от языка преимущества и основные концепции. Особенно, если это новая тема для вас, я рекомендую вам сначала прочитать этот пост, так как в нем освещено много идей, которые применяются гораздо шире, чем то, что мы рассмотрим в этом посте, который вместо этого будет сосредоточен на том, как Rust делает что-то.</p>
+<p>В этом посте мы рассмотрим некоторые особенности и, в частности, рассмотрим, как вместе общие типы и трэйты формируют мощную комбинацию инструментов в Rust, которая позволяет нам быть продуктивными и выразительными, не жертвуя присущей статической предсказуемостью и безопасностью. печатный язык.</p>
+<blockquote>
+<p>Я обнаружил, что существующие библиотеки и API Rust намного легче понять теперь, когда я занялся этими двумя темами. Я действительно изо всех сил пытался прочитать код Rust, прежде чем потратил дополнительное время на понимание не только обобщений и трейтов в rust, но и концепций, которые они представляют, и их базовой реализации. Если вам это тоже сложно, надеюсь, эта серия постов поможет.</p>
+</blockquote>
+<p>Как я уже говорил в предыдущем посте, чтобы позволить разработчику использовать универсальное программирование, язык должен обеспечивать две вещи:</p>
+<ul>
+<li>Синтаксис, который позволяет разработчику использовать общие термины в качестве заполнителей для более конкретных типов, которые будут переданы в другое место.</li>
+<li>Базовая реализация, которая позволяет преобразовывать общие термины в конкретные термины, когда это необходимо.</li>
+</ul>
+<p>В этом посте мы рассмотрим синтаксис использования дженериков в Rust с некоторыми практическими примерами. Мы рассмотрим базовую реализацию в следующем посте, так как Rust предлагает несколько интересных вариантов полиморфизма, которые здесь имеют значение.</p>
+<h2 id="parametry-tipa">Параметры типа</h2>
+<p>Если вы использовали Rust в течение даже небольшого количества времени, вы, вероятно, использовали дженерики, даже не осознавая этого. Возьмем простой пример создания нового вектора: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> myvec </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Этот код не компилируется; мы не предоставили параметр типа, указывающий, какой тип должен содержать этот вектор. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0282]: type annotations needed for `std::vec::Vec&lt;T&gt;`
+</span><span> --&gt; src/main.rs:7:17
+</span><span>  |
+</span><span>7 |     let myvec = Vec::new();
+</span><span>  |         -----   ^^^^^^^^ cannot infer type for type parameter `T`
+</span><span>  |         |
+</span><span>  |         consider giving `myvec` the explicit type `std::vec::Vec&lt;T&gt;`, where the type parameter `T` is specified
+</span></code></pre>
+<p>Это связано с тем, что для реализации векторов требуется общий параметр T, который является заполнителем, который мы должны выполнить с определенным типом. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// We can provide the type parameter on creation
+</span><span style="color:#ff7733;">let</span><span> myvec</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">i32</span><span>&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Or, we can add to the previous example by making our vector mutable,
+</span><span style="font-style:italic;color:#5c6773;">// and then pushing elements to it.
+</span><span style="color:#ff7733;">let mut</span><span> myvec </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// The compiler will automatically infer the inner type of the vector using the type of
+</span><span style="font-style:italic;color:#5c6773;">// the pushed element.
+</span><span>myvec</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(</span><span style="color:#f29718;">34</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Работает любой из вышеперечисленных подходов - важно то, что компилятор должен знать в какой-то момент, какой конкретный тип вы собираетесь использовать для замены заполнителя T.</p>
+<blockquote>
+<p>Важно понимать, что это НЕ то же самое, что динамический набор текста. Динамическая типизация - это концепция гораздо более ориентированных на время выполнения языков, таких как Python, которая включает в себя возможность изменять тип для любой переменной во время выполнения или создавать коллекции / массивы нескольких различных типов. В Rust это невозможно.</p>
+</blockquote>
+<p>Теперь мы рассмотрим, как использовать Generics для определения подобных заполнителей в вашем собственном коде Rust.</p>
+<h2 id="opredelenie-universal-nykh-tipov-v-rust">Определение универсальных типов в Rust</h2>
+<p>Rust может использовать дженерики в нескольких местах:</p>
+<ul>
+<li>
+<p>Определения функций</p>
+</li>
+<li>
+<p>Определения структур</p>
+</li>
+<li>
+<p>Определения перечисления</p>
+</li>
+<li>
+<p>Определения методов</p>
+<p>Примеры каждого из них хорошо задокументированы в книге Rust, поэтому, если вы ищете полные примеры каждого из них, обратитесь туда. Я выделю несколько вещей, которые мне особенно понравились.</p>
+</li>
+</ul>
+<p>Независимо от того, как они используются, они служат простой цели - позволяют разработчику писать более краткий и менее повторяющийся код. Как мы исследовали в предыдущем посте в более широком смысле, из-за отсутствия дженериков мы вынуждены либо писать много повторяющегося кода, который позволяет использовать разные конкретные типы, либо полагаться на инструменты, доступные во время выполнения, что может привести к значительным потерям производительности. или создать условия ошибки, с которыми мы должны приложить все усилия, чтобы обработать их должным образом.</p>
+<p>С помощью дженериков мы можем обойти этот выбор. Вместо этого мы можем писать наш код кратко и позволять компилятору выполнять работу по преобразованию всех наших «заполнителей» в конкретные статические типы, что дает нам необходимую скорость и безопасность.</p>
+<p>Необходим простой иллюстративный пример. Без дженериков, если бы мы хотели представить двумерную точку в пространстве, нам нужно было бы убедиться, что у нас есть структура, представляющая это для любого конкретного типа, который мы хотели бы использовать в качестве значений координат: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">PointI32 </span><span>{
+</span><span>    x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>    y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">PointF32 </span><span>{
+</span><span>    x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>    y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>}
+</span></code></pre>
+<p>Однако с универсальными шаблонами нам нужно написать только один экземпляр этой структуры и использовать «заполнитель», чтобы указать, что мы хотим, чтобы тип предоставлялся при создании экземпляра, как мы видели выше в векторном примере. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Point</span><span>&lt;T&gt; {
+</span><span>    x</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>    y</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>}
+</span></code></pre>
+<p>Когда Rust компилирует этот код, он анализирует, как эта структура используется, и «мономорфизирует» ее. Это процесс создания дубликатов этих типов, но с конкретными типами, а не с универсальными типами. Это позволяет нам, как разработчикам, писать простой общий код, но мы по-прежнему получаем все преимущества использования конкретных типов.</p>
+<p>Это общий принцип, по которому вы можете захотеть использовать универсальные шаблоны в своем коде - теперь давайте перейдем к некоторым примерам.</p>
+<h2 id="generics-predlagaiut-prostye-i-avtomaticheskie-ogranicheniia-tipa">Generics предлагают простые и автоматические ограничения типа</h2>
+<p>Я уже рассказывал об использовании границ трэйтов с универсальными типами, чтобы помочь вам разработать ограничения для типов на основе их поведения, например, для параметров функций. Однако сами дженерики предлагают некоторые основные, но полезные ограничения сами по себе.</p>
+<p>Например, в определении структуры мы можем указать, что данное поле является универсальным типом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Point</span><span>&lt;T&gt; {
+</span><span>    x</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>}
+</span></code></pre>
+<p>Мы определили общий тип T, а затем указали, что поле x имеет тип T. На данный момент нигде не указан конкретный тип. Однако, как только мы создадим экземпляр этого типа и присвоим конкретное значение x, он примет тип любого используемого конкретного значения: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// For this instance of Point, the type of `x` is assumed
+</span><span style="font-style:italic;color:#5c6773;">// to be `i32` (https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-types):
+</span><span style="color:#ff7733;">let</span><span> point </span><span style="color:#f29668;">=</span><span> Point{x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">42</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Использование универсальных типов также может дать нам некоторые простые ограничения, которые автоматически применяются в нашей структуре. Например, добавление второго поля, которое использует один и тот же универсальный параметр T, означает, что когда конкретные типы используются для создания экземпляра нашей структуры, один и тот же конкретный тип должен использоваться для обоих полей x и y: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Point</span><span>&lt;T&gt; {
+</span><span>    x</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>    y</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>}
+</span></code></pre>
+<p>Это становится очевидным, когда мы пытаемся использовать разные типы - приведенный ниже пример не будет компилироваться:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> point </span><span style="color:#f29668;">=</span><span> Point{
+</span><span>    x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">,
+</span><span>    y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">24.1</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Ошибка заключается в использовании числа с плавающей запятой для y: ожидаемое целое число, найденное число с плавающей запятой. Это потому, что мы использовали целое число для x, и поскольку x и y имеют общий параметр, они должны быть одного и того же конкретного типа, каким бы он ни был. Проще говоря, это можно было бы сказать:</p>
+<blockquote>
+<p>Меня не волнует, какой конкретный тип используется для поля x или y, но мне важно, чтобы они были одного типа.</p>
+</blockquote>
+<p>В определениях функций универсальные шаблоны могут дать некоторую полезную гарантию. Например, вы можете захотеть передать несколько параметров, оба из которых являются универсальными типами. Вы также можете вернуть один универсальный тип, который соответствует тому же конкретному типу, что и первый параметр: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">genericfn</span><span>&lt;T, U&gt;(</span><span style="color:#f29718;">foo</span><span style="color:#bfbab0cc;">:</span><span> T, </span><span style="color:#f29718;">bar</span><span style="color:#bfbab0cc;">:</span><span> U) </span><span style="color:#bfbab0cc;">-&gt;</span><span> T {
+</span><span>    foo
+</span><span>}
+</span></code></pre>
+<p>Здесь использование второго универсального параметра U означает, что у нас есть два заполнителя. Параметры bar и foo не обязательно должны быть одного и того же типа - главное, чтобы эта функция возвращала тот же тип T, который используется для параметра foo(что, очевидно, верно в этом простом примере, поскольку мы просто возвращаем foo сразу).</p>
+<blockquote>
+<p>Важное замечание: в этом примере, хотя foo и bar не обязательно должны быть одного и того же типа из-за того, что мы используем разные общие параметры, они все же могут быть. Тот факт, что мы используем разные общие типы, не означает, что типы должны быть разными. Они по-прежнему могут быть экземпляром Point, например.</p>
+</blockquote>
+<p>Как видите, используя общие параметры сами по себе, мы можем добиться большой гибкости и краткости нашего кода, при этом оставив при этом некоторые полезные ограждения.</p>
+<h2 id="generics-trait-bounds-sverkhsposobnosti">Generics + Trait Bounds == Сверхспособности</h2>
+<p>В предыдущих примерах мы не особо много работали с общими параметрами, поэтому нас не особо затрудняли: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">returnt</span><span>&lt;T&gt;(</span><span style="color:#f29718;">foo</span><span style="color:#bfbab0cc;">:</span><span> T) </span><span style="color:#bfbab0cc;">-&gt;</span><span> T {
+</span><span>    foo
+</span><span>}
+</span></code></pre>
+<p>Когда вы указываете общие параметры, а затем пытаетесь что-то сделать с этими параметрами, это может стать немного интереснее - этот код не будет компилироваться: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">printme</span><span>&lt;T&gt;(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">:</span><span> T) {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> x)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0277]: `T` doesn&#39;t implement `std::fmt::Debug`
+</span><span>  --&gt; src/main.rs:37:22
+</span><span>   |
+</span><span>37 |     println!(&quot;{:?}&quot;, x);
+</span><span>   |                      ^ `T` cannot be formatted using `{:?}` because it doesn&#39;t implement `std::fmt::Debug`
+</span></code></pre>
+<p>Эта ошибка вызвана тем фактом, что компилятор Rust знает, что для макроса println требуется тип, реализующий трэйту std::fmt::Debug, и в настоящее время нет гарантии, что универсальный тип T реализует это.</p>
+<p>Как мы узнали в предыдущем посте, «привязка трэйты» может помочь исправить это. Это накладывает дополнительные ограничения на типы типов, которые могут использоваться для нашей функции printme, разрешая только типы, реализующие данную трэйту: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">printme</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>fmt</span><span style="color:#f29668;">::</span><span>Debug&gt; (</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">:</span><span> T) {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> x)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Итак, там, где универсальные типы дают нам возможность писать краткий код, который работает для многих различных конкретных типов, трэйты (при привязке к универсальному типу) позволяют нам гарантировать, что эти типы демонстрируют определенное поведение. Более того, это всего лишь еще одна проверка во время компиляции. Результирующая программа по-прежнему имеет такую же статическую и конкретную типизацию.</p>
+<p>Комбинация обобщений и трейтов в Rust дает нам такую же гибкость, которую мы ищем в динамически типизированном языке, но без каких-либо компромиссов во время выполнения. Опять же, мы подробно рассмотрим это в одной из следующих статей.</p>
+<blockquote>
+<p>Когда я писал свой пост о Rust Traits, я чувствовал, что Traits могут более или менее концептуально стоять самостоятельно, но даже все же я не мог избежать краткого упоминания общих типов в этом посте. Сама книга Rust, кажется, признает эту взаимосвязанную природу двух концепций, охватывая их обе в одном разделе. Они действительно предназначены для совместного использования, и именно по этой причине мне было трудно читать код Rust, пока я не овладел этими двумя концепциями.</p>
+</blockquote>
+<p>Суть в том, что при написании и чтении кода Rust мы получаем гибкость и производительность, которые могли бы соперничать с языком с динамической типизацией, но как только наша программа скомпилирована, мы получаем всю безопасность и предсказуемость, как если бы мы только что написали все с конкретным типы самих себя и все ненужное дублирование кода, которое может потребоваться.</p>
+<h2 id="obobshcheniia-v-opredeleniiakh-metodov">Обобщения в определениях методов</h2>
+<p>Определение метода для типа, который использует универсальные типы, требует, чтобы мы указали полную сигнатуру типа в операторе impl, который включает эти типы. Поскольку наша структура Point на самом деле является Point<T>, мы должны повторить это в объявлении impl. Более того, мы должны переопределить и этот общий параметр, что приведет к следующему: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Re-defining the parameter T for this `impl` statement, which makes it available to
+</span><span style="font-style:italic;color:#5c6773;">// the methods defined below for this generic type.
+</span><span style="color:#ff7733;">impl</span><span>&lt;T&gt; </span><span style="color:#59c2ff;">Point</span><span>&lt;T&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// This method returns the same concrete type used for
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// the `x` field of `Point` - we know this because it
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// uses the same generic parameter.
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">x</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span>T {
+</span><span>        </span><span style="color:#f29668;">&amp;</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>x
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Мы уже узнали, что можем объявлять общие параметры для функций. Что интересно, мы можем сделать это и для методов, даже если тип, которому принадлежат эти методы, нигде не использует универсальные типы: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">NewStruct </span><span>{}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// NewStruct doesn&#39;t use any generic types,
+</span><span style="font-style:italic;color:#5c6773;">// so we don&#39;t need to specify any here.
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">NewStruct </span><span>{
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// We can still, however, define our own generic parameters
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// on an individual method as desired
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">x</span><span>&lt;T&gt;(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">foo</span><span style="color:#bfbab0cc;">:</span><span> T) </span><span style="color:#bfbab0cc;">-&gt;</span><span> T {
+</span><span>        foo
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="vyvod">Вывод</h2>
+<p>Это было довольно легкое введение в использование универсальных типов в Rust. Как указывалось ранее, в документации также есть немало убедительных примеров, так что, надеюсь, вы сможете начать определять места в своем собственном коде, где универсальные шаблоны могут упростить вам задачу.</p>
+<p>В следующем посте мы более подробно рассмотрим, как это скрыто реализовано в Rust. Здесь есть не только некоторые интересные подробности о том, как здесь работает Rust, но и некоторые интересные варианты реализации полиморфизма в Rust, каждая из которых имеет свои собственные компромиссы, которые стоит рассмотреть. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

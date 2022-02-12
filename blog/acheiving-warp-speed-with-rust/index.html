@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Достижение скорости варпа с помощью Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#sovet-po-optimizatsii-nomer-odin-ne-delaite-etogo">Совет по оптимизации номер один: не делайте этого</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#nikogda-ne-optimiziruite-vslepuiu">Никогда не оптимизируйте вслепую</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#ne-bespokoites-ob-optimizatsii-edinovremennykh-zatrat">Не беспокойтесь об оптимизации единовременных затрат</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#uluchshite-svoi-algoritmy">Улучшите свои алгоритмы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#uchebnik-po-arkhitekture-tsp">Учебник по архитектуре ЦП</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#derzhite-kak-mozhno-bol-she-v-keshe">Держите как можно больше в кеше</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#khranit-kak-mozhno-bol-she-v-registrakh">Хранить как можно больше в регистрах</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#avoid-box">Avoid Box</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#ispol-zovat-tipy-dannykh-peremennoi-dliny-na-osnove-steka">Использовать типы данных переменной длины на основе стека</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#razvertyvanie-lupa-po-prezhnemu-kruto">Развертывание лупа по-прежнему круто</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#asssert-usloviia-zaranee">asssert! условия заранее</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#ispol-zovat-optimizatsiiu-vremeni-komponovki">Использовать оптимизацию времени компоновки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#ne-ispol-zuite-inline-always">Не используйте #[inline(always)]</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#rasparallelivaite-no-ne-tak-kak-vy-dumaete">Распараллеливайте, но не так, как вы думаете</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#primer-iz-praktiki">Пример из практики</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/acheiving-warp-speed-with-rust/#podvedenie-itogov">Подведение итогов</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Достижение скорости варпа с помощью Rust</h1>
+
+<p><a href="http://troubles.md/rust-optimization/">Перевод</a></p>
+<p>Если вы хотите писать быстрый код на Rust, хорошие новости! Rust позволяет очень легко писать действительно быстрый код. Акцент на абстракции с нулевой стоимостью, отсутствие неявного бокса и управление статической памятью означает, что даже наивный код часто быстрее, чем эквивалент на других языках, и, безусловно, быстрее, чем наивный код на любом столь же безопасном языке. Возможно, однако, как и большинство программистов, вы провели всю свою карьеру программиста в безопасности, будучи изолированными от необходимости думать о каких-либо деталях машины, и теперь вы хотите копнуть немного глубже и выяснить настоящую причину того, что скрипт Python, который вы переписали в Rust работает в 100 раз быстрее и использует 10-ю часть памяти. В конце концов, они оба делают одно и то же и работают на одном процессоре, верно?</p>
+<p>Итак, вот руководство по оптимизации, предназначенное для тех, кто умеет программировать, но, возможно, не знает, как оно сопоставляется с реальными единицами и нулями на голом железе вашего процессора. Я постараюсь составить практические советы по оптимизации кода Rust с объяснением причин, по которым он быстрее, чем альтернатива, и мы закончим примером из стандартной библиотеки Rust.</p>
+<p>Этот пост предполагает приличное знакомство с программированием, знакомство с Rust новичком и почти полное отсутствие знаний об архитектуре ЦП. </p>
+<h2 id="sovet-po-optimizatsii-nomer-odin-ne-delaite-etogo">Совет по оптимизации номер один: не делайте этого</h2>
+<p>Хорошо, я начну с нескольких заявлений об отказе от ответственности, прежде чем перейду к сути. Во-первых, если вы не сталкиваетесь с проблемами производительности при реальном использовании, оптимизируйте код для удобства чтения, прежде чем оптимизировать его для производительности во время выполнения. Как компиляторы, так и люди лучше понимают скучный и простой код, поэтому, если вы напишете его первым, у вас, вероятно, будет «достаточно хорошая» производительность с дополнительным преимуществом, заключающимся в удобстве обслуживания. Если вы напишете хороший, реорганизуемый код, его будет легко изменить, если вы позже поймете, что это расточительно.</p>
+<p>Это не значит, что производительность не имеет значения. Не следует оптимизировать только медленные программы. Длительная программа, использующая большое количество ресурсов ЦП, но не вызывающая видимой медлительности, так же плоха, как программа, которая обрабатывает некоторые данные за 30 секунд вместо 3, просто первая тратит впустую батарею, а вторая - время. Оцените время, необходимое для оптимизации кода, с выгодой, которую вы получите от оптимизации.</p>
+<p>Причина, по которой ремонтопригодность так важна, заключается в том, что многие оптимизации проводятся по принципу «попробуй и увидишь» - если вы не можете внести радикальные изменения в свой код, не нарушив его, вам будет очень плохо. Теперь, говоря о «попробуй и увидишь»…</p>
+<h2 id="nikogda-ne-optimiziruite-vslepuiu">Никогда не оптимизируйте вслепую</h2>
+<p>Существует множество инструментов для отслеживания производительности. Знаменитым инструментом / набором инструментов для C и других системных языков является valgrind, которые чрезвычайно мощны, но могут быть пугающими для начала, поэтому, если вы просто хотите получить быстрый обзор того, что делает ваша программа, с точки зрения проверки производительности прочтите эту статью об анализе Rust с помощью perf, фантастического и простого в использовании инструмента повышения производительности для Linux. Если нет явного изъяна, такого как повсеместное клонирование или явно неоптимальный алгоритм, perf, скорее всего, даст лучшие результаты, чем простая оптимизация того, что «выглядит медленно».</p>
+<p>Еще один инструмент, который поможет вам избежать всевозможных подводных камней (не только производительности), довольно краток, но вы уже знали об этом, потому что с самого начала используете его во всем своем коде, верно?</p>
+<p>perf также показывает совокупную стоимость каждой функции в течение времени выполнения программы, что подводит меня к следующему пункту:</p>
+<h2 id="ne-bespokoites-ob-optimizatsii-edinovremennykh-zatrat">Не беспокойтесь об оптимизации единовременных затрат</h2>
+<p>Ваш код анализа конфигурации может быть сколь угодно медленным, и это вряд ли имеет значение. Не просто оптимизируйте самую медленную функцию в своей программе, оптимизируйте ту, которая занимает большую часть времени выполнения. Это может быть одна и та же функция, но если вы улучшите функцию, которая вызывается 1000 раз, на 2 миллисекунды, это лучше, чем улучшение на 1 секунду для функции, которая вызывается один раз.</p>
+<h2 id="uluchshite-svoi-algoritmy">Улучшите свои алгоритмы</h2>
+<p>Теперь, как и в каждой статье о производительности, здесь я добавляю обязательный отказ от использования в первую очередь лучших алгоритмов. Не изобретайте новые алгоритмы, если вы этим не зарабатываете на жизнь, но, по всей вероятности, если вы столкнетесь с проблемами производительности, это, скорее всего, будет из-за плохих алгоритмов, чем из-за плохой реализации. Большинство программистов тестируют свой код на небольших наборах данных, но если у вас сложность O (n²), она не появится, пока вы не попробуете ее на более крупном наборе данных. Если вы не знаете, каков ваш алгоритм, что вероятно, поскольку большая часть кода написана без учета определенного алгоритма, просто постарайтесь создать как можно меньше циклов и помните, что каждое использование collect должно перебирать всю коллекцию на хотя бы один раз, поэтому чем больше работы вы сможете выполнить, используя меньшее количество циклов, тем лучше. Тем не менее, это то же самое, что и оптимизация на любом языке, так что это все, что я скажу об алгоритмической сложности. Если вы хотите узнать больше, есть отличные ресурсы. </p>
+<h2 id="uchebnik-po-arkhitekture-tsp">Учебник по архитектуре ЦП</h2>
+<p>Так что, возможно, сложность вашего алгоритма не может быть улучшена, и для внесения каких-либо улучшений вам нужно вникнуть в самые мелкие вещи. В этом заключается разница между такими языками, как Rust и C, и такими языками, как Python и Ruby. Вполне возможно, что вы это уже знаете, но стоит перейти, чтобы убедиться, что мы все на одной странице.</p>
+<p>Любые вычисления состоят из двух частей: того, что они делают, и того, над чем они работают. Инструкции и данные.</p>
+<p>Инструкции хранятся в кэше инструкций - фрагменте действительно, очень быстрой памяти, которая напрямую читается ЦП. Каждая инструкция может помещать и/или принимать данные из регистров ЦП, которые представляют собой небольшое количество небольших фрагментов памяти, 32 или 64 бита в зависимости от размера слова вашего компьютера. Однако в любой момент времени в регистрах может находиться только небольшой объем данных, и вы не можете использовать указатель на регистр, поэтому иногда ЦП должен получить доступ к ОЗУ компьютера. Поскольку оперативная память медленная, ЦП пытается выполнить массовое чтение, а затем сохранить результат во все более мелких и все более быстрых кэшах. Если он пытается получить доступ к данным, которых нет в самом маленьком кэше, он должен прочитать немного больший кеш, продолжая до тех пор, пока он не достигнет ОЗУ. Результат таков: вы хотите, чтобы ваши данные были как можно меньше, а данные, к которым осуществляется совместный доступ, должны быть близко друг к другу, чтобы ЦП загружал как можно больше их одновременно. Этой информации должно быть достаточно, чтобы вы могли прочитать оставшуюся часть этой статьи, но если вы хотите глубже погрузиться в нее, вы можете проверить раздел структуры и реализации на странице Википедии, посвященной процессору. </p>
+<h2 id="derzhite-kak-mozhno-bol-she-v-keshe">Держите как можно больше в кеше</h2>
+<p>Чем дальше ваши данные от вашего процессора, тем медленнее будет ваша программа. Наихудшее место для данных - другой компьютер. Менее ужасное - но все же очень ужасное - место для данных находится на вашем жестком диске. Лучше по-прежнему находится в вашей оперативной памяти, но, как упоминалось ранее, оперативная память работает медленно. Практически лучшее место для ваших данных - это кэш ЦП. Возможно, вы слышали какой-то фольклор о том, что распределение - это плохо, и это основная причина, почему. Доступ к двум разным местоположениям в стеке по очереди - это нормально, поскольку они, скорее всего, находятся в одной строке кеша. Доступ к двум разным местоположениям в куче поочередно происходит значительно медленнее, поскольку гораздо менее вероятно, что они находятся непосредственно рядом друг с другом. Мы скоро выясним, почему это происходит.</p>
+<p>Если вам нужно выделить, потому что вам нужны контейнеры переменного размера, совместное владение или принадлежащие объекты-характеристики (см. Ниже, почему вам, вероятно, не нужны объекты-характеристики), попробуйте поместить данные, к которым будет осуществляться доступ последовательно, в ОЗУ, так что, когда ЦП считывает один элемент, он обязательно должен также читать следующие несколько элементов, что означает, что ему не нужно останавливаться в ожидании ОЗУ, чтобы работать с ними.</p>
+<p>Эмпирическое правило для определения того, должно ли что-то выделяться: если вы можете сказать мне, сколько места будет использовано значением без запуска программы, оно сохраняется в стеке. Если вы не знаете размер чего-либо до времени выполнения, он размещается в куче.</p>
+<p>Это означает, что String, Vec, HashMap и Box<Trait> / Box&lt;[T]&gt; выделяются, но никакая определяемая пользователем структура не выделяется (она может содержать что-то, что выделяет, но не требует дополнительного выделения для построить, если у вас уже есть экземпляр выделяющего типа). Box<T>, где T имеет статически известный размер, также выделяется, поэтому будьте осторожны с рекурсивными перечислениями. Если вы создаете древовидную структуру, которая затем становится неизменной, как в случае с AST, вы можете рассмотреть возможность использования TypedArena для более жесткого контроля над использованием памяти. Тем не менее, TypedArena по-прежнему нестабильна и увеличивает сложность, поэтому не подходит для всех сценариев использования.</p>
+<p>Вот почему вы, возможно, слышали жалобы на то, что Haskell использует связанный список символов для представления строки. Я не собираюсь обыгрывать чудесную тираду ганкро по этому поводу, но достаточно сказать, что это более или менее худшая из возможных структур данных для выбора, когда каждый отдельный элемент мал, а количество элементов велико, потому что для этого нужно для хранения указателя для каждого элемента вместо одного целого числа для всего массива.</p>
+<p>Не только это, но и без некоторых действительно сумасшедших оптимизаций компилятора это означает, что каждый элемент не может быть непосредственно после элемента перед ним в памяти. Мы скоро узнаем, как это вычислить, но, по сути, это означает, что тип String в Haskell может вызвать пропуск кэша до двух раз на элемент, тогда как если бы у вас был вектор символов (при условии 32-битных символов), он мог бы только вызвать максимум 1 промах в кэше на каждые 16 элементов. Вот почему специалисты по производительности в таких языках, как Haskell и Lisp, знают, что нужно использовать векторные конструкции, когда это возможно.</p>
+<p>Вернувшись в мир Rust, это означает, что вам следует избегать непрямых представлений Vec&lt;Vec&lt;_&gt;&gt; для представления матрицы, поскольку это означает, что каждый sub-vec, скорее всего, будет в другом месте. Используйте структуру данных, которая использует плоский Vec в качестве вспомогательного массива и строится поверх него, если вам действительно не нужно, чтобы внутренние Vec были как зубчатыми (каждый sub-vec имеет разный размер), так и растущими (вы можете изменить размер каждого вспомогательного вектора независимо во время выполнения). Вероятно, вам не понадобится ни то, ни другое, не говоря уже о том и другом. Если вам нужно, чтобы они были одинакового размера, сохраните Vec и кортеж измерения, если вам нужно, чтобы они были зубчатыми, но не нужно, чтобы они могли увеличиваться, сохраните список индексов и возвращайте срезы плоского Vec, используя их. Чтобы понять, почему это хорошо, давайте погрузимся в основы математики. Предположим, что матрица основана на плоском векторе и количестве столбцов (количество строк можно вывести из столбцов + длины данных): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// This isn&#39;t how Vec is defined in the standard library but it&#39;s a simplified
+</span><span style="font-style:italic;color:#5c6773;">// version with the same memory layout.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Vec</span><span>&lt;T&gt; {
+</span><span>    pointer</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*mut</span><span> T,
+</span><span>    capacity</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    len</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Matrix</span><span>&lt;T&gt; {
+</span><span>    data</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;T&gt;,
+</span><span>    num_columns</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span></code></pre>
+<p>Таким образом, матрице с N строками и M столбцами требуется пространство N * M * size_of ::<T>() для элементов плюс size_of::&lt;* mut T&gt;() + 3 * size_of::<usize>() для «метаданные» (указатель вектора и поля capacity, length и num_columns). Если у нас 64-битный ЦП с 64-байтовыми строками кэша, как у i7, в итоге мы получим как * mut T, так и usize по 4 байта каждая. Если бы у нас была матрица f32 размером 4x4 (также размером 4 байта), это означало бы: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Metadata size = 4 + 3 * 4 = 16
+</span><span>Maximum 2 cache misses
+</span><span>
+</span><span>Data size = 4 * 4 * 4 = 64
+</span><span>Maximum 2 cache misses
+</span></code></pre>
+<p>Поскольку метаданные и данные могут находиться в разных частях памяти, мы должны отдельно рассчитывать максимальное количество промахов в кэше. И метаданные, и данные могут пересекать строку кэша, и для их загрузки требуется два промаха кеша. Это означает, что вся матрица в худшем случае пропустит кеш 4 раза. Если бы у нас было представление Vec&lt;Vec<f32>&gt;, это означало бы размер: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Matrix metadata size = 4 + 2 * 4 = 12
+</span><span>Maximum 2 cache misses
+</span><span>
+</span><span>Inner vector metadata size = 4 * (4 + 2 * 4) = 48
+</span><span>Maximum 2 cache misses
+</span><span>
+</span><span>Data size = 4 * 4 = 16
+</span><span>Maximum 2 cache misses per row (8 cache misses total)
+</span></code></pre>
+<p>Это означает, что представление Vec&lt;Vec<f32>&gt; могло пропускать кеш до 12 раз, чтобы прочитать весь массив, что намного хуже, чем плоское представление.</p>
+<p>Еще лучше, если вы статически знаете размер матрицы, вы можете использовать массивы статического размера, такие как [[T; N]; N]. Это даже дешевле, чем плоские векторы, хотя вы, очевидно, не можете использовать их для данных с переменным размером во время выполнения. Массив 4x4 в предыдущем примере будет иметь вид [[f32; 4]; 4] и занимают 64 байта, что означает, что в худшем случае для загрузки потребуется всего 2 промаха кеша.</p>
+<h2 id="khranit-kak-mozhno-bol-she-v-registrakh">Хранить как можно больше в регистрах</h2>
+<p>Теперь самое лучшее место для ваших данных - регистры. Чем больше работы вы можете проделать без нелокальных операций записи, тем больше rustc и LLVM могут предположить о шаблонах доступа к вашим данным. Это хорошо, потому что это означает, что данные могут быть сопоставлены с физическими регистрами ЦП, которые являются самой быстрой памятью на всем вашем компьютере, но даже лучше, если вы сделаете свои данные подходящими для регистров, тогда все, что происходит с этими данными, можно агрессивно оптимизировать. . Запись и чтение через указатели имеют определенные ограничения по порядку, препятствующие оптимизации, но таких ограничений для данных, размещенных в регистрах, нет.</p>
+<p>Стоит отметить, что, поскольку Rust ограничивает указатели больше, чем C, ограничения на упорядочение указателей могут быть ослаблены. Это еще не реализовано в LLVM, поскольку большая часть работы по оптимизации основана на использовании правил языков C и C-семейств. Однако даже если они ослабят правила переупорядочения, сохранение данных в регистрах все равно будет проще оптимизировать.</p>
+<p>Так как же заставить rustc распределять данные по регистрам? По сути, чем меньше указателей нужно писать во время выполнения, тем лучше. Запись в локальные переменные лучше, чем через изменяемый указатель. Насколько это возможно, вы должны попытаться ограничить изменяемую запись для данных, которыми вы владеете. Таким образом, изменяемый счетчик цикла - это нормально, но передача изменяемой ссылки на счетчик цикла через несколько уровней функций - нет (если, конечно, они не становятся встроенными). На самом деле это просто продолжение одного из моих первых замечаний: чистый, скучный код легче оптимизировать, чем спагетти.</p>
+<h2 id="avoid-box">Avoid Box<Trait></h2>
+<p>Канонический способ создания типажных объектов - Box<Trait>, но для большей части кода можно использовать &amp;mut Trait, который также имеет динамическую отправку, но сохраняет выделение. Если вам абсолютно необходимо владение, используйте Box, но в большинстве случаев можно использовать трэйты &amp;Trait или &amp;mut Trait. Еще лучше избегать использования всех трэйтов вместе. impl Trait - очевидный способ их избежать, но он не позволяет вам хранить разнородную коллекцию элементов, реализующих одну трэйту, поскольку это в основном вывод типа в причудливой шляпе. Хороший трюк, когда вы хотите разрешить переменную, но конечное число разработчиков типа, потому что вы хотите выбирать между ними или выполнять итерацию по ним, используйте либо кортеж, либо рекурсивную универсальную структуру, подобную этой: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Cons</span><span>&lt;Head, Tail&gt;(Head, Tail)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Поскольку структуры данных в Rust не добавляют косвенных затрат или накладных расходов на пространство, вы можете рекурсивно реализовать трейт для этой структуры и иметь функцию, которая может принимать любое количество параметров, которая работает так же быстро, как эквивалентная функция, которая принимает фиксированное количество параметров. . Вот пример того, как это может искать функцию, которая принимает список функций и вызывает их:</p>
+<p>Версия с аллокацией: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">call_all_fns</span><span>(</span><span style="color:#f29718;">fns</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;FnBox() </span><span style="color:#bfbab0cc;">-&gt;</span><span>()&gt;&gt;) {
+</span><span>    </span><span style="color:#ff7733;">for</span><span> f </span><span style="color:#f29668;">in</span><span> fns {
+</span><span>        </span><span style="color:#f07178;">f</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Версия без аллокации: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Cons</span><span>&lt;First, Second&gt;(First, Second)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">HCons</span><span>: Sized {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">cons</span><span>&lt;T&gt;(</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">other</span><span style="color:#bfbab0cc;">:</span><span> T) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cons&lt;</span><span style="color:#ff7733;">Self</span><span>, T&gt; {
+</span><span>        Cons(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#bfbab0cc;">,</span><span> other)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;T</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Sized</span><span>&gt; HCons </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">T </span><span>{}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// This is a hack to get around the fact that manually implementing the `Fn`
+</span><span style="font-style:italic;color:#5c6773;">// traits is currently unstable.
+</span><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Callable </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">call</span><span>(</span><span style="color:#f29718;">self</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;F</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Fn</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span>()&gt; Callable </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">F </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">call</span><span>(</span><span style="color:#f29718;">self</span><span>) { </span><span style="color:#f07178;">self</span><span>() }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;First</span><span style="color:#bfbab0cc;">:</span><span> Callable, Second</span><span style="color:#bfbab0cc;">:</span><span> Callable&gt; Callable </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Cons</span><span>&lt;First, Second&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">call</span><span>(</span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">call</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">1.</span><span style="color:#f07178;">call</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">call_all_fns_no_alloc</span><span>&lt;T</span><span style="color:#bfbab0cc;">:</span><span> Callable&gt;(</span><span style="color:#f29718;">fns</span><span style="color:#bfbab0cc;">:</span><span> T) {
+</span><span>    fns</span><span style="color:#f29668;">.</span><span style="color:#f07178;">call</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вот как они оба выглядят при использовании: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">first_fn </span><span style="color:#f29668;">= </span><span>|| { </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello!&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">second_fn </span><span style="color:#f29668;">= </span><span>|| { </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;World!&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    
+</span><span>    </span><span style="color:#f07178;">call_all_fns</span><span>(</span><span style="color:#f07178;">vec!</span><span>[</span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(first_fn)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Box</span><span style="color:#f29668;">::</span><span>new(second_fn)])</span><span style="color:#bfbab0cc;">;
+</span><span>    
+</span><span>    </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">first_fn </span><span style="color:#f29668;">= </span><span>|| { </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello!&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let </span><span style="color:#ffb454;">second_fn </span><span style="color:#f29668;">= </span><span>|| { </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;World!&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    
+</span><span>    </span><span style="color:#f07178;">call_all_fns_no_alloc</span><span>(first_fn</span><span style="color:#f29668;">.</span><span style="color:#f07178;">cons</span><span>(second_fn))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Функции, переданные в call_all_fns_no_alloc, подходят для встраивания, они не требуют накладных расходов на пространство, а их инструкции и данные находятся непосредственно рядом друг с другом в памяти и, следовательно, получить доступ к ним намного быстрее, чем если бы каждая из них была помещена в коробку. Например, в сочетании есть функция выбора, которая принимает массив, который может содержать объекты трэйтов, но также предоставляет комбинатор .or() (и макрос выбора!, Который расширяется до рекурсивных вызовов .or), который возвращает Or &lt;A, B&gt; Что в свою очередь реализует Parser. Это означает, что диспетчеризация является статической, и все объекты хранятся в памяти по порядку (потому что это всего лишь набор рекурсивных структур). В некоторых случаях вам все равно понадобится динамическая отправка, но использование этого метода означает, что количество случаев, когда это необходимо, очень мало.</p>
+<h2 id="ispol-zovat-tipy-dannykh-peremennoi-dliny-na-osnove-steka">Использовать типы данных переменной длины на основе стека</h2>
+<p>Типы данных фиксированной длины легко сохранить в стеке, но для данных с динамическим размером это не так просто. Однако smallvec, smallstring и temril - это типы данных переменной длины, которые позволяют хранить небольшое количество элементов в стеке (бесстыдный плагин: smallstring был написан мной). Из-за закона малых чисел у вас, скорее всего, будет больше этих маленьких строк, чем больших. Это хорошо, потому что сокращает выделение, но прекрасно, если вы храните их в Vec или HashMap, поскольку у вас будет меньше косвенных обращений и, следовательно, лучшее использование кеша. Хорошее практическое правило - никогда не иметь более одного уровня указателей для разыменования, прежде чем вы достигнете своего значения (НАСА применяет это правило в своем коде C, хотя для надежности, а не для производительности).</p>
+<p>Такие библиотеки, как smallvec, отлично подходят для локализации кеша, поскольку массив SmallVec&lt;[T; 4]&gt; будет иметь точно такую же локальность кэша, что и массив из просто T - пока длина каждого SmallVec меньше 8, он просто сохраняется по порядку. Возвращаясь к расчетам промаха кеша, сделанным ранее: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// This is a gross oversimplification of how this type is implemented in the
+</span><span style="font-style:italic;color:#5c6773;">// crate, but it&#39;s enough to explain how it works.
+</span><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">SmallVec</span><span>&lt;T&gt; {
+</span><span>    Small([T</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">4</span><span>])</span><span style="color:#bfbab0cc;">,
+</span><span>    Big(</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;T&gt;)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Matrix</span><span style="color:#f29668;">&lt;</span><span>T</span><span style="color:#f29668;">&gt; = </span><span>SmallVec&lt;SmallVec&lt;T&gt;&gt;</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Пока в SmallVec меньше или равно 4 элемента, размер каждого экземпляра равен размеру данных плюс размер тега, что составляет: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> size_of_data </span><span style="color:#f29668;">= </span><span>size_of</span><span style="color:#f29668;">::</span><span>&lt;T&gt;() </span><span style="color:#f29668;">* </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> size_of_tag  </span><span style="color:#f29668;">= </span><span style="color:#f07178;">max</span><span>(size_of</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;()</span><span style="color:#bfbab0cc;">, </span><span>align_of</span><span style="color:#f29668;">::</span><span>&lt;T&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>size_of_data </span><span style="color:#f29668;">+</span><span> size_of_tag
+</span></code></pre>
+<p>Возникает очевидный вопрос: почему размер тега не равен size_of::<u8>(). Это связано с тем, что, если бы размер T был больше 1 байта, это означало бы, что все элементы не были бы выровнены на 1 байт, что плохо. Процессоры работают намного медленнее с невыровненными данными, но если вы не напишете компилятор, вам никогда не придется об этом думать. Размер данных и их выравнивание не обязательно должны совпадать. Для структур, например, выравнивание обычно является наибольшим выравниванием любого из ее членов. Для примитивных типов, таких как указатели, целые числа и числа с плавающей запятой, выравнивание совпадает с его размером. Выравнивание и размер f32 равны 4. Выравнивание SmallVec<f32> - это наибольшее выравнивание его элементов, которое совпадает с выравниванием [f32; 4], что совпадает с выравниванием f32: 4.</p>
+<p>Предположим, у нас есть матрица 4x4 f32, это будет означать, что размер матрицы будет: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Inner SmallVec size = 4 * 4 + 4
+</span><span>Matrix size = 4 * (4 * 4 + 4) + 4 = 84
+</span><span>Maximum 3 cache misses
+</span></code></pre>
+<p>Нам не нужно отдельно вычислять промахи во внутреннем и внешнем кэше, потому что они гарантированно находятся рядом друг с другом в памяти.</p>
+<p>С точки зрения кеширования это ничем не хуже плоского векторного представления, но ничто не мешает вам случайно сделать внутренние векторы разной длины и нарушить инвариант, согласно которому строки массива должны быть одинаковой длины.</p>
+<p>Я хочу прояснить кое-что: вы никогда не будете делать эти вычисления в процессе оптимизации вашей программы. Это просто некоторое математическое обоснование фольклора вуду о том, что «распределение - это плохо», поскольку этому часто противопоставляется «malloc работает быстро». Оба утверждения верны - фактический процесс выделения и освобождения памяти происходит быстро, но выделяемые структуры данных хуже для случаев использования, требующих максимальной скорости.</p>
+<h2 id="razvertyvanie-lupa-po-prezhnemu-kruto">Развертывание лупа по-прежнему круто</h2>
+<p>Устройство Даффа - это весело, но развернутые циклы общей длины массива вряд ли будут быстрее, чем эквивалентный оптимизированный наивный код в настоящее время, поскольку любой оптимизирующий компилятор, достойный своих битов, будет выполнять такую оптимизацию без необходимости искажать ваш код и разрушать будущее - вы день.</p>
+<p>При этом, если вы знаете, что размер массива, скорее всего, будет кратен N, попробуйте сделать его &amp;[[T; N]] и работает на [T; N] в каждой итерации. Это уменьшает количество итераций (и, следовательно, количество раз, которое вам нужно пересчитывать переменные цикла) и позволяет компилятору более агрессивно работать с телом цикла.</p>
+<p>Вы также можете использовать более классическое развертывание цикла, если это позволяет снизить «силу» ваших операций. Это означает, что если вам нужно вычислить какое-то значение для каждой итерации цикла и вычисление этого значения занимает больше времени, чем само тело, вручную разверните тело, чтобы вы могли рассчитать его меньше. Пример: вы можете реализовать функцию целочисленного логарифма следующим образом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">log_base</span><span>(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">base</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> out </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">loop </span><span>{
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> base { </span><span style="color:#ff7733;">return</span><span> out</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>
+</span><span>        out </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        n </span><span style="color:#f29668;">/=</span><span> base</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Однако n /= base; out += 1; вычисляется медленнее, чем n &lt; base. Чтобы воспользоваться этим фактом, вы можете развернуть цикл следующим образом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">log_base_unrolled</span><span>(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">base</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span style="color:#f29718;">UNROLL_COUNT</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// We use a fixed-size array to ensure that we don&#39;t get the array count and
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// the `out` skip value out of sync.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> premultiplied_base</span><span style="color:#bfbab0cc;">: </span><span>[</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">UNROLL_COUNT</span><span>] </span><span style="color:#f29668;">= </span><span>[
+</span><span>        base</span><span style="color:#bfbab0cc;">,
+</span><span>        base </span><span style="color:#f29668;">*</span><span> base</span><span style="color:#bfbab0cc;">,
+</span><span>        base </span><span style="color:#f29668;">*</span><span> base </span><span style="color:#f29668;">*</span><span> base</span><span style="color:#bfbab0cc;">,
+</span><span>        base </span><span style="color:#f29668;">*</span><span> base </span><span style="color:#f29668;">*</span><span> base </span><span style="color:#f29668;">*</span><span> base</span><span style="color:#bfbab0cc;">,
+</span><span>    ]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> out </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>    
+</span><span>    </span><span style="color:#ff7733;">loop </span><span>{
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">0</span><span>] { </span><span style="color:#ff7733;">return</span><span> out</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">1</span><span>] { </span><span style="color:#ff7733;">return</span><span> out </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">2</span><span>] { </span><span style="color:#ff7733;">return</span><span> out </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">3</span><span>] { </span><span style="color:#ff7733;">return</span><span> out </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>        
+</span><span>        n </span><span style="color:#f29668;">/=</span><span> precalculated_base[</span><span style="color:#f29718;">UNROLL_COUNT </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>        out </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">UNROLL_COUNT</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Вот тесты, которые я использовал:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_log_base</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">5000000120510250</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">log_base</span><span>(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_log_base_unrolled</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">5000000120510250</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">log_base</span><span>(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>test::black_box - это волшебная функция, которая не позволяет rustc и LLVM вычислять эти вызовы функций во время компиляции и преобразовывать их в константу, как обычно (на самом деле, это не волшебство, это просто некоторая встроенная сборка, которая ничего не делает , поскольку ни rustc, ни LLVM не будут пытаться оптимизировать все, что было доступно встроенной сборке).</p>
+<p>Это дает следующие результаты: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>test bench_log_base          ... bench:  18 ns/iter (+/- 0)
+</span><span>test bench_log_base_unrolled ... bench:   5 ns/iter (+/- 0)
+</span></code></pre>
+<p>Подождите, однако, что произойдет, если мы дадим для base непостоянное значение? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_log_base_nonconstbase</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">5000000120510250</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> base </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">log_base</span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> base)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_log_base_unrolled_nonconstbase</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">5000000120510250</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> base </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">log_base_unrolled</span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> base)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>test bench_log_base_unrolled_nonconstbase ... bench:  37 ns/iter (+/- 1)
+</span><span>test bench_log_base_nonconstbase          ... bench: 199 ns/iter (+/- 5)
+</span></code></pre>
+<p>Они оба намного медленнее! Можем ли мы сделать лучше? Оказывается, да, мы можем: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">log_base_increasing</span><span>(</span><span style="color:#f29718;">n</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">base</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span style="color:#f29718;">UNROLL_COUNT</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> premultiplied_base</span><span style="color:#bfbab0cc;">: </span><span>[</span><span style="color:#f29668;">_</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">UNROLL_COUNT</span><span>] </span><span style="color:#f29668;">= </span><span>[
+</span><span>        base</span><span style="color:#bfbab0cc;">,
+</span><span>        base </span><span style="color:#f29668;">*</span><span> base</span><span style="color:#bfbab0cc;">,
+</span><span>        base </span><span style="color:#f29668;">*</span><span> base </span><span style="color:#f29668;">*</span><span> base</span><span style="color:#bfbab0cc;">,
+</span><span>        base </span><span style="color:#f29668;">*</span><span> base </span><span style="color:#f29668;">*</span><span> base </span><span style="color:#f29668;">*</span><span> base</span><span style="color:#bfbab0cc;">,
+</span><span>    ]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">0</span><span>] { </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>    </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">1</span><span>] { </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>    </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">2</span><span>] { </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>    </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">3</span><span>] { </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> out </span><span style="color:#f29668;">= </span><span style="color:#f29718;">UNROLL_COUNT </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> mul </span><span style="color:#f29668;">=</span><span> premultiplied_base[</span><span style="color:#f29718;">UNROLL_COUNT </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">loop </span><span>{
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">*</span><span> mul { </span><span style="color:#ff7733;">return</span><span> out</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">*</span><span> mul { </span><span style="color:#ff7733;">return</span><span> out </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">2</span><span>] </span><span style="color:#f29668;">*</span><span> mul { </span><span style="color:#ff7733;">return</span><span> out </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>        </span><span style="color:#ff7733;">if</span><span> n </span><span style="color:#f29668;">&lt;</span><span> premultiplied_base[</span><span style="color:#f29718;">3</span><span>] </span><span style="color:#f29668;">*</span><span> mul { </span><span style="color:#ff7733;">return</span><span> out </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>
+</span><span>        mul </span><span style="color:#f29668;">*=</span><span> premultiplied_base[</span><span style="color:#f29718;">UNROLL_COUNT </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>        out </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">UNROLL_COUNT</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_log_base_increasing</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">5000000120510250</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">log_base_increasing</span><span>(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_log_base_increasing_nonconstbase</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">5000000120510250</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> base </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">log_base_increasing</span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> base)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Теперь посмотрим на результаты: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>test bench_log_base                         ... bench:  18 ns/iter (+/- 0)
+</span><span>test bench_log_base_nonconstbase            ... bench: 199 ns/iter (+/- 5)
+</span><span>
+</span><span>test bench_log_base_unrolled                ... bench:   5 ns/iter (+/- 0)
+</span><span>test bench_log_base_unrolled_nonconstbase   ... bench:  37 ns/iter (+/- 1)
+</span><span>
+</span><span>test bench_log_base_increasing              ... bench:   6 ns/iter (+/- 0)
+</span><span>test bench_log_base_increasing_nonconstbase ... bench:   8 ns/iter (+/- 1)
+</span></code></pre>
+<p>Оказывается, компилятор делал что-то коварное: он может оптимизировать целочисленное деление на константу в умножение в сочетании со сдвигом. Когда он больше не мог складывать константу в функцию, он значительно замедлился. Можно полагаться на константное сворачивание, если оно позволяет получить значительное ускорение и вы знаете, что функция обычно вызывается с постоянными аргументами, но будьте осторожны. На что следует обратить внимание, - это операторы if и целочисленное деление, которые могут быть намного медленнее с непостоянными значениями по сравнению с константами.</p>
+<p>Самый быстрый метод на сегодняшний день преобразуется в f64, вызывает .log (base) на этом, а затем преобразует обратно. Однако он не работает для больших чисел из-за потери точности. Вероятно, сейчас самое время отметить, что, хотя сложение и умножение целых чисел происходит быстрее, чем то же самое для чисел с плавающей запятой, для кода, который выполняет деление на непостоянное значение или что-то более сложное, например тригонометрия, вам обязательно следует использовать числа с плавающей запятой. Компилятор не может выполнить преобразование за вас - он не будет применять оптимизацию, которая делает ваш код менее точным, - но вы можете проверить области, в которых это может быть улучшением, и внести изменения вручную.</p>
+<h2 id="asssert-usloviia-zaranee">asssert! условия заранее</h2>
+<p>Если вы хотите уменьшить количество неявных утверждений, которые компилируются в код, вместо этого: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">do_something_with_array</span><span>(</span><span style="color:#f29718;">array</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">u8</span><span>]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u8 </span><span>{
+</span><span>    array[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">2</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">3</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">4</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">5</span><span>]
+</span><span>}
+</span></code></pre>
+<p>Do this:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">do_something_with_array</span><span>(</span><span style="color:#f29718;">array</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">u8</span><span>]) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u8 </span><span>{
+</span><span>    </span><span style="color:#f07178;">assert!</span><span>(array</span><span style="color:#f29668;">.</span><span>len </span><span style="color:#f29668;">&gt;= </span><span style="color:#f29718;">5</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    array[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">2</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">3</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">4</span><span>] </span><span style="color:#f29668;">+</span><span> array[</span><span style="color:#f29718;">5</span><span>]
+</span><span>}
+</span></code></pre>
+<p>1 155 / 5 000
+Результаты перевода
+Это позволяет LLVM понять, что последующие утверждения недоступны, и исключает их. Это полезно для любого кода, который может утверждать несколько различных качеств одних и тех же данных, но особенно полезно для индексации, поскольку мы знаем, что если array [n] завершится успешно, то array [n - 1] также будет успешным. Это похоже на вопрос о массивах фиксированной длины в предыдущем разделе.</p>
+<p>По сути, попробуйте объединить проверки в одно утверждение !. Это означает, что последующие проверки становятся статически недоступными. Если LLVM / Rust по-прежнему не оптимизирует его, вы можете переключиться на использование небезопасных методов индексации, убедившись, что они по-прежнему безопасны. Этот совет бессовестно украден из комментария к /r/rust.</p>
+<h2 id="ispol-zovat-optimizatsiiu-vremeni-komponovki">Использовать оптимизацию времени компоновки</h2>
+<p>Обычно Rust может встраивать только функции, которые либо определены внутри контейнера, либо, в случае функций из других библиотек, имеют указанный #[inline]. LTO позволяет компилятору встраивать кросс-крейт за счет снижения скорости во время компиляции. Я придерживаюсь мнения, что время компиляции имеет значение только для отладочных сборок, поэтому я готов пойти на компромисс. Как и во всем остальном, профилируйте и убедитесь, что компромисс оправдан. </p>
+<h2 id="ne-ispol-zuite-inline-always">Не используйте #[inline(always)]</h2>
+<p><code>#[inline (always)]</code> кажется хорошим трэйтом производительности, но правда в том, что оптимизирующие компиляторы действительно хороши в работе, когда функция выиграет от встраивания, а Rust не ограничен более медленным стандартизированным соглашением о вызовах C и может использовать fastcc, что делает вызовы функций чрезвычайно дешевыми. Скорее всего, вы увеличите размер исполняемого файла. Конечно, это займет больше места на жестком диске, но это не такая уж большая проблема. Если у вас есть хотя бы один связанный ресурс, такой как изображения или аудио, они, скорее всего, уменьшат размер вашего исполняемого файла.</p>
+<p>Настоящая проблема здесь в том, что это может привести к тому, что ваша программа больше не поместится в кеш-память команд ЦП. ЦП будет обращаться в ОЗУ для выполнения своих инструкций только тогда, когда функции вызываются с инструкциями вне текущей строки кэша. Чем больше ваш двоичный файл, тем больше вероятность этого, и чем больше функций встроено, тем больше ваш двоичный файл. Иметь большой двоичный файл - не конец света, но если вы действительно не уверены, что что-то будет улучшено, если вручную пометить его как встроенный, и у вас есть тесты, подтверждающие это, так же вероятно, что вы замедлитесь. программу с неосторожным встраиванием, чем для ее ускорения.</p>
+<p>Итак, теперь я напугал вас встраиванием, давайте поговорим о том, когда вам следует явно добавлять встраиваемые аннотации. Часто вызываемые небольшие функции являются хорошей целью для встраивания. Итератор::next, например, или Deref::deref. Накладные расходы на вызов этих функций могут быть больше, чем время, необходимое для запуска самой функции. Скорее всего, они будут автоматически встроены при внутреннем вызове, но пометка их как #[inline] позволит пользователям вашей библиотеки также встроить их, даже если они не используют LTO. Только функции, помеченные #[inline], будут рассматриваться для встраивания между крэйтами, но это означает, что определение должно храниться в скомпилированной библиотеке, что приведет к раздуванию и увеличению времени компиляции. #[inline (always)] еще более нишевый, но иногда приятно убедиться, что крошечная функция будет встроена, или как своего рода документация, для которой вызов функции бесплатен, если кто-то приходит и пытается вручную встроить ее в улучшить производительность. Однако это действительно очень редко, когда вы захотите сделать это, и лучше всего просто доверять компилятору.</p>
+<p>Другой класс функций, которые являются хорошими целями для аннотирования встраивания, - это функции, которые, как вы знаете, часто вызываются с постоянными параметрами. Мы рассмотрим это позже, но {integer}::from_str_radix - отличный пример этого. В большинстве случаев использование этой функции будет иметь константу в качестве второго параметра, и поэтому разумное использование #[inline] мы можем предотвратить ветвление и дорогостоящие операции, такие как разделение, для потребителей нашей библиотеки. Однако не стоит терять сон, поскольку они могут просто использовать оптимизацию времени компоновки, если им нужно выжать все до последней капли производительности.</p>
+<p>Кроме того, компилятор иногда действительно ошибается и может упустить возможности встраивания, которые улучшили бы скорость кода. Однако добавляйте аннотацию #[inline (always)] только в том случае, если вы можете доказать с помощью тестов, что это улучшает скорость, а добавление этих аннотаций - своего рода мрачное искусство. Ваши усилия, вероятно, лучше потратить на что-то другое.</p>
+<p>Если вы хотите уменьшить размер кода, вы можете попробовать использовать panic = &quot;abort&quot;. Это удаляет «посадочные площадки», которые позволяют Rust показывать красивую трассировку стека после паники, и приводит к немедленному завершению программы при любой панике. Я на законных основаниях видел нетривиальное ускорение тестов для оболочки ion после добавления этой опции в сборку релиза, и я могу отнести это только к тому, что больше кода помещается в кэш инструкций. Я не пробовал это со многими другими программами, но, вероятно, это повлияет только на средние и большие проекты. Попробуйте это на своей кодовой базе, это так же просто, как добавить одну строку в Cargo.toml, и это может улучшить скорость вашего кода. </p>
+<h2 id="rasparallelivaite-no-ne-tak-kak-vy-dumaete">Распараллеливайте, но не так, как вы думаете</h2>
+<p>Для Haskell существует потрясающая библиотека под названием Haxl, которая автоматически отслеживает зависимости данных ваших сетевых запросов, группирует их и выполняет асинхронно, пока они не пересекаются. Это то, что демонстрирует мощь вычислительных абстракций, таких как монады, и, насколько мне известно, это не то, что имеет, кхм, параллель в каком-либо другом языке. По крайней мере, не для IO. У нас есть эта точная способность в ЦП в течение долгого, долгого времени. ЦП отслеживает зависимости данных вычислений и распараллеливает их, где это возможно.</p>
+<p>Причина, по которой зависимости данных имеют значение, заключается в том, что ЦП не выполняет просто одну инструкцию за раз. Пока две инструкции не используют общий регистр, их можно безопасно запускать одновременно, так что это делает ЦП. По сути, это свободный параллелизм без необходимости блокировок, рабочих очередей или чего-либо, что вообще влияет на вашу архитектуру, поэтому вы были бы сумасшедшими, если бы не воспользовались им.</p>
+<p>Распараллеливание вычислений также хорошо поддается автовекторизации, то есть процессу, при котором компилятор понимает, что вы делаете одно и то же с несколькими разными значениями, и преобразует это в специальную инструкцию, которая, ну, в общем, делает то же самое с несколькими разными значениями.</p>
+<p>Например, компилятор может перевести следующий числовой код: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>(a1 </span><span style="color:#f29668;">+</span><span> a2) </span><span style="color:#f29668;">+ </span><span>(b1 </span><span style="color:#f29668;">+</span><span> b2) </span><span style="color:#f29668;">+ </span><span>(c1 </span><span style="color:#f29668;">+</span><span> c2) </span><span style="color:#f29668;">+ </span><span>(d1 </span><span style="color:#f29668;">+</span><span> d2)
+</span></code></pre>
+<p>в одну инструкцию, которая выполняет все четыре подвыражения так же быстро, как одно сложение. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>%intermediate-value = add-vectors [%a1 %b1 %c1 %d1] [%a2 %b2 %c2 %d2]
+</span><span>sum-parts %intermediate-value
+</span></code></pre>
+<h2 id="primer-iz-praktiki">Пример из практики</h2>
+<p>Давайте напишем версию usize::from_str_radix, которая будет примерно на 30% быстрее, чем версия в стандартной библиотеке. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// We&#39;re redefining these here since they&#39;re private in the stdlib
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug</span><span style="color:#bfbab0cc;">,</span><span> Clone</span><span style="color:#bfbab0cc;">,</span><span> PartialEq</span><span style="color:#bfbab0cc;">,</span><span> Eq)]
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">ParseIntError </span><span>{
+</span><span>    kind</span><span style="color:#bfbab0cc;">:</span><span> IntErrorKind,
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug</span><span style="color:#bfbab0cc;">,</span><span> Clone</span><span style="color:#bfbab0cc;">,</span><span> PartialEq</span><span style="color:#bfbab0cc;">,</span><span> Eq)]
+</span><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">IntErrorKind </span><span>{
+</span><span>    Empty</span><span style="color:#bfbab0cc;">,
+</span><span>    InvalidDigit</span><span style="color:#bfbab0cc;">,
+</span><span>    Overflow</span><span style="color:#bfbab0cc;">,
+</span><span>    Underflow</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">inline</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from_str_radix</span><span>(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>, </span><span style="color:#f29718;">radix</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, ParseIntError&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_digit_ascii</span><span>(</span><span style="color:#f29718;">ascii</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>, </span><span style="color:#f29718;">radix</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#ff7733;">usize</span><span>, ParseIntError&gt; {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> decimal_digit </span><span style="color:#f29668;">=</span><span> ascii</span><span style="color:#f29668;">.</span><span style="color:#f07178;">wrapping_sub</span><span>(</span><span style="color:#ff7733;">b</span><span style="color:#c2d94c;">&#39;0&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">if</span><span> radix </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">10 </span><span style="color:#f29668;">&amp;&amp;</span><span> decimal_digit </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">9 </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> out </span><span style="color:#f29668;">= </span><span>(ascii </span><span style="color:#f29668;">| </span><span style="color:#f29718;">32</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">wrapping_sub</span><span>(</span><span style="color:#ff7733;">b</span><span style="color:#c2d94c;">&#39;a&#39;</span><span>) </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">if</span><span> out </span><span style="color:#f29668;">&gt;</span><span> radix </span><span style="color:#f29668;">- </span><span style="color:#f29718;">10 </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(ParseIntError { kind</span><span style="color:#bfbab0cc;">: </span><span>IntErrorKind</span><span style="color:#f29668;">::</span><span>InvalidDigit })
+</span><span>            } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(out </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">10</span><span>)
+</span><span>            }
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> decimal_digit </span><span style="color:#f29668;">=</span><span> decimal_digit </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">if</span><span> decimal_digit </span><span style="color:#f29668;">&gt;</span><span> radix {
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(ParseIntError { kind</span><span style="color:#bfbab0cc;">: </span><span>IntErrorKind</span><span style="color:#f29668;">::</span><span>InvalidDigit })
+</span><span>            } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(decimal_digit)
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">if</span><span> radix </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">36 </span><span>{
+</span><span>        </span><span style="color:#f07178;">panic!</span><span>(</span><span style="color:#c2d94c;">&quot;from_str_radix: radix is too high (maximum 36)&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> bytes </span><span style="color:#f29668;">=</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_bytes</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">if</span><span> bytes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">== </span><span style="color:#f29718;">0 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(
+</span><span>            ParseIntError { kind</span><span style="color:#bfbab0cc;">: </span><span>IntErrorKind</span><span style="color:#f29668;">::</span><span>Empty }
+</span><span>        )</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> bytes </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match</span><span> bytes[</span><span style="color:#f29718;">0</span><span>] {
+</span><span>        </span><span style="color:#ff7733;">b</span><span style="color:#c2d94c;">&#39;+&#39; </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="color:#f29668;">&amp;</span><span>bytes[</span><span style="color:#f29718;">1</span><span style="color:#f29668;">..</span><span>] }</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#ff7733;">b</span><span style="color:#c2d94c;">&#39;-&#39; </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(ParseIntError { kind</span><span style="color:#bfbab0cc;">: </span><span>IntErrorKind</span><span style="color:#f29668;">::</span><span>Underflow }) }</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29668;">_ =&gt;</span><span> bytes</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> mul </span><span style="color:#f29668;">=</span><span> radix</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> index </span><span style="color:#f29668;">=</span><span> bytes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> output </span><span style="color:#f29668;">= </span><span style="color:#f07178;">to_digit_ascii</span><span>(bytes[index]</span><span style="color:#bfbab0cc;">,</span><span> radix)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">&amp;</span><span>byte </span><span style="color:#f29668;">in</span><span> bytes[</span><span style="color:#f29668;">..</span><span>index]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">rev</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> digit </span><span style="color:#f29668;">= </span><span style="color:#f07178;">to_digit_ascii</span><span>(byte</span><span style="color:#bfbab0cc;">,</span><span> radix)</span><span style="color:#f29668;">?</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> next_output </span><span style="color:#f29668;">=</span><span> output</span><span style="color:#f29668;">.</span><span style="color:#f07178;">wrapping_add</span><span>(digit </span><span style="color:#f29668;">*</span><span> mul)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">if</span><span> output </span><span style="color:#f29668;">&gt;</span><span> next_output {
+</span><span>            </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(
+</span><span>                ParseIntError { kind</span><span style="color:#bfbab0cc;">: </span><span>IntErrorKind</span><span style="color:#f29668;">::</span><span>Overflow }
+</span><span>            )</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        mul </span><span style="color:#f29668;">*=</span><span> radix</span><span style="color:#bfbab0cc;">;
+</span><span>        output </span><span style="color:#f29668;">=</span><span> next_output</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(output)
+</span><span>}
+</span></code></pre>
+<p>Я явно использую функции wrapping_ * не в целях оптимизации (поскольку проверки переполнения удаляются во время выполнения), а потому, что для правильного поведения требуется переполнение. Здесь вы заметите некоторые улучшения:</p>
+<ul>
+<li>Начинаем в конце и работаем в обратном направлении, сохраняя счетчик «мул». Первоначально я написал такую версию, которая работает в прямом направлении и умножает вывод на основание системы счисления в каждом цикле, но обратный метод на 10% быстрее. Похоже, это связано с лучшим параллелизмом на уровне инструкций. Умножения можно распараллеливать, и только сложение зависит от значения предыдущей итерации для вывода, и сложение происходит намного быстрее. Таким образом можно улучшить любые операции сворачивания, используя алгебраические законы (в данном случае закон распределения) для увеличения количества операций, которые могут выполняться параллельно.</li>
+<li>Мы полагаемся на переполнение для проверки сравнений A &lt;x &lt;B. Здесь это полезно только потому, что нам уже нужно значение x - A, поэтому мы сохраняем дополнительное сравнение и побитовое и. В большинстве случаев код A &lt;x &amp;&amp; x &lt;B столь же дешев или дешевле, чем x - A &lt;B с переполнением.</li>
+<li>Мы используем | 32, чтобы унифицировать пути кода для прописных и строчных букв, уменьшая количество необходимых сравнений.</li>
+<li>Мы не делаем output + digit * mul, когда output == 0 и mul == 1. Кажется, что это постоянно на 1 нс быстрее, но возможно, что это не имеет значения, и ускорение на 1 нс, которое я вижу, составляет чистое везение. Я повторно проводил тесты как с изменением, так и без него несколько раз и увидел стабильную разницу, но это не исключает удачи. Это проблема микротестов, когда разница становится достаточно маленькой, вы не можете сказать, действительно ли вы делаете это быстрее.</li>
+<li>Мы используем безопасный интерфейс итератора Rust, который работает так же быстро, как идиома C по хранению указателей «начало» и «конец», поэтому вы можете проверить завершение цикла простым ==. Если вы когда-нибудь слышите, как кто-то говорит: «Гарантии безопасности Rust бесполезны, потому что вам нужно опуститься до небезопасного, чтобы получить реальную скорость» (я уже видел это почти дословно раньше на Hacker News), вы можете показать им это.</li>
+<li>Мы не полагаемся на константное сворачивание, чтобы сделать наш код быстрым, но он работает быстрее с постоянным значением для radix. Поэтому мы добавляем #[inline], чтобы позволить последующим крэйтам также применять константное сворачивание.</li>
+</ul>
+<p>Метод, который я использовал для этого, является основным методом, который вы должны использовать для любой работы по оптимизации: напишите репрезентативный тест, а затем постепенно настраивайте и повторно запускайте тесты, пока у вас не будет больше циклов. Сделать это для чистых функций намного проще, поэтому первое, что вы должны сделать для оптимизации любой функции, вызываемой в замкнутом цикле, - это сделать ее чистой. Это позволяет избежать косвенной записи и чтения (чтения и записи в места в памяти, которые могут находиться за пределами строк кэша) и значительно упрощает тестирование производительности. Если вы используете разработку через тестирование для обеспечения надежности, это эквивалентно производительности.</p>
+<p>Расширение этого для работы со знаковыми целочисленными типами - это упражнение для читателя. Совет: в отличие от C, вы можете полагаться на переполнение целых чисел со знаком с помощью арифметики с дополнением до 2.</p>
+<p>Вот функции, которые я использовал для тестирования кода: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_from_str</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;1235112512&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">from_str_radix</span><span>(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">1235112512</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;FFaf125A&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">from_str_radix</span><span>(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">0xFFaf125A</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_from_str_native</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;1235112512&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span>from_str_radix(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">1235112512</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;FFaf125A&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span>from_str_radix(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">0xFFaf125A</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_from_str_nonconstradix</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;1235112512&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> radix </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">from_str_radix</span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> radix)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">1235112512</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;FFaf125A&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> radix </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">from_str_radix</span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> radix)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">0xFFaf125A</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_from_str_native_nonconstradix</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;1235112512&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> radix </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span>from_str_radix(input</span><span style="color:#bfbab0cc;">,</span><span> radix)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">1235112512</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;FFaf125A&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> radix </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span>from_str_radix(input</span><span style="color:#bfbab0cc;">,</span><span> radix)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">0xFFaf125A</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_from_str_1char</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;1&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">from_str_radix</span><span>(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;F&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">from_str_radix</span><span>(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">0xF</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">bench</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">bench_from_str_native_1char</span><span>(</span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Bencher) {
+</span><span>    b</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>(|| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;1&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span>from_str_radix(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">10</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">= </span><span style="color:#f07178;">black_box</span><span>(</span><span style="color:#c2d94c;">&quot;F&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#ff7733;">usize</span><span style="color:#f29668;">::</span><span>from_str_radix(input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">16</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29718;">0xF</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Результаты: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>test bench_from_str                      ... bench:          22 ns/iter (+/- 7)
+</span><span>test bench_from_str_native               ... bench:          36 ns/iter (+/- 0)
+</span><span>test bench_from_str_nonconstradix        ... bench:          26 ns/iter (+/- 0)
+</span><span>test bench_from_str_native_nonconstradix ... bench:          39 ns/iter (+/- 0)
+</span><span>test bench_from_str_1char                ... bench:           5 ns/iter (+/- 0)
+</span><span>test bench_from_str_native_1char         ... bench:          13 ns/iter (+/- 0)
+</span></code></pre>
+<p>При тестах ниже 1 мс я заметил, что для «раскрутки» процессора может потребоваться некоторое время. Иногда первый тест в наборе занимает на 20-30 нс дольше, чем последующие. Если вы дословно продублируете эталонный тест и возьмете число с наименьшей дисперсией, это позволит избежать проблемы. Я думаю, это связано с тем, что ЦП должен собирать информацию для правильного прогнозирования ветвлений. В идеале вы просто не должны проводить микротест, но некоторые функции законно требуют этого. Не доверяйте тестам, особенно микробенчмаркам, пока не запустите их несколько раз.</p>
+<p>Когда я повторно запускал этот конкретный тест (всего не менее 10 раз, не считая тестов, которые я запускал при редактировании кода), чтобы убедиться, что числа были стабильными, и хотя средние значения чрезвычайно стабильны (собственный тест иногда был немного медленнее, Значение 36 нс выше - это то, что я вижу большую часть времени), дисперсия в основном составляет 0–3 нс с пиками 13–26 нс. У меня нет хорошего объяснения этому, ожидайте следующего сообщения с советами по написанию лучших тестов.</p>
+<p>Это прекрасный пример того, почему так важна низкоуровневая оптимизация, поскольку именно такая функция может использоваться сотни тысяч раз в парсерах текстовых данных, а ускорение на 10 нс здесь может привести к значительным улучшениям в течение срока службы программа. Это также пример того, почему вам следует по возможности избегать низкоуровневой оптимизации. Исходная реализация этой функции в stdlib - не самый идиоматический код, но он значительно более читабелен, чем этот. Сказав это, тем не менее, это свидетельство приверженности Rust абстракциям с нулевой стоимостью: вы можете писать в основном идиоматический, безопасный код и заставлять его работать, а также эквивалентный код C/C++, который потребует использования небезопасной арифметики указателей.</p>
+<h2 id="podvedenie-itogov">Подведение итогов</h2>
+<p>Если бы мне пришлось подытожить трюк с оптимизацией в содержательном фрагменте, готовом для QotW, это было бы так:</p>
+<blockquote>
+<p>Самый быстрый код - это код, который вообще не запускается, второй по скорости код - это код, который никогда не должен ждать.</p>
+</blockquote>
+<p>В идеале вы хотите делать меньше работы, а если вы выполняете минимальный объем работы, вы хотите уменьшить количество времени, которое процессор тратит на ожидание.</p>
+<p>Если вам нужно больше советов по производительности Rustic с большим количеством цифр, я бы посчитал превосходное вскрытие ripgrep BurntSushi необходимым для чтения всем, кто хочет писать быстрое программное обеспечение (это было то, что изначально отправило меня в эту глубокую кроличью нору). Чтобы узнать о более общих системных языковых аспектах, ознакомьтесь с докладом Андрея Александреску «Fastware», из которого был адаптирован код from_str_radix и log_base. Многие пункты в этой статье являются расширением пунктов, стоящих за одной из этих двух ссылок.</p>
+<p>Я надеюсь, что независимо от того, являетесь ли вы Rustacean софт-оболочкой или седеющим ветераном, это дало вам лучшее представление о том, когда какой-то код может плохо работать, и что с этим делать. Иди, пусть дела идут врум. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

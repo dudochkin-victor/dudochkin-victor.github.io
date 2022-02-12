@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>WASM | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#kontraktnyi-poddon-wasm">Контрактный поддон WASM</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#veb-sborka-wasm"><small>- Веб-сборка (Wasm)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#chto-takoe-webassembly"><small>- Что такое WebAssembly?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#pochemu-webassembly"><small>- Почему WebAssembly?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#poddon-kontraktov"><small>- Поддон контрактов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#vasm-dvigatel"><small>- Васм Двигатель</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#funktsii"><small>- Функции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#na-osnove-akkaunta"><small>- На основе аккаунта</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#dvukhetapnoe-razvertyvanie"><small>- Двухэтапное развертывание</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#sokhranite-kontrakt-wasm-v-blokcheine"><small>- Сохраните контракт Wasm в блокчейне.</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#tipy-sredy-vypolneniia"><small>- Типы среды выполнения</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#kontraktnye-vyzovy"><small>- Контрактные вызовы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#pesochnitsa"><small>- Песочница</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#gaz"><small>- Газ</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#arenda-sklada"><small>- Аренда склада</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#modul-kontraktov-i-evm">Модуль контрактов и EVM</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/readme/#resursy"><small>- Ресурсы</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>WASM</h1>
+
+<p><img src="../../../../../.gitbook/assets/substrate-ink.png" alt="" /></p>
+<h2 id="kontraktnyi-poddon-wasm">Контрактный поддон WASM</h2>
+<h3 id="veb-sborka-wasm">Веб-сборка (Wasm)</h3>
+<p>WebAssembly используется в Polkadot, Substrate и Edgeware в качестве цели компиляции для среды выполнения.</p>
+<h3 id="chto-takoe-webassembly">Что такое WebAssembly?</h3>
+<p>WebAssembly, сокращенно Wasm, представляет собой двоичный формат инструкций для виртуальной машины на основе стека. Wasm разработан как переносимая цель для компиляции языков высокого уровня, таких как C/C++/Rust, что позволяет развертывать в Интернете клиентские и серверные приложения.</p>
+<h3 id="pochemu-webassembly">Почему WebAssembly?</h3>
+<p>WebAssembly — это двоичный формат, не зависящий от платформы, что означает, что он будет выполнять одни и те же инструкции на любой машине, на которой он работает. Блокчейнам нужна определенность, чтобы иметь надежные обновления перехода состояний на всех узлах в одноранговой сети, не заставляя каждый узел использовать одно и то же оборудование. Wasm хорошо подходит для надежности среди возможно разнообразного набора машин. Wasm эффективен и быстр. Эффективность означает, что он может быть загружен в цепочку как блок кода, не вызывая слишком большого раздувания состояния, сохраняя при этом способность выполняться на скорости, близкой к исходной.</p>
+<h3 id="poddon-kontraktov">Поддон контрактов</h3>
+<p>Палитра контрактов предоставляет среде выполнения возможность развертывать и выполнять смарт-контракты WebAssembly (Wasm).</p>
+<h3 id="vasm-dvigatel">Васм Двигатель</h3>
+<p>Палитра контрактов зависит от интерфейса песочницы Wasm, определяющего механизм выполнения Wasm, доступный в среде выполнения. В настоящее время это реализовано с помощью wasmi, интерпретатора Wasm.</p>
+<h3 id="funktsii">Функции</h3>
+<p>Модуль «Контракты» имеет ряд знакомых и новых функций для развертывания и выполнения смарт-контрактов.</p>
+<h3 id="na-osnove-akkaunta">На основе аккаунта</h3>
+<p>Модуль «Контракты» использует систему на основе учетной записи, аналогичную многим существующим платформам смарт-контрактов. Для среды выполнения Substrate контрактные учетные записи ничем не отличаются от обычных учетных записей пользователей; однако в дополнение к AccountID и Балансу, которые есть у обычных учетных записей, учетная запись контракта также имеет связанный код контракта и некоторое постоянное хранилище контрактов.</p>
+<h3 id="dvukhetapnoe-razvertyvanie">Двухэтапное развертывание</h3>
+<p>Развертывание контракта с помощью модуля «Контракты» выполняется в два этапа:</p>
+<h3 id="sokhranite-kontrakt-wasm-v-blokcheine">Сохраните контракт Wasm в блокчейне.</h3>
+<p>Создайте новую учетную запись с новым хранилищем, связанным с этим контрактом Wasm. Это означает, что несколько экземпляров контрактов с разными аргументами конструктора могут быть инициализированы с использованием одного и того же кода Wasm, что уменьшает объем памяти, необходимый модулю контрактов в вашей цепочке блоков.</p>
+<h3 id="tipy-sredy-vypolneniia">Типы среды выполнения</h3>
+<p>Для написания контрактов и взаимодействия со средой выполнения доступен набор типов (например, AccountId, Balance, Hash, Moment). Эти типы могут быть определены пользователем для пользовательских сред выполнения или могут использоваться предоставленные значения по умолчанию.</p>
+<h3 id="kontraktnye-vyzovy">Контрактные вызовы</h3>
+<p>Вызовы контрактов могут изменять хранилище контракта, создавать новые контракты и вызывать другие контракты. Поскольку Substrate предоставляет вам возможность писать собственные модули среды выполнения, модуль Contracts также позволяет выполнять асинхронные вызовы непосредственно к этим функциям среды выполнения от имени учетной записи контракта.</p>
+<h3 id="pesochnitsa">Песочница</h3>
+<p>Модуль «Контракты» предназначен для использования любым пользователем общедоступной сети. Это означает, что контракты имеют возможность напрямую изменять только свое собственное хранилище. Чтобы обеспечить безопасность базового состояния блокчейна, модуль Contracts включает обратимые транзакции, которые откатывают любые изменения в хранилище вызовами контрактов, которые не завершились успешно.</p>
+<h3 id="gaz">Газ</h3>
+<p>За вызовы по контракту взимается плата за газ, чтобы ограничить количество вычислительных ресурсов, которые может использовать транзакция. При формировании договорной сделки указывается лимит газа. По мере исполнения контракта газ постепенно расходуется в зависимости от сложности вычислений. Если лимит газа будет достигнут до завершения выполнения контракта, транзакция завершится неудачно, хранилище контракта будет возвращено, а плата за газ не будет возвращена пользователю. Если исполнение контракта завершается с оставшимся газом, излишки возвращаются пользователю в конце транзакции.</p>
+<p>Модуль «Контракты» определяет цену газа, которая представляет собой конвертацию валюты субстрата в одну единицу газа. Таким образом, для выполнения транзакции у пользователя должен быть свободный баланс не ниже цены газа * лимита газа, который можно потратить.</p>
+<h3 id="arenda-sklada">Аренда склада</h3>
+<p>Подобно тому, как газ ограничивает количество вычислительных ресурсов, которые могут быть использованы во время транзакции, аренда хранилища ограничивает площадь, которую контракт может иметь в хранилище блокчейна. С контрактной учетной записи взимается плата пропорционально объему хранилища, используемому этой учетной записью. Когда баланс контракта становится ниже определенного предела, учетная запись контракта превращается в «надгробие», а его хранилище очищается. Контракт с захоронением можно восстановить, предоставив данные, которые были очищены, когда он стал захоронением, а также любые дополнительные средства, необходимые для поддержания контракта в силе.</p>
+<h2 id="modul-kontraktov-i-evm">Модуль контрактов и EVM</h2>
+<p>Модуль «Контракты» повторяет существующие идеи в экосистеме смарт-контрактов, в частности Ethereum и EVM.</p>
+<p>Наиболее очевидное различие между модулем Contracts и EVM заключается в основном механизме выполнения, используемом для запуска смарт-контрактов. EVM — хорошая теоретическая среда выполнения, но ее не очень удобно использовать на современном оборудовании. Например, манипулирование 256-битными целыми числами в современных архитектурах значительно сложнее, чем стандартные типы. Даже команда Ethereum исследовала использование <a href="https://github.com/ewasm/design">Wasm</a> для сети следующего поколения.</p>
+<p>EVM взимает плату за хранение только во время хранения. Эти единовременные затраты приводят к тому, что некоторый постоянный объем хранилища используется в блокчейне навсегда, что экономически нецелесообразно. Модуль «Контракты» пытается исправить это с помощью <a href="https://substrate.dev/docs/en/knowledgebase/smart-contracts/contracts-pallet#storage-rent">аренды хранилища</a>, что гарантирует, что любые данные, которые сохраняются в блокчейне, должным образом оплачиваются эти ресурсы.</p>
+<p>Модуль «Контракты» выбирает подход к созданию контракта с использованием <a href="https://substrate.dev/docs/en/knowledgebase/smart-contracts/contracts-pallet#two-step-deployment">двухэтапного процесса</a>, что коренным образом меняет способ контракты хранятся в цепочке. Адреса контрактов, их хранилище и балансы теперь отделены от основной логики контрактов. Это может обеспечить поведение, подобное тому, которое <a href="https://eips.ethereum.org/EIPS/eip-1014">create2</a> предоставило Ethereum, или даже включить восстанавливаемые или обновляемые контракты в блокчейне на основе субстрата.</p>
+<h3 id="resursy">Ресурсы</h3>
+<ul>
+<li><a href="https://webassembly.org">WebAssembly.org</a> - домашняя страница WebAssembly, содержащая ссылку на спецификацию.</li>
+<li><a href="https://github.com/paritytech/Wasmi">Wasmi</a> - интерпретатор WebAssembly, написанный на Rust.
+— <a href="https://github.com/paritytech/parity-Wasm">Parity Wasm</a> — сериализация/десериализация WebAssembly в Rust.</li>
+<li><a href="https://github.com/paritytech/Wasm-utils">Утилиты Wasm</a> - Коллекция утилит Wasm, используемых при разработке контрактов Parity и Wasm.</li>
+<li><a href="https://crates.io/crates/pallet-contracts">Pallet-contracts</a> - Модуль Contract предоставляет функциональные возможности среды выполнения для развертывания и выполнения смарт-контрактов WebAssembly.</li>
+<li><a href="https://substrate.dev/docs/en/knowledgebase/smart-contracts/contracts-pallet">Поддон контрактов</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

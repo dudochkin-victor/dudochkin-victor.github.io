@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Go Vs Rust: что больше подходит для использования в 2021 году? | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#chto-takoe-go">Что такое Go?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#chem-mozhet-byt-polezen-golang"><small>- Чем может быть полезен Голанг?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#nedostatki-go"><small>- Недостатки Go</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#chto-takoe-rust">Что такое Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#chem-polezen-iazyk-rust"><small>- Чем полезен язык Rust?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#nedostatki-rust"><small>- Недостатки Rust</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#nekotorye-tsifry-rust-vs-go">Некоторые цифры: Rust Vs Go</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#rust-vs-go-chto-obshchego">Rust Vs Go: что общего?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#rust-vs-go-proizvoditel-nost">Rust VS Go: производительность</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#rust-vs-go-skorost-razrabotki">Rust VS Go: скорость разработки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#rust-protiv-go-parallelizm">Rust против Go: параллелизм</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#rust-vs-go-upravlenie-pamiat-iu">Rust Vs Go: управление памятью</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#rust-vs-go-okonchatel-noe-sravnenie">Rust Vs Go: окончательное сравнение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#kliuchevye-vyvody-rust-vs-go">Ключевые выводы: Rust Vs Go</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/go-vs-rust-which-is-more-compatible-to-use-in-2021/#podvodit-itogi">Подводить итоги…</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Go Vs Rust: что больше подходит для использования в 2021 году?</h1>
+
+<p><a href="https://codersera.com/blog/go-vs-rust/">Перевод</a> | Автор оригинала: William Dawson</p>
+<p>Выбор идеального языка программирования - главный приоритет в динамичной среде для достижения успеха. Как компаниям, так и разработчикам важно предлагать своим клиентам отличные знания. Обстоятельства стали очень сложными для разработчиков, чтобы выбрать один язык вместо другого для создания надежных и эффективных приложений. Разработчики в курсе новых алгоритмов и могут легко справляться с постоянно меняющимися механизмами.</p>
+<p>Новейшие языки в технологической индустрии - это Go, язык программирования с несколькими парадигмами систем на основе Google, и язык программирования Rust с несколькими парадигмами. У обоих этих языков есть несколько общих черт, например, оба они широко известны как инструменты «Языки».</p>
+<p>Хотя могут быть общие трэйты, Go и Rust также имеют много различий, но не беспокойтесь, если вы не знаете, для какого языка использовать. В этой статье мы поговорим об обоих языках отдельно, а также проведем сравнение между ними.</p>
+<p>Хотите узнать больше о тенденциях в мире программирования? Мы вас поддержим. Прочтите столько технических статей, сколько хотите - о каждой технологии, языке, программном обеспечении и фреймворках.</p>
+<h2 id="chto-takoe-go">Что такое Go?</h2>
+<p>Язык программирования с открытым исходным кодом, что упрощает создание простого, эффективного и надежного программного обеспечения. Го артикулируемый, точный, плавный и эффективный. Процессы параллелизма полезны для написания программ, которые используют все многоядерные и сетевые машины, в то время как система нового типа позволяет гибко и модульно создавать программы.</p>
+<p><img src="/imgs/posts/48e08ff2_01.png" alt="Go" /></p>
+<p>Golang быстро компилируется в машинный код и обладает удобством сборки мусора и возможностью представления во время выполнения. Это быстрый, статически типизированный, компилируемый язык, который начинает ощущаться как интерпретируемый язык с динамической типизацией.</p>
+<h3 id="chem-mozhet-byt-polezen-golang">Чем может быть полезен Голанг?</h3>
+<ol>
+<li>Это минималистский язык.</li>
+<li>Go - это компилируемый язык.</li>
+<li>Известен своей скоростью.</li>
+<li>Он предлагает удивительную гибкость и простоту использования.</li>
+<li>Масштабируемость и простота.</li>
+<li>Он поддерживает параллельный механизм.</li>
+<li>Это кроссплатформенный.</li>
+<li>Он обнаруживает неиспользуемые переменные.</li>
+<li>Имеет инструменты статического анализа.</li>
+</ol>
+<h3 id="nedostatki-go">Недостатки Go</h3>
+<ol>
+<li>Отсутствие ручного управления памятью.</li>
+<li>Это кажется поверхностным, потому что это слишком просто.</li>
+<li>Библиотек не так много, потому что она еще молода.</li>
+<li>Он имеет низкоуровневые функции, такие как арифметика указателей.</li>
+<li>Инструменты Go имеют множество ограничений.</li>
+<li>Обработка ошибок в нем может стать трудной.</li>
+</ol>
+<h2 id="chto-takoe-rust">Что такое Rust?</h2>
+<p>Безопасный, параллельный, функциональный язык. Rust - это язык программирования для систем, который объединяет строгие гарантии корректности во время компиляции с большей надежностью. Обеспечивая гарантированную безопасность памяти (отсутствие сбоев и скачков данных) и полный контроль над жизненным циклом памяти, расширяет концепции других системных языков, таких как C++. При этом язык Rust довольно прост для понимания, и его можно выучить всего за 5 минут.</p>
+<p><img src="/imgs/posts/48e08ff2_02.png" alt="Rust" /></p>
+<p>Не верите нам? Идите вперед и убедитесь сами, как вы можете изучить программирование на Rust за 5 минут.</p>
+<h3 id="chem-polezen-iazyk-rust">Чем полезен язык Rust?</h3>
+<ol>
+<li>Обеспечивает исключительную скорость бега.</li>
+<li>Благодаря компилятору он обеспечивает хорошую защиту памяти.</li>
+<li>Быстрое выполнение за счет абстракций с нулевыми затратами.</li>
+<li>Это кроссплатформенный.</li>
+<li>Он предлагает предсказуемое поведение во время выполнения.</li>
+<li>Он дает доступ к богатым шаблонам и синтаксису.</li>
+<li>У него есть особая особенность владения.</li>
+<li>Простота интеграции с C и другими языками. </li>
+</ol>
+<h3 id="nedostatki-rust">Недостатки Rust</h3>
+<ol>
+<li>Даже несмотря на заявления о том, что он быстрый, люди находили его медленнее, чем F #.</li>
+<li>Его управление памятью на основе области действия делает рекурсивную утечку памяти.</li>
+<li>Чисто функциональные структуры данных непригодны для использования в Rust из-за отсутствия (эффективной) сборки мусора.</li>
+<li>Не имеет уровня исправления обезьяны, поддерживаемого такими языками, как Python и Perl.</li>
+<li>Люди находят проблемы в синтаксисе, поскольку язык новый.</li>
+<li>Иногда он компилируется медленно и его трудно выучить.</li>
+</ol>
+<h2 id="nekotorye-tsifry-rust-vs-go">Некоторые цифры: Rust Vs Go</h2>
+<p>Согласно опросу, наиболее предпочтительным языком респондентов оказался голанг.</p>
+<p><img src="/imgs/posts/48e08ff2_03.svg" alt="Rust против Go" /></p>
+<p>Теперь, когда мы разработали базовую идею обоих языков, давайте проведем сравнение Rust и Go, чтобы лучше понять сходства и различия этих языков.</p>
+<h2 id="rust-vs-go-chto-obshchego">Rust Vs Go: что общего?</h2>
+<p>У Go и Rust много общего. Оба являются одними из современных языков программирования и широко используются многими молодыми программистами. (Большинство других распространенных сегодня языков значительно старше, например C, Java и Python.)</p>
+<p>Go и Rust - это компилируемые языки с открытым исходным кодом, и оба они разработаны для современных параллельных вычислительных сред, ориентированных на микросервисы.</p>
+<p>Наконец, их обоих довольно просто понять, если вы уже знаете C++.</p>
+<h2 id="rust-vs-go-proizvoditel-nost">Rust VS Go: производительность</h2>
+<p>Единственный фактор, который склоняет чашу весов к Rust при сравнении Rust и Go, - это эффективность. Программы были созданы для работы с эквивалентами C++ и C.</p>
+<p>С другой стороны, Go автоматизирует функции с удобной скоростью выполнения. Но скорость разработки Go немного отстает от производительности Rust в сравнении с производительностью Rust и Go.</p>
+<p>В то время как результат Rust превосходит Go, первый имеет тенденцию отставать по скорости компиляции, тогда как Go быстрее. Но иногда люди не беспокоятся о времени компиляции, поэтому в общих результатах выбирается Rust.</p>
+<h2 id="rust-vs-go-skorost-razrabotki">Rust VS Go: скорость разработки</h2>
+<p>Скорость разработки гораздо важнее скорости программы. Яркое доказательство этого можно увидеть на примере Python, который не является одним из самых быстрых в исполнении, но самым быстрым в написании программным обеспечением. Go находится в том же духе. Он быстрее, чем ряд языков на рынке, благодаря своей простоте и остроте.</p>
+<p>Rust, напротив, обладает большей гибкостью и возможностями, поэтому для его понимания требуется время. Скорость компиляции больше, чем у Go. И было бы легче выбрать Go, чем Rust, если вам нужен более короткий цикл разработки.</p>
+<p><img src="/imgs/posts/48e08ff2_04.png" alt="" /></p>
+<h2 id="rust-protiv-go-parallelizm">Rust против Go: параллелизм</h2>
+<p>В наши дни приложения в основном объединены в сеть и распределены. Следовательно, языки, которые работают с этими факторами, сильно отстают в гонке. Разработчики должны иметь возможность выполнять действия независимо и делиться друг с другом статусом задачи без возможности манипулирования данными.</p>
+<p>Теперь, когда параллелизм был реализован в синтаксисе Golang с самого начала, Rust недавно получил собственный синтаксис в форме async / .await,. Но хотя параллелизму Rust не хватает опыта разработчиков, стоящего за Go, он компенсирует стабильность памяти Rust.</p>
+<h2 id="rust-vs-go-upravlenie-pamiat-iu">Rust Vs Go: управление памятью</h2>
+<p>Rust использует стратегию владения во время компиляции с нулевой абстракцией для управления памятью. Он не сможет пройти стадию компиляции, если программа на Rust не является безопасной для памяти программой.</p>
+<p>В то время как, говоря о Golang, он полностью автоматизируется во время выполнения. Проще говоря, при написании кода программистам не нужно беспокоиться об удалении или назначении памяти.</p>
+<h2 id="rust-vs-go-okonchatel-noe-sravnenie">Rust Vs Go: окончательное сравнение</h2>
+<table><thead><tr><th>Параметр</th><th>Rust</th><th>Golang</th></tr></thead><tbody>
+<tr><td>Происхождение</td><td>Разработчик: Mozilla Research</td><td>Разработчик: The Go Authors</td></tr>
+<tr><td>Последняя версия</td><td>Версия 1.49.0 (обновлено 31 декабря 2020 г.)</td><td>go1.15 (обновлено 11 августа 2020 г.)</td></tr>
+<tr><td>Производительность</td><td>Выступает исключительно великолепно. Быстрее, чем язык программирования Swift.</td><td>Недостаток производительности по сравнению с языком программирования RUST.</td></tr>
+<tr><td>Легкость использования</td><td>Простота использования с абстракциями среды выполнения с нулевой стоимостью.</td><td>Легко использовать и обрабатывать.</td></tr>
+<tr><td>Легкость обучения</td><td>Разработчики могут изучить его, не прилагая больших усилий.</td><td>Он предоставляет доступ ко всей документации и имеет большое сообщество пользователей.</td></tr>
+<tr><td>Совместимость с устаревшим кодом</td><td>RUST может взаимодействовать с кодом на более высоких уровнях, например, напрямую взаимодействуя с внешними ключевыми словами с библиотеками C и вызывая библиотеки libc «crate». RUST не гарантирует безопасность памяти или потока.</td><td>Функциональная совместимость сопровождается увеличением скорости. Пакет cgo для работы с C предлагает Go. Поскольку Go управляется памятью и собирает мусор, необходимо убедиться, что все указатели, переданные в C, правильно обрабатываются.</td></tr>
+</tbody></table>
+<h2 id="kliuchevye-vyvody-rust-vs-go">Ключевые выводы: Rust Vs Go</h2>
+<p>Rust немного сложно понять и работать с ним, и он больше ориентирован на разработку приложений с ограниченным объемом, где единственное, что важно, - это безопасность. Go, с другой стороны, идеально подходит для создания приложений, в которых вы сосредоточены не только на безопасности, но и с рядом других параметров, что, возможно, является вашей целью, если вы работаете в команде DevOps, которая стремится разработать масштабируемое, расширяемое приложение. или система.</p>
+<p>Стоит отметить, что Go сегодня чрезвычайно популярен среди программистов. По рейтингу TIOBE Index Go занимает 15-е место по популярности среди языков программирования, а Rust - 34-е. У популярных языков есть удивительные преимущества перед языками, которые не так популярны. Другие разработчики лучше осведомлены об этом, поэтому обмениваться кодом или набирать членов в вашу команду становится проще. Кроме того, эти популярные языки обычно имеют лучшую поддержку, документацию и плагины для сообщества.</p>
+<h2 id="podvodit-itogi">Подводить итоги…</h2>
+<p>Поскольку они возникли в один и тот же период времени, оба языка считаются конкурентами друг друга. Golang развивается быстрее, чем Rust. Благодаря своей универсальности и расширенному опыту программирования Golang хорошо известен и довольно популярен. Это делает работу в больших командах более эффективной и рентабельной для Golang.</p>
+<p>Мы можем углубиться в оба языка, анализируя оба аспекта сравнения Go и Rust, но общий ответ на сравнение Rust и Go будет определяться на основе целей разработки и бизнеса. Пока продолжается соревнование, у каждого языка есть свои преимущества и недостатки. Будут времена, когда Rust будет лучше, а в другие времена люди предпочтут использовать Go.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

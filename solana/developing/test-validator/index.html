@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Тестовый валидатор Solana | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#preimushchestva">Преимущества</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#ustanovka">Установка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#beg">Бег</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#vzaimodeistvie">Взаимодействие</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#nastroite-nabor-instrumentov-cli-dlia-raboty-s-lokal-nym-klasterom-po-umolchaniiu"><small>- Настройте набор инструментов CLI для работы с локальным кластером по умолчанию.</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#prover-te-konfiguratsiiu-cli-tool-suite"><small>- Проверьте конфигурацию CLI Tool Suite</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#proverit-balans-koshel-ka"><small>- Проверить баланс кошелька</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#vypolnit-bazovuiu-tranzaktsiiu-perevoda"><small>- Выполнить базовую транзакцию перевода</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#otslezhivaite-vyvod-msg-iz-setevykh-programm"><small>- Отслеживайте вывод msg!() из сетевых программ</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/test-validator/#prilozhenie-i-vyvod-sostoianiia">Приложение I: Вывод состояния</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Тестовый валидатор Solana</h1>
+
+<p>На ранней стадии разработки часто бывает удобно ориентироваться на кластер с меньшими ограничениями и большим количеством вариантов конфигурации, чем в общедоступных предложениях. Этого легко добиться с помощью двоичного файла solana-test-validator, который запускает полнофункциональный одноузловой кластер на рабочей станции разработчика.</p>
+<h2 id="preimushchestva">Преимущества</h2>
+<ul>
+<li>Нет ограничений скорости RPC</li>
+<li>Нет ограничений по аирдропу</li>
+<li>Прямое развертывание <a href="%D0%BE%D0%BD%D1%87%D0%B5%D0%B9%D0%BD-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B/%D0%BE%D0%B1%D0%B7%D0%BE%D1%80">ончейн-программы</a> (<code>--bpf-program...</code>)</li>
+<li>Клонировать аккаунты из публичного кластера, включая программы (<code>--clone...</code>)</li>
+<li>Загружать аккаунты из файлов</li>
+<li>Настраиваемое сохранение истории транзакций (<code>--limit-ledger-size...</code>)</li>
+<li>Настраиваемая продолжительность эпохи (<code>--slots-per-epoch...</code>)</li>
+<li>Перейти к произвольному слоту (<code>--warp-slot...</code>)</li>
+</ul>
+<h2 id="ustanovka">Установка</h2>
+<p>Бинарный файл solana-test-validator поставляется вместе с Solana CLI Tool Suite. <a href="/cli/install-solana-cli-tools">Установить</a>, прежде чем продолжить.</p>
+<h2 id="beg">Бег</h2>
+<p>Сначала взгляните на параметры конфигурации</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-test-validator --help
+</span></code></pre>
+<p>Затем запустите тестовый валидатор</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana-test-validator
+</span></code></pre>
+<p>По умолчанию основная информация о состоянии печатается во время выполнения процесса. Подробности см. в Приложении I.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Ledger location: test-ledger
+</span><span>Log: test-ledger/validator.log
+</span><span>Identity: EPhgPANa5Rh2wa4V2jxt7YbtWa3Uyw4sTeZ13cQjDDB8
+</span><span>Genesis Hash: 4754oPEMhAKy14CZc8GzQUP93CB4ouELyaTs4P8ittYn
+</span><span>Version: 1.6.7
+</span><span>Shred Version: 13286
+</span><span>Gossip Address: 127.0.0.1:1024
+</span><span>TPU Address: 127.0.0.1:1027
+</span><span>JSON RPC URL: http://127.0.0.1:8899
+</span><span>⠈ 00:36:02 | Processed Slot: 5142 | Confirmed Slot: 5142 | Finalized Slot: 5110 | Snapshot Slot: 5100 | Transactions: 5142 | ◎499.974295000
+</span></code></pre>
+<p>Оставьте solana-test-validator запущенным в отдельном терминале. Когда он больше не нужен, его можно остановить с помощью Ctrl-C.</p>
+<h2 id="vzaimodeistvie">Взаимодействие</h2>
+<p>Откройте новый терминал для взаимодействия с работающим экземпляром solana-test-validator, используя другие двоичные файлы из Solana CLI Tool Suite или вашего собственного клиентского программного обеспечения.</p>
+<h4 id="nastroite-nabor-instrumentov-cli-dlia-raboty-s-lokal-nym-klasterom-po-umolchaniiu">Настройте набор инструментов CLI для работы с локальным кластером по умолчанию.</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana config set --url http://127.0.0.1:8899
+</span></code></pre>
+<h4 id="prover-te-konfiguratsiiu-cli-tool-suite">Проверьте конфигурацию CLI Tool Suite</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana genesis-hash
+</span></code></pre>
+<ul>
+<li>**ПРИМЕЧАНИЕ. ** Результат должен соответствовать полю «Genesis Hash:» в выводе состояния «solana-test-validator».</li>
+</ul>
+<h4 id="proverit-balans-koshel-ka">Проверить баланс кошелька</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana balance
+</span></code></pre>
+<ul>
+<li><strong>ПРИМЕЧАНИЕ:</strong> <code>Ошибка: нет такого файла или каталога (ошибка ОС 2)</code> означает, что кошелек по умолчанию еще не существует. Создайте его с помощью <code>solana-keygen new</code>.</li>
+<li><strong>ПРИМЕЧАНИЕ.</strong> Если в кошельке нулевой баланс SOL, раздайте немного SOL в локальной сети с помощью <code>solana airdrop 10</code>.</li>
+</ul>
+<h4 id="vypolnit-bazovuiu-tranzaktsiiu-perevoda">Выполнить базовую транзакцию перевода</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana transfer EPhgPANa5Rh2wa4V2jxt7YbtWa3Uyw4sTeZ13cQjDDB8 1
+</span></code></pre>
+<h4 id="otslezhivaite-vyvod-msg-iz-setevykh-programm">Отслеживайте вывод <code>msg!()</code> из сетевых программ</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana logs
+</span></code></pre>
+<ul>
+<li><strong>ПРИМЕЧАНИЕ.</strong> Эта команда должна выполняться при выполнении целевой транзакции. Запустите его в собственном терминале</li>
+</ul>
+<h2 id="prilozhenie-i-vyvod-sostoianiia">Приложение I: Вывод состояния</h2>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Ledger location: test-ledger
+</span></code></pre>
+<ul>
+<li>Путь к файлу каталога хранения леджера. Этот каталог может стать большим. Сохраняйте меньше истории транзакций с помощью <code>--limit-ledger-size ...</code> или перемещайте ее с помощью <code>--ledger ...</code></li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Log: test-ledger/validator.log
+</span></code></pre>
+<ul>
+<li>Путь к файлу текстового журнала валидатора. Журнал также можно передать в потоковом режиме, передав <code>--log</code>. В этом случае вывод состояния подавляется.</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Identity: EPhgPANa5Rh2wa4V2jxt7YbtWa3Uyw4sTeZ13cQjDDB8
+</span></code></pre>
+<ul>
+<li>Личность валидатора в <a href="/validator/gossip#gossip-overview">сети сплетен</a></li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Version: 1.6.7
+</span></code></pre>
+<ul>
+<li>Версия программного обеспечения</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Gossip Address: 127.0.0.1:1024
+</span><span>TPU Address: 127.0.0.1:1027
+</span><span>JSON RPC URL: http://127.0.0.1:8899
+</span></code></pre>
+<ul>
+<li>Сетевой адрес <a href="/validator/gossip#gossip-overview">Gossip</a>, <a href="/validator/tpu">блока обработки транзакций</a> и <a href="clients/jsonrpc-api#json-rpc-api-reference">JSON RPC</a> обслуживание соответственно</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>⠈ 00:36:02 | Processed Slot: 5142 | Confirmed Slot: 5142 | Finalized Slot: 5110 | Snapshot Slot: 5100 | Transactions: 5142 | ◎499.974295000
+</span></code></pre>
+<ul>
+<li>Время выполнения сеанса, текущий слот трех блоков <a href="clients/jsonrpc-api#configuring-state-commitment">уровни обязательств</a>, высота слота последнего снимка, количество транзакций, [право голоса](/running-validator/vote -accounts#vote-authority) баланс</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

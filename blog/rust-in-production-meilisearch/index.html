@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust в производстве: MeiliSearch | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#ne-mogli-by-vy-rasskazat-nam-nemnogo-o-svoei-kompanii-i-svoei-roli-v-nei">Не могли бы вы рассказать нам немного о своей компании и своей роли в ней?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#kakie-chasti-kodovoi-bazy-meilisearch-napisany-na-rust">Какие части кодовой базы MeiliSearch написаны на Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#kak-vy-reshili-ispol-zovat-rust-dlia-proekta-povliiali-li-na-vybor-kakie-libo-preimushchestva-rust-takie-kak-skorost-ili-bezopasnost-tipov-pamiati">Как вы решили использовать Rust для проекта? Повлияли ли на выбор какие-либо преимущества Rust, такие как скорость или безопасность типов &#x2F; памяти?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#gde-luchshe-vsego-ispol-zovat-rust-i-gde-emu-ne-khvataet-v-vashem-steke">Где лучше всего использовать Rust и где ему не хватает в вашем стеке?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#kakie-nibud-konkretnye-biblioteki-rust-kotorye-vy-sochli-ochen-poleznymi-vo-vremia-razrabotki-i-khoteli-by-upomianut">Какие-нибудь конкретные библиотеки Rust, которые вы сочли очень полезными во время разработки и хотели бы упомянуть?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#chto-bylo-samym-bol-shim-vyzovom-pri-razrabotke-meilisearch-s-rust">Что было самым большим вызовом при разработке MeiliSearch с Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#ia-videl-repozitorii-pod-nazvaniem-milli-v-profile-meilisearch-na-github-eto-budushchee-meilisearch-khoteli-by-vy-nemnogo-ob-etom-pogovorit">Я видел репозиторий под названием milli в профиле MeiliSearch на GitHub. Это будущее MeiliSearch? Хотели бы вы немного об этом поговорить?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#naskol-ko-ia-ponimaiu-meilisearch-polnost-iu-otkryt-kak-vy-eto-podderzhivaete">Насколько я понимаю, MeiliSearch полностью открыт. Как вы это поддерживаете?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-in-production-meilisearch/#kakie-sovety-vy-mogli-by-predlozhit-tem-kto-khochet-zapustit-svoi-sobstvennyi-proekt-na-rust-s-otkrytym-iskhodnym-kodom-mozhet-byt-kak-tekhnicheskim-tak-i-netekhnicheskim">Какие советы вы могли бы предложить тем, кто хочет запустить свой собственный проект на Rust с открытым исходным кодом (может быть как техническим, так и нетехническим)?</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust в производстве: MeiliSearch</h1>
+
+<p><a href="https://serokell.io/blog/rust-in-production-meilisearch">Перевод</a> | Автор оригинала: Gints Dreimanis</p>
+<p>В этом интервью я разговариваю с Томасом Пайетом, соучредителем и главным операционным директором MeiliSearch. MeiliSearch - это поисковая система с открытым исходным кодом, входящая в топ-20 самых популярных проектов Rust на GitHub на момент написания. Мы говорим о MeiliSearch и о том, как Rust и его экосистема помогли им в его создании.</p>
+<p>Читайте дальше, чтобы узнать об их опыте работы с Rust и найти советы по запуску собственного проекта с открытым исходным кодом.</p>
+<h3 id="ne-mogli-by-vy-rasskazat-nam-nemnogo-o-svoei-kompanii-i-svoei-roli-v-nei">Не могли бы вы рассказать нам немного о своей компании и своей роли в ней?</h3>
+<p>MeiliSearch - это поисковый API с открытым исходным кодом. С тех пор, как существуют компьютеры, поиск всегда был проблемой. Сегодня большинство людей привыкли к очень хорошим результатам поиска при использовании Google или Amazon, но может быть сложно предложить такой пользовательский интерфейс, когда у вас нет средств, которые предоставляют эти крупные технологические компании. В MeiliSearch мы разрабатываем технологию с открытым исходным кодом, которая, как мы думаем, может помочь многим разработчикам предложить фантастические возможности поиска прямо из коробки.</p>
+<p>Я один из соучредителей (нас трое) и главный операционный директор Meili, компании, стоящей за MeiliSearch. Моя роль состоит в том, чтобы синхронизировать команды, чтобы каждый мог делать все возможное в нашей компании, преследуя одну и ту же цель. Большинство из нас в душе разработчики, и поскольку я был, возможно, одним из менее технических людей, я был одним из первых, кто изменил свою роль, чтобы поддержать рост нашей организации.</p>
+<p><img src="/imgs/posts/9a335503_01.png" alt="Томас Пайе" /></p>
+<h3 id="kakie-chasti-kodovoi-bazy-meilisearch-napisany-na-rust">Какие части кодовой базы MeiliSearch написаны на Rust?</h3>
+<p>MeiliSearch - это проект, состоящий из движка и нескольких SDK и библиотек для разных языков и фреймворков, чтобы упростить использование основного движка. Движок на 100% написан на Rust, и мы поддерживаем более 20 интеграций на 8 разных языках вместе с сообществом.</p>
+<p>Мы стараемся не быть сторонниками каких-либо конкретных технологий; внутри мы просто выберем лучший инструмент для работы. :)</p>
+<h3 id="kak-vy-reshili-ispol-zovat-rust-dlia-proekta-povliiali-li-na-vybor-kakie-libo-preimushchestva-rust-takie-kak-skorost-ili-bezopasnost-tipov-pamiati">Как вы решили использовать Rust для проекта? Повлияли ли на выбор какие-либо преимущества Rust, такие как скорость или безопасность типов / памяти?</h3>
+<p>Скорость и безопасность - это, конечно, главные аргументы в пользу Rust.</p>
+<p>Две важные вещи для поисковых систем - это производительность и релевантность. Релевантность может быть сделана на любом языке, если у вас хороший алгоритм и логика. Что касается производительности, сегодня вы выбираете C++, Rust или, может быть, Go.</p>
+<p>В наших предыдущих работах мы создали поисковую систему на Go и быстро узнали о недостатках языка со сборкой мусора при разработке программы, ориентированной на производительность. При выполнении тестов мы обнаружили некоторые замедления и быстро поняли, что именно регулярная сборка мусора замедляет работу всей системы. ^^</p>
+<p>Когда дело доходит до C++, нам кажется более трудным поддерживать кодовую базу C++ в долгосрочной перспективе. Кроме того, керо, наш технический директор, является разработчиком Rust с момента первого стабильного выпуска.</p>
+<p>В конце концов, мы так и не приняли «решение» использовать Rust, так как нам казалось очевидным, что это инструмент, который нам нужен для этой работы!</p>
+<h3 id="gde-luchshe-vsego-ispol-zovat-rust-i-gde-emu-ne-khvataet-v-vashem-steke">Где лучше всего использовать Rust и где ему не хватает в вашем стеке?</h3>
+<p>Экосистема Rust современна, и ее очень легко использовать в качестве повседневного языка с фактическим потоком предложений GitHub. Мы чувствуем себя очень уверенно, работая с Rust, потому что он устраняет большую неопределенность, которая может быть у нас с другими языками. Мы можем сосредоточиться на других проблемах, с которыми мы сталкиваемся, например на дизайне и производительности.</p>
+<p>Сильное сообщество исследователей CS реализует низкоуровневые библиотеки для современной оптимизации, от которой мы регулярно получаем пользу. С другой стороны, мы сделали несколько итераций, чтобы найти подходящую структуру HTTP для сервера, прежде чем закончить использование actix-web, что является наиболее подходящим для нашего варианта использования. </p>
+<h3 id="kakie-nibud-konkretnye-biblioteki-rust-kotorye-vy-sochli-ochen-poleznymi-vo-vremia-razrabotki-i-khoteli-by-upomianut">Какие-нибудь конкретные библиотеки Rust, которые вы сочли очень полезными во время разработки и хотели бы упомянуть?</h3>
+<p>Их много, но вот наша тройка лучших:</p>
+<ul>
+<li>fst от BurntSushi. Это позволяет нам хранить и искать в словаре слов, и это очень эффективно.</li>
+<li>Автомат Левенштейна от Фульмикотона. Мы используем его для очень быстрого получения слов из словаря с определенными правилами Левенштейна.</li>
+<li>roaring-rs, который мы используем для оптимизированных операций над множеством.</li>
+</ul>
+<h3 id="chto-bylo-samym-bol-shim-vyzovom-pri-razrabotke-meilisearch-s-rust">Что было самым большим вызовом при разработке MeiliSearch с Rust?</h3>
+<p>В дорожной карте MeiliSearch есть некоторые функции распределенных систем, которые мы хотели бы предложить, такие как высокая доступность и сегментирование.</p>
+<p>Мы очень завидуем библиотеке Go Raft от Hashicorp. Хотелось бы, чтобы у нас было что-то подобное в Rust, но до сих пор мы не нашли такой крэйт, который помог бы нам использовать алгоритм консенсуса для легкого создания кластеров MeiliSearch.</p>
+<p>Мы думали об этом почти с тех пор, как начали проект два с половиной года назад, и мы пытаемся интегрировать различные библиотеки реализации Raft, но пока не нашли ни одной, которая соответствовала бы нашим ожиданиям. Это одна из самых больших проблем, стоящих перед нами в нашей дорожной карте.</p>
+<h3 id="ia-videl-repozitorii-pod-nazvaniem-milli-v-profile-meilisearch-na-github-eto-budushchee-meilisearch-khoteli-by-vy-nemnogo-ob-etom-pogovorit">Я видел репозиторий под названием milli в профиле MeiliSearch на GitHub. Это будущее MeiliSearch? Хотели бы вы немного об этом поговорить?</h3>
+<p>Конечно. ^^</p>
+<p>По мере роста команды и проекта мы постоянно учимся. В прошлом году мы поняли, что для облегчения подключения внешних участников и разработки новых функций нам необходимо перестроить всю кодовую базу, чтобы сделать ее более читаемой и поддерживаемой.</p>
+<p>Керо, наш технический директор, начал работу над новой версией движка почти год назад (август 2020 г.), и мы планируем выпустить ее в ближайшие месяцы.</p>
+<p>Мы столкнулись с некоторыми внутренними трудностями при расстановке приоритетов в работе над новой версией движка, поддерживая последнюю стабильную версию MeiliSearch в актуальном состоянии. Тем не менее, нам не терпится выпустить его официально. Улучшение производительности невероятное!</p>
+<p>В репозитории milli размещается 4-я итерация библиотеки ядра ядра, но код, который использует эту библиотеку, чтобы сделать ее пригодным для использования двоичным файлом, будет выпущен в репозитории MeiliSearch.</p>
+<h3 id="naskol-ko-ia-ponimaiu-meilisearch-polnost-iu-otkryt-kak-vy-eto-podderzhivaete">Насколько я понимаю, MeiliSearch полностью открыт. Как вы это поддерживаете?</h3>
+<p>Мы начали проект, работая подрядчиками в Louis Vuitton. Большинство проектов мы разработали, работая с ними. В какой-то момент мы поняли, что нам нужно привлечь средства венчурных капиталистов, чтобы сосредоточиться на проекте с открытым исходным кодом.</p>
+<p>Мы думаем, что можем сделать MeiliSearch устойчивым, построив вокруг него бизнес, который будет продавать MeiliSearch как облачное предложение (SaaS) и продавать определенные функции по бизнес-лицензии компаниям с особыми потребностями.</p>
+<h3 id="kakie-sovety-vy-mogli-by-predlozhit-tem-kto-khochet-zapustit-svoi-sobstvennyi-proekt-na-rust-s-otkrytym-iskhodnym-kodom-mozhet-byt-kak-tekhnicheskim-tak-i-netekhnicheskim">Какие советы вы могли бы предложить тем, кто хочет запустить свой собственный проект на Rust с открытым исходным кодом (может быть как техническим, так и нетехническим)?</h3>
+<p>Разработка и поддержка проекта с открытым исходным кодом может быстро превратиться в постоянную работу для всей команды. Я бы посоветовал всем, кто хочет начать поддерживать проект с открытым исходным кодом, найти людей, с которыми можно поработать, потому что есть много других вещей, которые нужно сделать: вам нужно будет написать документацию, руководства по участию, ответить на вопросы и запросы на вытягивание!</p>
+<p>Приятно работать с незнакомцами из Интернета, которых вы, вероятно, никогда не встретите, но я боюсь, что это может быстро стать невыносимым, если вы будете делать это в одиночку.</p>
+<p>Хочу поблагодарить Томаса за уделенное время! Если вам требуется поисковая система для вашего приложения, обязательно попробуйте MeiliSearch.</p>
+<p>Если вы хотите прочитать больше статей о Rust, не забудьте подписаться на нас в Twitter, Medium и DEV. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

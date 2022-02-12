@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EVM: Сетевые параметры  | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/evm-network-parameters/#testy-evm">Тесты EVM</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/evm-network-parameters/#konechnye-tochki-rpc">Конечные точки RPC</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/evm-network-parameters/#beresheet-testnet"><small>- Beresheet testnet</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/evm-network-parameters/#local-edgeware-uzel-razrabotki"><small>- Local Edgeware узел разработки</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/evm-network-parameters/#edgeware-mainnet"><small>- Edgeware mainnet</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/evm-network-parameters/#edg-evm-tools"><small>- EDG EVM Tools</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/evm-network-parameters/#edg-evm-uchebniki"><small>- EDG EVM Учебники</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>EVM: Сетевые параметры </h1>
+
+<h2 id="testy-evm">Тесты EVM</h2>
+<p>1 единица газа EVM = 3000-4000 пикосекунд времени выполнения, что означает количество газа EVM, которое мы можем обработать в секунду = 250 000 000.</p>
+<p>Мы консервативно настроили газ в секунду = 8 000 000, что означает, что наш лимит газа в блоке составляет 12 млн газа (у Эфириума — 15 млн газа). Контрольный показатель предполагает, что мы можем значительно увеличить эту сумму до 250 000 000, что будет означать, что наш лимит газа на блоке составляет 375 млн.</p>
+<p>На Beresheet лимит газа установлен на 225 м, мы рекомендуем запускать развертывание в основной сети с лимитом газа 12 м.</p>
+<h2 id="konechnye-tochki-rpc">Конечные точки RPC</h2>
+<h3 id="beresheet-testnet">Beresheet testnet</h3>
+<ul>
+<li>Имя сети: Beresheet</li>
+<li>RPC URL: <a href="https://beresheet2.edgewa.re/evm">https://beresheet2.edgewa.re/evm</a> (В качестве альтернативы можно использовать <a href="https://beresheetX.edgewa.re/evm">https://beresheetX.edgewa.re/evm</a> где X может быть любым числом от 1 до 8.)</li>
+<li>Chain ID: 2022</li>
+</ul>
+<h3 id="local-edgeware-uzel-razrabotki">Local Edgeware узел разработки</h3>
+<ul>
+<li>Имя сети: dev</li>
+<li>RPC URL: <a href="http://localhost:9933/">http://localhost:9933/</a></li>
+<li>Chain ID: 2021</li>
+</ul>
+<h3 id="edgeware-mainnet">Edgeware mainnet</h3>
+<ul>
+<li>Имя сети: Edgeware</li>
+<li>RPC URL: <a href="https://mainnet2.edgewa.re/evm">https://mainnet2.edgewa.re/evm</a> (В качестве альтернативы можно использовать <a href="https://mainnetX.edgewa.re/evm">https://mainnetX.edgewa.re/evm</a> где X может быть любым числом от 1 до 20.)</li>
+<li>Chain ID: 2021</li>
+</ul>
+<h3 id="edg-evm-tools">EDG EVM Tools</h3>
+<p>testnet обозреватель блоков <a href="https://beresheet.edgscan.com/">https://beresheet.edgscan.com/</a></p>
+<p>mainnet обозреватель блоков <a href="https://mainnet.edgscan.com/">https://mainnet.edgscan.com/</a></p>
+<p>Edgeware Key Generator <a href="https://edgewa.re/keygen">https://edgewa.re/keygen</a></p>
+<h3 id="edg-evm-uchebniki">EDG EVM Учебники</h3>
+<p>Youtube <a href="https://www.youtube.com/playlist?list=PLJK4WO5y_eJFMGZGDmNOWRZI2dAV4GyU6">https://www.youtube.com/playlist?list=PLJK4WO5y_eJFMGZGDmNOWRZI2dAV4GyU6</a></p>
+<p>Документация <a href="https://main.edgeware.wiki/development/develop/smart-contracts/evm-smart-contracts/tutorials">https://main.edgeware.wiki/development/develop/smart-contracts/evm-smart-contracts/tutorials</a></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

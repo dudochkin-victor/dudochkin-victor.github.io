@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Руководство по стилю кода | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/style-guide/code-style-guide/#formatirovanie">Форматирование</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/style-guide/code-style-guide/#stil">Стиль</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Руководство по стилю кода</h1>
+
+<h2 id="formatirovanie">Форматирование</h2>
+<ul>
+<li>Отступ с помощью табуляции.</li>
+<li>Строки должны быть длиннее 100 символов только в исключительных случаях и, конечно, не длиннее 120. Для этой цели ширина табуляции считается 4 символа.</li>
+<li>Уровни отступа должны быть больше 5 только в исключительных случаях и, конечно же, не должны превышать 8. Если они больше 5, рассмотрите возможность использования <code>let</code> или вспомогательных функций для удаления сложных встроенных выражений.</li>
+<li>Никогда не ставьте пробелы в строке перед непробельным символом</li>
+<li>Последующие строки представляют собой только один отступ от исходной строки.</li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">calculation</span><span>(</span><span style="color:#f29718;">some_long_variable_a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i8</span><span>, </span><span style="color:#f29718;">some_long_variable_b</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">=</span><span> some_long_variable_a </span><span style="color:#f29668;">*</span><span> some_long_variable_b
+</span><span>        </span><span style="color:#f29668;">-</span><span> some_long_variable_b </span><span style="color:#f29668;">/</span><span> some_long_variable_a
+</span><span>        </span><span style="color:#f29668;">+ </span><span style="color:#f07178;">sqrt</span><span>(some_long_variable_a) </span><span style="color:#f29668;">- </span><span style="color:#f07178;">sqrt</span><span>(some_long_variable_b)</span><span style="color:#bfbab0cc;">;
+</span><span>    x </span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">10
+</span><span>}
+</span></code></pre>
+<ul>
+<li>Отступ должен следовать за открытыми скобками/квадратными скобками, но должен быть свернут до наименьшего количества фактически используемых уровней:</li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">calculate</span><span>(
+</span><span>    </span><span style="color:#f29718;">some_long_variable_a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>    </span><span style="color:#f29718;">some_long_variable_b</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>    </span><span style="color:#f29718;">some_long_variable_c</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f32 </span><span>{
+</span><span>    (</span><span style="color:#f29668;">-</span><span>some_long_variable_b </span><span style="color:#f29668;">+ </span><span style="color:#f07178;">sqrt</span><span>(
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// two parens open, but since we open &amp; close them both on the
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// same line, only one indent level is used
+</span><span>        some_long_variable_b </span><span style="color:#f29668;">*</span><span> some_long_variable_b
+</span><span>        </span><span style="color:#f29668;">- </span><span style="color:#f29718;">4 </span><span style="color:#f29668;">*</span><span> some_long_variable_a </span><span style="color:#f29668;">*</span><span> some_long_variable_c
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// both closed here at beginning of line, so back to the original indent
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// level
+</span><span>    )) </span><span style="color:#f29668;">/ </span><span>(</span><span style="color:#f29718;">2 </span><span style="color:#f29668;">*</span><span> some_long_variable_a)
+</span><span>}
+</span></code></pre>
+<ul>
+<li><code>where</code> имеет отступ, а его элементы сдвинуты на один дальше.</li>
+<li>Списки аргументов или вызовы функций, которые слишком длинны для размещения в одной строке, располагаются с отступом аналогично блокам кода, и как только один параметр имеет такой отступ, все остальные должны быть такими же. Списки параметров запуска также приемлемы для однострочных запусков вызовов базовых функций.</li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// OK
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>(
+</span><span>    </span><span style="color:#f29718;">really_long_parameter_name_1</span><span style="color:#bfbab0cc;">:</span><span> SomeLongTypeName,
+</span><span>    </span><span style="color:#f29718;">really_long_parameter_name_2</span><span style="color:#bfbab0cc;">:</span><span> SomeLongTypeName,
+</span><span>    </span><span style="color:#f29718;">shrt_nm_1</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>    </span><span style="color:#f29718;">shrt_nm_2</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>) {
+</span><span>   </span><span style="color:#f29668;">...
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// NOT OK
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>(</span><span style="color:#f29718;">really_long_parameter_name_1</span><span style="color:#bfbab0cc;">:</span><span> SomeLongTypeName, </span><span style="color:#f29718;">really_long_parameter_name_2</span><span style="color:#bfbab0cc;">:</span><span> SomeLongTypeName,
+</span><span>    </span><span style="color:#f29718;">shrt_nm_1</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>, </span><span style="color:#f29718;">shrt_nm_2</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) {
+</span><span>    </span><span style="color:#f29668;">...
+</span><span>}
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Complex line (not just a function call, also a let statement). Full
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// structure.
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(a</span><span style="color:#bfbab0cc;">,</span><span> b) </span><span style="color:#f29668;">= </span><span style="color:#f07178;">bar</span><span>(
+</span><span>        really_long_parameter_name_1</span><span style="color:#bfbab0cc;">,
+</span><span>        really_long_parameter_name_2</span><span style="color:#bfbab0cc;">,
+</span><span>        shrt_nm_1</span><span style="color:#bfbab0cc;">,
+</span><span>        shrt_nm_2</span><span style="color:#bfbab0cc;">,
+</span><span>    )</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Long, simple function call.
+</span><span>    </span><span style="color:#f07178;">waz</span><span>(
+</span><span>        really_long_parameter_name_1</span><span style="color:#bfbab0cc;">, 
+</span><span>        really_long_parameter_name_2</span><span style="color:#bfbab0cc;">,
+</span><span>        shrt_nm_1</span><span style="color:#bfbab0cc;">, 
+</span><span>        shrt_nm_2</span><span style="color:#bfbab0cc;">,
+</span><span>    )</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Short function call. Inline.
+</span><span>    </span><span style="color:#f07178;">baz</span><span>(a</span><span style="color:#bfbab0cc;">,</span><span> b)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<ul>
+<li>Всегда заканчивайте последний элемент многострочного набора с разделителями-запятыми символом <code>,</code>, если это допустимо:</li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Point</span><span>&lt;T&gt; {
+</span><span>    x</span><span style="color:#bfbab0cc;">:</span><span> T,
+</span><span>    y</span><span style="color:#bfbab0cc;">:</span><span> T,    </span><span style="font-style:italic;color:#5c6773;">// &lt;-- Multiline comma-delimited lists end with a trailing ,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Single line comma-delimited items do not have a trailing `,`
+</span><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Meal </span><span>{ Breakfast</span><span style="color:#bfbab0cc;">,</span><span> Lunch</span><span style="color:#bfbab0cc;">,</span><span> Dinner }</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<ul>
+<li>Избегайте завершающих <code>;</code> там, где это не нужно.</li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">if</span><span> condition {
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f29718;">1    </span><span style="font-style:italic;color:#5c6773;">// &lt;-- no ; here
+</span><span>}
+</span></code></pre>
+<ul>
+<li><code>match</code> ветви могут быть либо блоками, либо заканчиваться <code>,</code>, но не тем и другим одновременно.</li>
+<li>Блоки не должны использоваться без необходимости.</li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">match</span><span> meal {
+</span><span>    Meal</span><span style="color:#f29668;">::</span><span>Breakfast </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;eggs&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    Meal</span><span style="color:#f29668;">::</span><span>Lunch </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="color:#f07178;">check_diet</span><span>()</span><span style="color:#bfbab0cc;">; </span><span style="color:#f07178;">recipe</span><span>() }</span><span style="color:#bfbab0cc;">,
+</span><span style="font-style:italic;color:#5c6773;">//    Meal::Dinner =&gt; { return Err(&quot;Fasting&quot;) }   // WRONG
+</span><span>    Meal</span><span style="color:#f29668;">::</span><span>Dinner </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">return </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#c2d94c;">&quot;Fasting&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<h2 id="stil">Стиль</h2>
+<ul>
+<li>Паникующий код требуют явных доказательств, который они вызывают. Вызов <code>unwrap</code> не рекомендуется. Исключением из этого правила является тестовыый кодо. Если возможно, предпочтительнее избегать паникеров путем реструктуризации кода.</li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> target_path </span><span style="color:#f29668;">= 
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">path</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">expect</span><span>(
+</span><span>        </span><span style="color:#c2d94c;">&quot;self is instance of DiskDirectory;</span><span style="color:#bfbab0cc;">\
+</span><span style="color:#c2d94c;">        DiskDirectory always returns path;</span><span style="color:#bfbab0cc;">\
+</span><span style="color:#c2d94c;">        qed&quot;
+</span><span>    )</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<ul>
+<li>
+<p>Небезопасный код требует явных доказательств, как это делают паникеры. При внедрении небезопасного кода рассмотрите компромисс между эффективностью, с одной стороны, и надежностью, безопасностью и затратами на обслуживание, с другой.</p>
+<p>Вот список вопросов, которые могут помочь оценить компромисс при подготовке или рассмотрении PR:</p>
+<ul>
+<li>насколько более производительным или компактным будет полученный код при использовании небезопасного кода,</li>
+<li>насколько вероятно, что инварианты могут быть нарушены,</li>
+<li>проблемы, возникающие из-за использования небезопасного кода, обнаруженного существующими тестами/инструментами,</li>
+<li>какие последствия, если проблемы скатятся в продакшн.</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

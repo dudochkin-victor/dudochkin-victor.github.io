@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Изучение Rust и Go | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#ei-poidem">Эй, пойдем!</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#kodirovanie-detoks"><small>- Кодирование Детокс</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#instrumenty"><small>- Инструменты</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#liubit"><small>- любит</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#bespokoistva"><small>- Беспокойства</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#kak-nachat-uchit-sia"><small>- Как начать учиться</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#ot-triapki-k-triapke-ot-rust-k-rust">От тряпки к тряпке, от Rust к Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#pamiati"><small>- Памяти</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#otladka-vo-vremia-kompiliatsii"><small>- Отладка во время компиляции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#abstraktsii-s-nulevoi-stoimost-iu"><small>- Абстракции с нулевой стоимостью</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#liubit-1"><small>- Любит</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#bespokoistva-1"><small>- Беспокойства</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#izuchenie-rust"><small>- Изучение Rust</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/learning-rust-and-go/#rust-or-go-rust-i-vpered">Rust or Go? Rust и вперед!</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Изучение Rust и Go</h1>
+
+<p><a href="https://fettblog.eu/learning-rust-and-go/">Перевод</a> | Автор оригинала: Stefan Baumgartner</p>
+<p>Мой блог - это хроника познания нового. Большинство статей, которые я пишу, представляют собой заметки о том, как я решал проблемы, с которыми сталкивался в повседневной работе. И то и дело мне приходится призывать узнавать что-то новое!</p>
+<p>Из-за моей общей усталости от веб-разработки в целом я решил вернуться к тому, что делал 15-20 лет назад, и снова заняться программированием на уровне системы. Если вы читали мой информационный бюллетень, вы могли знать, что я недавно пробовал себя как в Rust, так и в Go.</p>
+<p>Интересно, что и Go, и Rust попадают в одну категорию, но настолько принципиально отличаются друг от друга по дизайну, философии и исполнению.</p>
+<p>Вот несколько советов по использованию обоих в течение длительного времени.</p>
+<h2 id="ei-poidem">Эй, пойдем!</h2>
+<p>Я увлекся Go, послушав Кармен Андох, которая сказала, что «Go делает программирование увлекательным!».</p>
+<p>Go думает: «Что, если бы всего, что произошло после C++, просто не произошло бы? Включая C++! » - без занятий, без хлама. Никаких ОО-шаблонов. Сфокусированный код, скомпилированный в исходном коде. Просто, понятно. Продолжение C.</p>
+<p>И мне нравится C!</p>
+<p>Создатели Go умеют разыгрывать карту C. Один из его создателей - известный UNIX Кен Томпсон, входивший в ту же команду, что и первоначальный автор C Деннис Ричи. Книгу «Язык программирования Go» написал Брайан Керниган, который также написал «Язык программирования C», поскольку он был коллегой Ричи и Томпсона.</p>
+<p>Но есть также влияния Паскаля, которые имеют большой смысл, если вы знаете историю создателей.</p>
+<p>Они знают свое наследие. Они видели развитие языков программирования. Они хотят пойти по альтернативному пути, по которому вы получите большую часть преимуществ современных языков программирования, не теряя при этом ни внимания, ни производительности.</p>
+<h3 id="kodirovanie-detoks">Кодирование Детокс</h3>
+<p>Мой друг Райнер назвал Go «Coding Detox». И это очень подходящий термин, потому что вам придется отучиться от множества непонятных языков программирования, добавленных за последние пару лет. Ваш код становится более подробным, но неизбежно более читабельным.</p>
+<p>И это правда! Даже если вы не умеете писать Go, если у вас есть немного знаний из других программ, вы сможете читать код Go. Это так просто. Да, Go иногда может быть немного многословным, но опять же: это делает его намного проще для чтения, поскольку каждый шаг очень преднамеренный.</p>
+<p>Следующий фрагмент извлекает N случайных чисел из банка M. Мне не нужно было понимать большую часть внутренней механики Go, чтобы создать что-то вроде этого. </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span style="color:#ff7733;">func </span><span style="color:#ffb454;">makeRange</span><span>(</span><span style="color:#f29718;">min </span><span style="font-style:italic;color:#39bae6;">int</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">max </span><span style="font-style:italic;color:#39bae6;">int</span><span>) []</span><span style="font-style:italic;color:#39bae6;">int </span><span>{
+</span><span>	numbers </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>([]</span><span style="font-style:italic;color:#39bae6;">int</span><span style="color:#bfbab0cc;">, </span><span>max</span><span style="color:#f29668;">-</span><span>min)
+</span><span>	</span><span style="color:#ff7733;">for </span><span>i </span><span style="color:#f29668;">:= </span><span style="color:#ff7733;">range </span><span>numbers {
+</span><span>		numbers[i] </span><span style="color:#f29668;">= </span><span>min </span><span style="color:#f29668;">+ </span><span>i
+</span><span>	}
+</span><span>	</span><span style="color:#ff7733;">return </span><span>numbers
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">func </span><span style="color:#ffb454;">takeNFromM</span><span>(</span><span style="color:#f29718;">take </span><span style="font-style:italic;color:#39bae6;">int</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">from </span><span style="font-style:italic;color:#39bae6;">int</span><span>) []</span><span style="font-style:italic;color:#39bae6;">int </span><span>{
+</span><span>	source </span><span style="color:#f29668;">:= </span><span>rand</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">NewSource</span><span>(time</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Now</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">UnixNano</span><span>())
+</span><span>	rando </span><span style="color:#f29668;">:= </span><span>rand</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">New</span><span>(source)
+</span><span>	numbers </span><span style="color:#f29668;">:= </span><span style="color:#ffb454;">makeRange</span><span>(</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span>from</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span>)
+</span><span>	rando</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Shuffle</span><span>(</span><span style="color:#f07178;">len</span><span>(numbers)</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">func</span><span>(</span><span style="color:#f29718;">i</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">j </span><span style="font-style:italic;color:#39bae6;">int</span><span>) {
+</span><span>		numbers[i]</span><span style="color:#bfbab0cc;">, </span><span>numbers[j] </span><span style="color:#f29668;">= </span><span>numbers[j]</span><span style="color:#bfbab0cc;">, </span><span>numbers[i]
+</span><span>	})
+</span><span>	</span><span style="color:#ff7733;">return </span><span>numbers[</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">:</span><span>take]
+</span><span>}
+</span></code></pre>
+<p>Мне очень нравится этот факт о го. То, как Go работает по дизайну, очень похоже на то, как я пишу JavaScript. Так что для меня это очень легко. Уменьшенный синтаксис позволяет сосредоточиться на действительно важных вещах: структуре, архитектуре, производительности.</p>
+<h3 id="instrumenty">Инструменты</h3>
+<p>Я сразу заметил одну вещь: насколько хороши инструменты. Я знаю, что в последнее время мы далеко продвинулись в использовании инструментов JavaScript. Но это все равно ничто по сравнению с тем, что предлагает Go.</p>
+<p>Бинарный файл Go поставляется со всеми инструментами, необходимыми для сборки, запуска, форматирования и тестирования вашего кода. И это супер быстро. Если вы установите расширения Go для VS Code, вы получите быстрое редактирование, которое превосходит все, что я видел до сих пор. Всего несколько щелчков мышью, и готово: автозаполнение, автоимпорт, автоформатирование, отладка. Все просто так!</p>
+<p>Благодаря великолепному Intellisense мне нужно было лишь смутное представление о том, какой пакет из стандартной библиотеки я хотел импортировать. math / rand и время для правильных генераторов случайных чисел. Это можно сделать, набрав пару букв.</p>
+<h3 id="liubit">любит</h3>
+<p>Есть некоторые вещи, которые мне очень нравятся:</p>
+<ol>
+<li>ОО без БС. Никаких странных шаблонов наследования или использования абстракций там, где они не нужны. Структуры и методы, которые вы вызываете для структур. Если хотите, методы выглядят и работают как обычные функции. Так же, как я пишу свой JavaScript.</li>
+<li>Стандартная библиотека огромна и заботится о множестве вещей, с которыми вы сталкиваетесь в повседневной жизни программирования.</li>
+<li>Сильно самоуверен, не теряя выразительности.</li>
+</ol>
+<h3 id="bespokoistva">Беспокойства</h3>
+<p>При всем волнении меня беспокоит пара вещей:</p>
+<ol>
+<li>Есть нулевые значения и указатели. Я знаю, что они ведут себя по-другому и намного безопаснее, чем то, что я знаю из C, но мне все равно кажется, что я могу сделать что-то не так, где я не должен, учитывая, что все остальное находится под контролем.</li>
+<li>Я должен привыкнуть к загрузке пакетов с GitHub.</li>
+<li>Время от времени мне не хватает абстракций более высокого уровня, таких как итераторы или более выразительная система типов, но эй. Это часть их философии!</li>
+</ol>
+<h3 id="kak-nachat-uchit-sia">Как начать учиться</h3>
+<p>Брайан Кантрилл однажды сказал, что JavaScript - это «LISP в одежде Си». В этом много правды. Отношение к Java скорее случайное, чем преднамеренное. В JS есть много LISP-измов, которые доступны через знакомый синтаксис. В некотором смысле это делает JavaScript управляемым продолжением C.</p>
+<p>Если я посмотрю с этой точки зрения, Go попадает в аналогичную категорию. Продолжение C, управляемое, очищенное, для современных приложений.</p>
+<p>Я думаю, что хороший способ начать, если вы хотите вникнуть в некоторый готовый к производству код, - это преобразовать ваши Node-приложения в Go. Особенно веб-серверы и тому подобное, для чего вам обычно нужны Express или Fastify.</p>
+<p>В Go есть потрясающий HTTP-пакет, в котором вы работаете с аналогичным API для создания своих серверов. Попробуйте это!</p>
+<p>Если это не ваше дело, я думаю, все, что вам нужно, чтобы преобразовать JSON, XML или любой другой файл во что-то, - это хороший способ начать работать с Go. </p>
+<h2 id="ot-triapki-k-triapke-ot-rust-k-rust">От тряпки к тряпке, от Rust к Rust</h2>
+<p>Я впервые услышал о Rust от Райана Левика, который был гостем нашего подкаста Working Draft на Web Assembly, но не мог перестать восторгаться Rust!</p>
+<p>За последние пару лет Rust стал довольно популярным, что мне до сих пор интересно, потому что по сравнению с любым другим современным языком программирования есть чему поучиться, если вы хотите продуктивно работать с Rust.</p>
+<p>Rust поставляется с богатым синтаксисом, подобным C, который сначала кажется очень необходимым, но при более внимательном рассмотрении имеет много связей с функциональным программированием. Учитывая, что исходный компилятор был написан на OCaml, это не должно вызывать удивления.</p>
+<p>Это дает вам как разработчику такие конструкции, как сопоставление с образцом, расширенные типы с помощью перечислений, итераторы, с которыми вы можете императивно работать, и так далее.</p>
+<p>Как только вы освоите его, это будет исключительно хороший язык. Он элегантный, современный, прекрасно читается, учитывая, что вы работаете над задачами, которые так близки к металлу.</p>
+<p>Следующий пример кода делает то же самое, что и приведенный выше фрагмент Go, но выглядит намного более плавным: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">take_n_from_m</span><span>(</span><span style="color:#f29718;">take</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">from</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">u64</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> rng </span><span style="color:#f29668;">= </span><span>rand</span><span style="color:#f29668;">::</span><span>thread_rng()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> nums</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">u64</span><span>&gt; </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">1</span><span style="color:#f29668;">..=</span><span>from)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    nums</span><span style="color:#f29668;">.</span><span style="color:#f07178;">shuffle</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> rng)</span><span style="color:#bfbab0cc;">;
+</span><span>    nums[</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>take]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_vec</span><span>()
+</span><span>}
+</span></code></pre>
+<h3 id="pamiati">Памяти</h3>
+<p>Так же, как и Go, Rust хочет знать, как бы выглядели языки программирования, если бы не было обходного пути C++, Java и т.д. Но вместо того, чтобы предоставить вам преимущества управляемой памяти, Rust обеспечивает безопасность памяти за счет синтаксиса и семантики. Во время компиляции.</p>
+<p>Для меня это понятие совершенно новое. По сути, это говорит о том, что для каждого фрагмента памяти может быть только один владелец. Все остальное просто заимствует этот фрагмент памяти на какое-то время с гарантией, что они вернут его первоначальному владельцу или станут новым владельцем.</p>
+<p>Это очень похоже на то, как брать книгу у кого-то. Эта аналогия работает исключительно хорошо. Это тоже то, чему нужно много учиться.</p>
+<p>Оказывается, с момента появления языков программирования высокого уровня произошло множество абстракций, от простейшего умножения до переназначения и т.д.</p>
+<p>Внезапно вам нужно много думать о памяти. По сути, все время, пока шаблоны не станут для вас естественными.</p>
+<p>И это исключительно хорошо. У вас есть ощущение, что вы полностью контролируете низкоуровневое управление памятью, совершенно не беспокоясь о том, что вы можете что-то сломать. Это потрясающе!</p>
+<h3 id="otladka-vo-vremia-kompiliatsii">Отладка во время компиляции</h3>
+<p>Это также приводит к философии, которую я когда-то слышал как «отладка во время компиляции». Вместо того, чтобы обнаруживать ошибки, когда они случаются, вы обнаруживаете многие из них во время разработки, когда пытаетесь скомпилировать свой код.</p>
+<p>Вы будете много спорить со своим компилятором. Но компилятор хорош. Он дает вам подсказки о том, что вы можете попробовать, что вы могли иметь в виду. Замечательный диалог, почти в стиле парного программирования.</p>
+<p>И внезапно вы начинаете понимать, что происходит с воспоминаниями внизу. И вы начинаете оптимизировать под это. И ваша программа становится намного быстрее, чем вы ожидали.</p>
+<p>Для одной задачи сexperism.io был набор тестов, который занял более 45 секунд, учитывая мою плохую реализацию. Спустя пару оптимизаций весь пакет был выполнен менее чем за секунду.</p>
+<p>Я чувствовал себя всемогущим!</p>
+<h3 id="abstraktsii-s-nulevoi-stoimost-iu">Абстракции с нулевой стоимостью</h3>
+<p>Идея абстракций с нулевой стоимостью присутствует повсюду. Например, использование итераторов, которые можно использовать как в функциональном стиле программирования, так и в императивном стиле.</p>
+<p>Вы можете переключаться между обоими стилями по своему вкусу и при этом сохранять ощущение, что вы пишете производительный код. Это также дает вам лучшее представление о том, что происходит, когда вы вызываете итератор.</p>
+<p>То же самое и с богатой системой шрифтов и их трэйтами. Вы понимаете, что делает число числом и как оно представлено в системе типов. И чем больше вы работаете с этим, вы видите, как эти типы помогают в основном предоставлять компилятору достаточно информации, чтобы он мог генерировать наиболее производительный ассемблерный код. </p>
+<h3 id="liubit-1">Любит</h3>
+<p>Что мне больше всего нравится в Rust?</p>
+<ol>
+<li>Трэйты и типы. Это дает совершенно новый поворот в объектной ориентации, который я бы даже не осмелился назвать объектно-ориентированным.</li>
+<li>Выражения! Все является выражением, даже если или за. Это дает место для множества красивых узоров!</li>
+<li>В их системе пакетов (называемых крэйтами) есть несколько чрезвычайно полезных утилит, которые я бы полюбил на любом другом языке. Поскольку итераторы очень важны для всего, что вы делаете, я бы не хотел пропустить itertools.</li>
+<li>Как и Go, Rust очень самоуверен, когда это важно!</li>
+<li>Честно? Общество. Я организовываю Rust Linz с некоторыми людьми, и я был сбит с толку, насколько все гостеприимны и осторожны. Ребята из Rust обо всем позаботятся!</li>
+<li>Rust приобретает все большее значение в отрасли. К счастью, это не находится в руках одной корпорации, но есть фонд, поддерживающий это.</li>
+</ol>
+<h3 id="bespokoistva-1">Беспокойства</h3>
+<p>Если есть что-то, что меня беспокоит, так это управление пакетами. крэйти и cargo очень приветствуются сообществом. Хорошие вещи, как и у всех JavaScript-разработчиков. Хорошо, что crates.io - это не другая упаковочная компания, как NPM, но я вижу некоторые из тех же шаблонов, которые в какой-то момент сработали в Node и NPM:</p>
+<ol>
+<li>Слишком много важных пакетов в версии 0.x.</li>
+<li>Большие деревья зависимостей, которые вы втягиваете, не зная.</li>
+<li>Многие вещи делают то же самое!</li>
+</ol>
+<p>Я надеюсь, что это всего лишь впечатление и не пойдет в том же направлении, что и Node. Я думаю, что это важно, так как многие функции, которые, как вы ожидаете, поставляются с языком в какой-то стандартной библиотеке, обычно извлекаются в крэйти: случайные числа, сеть TCP и т.д. Вы много полагаетесь на крэйти.</p>
+<p>Еще одна вещь, которая кажется мне немного странной, - это макросы. Они хороши и полезны, но теоретически у вас есть возможность создать с их помощью свой собственный метаязык. Кто-то даже создал макрос JSX в Rust. Само по себе это неплохо, но, учитывая, что большинство зависимостей - 0.x и что в языке уже есть довольно много синтаксиса и концепций, которые нужно изучить, я боюсь, что будет слишком много шума, из-за которого будет сложно сосредоточиться. и решить, что использовать для ваших производственных приложений.</p>
+<p>Кроме этого, меня не волнует. Это красивый язык, и мне очень нравится его писать!</p>
+<h3 id="izuchenie-rust">Изучение Rust</h3>
+<p>Думаю, будет не так-то просто перенести некоторые приложения Node на Rust, даже несмотря на то, что есть крэйти, которые работают как Express. Например, ракета.</p>
+<p>Я изучил Rust, посмотрев на сайтexperminism.io и выполнив несколько упражнений по программированию 101, в которых я мог сосредоточиться на изучении языка, его синтаксиса и семантики, не слишком беспокоясь о возникшей проблеме. Приятно иметь возможность генерировать числа Фибоначчи или находить простые числа.</p>
+<p>Такой шанс важен. Rust - отнюдь не простой язык. И требуется время, чтобы разобраться в каждой концепции, которая позволяет создавать читаемый и целеустремленный код.</p>
+<p>На полпути к курсу я понял, что мне нужен настоящий проект, над которым можно подумать. Я в основном работаю над распределением сетевых запросов другим сервисам и оркестровкой этих сервисов. Оказывается, это идеальный вариант использования Rust. Но я думаю, что и другие вещи тоже. Я действительно не вижу предела.</p>
+<h2 id="rust-or-go-rust-i-vpered">Rust or Go? Rust и вперед!</h2>
+<p>Rust и Go для меня сейчас желанное отвлечение. Хорошо делать что-то совершенно отличное от того, что я делал раньше, и оба языка по-своему приводят меня к моим целям. Прямо сейчас я не мог сказать, какой из них я бы предпочел для какой задачи, поскольку оба они мне очень нравятся. Возможно, это решение придет, когда я столкнусь с проблемами, которые я смог бы легко решить на другом языке.</p>
+<p>Но эй, а почему ты выбираешь? Может и дальше буду пользоваться обоими! </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Однажды я написал программу на ANSI-C
+</span><span>передача данных по TCP
+</span><span>Миллион маллоков, ни одного бесплатного,
+</span><span>ой, куча переполнена!
+</span><span>
+</span><span>Скоро может наступить SEGFAULT,
+</span><span>Когда я отлаживаю, компилирую и запускаю.
+</span><span>Я спрашиваю себя, что я наделал.
+</span><span>И перепишите на Rust or Go.
+</span><span>
+</span><span>Верно. Это была хижина! 
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Транзакции | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#anatomiia-tranzaktsii">Анатомия транзакции</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#format-tranzaktsii"><small>- Формат транзакции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#format-soobshcheniia"><small>- Формат сообщения</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#format-instruktsii"><small>- Формат инструкции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#format-kompaktnogo-massiva"><small>- Формат компактного массива</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#format-adresa-uchetnoi-zapisi"><small>- Формат адреса учетной записи</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#instruktsii">Инструкции</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#identifikator-programmy"><small>- Идентификатор программы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#scheta"><small>- Счета</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#dannye-instruktsii"><small>- Данные инструкции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#neskol-ko-instruktsii-v-odnoi-tranzaktsii"><small>- Несколько инструкций в одной транзакции</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#podpisi">Подписи</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/programming-model/transactions/#nedavnii-blokkhesh">Недавний блокхэш</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Транзакции</h1>
+
+<p>Выполнение программы начинается с отправки <a href="terminology.md#transaction">транзакции</a> в кластер. Среда выполнения Solana выполнит программу для обработки каждой из <a href="terminology.md#instruction">инструкций</a>, содержащихся в транзакции, по порядку и атомарно.</p>
+<h2 id="anatomiia-tranzaktsii">Анатомия транзакции</h2>
+<p>В этом разделе рассматривается двоичный формат транзакции.</p>
+<h3 id="format-tranzaktsii">Формат транзакции</h3>
+<p>Транзакция содержит compact-array подписей, за которыми следует сообщение. Каждый элемент в массиве подписей представляет собой цифровую подпись данного сообщения. Среда выполнения Solana проверяет, соответствует ли количество подписей числу в первых 8 битах заголовка сообщения. Он также проверяет, что каждая подпись была подписана закрытым ключом, соответствующим открытому ключу с тем же индексом в массиве адресов учетных записей сообщения.</p>
+<h4 id="format-podpisi">Формат подписи</h4>
+<p>Каждая цифровая подпись имеет двоичный формат ed25519 и занимает 64 байта.</p>
+<h3 id="format-soobshcheniia">Формат сообщения</h3>
+<p>Сообщение содержит заголовок, за которым следует компактный массив адресов аккаунтов, за которым следует недавний блок-хэш, за которым следует компактный массив инструкций.</p>
+<h4 id="format-zagolovka-soobshcheniia">Формат заголовка сообщения</h4>
+<p>Заголовок сообщения содержит три 8-битных значения без знака. Первое значение — это количество необходимых подписей в содержащей транзакции. Второе значение — это количество тех соответствующих адресов учетных записей, которые доступны только для чтения. Третье значение в заголовке сообщения — это количество адресов учетных записей только для чтения, не требующих подписи.</p>
+<h4 id="format-adresov-schetov">Формат адресов счетов</h4>
+<p>Адреса, требующие подписи, появляются в начале массива адресов учетных записей, причем адреса, запрашивающие доступ для записи, идут первыми, а учетные записи только для чтения следуют за ними. Адреса, не требующие подписи, следуют за адресами, для которых она требуется, опять же сначала с учетными записями для чтения и записи, а затем с учетными записями только для чтения.</p>
+<h4 id="format-blokcheina">Формат блокчейна</h4>
+<p>Блокхэш содержит 32-байтовый хэш SHA-256. Он используется для указания, когда клиент в последний раз просматривал реестр. Валидаторы будут отклонять транзакции, когда хеш-блок будет слишком старым.</p>
+<h3 id="format-instruktsii">Формат инструкции</h3>
+<p>Инструкция содержит индекс идентификатора программы, за которым следует компактный массив индексов адресов учетных записей, за которым следует компактный массив непрозрачных 8-битных данных. Индекс идентификатора программы используется для идентификации сетевой программы, которая может интерпретировать непрозрачные данные. Индекс идентификатора программы представляет собой 8-битный индекс без знака для адреса учетной записи в массиве адресов учетной записи сообщения. Каждый индекс адреса учетной записи представляет собой 8-битный индекс без знака в том же массиве.</p>
+<h3 id="format-kompaktnogo-massiva">Формат компактного массива</h3>
+<p>Компактный массив сериализуется как длина массива, за которой следует каждый элемент массива. Длина массива — это специальная многобайтовая кодировка, называемая compact-u16.</p>
+<h4 id="kompaktnyi-format-u16">Компактный формат u16</h4>
+<p>Compact-u16 — это многобайтовая кодировка из 16 бит. Первый байт содержит младшие 7 бит значения в своих младших 7 битах. Если значение выше 0x7f, устанавливается старший бит, а следующие 7 бит значения помещаются в младшие 7 бит второго байта. Если значение выше 0x3fff, устанавливается старший бит, а оставшиеся 2 бита значения помещаются в младшие 2 бита третьего байта.</p>
+<h3 id="format-adresa-uchetnoi-zapisi">Формат адреса учетной записи</h3>
+<p>Адрес учетной записи — это 32 байта произвольных данных. Когда для адреса требуется цифровая подпись, среда выполнения интерпретирует ее как открытый ключ пары ключей ed25519.</p>
+<h2 id="instruktsii">Инструкции</h2>
+<p>Каждая <a href="terminology.md#instruction">инструкция</a> определяет одну программу, подмножество учетных записей транзакции, которые должны быть переданы программе, и массив байтов данных, который передается программе. Программа интерпретирует массив данных и оперирует указанными в инструкции счетами. Программа может вернуться успешно или с кодом ошибки. Возврат ошибки приводит к немедленному сбою всей транзакции.</p>
+<p>Программы обычно предоставляют вспомогательные функции для создания инструкций, которые они поддерживают. Например, системная программа предоставляет следующий помощник Rust для создания [<code>SystemInstruction::CreateAccount</code>](https://github.com/solana-labs/solana/blob/6606590b8132e56dab9e60b3f7d20ba7412a736c/sdk/program/src/system_instruction.rs #L63) инструкция:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">create_account</span><span>(
+</span><span>    </span><span style="color:#f29718;">from_pubkey</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>    </span><span style="color:#f29718;">to_pubkey</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>    </span><span style="color:#f29718;">lamports</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64</span><span>,
+</span><span>    </span><span style="color:#f29718;">space</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u64</span><span>,
+</span><span>    </span><span style="color:#f29718;">owner</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey,
+</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Instruction {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> account_metas </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>        AccountMeta</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29668;">*</span><span>from_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        AccountMeta</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29668;">*</span><span>to_pubkey</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    ]</span><span style="color:#bfbab0cc;">;
+</span><span>    Instruction</span><span style="color:#f29668;">::</span><span>new_with_bincode(
+</span><span>        system_program</span><span style="color:#f29668;">::</span><span>id()</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29668;">&amp;</span><span>SystemInstruction</span><span style="color:#f29668;">::</span><span>CreateAccount {
+</span><span>            lamports</span><span style="color:#bfbab0cc;">,
+</span><span>            space</span><span style="color:#bfbab0cc;">,
+</span><span>            owner</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">*</span><span>owner</span><span style="color:#bfbab0cc;">,
+</span><span>        }</span><span style="color:#bfbab0cc;">,
+</span><span>        account_metas</span><span style="color:#bfbab0cc;">,
+</span><span>    )
+</span><span>}
+</span></code></pre>
+<p>Которые можно найти здесь:</p>
+<p>https://github.com/solana-labs/solana/blob/6606590b8132e56dab9e60b3f7d20ba7412a736c/sdk/program/src/system_instruction.rs#L220</p>
+<h3 id="identifikator-programmy">Идентификатор программы</h3>
+<p>[идентификатор программы] инструкции (terminology.md#program-id) указывает, какая программа будет обрабатывать эту инструкцию. Владелец учетной записи программы указывает, какой загрузчик следует использовать для загрузки и выполнения программы, а данные содержат информацию о том, как среда выполнения должна выполнять программу.</p>
+<p>В случае <a href="developing/on-chain-programs/overview/">ончейн-программ BPF</a> владельцем является загрузчик BPF, а данные учетной записи содержат байт-код BPF. Учетные записи программ постоянно помечаются загрузчиком как исполняемые после их успешного развертывания. Среда выполнения будет отклонять транзакции, в которых указаны неисполняемые программы.</p>
+<p>В отличие от сетевых программ, <a href="developing/runtime-facilities/programs/">собственные программы</a> обрабатываются по-другому, поскольку они встроены непосредственно в среду выполнения Solana.</p>
+<h3 id="scheta">Счета</h3>
+<p>Учетные записи, на которые ссылается инструкция, представляют состояние в цепочке и служат как входами, так и выходами программы. Более подробную информацию об Аккаунтах можно найти в разделе <a href="accounts/">Аккаунты</a>.</p>
+<h3 id="dannye-instruktsii">Данные инструкции</h3>
+<p>Каждая инструкция содержит массив байтов общего назначения, который передается программе вместе с учетными записями. Содержимое данных инструкций зависит от программы и обычно используется для передачи того, какие операции должна выполнять программа, и любой дополнительной информации, которая может потребоваться этим операциям помимо того, что содержится в учетных записях.</p>
+<p>Программы могут свободно указывать, как информация кодируется в массив байтов данных инструкции. Выбор способа кодирования данных должен учитывать накладные расходы на декодирование, поскольку этот шаг выполняется программой в цепочке. Было замечено, что некоторые распространенные кодировки (например, бинкод Rust) очень неэффективны.</p>
+<p><a href="https://github.com/solana-labs/solana-program-library/tree/master/token">Программа токена библиотеки программ Solana</a> дает один пример того, как данные инструкции могут быть эффективно закодированы, но обратите внимание, что этот метод поддерживает только типы фиксированного размера. Токен использует трейт <a href="https://github.com/solana-labs/solana/blob/master/sdk/program/src/program_pack.rs">Pack</a> для кодирования/декодирования данных инструкций как для инструкций токена, так и для самого токена. состояния аккаунта.</p>
+<h3 id="neskol-ko-instruktsii-v-odnoi-tranzaktsii">Несколько инструкций в одной транзакции</h3>
+<p>Транзакция может содержать инструкции в любом порядке. Это означает, что злоумышленник может создавать транзакции, которые могут представлять инструкции в порядке, от которого программа не защищена. Программы должны быть усилены, чтобы правильно и безопасно обрабатывать любую возможную последовательность инструкций.</p>
+<p>Одним из не столь очевидных примеров является деинициализация аккаунта. Некоторые программы могут попытаться деинициализировать учетную запись, установив для ее ламповых портов нулевое значение, предполагая, что среда выполнения удалит учетную запись. Это допущение может быть действительным между транзакциями, но не между инструкциями или межпрограммными вызовами. Чтобы защититься от этого, программа также должна явно обнулить данные учетной записи.</p>
+<p>Примером того, где это может быть проблемой, является то, что программа токенов после передачи токена из учетной записи устанавливает нулевое значение порта учетной записи, предполагая, что оно будет удалено во время выполнения. Если программа не обнуляет данные учетной записи, злоумышленник может сопроводить эту инструкцию другой, которая передает токены во второй раз.</p>
+<h2 id="podpisi">Подписи</h2>
+<p>Каждая транзакция явно перечисляет все открытые ключи учетной записи, на которые ссылаются инструкции транзакции. Каждое подмножество этих открытых ключей сопровождается подписью транзакции. Эти подписи сигнализируют ончейн-программам, что владелец аккаунта авторизовал транзакцию. Обычно программа использует авторизацию для разрешения списания средств со счета или изменения его данных. Дополнительную информацию о том, как авторизация передается программе, можно найти в разделе <a href="accounts.md#signers">Учетные записи</a></p>
+<h2 id="nedavnii-blokkhesh">Недавний блокхэш</h2>
+<p>Транзакция включает недавний <a href="terminology.md#blockhash">хеш-блок</a>, чтобы предотвратить дублирование и увеличить время жизни транзакций. Любая транзакция, полностью идентичная предыдущей, отклоняется, поэтому добавление нового хэша блока позволяет нескольким транзакциям повторять одно и то же действие. Транзакции также имеют время жизни, которое определяется хэшем блока, поскольку любая транзакция со слишком старым хэшем блока будет отклонена.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

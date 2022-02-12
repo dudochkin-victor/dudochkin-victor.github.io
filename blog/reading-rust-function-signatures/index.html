@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Чтение сигнатур функций Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#shagi-malysha">Шаги малыша</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#vidimost">Видимость</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#prostye-parametry">Простые параметры</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#zaimstvovanie">Заимствование</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#vozvrashchenie">Возвращение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#vnutrennie-treity">Внутренние трэйты</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#dzheneriki">Дженерики</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#peredacha-funktsii">Передача функций</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#vremia-zhizni">Время жизни</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/reading-rust-function-signatures/#vremia-ispytaniia">Время испытания</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Чтение сигнатур функций Rust</h1>
+
+<p><a href="https://hoverbear.org/blog/reading-rust-function-signatures/">Перевод</a> | Автор оригинала: Ana Hoverbear</p>
+<p>В Rust сигнатуры функций рассказывают историю. Просто взглянув на сигнатуру функции, опытный пользователь Rust может сказать многое о ее поведении.</p>
+<p>В этой статье мы исследуем некоторые подписи и поговорим о том, как их читать и извлекать из них информацию. Во время изучения вы можете найти множество отличных примеров сигнатур функций в документации Rust API. Можно поиграть на манеже.</p>
+<p>В этой статье предполагается, что вы знакомы с Rust, небольшого упоминания в книге будет вполне достаточно, если вам этого не хватает, но вы уже программировали раньше.</p>
+<p>Если вы привыкли программировать на чем-то вроде Python или Javascript, все это может показаться вам немного чуждым. Я надеюсь, что к концу вы убедитесь, что эта дополнительная информация полезна и не так часто встречается в языках с динамической типизацией.</p>
+<p>Если вы привыкли к C++, C или другим системным языкам, надеюсь, все они должны показаться вам очень знакомыми, несмотря на различия в синтаксисе. В идеале к концу статьи вы будете больше думать о своих сигнатурах функций по мере их написания!</p>
+<h2 id="shagi-malysha">Шаги малыша</h2>
+<p>Ваше первое определение функции в Rust почти наверняка выглядит так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {}
+</span></code></pre>
+<p>Итак, поскольку вы, скорее всего, уже написали это, давайте начнем здесь!</p>
+<ul>
+<li>fn: это синтаксис, который сообщает Rust, что мы объявляем функцию.</li>
+<li>main: это имя функции. main является особенным, потому что это то, что программа вызывает при сборке и запуске как двоичный файл. Имена функций всегда snake_case, а не camelCase.
+-(): список аргументов. В этом случае main не принимает аргументов.</li>
+<li>{}: разделители внутри функции. В данном случае он пуст.</li>
+</ul>
+<p>Итак, что бы мы написали для функции, которая не делает ничего полезного? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">do_nothing_useful</span><span>() {}
+</span></code></pre>
+<p>Отлично, теперь и ты ничего полезного сделать не можешь!</p>
+<h2 id="vidimost">Видимость</h2>
+<p>По умолчанию все функции являются частными и не могут использоваться вне модуля, в котором они находятся. Сделать их доступными для другого модуля очень просто.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">dog </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">private_function</span><span>() {}
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">public_function</span><span>() {}
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Optional to avoid `foo::`
+</span><span style="color:#ff7733;">use </span><span>dog</span><span style="color:#f29668;">::</span><span>public_function</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    dog</span><span style="color:#f29668;">::</span><span>public_function()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// With `use`
+</span><span>    </span><span style="color:#f07178;">public_function</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Как и изменчивость, Rust консервативен в своих предположениях о таких вещах, как видимость. Если вы попытаетесь использовать частную функцию, компилятор сообщит вам об этом и поможет указать, где вам нужно сделать функцию общедоступной.</p>
+<p>Если в вашем проекте есть такая функция, как foo::bar::baz::rad(), и вы хотите, чтобы ее можно было использовать как foo::rad(), добавьте pub use bar::baz::rad; в ваш модуль foo. Это называется реэкспортом.</p>
+<h2 id="prostye-parametry">Простые параметры</h2>
+<p>Вы больше не довольны do_nothing_useful() и решили завести собаку. Повезло тебе! Теперь у вас есть новая проблема, вы должны пройти ее и поиграть! </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk_dog</span><span>(</span><span style="color:#f29718;">dog_name</span><span style="color:#bfbab0cc;">:</span><span> String) {}
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">play_with</span><span>(</span><span style="color:#f29718;">dog_name</span><span style="color:#bfbab0cc;">:</span><span> String, </span><span style="color:#f29718;">game_name</span><span style="color:#bfbab0cc;">:</span><span> String) {}
+</span></code></pre>
+<p>Параметры объявляются имя переменной: Тип и разделяются запятыми. Но давай! Наша собака - это намного больше, чем просто веревка! Хорошие новости, вы также можете использовать свои собственные шрифты. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Dog</span><span style="color:#bfbab0cc;">;  </span><span style="font-style:italic;color:#5c6773;">// Let&#39;s not go overboard.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Game</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Simple types in demos!
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk_dog</span><span>(</span><span style="color:#f29718;">dog</span><span style="color:#bfbab0cc;">:</span><span> Dog) {}
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">play_with</span><span>(</span><span style="color:#f29718;">dog</span><span style="color:#bfbab0cc;">:</span><span> Dog, </span><span style="color:#f29718;">game</span><span style="color:#bfbab0cc;">:</span><span> Game) {}
+</span></code></pre>
+<p>Отлично, уже выгляжу лучше. Давайте начнем этот замечательный день. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> rover </span><span style="color:#f29668;">=</span><span> Dog</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">walk_dog</span><span>(rover)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> fetch </span><span style="color:#f29668;">=</span><span> Game</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">play_with</span><span>(rover</span><span style="color:#bfbab0cc;">,</span><span> fetch)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Compiler Error!
+</span><span>}
+</span></code></pre>
+<p>ВОУ ВОУ! Это отличный день, когда компилятор нас полностью разваливает! Роверу будет очень грустно.</p>
+<p>Посмотрим на ошибку: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&lt;anon&gt;:11:15: 11:20 error: use of moved value: `rover`
+</span><span>&lt;anon&gt;:11     play_with(rover, fetch);
+</span><span>                        ^~~~~
+</span><span>&lt;anon&gt;:9:14: 9:19 note: `rover` moved here because it has type `Dog`, which is non-copyable
+</span><span>&lt;anon&gt;:9     walk_dog(rover);
+</span><span>                      ^~~~~
+</span></code></pre>
+<p>Здесь компилятор сообщает нам, что ровер был перемещен, когда мы передали его в walk_dog(). Это потому, что fn walk_dog (dog: Dog) {} принимает значение Dog, а мы не сообщили компилятору, что они копируемы! Значения с копией неявно копируются при передаче в функции. Вы можете сделать что-нибудь Копировать, добавив #[derive(Copy)] над объявлением.</p>
+<p>Мы собираемся сделать так, чтобы Dog не копировался, потому что, черт возьми, вы не можете копировать собак. Так как же это исправить?</p>
+<p>Мы могли бы клонировать вездеход. Но наша структура Dog тоже не клон! Клонирование означает, что мы можем явно сделать копию объекта. Вы можете сделать что-нибудь клонировать точно так же, как вы делали это как копию. Чтобы клонировать нашу собаку, вы можете сделать rover.clone()</p>
+<p>Но на самом деле ни одно из этих возможных решений не решило настоящую проблему: мы хотим гулять и играть с одной и той же собакой!</p>
+<h2 id="zaimstvovanie">Заимствование</h2>
+<blockquote>
+<p>Могу я одолжить твою собаку?</p>
+</blockquote>
+<p>Вместо того, чтобы перемещать нашу собаку в функцию walk_dog(), мы просто хотим передать эту функцию нашей собаке. Когда вы выгуливаете собаку, она (как правило) возвращается с вами в дом, верно?</p>
+<p>В Rust символ &amp; используется для обозначения заимствования. Заимствование чего-либо сообщает компилятору, что, когда функция завершена, право собственности на значение возвращается обратно вызывающей стороне. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk_dog</span><span>(</span><span style="color:#f29718;">dog</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Dog) {}
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">play_with</span><span>(</span><span style="color:#f29718;">dog</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Dog, </span><span style="color:#f29718;">game</span><span style="color:#bfbab0cc;">:</span><span> Game) {}
+</span></code></pre>
+<p>Есть неизменные заимствования, а также изменяемые заимствования (&amp;mut). Вы можете передать неизменяемое заимствование любому количеству объектов одновременно, а изменяемое заимствование - только одному объекту за раз. Это обеспечивает безопасность данных.</p>
+<p>Так что наши новые функции заимствования на самом деле не сокращают, не так ли? Мы даже не можем мутировать Собаку! В любом случае попробуем увидеть сообщение об ошибке.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Dog </span><span>{
+</span><span>    walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk_dog</span><span>(</span><span style="color:#f29718;">dog</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Dog) {
+</span><span>    dog</span><span style="color:#f29668;">.</span><span>walked </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> rover </span><span style="color:#f29668;">=</span><span> Dog { walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">false </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">walk_dog</span><span>(</span><span style="color:#f29668;">&amp;</span><span>rover)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(rover</span><span style="color:#f29668;">.</span><span>walked</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Как мы и ожидали: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>&lt;anon&gt;:6:5: 6:22 error: cannot assign to immutable field `dog.walked`
+</span><span>&lt;anon&gt;:6     dog.walked = true;
+</span><span>             ^~~~~~~~~~~~~~~~~
+</span><span>error: aborting due to previous error
+</span></code></pre>
+<p>Изменив сигнатуру функции на fn walk_dog (dog: &amp;mut Dog) {} и обновив наш main(), мы можем решить эту проблему. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> rover </span><span style="color:#f29668;">=</span><span> Dog { walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">false </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">walk_dog</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> rover)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(rover</span><span style="color:#f29668;">.</span><span>walked</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Как видите, сигнатура функции сообщает программисту, является ли значение изменяемым и используется ли значение или используется ли ссылка на него.</p>
+<h2 id="vozvrashchenie">Возвращение</h2>
+<p>Давайте вернемся к тому, как именно мы получаем Rover, потому что именно так мы можем исследовать возвращаемые типы! Допустим, нам нужна функция accept_dog(), которая принимает имя и дает нам Dog. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Dog </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">adopt_dog</span><span>(</span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Dog {
+</span><span>    Dog { name</span><span style="color:#bfbab0cc;">:</span><span> name</span><span style="color:#bfbab0cc;">,</span><span> walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">false </span><span>}
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> rover </span><span style="color:#f29668;">= </span><span style="color:#f07178;">adopt_dog</span><span>(</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Rover&quot;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(rover</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;Rover&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Таким образом, часть -&gt; Dog в сигнатуре функции сообщает нам, что функция возвращает Dog. Обратите внимание, что имя перенесено и дано собаке, а не скопировано или клонировано.</p>
+<h2 id="vnutrennie-treity">Внутренние трэйты</h2>
+<p>Если вы реализуете функции в трейте, у вас также есть доступ к следующим двум инструментам:</p>
+<ul>
+<li>Тип возврата Self, который представляет текущий тип.</li>
+<li>Параметр self, который определяет заимствование / перемещение / изменчивость экземпляра структуры. В walk() ниже мы берем изменяемое заимствование, голое «я» перемещает значение.</li>
+</ul>
+<p>Пример: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// ... `Dog` struct from before.
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Dog </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">adopt</span><span>(</span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        Dog { name</span><span style="color:#bfbab0cc;">:</span><span> name</span><span style="color:#bfbab0cc;">,</span><span> walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">false </span><span>}
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">walk</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>walked </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> rover </span><span style="color:#f29668;">= </span><span>Dog</span><span style="color:#f29668;">::</span><span>adopt(</span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Rover&quot;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(rover</span><span style="color:#f29668;">.</span><span>name</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;Rover&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    rover</span><span style="color:#f29668;">.</span><span style="color:#f07178;">walk</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(rover</span><span style="color:#f29668;">.</span><span>walked</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="dzheneriki">Дженерики</h2>
+<p>Посмотрим правде в глаза, собак разных пород очень много! Но, тем более, видов животных очень много! По некоторым из них мы, возможно, тоже захотим прогуляться, например, наш Медведь.</p>
+<p>Дженерики позволяют нам это делать. У нас может быть структура Dog и Bear, реализующая трэйту Walk, а затем функция walk_pet() принимает любую структуру с характерной чертой Walk!</p>
+<p>Обобщения указываются для функций между именем и параметрами в квадратных скобках. В отношении универсальных шаблонов важно отметить, что когда вы принимаете универсальный шаблон, вы можете использовать только функции из ограничений. Это означает, что если вы передадите Read функции, которая хочет Write, она все равно не сможет Read в ней, если ограничения не включают ее. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Dog </span><span>{ walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>, }
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Bear </span><span>{ walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool</span><span>, }
+</span><span>
+</span><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Walk </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span>Walk </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Dog </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>walked </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true
+</span><span>    }
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span>Walk </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Bear </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>walked </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk_pet</span><span>&lt;W</span><span style="color:#bfbab0cc;">:</span><span> Walk&gt;(</span><span style="color:#f29718;">pet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> W) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Try setting `pet.walked` here!
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// You can&#39;t!
+</span><span>    pet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">walk</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk_pet_2</span><span>(</span><span style="color:#f29718;">pet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Walk) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Try setting `pet.walked` here!
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// You can&#39;t!
+</span><span>    pet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">walk</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> rover </span><span style="color:#f29668;">=</span><span> Dog { walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">, </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">walk_pet</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> rover)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(rover</span><span style="color:#f29668;">.</span><span>walked</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вы также можете использовать другой синтаксис where, поскольку сигнатуры функций со сложными универсальными шаблонами могут быть довольно длинными. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk_pet</span><span>&lt;W&gt;(</span><span style="color:#f29718;">pet</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> W)
+</span><span style="color:#ff7733;">where</span><span> W</span><span style="color:#bfbab0cc;">:</span><span> Walk {
+</span><span>    pet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">walk</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Если у вас несколько универсальных шаблонов, вы можете разделить их запятыми в обоих случаях. Если вам нужно более одного ограничения трэйты, вы можете использовать where W: Walk + Read или &lt;W: Walk + Read&gt;. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">stuff</span><span>&lt;R, W&gt;(</span><span style="color:#f29718;">r</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>R, </span><span style="color:#f29718;">w</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> W)
+</span><span style="color:#ff7733;">where</span><span> W</span><span style="color:#bfbab0cc;">:</span><span> Write, R</span><span style="color:#bfbab0cc;">:</span><span> Read + Clone {}
+</span></code></pre>
+<p>Посмотрите на всю информацию, которую вы можете извлечь из этой сигнатуры функции! Это не очень полезное название, но вы все равно можете почти наверняка сказать, что он делает!</p>
+<p>Есть еще такие сумасшедшие штуки, которые называются связанными типами, которые используются в таких вещах, как Iterator. Когда вы пишете в подписи, вы хотите использовать что-то вроде Iterator &lt;Item = Dog&gt;, чтобы сказать итератор Dogs.</p>
+<h2 id="peredacha-funktsii">Передача функций</h2>
+<p>Иногда желательно передавать функции другим функциям. В Rust довольно просто принять функцию в качестве аргумента. У функций есть трэйты, и они передаются как универсальные!</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span> Вы обязательно должны использовать здесь синтаксис where. 
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Dog </span><span>{
+</span><span>    walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">bool
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">do_with</span><span>&lt;F&gt;(</span><span style="color:#f29718;">dog</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Dog, </span><span style="color:#f29718;">action</span><span style="color:#bfbab0cc;">:</span><span> F)
+</span><span style="color:#ff7733;">where</span><span> F</span><span style="color:#bfbab0cc;">:</span><span> Fn(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Dog) {
+</span><span>    </span><span style="color:#f07178;">action</span><span>(dog)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">walk</span><span>(</span><span style="color:#f29718;">dog</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> Dog) {
+</span><span>    dog</span><span style="color:#f29668;">.</span><span>walked </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> rover </span><span style="color:#f29668;">=</span><span> Dog { walked</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">, </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Fn
+</span><span>    </span><span style="color:#f07178;">do_with</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> rover</span><span style="color:#bfbab0cc;">,</span><span> walk)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Closure
+</span><span>    </span><span style="color:#f07178;">do_with</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> rover</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29718;">dog</span><span>| dog</span><span style="color:#f29668;">.</span><span>walked </span><span style="color:#f29668;">= </span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Функции в Rust реализуют трейты, которые определяют, куда (и как) они передаются:</p>
+<ul>
+<li>FnOnce - принимает счетчик по стоимости.</li>
+<li>FnMut - принимает изменяемый приемник.</li>
+<li>Fn - берет неизменный приемник.</li>
+</ul>
+<p>Конкретный ответ Stack Overflow очень хорошо суммирует различия:</p>
+<blockquote>
+<p>Замыкания |...| ... автоматически реализует как можно больше из них.</p>
+</blockquote>
+<ul>
+<li>Все замыкания реализуют FnOnce: замыкание, которое нельзя вызвать один раз, не заслуживает названия. Обратите внимание: если замыкание реализует только FnOnce, его можно вызвать только один раз.</li>
+<li>Замыкания, которые не выходят за пределы своих захватов, реализуют FnMut, что позволяет им вызываться более одного раза (если есть неограниченный доступ к объекту функции).</li>
+<li>Замыкания, которые не нуждаются в уникальном / изменяемом доступе к своим захватам, реализуют Fn, что позволяет их вызывать практически повсюду.</li>
+</ul>
+<p>По сути, разница между разными типами заключается в том, как они взаимодействуют со своей средой. По моему опыту, вам действительно нужно беспокоиться только о различиях для замыканий, которые могут захватывать переменные в области видимости (в нашем примере выше, это функция main()).</p>
+<p>Но не бойтесь! Сообщения компилятора, когда один тип предоставляется, когда нужен другой, очень полезны!</p>
+<h2 id="vremia-zhizni">Время жизни</h2>
+<p>Итак, вы, вероятно, сейчас довольно хорошо себя чувствуете. Я имею в виду, посмотрите на эту полосу прокрутки, она почти до конца страницы! Вы быстро станете мастером подписи функций Rust!</p>
+<p>Давайте закончим небольшим разговором о жизнях, потому что вы в конечном итоге столкнетесь с ними и, вероятно, сильно запутаетесь.</p>
+<blockquote>
+<p>Позвольте мне быть честным с вами здесь. Для меня жизнь - это тайное искусство. Я использовал их немного назад в 0.7-0.10, и с тех пор мне действительно не приходилось их использовать. Если вы хоть что-нибудь знаете о них, вы гораздо более квалифицированы для написания этого раздела, чем я.</p>
+</blockquote>
+<p>В Modern Rust есть действительно надежный и эффективный пожизненный эллипс, который устраняет подавляющее большинство жизненных упражнений, которые нам раньше приходилось беспокоить. Но когда вы это сделаете, все может начать распутываться.</p>
+<p>Итак, если вы начинаете иметь дело с большим количеством жизней, вашим первым шагом действительно должно быть сесть и подумать об этом. Если ваш код не является достаточно сложным, вполне вероятно, что вам не придется иметь дело со сроками жизни. Если вы на простом примере сталкиваетесь с жизнями, ваше представление о проблеме, вероятно, неверно.</p>
+<p>Вот функция со сроками жизни из реализации Option. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>as_slice&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt;(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span style="font-style:italic;color:#39bae6;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span>[T]
+</span></code></pre>
+<p>Время жизни обозначается галочкой (') и дается имя. В этом случае «а», но они также могут быть чем-то вроде «буррито», если вы предпочитаете шутки внутри. По сути, это говорит о следующем:</p>
+<blockquote>
+<p>Время жизни вызываемого Option<T> такое же, как время жизни возвращенного [T]</p>
+</blockquote>
+<p>Здорово! Я действительно не могу больше писать о жизнях, но если у вас есть что добавить, дайте мне знать, и я буду вам доверять.</p>
+<h2 id="vremia-ispytaniia">Время испытания</h2>
+<p>Ниже вы найдете набор функций, взятых из стандартной библиотеки, вместе со ссылками на их документацию. Можете ли вы сказать по их функциональной сигнатуре, что они делают? (Для большего удовольствия я удалил имя функции!) </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// In `File`
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">name</span><span>&lt;P</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">AsRef</span><span>&lt;Path&gt;&gt;(</span><span style="color:#f29718;">path</span><span style="color:#bfbab0cc;">:</span><span> P) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;File&gt;
+</span></code></pre>
+<p>Source</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// In `Option&lt;T&gt;`
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">name</span><span>&lt;E, T&gt;(</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">err</span><span style="color:#bfbab0cc;">:</span><span> E) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;T, E&gt;
+</span></code></pre>
+<p>Source</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// In `Iterator&lt;Item=T&gt;`
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">name</span><span>&lt;B</span><span style="color:#bfbab0cc;">: </span><span>FromIterator&lt;</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Item&gt;&gt;(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> B
+</span><span style="color:#ff7733;">where Self</span><span style="color:#bfbab0cc;">:</span><span> Sized
+</span></code></pre>
+<p>Source</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// In `Iterator&lt;Item=T&gt;`
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">name</span><span>&lt;B, F&gt;(</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">init</span><span style="color:#bfbab0cc;">:</span><span> B, </span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">:</span><span> F) </span><span style="color:#bfbab0cc;">-&gt;</span><span> B
+</span><span style="color:#ff7733;">where Self</span><span style="color:#bfbab0cc;">:</span><span> Sized, F</span><span style="color:#bfbab0cc;">:</span><span> FnMut(B, </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Item) -&gt; B
+</span></code></pre>
+<p>Source</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// In `Result&lt;T,E&gt;`
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">name</span><span>&lt;F, O</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">FnOnce</span><span>(E) </span><span style="color:#bfbab0cc;">-&gt;</span><span> F&gt;(</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">op</span><span style="color:#bfbab0cc;">:</span><span> O) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;T, F&gt;
+</span></code></pre>
+<p>Source</p>
+<p>Я надеюсь, что все прошло фантастически, я просто был здесь и подбадривал вас! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

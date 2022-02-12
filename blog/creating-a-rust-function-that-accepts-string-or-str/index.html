@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Создание функции Rust, которая принимает String или &amp;str | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/creating-a-rust-function-that-accepts-string-or-str/#struktura-soderzhashchaia-stroki">Структура, содержащая строки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/creating-a-rust-function-that-accepts-string-or-str/#v-konversii">В конверсии</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/creating-a-rust-function-that-accepts-string-or-str/#sviazannyi">Связанный</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Создание функции Rust, которая принимает String или &amp;str</h1>
+
+<p><a href="https://hermanradtke.com/2015/05/06/creating-a-rust-function-that-accepts-string-or-str.html">Перевод</a> | Автор оригинала: Herman J. Radtke III</p>
+<p>В моем последнем посте мы много говорили об использовании &amp;str в качестве предпочтительного типа для функций, принимающих строковый аргумент. Ближе к концу этого поста было обсуждение того, когда использовать String vs &amp;str в структуре. Я думаю, что это хороший совет, но бывают случаи, когда использование &amp;str вместо String не оптимально. Нам нужна другая стратегия для этих случаев использования.</p>
+<h2 id="struktura-soderzhashchaia-stroki">Структура, содержащая строки</h2>
+<p>Рассмотрим структуру Person ниже. Для обсуждения предположим, что человеку действительно необходимо владеть переменной name. Мы решили использовать тип String вместо &amp;str. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span></code></pre>
+<p>Теперь нам нужно реализовать функцию new(). Основываясь на моем последнем сообщении в блоге, мы предпочитаем &amp;str: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new </span><span>(</span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Person {
+</span><span>        Person { name</span><span style="color:#bfbab0cc;">:</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>() }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Это работает до тех пор, пока мы не забываем вызывать .to_string() внутри функции new(). Однако эргономика этой функции ниже, чем хотелось бы. Если мы используем строковый литерал, мы можем создать новый объект Person, например Person.new («Герман»). Если у нас уже есть String, нам нужно запросить ссылку на String: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> name </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;Herman&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> person </span><span style="color:#f29668;">= </span><span>Person</span><span style="color:#f29668;">::</span><span>new(name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_ref</span><span>())</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Хотя такое чувство, что мы ходим по кругу. У нас была String, затем мы вызвали as_ref(), чтобы превратить ее в &amp;str, а затем снова превратить в String внутри функции new(). Мы могли бы вернуться к использованию String, например fn new (name: String) -&gt; Person {, но это означает, что нам нужно заставить вызывающего абонента использовать .to_string() всякий раз, когда есть строковый литерал.</p>
+<h2 id="v-konversii">В конверсии</h2>
+<p>Мы можем упростить работу вызывающей программы с помощью свойства Into. Эта трэйта может автоматически преобразовывать &amp;str в строку. Если у нас уже есть String, преобразование не происходит. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>&lt;S</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Into</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;&gt;(</span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">:</span><span> S) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Person {
+</span><span>        Person { name</span><span style="color:#bfbab0cc;">:</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>() }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> person </span><span style="color:#f29668;">= </span><span>Person</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;Herman&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> person </span><span style="color:#f29668;">= </span><span>Person</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;Herman&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Этот синтаксис для new() выглядит немного иначе. Мы используем Generics и Traits, чтобы сообщить Rust, что некоторый тип S должен реализовывать трейт Into для типа String. Тип String реализует Into <String> как noop, потому что у нас уже есть String. Тип &amp;str реализует Into <String> с помощью того же метода .to_string(), который мы изначально использовали в функции new(). Таким образом, мы не обойдем вниманием необходимость вызова .to_string(), но мы убираем необходимость его выполнения вызывающей стороной. Вы можете задаться вопросом, влияет ли использование Into <String> на производительность, и ответ отрицательный. Rust использует статическую диспетчеризацию и концепцию мономорфизации для обработки всего этого на этапе компиляции.</p>
+<p>Не беспокойтесь, если вас сбивают с толку такие вещи, как статическая диспетчеризация и мономорфизация. Вам просто нужно знать, что, используя приведенный выше синтаксис, вы можете создавать функции, которые принимают как String, так и &amp;str. Если вы думаете, что fn new &lt;S: Into <String>&gt; (name: S) -&gt; Person {- это много синтаксиса, то это так. Однако важно отметить, что в Into <String> нет ничего особенного. Это просто трэйта, которая является частью стандартной библиотеки Rust. Вы могли бы реализовать эту трэйту самостоятельно, если бы захотели. Вы можете реализовать похожие трэйты, которые сочтете полезными, и опубликовать их на crates.io. Вся эта мощь пользовательского пространства - вот что делает Rust прекрасным языком.
+Другой способ написать Person::new()</p>
+<p>Синтаксис where также работает, и его может быть легче читать, особенно если подпись функции становится более сложной: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Person </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>&lt;S&gt;(</span><span style="color:#f29718;">name</span><span style="color:#bfbab0cc;">:</span><span> S) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Person </span><span style="color:#ff7733;">where</span><span> S</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Into</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt; {
+</span><span>        Person { name</span><span style="color:#bfbab0cc;">:</span><span> name</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>() }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="sviazannyi">Связанный</h2>
+<ul>
+<li>String vs &amp;str в функциях Rust</li>
+<li>Создание функции Rust, которая возвращает &amp;str или String </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Симпатичные шаблоны конечного автомата в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#osnovanie-nashikh-kontseptsii">Основание наших концепций</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#opredelenie-togo-chego-my-khotim">Определение того, чего мы хотим</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#vtoroi-snimok-s-perechisleniiami">Второй снимок с перечислениями</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#struktury-s-perekhodami">Структуры с переходами</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#v-tselom-izyskannost">В целом изысканность</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#bespokoistvo-s-roditeliami">Беспокойство с родителями</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#rabochie-primery">Рабочие примеры</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#tri-sostoianiia-dva-perekhoda"><small>- Три состояния, два перехода</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#primer-plota">Пример плота</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#al-ternativy-po-otzyvam">Альтернативы по отзывам</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/pretty-state-machine-patterns-in-rust/#zakliuchitel-nye-mysli">Заключительные мысли</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Симпатичные шаблоны конечного автомата в Rust</h1>
+
+<p><a href="https://hoverbear.org/blog/rust-state-machine-pattern/">Перевод</a> | Автор оригинала: Ana Hoverbear</p>
+<p>В последнее время я много думал о шаблонах и структурах, с помощью которых мы программируем. Действительно замечательно начать изучать проект и увидеть знакомые шаблоны и стили, которые вы уже использовали раньше. Это упрощает понимание проекта и дает вам возможность быстрее начать работу над ним.</p>
+<p>Иногда вы работаете над новым проектом и понимаете, что вам нужно сделать что-то так же, как вы это делали в другом проекте. Это может быть не функциональность или библиотека, это может быть не то, что вы можете закодировать в какой-нибудь умный макрос или небольшой крэйт. Вместо этого это может быть просто шаблон или структурная концепция, которая хорошо решает проблему.</p>
+<p>Один интересный паттерн, который обычно применяется к проблемам, - это паттерн «Конечный автомат». Давайте посмотрим, что именно мы имеем в виду, когда говорим это, и почему они интересны.</p>
+<blockquote>
+<p>В этом посте вы можете запускать все примеры на игровой площадке, я обычно по привычке использую Nightly.</p>
+</blockquote>
+<h2 id="osnovanie-nashikh-kontseptsii">Основание наших концепций</h2>
+<p>В Интернете есть много ресурсов и тематических статей о конечных автоматах. Более того, существует множество реализаций конечных автоматов.</p>
+<p>Чтобы попасть на эту веб-страницу, вы использовали ее. Вы можете смоделировать TCP как конечный автомат. Вы также можете моделировать HTTP-запросы. Вы можете смоделировать любой обычный язык, например регулярное выражение, как конечный автомат. Они повсюду, прячутся внутри вещей, которыми мы пользуемся каждый день.</p>
+<p>Итак, конечный автомат - это любой «автомат», между которыми определен набор «состояний» и «переходов».</p>
+<p>Когда мы говорим о машине, мы имеем в виду абстрактную концепцию чего-то, что что-то делает. Например, ваше «Hello World!» функция - это машина. Он запускается и в конечном итоге выводит то, что мы ожидаем. Некоторая модель, которую вы используете для взаимодействия с вашей базой данных, точно такая же. Мы будем рассматривать нашу самую простую машину просто как структуру, которую можно создавать и уничтожать. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Machine</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let</span><span> my_machine </span><span style="color:#f29668;">=</span><span> Machine</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// Create.
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// `my_machine` is destroyed when it falls out of scope below.
+</span><span>}
+</span></code></pre>
+<p>Состояния - это способ понять, где находится машина в своем процессе. Например, в качестве примера можно представить машину для розлива бутылок. Машина находится в состоянии ожидания, когда ожидает новую бутылку. Как только он обнаруживает бутылку, он переходит в состояние «наполнения». Обнаружив, что бутылка заполнена, она переходит в состояние «готово». После того, как бутылка оставлена, автомат возвращается в состояние ожидания.</p>
+<p>Ключевой вывод здесь заключается в том, что ни у одного из штатов нет информации, относящейся к другим штатам. Состояние «заполнение» не заботится о том, как долго ожидало состояние «ожидания». Состояние «Готово» не заботится о том, с какой скоростью была заполнена бутылка. У каждого государства есть отдельные обязанности и заботы. Эти варианты естественным образом рассматривать в виде перечисления. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">BottleFillerState </span><span>{
+</span><span>  Waiting { waiting_time</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration }</span><span style="color:#bfbab0cc;">,
+</span><span>  Filling { rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>  Done</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">BottleFiller </span><span>{
+</span><span>  state</span><span style="color:#bfbab0cc;">:</span><span> BottleFillerState,
+</span><span>}
+</span></code></pre>
+<p>Использование перечисления таким образом означает, что все состояния являются взаимоисключающими, вы можете быть только в одном за раз. «Толстые перечисления» Rust позволяют нам иметь каждое из этих состояний для переноса данных с собой. Что касается нашего текущего определения, все в порядке.</p>
+<p>Но здесь есть небольшая проблема. Когда мы описывали нашу машину для розлива бутылок выше, мы описали три перехода: Ожидание -&gt; Наполнение, Наполнение -&gt; Готово и Готово -&gt; Ожидание. Мы никогда не описывали «Ожидание» -&gt; «Готово» или «Готово» -&gt; «Заполнение», это не имеет смысла!</p>
+<p>Это подводит нас к идее переходов. Одна из самых приятных особенностей настоящего конечного автомата - это то, что нам никогда не придется беспокоиться о том, что наш автомат для бутылок перейдет, например, из Готово -&gt; Наполнение. Шаблон конечного автомата должен гарантировать, что этого никогда не может произойти. В идеале это должно быть сделано до того, как мы начнем запускать нашу машину, во время компиляции.</p>
+<p>Давайте еще раз посмотрим на переходы, которые мы описали для нашего наполнителя бутылок на схеме: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  +++++++++++   +++++++++++   ++++++++
+</span><span>  |         |   |         |   |      |
+</span><span>  | Waiting +--&gt;+ Filling +--&gt;+ Done |
+</span><span>  |         |   |         |   |      |
+</span><span>  ++++-++++-+   +++++++++++   +--+++++
+</span><span>       ^                         |
+</span><span>       +++++++++++++++++++++++++-+
+</span></code></pre>
+<p>Как мы видим, здесь существует конечное число состояний и конечное число переходов между этими состояниями. Теперь можно иметь допустимый переход между каждым состоянием и любым другим состоянием, но в большинстве случаев это неверно.</p>
+<p>Это означает, что переход от состояния, такого как «Ожидание», к состоянию, например, «Заполнение», должен иметь определенную семантику. В нашем примере это можно определить как «Бутылка на месте». В случае потока TCP это может быть «Мы получили пакет FIN», что означает, что нам нужно завершить закрытие потока.</p>
+<h2 id="opredelenie-togo-chego-my-khotim">Определение того, чего мы хотим</h2>
+<p>Теперь, когда мы знаем, что такое конечный автомат, как нам представить их в Rust? Сначала давайте подумаем, чего мы хотим от какого-нибудь паттерна.</p>
+<p>В идеале мы хотели бы видеть следующие характеристики:</p>
+<ul>
+<li>Одновременно может находиться только в одном состоянии.</li>
+<li>Каждое состояние должно иметь свои собственные связанные значения, если требуется.</li>
+<li>Переход между состояниями должен иметь четко определенную семантику.</li>
+<li>Должна быть возможность иметь некоторый уровень общего состояния.</li>
+<li>Должны быть разрешены только явно определенные переходы.</li>
+<li>Переход из одного состояния в другое должно поглотить состояние, чтобы его больше нельзя было использовать.</li>
+<li>Нам не нужно выделять память для всех состояний. Конечно, не больше, чем самый крупный штат</li>
+<li>Любые сообщения об ошибках должны быть понятными.</li>
+<li>Для этого нам не нужно прибегать к выделению кучи. В стеке должно быть возможно все.</li>
+<li>Систему шрифтов нужно использовать с максимальной эффективностью.</li>
+<li>Во время компиляции должно быть как можно больше ошибок.</li>
+</ul>
+<p>Так что, если бы у нас был шаблон дизайна, который позволял бы все эти вещи, было бы поистине фантастически. Было бы неплохо иметь шаблон, который позволял бы большинство из них.
+Изучение возможных вариантов реализации</p>
+<p>С такой мощной и гибкой системой типов, как Rusts, мы сможем это представить. Истина в том, что есть несколько способов попробовать, каждый из них обладает ценными качествами, и каждый преподает нам уроки.</p>
+<h2 id="vtoroi-snimok-s-perechisleniiami">Второй снимок с перечислениями</h2>
+<p>Как мы видели выше, наиболее естественный способ попробовать это перечисление, но мы уже отметили, что вы не можете контролировать, какие переходы фактически разрешены в этом случае. Так можем ли мы просто обернуть это? Мы уверены, что сможем! Давайте взглянем:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">State </span><span>{
+</span><span>    Waiting { waiting_time</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration }</span><span style="color:#bfbab0cc;">,
+</span><span>    Filling { rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    Done
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">StateMachine </span><span>{ state</span><span style="color:#bfbab0cc;">:</span><span> State }
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">StateMachine </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        StateMachine {
+</span><span>            state</span><span style="color:#bfbab0cc;">: </span><span>State</span><span style="color:#f29668;">::</span><span>Waiting { waiting_time</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span>) }
+</span><span>        }
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_filling</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>state </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>state {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// Only Waiting -&gt; Filling is valid.
+</span><span>            State</span><span style="color:#f29668;">::</span><span>Waiting { </span><span style="color:#f29668;">.. </span><span>} </span><span style="color:#f29668;">=&gt; </span><span>State</span><span style="color:#f29668;">::</span><span>Filling { rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1 </span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// The rest should fail.
+</span><span>            </span><span style="color:#f29668;">_ =&gt; </span><span style="color:#f07178;">panic!</span><span>(</span><span style="color:#c2d94c;">&quot;Invalid state transition!&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> state_machine </span><span style="color:#f29668;">= </span><span>StateMachine</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    state_machine</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_filling</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>На первый взгляд все нормально. Но заметили какие-то проблемы?</p>
+<ul>
+<li>Во время выполнения происходят недопустимые ошибки перехода, что ужасно!</li>
+<li>Это предотвращает только недопустимые переходы за пределы модуля, поскольку частными полями можно свободно манипулировать внутри модуля. Например, state_machine.state = State::Done совершенно корректно внутри модуля.</li>
+<li>Каждая функция, которую мы реализуем, которая работает с состоянием, должна включать оператор соответствия!</li>
+</ul>
+<p>Однако у него есть некоторые хорошие характеристики:</p>
+<ul>
+<li>Память, необходимая для представления конечного автомата, составляет только размер самого большого состояния. Это связано с тем, что размер толстого перечисления равен размеру его самого большого варианта.</li>
+<li>Все происходит в стеке.</li>
+<li>Переход между состояниями имеет четко определенную семантику ... Он либо работает, либо вылетает!</li>
+</ul>
+<p>Теперь вы можете подумать: «Hoverbear, вы могли бы полностью обернуть вывод to_filling() с помощью Result&lt;T, E&gt; или иметь вариант InvalidState!» Но давайте посмотрим правде в глаза: это не делает ничего лучше, если вообще делает. Даже если мы избавимся от сбоев во время выполнения, нам все равно придется иметь дело с большой неуклюжестью с операторами сопоставления, и наши ошибки все равно будут обнаруживаться только во время выполнения! Фу! Обещаю, мы сможем добиться большего.</p>
+<p>Так что продолжим поиски!</p>
+<h2 id="struktury-s-perekhodami">Структуры с переходами</h2>
+<p>Так что, если бы мы просто использовали набор структур? Мы могли бы заставить их всех реализовать трэйты, которые должны разделять все государства. Мы могли бы использовать специальные функции, которые переводили тип в новый тип! Как бы это выглядело? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// This is some functionality shared by all of the states.
+</span><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">SharedFunctionality </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_shared_value</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Waiting </span><span>{
+</span><span>    waiting_time</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Value shared by all states.
+</span><span>    shared_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Waiting </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        Waiting {
+</span><span>            waiting_time</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">0</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            shared_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Consumes the value!
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_filling</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Filling {
+</span><span>        Filling {
+</span><span>            rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,
+</span><span>            shared_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span>SharedFunctionality </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Waiting </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_shared_value</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>shared_value
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Filling </span><span>{
+</span><span>    rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Value shared by all states.
+</span><span>    shared_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span>SharedFunctionality </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Filling </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_shared_value</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>shared_value
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_waiting_state </span><span style="color:#f29668;">= </span><span>Waiting</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_filling_state </span><span style="color:#f29668;">=</span><span> in_waiting_state</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_filling</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Трэйт возьми, это банальный код! Идея заключалась в том, чтобы у всех государств были общие общие ценности, а также их собственные особые ценности. Как видно из функции to_filling(), мы можем использовать заданное состояние «Ожидание» и перевести его в состояние «Заполнение». Сделаем небольшое изложение:</p>
+<ul>
+<li>Ошибки перехода обнаруживаются во время компиляции! Например, вы даже не можете случайно создать состояние заполнения, не запустив сначала состояние ожидания. (Можно было бы специально, но это не относится к делу.)</li>
+<li>Правоприменение в переходный период происходит повсюду.</li>
+<li>Когда выполняется переход между состояниями, старое значение используется вместо только что измененного. Мы могли бы сделать это и с приведенным выше примером перечисления.</li>
+<li>Нам не обязательно все время совпадать.</li>
+<li>Потребление памяти по-прежнему невысокое, в любой момент времени размер такой же, как у состояния.</li>
+</ul>
+<p>Однако есть и недостатки:</p>
+<ul>
+<li>Есть куча повторов кода. Вы должны реализовать одни и те же функции и характеристики для нескольких структур.</li>
+<li>Не всегда понятно, какие ценности разделяют все государства и только одно. - Из-за этого обновление кода позже могло быть проблемой.</li>
+<li>Поскольку размер состояния является переменным, нам приходится заключать его в перечисление, как указано выше, чтобы его можно было использовать, когда конечный автомат является просто одним из компонентов более сложной системы. Вот как это может выглядеть: </li>
+</ul>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">State </span><span>{
+</span><span>    Waiting(Waiting)</span><span style="color:#bfbab0cc;">,
+</span><span>    Filling(Filling)</span><span style="color:#bfbab0cc;">,
+</span><span>    Done(Done)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_waiting_state </span><span style="color:#f29668;">= </span><span>State</span><span style="color:#f29668;">::</span><span>Waiting(Waiting</span><span style="color:#f29668;">::</span><span>new())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// This doesn&#39;t work since the `Waiting` struct is wrapped! We need to `match` to get it out.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_filling_state </span><span style="color:#f29668;">= </span><span>State</span><span style="color:#f29668;">::</span><span>Filling(in_waiting_state</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_filling</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Как видите, это не очень эргономично. Однако мы приближаемся к тому, чего хотим. Идея перехода между разными типами кажется хорошим шагом вперед! Прежде чем мы попробуем что-то совершенно другое, давайте поговорим о простом способе изменить наш пример, который может пролить свет на дальнейшее мышление.</p>
+<p>Стандартная библиотека Rust определяет две тесно связанные трэйты: From и Into, которые чрезвычайно полезны и заслуживают внимания. Важно отметить, что реализация одного из них автоматически реализует другой. В целом реализация From предпочтительнее, так как она немного более гибкая. Мы можем очень легко реализовать их в нашем примере, приведенном выше, вот так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// ...
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;Waiting&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Filling </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">:</span><span> Waiting) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Filling {
+</span><span>        Filling {
+</span><span>            rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,
+</span><span>            shared_value</span><span style="color:#bfbab0cc;">:</span><span> val</span><span style="color:#f29668;">.</span><span>shared_value</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span style="font-style:italic;color:#5c6773;">// ...
+</span></code></pre>
+<p>Это не только дает нам общую функцию для перехода, но также приятно читать об этом в исходном коде! Это снижает умственную нагрузку на нас и облегчает понимание читателями. Вместо реализации пользовательских функций мы просто используем уже существующий шаблон. Построение нашего паттерна на основе уже существующих паттернов - отличный путь вперед.</p>
+<p>Так что это круто, но как нам справиться со всем этим неприятным повторением кода и повторяющимися вещами shared_value? Давайте изучим еще немного!</p>
+<h2 id="v-tselom-izyskannost">В целом изысканность</h2>
+<p>В этом приключении мы объединим уроки и идеи из первых двух, а также несколько новых идей, чтобы получить что-то более приятное. Суть этого в том, чтобы использовать возможности дженериков. Давайте посмотрим на довольно простую структуру, представляющую это: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">BottleFillingMachine</span><span>&lt;S&gt; {
+</span><span>    shared_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    state</span><span style="color:#bfbab0cc;">:</span><span> S
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The following states can be the &#39;S&#39; in StateMachine&lt;S&gt;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Waiting </span><span>{
+</span><span>    waiting_time</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Filling </span><span>{
+</span><span>    rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Done</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Итак, здесь мы фактически встраиваем состояние в сигнатуру типа самой BottleFillingMachine. Конечный автомат в состоянии «Наполнение» - это BottleFillingMachine <Filling>, что просто замечательно, поскольку это означает, что когда мы видим его как часть сообщения об ошибке или чего-то еще, мы сразу знаем, в каком состоянии находится машина.</p>
+<p>Оттуда мы можем продолжить и реализовать From<T> для некоторых из этих конкретных универсальных вариантов, например: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;BottleFillingMachine&lt;Waiting&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">BottleFillingMachine</span><span>&lt;Filling&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>BottleFillingMachine&lt;Waiting&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>BottleFillingMachine&lt;Filling&gt; {
+</span><span>        BottleFillingMachine {
+</span><span>            shared_value</span><span style="color:#bfbab0cc;">:</span><span> val</span><span style="color:#f29668;">.</span><span>shared_value</span><span style="color:#bfbab0cc;">,
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> Filling {
+</span><span>                rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;BottleFillingMachine&lt;Filling&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">BottleFillingMachine</span><span>&lt;Done&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>BottleFillingMachine&lt;Filling&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>BottleFillingMachine&lt;Done&gt; {
+</span><span>        BottleFillingMachine {
+</span><span>            shared_value</span><span style="color:#bfbab0cc;">:</span><span> val</span><span style="color:#f29668;">.</span><span>shared_value</span><span style="color:#bfbab0cc;">,
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> Done</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Определение начального состояния машины выглядит так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">BottleFillingMachine</span><span>&lt;Waiting&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">shared_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        BottleFillingMachine {
+</span><span>            shared_value</span><span style="color:#bfbab0cc;">:</span><span> shared_value</span><span style="color:#bfbab0cc;">,
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> Waiting {
+</span><span>                waiting_time</span><span style="color:#bfbab0cc;">: </span><span>std</span><span style="color:#f29668;">::</span><span>time</span><span style="color:#f29668;">::</span><span>Duration</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Итак, как это выглядит при переходе между двумя состояниями? Нравится: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_waiting </span><span style="color:#f29668;">= </span><span>BottleFillingMachine</span><span style="color:#f29668;">::</span><span>&lt;Waiting&gt;</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">0</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_filling </span><span style="color:#f29668;">= </span><span>BottleFillingMachine</span><span style="color:#f29668;">::</span><span>&lt;Filling&gt;</span><span style="color:#f29668;">::</span><span>from(in_waiting)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>В качестве альтернативы, если вы делаете это внутри функции, сигнатура типа которой ограничивает возможные выходы, это может выглядеть так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">transition_the_states</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>BottleFillingMachine&lt;Waiting&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>BottleFillingMachine&lt;Filling&gt; {
+</span><span>    val</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>() </span><span style="font-style:italic;color:#5c6773;">// Nice right?
+</span><span>}
+</span></code></pre>
+<p>Как выглядят сообщения об ошибках времени компиляции? </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0277]: the trait bound `BottleFillingMachine&lt;Done&gt;: std::convert::From&lt;BottleFillingMachine&lt;Waiting&gt;&gt;` is not satisfied
+</span><span>  --&gt; &lt;anon&gt;:50:22
+</span><span>   |
+</span><span>50 |     let in_filling = BottleFillingMachine::&lt;Done&gt;::from(in_waiting);
+</span><span>   |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+</span><span>   |
+</span><span>   = help: the following implementations were found:
+</span><span>   = help:   &lt;BottleFillingMachine&lt;Filling&gt; as std::convert::From&lt;BottleFillingMachine&lt;Waiting&gt;&gt;&gt;
+</span><span>   = help:   &lt;BottleFillingMachine&lt;Done&gt; as std::convert::From&lt;BottleFillingMachine&lt;Filling&gt;&gt;&gt;
+</span><span>   = note: required by `std::convert::From::from`
+</span></code></pre>
+<p>Совершенно ясно, что в этом плохого. Сообщение об ошибке даже намекает нам на некоторые допустимые переходы!</p>
+<p>Так что же нам дает эта схема?</p>
+<ul>
+<li>Переходы гарантированы, чтобы быть действительными во время компиляции.</li>
+<li>Сообщения об ошибках о недопустимых переходах очень понятны и даже содержат список допустимых параметров.</li>
+<li>У нас есть «родительская» структура, с которой могут быть связаны характеристики и значения, которые не повторяются.</li>
+<li>После выполнения перехода старое состояние больше не существует, оно расходуется. Действительно, вся структура потребляется, поэтому, если есть побочные эффекты перехода на родительский элемент (например, изменение среднего времени ожидания), мы не можем получить доступ к устаревшим значениям.</li>
+<li>Потребление памяти скудное и все в стеке.</li>
+</ul>
+<p>Есть еще несколько минусов:</p>
+<ul>
+<li>Наши реализации From<T> страдают от изрядного количества &quot;типового шума&quot;. Однако это очень незначительная проблема.</li>
+<li>Каждый <code>BottleFillingMachine &lt;S&gt;</code> имеет другой размер, как в нашем предыдущем примере, поэтому нам нужно будет использовать перечисление. Однако благодаря нашей структуре мы можем делать это не совсем отстойным способом.</li>
+</ul>
+<blockquote>
+<p>Вы можете поиграть с этим примером здесь</p>
+</blockquote>
+<h2 id="bespokoistvo-s-roditeliami">Беспокойство с родителями</h2>
+<p>Итак, как мы можем иметь некоторую родительскую структуру, удерживающую наш конечный автомат, чтобы взаимодействие с ней не было гигантской болью? Что ж, это возвращает нас к первоначальной идее перечисления.</p>
+<p>Если вы помните, основная проблема с приведенным выше примером перечисления заключалась в том, что нам приходилось иметь дело с отсутствием возможности принудительно выполнять переходы, и единственные ошибки, которые мы получили, были во время выполнения, когда мы пытались. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">BottleFillingMachineWrapper </span><span>{
+</span><span>    Waiting(BottleFillingMachine&lt;Waiting&gt;)</span><span style="color:#bfbab0cc;">,
+</span><span>    Filling(BottleFillingMachine&lt;Filling&gt;)</span><span style="color:#bfbab0cc;">,
+</span><span>    Done(BottleFillingMachine&lt;Done&gt;)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Factory </span><span>{
+</span><span>    bottle_filling_machine</span><span style="color:#bfbab0cc;">:</span><span> BottleFillingMachineWrapper,
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Factory </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        Factory {
+</span><span>            bottle_filling_machine</span><span style="color:#bfbab0cc;">: </span><span>BottleFillingMachineWrapper</span><span style="color:#f29668;">::</span><span>Waiting(BottleFillingMachine</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">0</span><span>))</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Здесь ваша первая реакция, вероятно, будет: «Гоша, Hoverbear, посмотри на эту ужасную и длинную подпись!» Вы совершенно правы! Честно говоря, он довольно длинный, но я выбрал длинные, пояснительные названия типов! Вы сможете использовать все свои любимые загадочные сокращения и псевдонимы типов в своем собственном коде. Есть у! </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">BottleFillingMachineWrapper </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">step</span><span>(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self </span><span>{
+</span><span>            BottleFillingMachineWrapper</span><span style="color:#f29668;">::</span><span>Waiting(val) </span><span style="color:#f29668;">=&gt; </span><span>BottleFillingMachineWrapper</span><span style="color:#f29668;">::</span><span>Filling(val</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())</span><span style="color:#bfbab0cc;">,
+</span><span>            BottleFillingMachineWrapper</span><span style="color:#f29668;">::</span><span>Filling(val) </span><span style="color:#f29668;">=&gt; </span><span>BottleFillingMachineWrapper</span><span style="color:#f29668;">::</span><span>Done(val</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())</span><span style="color:#bfbab0cc;">,
+</span><span>            BottleFillingMachineWrapper</span><span style="color:#f29668;">::</span><span>Done(val) </span><span style="color:#f29668;">=&gt; </span><span>BottleFillingMachineWrapper</span><span style="color:#f29668;">::</span><span>Waiting(val</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> the_factory </span><span style="color:#f29668;">= </span><span>Factory</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    the_factory</span><span style="color:#f29668;">.</span><span>bottle_filling_machine </span><span style="color:#f29668;">=</span><span> the_factory</span><span style="color:#f29668;">.</span><span>bottle_filling_machine</span><span style="color:#f29668;">.</span><span style="color:#f07178;">step</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Опять же, вы можете заметить, что это работает путем потребления, а не мутации. Использование match способом, описанным выше, перемещает val, чтобы его можно было использовать с .into(), который, как мы уже определили, должен использовать состояние. Если вы действительно хотите использовать мутацию, вы можете рассмотреть возможность использования ваших состояний #[derive(Clone)] или даже Copy, но это ваш выбор.</p>
+<p>Несмотря на то, что это немного менее эргономично и приятно работать, чем мы могли бы пожелать, мы по-прежнему получаем строго принудительные переходы между состояниями и все гарантии, которые с ними связаны.</p>
+<p>Вы заметите одну вещь: эта схема заставляет вас обрабатывать все возможные состояния при манипулировании машиной, и это имеет смысл. Вы входите в структуру с конечным автоматом и манипулируете им, вам необходимо определить действия для каждого состояния, в котором он находится.</p>
+<p>Или вы можете просто паниковать!() Если вы действительно этого хотите. Но если вы просто хотели запаниковать!(), То почему вы просто не использовали первую попытку?</p>
+<blockquote>
+<p>Вы можете увидеть полностью рабочий пример этого примера Factory здесь</p>
+</blockquote>
+<h2 id="rabochie-primery">Рабочие примеры</h2>
+<p>Всегда приятно иметь несколько примеров для таких вещей. Итак, ниже я собрал пару рабочих примеров с комментариями, которые вы можете изучить.</p>
+<h3 id="tri-sostoianiia-dva-perekhoda">Три состояния, два перехода</h3>
+<p>Этот пример очень похож на приведенную выше машину для розлива бутылок, но вместо этого он действительно работает, хотя и тривиальная работа. Он принимает строку и возвращает количество слов в ней.</p>
+<p>Ссылка на игровую площадку </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The `&lt;StateA&gt;` is implied here. We don&#39;t need to add type annotations!
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_state_a </span><span style="color:#f29668;">= </span><span>StateMachine</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;Blah blah blah&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// This is okay here. But later once we&#39;ve changed state it won&#39;t work anymore.
+</span><span>    in_state_a</span><span style="color:#f29668;">.</span><span>some_unrelated_value</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Starting Value: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> in_state_a</span><span style="color:#f29668;">.</span><span>state</span><span style="color:#f29668;">.</span><span>start_value)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Transition to the new state. This consumes the old state.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Here we need type annotations (since not all StateMachines are linear in their state).
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_state_b </span><span style="color:#f29668;">= </span><span>StateMachine</span><span style="color:#f29668;">::</span><span>&lt;StateB&gt;</span><span style="color:#f29668;">::</span><span>from(in_state_a)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// This doesn&#39;t work! The value is moved when we transition!
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// in_state_a.some_unrelated_value;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Instead, we can use the existing value.
+</span><span>    in_state_b</span><span style="color:#f29668;">.</span><span>some_unrelated_value</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Interm Value: </span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> in_state_b</span><span style="color:#f29668;">.</span><span>state</span><span style="color:#f29668;">.</span><span>interm_value)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// And our final state.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> in_state_c </span><span style="color:#f29668;">= </span><span>StateMachine</span><span style="color:#f29668;">::</span><span>&lt;StateC&gt;</span><span style="color:#f29668;">::</span><span>from(in_state_b)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// This doesn&#39;t work either! The state doesn&#39;t even contain this value.
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// in_state_c.state.start_value;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Final state: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> in_state_c</span><span style="color:#f29668;">.</span><span>state</span><span style="color:#f29668;">.</span><span>final_value)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Here is our pretty state machine.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">StateMachine</span><span>&lt;S&gt; {
+</span><span>    some_unrelated_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>    state</span><span style="color:#bfbab0cc;">:</span><span> S,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// It starts, predictably, in `StateA`
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">StateMachine</span><span>&lt;StateA&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        StateMachine {
+</span><span>            some_unrelated_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">,
+</span><span>            state</span><span style="color:#bfbab0cc;">: </span><span>StateA</span><span style="color:#f29668;">::</span><span>new(val)
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// State A starts the machine with a string.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">StateA </span><span>{
+</span><span>    start_value</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">StateA </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">start_value</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        StateA {
+</span><span>            start_value</span><span style="color:#bfbab0cc;">:</span><span> start_value</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// State B goes and breaks up that String into words.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">StateB </span><span>{
+</span><span>    interm_value</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;,
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;StateMachine&lt;StateA&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">StateMachine</span><span>&lt;StateB&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>StateMachine&lt;StateA&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>StateMachine&lt;StateB&gt; {
+</span><span>        StateMachine {
+</span><span>            some_unrelated_value</span><span style="color:#bfbab0cc;">:</span><span> val</span><span style="color:#f29668;">.</span><span>some_unrelated_value</span><span style="color:#bfbab0cc;">,
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> StateB {
+</span><span>                interm_value</span><span style="color:#bfbab0cc;">:</span><span> val</span><span style="color:#f29668;">.</span><span>state</span><span style="color:#f29668;">.</span><span>start_value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">split</span><span>(</span><span style="color:#c2d94c;">&quot; &quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">x</span><span>| x</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Finally, StateC gives us the length of the vector, or the word count.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">StateC </span><span>{
+</span><span>    final_value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;StateMachine&lt;StateB&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">StateMachine</span><span>&lt;StateC&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>StateMachine&lt;StateB&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>StateMachine&lt;StateC&gt; {
+</span><span>        StateMachine {
+</span><span>            some_unrelated_value</span><span style="color:#bfbab0cc;">:</span><span> val</span><span style="color:#f29668;">.</span><span>some_unrelated_value</span><span style="color:#bfbab0cc;">,
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> StateC {
+</span><span>                final_value</span><span style="color:#bfbab0cc;">:</span><span> val</span><span style="color:#f29668;">.</span><span>state</span><span style="color:#f29668;">.</span><span>interm_value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="primer-plota">Пример плота</h2>
+<p>Если вы какое-то время следили за моими постами, то, возможно, знаете, что мне больше нравится думать о Raft. Raft и обсуждение с @argorak были основными мотивами всего этого исследования.</p>
+<p>Raft немного сложнее, чем приведенные выше примеры, поскольку он не просто имеет линейные состояния, где A-&gt; B-&gt; C. Вот схема перехода: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>++++++++++-+    ++++++++++--+    +++++++--+
+</span><span>|          ++++-&gt;           |    |        |
+</span><span>| Follower |    | Candidate ++++-&gt; Leader |
+</span><span>|          &lt;+++-+           |    |        |
+</span><span>+++++++--^-+    ++++++++++--+    +-++++++++
+</span><span>         |                         |
+</span><span>         +++++++++++++++++++++++++-+
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Ссылка на игровую площадку 
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// You can play around in this function.
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> is_follower </span><span style="color:#f29668;">= </span><span>Raft</span><span style="color:#f29668;">::</span><span>new(</span><span style="font-style:italic;color:#5c6773;">/* ... */</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Raft typically comes in groups of 3, 5, or 7. Just 1 for us. :)
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Simulate this node timing out first.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> is_candidate </span><span style="color:#f29668;">= </span><span>Raft</span><span style="color:#f29668;">::</span><span>&lt;Candidate&gt;</span><span style="color:#f29668;">::</span><span>from(is_follower)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// It wins! How unexpected.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> is_leader </span><span style="color:#f29668;">= </span><span>Raft</span><span style="color:#f29668;">::</span><span>&lt;Leader&gt;</span><span style="color:#f29668;">::</span><span>from(is_candidate)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Then it fails and rejoins later, becoming a Follower again.
+</span><span>    </span><span style="color:#ff7733;">let</span><span> is_follower_again </span><span style="color:#f29668;">= </span><span>Raft</span><span style="color:#f29668;">::</span><span>&lt;Follower&gt;</span><span style="color:#f29668;">::</span><span>from(is_leader)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// And goes up for election...
+</span><span>    </span><span style="color:#ff7733;">let</span><span> is_candidate_again </span><span style="color:#f29668;">= </span><span>Raft</span><span style="color:#f29668;">::</span><span>&lt;Candidate&gt;</span><span style="color:#f29668;">::</span><span>from(is_follower_again)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// But this time it fails!
+</span><span>    </span><span style="color:#ff7733;">let</span><span> is_follower_another_time </span><span style="color:#f29668;">= </span><span>Raft</span><span style="color:#f29668;">::</span><span>&lt;Follower&gt;</span><span style="color:#f29668;">::</span><span>from(is_candidate_again)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// This is our state machine.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Raft</span><span>&lt;S&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ... Shared Values
+</span><span>    state</span><span style="color:#bfbab0cc;">:</span><span> S
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The three cluster states a Raft node can be in
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// If the node is the Leader of the cluster services requests and replicates its state.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Leader </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ... Specific State Values
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// If it is a Candidate it is attempting to become a leader due to timeout or initialization.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Candidate </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ... Specific State Values
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Otherwise the node is a follower and is replicating state it receives.
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Follower </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ... Specific State Values
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Raft starts in the Follower state
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Raft</span><span>&lt;Follower&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="font-style:italic;color:#5c6773;">/* ... */</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>        Raft {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> Follower { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The following are the defined transitions between states.
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// When a follower timeout triggers it begins to campaign
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;Raft&lt;Follower&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Raft</span><span>&lt;Candidate&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>Raft&lt;Follower&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Raft&lt;Candidate&gt; {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// ... Logic prior to transition
+</span><span>        Raft {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ... attr: val.attr
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> Candidate { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// If it doesn&#39;t receive a majority of votes it loses and becomes a follower again.
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;Raft&lt;Candidate&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Raft</span><span>&lt;Follower&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>Raft&lt;Candidate&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Raft&lt;Follower&gt; {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// ... Logic prior to transition
+</span><span>        Raft {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ... attr: val.attr
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> Follower { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// If it wins it becomes the leader.
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;Raft&lt;Candidate&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Raft</span><span>&lt;Leader&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>Raft&lt;Candidate&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Raft&lt;Leader&gt; {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// ... Logic prior to transition
+</span><span>        Raft {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ... attr: val.attr
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> Leader { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// If the leader becomes disconnected it may rejoin to discover it is no longer leader
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;Raft&lt;Leader&gt;&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Raft</span><span>&lt;Follower&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span>Raft&lt;Leader&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Raft&lt;Follower&gt; {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// ... Logic prior to transition
+</span><span>        Raft {
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// ... attr: val.attr
+</span><span>            state</span><span style="color:#bfbab0cc;">:</span><span> Follower { </span><span style="font-style:italic;color:#5c6773;">/* ... */ </span><span>}
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="al-ternativy-po-otzyvam">Альтернативы по отзывам</h2>
+<p>Я видел интересный комментарий I-impv на Reddit, демонстрирующий этот подход, основанный на наших примерах выше. Вот что они сказали по этому поводу:</p>
+<p>Мне нравится, как вы это сделали. Я сам сейчас работаю над довольно сложным автоматом, и сделал это немного по-другому.</p>
+<p>Некоторые вещи я делал иначе:</p>
+<ul>
+<li>Я также смоделировал ввод для конечного автомата. Таким образом, вы можете моделировать свои переходы как соответствие (Состояние, Событие), каждая недопустимая комбинация обрабатывается шаблоном «по умолчанию».</li>
+<li>Вместо использования паники для недопустимых переходов я использовал состояние отказа, поэтому каждая недопустимая комбинация переходит в это состояние отказа</li>
+</ul>
+<p>Мне очень нравится идея моделирования ввода в переходах!</p>
+<h2 id="zakliuchitel-nye-mysli">Заключительные мысли</h2>
+<p>Rust позволяет нам довольно хорошо представить State Machines. В идеальной ситуации мы могли бы создавать перечисления с ограниченными переходами между вариантами, но это не так. Вместо этого мы можем использовать возможности дженериков и системы владения, чтобы создать что-то выразительное, безопасное и понятное.</p>
+<p>Если у вас есть отзывы или предложения по этой статье, я бы посоветовал проверить нижний колонтитул этой страницы для получения контактной информации. Я также болтаюсь в IRC Mozilla под именем Hoverbear. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

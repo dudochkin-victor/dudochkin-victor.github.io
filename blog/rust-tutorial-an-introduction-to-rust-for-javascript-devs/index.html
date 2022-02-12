@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust Tutorial: Введение в Rust для JavaScript-разработчиков | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#rust-v-dvukh-slovakh">Rust в двух словах</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#skhodstva">Сходства</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#razlichiia">Различия</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#privet-rust">Привет, Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#instrumenty"><small>- Инструменты</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#napisanie-koda-na-rust"><small>- Написание кода на Rust</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#integratsiia-s-javascript"><small>- Интеграция с JavaScript</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#kogda-ispol-zovat-rust">Когда использовать Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#simuliator-zarazheniia-koronnym-razriadom">Симулятор заражения коронным разрядом</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#interfeis-modelirovaniia"><small>- Интерфейс моделирования</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#realizatsiia-na-rust"><small>- Реализация на Rust</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#rezul-taty-sravneniia">Результаты сравнения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-tutorial-an-introduction-to-rust-for-javascript-devs/#zakliuchenie-i-dopolnitel-nye-resursy">Заключение и дополнительные ресурсы</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust Tutorial: Введение в Rust для JavaScript-разработчиков</h1>
+
+<p><a href="https://www.sitepoint.com/rust-tutorial-introduction-javascript-devs/">Перевод</a> | Автор оригинала: Nick Groenen</p>
+<p><strong>Rust - это язык программирования, созданный Mozilla Research в 2010 году. Сегодня он используется всеми крупными компаниями.</strong></p>
+<p>И Amazon, и Microsoft одобрили его как лучшую альтернативу C/C++ для своих систем. Но Rust не останавливается на достигнутом. Такие компании, как Figma и Discord, теперь лидируют, также используя Rust в своих клиентских приложениях.</p>
+<p>Это руководство по Rust направлено на то, чтобы дать краткий обзор Rust, как использовать его в браузере и когда вам следует подумать о его использовании. Я начну с сравнения Rust с JavaScript, а затем расскажу, как запустить Rust в браузере. Наконец, я представлю быструю оценку производительности моего веб-приложения-симулятора COVID, которое использует Rust и JavaScript.</p>
+<h2 id="rust-v-dvukh-slovakh">Rust в двух словах</h2>
+<p>Rust концептуально сильно отличается от JavaScript. Но есть и общие трэйты, на которые следует обратить внимание. Давайте посмотрим на обе стороны медали.</p>
+<h2 id="skhodstva">Сходства</h2>
+<p>Оба языка имеют современную систему управления пакетами. В JavaScript есть npm, в Rust есть Cargo. Вместо package.json в Rust есть Cargo.toml для управления зависимостями. Чтобы создать новый проект, используйте Cargo init, а для его запуска - cargo run. Не слишком ли чуждо, не так ли?</p>
+<p>В Rust есть много интересных функций, которые вы уже знаете по JavaScript, только с немного другим синтаксисом. Возьмите этот общий шаблон JavaScript, чтобы применить замыкание к каждому элементу в массиве: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">let </span><span>staff </span><span style="color:#f29668;">= </span><span>[
+</span><span>   {name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;George&quot;</span><span style="color:#bfbab0cc;">, </span><span>money</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>   {name</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Lea&quot;</span><span style="color:#bfbab0cc;">, </span><span>money</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">500000</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>salary </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1000</span><span style="color:#bfbab0cc;">;
+</span><span>staff</span><span style="color:#f29668;">.</span><span style="color:#f07178;">forEach</span><span>( (</span><span style="color:#f29718;">employee</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>{ employee</span><span style="color:#f29668;">.</span><span>money </span><span style="color:#f29668;">+= </span><span>salary</span><span style="color:#bfbab0cc;">; </span><span>} )</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>В Rust мы бы написали это так:</p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> salary </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1000</span><span style="color:#bfbab0cc;">;
+</span><span>staff</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter_mut</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">for_each</span><span>( 
+</span><span>    |</span><span style="color:#f29718;">employee</span><span>| { employee</span><span style="color:#f29668;">.</span><span>money </span><span style="color:#f29668;">+=</span><span> salary</span><span style="color:#bfbab0cc;">; </span><span>}
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>По общему признанию, нужно время, чтобы привыкнуть к этому синтаксису, с вертикальной чертой (|) вместо круглых скобок.
+Но после того, как я преодолел первоначальную неловкость, мне стало легче читать, чем еще один набор круглых скобок.</p>
+<p>Другой пример - деструктуризация объекта в JavaScript: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">let </span><span>point </span><span style="color:#f29668;">= </span><span>{ x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">, </span><span>y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">10 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let </span><span>{x</span><span style="color:#bfbab0cc;">,</span><span>y} </span><span style="color:#f29668;">= </span><span>point</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Аналогично в Rust: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> point </span><span style="color:#f29668;">=</span><span> Point { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">10 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> Point { x</span><span style="color:#bfbab0cc;">,</span><span> y } </span><span style="color:#f29668;">=</span><span> point</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Основное отличие состоит в том, что в Rust мы должны указывать тип (Point). В более общем плане Rust должен знать все типы во время компиляции. Но в отличие от большинства других компилируемых языков компилятор по возможности определяет типы самостоятельно.</p>
+<p>Чтобы объяснить это немного подробнее, вот код, действующий на C++ и многих других языках. Каждая переменная требует явного объявления типа: </p>
+<pre data-lang="cpp" style="background-color:#0f1419;color:#bfbab0;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#ff7733;">int</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">float</span><span> b </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">.</span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">float</span><span> c </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">.</span><span style="color:#f29718;">5 </span><span style="color:#f29668;">*</span><span> a</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>В JavaScript, как и в Rust, допустим этот код:</p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> b </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0.5</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> c </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1.5 </span><span style="color:#f29668;">*</span><span> a</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Список общих функций можно продолжать и продолжать:</p>
+<ul>
+<li>Rust имеет синтаксис async + await.</li>
+<li>Массивы могут быть созданы так же просто, как let array = [1,2,3].</li>
+<li>Код организован в модули с явным импортом и экспортом.</li>
+<li>Строковые литералы кодируются в Юникоде, без проблем обрабатывая специальные символы.</li>
+</ul>
+<p>Я мог бы продолжить список, но думаю, что теперь моя точка зрения ясна: Rust имеет богатый набор функций, которые также используются в современном JavaScript.</p>
+<h2 id="razlichiia">Различия</h2>
+<p>Rust - это скомпилированный язык, а это означает, что нет среды выполнения, которая выполняет код Rust. Приложение может работать только после того, как компилятор (rustc) совершит свое волшебство. Преимущество этого подхода - обычно лучшая производительность.</p>
+<p>К счастью, Cargo позаботится о вызове компилятора за нас. А с помощью webpack мы также сможем скрыть cargo за npm run build. С помощью этого руководства можно сохранить обычный рабочий процесс веб-разработчика после того, как Rust настроен для проекта.</p>
+<p>Rust - это строго типизированный язык, что означает, что все типы должны совпадать во время компиляции. Например, нельзя вызвать функцию с параметрами неправильного типа или неправильным количеством параметров. Компилятор перехватит ошибку, прежде чем вы столкнетесь с ней во время выполнения. Очевидное сравнение - TypeScript. Если вам нравится TypeScript, то вам, скорее всего, понравится Rust.</p>
+<p>Но не волнуйтесь: если вам не нравится TypeScript, Rust все равно может быть для вас. В последние годы Rust создавался с нуля с учетом всего, что человечество узнало о проектировании языков программирования за последние несколько десятилетий. Результат - освежающе чистый язык.</p>
+<p>Сопоставление с образцом в Rust - моя любимая функция. В других языках есть переключатель и регистр, чтобы избежать таких длинных цепочек: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">if </span><span>( x </span><span style="color:#f29668;">== </span><span style="color:#f29718;">1</span><span>) { 
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ... 
+</span><span>} </span><span style="color:#ff7733;">else if </span><span>( x </span><span style="color:#f29668;">== </span><span style="color:#f29718;">2 </span><span>) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>}
+</span><span style="color:#ff7733;">else if </span><span>( x </span><span style="color:#f29668;">== </span><span style="color:#f29718;">3 </span><span style="color:#f29668;">|| </span><span>x </span><span style="color:#f29668;">== </span><span style="color:#f29718;">4 </span><span>) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span>} </span><span style="font-style:italic;color:#5c6773;">// ...
+</span></code></pre>
+<p>Rust использует более элегантное совпадение, которое работает следующим образом: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">match</span><span> x {
+</span><span>    </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="font-style:italic;color:#5c6773;">/* Do something if x == 1 */</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">2 </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="font-style:italic;color:#5c6773;">/* Do something if x == 2 */</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">3 </span><span style="color:#f29668;">| </span><span style="color:#f29718;">4 </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="font-style:italic;color:#5c6773;">/* Do something if x == 3 || x == 4 */</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">5</span><span style="color:#f29668;">...</span><span style="color:#f29718;">10 </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="font-style:italic;color:#5c6773;">/* Do something if x &gt;= 5 &amp;&amp; x &lt;= 10 */</span><span>}</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29668;">_ =&gt; </span><span>{ </span><span style="font-style:italic;color:#5c6773;">/* Catch all other cases */ </span><span>}
+</span><span>}
+</span></code></pre>
+<p>Я думаю, что это довольно удобно, и я надеюсь, что разработчики JavaScript также оценят это расширение синтаксиса.</p>
+<p>К сожалению, мы также должны поговорить о темной стороне Rust. Говоря прямо, использование строгой системы типов иногда может показаться очень громоздким. Если вы считали системы типов C++ или Java строгими, приготовьтесь к трудному путешествию с Rust.</p>
+<p>Лично мне нравится эта часть о Rust. Я полагаюсь на строгость системы типов и, таким образом, могу отключить часть своего мозга - часть, которая сильно мучает каждый раз, когда я пишу JavaScript. Но я понимаю, что новичкам может быть очень неприятно постоянно бороться с компилятором. Кое-что из этого мы увидим позже в этом руководстве по Rust.</p>
+<h2 id="privet-rust">Привет, Rust</h2>
+<p>А теперь давайте познакомимся с Rust, работающим в браузере. Начнем с того, что убедимся, что все необходимые инструменты установлены.</p>
+<h3 id="instrumenty">Инструменты</h3>
+<ol>
+<li>Установите Cargo + rustc с помощью rustup. Rustup - это рекомендуемый способ установки Rust. Он установит компилятор (rustc) и менеджер пакетов (Cargo) для последней стабильной версии Rust. Он также может управлять бета-версиями и ночными версиями, но в этом примере это не обязательно.
+<ul>
+<li>Проверьте установку, набрав в терминале Cargo --version. Вы должны увидеть что-то вроде Cargo 1.48.0 (65cbdd2dc 2020-10-14).</li>
+<li>Также проверьте Rustup: rustup --version должен выдать rustup 1.23.0 (00924c9ba 2020-11-27).</li>
+</ul>
+</li>
+<li>Установите wasm-pack. Это необходимо для интеграции компилятора с npm.
+<ul>
+<li>Проверьте установку, набрав wasm-pack --version, что должно дать вам что-то вроде wasm-pack 0.9.1.</li>
+</ul>
+</li>
+<li>Еще нам нужны Node и npm. У нас есть полная статья, в которой объясняется, как лучше всего установить эти два.</li>
+</ol>
+<h3 id="napisanie-koda-na-rust">Написание кода на Rust</h3>
+<p>Теперь, когда все установлено, приступим к созданию проекта. Окончательный код также доступен в этом репозитории GitHub. Мы начинаем с проекта Rust, который можно скомпилировать в пакет npm. Код JavaScript, который импортирует этот пакет, появится позже.</p>
+<p>Чтобы создать проект hello-world на Rust, используйте Cargo init --lib hello-world. Это создает новый каталог и генерирует все файлы, необходимые для библиотеки Rust: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>├──hello-world
+</span><span>    ├── Cargo.toml
+</span><span>    ├── src
+</span><span>        ├── lib.rs
+</span></code></pre>
+<p>Код Rust будет помещен в lib.rs. Перед этим необходимо настроить Cargo.toml. Он определяет зависимости и другую информацию о пакете с помощью TOML. Для приветствия в браузере добавьте следующие строки где-нибудь в вашем Cargo.toml (например, в конец файла): </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">lib</span><span>]
+</span><span style="color:#59c2ff;">crate-type </span><span>= [</span><span style="color:#c2d94c;">&quot;cdylib&quot;</span><span>]
+</span></code></pre>
+<p>Это указывает компилятору создать библиотеку в режиме совместимости с C. Очевидно, что в нашем примере мы не используем C. C-совместимый просто означает, что он не зависит от Rust, а это то, что нам нужно, чтобы использовать библиотеку из JavaScript.</p>
+<p>Также нам понадобятся две внешние библиотеки. Добавьте их отдельными строками в разделе зависимостей: </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">wasm-bindgen </span><span>= </span><span style="color:#c2d94c;">&quot;0.2.68&quot;
+</span><span style="color:#59c2ff;">web-sys </span><span>= {</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.3.45&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#59c2ff;">features </span><span>= [</span><span style="color:#c2d94c;">&quot;console&quot;</span><span>]}
+</span></code></pre>
+<p>Это зависимости от crates.io, репозитория пакетов по умолчанию, который использует Cargo.</p>
+<p>wasm-bindgen необходим для создания точки входа, которую мы можем позже вызвать из JavaScript. (Вы можете найти полную документацию здесь.) Значение «0.2.68» указывает версию.</p>
+<p>web-sys содержит привязки Rust ко всем веб-API. Это даст нам доступ к консоли браузера. Обратите внимание, что мы должны явно выбрать функцию консоли. Наш окончательный двоичный файл будет содержать только привязки веб-API, выбранные таким образом.</p>
+<p>Далее идет фактический код внутри lib.rs. Автоматически созданный модульный тест можно удалить. Просто замените содержимое файла этим кодом: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">use </span><span>wasm_bindgen</span><span style="color:#f29668;">::</span><span>prelude</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>web_sys</span><span style="color:#f29668;">::</span><span>console</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">hello_world</span><span>() {
+</span><span>    console</span><span style="color:#f29668;">::</span><span>log_1(</span><span style="color:#c2d94c;">&quot;Hello world&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Операторы использования вверху предназначены для импорта элементов из других модулей. (Это похоже на импорт в JavaScript.)</p>
+<p>pub fn hello_world() {...} объявляет функцию. Модификатор pub является сокращением от «public» и действует как экспорт в JavaScript. Аннотация #[wasm_bindgen] специфична для компиляции Rust в WebAssembly (Wasm). Он нам нужен здесь, чтобы компилятор предоставлял функцию-оболочку JavaScript.</p>
+<p>В теле функции на консоль выводится «Hello world». console::log_1() в Rust - это оболочка для вызова console.log(). (Подробнее читайте здесь.)</p>
+<p>Вы заметили суффикс _1 при вызове функции? Это связано с тем, что JavaScript допускает переменное количество параметров, а Rust - нет. Чтобы обойти это, wasm_bindgen генерирует по одной функции для каждого количества параметров. Да, это может быстро стать уродливым! Но это работает. Полный список функций, которые можно вызывать на консоли из Rust, доступен в документации web-sys.</p>
+<p>Теперь у нас все должно быть на месте. Попробуйте скомпилировать его с помощью следующей команды. Это загрузит все зависимости и скомпилирует проект. В первый раз это может занять некоторое время: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cd hello-world
+</span><span>wasm-pack build
+</span></code></pre>
+<p>Хм! Компилятор Rust недоволен нами: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0308]: mismatched types
+</span><span> --&gt; src\lib.rs:6:20
+</span><span>  |
+</span><span>6 |     console::log_1(&quot;Hello world&quot;);
+</span><span>  |                    ^^^^^^^^^^^^^ expected struct `JsValue`, found `str`
+</span><span>  |
+</span><span>  = note: expected reference `&amp;JsValue`
+</span><span>             found reference `&amp;&#39;static str
+</span></code></pre>
+<p>Если вы видите другую ошибку (ошибка: сбой при связывании с cc: код выхода: 1) и вы работаете в Linux, значит, у вас отсутствуют зависимости кросс-компиляции. sudo apt install gcc-Multilib должен решить эту проблему.</p>
+<p>Как я упоминал ранее, компилятор строгий. Когда он ожидает ссылку на JsValue в качестве аргумента функции, он не принимает статическую строку. Чтобы удовлетворить компилятор, необходимо явное преобразование. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span>    console</span><span style="color:#f29668;">::</span><span>log_1(</span><span style="color:#f29668;">&amp;</span><span style="color:#c2d94c;">&quot;Hello world&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>())</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Метод into() преобразует одно значение в другое. Компилятор Rust достаточно умен, чтобы отложить, какие типы участвуют в преобразовании, поскольку сигнатура функции оставляет только одну возможность. В этом случае он будет преобразован в JsValue, который является типом оболочки для значения, управляемого JavaScript. Затем мы также должны добавить &amp;, чтобы передать его по ссылке, а не по значению, иначе компилятор снова пожалуется.</p>
+<p>Попробуйте снова запустить wasm-pack build. Если все пойдет хорошо, последняя напечатанная строка должна выглядеть так: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>[INFO]: :-) Your wasm pkg is ready to publish at /home/username/intro-to-rust/hello-world/pkg.
+</span></code></pre>
+<p>Если вам удалось зайти так далеко, теперь вы можете скомпилировать Rust вручную. Затем мы интегрируем это с npm и webpack, которые сделают это за нас автоматически.</p>
+<h3 id="integratsiia-s-javascript">Интеграция с JavaScript</h3>
+<p>В этом примере я решил поместить package.json в каталог hello-world. Мы также могли бы использовать разные каталоги для проекта Rust и проекта JavaScript. Дело вкуса.</p>
+<p>Ниже мой файл package.json. Самый простой способ - скопировать его и запустить npm install. Или запустите npm init и скопируйте только зависимости dev: </p>
+<pre data-lang="json" style="background-color:#0f1419;color:#bfbab0;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>    </span><span style="color:#c2d94c;">&quot;name&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;hello-world&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;version&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;1.0.0&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;description&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Hello world app for Rust in the browser.&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;main&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;index.js&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;scripts&quot;</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        </span><span style="color:#c2d94c;">&quot;build&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;webpack&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;serve&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;webpack serve&quot;
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;author&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;Jakob Meier &lt;inbox@jakobmeier.ch&gt;&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;license&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;(MIT OR Apache-2.0)&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#c2d94c;">&quot;devDependencies&quot;</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        </span><span style="color:#c2d94c;">&quot;@wasm-tool/wasm-pack-plugin&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;~1.3.1&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;@webpack-cli/serve&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;^1.1.0&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;css-loader&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;^5.0.1&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;style-loader&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;^2.0.0&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;webpack&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;~5.8.0&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;webpack-cli&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;~4.2.0&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#c2d94c;">&quot;webpack-dev-server&quot;</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;~3.11.0&quot;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Как видите, мы используем webpack 5. Wasm-pack также работает со старыми версиями webpack или даже без сборщика. Но каждая установка работает по-своему. Я бы посоветовал вам использовать те же самые версии, когда вы будете следовать этому руководству по Rust.</p>
+<p>Еще одна важная зависимость - wasm-pack-plugin. Это плагин для веб-пакетов, специально предназначенный для загрузки пакетов Rust, созданных с помощью wasm-pack.</p>
+<p>Двигаясь дальше, нам также необходимо создать файл webpack.config.js для настройки webpack. Вот как это должно выглядеть: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>path </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;path&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>webpack </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;webpack&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>WasmPackPlugin </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@wasm-tool/wasm-pack-plugin&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">module</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">exports </span><span style="color:#f29668;">= </span><span>{
+</span><span>    entry</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;./src/index.js&#39;</span><span style="color:#bfbab0cc;">,
+</span><span>    output</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        path</span><span style="color:#bfbab0cc;">: </span><span>path</span><span style="color:#f29668;">.</span><span style="color:#f07178;">resolve</span><span>(__dirname</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&#39;dist&#39;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        filename</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;index.js&#39;</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    plugins</span><span style="color:#bfbab0cc;">: </span><span>[
+</span><span>        </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">WasmPackPlugin</span><span>({
+</span><span>            crateDirectory</span><span style="color:#bfbab0cc;">: </span><span>path</span><span style="color:#f29668;">.</span><span style="color:#f07178;">resolve</span><span>(__dirname</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;.&quot;</span><span>)
+</span><span>        })</span><span style="color:#bfbab0cc;">,
+</span><span>    ]</span><span style="color:#bfbab0cc;">,
+</span><span>    devServer</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        contentBase</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;./src&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>        hot</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    module</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        rules</span><span style="color:#bfbab0cc;">: </span><span>[{
+</span><span>            test</span><span style="color:#bfbab0cc;">: </span><span style="color:#95e6cb;">/\.css</span><span style="color:#ff7733;">$</span><span style="color:#95e6cb;">/</span><span style="color:#ff7733;">i</span><span style="color:#bfbab0cc;">,
+</span><span>            use</span><span style="color:#bfbab0cc;">: </span><span>[</span><span style="color:#c2d94c;">&quot;style-loader&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;css-loader&quot;</span><span>]</span><span style="color:#bfbab0cc;">,
+</span><span>        }</span><span style="color:#bfbab0cc;">, </span><span>]
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>    experiments</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        syncWebAssembly</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">,
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Все пути настроены так, чтобы код Rust и код JavaScript располагались рядом. Index.js будет в папке src рядом с lib.rs. Не стесняйтесь настраивать их, если вы предпочитаете другую настройку.</p>
+<p>Вы также заметите, что мы используем эксперименты с веб-пакетами - новый параметр, представленный в веб-пакете 5. Убедитесь, что для параметра syncWebAssembly установлено значение true.</p>
+<p>Наконец, нам нужно создать точку входа JavaScript, src/index.js: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#f29668;">import</span><span>(</span><span style="color:#c2d94c;">&quot;../pkg&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">catch</span><span>(</span><span style="color:#f29718;">e </span><span style="color:#ff7733;">=&gt; </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">error</span><span>(</span><span style="color:#c2d94c;">&quot;Failed loading Wasm module:&quot;</span><span style="color:#bfbab0cc;">, </span><span>e))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">then</span><span>(
+</span><span>    </span><span style="color:#f29718;">rust </span><span style="color:#ff7733;">=&gt;
+</span><span>        rust</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">hello_world</span><span>()
+</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Мы должны загружать модуль Rust асинхронно. Вызов rust.hello_world() вызывает сгенерированную функцию-оболочку, которая, в свою очередь, вызывает функцию hello_world Rust, определенную в lib.rs.</p>
+<p>Запуск npm run serve должен теперь скомпилировать все и запустить сервер разработки. Мы не определили HTML-файл, поэтому на странице ничего не отображается. Вероятно, вам также придется перейти на http: // localhost: 8080 / index вручную, поскольку http: // localhost: 8080 просто перечисляет файлы без выполнения какого-либо кода.</p>
+<p>Получив пустую страницу, откройте консоль разработчика. В журнале должна быть запись с Hello World.</p>
+<p>Хорошо, это было довольно сложно для простого привет, мир. Но теперь, когда все готово, мы можем легко расширить код Rust, не беспокоясь об этом. После сохранения изменений в lib.rs вы должны автоматически увидеть перекомпиляцию и оперативное обновление в браузере, как и в случае с JavaScript!</p>
+<h2 id="kogda-ispol-zovat-rust">Когда использовать Rust</h2>
+<p>Rust не является общей заменой JavaScript. Он может работать только в браузере через Wasm, и это немного ограничивает его полезность. Даже несмотря на то, что вы могли бы заменить практически весь код JavaScript на Rust, если бы действительно захотели, это плохая идея и не для чего был создан Wasm. Например, Rust не подходит для взаимодействия с пользовательским интерфейсом вашего веб-сайта.</p>
+<p>Я думаю о Rust + Wasm как о дополнительной опции, которую можно использовать для более эффективного выполнения рабочей нагрузки, загружающей процессор. За счет больших размеров загрузки Wasm избегает накладных расходов на синтаксический анализ и компиляцию, с которыми сталкивается код JavaScript. Это, плюс сильная оптимизация компилятора, потенциально приводит к повышению производительности. Обычно поэтому компании выбирают Rust для конкретных проектов. Еще одна причина выбрать Rust - это языковые предпочтения. Но это совершенно другое обсуждение, в которое я не буду вдаваться.</p>
+<h2 id="simuliator-zarazheniia-koronnym-razriadom">Симулятор заражения коронным разрядом</h2>
+<p>Пришло время создать настоящее приложение, которое раскрывает всю мощь Rust в браузере! Ниже представлена живая демонстрация CodePen. Если вы предпочитаете смотреть его в полном размере, нажмите здесь. Также доступен репозиторий с кодом.</p>
+<p>Сетка внизу содержит ячейки, которые являются объектами моделирования. Красный квадрат представляет клетку, инфицированную вирусом. Нажимая на отдельные ячейки, вы можете добавлять или удалять инфекции.</p>
+<p>Кнопка «Начать моделирование» будет имитировать инфекцию между ячейками с небольшой задержкой между днями моделирования. При нажатии кнопки с надписью «Следующий день» будет имитироваться один день.</p>
+<p>Правила заражения просты. У здоровой клетки есть определенный шанс заразиться для каждого зараженного соседа в радиусе заражения. После фиксированного количества дней заражения клетка восстанавливается и становится невосприимчивой для остальной части моделирования. Также существует определенная вероятность того, что инфицированная клетка умирает каждый день от заражения до выздоровления.</p>
+<p>Форма в правом верхнем углу управляет различными параметрами моделирования. Их можно обновить в любое время и вступить в силу на следующий день. Если вы измените размер сетки, симуляция будет сброшена.</p>
+<p>Большая часть того, что вы видите, реализована на JavaScript. Только при нажатии на Next Day или Start Simulation будет вызван код Rust для расчета всех заражений. Я также реализовал эквивалентный интерфейс в JavaScript, чтобы мы могли легко провести сравнение производительности позже. Ползунок, переключающийся между Rust и JS, меняется между двумя реализациями. Даже при запуске автоматизированного моделирования это вступает в силу немедленно (на следующий день). </p>
+<h3 id="interfeis-modelirovaniia">Интерфейс моделирования</h3>
+<p>Объект моделирования (реализованный в Rust и JavaScript) предоставляет только один класс с конструктором и два дополнительных метода. Сначала я дам вам обозначение JavaScript: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export class </span><span style="color:#59c2ff;">JsSimulation </span><span>{
+</span><span>    </span><span style="color:#ff7733;">constructor</span><span>() { 
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/* implementation omitted */ 
+</span><span>    }
+</span><span>    </span><span style="color:#ffb454;">reconfigure</span><span>(
+</span><span>        </span><span style="color:#f29718;">w</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29718;">h</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29718;">radius</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29718;">recovery</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29718;">infection_rate</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f29718;">death_rate</span><span style="color:#bfbab0cc;">,
+</span><span>    ) { 
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/* implementation omitted */ 
+</span><span>    }
+</span><span>    </span><span style="color:#ffb454;">next_day</span><span>(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">output</span><span>) { 
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/* implementation omitted */ 
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Конструктор не принимает аргументов. Он просто установит для всех параметров конфигурации значения по умолчанию. Используя reconfigure(), можно установить значения из HTML-формы. Наконец, next_day() принимает входной Uint8Array и выходной Uint8Array.</p>
+<p>В Rust класс определяется следующим образом: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Simulation </span><span>{ </span><span style="font-style:italic;color:#5c6773;">/* fields omitted */ </span><span>}
+</span></code></pre>
+<p>В Rust нет понятия классов. Есть только struct. Определение структуры Simulation, как указано выше, с аннотацией #[wasm_bindgen] приведет к созданию класса оболочки JavaScript, который можно использовать в качестве прокси.</p>
+<p>Чтобы определить методы в структуре, мы используем блок impl в Rust. Таких блоков для структуры может быть много, разбросанных по разным файлам. В этом примере нам нужен только один из них: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>]
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Simulation </span><span>{
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">wasm_bindgen</span><span>(constructor)]
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> Simulation {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/* implementation omitted */
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">reconfigure</span><span>(
+</span><span>        </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>,
+</span><span>        </span><span style="color:#f29718;">w</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>        </span><span style="color:#f29718;">h</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>        </span><span style="color:#f29718;">radius</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>        </span><span style="color:#f29718;">recovery</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>        </span><span style="color:#f29718;">infection_rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>        </span><span style="color:#f29718;">death_rate</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>    ) {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/* implementation omitted */
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">next_day</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">u8</span><span>], </span><span style="color:#f29718;">output</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> [</span><span style="color:#ff7733;">u8</span><span>]) {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/* implementation omitted */
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Самое большое отличие от JavaScript состоит в том, что все типы явно упоминаются в сигнатурах функций. Например, w: usize означает, что параметр w имеет тип usize, который представляет собой целое число без знака, размер которого соответствует естественному размеру целевой архитектуры (например, 64-битной). С другой стороны, простое u8 - это 8-битовое целое число без знака на всех платформах.</p>
+<p>В функции next_day() два параметра input: &amp;[u8], output: &amp;mut [u8] ожидают каждый фрагмент u8, который по сути является массивом. Заметили ключевое слово mut в типе вывода? Это сообщает компилятору, что мы собираемся изменить содержимое массива, тогда как из входного массива мы будем только читать. (Компилятор остановит нас, если мы попытаемся изменить ввод.)</p>
+<p>Еще есть странный параметр &amp;mut self. Это эквивалент этого в JavaScript. Если метод изменяет внутреннее состояние объекта, это должно быть обозначено явным добавлением &amp;mut self в список параметров. Если вы читаете только из поля объекта, но не меняете, то &amp;self тоже подойдет. Если ни к каким полям объекта нет доступа вообще, упоминать себя не нужно.</p>
+<p>В качестве возвращаемого типа функции Rust использует обозначение стрелки (-&gt;). Итак, fn new() -&gt; Simulation - это функция, возвращающая объект Simulation. И поскольку я добавил аннотацию #[wasm_bindgen (constructor)], эта функция будет вызываться, когда код JavaScript вызывает конструктор в классе-оболочке, как в let sim = new Simulation().</p>
+<h4 id="proizvoditel-nost-statusa-zarazheniia">Производительность статуса заражения</h4>
+<p>Входные и выходные массивы используют однобайтовое целое число без знака для представления статуса заражения каждой ячейки. Нам нужно как-то закодировать всю необходимую информацию о ячейке внутри этого байта.</p>
+<p>В JavaScript я определил несколько констант для представления различных возможностей: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>HEALTHY           </span><span style="color:#f29668;">=      </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>INFECTED_DAY_0    </span><span style="color:#f29668;">=      </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>INFECTED_DAY_MAX  </span><span style="color:#f29668;">=     </span><span style="color:#f29718;">64</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>IMMUNE            </span><span style="color:#f29668;">=    </span><span style="color:#f29718;">100</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>DEAD              </span><span style="color:#f29668;">=    </span><span style="color:#f29718;">101</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Для статуса заражения нам нужно подсчитать, сколько дней клетка уже была больна, чтобы применить восстановление через определенное количество дней. Следовательно, константы дают минимальное и максимальное значение. Любое промежуточное значение представляет инфицированную ячейку.</p>
+<p>В Rust мы можем сделать то же самое с перечислением вроде этого: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">InfectionStatus </span><span>{
+</span><span>    Healthy</span><span style="color:#bfbab0cc;">,
+</span><span>    Infected(</span><span style="color:#ff7733;">u8</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Immune</span><span style="color:#bfbab0cc;">,
+</span><span>    Dead</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Значение типа InfectionStatus может принимать любое из указанных выше значений. Rust присваивает значениям уникальные числа, и нам, программистам, не о чем беспокоиться. Кроме того, перечисления Rust более гибкие, чем перечисления в стиле C. Для значения варианта Infected доступно дополнительное связанное число типа u8, представляющее количество дней, в течение которых ячейка была инфицирована.</p>
+<h3 id="realizatsiia-na-rust">Реализация на Rust</h3>
+<p>Давайте посмотрим на реализацию fn next_day() в Rust. Он начинается с двух вложенных циклов for, которые проходят через все ячейки в сетке: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">for</span><span> x </span><span style="color:#f29668;">in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>w {
+</span><span>    </span><span style="color:#ff7733;">for</span><span> y </span><span style="color:#f29668;">in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>h {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">/* ...more code... */
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>В этом примере x изменяется от 0 до self.w (исключая self.w). Две точки между двумя значениями создают диапазон целых чисел, который повторяется в цикле for. Так написаны циклы for в Rust: некоторая переменная x выполняет итерацию по чему-то итерируемому. В этом случае итерация представляет собой диапазон чисел. Точно так же мы могли бы перебирать значения массива (для элемента в срезе {/ * сделать что-нибудь с элементом * /}).</p>
+<p>Заглянув внутрь тела цикла, он начинается с поиска во входном массиве: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> current </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#bfbab0cc;">,</span><span> y)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Функция get определена ниже в lib.rs. Он считывает соответствующий u8 из входного массива и преобразует его в InfectionStatus в соответствии с константами, определенными в JavaScript. Таким образом, текущая переменная имеет тип InfectionStatus, и мы можем использовать для нее мощные средства сопоставления с образцом в Rust: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">let</span><span> current </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get</span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#bfbab0cc;">,</span><span> y)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let mut</span><span> next </span><span style="color:#f29668;">=</span><span> current</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">match</span><span> current {
+</span><span>    Healthy </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chance_to_catch_covid_today</span><span>(input</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#bfbab0cc;">,</span><span> y) </span><span style="color:#f29668;">&gt; </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>rng</span><span style="color:#f29668;">.</span><span style="color:#f07178;">gen</span><span>() {
+</span><span>            next </span><span style="color:#f29668;">=</span><span> Infected(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>    Infected(days) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>death_rate </span><span style="color:#f29668;">&gt; </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>rng</span><span style="color:#f29668;">.</span><span style="color:#f07178;">gen</span><span>() {
+</span><span>            next </span><span style="color:#f29668;">=</span><span> Dead</span><span style="color:#bfbab0cc;">;
+</span><span>        } </span><span style="color:#ff7733;">else if</span><span> days </span><span style="color:#f29668;">&gt;= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>recovery {
+</span><span>            next </span><span style="color:#f29668;">=</span><span> Immune</span><span style="color:#bfbab0cc;">;
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            next  </span><span style="color:#f29668;">=</span><span> Infected(days </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>    Dead </span><span style="color:#f29668;">|</span><span> Immune </span><span style="color:#f29668;">=&gt; </span><span>{ </span><span style="font-style:italic;color:#5c6773;">/* NOP */ </span><span>}
+</span><span>}
+</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>(output</span><span style="color:#bfbab0cc;">,</span><span> x</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">,</span><span> next)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Хорошо, это много кода. Позвольте мне сломать это. Сначала мы устанавливаем рядом то же значение, что и current. (По умолчанию статус выхода должен быть таким же, как статус входа.) Затем соответствующий текущий блок переключает возможности для текущего статуса заражения.</p>
+<p>Если ячейка сейчас здорова, мы вычисляем шанс заразиться сегодня в отдельной функции, которая будет перебирать всех соседей в заданном радиусе. (Подробности здесь опущены.) Эта функция возвращает значение от 0,0 до 1,0, которое мы сравниваем со случайным числом в том же диапазоне, созданным на месте. Если шанс заразиться сегодня выше случайного числа, мы устанавливаем рядом с Infected (1), что означает, что это первый день заражения клетки. (Примечание: в Rust мы обычно опускаем скобки вокруг условия if.)</p>
+<p>Если клетка уже заражена, мы проверяем две вещи. Во-первых, умрет ли клетка сегодня, опять же на основе случайного числа, сгенерированного на месте. Если ячейке не повезло, для следующей устанавливается значение «Мертвая». 😢 В противном случае мы проверяем, наступила ли дата восстановления, и в этом случае новый статус будет Иммунный. Наконец, если ни одна из двух проверок не дала положительного результата, счетчик дня заражения увеличивается на единицу.</p>
+<p>Последний вариант сопоставления с образцом - это то, что клетка уже мертва или имеет иммунитет. В обоих случаях мы ничего не делаем.</p>
+<p>После выражения соответствия мы вызываем функцию установки, которая принимает значение InfectionStatus. Он преобразует значение обратно в u8 и записывает его в выходной массив. Я не буду вдаваться в подробности реализации этого здесь, но я рекомендую вам взглянуть на исходный код, если вам интересно.</p>
+<p>И это все! Этот цикл выполняется один раз на каждый день моделирования. Больше ничего.</p>
+<h2 id="rezul-taty-sravneniia">Результаты сравнения</h2>
+<p>Последний вопрос: стоило ли вообще здесь использовать Rust? Чтобы ответить на этот вопрос, я выбрал пару настроек и сравнил скорость реализации Rust с таковой в JavaScript. Чего бы вы ожидали? Ответ может вас удивить.</p>
+<p>При настройках по умолчанию (100 ячеек, радиус заражения = 2) первый день моделирования занимает в среднем 0,11 мс с Rust и 0,72 мс с JavaScript. Так что Rust более чем в шесть раз быстрее! Но по мере того, как я увеличивал размер и продолжал моделирование в течение нескольких дней моделирования, JavaScript внезапно выполнял ту же работу за половину времени, которое требуется Rust.</p>
+<p>Ниже приведены графики экспериментов с большим количеством ячеек и измененным радиусом, что увеличивает общую рабочую нагрузку. Я выполнил этот тест на своем настольном ПК.</p>
+<p><img src="/imgs/posts/0f5b5298_01.svg" alt="Диаграмма, показывающая время моделирования за первые 10 дней на desktop" /></p>
+<p>График показывает, что Rust значительно быстрее JavaScript в первый день моделирования, независимо от настроек. Это когда код JavaScript должен быть проанализирован, скомпилирован и оптимизирован. После этого код JavaScript с каждым днем становится все быстрее, поскольку JIT-компилятор оптимизирует ветки. Версия Rust сохраняет относительно стабильное время выполнения в течение всех дней.</p>
+<p>В этом примере JIT-компилятор отлично справляется. Вся рабочая нагрузка - это один огромный цикл, выполняющий одни и те же вычисления снова и снова с незначительно изменяющимися значениями. Оптимизация этого во время выполнения дает лучшие результаты даже, чем оптимизация Rust во время компиляции.</p>
+<p>Чтобы немного разобраться, я провел те же тесты на своем Samsung Galaxy S7. Я предполагал, что встроенный в мобильные браузеры JIT-компилятор будет менее агрессивным, что затруднит эффективное выполнение кода JavaScript.</p>
+<p><img src="/imgs/posts/0f5b5298_02.svg" alt="Диаграмма, показывающая время моделирования за первые 10 дней на мобильном устройстве" /></p>
+<p>Действительно, результаты на моем телефоне были намного больше в пользу Rust на моем мобильном телефоне! В первый день моделирования с 3000 узлов версия Rust была в 36,9 раза быстрее (1,45 мс против 53,5 мс)! Начиная с четвертого дня, эксперимент с 3000 и 10000 узлов достиг относительно стабильной производительности для JavaScript. Но даже там Rust был быстрее в 2,5–3 раза (около 28 мс против 79 мс для 10 тыс. Узлов).</p>
+<p>Хотя приложение COVID Simulation не является репрезентативным примером всех приложений Wasm, оно уже показывает, что выбор между реализациями Wasm и JavaScript зависит от многих факторов. Wasm может быть намного быстрее в определенных обстоятельствах и, как правило, более согласован, чем его аналог на JavaScript. Но без тщательного тестирования трудно предсказать, какой из двух будет лучше работать на устройстве конечного пользователя.</p>
+<p>Выполнение необходимых тестов на самом деле может быть довольно простым - при условии, что вы написали быстрый прототип Rust, который хотите сравнить с существующей реализацией JavaScript. Вам нужно измерить, сколько времени требуется для выполнения кода Rust, включая накладные расходы на вызовы из JavaScript. Это можно очень легко измерить, используя только JavaScript: </p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>t0 </span><span style="color:#f29668;">= </span><span>performance</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">now</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>wasm</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">expensiveCall</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>t1 </span><span style="color:#f29668;">= </span><span>performance</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">now</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">`Rust code executed in ${</span><span>t1 </span><span style="color:#f29668;">- </span><span>t0</span><span style="color:#c2d94c;">}ms`</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>В этом туториале по Rust я сделал именно это. Версия, развернутая в демоверсии CodePen, которая также была связана ранее, по-прежнему содержит тестовый код. Вы можете просто открыть консоль разработчика, чтобы узнать время, которое вы получаете на своем устройстве.</p>
+<h2 id="zakliuchenie-i-dopolnitel-nye-resursy">Заключение и дополнительные ресурсы</h2>
+<p>В этом руководстве по Rust я показал шаги по интеграции Rust в проект JavaScript. Поддержка Wasm для Rust достигла приличной зрелости, так что ее можно использовать в вашей работе. Шаблон hello world из этого урока должен стать хорошим началом для этого. Кроме того, есть официальное руководство по wasm-bindgen с гораздо более подробной информацией и опциями.</p>
+<p>С помощью приложения COVID Simulation я продемонстрировал, как создать законченное приложение с помощью Rust в браузере. Чтобы количественно оценить производительность Rust, я реализовал полное приложение также на JavaScript и провел несколько тестов. Оценка производительности была немного в пользу JavaScript для настольных ПК, но явно в пользу Rust для мобильных устройств. Главный вывод заключается в том, что только сравнительный анализ может точно сказать, какой язык работает быстрее для вашего приложения.</p>
+<p>В этом уроке я также немного рассказал о Rust в целом. Rust - сложный язык для изучения, поэтому я намеренно избегал вдаваться в подробности в этом введении. Если вы действительно хотите изучить Rust, я очень рекомендую книгу Rust и руководство по Rust на примерах в качестве ваших основных источников.</p>
+<p>Спасибо, что дочитали до конца! Если вам понравился этот учебник по Rust, вам также может понравиться часть содержимого, которое я разместил в своем личном блоге. Будьте моим гостем и посмотрите, как Rust встречается с Интернетом - столкновение парадигм программирования для более критического взгляда на Rust в браузере.</p>
+<p>Готовы ли вы запрыгнуть на поезд Rust, пока он все еще набирает скорость? </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

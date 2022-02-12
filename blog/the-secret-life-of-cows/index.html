@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Тайная жизнь коров | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#organizatsiia-dannykh">Организация данных</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#gde-nakhodiatsia-nashi-dannye"><small>- Где находятся наши данные</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#strukturirovanie-dannykh"><small>- Структурирование данных</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#udalenie-dannykh"><small>- Удаление данных</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#net-nenuzhnogo-kopirovaniia"><small>- Нет ненужного копирования</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#chto-takoe-korova">Что такое корова?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#standartnyi-primer"><small>- Стандартный пример</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#muskulistoe-opredelenie"><small>- Мускулистое определение</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#korovy-v-dikoi-prirode">Коровы в дикой природе</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#smeshannye-staticheskie-i-dinamicheskie-stroki"><small>- Смешанные статические и динамические строки</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#kontrol-nye-pokazateli">Контрольные показатели</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/the-secret-life-of-cows/#serde"><small>- Серде</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Тайная жизнь коров</h1>
+
+<p><a href="https://deterministic.space/secret-life-of-cows.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Многие на RustFest Paris упоминали коров - что может быть удивительно, если вы никогда не видели std::заимствовать::Cow!</p>
+<p>Cow в этом контексте означает «Клонировать при записи» и представляет собой тип, который позволяет повторно использовать данные, если они не были изменены. Почему-то эти бычьи сверхспособности стандартной библиотеки Rust, кажется, хорошо хранятся в секрете, хотя они и не новы. В этом посте мы углубимся в этот очень полезный тип указателя, объяснив, почему в языках системного программирования вам нужен такой тонкий контроль, подробно объясним Cows и сравните их с другими способами организации ваших данных.</p>
+<h2 id="organizatsiia-dannykh">Организация данных</h2>
+<p>Вот к чему все сводится: люди хотят иметь хороший и точный способ организации своих данных. И они хотят, чтобы их язык программирования поддерживал их. Вот почему многие новые языки включают в себя набор структур данных, оптимизированных для различных случаев использования, и именно поэтому разработчики программного обеспечения так часто имеют дело с документацией по API. Чтобы гарантировать, что ваш код имеет ожидаемые характеристики производительности, важно знать, какой фрагмент данных представлен в каком виде.</p>
+<p>В языках системного программирования это в некоторых отношениях даже более важно. Ты хочешь знать:</p>
+<ol>
+<li>где именно находятся ваши данные,</li>
+<li>что он эффективно хранится,</li>
+<li>что он удаляется, как только вы перестанете его использовать,</li>
+<li>И что вы не копируете это без нужды.</li>
+</ol>
+<p>Обеспечение всех этих свойств - отличный способ писать быстрые программы. Давайте посмотрим, как это сделать в Rust.</p>
+<h3 id="gde-nakhodiatsia-nashi-dannye">Где находятся наши данные</h3>
+<p>Совершенно ясно, где находятся ваши данные. По умолчанию примитивные типы и структуры, содержащие примитивные типы, размещаются в стеке без какого-либо выделения динамической памяти. Если вы хотите хранить данные размера, известного только во время выполнения (например, текстовое содержимое файла), вам необходимо использовать тип, который динамически выделяет память (в куче), например String или Vec. Вы можете явно выделить тип данных в куче, заключив его в Box.</p>
+<p>(Если вы не знакомы с понятием «стек и куча», вы можете найти хорошее объяснение в этой главе официальной книги Rust.)</p>
+<p>Создание новой (непустой) строки означает выделение памяти, что является довольно затратной операцией. Такой язык, как Rust, дает вам довольно много возможностей пропустить некоторые выделения, и это может значительно ускорить критические для производительности части вашего кода. (Спойлер: Корова - один из таких вариантов.)</p>
+<h3 id="strukturirovanie-dannykh">Структурирование данных</h3>
+<p>Если вы знаете, что вы будете делать со своими данными, вы, вероятно, сможете придумать, как их лучше всего хранить. Если вы, например, всегда просматриваете известный список значений, вам подойдет массив (или Vec). Если вам нужно искать значения по известным ключам, и вам не важен порядок их хранения, хеш-карта - это хорошо. Если вам нужен стек для размещения данных из разных потоков, вы можете использовать crossbeam-deque. Это просто для того, чтобы дать вам несколько примеров - есть книги по этой теме, и вы должны их прочитать. Корова сама по себе здесь не поможет, но вы можете использовать ее в своих структурах данных. </p>
+<h3 id="udalenie-dannykh">Удаление данных</h3>
+<p>К счастью, в Rust легко убедиться, что наши данные удаляются из памяти как можно скорее (чтобы мы не использовали слишком много памяти и не замедляли работу системы). Rust использует модель владения, при которой ресурсы автоматически удаляются, когда они выходят за пределы области видимости, поэтому нет необходимости периодически запускать сборщик мусора для освобождения памяти. Конечно, вы все равно можете тратить память, выделяя слишком много ее вручную или создавая ссылочные циклы и сбрасывая ее.</p>
+<h3 id="net-nenuzhnogo-kopirovaniia">Нет ненужного копирования</h3>
+<p>Один из важных шагов к тому, чтобы быть ответственным гражданином в отношении использования памяти, - это не копировать данные больше, чем необходимо. Если у вас, например, есть функция, которая удаляет пробелы в начале строки, вы можете создать новую строку, содержащую только символы после ведущего пробела. (Помните: новая строка означает новое выделение памяти.) Или вы можете вернуть часть исходной строки, которая начинается после ведущего пробела. Второй вариант требует, чтобы мы сохранили исходные данные, потому что наш новый фрагмент просто ссылается на него внутри. Это означает, что вместо копирования любого количества байтов, которое содержит ваша строка, мы просто записываем два числа: указатель на точку в исходной строке после ведущего пробела и длину оставшейся строки, которая нас интересует. (В Rust принято носить с собой длину.)</p>
+<p>Но как насчет более сложной функции? Представим, что мы хотим заменить некоторые символы в строке. Всегда ли нам нужно копировать это с замененными символами? Или можно поступить по-умному и вернуть какой-нибудь указатель на исходную строку, если в замене не было необходимости? Действительно, в Rust это возможно! В этом вся суть Cow.</p>
+<h2 id="chto-takoe-korova">Что такое корова?</h2>
+<p>В Rust сокращение «Cow» означает «клонировать при записи» 1. Это перечисление с двумя состояниями: Borrowed и Owned. Это означает, что вы можете использовать его, чтобы абстрагироваться от того, владеете ли вы данными или просто имеете на них ссылку. Это особенно полезно, когда вы хотите вернуть тип из функции, которую может или не нужно выделять.</p>
+<h3 id="standartnyi-primer">Стандартный пример</h3>
+<p>Давайте посмотрим на пример. Допустим, у вас есть путь и вы хотите преобразовать его в строку. К сожалению, не все пути файловой системы допустимы для UTF-8 (строки Rust гарантированно имеют кодировку UTF-8). В Rust есть удобная функция для получения строки независимо: Path::to_string_lossy. Когда путь уже является допустимым UTF-8, он вернет ссылку на исходные данные, в противном случае он создаст новую строку, в которой недопустимые символы заменены символом �. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>borrow</span><span style="color:#f29668;">::</span><span>Cow</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>path</span><span style="color:#f29668;">::</span><span>Path</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> path </span><span style="color:#f29668;">= </span><span>Path</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#c2d94c;">&quot;foo.txt&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">match</span><span> path</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string_lossy</span><span>() {
+</span><span>    Cow</span><span style="color:#f29668;">::</span><span>Borrowed(_str_ref) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;path was valid UTF-8&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>    Cow</span><span style="color:#f29668;">::</span><span>Owned(_new_string) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;path was not valid UTF-8&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<h3 id="muskulistoe-opredelenie">Мускулистое определение</h3>
+<p>Имея это в виду, давайте посмотрим на фактическое определение коровы: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Cow</span><span>&lt;&#39;a, B: ToOwned + ?Sized + &#39;a&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Borrowed data.
+</span><span>    Borrowed(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> B)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Owned data.
+</span><span>    Owned(</span><span style="color:#f29668;">&lt;</span><span>B </span><span style="color:#f29668;">as </span><span style="font-style:italic;color:#39bae6;">ToOwned</span><span style="color:#f29668;">&gt;::</span><span>Owned)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Как видите, требуется некоторое убеждение, чтобы Rust принял этот тип таким образом, чтобы мы могли с ним работать. Давайте пройдемся по порядку.</p>
+<ul>
+<li>
+<p>'a - время жизни, в течение которого нам нужно, чтобы наши данные были действительными. Для случая Owned это не очень интересно (чтобы Cow владела данными - это действительно до тех пор, пока Cow не выйдет из области видимости), но в случае, если Cow содержит заимствованные данные, это время жизни является ограничением, установленным данными, на которые мы ссылаемся. У нас не может быть коровы, которая ссылается на уже освобожденную память, и rustc сообщит нам, когда это возможно, упомянув, что корова переживает свое 'a.</p>
+</li>
+<li>
+<p>ToOwned - это трэйта, которая определяет метод преобразования заимствованных данных в собственные данные (скорее всего, путем клонирования и предоставления нам права собственности на новое распределение). Тип, который мы получаем от этого метода, является ассоциированным типом для трэйта, и его имя принадлежит (да, то же имя, что и вариант Cow, извините). Это позволяет нам ссылаться на него в <code>Owned (&lt;B as ToOwned&gt;::Owned)</code>.</p>
+</li>
+<li>
+<p>Чтобы сделать это немного более конкретным, предположим, что у нас есть Cow, которая хранит &amp;str (в случае Borrowed). Реализация ToOwned для str имеет тип Owned = String, поэтому &lt;&amp;str as ToOwned&gt;::Owned == String.</p>
+</li>
+</ul>
+<p>-? Размер забавный. По умолчанию Rust ожидает, что все типы будут иметь известный размер, что выражается неявным ограничением для свойства маркера Sized. Вы можете явно отказаться от этого, добавив «ограничение» на? Sized.</p>
+<blockquote>
+<p>Дело в том, что не все возможные типы имеют известный размер. Например, [u8] - это массив байтов где-то в памяти, но мы не знаем его длины. В коде приложения вы не увидите подобный тип напрямую, вы увидите его за ссылками. И обратите внимание: в Rust сама ссылка может содержать длину. (Смотрите, что я писал выше о срезах!)</p>
+</blockquote>
+<blockquote>
+<p>Но как это снова относится к Корове? Видите ли, буква B в определении Cow находится за ссылкой: когда-то видна непосредственно в варианте Borrowed, а второй тип скрыт в ToOwned::Owned (который имеет тип Borrow <Self>). Поскольку корова должна иметь возможность содержать &amp;[u8], ее определение должно работать для &amp;'a B, где B = [u8]. Это, в свою очередь, означает, что нужно сказать: «Нам не требуется, чтобы это было Sized, мы все равно знаем, что это за ссылкой» - именно это и делает синтаксис? Sized.</p>
+</blockquote>
+<p>Хорошо, пока все хорошо! Однако позвольте мне указать на одну вещь: если вы хотите сохранить входную строку &amp;'в корове (например, используя Cow::Borrowed (&amp;' input str)), каков конкретный тип коровы? (Общий - Cow &lt;'a, T&gt;.)</p>
+<p>Правильно! Корова &lt;'input, str&gt;! Определение типа для заимствованного варианта содержит &amp;'a T, поэтому наш общий тип - это тип, на который мы ссылаемся. Это также означает, что ToOwned нужно реализовывать не для ссылок, а для конкретных типов, таких как str и Path.</p>
+<p>Позвольте мне отметить кое-что об этом времени жизни, которое корова несет с собой очень быстро: если вы хотите заменить тип полосы в struct Foo {bar: String} на Cow, вам нужно будет указать время жизни ссылки, которую может include: struct Foo &lt;'a&gt; {bar: Cow &lt;' a, str&gt;}. Это означает, что каждый раз, когда вы теперь используете Foo, это время жизни будет отслеживаться, и каждый раз, когда вы берете или возвращаете Foo, вам может потребоваться просто аннотировать его.</p>
+<p>Один из простых способов обойти это - использовать static: вы можете опустить аннотацию времени жизни в своей структуре, но ваша Cow может содержать только ссылки на статическую память. Это может показаться менее полезным, чем универсальное время жизни - потому что это так, - но в случае функций и типов, которые содержат или возвращают новые данные или статические значения по умолчанию, известные во время компиляции, этого может быть достаточно.</p>
+<h2 id="korovy-v-dikoi-prirode">Коровы в дикой природе</h2>
+<p>Знать коров в теории - это прекрасно, но примеры, которые мы видели до сих пор, дают вам лишь небольшой взгляд на то, когда их можно использовать на практике. К сожалению, как оказалось, не многие API-интерфейсы Rust открывают доступ к Cows. Может быть, потому что они рассматриваются как вещь, которую вы можете представить, когда у вас есть узкое место в производительности, или, может быть, это потому, что люди не хотят добавлять аннотации времени жизни к своим структурам (и они не хотят или не могут использовать Cow &lt; 'статический, T&gt;).</p>
+<h3 id="smeshannye-staticheskie-i-dinamicheskie-stroki">Смешанные статические и динамические строки</h3>
+<p>Один очень интересный вариант использования Cows - это работа с функциями, которые либо возвращают статические строки (то есть строки, которые вы буквально пишете в исходном коде), либо динамические строки, которые собираются во время выполнения. В книге Джима Бланди и Джейсона Орендорфа Programming Rust есть такой пример: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>borrow</span><span style="color:#f29668;">::</span><span>Cow</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">describe</span><span>(</span><span style="color:#f29718;">error</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Error) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;static</span><span>, </span><span style="color:#ff7733;">str</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="color:#f29668;">*</span><span>error {
+</span><span>        Error</span><span style="color:#f29668;">::</span><span>NotFound </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;Error: Not found&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        Error</span><span style="color:#f29668;">::</span><span>Custom(e) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;Error: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Небольшое отступление: видите, как мы используем трэйту Into, чтобы сделать построение коров сверхкоротким? Into является противоположностью From и реализован для всех типов, реализующих From. Итак, компилятор знает, что нам нужен Cow &lt;'static, str&gt;, и дал ему String или &amp;' static str. К счастью для нас, impl &lt;'a&gt; From&lt;&amp;' a str&gt; для Cow &lt;'a, str&gt; и impl &lt;' a&gt; From<String> для Cow &lt;'a, str&gt; находятся в стандартной библиотеке, поэтому rustc можно найти и позвонить!</p>
+<p>Почему это очень крутой пример? Пользователь Reddit 0x7CFE сказал об этом так:</p>
+<ul>
+<li>
+<p>Самым важным является то, что, поскольку Cow &lt;'static, str&gt; derefs2 до &amp;str, он может действовать как замена везде, где ожидается &amp;str. Итак, если бы последний вариант ошибки был добавлен к уже существующей базе кода, все было бы просто работать без какого-либо серьезного рефакторинга.</p>
+</li>
+<li>
+<p>В других языках, таких как C++, вам, вероятно, придется решить, [либо] возвращать всю версию распределения, такую как std::string, или избавиться от деталей и страдать от плохой эргономики, где вам нужно будет использовать такой [a] метод . Хуже того, запись об ошибке с дополнительными деталями может быть очень редкой, и тем не менее вам нужно будет выделить все, чтобы просто вставить все это.</p>
+</li>
+<li>
+<p>Rust предоставляет решение с нулевой стоимостью для случаев, когда не требуются дополнительные детали. Это блестящий пример действия принципа «плати только за то, что используешь».</p>
+</li>
+</ul>
+<h2 id="kontrol-nye-pokazateli">Контрольные показатели</h2>
+<p>Одним из примеров повышения производительности программы с помощью Cow является эта часть микротеста Regex Redux. Уловка состоит в том, чтобы сначала сохранить ссылку на данные и заменить ее собственными данными во время итераций цикла.</p>
+<h3 id="serde">Серде</h3>
+<p>Отличным примером того, как вы можете использовать суперсилы Cows в своих собственных структурах для обращения к входным данным вместо их копирования, является атрибут Serde #[serde (заимствовать)]. Если у вас есть структура вроде </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug</span><span style="color:#bfbab0cc;">,</span><span> Deserialize)]
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Foo</span><span>&lt;</span><span style="color:#ff7733;">&#39;input</span><span>&gt; {
+</span><span>    bar</span><span style="color:#bfbab0cc;">: </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;input</span><span>, </span><span style="color:#ff7733;">str</span><span>&gt;,
+</span><span>}
+</span></code></pre>
+<p>Serde по умолчанию заполнит эту полосу Cow принадлежащей ей строкой (игровая площадка). Однако если вы напишете это как </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug</span><span style="color:#bfbab0cc;">,</span><span> Deserialize)]
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Foo</span><span>&lt;</span><span style="color:#ff7733;">&#39;input</span><span>&gt; {
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">serde</span><span>(borrow)]
+</span><span>    bar</span><span style="color:#bfbab0cc;">: </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;input</span><span>, </span><span style="color:#ff7733;">str</span><span>&gt;,
+</span><span>}
+</span></code></pre>
+<p>Серде попытается создать заимствованную версию Коровы (детская площадка).</p>
+<p>Однако это будет работать только в том случае, если входную строку не нужно настраивать. Так, например, когда вы десериализуете строку JSON, которая имеет экранированные кавычки в it3, Serde должен будет выделить новую строку для хранения неэкранированного представления и, таким образом, даст вам Cow::Owned (игровая площадка).</p>
+<p>Спасибо Роберту Балики, Алексу Китченс и Мэтту Брубеку за просмотр этого поста! А также спасибо Брэду Гибсону за то, что он спросил о более подробном объяснении проблемы «большого размера», решение которой заняло у меня менее двух лет!</p>
+<hr />
+<ol>
+<li>
+<p>Да, правильно: клонировать при записи, а не копировать при записи. Это потому, что в Rust трейт Copy гарантированно будет простой операцией memcpy, в то время как Clone также может выполнять настраиваемую логику (например, рекурсивно клонировать HashMap &lt;String, String&gt;.</p>
+</li>
+<li>
+<p>Благодаря реализации трейта Deref вы можете использовать ссылку на Cow &lt;'static, str&gt; вместо &amp;str. Это означает, что Cow &lt;'static, str&gt; можно увидеть как ссылку на строку без необходимости ее преобразовывать.</p>
+</li>
+<li>
+<p>&quot;&quot; Экранированные строки содержат обратную косую трэйту \ &quot;, - сказал он.</p>
+</li>
+</ol>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

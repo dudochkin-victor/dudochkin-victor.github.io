@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Награды за стекинг | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/staking-rewards/#obshchii-obzor">Общий обзор</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/staking-rewards/#shtrafy">Штрафы</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Награды за стекинг</h1>
+
+<p>Здесь описана схема Proof of Stake (PoS), (т.е. с использованием внутрипротокольного актива, SOL, для обеспечения безопасного консенсуса). Solana реализует схему вознаграждения/безопасности Proof-of-Stake для узлов валидатора в кластере. Цель тройная:</p>
+<ul>
+<li>
+<p>Совместите стимулы валидатора с стимулами большего кластера за счет депозитов со скином в игре, подверженных риску.</p>
+</li>
+<li>
+<p>Избегайте проблем с голосованием в ответвлении «ничего не поставлено на карту», ​​внедрив правила сокращения, направленные на содействие конвергенции вилок.</p>
+</li>
+<li>
+<p>Предоставить возможность для вознаграждения валидатора, предоставляемого в зависимости от участия валидатора в кластере.</p>
+</li>
+</ul>
+<p>В то время как многие детали конкретной реализации в настоящее время находятся на рассмотрении и, как ожидается, будут рассмотрены в ходе конкретных исследований моделирования и изучения параметров в тестовой сети Solana, здесь мы излагаем наши текущие мысли об основных компонентах системы PoS. Большая часть этого мышления основана на текущем статусе Casper FFG, с оптимизацией и определенными атрибутами, которые должны быть изменены, как это разрешено структурой данных блокчейна Solana Proof of History (PoH).</p>
+<h2 id="obshchii-obzor">Общий обзор</h2>
+<p>Дизайн проверки бухгалтерской книги Solana основан на ротации, взвешивании выбранных лидеров, транслирующих транзакции в структуре данных PoH на проверяющие узлы. Эти узлы, получив трансляцию лидера, имеют возможность проголосовать за текущее состояние и высоту PoH, подписав транзакцию в поток PoH.</p>
+<p>Чтобы стать валидатором Solana, необходимо внести/зафиксировать некоторую сумму SOL в контракте. Этот SOL будет недоступен в течение определенного периода времени. Точная продолжительность периода блокировки ставок не определена. Однако мы можем рассмотреть три фазы этого времени, для которых потребуются конкретные параметры:</p>
+<ul>
+<li>
+<p><em>Период прогрева</em>: какой SOL депонирован и недоступен для узла, однако проверка транзакции PoH еще не началась. Скорее всего от дней до недель</p>
+</li>
+<li>
+<p><em>Период проверки</em>: минимальная продолжительность, в течение которой депонированный SOL будет недоступен, подвержен риску сокращения (см. правила сокращения ниже) и получения вознаграждения за участие валидатора. Вероятная продолжительность от месяцев до года.</p>
+</li>
+<li>
+<p><em>Период охлаждения</em>: продолжительность времени после отправки транзакции «снятия средств». В течение этого периода обязанности по валидации были сняты, а средства по-прежнему недоступны. Накопленные вознаграждения должны быть доставлены в конце этого периода вместе с возвратом первоначального депозита.</p>
+</li>
+</ul>
+<p>Ненадежное чувство времени и порядок Solana, обеспечиваемое ее структурой данных PoH, наряду с ее <a href="https://www.youtube.com/watch?v=qt_gDRXHrHQ&amp;t=1s">турбинной</a> схемой широковещательной передачи и передачи данных, должны обеспечивать менее секунды время подтверждения транзакций, которое масштабируется в зависимости от количества узлов в кластере. Это означает, что нам не нужно ограничивать количество валидирующих узлов запретительным «минимальным депозитом» и ожидать, что узлы смогут стать валидаторами с номинальным количеством поставленных SOL. В то же время акцент Solana на высокой пропускной способности должен стимулировать клиентов валидации предоставлять высокопроизводительное и надежное оборудование. В сочетании с потенциальным порогом минимальной скорости сети для присоединения в качестве клиента проверки мы ожидаем появления здорового рынка делегирования проверки.</p>
+<h2 id="shtrafy">Штрафы</h2>
+<p>Как обсуждалось в разделе <a href="ed_overview/ed_overview/">Экономический план</a>, годовые процентные ставки валидатора должны указываться как функция от общего процента оборотного предложения, на которое была сделана ставка. Кластер вознаграждает валидаторов, которые находятся в сети и активно участвуют в процессе проверки на протяжении всего их <em>периода проверки</em>. Для валидаторов, которые переходят в автономный режим или не могут проверить транзакции в течение этого периода, их годовое вознаграждение фактически уменьшается.</p>
+<p>Точно так же мы можем рассмотреть алгоритмическое уменьшение активной суммы стейкинга валидатора в случае, если он не в сети. т.е. если валидатор неактивен в течение некоторого времени из-за разделения или иным образом, сумма его ставки, которая считается «активной» (имеющей право на получение вознаграждения), может быть уменьшена. Этот дизайн будет структурирован, чтобы помочь долгоживущим разделам в конечном итоге достичь окончательности в своих соответствующих цепочках, поскольку % общей ставки без права голоса будет уменьшаться с течением времени до тех пор, пока активные валидаторы в каждом разделе не смогут получить квалифицированное большинство. Точно так же при повторном привлечении «активная» сумма ставок вернется в онлайн с определенной скоростью. В зависимости от размера раздела/активного набора могут рассматриваться различные ставки снижения ставок.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

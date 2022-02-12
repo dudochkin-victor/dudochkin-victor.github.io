@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Transactions v2 — таблицы поиска адресов в цепочке | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#problema">Проблема</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#predlozhennoe-reshenie">Предложенное решение</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#programma-tablitsy-poiska-adresov"><small>- Программа таблицы поиска адресов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#versionnye-tranzaktsii"><small>- Версионные транзакции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#ogranicheniia"><small>- Ограничения</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#voprosy-bezopasnosti">Вопросы безопасности</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#povtornaia-initsializatsiia-tablitsy-poiska"><small>- Повторная инициализация таблицы поиска</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#potreblenie-resursov"><small>- Потребление ресурсов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#perednii-khod"><small>- Передний ход</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#otkaz-v-obsluzhivanii"><small>- Отказ в обслуживании</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#dubliruiushchie-akkaunty"><small>- Дублирующие аккаунты</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/transactions-v2/#drugie-predlozheniia">Другие предложения</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Transactions v2 — таблицы поиска адресов в цепочке</h1>
+
+<h2 id="problema">Проблема</h2>
+<p>Сообщения, передаваемые валидаторам Solana, не должны превышать размер IPv6 MTU, чтобы обеспечить быструю и надежную сетевую передачу информации о кластере по протоколу UDP.
+Сетевой стек Solana использует консервативный размер MTU, равный 1280 байтам, который после учета заголовков оставляет 1232 байта для пакетных данных, таких как сериализованные транзакции.</p>
+<p>Разработчики, создающие приложения на Solana, должны проектировать свои программные интерфейсы в сети в рамках вышеуказанного ограничения размера транзакции. Одним из распространенных обходных путей является временное сохранение состояния в цепочке и использование этого состояния в последующих транзакциях. Это подход, используемый программой-загрузчиком BPF для развертывания программ Solana.</p>
+<p>Однако этот обходной путь не работает, когда разработчики создают множество сетевых программ в одной атомарной транзакции. С большей композицией появляется больше входных данных аккаунта, каждый из которых занимает 32 байта. В настоящее время нет доступного обходного пути для увеличения количества учетных записей, используемых в одной транзакции, поскольку каждая транзакция должна перечислять все учетные записи, необходимые для правильной блокировки учетных записей для параллельного выполнения. Таким образом, текущее ограничение составляет около 35 учетных записей после учета подписей и других метаданных транзакций.</p>
+<h2 id="predlozhennoe-reshenie">Предложенное решение</h2>
+<ol>
+<li>Представьте новую программу, которая управляет таблицами поиска адресов в цепочке.</li>
+<li>Добавьте новый формат транзакций, который может использовать таблицы поиска адресов в цепочке для эффективной загрузки большего количества учетных записей за одну транзакцию.</li>
+</ol>
+<h3 id="programma-tablitsy-poiska-adresov">Программа таблицы поиска адресов</h3>
+<p>Здесь мы описываем программное решение проблемы, с помощью которого разработчик протокола или конечный пользователь может создавать коллекции связанных адресов в цепочке для краткого использования во входных данных учетной записи транзакции.</p>
+<p>После того, как адреса сохранены в цепочке в учетной записи таблицы поиска адресов, на них можно кратко ссылаться в транзакции с использованием 1-байтового индекса u8, а не полного 32-байтового адреса. Это потребует нового формата транзакций для использования этих кратких ссылок, а также обработки во время выполнения для поиска и загрузки адресов из таблиц поиска в цепочке.</p>
+<h4 id="sostoianie">Состояние</h4>
+<p>Таблицы поиска адресов должны быть освобождены от арендной платы при инициализации и после каждого добавления новых адресов. Таблицы поиска могут быть расширены из буферизованного списка адресов в цепочке или напрямую путем добавления адресов через данные инструкций. Для вновь добавленных адресов требуется один слот для прогрева, прежде чем они станут доступными для транзакций для поиска.</p>
+<p>Поскольку транзакции используют индекс u8 для поиска адресов, каждая таблица адресов может хранить до 256 адресов. В дополнение к сохраненным адресам учетные записи таблицы адресов также отслеживают различные метаданные, описанные ниже.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">/// The maximum number of addresses that a lookup table can hold
+</span><span style="color:#ff7733;">pub const </span><span style="color:#f29718;">LOOKUP_TABLE_MAX_ADDRESSES</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/// The serialized size of lookup table metadata
+</span><span style="color:#ff7733;">pub const </span><span style="color:#f29718;">LOOKUP_TABLE_META_SIZE</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize </span><span style="color:#f29668;">= </span><span style="color:#f29718;">56</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">LookupTableMeta </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Lookup tables cannot be closed until the deactivation slot is
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// no longer &quot;recent&quot; (not accessible in the `SlotHashes` sysvar).
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>deactivation_slot</span><span style="color:#bfbab0cc;">:</span><span> Slot,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// The slot that the table was last extended. Address tables may
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// only be used to lookup addresses that were extended before
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// the current bank&#39;s slot.
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>last_extended_slot</span><span style="color:#bfbab0cc;">:</span><span> Slot,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// The start index where the table was last extended from during
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// the `last_extended_slot`.
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>last_extended_slot_start_index</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Authority address which must sign for each modification.
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>authority</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;Pubkey&gt;,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Padding to keep addresses 8-byte aligned
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>_padding</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u16</span><span>,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Raw list of addresses follows this serialized structure in
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// the account&#39;s data, starting from `LOOKUP_TABLE_META_SIZE`.
+</span><span>}
+</span></code></pre>
+<p>Чтобы облегчить обновление таблиц поиска адресов органами с несколькими подписями или органами, контролируемыми управлением, адреса могут быть буферизованы в цепочке в буферной учетной записи. Буферные учетные записи можно использовать для расширения таблицы поиска множеством адресов за одну небольшую транзакцию.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">BufferMeta </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Authority address which must sign for each modification.
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>authority</span><span style="color:#bfbab0cc;">:</span><span> Pubkey,
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Serialized list of stored addresses follows the above metadata.
+</span><span>}
+</span></code></pre>
+<h4 id="ochistka">Очистка</h4>
+<p>Как только таблица поиска адресов больше не нужна, ее можно деактивировать и закрыть, чтобы восстановить баланс арендной платы. Таблицы поиска адресов нельзя воссоздавать по тому же адресу, потому что каждая новая таблица поиска должна быть инициализирована по адресу, полученному из последнего слота.</p>
+<p>Таблицы поиска адресов можно деактивировать в любое время, но они могут продолжать использоваться транзакциями до тех пор, пока слот деактивации больше не будет присутствовать в системной переменной хэшей слотов. Этот период охлаждения гарантирует, что текущие транзакции не могут быть подвергнуты цензуре, а таблицы поиска адресов не могут быть закрыты и воссозданы для того же слота.</p>
+<h4 id="raskhody">Расходы</h4>
+<p>Поскольку поиск адресов требует дополнительных накладных расходов во время обработки транзакций, они должны нести более высокие затраты на транзакцию.</p>
+<h3 id="versionnye-tranzaktsii">Версионные транзакции</h3>
+<p>Для поддержки поиска в таблице адресов необходимо изменить структуру сериализованных транзакций. Новый формат транзакций не должен влиять на обработку транзакций в среде выполнения программы Solana, за исключением увеличения емкости учетных записей и вызовов программы. Вызванные программы не будут знать, какой формат транзакции использовался.</p>
+<p>Новый формат транзакции должен отличаться от текущего формата транзакции. Текущие транзакции могут содержать не более 19 подписей (по 64 байта каждая), но заголовок сообщения кодирует num_required_signatures как u8. Поскольку старший бит <code>u8</code> никогда не будет установлен для действительной транзакции, мы можем включить его, чтобы обозначить, должна ли транзакция быть декодирована в версионном формате или нет.</p>
+<h4 id="novyi-format-tranzaktsii">Новый формат транзакции</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Serialize</span><span style="color:#bfbab0cc;">,</span><span> Deserialize)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Transaction </span><span>{
+</span><span>    </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">serde</span><span>(with </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;short_vec&quot;</span><span>)]
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>signatures</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Signature&gt;,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// The message to sign.
+</span><span>    </span><span style="color:#ff7733;">pub </span><span>message</span><span style="color:#bfbab0cc;">:</span><span> Message,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Uses custom serialization. If the first bit is set, the remaining bits
+</span><span style="font-style:italic;color:#5c6773;">// in the first byte will encode a version number. If the first bit is not
+</span><span style="font-style:italic;color:#5c6773;">// set, the first byte will be treated as the first byte of an encoded
+</span><span style="font-style:italic;color:#5c6773;">// legacy message.
+</span><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">VersionedMessage </span><span>{
+</span><span>    Legacy(Message)</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#f29718;">V0</span><span>(v0</span><span style="color:#f29668;">::</span><span>Message)</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// The structure of the new v0 Message
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Serialize</span><span style="color:#bfbab0cc;">,</span><span> Deserialize)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Message </span><span>{
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// unchanged
+</span><span>  </span><span style="color:#ff7733;">pub </span><span>header</span><span style="color:#bfbab0cc;">:</span><span> MessageHeader,
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// unchanged
+</span><span>  </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">serde</span><span>(with </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;short_vec&quot;</span><span>)]
+</span><span>  </span><span style="color:#ff7733;">pub </span><span>account_keys</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;Pubkey&gt;,
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// unchanged
+</span><span>  </span><span style="color:#ff7733;">pub </span><span>recent_blockhash</span><span style="color:#bfbab0cc;">:</span><span> Hash,
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// unchanged
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">//
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// # Notes
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">//
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// Account and program indexes will index into the list of addresses
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// constructed from the concatenation of three key lists:
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">//   1) message `account_keys`
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">//   2) ordered list of keys loaded from address table `writable_indexes`
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">//   3) ordered list of keys loaded from address table `readable_indexes`
+</span><span>  </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">serde</span><span>(with </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;short_vec&quot;</span><span>)]
+</span><span>  </span><span style="color:#ff7733;">pub </span><span>instructions</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;CompiledInstruction&gt;,
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">/// List of address table lookups used to load additional accounts
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">/// for this transaction.
+</span><span>  </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">serde</span><span>(with </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;short_vec&quot;</span><span>)]
+</span><span>  </span><span style="color:#ff7733;">pub </span><span>address_table_lookups</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;MessageAddressTableLookup&gt;,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">/// Address table lookups describe an on-chain address lookup table to use
+</span><span style="font-style:italic;color:#5c6773;">/// for loading more readonly and writable accounts in a single tx.
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Serialize</span><span style="color:#bfbab0cc;">,</span><span> Deserialize)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">MessageAddressTableLookup </span><span>{
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">/// Address lookup table account key
+</span><span>  </span><span style="color:#ff7733;">pub </span><span>account_key</span><span style="color:#bfbab0cc;">:</span><span> Pubkey,
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">/// List of indexes used to load writable account addresses
+</span><span>  </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">serde</span><span>(with </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;short_vec&quot;</span><span>)]
+</span><span>  </span><span style="color:#ff7733;">pub </span><span>writable_indexes</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;,
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">/// List of indexes used to load readonly account addresses
+</span><span>  </span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">serde</span><span>(with </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;short_vec&quot;</span><span>)]
+</span><span>  </span><span style="color:#ff7733;">pub </span><span>readonly_indexes</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#ff7733;">u8</span><span>&gt;,
+</span><span>}
+</span></code></pre>
+<h4 id="izmeneniia-razmera">Изменения размера</h4>
+<ul>
+<li>1 дополнительный байт для поля <code>версия</code></li>
+<li>1 дополнительный байт для длины <code>address_table_lookups</code></li>
+<li>34 дополнительных байта для адреса и длины индексов <code>writable_indexes</code> и <code>readonly_indexes</code> в каждом поиске таблицы адресов.</li>
+<li>1 дополнительный байт для каждого индекса таблицы поиска</li>
+</ul>
+<h4 id="izmeneniia-metadannykh">Изменения метаданных</h4>
+<p>Каждый разрешенный адрес из таблицы поиска адресов должен храниться в метаданных транзакции для быстрой справки. Это избавит клиентов от необходимости выполнять несколько циклов RPC для извлечения всех учетных записей, загруженных транзакцией v2. Это также упростит использование инструмента бухгалтерской книги для анализа шаблонов доступа к учетной записи.</p>
+<h4 id="izmeneniia-rpc">изменения RPC</h4>
+<p>Полученные ответы транзакции, скорее всего, потребуют нового поля версии, чтобы указать клиентам, какую структуру транзакции следует использовать для десериализации.
+Клиенты, использующие ранее существовавшие методы RPC, будут получать ответы об ошибках при попытке получить версионную транзакцию, что будет указывать на необходимость обновления.</p>
+<p>API RPC также должен поддерживать возможность возврата полностью развернутых транзакций, чтобы абстрагироваться от деталей таблицы поиска адресов от нижестоящих клиентов.</p>
+<h3 id="ogranicheniia">Ограничения</h3>
+<ul>
+<li>Транзакцией может быть загружено до 256 уникальных учетных записей, поскольку <code>u8</code> используется скомпилированными инструкциями для индексации сообщения транзакции <code>account_keys</code>.</li>
+<li>Таблицы поиска адресов могут содержать до 256 записей, поскольку индексы таблиц поиска также имеют значение <code>u8</code>.</li>
+<li>Стороны, подписывающие транзакции, не могут быть загружены через таблицу поиска адресов, полный адрес каждой подписывающей стороны должен быть сериализован в транзакции. Это гарантирует, что производительность проверок подписи транзакций не пострадает.</li>
+<li>Аппаратные кошельки, вероятно, не смогут отображать сведения об учетных записях, на которые ссылаются таблицы поиска адресов, из-за невозможности проверки данных в цепочке.</li>
+<li>Можно использовать только одноуровневые таблицы поиска адресов. Рекурсивный поиск не будет поддерживаться.</li>
+</ul>
+<h2 id="voprosy-bezopasnosti">Вопросы безопасности</h2>
+<h3 id="povtornaia-initsializatsiia-tablitsy-poiska">Повторная инициализация таблицы поиска</h3>
+<p>Если таблицу поиска адресов можно закрыть и повторно инициализировать с новыми адресами, любой клиент, который не знает об изменении, может непреднамеренно искать неожиданные адреса. Чтобы избежать этого, все таблицы поиска адресов должны быть инициализированы по адресу, полученному из последнего слота, и они не могут быть закрыты до тех пор, пока слот, используемый для деактивации, больше не будет находиться в системной переменной хэшей слотов.</p>
+<h3 id="potreblenie-resursov">Потребление ресурсов</h3>
+<p>Включение большего количества входных данных учетной записи в транзакцию позволяет увеличить количество вызовов программ, блокировок записи и операций чтения/записи данных. Прежде чем включить таблицы адресов, потребуются ограничения вычислений для всей транзакции и повышенные затраты на блокировку записи и чтение данных.</p>
+<h3 id="perednii-khod">Передний ход</h3>
+<p>Если адреса, перечисленные в таблице поиска адресов, изменяемы, атаки с опережением могут изменить адреса, которые разрешаются для последующей транзакции. По этой причине таблицы поиска адресов предназначены только для добавления и могут быть закрыты только в том случае, если больше невозможно создать новую таблицу поиска по тому же производному адресу.</p>
+<p>Кроме того, злоумышленник может попытаться разветвить цепочку сразу после добавления в блок новой учетной записи таблицы поиска адресов. В случае успеха они могут добавить в ответвление другую непредвиденную запись в таблице. Чтобы предотвратить эту атаку, клиенты должны дождаться завершения обработки таблиц поиска адресов, прежде чем использовать их в транзакции. Клиенты также могут добавлять к транзакции инструкции по проверке целостности, которые подтверждают, что просматриваются правильные учетные записи.</p>
+<h3 id="otkaz-v-obsluzhivanii">Отказ в обслуживании</h3>
+<p>Учетные записи таблицы поиска адресов могут считываться очень часто и, следовательно, будут более важной целью для атак типа «отказ в обслуживании» с помощью блокировок записи, аналогичных учетным записям sysvar.</p>
+<p>По этой причине к таблицам поиска адресов следует подходить особым образом.
+Когда таблица поиска адресов используется для поиска адресов для транзакции, ее можно загрузить, не дожидаясь блокировки чтения. Чтобы избежать условий гонки, для поиска могут использоваться только адреса, добавленные в предыдущие блоки, а для деактивации требуется период охлаждения.</p>
+<h3 id="dubliruiushchie-akkaunty">Дублирующие аккаунты</h3>
+<p>Транзакции не могут загружать учетную запись более одного раза, будь то напрямую через <code>account_keys</code> или косвенно через <code>address_table_lookups</code>.</p>
+<h2 id="drugie-predlozheniia">Другие предложения</h2>
+<ol>
+<li>Префиксы учетных записей</li>
+</ol>
+<p>Необходимость предварительной регистрации учетных записей в таблице поиска адресов в цепочке утомительна, поскольку добавляет дополнительный шаг для обработки транзакций. Вместо этого транзакции Solana могут использовать префиксы адресов переменной длины для указания учетных записей.
+Эти ярлыки префиксов могут сэкономить на использовании данных без необходимости настраивать состояние в цепочке.</p>
+<p>Однако эта модель требует, чтобы узлы сохраняли сопоставление префиксов с адресами активной учетной записи. Злоумышленники могут создавать учетные записи с тем же префиксом, что и у популярной учетной записи, для нарушения транзакций.</p>
+<ol start="2">
+<li>Программа построителя транзакций</li>
+</ol>
+<p>Solana может предоставить новую программу в сети, которая позволяет создавать «большие» транзакции в сети с помощью обычных транзакций. После того, как транзакция построена, окончательная транзакция «Выполнить» может инициировать обработку большой транзакции узлом как обычную транзакцию без необходимости помещать ее в пакет размера MTU.</p>
+<p>UX этого подхода сложен. Теоретически пользователь может подписать крупную транзакцию, но было бы не очень хорошо, если бы ему пришлось использовать свой кошелек для подписания нескольких транзакций, чтобы создать ту транзакцию, которую они уже подписали и одобрили. Однако это может быть вариантом использования для служб ретрансляции транзакций. Пользователь может заплатить ретранслятору за то, чтобы он создал для него крупную предварительно подписанную транзакцию в цепочке.</p>
+<p>Чтобы предотвратить реконструкцию и повторное воспроизведение большой транзакции, ее хэш сообщения необходимо будет добавить в кэш состояния при выполнении.</p>
+<ol start="3">
+<li>Индексы счетов эпох</li>
+</ol>
+<p>Аналогично расчету расписания лидера, валидаторы могут создать глобальный индекс учетных записей, к которым чаще всего обращаются в предыдущую эпоху, и сделать этот индекс доступным для транзакций в следующую эпоху.</p>
+<p>Недостатком этого подхода является то, что индекс обновляется только на границах эпох, что означает задержку в несколько дней, прежде чем можно будет сослаться на популярные новые учетные записи. Он также должен последовательно генерироваться всеми валидаторами с использованием некоторых критериев, таких как добавление учетных записей в порядке количества доступов.</p>
+<ol start="4">
+<li>Списки адресов</li>
+</ol>
+<p>Расширьте структуру транзакций для поддержки адресов, которые при загрузке расширяются до списка адресов. После расширения все входные данные учетных записей объединяются для формирования единого списка ключей учетных записей, который можно индексировать с помощью инструкций.
+Списки адресов, вероятно, должны быть неизменяемыми, чтобы предотвратить атаки. Их также необходимо ограничить по длине, чтобы ограничить потребление ресурсов.</p>
+<p>Это предложение можно рассматривать как частный случай предлагаемого подхода к индексному счету. Поскольку полный список учетных записей будет расширен, нет необходимости добавлять дополнительные смещения, которые занимают ограниченное пространство в сериализованной транзакции.
+Однако ожидаемый размер списка адресов может потребоваться закодировать в транзакции, чтобы облегчить санацию индексов учетных записей. Нам также нужно было бы закодировать, сколько адресов в списке должно быть загружено как только для чтения, а не для чтения и записи. Наконец, особое внимание следует уделить тому, чтобы следить за адресами, которые существуют в нескольких списках учетных записей.</p>
+<ol start="5">
+<li>Увеличьте размер транзакции</li>
+</ol>
+<p>Значительно большие сериализованные транзакции имеют повышенную вероятность того, что они будут отброшены по сети, но это может не быть большой проблемой, поскольку клиенты в любом случае могут повторить транзакции. Единственное время, когда валидаторы должны отправлять отдельные транзакции по сети, — это когда лидер пересылает необработанные транзакции следующему лидеру.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

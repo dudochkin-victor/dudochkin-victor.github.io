@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Использование Remix - Ethereum IDE | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-remix-ethereum-ide/#introduction">Introduction </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-remix-ethereum-ide/#interacting-with-edgeware-using-remix">Interacting With Edgeware Using Remix </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-remix-ethereum-ide/#what-s-next">What&#x27;s next? </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/deploy-an-evm-contract/using-remix-ethereum-ide/#reach-us-for-more-engagement">Reach us for more engagement </a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Использование Remix - Ethereum IDE</h1>
+
+<h2 id="introduction">Introduction <a id="introduction"></a></h2>
+<p>This guide walks through the process of creating and deploying a Solidity-based smart contract to a Edgeware dev node using the <a href="https://remix.ethereum.org/">Remix IDE</a>. Remix is one of the commonly used development environments for smart contracts on Ethereum. Given Edgeware’s Ethereum compatibility features, Remix can be used directly with a Edgeware node.</p>
+<p>This guide assumes that you have a running local Edgeware node running in <code>--dev</code> mode, and that you have a MetaMask installation configured to use this local node. <a href="https://main.edgeware.wiki/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/setting-up-a-edgeware-evm-node">You can find instructions for running a local Edgeware EVM node</a> and to <a href="https://main.edgeware.wiki/contribute-and-engage/develop/edgeware-smart-contracts/deploy-an-evm-contract/using-metamask">configure MetaMask for Edgeware</a>.</p>
+<h2 id="interacting-with-edgeware-using-remix">Interacting With Edgeware Using Remix <a id="interacting-with-edgeware-using-remix"></a></h2>
+<p><a href="https://remix.ethereum.org/">Open Remix</a> and click on the <code>New File</code></p>
+<p>Name your file, in our case we've named it <code>ERC20.sol</code> - yes, that <a href="https://eips.ethereum.org/EIPS/eip-20">famous token standard</a></p>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647263-91a9ad00-d0e0-11eb-93fb-1516d5c70509.png" alt="" /></p>
+<p>Now add code. Here we are using simple ERC-20 contract based on the current Open Zeppelin ERC-20 template. It creates <code>MyFirstToken</code> with symbol <code>HEDGE</code> and mints the entirety of the initial supply to the creator of the contract.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>pragma solidity ^0.6.0;
+</span><span>
+</span><span>import &#39;https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v3.1.0/contracts/token/ERC20/ERC20.sol&#39;;
+</span><span>
+</span><span>// This ERC-20 contract mints the specified amount of tokens to the contract creator.
+</span><span>contract MyFirstToken is ERC20 {
+</span><span>  constructor(uint256 initialSupply) ERC20(&quot;MyFirstToken&quot;, &quot;HEDGE&quot;) public {
+</span><span>    _mint(msg.sender, initialSupply);
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647352-1eed0180-d0e1-11eb-83f2-652e5d071d28.png" alt="" /></p>
+<p>On the left sidebar, you will click on Solidity compiler and Compile ERC20.sol</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Solidity Compiler &gt;&gt;&gt; Compile Contract
+</span></code></pre>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647422-683d5100-d0e1-11eb-8ec4-d987d7ed8365.png" alt="" /></p>
+<p>Now click to the <code>Deploy &amp; Run Transactions</code> on the left in the sidebar and open Metamask to check if is our account connected. If it's connected you can skip to next steps</p>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647516-cb2ee800-d0e1-11eb-91c8-78da242aca5b.png" alt="" /></p>
+<p>Select our account, in this case it's <code>Edgeware Dev</code> and click <strong>connect</strong> if you don't see that option click on <strong>Not connected</strong> a new window will pop up.</p>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647653-8ce5f880-d0e2-11eb-8775-1c0a8040e6db.png" alt="" /> <img src="https://user-images.githubusercontent.com/44712760/122647679-a71fd680-d0e2-11eb-890d-18a72131a25d.png" alt="" /></p>
+<p>You will now head to deploy contract. Just before that, make sure you've set set <strong>ENVIRONMENT</strong> to <code>Injected Web3</code> and Account that we've imported. Hint, it should have some Eth. To the input next deploy input <code>initialSupply</code>, in our case it's 21M. Since this contract uses the default of 18 decimals, the value you will put there is <code>21000000000000000000000000</code></p>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647765-0aaa0400-d0e3-11eb-8163-a3bf7778d3d0.png" alt="" /></p>
+<p>You will hit <strong>confirm</strong>!</p>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647786-27ded280-d0e3-11eb-8e16-46ca0bda1982.png" alt="Remix-MM-confirm" /></p>
+<p>You will see your contract has been successfully deployed.</p>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647859-886e0f80-d0e3-11eb-9b90-3da70fefe94a.png" alt="Remix-deployed-contract" /></p>
+<p>You can see your contract deployment details, that has been successfully deployed on Edgeware EVM</p>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647914-db47c700-d0e3-11eb-98ad-747ff2befd04.png" alt="" /></p>
+<p>You can now click to call functions like <code>decimals</code>, <code>name</code>, <code>symbol</code>, <code>totalSupply</code></p>
+<p><img src="https://user-images.githubusercontent.com/44712760/122647936-f61a3b80-d0e3-11eb-9657-ae4a4914dc4b.png" alt="" /></p>
+<h2 id="what-s-next">What's next? <a id="what39s-next"></a></h2>
+<p>You can copy your contracts address and add it to Metamask to play out! Have fun, stay safe!</p>
+<h2 id="reach-us-for-more-engagement">Reach us for more engagement <a id="reach-us-for-more-engagement"></a></h2>
+<p>Glad you've made it through! 🥰 We are eager to guide your more on your exploration through Edgeware Ethereum combability feature. We are <strong>keen to hear your experience and suggestions you may have for us.</strong>. You can feel free to <a href="https://linktr.ee/edg_developers">chat with us in the Edgeware's channels like Discord, Element and Telegram</a>, we can help you out with issues you may have or project you may want to be funded through our <a href="https://docs.edgewa.re/edgeware-runtime/treasury">Treasury program</a>. Don't hesitate to share your feedback on our channels, there is always space to improve! 🙌</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

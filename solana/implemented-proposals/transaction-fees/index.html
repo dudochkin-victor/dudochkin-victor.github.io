@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Детерминированные комиссии за транзакции | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/transaction-fees/#plata-za-peregruzku">Плата за перегрузку</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/transaction-fees/#raschet-sborov">Расчет сборов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/transaction-fees/#parametry-platy">Параметры платы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/transaction-fees/#ataki">Атаки</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/transaction-fees/#perekhvat-tseli-sps"><small>- Перехват цели SPS</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Детерминированные комиссии за транзакции</h1>
+
+<p>В настоящее время транзакции включают поле комиссии, которое указывает максимальное поле комиссии, которое лидер слота может взимать за обработку транзакции. Кластер, с другой стороны, соглашается на минимальную плату. Если сеть перегружена, слот-лидер может отдавать приоритет транзакциям, предлагающим более высокие комиссии. Это означает, что клиент не будет знать, сколько было собрано, пока кластер не подтвердит транзакцию и не проверит остаток. Пахнет именно тем, что нам не нравится в «газе» Эфириума, недетерминизмом.</p>
+<h2 id="plata-za-peregruzku">Плата за перегрузку</h2>
+<p>Каждый валидатор использует <em>сигнатур на слот</em> (SPS) для оценки перегрузки сети и <em>цель SPS</em> для оценки желаемой вычислительной мощности кластера. Валидатор узнает цель SPS из конфигурации генезиса, тогда как он вычисляет SPS из недавно обработанных транзакций. Конфигурация генезиса также определяет цель <code>lampports_per_signature</code>, которая представляет собой плату, взимаемую за подпись, когда кластер работает с целью <em>SPS</em>.</p>
+<h2 id="raschet-sborov">Расчет сборов</h2>
+<p>Клиент использует JSON RPC API, чтобы запросить у кластера текущие параметры платы. Эти параметры помечены хэшем блока и остаются в силе до тех пор, пока этот хэш блока не станет достаточно старым, чтобы быть отклоненным лидером слота.</p>
+<p>Прежде чем отправить транзакцию в кластер, клиент может отправить данные транзакции и счета комиссии в модуль SDK, называемый <em>калькулятором комиссии</em>. Пока версия SDK клиента совпадает с версией лидера слота, клиент может быть уверен, что его учетная запись будет изменена точно на такое же количество лампортов, которое было возвращено калькулятором комиссий.</p>
+<h2 id="parametry-platy">Параметры платы</h2>
+<p>В первой реализации этого дизайна единственным платным параметром является <code>lampports_per_signature</code>. Чем больше подписей необходимо проверить кластеру, тем выше плата. Точное количество лампортов определяется отношением SPS к целевому значению SPS. В конце каждого слота кластер снижает значение <code>lampports_per_signature</code>, когда SPS ниже целевого значения, и повышает его, когда оно превышает целевое значение. Минимальное значение для <code>lamports_per_signature</code> составляет 50% от целевого значения <code>lamports_per_signature</code>, а максимальное значение в 10 раз превышает целевое значение `lamports_per_signature'.</p>
+<p>Будущие параметры могут включать:</p>
+<ul>
+<li><code>lampports_per_pubkey</code> - стоимость загрузки аккаунта</li>
+<li><code>lampports_per_slot_distance</code> - более высокая стоимость загрузки очень старых учетных записей</li>
+<li><code>lampports_per_byte</code> - стоимость загруженного размера учетной записи</li>
+<li><code>lampports_per_bpf_instruction</code> - стоимость запуска программы</li>
+</ul>
+<h2 id="ataki">Атаки</h2>
+<h3 id="perekhvat-tseli-sps">Перехват цели SPS</h3>
+<p>Группа валидаторов может централизовать кластер, если им удастся убедить его поднять цель SPS выше точки, за которой остальные валидаторы могут не отставать. Повышение целевого показателя приведет к снижению комиссий, что, по-видимому, создаст больший спрос и, следовательно, более высокий TPS. Если у валидатора нет оборудования, способного обрабатывать такое количество транзакций с такой скоростью, его голоса подтверждения в конечном итоге станут такими длинными, что кластер будет вынужден загрузить его.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

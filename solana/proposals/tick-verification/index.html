@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Проверка отметок | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/tick-verification/#struktura-slota">Структура слота</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/tick-verification/#obrabotka-plokhikh-peredach">Обработка плохих передач</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/tick-verification/#blockstore-poluchaet-fragmenty">Blockstore получает фрагменты</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/tick-verification/#vosproizvedenie-i-proverka-tikov">Воспроизведение и проверка тиков</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Проверка отметок</h1>
+
+<p>Это разработка критериев и проверка тиков в слоте. В нем также описывается обработка ошибок и условия сокращения, охватывающие то, как система обрабатывает передачи, которые не соответствуют этим требованиям.</p>
+<h1 id="struktura-slota">Структура слота</h1>
+<p>Каждый слот должен содержать ожидаемое количество тиков <code>ticks_per_slot</code>. Последний фрагмент в слоте должен содержать только весь последний тик и ничего более. Лидер также должен пометить этот фрагмент, содержащий последний тик, флагом <code>LAST_SHRED_IN_SLOT</code>. Между тиками должно быть количество хэшей hashes_per_tick.</p>
+<h1 id="obrabotka-plokhikh-peredach">Обработка плохих передач</h1>
+<p>Вредоносные передачи <code>T</code> обрабатываются двумя способами:</p>
+<ol>
+<li>Если лидер может сгенерировать некоторую ошибочную передачу «T», а также некоторую альтернативную передачу «T» для одного и того же слота, не нарушая никаких правил косой черты для дублирующих передач (например, если «T» является подмножеством «T») , тогда кластер должен обработать возможность того, что обе передачи будут активными.</li>
+</ol>
+<p>Таким образом, это означает, что мы не можем пометить ошибочную передачу «T» как мертвую, потому что кластер, возможно, достиг консенсуса по «T». Эти случаи требуют убедительных доказательств, чтобы наказать за это плохое поведение.</p>
+<ol start="2">
+<li>В противном случае мы можем просто пометить слот как мертвый и неиграбельный. Доказательство косой черты может или не может быть необходимым в зависимости от осуществимости.</li>
+</ol>
+<h1 id="blockstore-poluchaet-fragmenty">Blockstore получает фрагменты</h1>
+<p>Когда блокстор получает новый фрагмент <code>s</code>, возможны два случая:</p>
+<ol>
+<li>
+<p><code>s</code> помечен как <code>LAST_SHRED_IN_SLOT</code>, затем проверьте, существует ли фрагмент <code>s'</code> в блочном хранилище для этого слота, где <code>s'.index &gt; s.index</code> Если да, то вместе <code>s</code> и <code>s' </code> представляют собой убедительное доказательство.</p>
+</li>
+<li>
+<p>Blockstore уже получил фрагмент <code>s', помеченный как </code>LAST_SHRED_IN_SLOT<code>с индексом</code>i<code>. Если </code>s.index &gt; i<code>, то вместе </code>s<code>и</code>s' составляют доказательство косой черты. В этом случае blockstore также не будет вставлять <code>s</code>.</p>
+</li>
+<li>
+<p>Повторяющиеся фрагменты для одного и того же индекса игнорируются. Неповторяющиеся фрагменты для одного и того же индекса являются условием сокращения. Подробности для этого случая описаны в разделе «Слешинг дубликатов блоков выноски».</p>
+</li>
+</ol>
+<h1 id="vosproizvedenie-i-proverka-tikov">Воспроизведение и проверка тиков</h1>
+<ol>
+<li>Этап воспроизведения воспроизводит записи из хранилища блоков, отслеживая количество тиков, которые он видел в каждом слоте, и проверяя количество хэшей <code>hashes_per_tick</code> между тиками. После воспроизведения тика из этого последнего фрагмента этап воспроизведения проверяет общее количество тиков.</li>
+</ol>
+<p>Сценарий сбоя 1: если есть два последовательных тика, между которыми количество хэшей равно <code>!= hashes_per_tick</code>, пометить этот слот как мертвый.</p>
+<p>Сценарий сбоя 2: если количество тиков != <code>ticks_per_slot</code>, пометить слот как мертвый.</p>
+<p>Сценарий сбоя 3: если количество тиков достигает <code>ticks_per_slot</code>, но мы все еще не видим <code>LAST_SHRED_IN_SLOT</code>, помечаем этот слот как мертвый.</p>
+<ol start="2">
+<li>Когда ReplayStage достигает фрагмента, отмеченного как последний фрагмент, он проверяет, является ли этот последний фрагмент галочкой.</li>
+</ol>
+<p>Сценарий сбоя: если подписанный фрагмент с флагом <code>LAST_SHRED_IN_SLOT</code> не может быть десериализован в тик (либо не может быть десериализован, либо десериализован в запись), пометьте этот слот как мертвый.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

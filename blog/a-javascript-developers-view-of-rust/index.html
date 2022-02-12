@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Взгляд разработчика JavaScript на Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+
+        <div class="content text">
+            
+<h1>Взгляд разработчика JavaScript на Rust</h1>
+
+<p><a href="https://medium.com/swlh/a-javascript-developers-view-of-rust-e702c11262c6">Перевод</a> | Автор оригинала: Danny Denenberg</p>
+<p>Некоторое время назад я пытался найти что-нибудь интересное для чтения в Интернете, когда наткнулся на Rust. Rust - это…</p>
+<blockquote>
+<p>«Язык, позволяющий каждому создавать надежное и эффективное программное обеспечение».</p>
+</blockquote>
+<p>Короче говоря, это язык системного программирования. Причем чертовски быстрый. Он даже превзошел C++ во многих тестах, проводимых The Computer Language Benchmarks Game (в основном связанных со сложными алгоритмическими задачами, такими как двоичные деревья и т.д.).</p>
+<p>Однако, прежде чем я начал больше углубляться в сам язык, я попытался понять, что люди думают о нем. Rust был создан в 2011 году и поддерживается некоммерческой организацией Mozilla. За ним следует своего рода нишевая группа, состоящая в основном из предыдущих разработчиков C/C++, которые хотели отдохнуть от исключений с нулевым указателем, неопределенного поведения, сложности языка, сумасшедших макросов - я продолжу? Хотя Rust все еще находится на ранней стадии развития, у него есть веб-сайт, посвященный разработке игрового программирования, что довольно приятно. Есть даже игры, которые вызывают много шума и даже были помещены в App Store и Google Play Store, например, A Snake’s Tale. У Rust даже есть УДИВИТЕЛЬНЫЙ менеджер пакетов под названием Cargo, который сравним с npm и на сегодняшний день его скачали почти 1,5 миллиарда.</p>
+<p>Увидев все это, я решил, что мне нужно удовлетворить свое любопытство и изучить синтаксис Rust. Я начал с чтения Книги - (в основном) полного пошагового руководства по синтаксису, идиомам и структуре программы Rust.</p>
+<p>Поскольку я знаю много языков типа c, общая форма синтаксиса была простой и понятной. Если вы один из тех, кто по возможности использует const и будет наказывать тех, кто этого не делает, вам понравится Rust. Форма присвоения переменных по умолчанию делает их неизменяемыми. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Below is an immutable variable
+</span><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// Below is a mutable variable
+</span><span style="color:#ff7733;">let mut</span><span> b </span><span style="color:#f29668;">= </span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#5c6773;">// General form for variables:
+</span><span style="color:#ff7733;">let</span><span> var_name</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">type </span><span style="color:#f29668;">=</span><span> value</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Типы данных в Rust просты. Целочисленные типы состоят из чисел без знака и со знаком от 8 до 128 битов.</p>
+<p><img src="/imgs/posts/5407a787_01.png" alt="Целые числа" /></p>
+<p>Существуют также неизменяемые типы массивов, символы, &amp;str (ссылки на список символов в памяти), кортежи, перечисления, структуры, коллекции и т.д.</p>
+<p>Функции объявляются с использованием ключевого слова fn следующим образом: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello, world&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вы можете указать возвращаемые значения с помощью символа -&gt;, и если вы возвращаете значение в последней строке функции, нет необходимости включать ключевое слово return. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// returns the 32-bit integer 5
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">my_function</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u32 </span><span>{
+</span><span>  </span><span style="color:#f29718;">5
+</span><span>}
+</span></code></pre>
+<p>Я медленно продвигался вперед, пока не натолкнулся на концепцию владения. Все программы должны управлять тем, как они используют память компьютера во время работы. Поскольку Rust не выполняет сборку мусора и программистам не нужно вручную выделять и освобождать память, памятью управляется через систему владения.</p>
+<p>Вот правила владения в Rust (прямо из Книги):</p>
+<ul>
+<li>Каждое значение в Rust имеет переменную, которая называется его владельцем.</li>
+<li>Единовременно может быть только один владелец.</li>
+<li>Когда владелец выходит за рамки, значение будет сброшено.</li>
+</ul>
+<p>Приведем пример: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>{                      </span><span style="font-style:italic;color:#5c6773;">// s is not valid here, it’s not yet declared
+</span><span>    </span><span style="color:#ff7733;">let</span><span> s </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;hello&quot;</span><span style="color:#bfbab0cc;">;   </span><span style="font-style:italic;color:#5c6773;">// s is valid from this point forward
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// do stuff with s
+</span><span>}                      </span><span style="font-style:italic;color:#5c6773;">// this scope is now over, and s is no longer valid
+</span></code></pre>
+<p>Вот проблема, в которую я попал, когда впервые использовал Rust. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Hello, world!&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// a is the owner
+</span><span style="color:#ff7733;">let</span><span> b </span><span style="color:#f29668;">=</span><span> a</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ownership has changed to b. What is a?
+</span><span>
+</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> a)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// error[E0382]: borrow of moved value: `a`
+</span></code></pre>
+<p>Поскольку одновременно может быть только один владелец, я не могу попытаться присвоить значение переменной другой, используя имя первой переменной, если она была размещена в куче, как тип String в Rust. Теперь, если тип переменной является примитивным (int, double, bool и т.д.), Выполнение переназначения просто скопирует значение и НЕ изменит владельца.</p>
+<p>При ссылке на переменную вы используете символ &amp;, как в C/C++. Ссылки позволяют программисту принять значение, не принимая на себя ответственность. Одновременно может быть столько неизменяемых ссылок на переменную, сколько нужно, но только ОДНА изменяемая ссылка. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Dude, Rust is sick.&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>{
+</span><span>  </span><span style="color:#ff7733;">let</span><span> b </span><span style="color:#f29668;">= &amp;</span><span>a</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ok
+</span><span>  </span><span style="color:#ff7733;">let</span><span> c </span><span style="color:#f29668;">= &amp;</span><span>a</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ok
+</span><span>}
+</span><span>
+</span><span>{
+</span><span>  </span><span style="color:#ff7733;">let</span><span> b </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> a</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// mutable reference. ok.
+</span><span>  </span><span style="color:#f29668;">*</span><span>b </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Different!&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// change value. ok
+</span><span>}
+</span><span>
+</span><span>{
+</span><span>  </span><span style="color:#ff7733;">let</span><span> b </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> a</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ok
+</span><span>  </span><span style="color:#ff7733;">let</span><span> c </span><span style="color:#f29668;">= &amp;</span><span style="color:#ff7733;">mut</span><span> a</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ERROR. Only one mut reference at a time!
+</span><span>}
+</span></code></pre>
+<p>Еще более сложным для меня было время жизни Rust, которое позволяет Rust обойтись с помощью сборки мусора. Это также их решение хорошо известной проблемы C++, связанной с висячими указателями, когда переменная «используется после освобождения». Я даже не буду пытаться здесь объяснять эту концепцию. Вы должны прочитать эту статью, чтобы узнать больше.</p>
+<p>В целом, я бы сказал, что мой опыт работы с Rust был полезным. Мне было легко понять его синтаксис и руководство по стилю, хотя некоторые концепции поначалу было трудно понять. Не знаю, только ли это я, но даже то, как язык выглядит при вводе, элегантно. Он использует методы функционального программирования, обычно используемые в JavaScript (фильтрация, сопоставление и т.д.), А его ключевые слова синтаксиса короткие и слишком точные (fn, enum, let, mut, i32, &amp;str)
+Некоторые системные разработчики активно лоббируют, чтобы Rust стал следующим C/C++. Не знаю, случится ли это в ближайшее время, но одно можно сказать наверняка: он будет продолжать расти и развиваться. Он поддерживается Mozilla и имеет «культ» последователей, которые хотят убить C++.</p>
+<p>Так что.</p>
+<p>Взгляните на Rust. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

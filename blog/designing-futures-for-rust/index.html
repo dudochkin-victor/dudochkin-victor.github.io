@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Проектирование футур для Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#predystoriia-treity-v-rust">Предыстория: трейты в Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#opredelenie-futur">Определение футур</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#lozhnyi-start-podkhod-obratnogo-vyzova-takzhe-izvestnyi-kak-zavershenie"><small>- Ложный старт: подход обратного вызова (также известный как завершение)</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#chto-srabotalo-podkhod-orientirovannyi-na-spros-takzhe-izvestnyi-kak-gotovnost">Что сработало: подход, ориентированный на спрос (также известный как готовность)</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#kraeugol-nyi-kamen-zadachi"><small>- Краеугольный камень: задачи</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#primer-prisoedinites-k-modeli-osnovannoi-na-sprose"><small>- Пример: присоединитесь к модели, основанной на спросе</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#futury-v-masshtabe">Футуры в масштабе</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#otmena"><small>- Отмена</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#obratnoe-davlenie"><small>- Обратное давление</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/designing-futures-for-rust/#soobshchenie-o-prichine-probuzhdeniia"><small>- Сообщение о причине пробуждения</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Проектирование футур для Rust</h1>
+
+<p><a href="http://aturon.github.io/blog/2016/09/07/futures-design/">Перевод</a> | Автор оригинала: Aaron Turon</p>
+<p>Недавно я писал о важности асинхронного ввода-вывода в Rust и целях новой библиотеки Futures. Этот пост углубляет историю, объясняя основной дизайн этой библиотеки. Если вы хотите узнать больше об использовании библиотеки, вам придется подождать; мы очень активно работаем над стеком Tokio, и нам будет что сказать, когда он немного уляжется.</p>
+<p>Напомним, цель - надежный и эргономичный асинхронный ввод-вывод без потери производительности:</p>
+<ul>
+<li>
+<p>Надежность: у библиотеки должна быть хорошая история обработки ошибок, отмены, тайм-аутов, противодавления и других типичных проблем при написании надежных серверов. Поскольку это Rust, мы, конечно же, гарантируем потокобезопасность.</p>
+</li>
+<li>
+<p>Эргономичность: библиотека должна делать написание асинхронного кода максимально безболезненным - в идеале, таким же простым, как написание синхронного кода, но с большей выразительностью. В то время как последнее потребует async / await для полного выполнения, библиотека futures предоставляет высокоуровневый способ выражения и комбинирования асинхронных вычислений, аналогичный успешному Rust Iterator API.</p>
+</li>
+<li>
+<p>Нулевая стоимость: код, написанный с использованием библиотеки, должен компилироваться до чего-то эквивалентного (или лучше, чем) «ручных» серверных реализаций, которые обычно используют ручные конечные автоматы и тщательное управление памятью.</p>
+</li>
+</ul>
+<p>Достижение этих целей требует сочетания существующих методов в Rust и некоторых новых идей о том, как создать библиотеку будущего; этот пост будет охватывать и то, и другое. В двух словах:</p>
+<ul>
+<li>
+<p>Используйте особенности и закрытие Rust для эргономики и снижения затрат. Трэйты и замыкания в Rust не требуют выделения памяти в куче или динамической диспетчеризации - факты, которыми мы пользуемся. Мы также используем систему трэйтов, чтобы упаковать Futures API простым и удобным способом.</p>
+</li>
+<li>
+<p>Разработайте базовую абстракцию Future так, чтобы она была ориентирована на спрос, а не на обратный вызов. (В терминах асинхронного ввода-вывода следуйте стилю «готовности», а не стилю «завершение».) Это означает, что составление футур вместе не требует создания промежуточных обратных вызовов. Как мы увидим, этот подход также имеет преимущества для противодавления и отмены.</p>
+</li>
+<li>
+<p>Предоставьте абстракцию задачи, похожую на зеленый поток, которая ведет к завершению будущего. Размещение будущего внутри задачи - это то, что позволяет коду библиотеки компилироваться до традиционной модели, то есть с большими конечными автоматами, которые могут служить обратным вызовом для большого количества основных событий.</p>
+</li>
+</ul>
+<p>Давайте нырнем!</p>
+<h2 id="predystoriia-treity-v-rust">Предыстория: трейты в Rust</h2>
+<blockquote>
+<p>Начнем с быстрого обзора трейтов в Rust. Если вы хотите больше читать по этим темам, вы можете ознакомиться с более подробным обзором черт характера.</p>
+</blockquote>
+<p>Чтобы понять, как работает дизайн футур, вам нужно иметь базовое представление о трэйтах Rust. Я не буду пытаться здесь вводить полностью, но я постараюсь выделить наиболее важные моменты, чтобы разобраться в происходящем.</p>
+<p>Трэйты предоставляют единственное в Rust понятие интерфейса, что означает, что трэйта - это абстракция, которая может применяться ко многим конкретным типам. Например, вот упрощенная характеристика хеширования: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Hash </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">hash</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Эта трэйта определяет, что тип, реализующий ее, должен предоставлять хэш-метод, который заимствует self и создает u64. Чтобы реализовать эту трэйту, вы должны дать конкретное определение для метода, например, следующее простое определение: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span>Hash </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">bool </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">hash</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u64 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">*</span><span style="font-style:italic;color:#39bae6;">self </span><span>{ </span><span style="color:#f29718;">0 </span><span>} </span><span style="color:#ff7733;">else </span><span>{ </span><span style="color:#f29718;">1 </span><span>}
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Hash </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">i32 </span><span>{ </span><span style="color:#f29668;">... </span><span>} </span><span style="font-style:italic;color:#5c6773;">// etc
+</span></code></pre>
+<p>После того, как эти реализации внедрены, вы можете выполнять такие вызовы, как true.hash(), для прямого вызова метода. Но часто методы вызываются через дженерики, в которых трэйты действительно действуют как абстракция: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_hash</span><span>&lt;T</span><span style="color:#bfbab0cc;">:</span><span> Hash&gt;(</span><span style="color:#f29718;">t</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>T) {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;The hash is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> t</span><span style="color:#f29668;">.</span><span style="color:#f07178;">hash</span><span>())
+</span><span>}
+</span></code></pre>
+<p>Функция print_hash является универсальной для неизвестного типа T, но требует, чтобы T реализовал свойство Hash. Это означает, что мы можем использовать его со значениями bool и i32: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">print_hash</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">true</span><span>)</span><span style="color:#bfbab0cc;">;   </span><span style="font-style:italic;color:#5c6773;">// instantiates T = bool
+</span><span style="color:#f07178;">print_hash</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">12</span><span>)</span><span style="color:#bfbab0cc;">;     </span><span style="font-style:italic;color:#5c6773;">// instantiates T = i32
+</span></code></pre>
+<p>Обобщения компилируются, что приводит к статической отправке. То есть, как и в случае с шаблонами C++, компилятор сгенерирует две копии метода print_hash для обработки вышеуказанного кода, по одной для каждого конкретного типа аргумента. Это, в свою очередь, означает, что внутренний вызов t.hash() - точка, где фактически используется абстракция - имеет нулевую стоимость: он будет скомпилирован в прямой статический вызов соответствующей реализации: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>// The compiled code:
+</span><span>__print_hash_bool(&amp;true);  // invoke specialized bool version directly
+</span><span>__print_hash_i32(&amp;12);     // invoke specialized i32 version directly
+</span></code></pre>
+<p>Компиляция до неуниверсального кода важна для того, чтобы абстракция, такая как Futures, работала без накладных расходов: большую часть времени этот неуниверсальный код также будет встроен, позволяя компилятору создавать и оптимизировать большие блоки кода, которые напоминают то, что у вас может быть написано простым, «ручным» стилем.</p>
+<p>Замыкания в Rust работают точно так же - по сути, это просто трэйты. Это означает, в частности, что создание закрытия не влечет за собой выделение кучи, а вызов закрытия может быть статически отправлен, как и метод хеширования выше.</p>
+<p>Наконец, трейты также могут использоваться как «объекты», которые вызывают динамическую отправку методов трейта (поэтому компилятор не сразу знает, какую реализацию будет использовать вызов). Преимущество типажных объектов заключается в гетерогенных коллекциях, где вам нужно сгруппировать вместе несколько объектов, которые могут иметь разные базовые типы, но все реализуют одну и ту же характеристику. Объекты трэйтов всегда должны находиться за указателем, что на практике обычно требует выделения в куче.</p>
+<h2 id="opredelenie-futur">Определение футур</h2>
+<p>А теперь обратимся к футурам. В более ранней публикации дано неформальное определение будущего:</p>
+<blockquote>
+<p>По сути, будущее представляет собой ценность, которая может быть еще не готова. Обычно будущее становится полным (значение готово) из-за события, происходящего где-то в другом месте.</p>
+</blockquote>
+<p>Ясно, что мы хотим, чтобы футуры были своего рода трэйтом, поскольку будет много разных видов «значений, которые еще не готовы» (например, данные в сокете, возвращаемое значение из вызова RPC и т.д.). Но как нам представить «еще не готовую» часть?</p>
+<h3 id="lozhnyi-start-podkhod-obratnogo-vyzova-takzhe-izvestnyi-kak-zavershenie">Ложный старт: подход обратного вызова (также известный как завершение)</h3>
+<p>Существует очень стандартный способ описания футур, который мы находили в каждой существующей реализации футуры, которую мы исследовали: как функция, которая подписывается на обратный вызов для уведомления о том, что будущее завершено.</p>
+<blockquote>
+<p>В мире асинхронного ввода-вывода этот вид интерфейса иногда называют основанным на завершении, поскольку о событиях сообщается о завершении операций; IOCP Windows основан на этой модели.</p>
+</blockquote>
+<p>В терминах Rust модель обратного вызова приводит к следующему трэйту: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Future </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The type of value produced by the future
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Item</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Tell the future to invoke the given callback on completion
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">schedule</span><span>&lt;F&gt;(</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">:</span><span> F) </span><span style="color:#ff7733;">where</span><span> F</span><span style="color:#bfbab0cc;">:</span><span> FnOnce(</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Item);
+</span><span>}
+</span></code></pre>
+<p>Здесь FnOnce - это трейт для замыканий, который будет вызываться не более одного раза. Поскольку расписание использует универсальные шаблоны, оно будет статически направлять любые вызовы этого закрытия.</p>
+<p>К сожалению, этот подход, тем не менее, требует выделения памяти почти в каждой точке будущей композиции и часто требует динамической отправки, несмотря на все наши усилия, чтобы избежать таких накладных расходов.</p>
+<p>Чтобы понять, почему, давайте рассмотрим простой способ объединения двух футур: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">join</span><span>&lt;F, G&gt;(</span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">:</span><span> F, </span><span style="color:#f29718;">g</span><span style="color:#bfbab0cc;">:</span><span> G) </span><span style="color:#bfbab0cc;">-&gt;</span><span> impl Future&lt;Item = (</span><span style="color:#ff7733;">F</span><span style="color:#f29668;">::</span><span>Item, </span><span style="color:#ff7733;">G</span><span style="color:#f29668;">::</span><span>Item)&gt;
+</span><span>    </span><span style="color:#ff7733;">where</span><span> F</span><span style="color:#bfbab0cc;">:</span><span> Future, G</span><span style="color:#bfbab0cc;">:</span><span> Future
+</span></code></pre>
+<p>Эта функция принимает два футуры, f и g, и возвращает новое будущее, которое дает пару с результатами обоих. Объединенный футура завершается только тогда, когда оба базовых футуры завершаются, но до этого момента позволяет базовым футурам выполняться одновременно.</p>
+<p>Как бы мы реализовали соединение, используя приведенное выше определение Future? Объединенному будущему будет предоставлен единственный обратный вызов both_done, который ожидает пару. Но каждому из базовых футур нужны свои собственные обратные вызовы f_done и g_done, принимающие только свои собственные результаты. Ясно, что здесь нам нужно какое-то совместное использование: нам нужно сконструировать f_done и g_done, чтобы каждый из них мог вызывать both_done, а также не забудьте включить соответствующую синхронизацию. Учитывая задействованные сигнатуры типов, просто невозможно сделать это без выделения (в Rust мы бы использовали здесь Arc).</p>
+<p>Подобные проблемы повторялись во многих будущих комбинаторах.</p>
+<p>Другая проблема заключается в том, что источники событий, такие как циклы событий, должны вызывать обратные вызовы произвольных разных типов - случай неоднородности, упомянутой выше. В качестве конкретного примера, когда сокет готов к чтению, это событие должно быть отправлено некоторому обратному вызову, и, как правило, вам понадобится сочетание разных футур, чтобы работать с разными сокетами. Чтобы эта работа работала, вам необходимо выделить в куче обратные вызовы для цикла событий в каждой точке, в которой будущее хочет прослушивать событие, и динамически отправлять уведомления этим обратным вызовам.</p>
+<p>TL;DR, мы не смогли сделать «стандартную» абстракцию будущего, обеспечивающую композицию футур с нулевой стоимостью, и мы не знаем ни одной «стандартной» реализации, которая бы это делала.</p>
+<h2 id="chto-srabotalo-podkhod-orientirovannyi-na-spros-takzhe-izvestnyi-kak-gotovnost">Что сработало: подход, ориентированный на спрос (также известный как готовность)</h2>
+<p>После долгих размышлений мы пришли к новому определению будущего, основанному на спросе. Вот упрощенная версия, в которой игнорируется обработка ошибок реальной трэйты:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// A *simplified* version of the trait, without error-handling
+</span><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Future </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The type of value produced on success
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Item</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Polls the future, resolving to a value if possible
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">poll</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Async&lt;</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Item&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Async</span><span>&lt;T&gt; {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Represents that a value is immediately ready.
+</span><span>    Ready(T)</span><span style="color:#bfbab0cc;">,
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Represents that a value is not ready yet, but may be so later.
+</span><span>    NotReady</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Сдвиг API здесь прост: вместо того, чтобы будущее активно вызывать обратный вызов по завершении, внешняя сторона должна опрашивать будущее, чтобы довести его до завершения. Будущее может сигнализировать о том, что он еще не готов и должен быть опрошен снова в какой-то момент, возвращая Async::NotReady (абстракция EWOULDBLOCK).</p>
+<blockquote>
+<p>Примечание: в мире асинхронного ввода-вывода этот вид интерфейса иногда называют основанным на готовности, поскольку события сигнализируются на основе «готовности» операций (например, байтов на готовность сокета) с последующей попыткой завершения. Операция; Linux epoll основан на этой модели. (Эта модель также может выражать завершение, рассматривая завершение операции как сигнал о том, что будущее готово для опроса.)</p>
+</blockquote>
+<p>Устраняя все промежуточные обратные вызовы, мы решили некоторые ключевые проблемы предыдущей версии трейта. Но мы ввели новый: после возврата NotReady кто и когда опрашивает будущее?</p>
+<p>Возьмем конкретный пример. Если future пытается прочитать байты из сокета, этот сокет может быть не готов к чтению, и в этом случае future может вернуть NotReady. Каким-то образом мы должны позаботиться о том, чтобы будущее позднее «просыпалось» (путем вызова опроса), как только сокет будет готов. Такого рода пробуждение - задача цикла обработки событий. Но теперь нам нужно каким-то образом связать сигнал в цикле событий с продолжением опроса будущего.</p>
+<p>Решение составляет другой главный компонент дизайна: задачи.</p>
+<h3 id="kraeugol-nyi-kamen-zadachi">Краеугольный камень: задачи</h3>
+<p>Задача - это будущее, которое выполняется. Это будущее почти всегда состоит из цепочки других футур, как в примере из исходного сообщения: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">id_rpc</span><span>(</span><span style="color:#f29668;">&amp;</span><span>my_server)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">id</span><span>| {
+</span><span>    </span><span style="color:#f07178;">get_row</span><span>(id)
+</span><span>})</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">row</span><span>| {
+</span><span>    json</span><span style="color:#f29668;">::</span><span>encode(row)
+</span><span>})</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">encoded</span><span>| {
+</span><span>    </span><span style="color:#f07178;">write_string</span><span>(my_socket</span><span style="color:#bfbab0cc;">,</span><span> encoded)
+</span><span>})
+</span></code></pre>
+<p>Ключевым моментом является то, что существует разница между такими функциями, как and_then, map и join, которые объединяют футуры в более крупные футуры, и функциями, которые выполняют футуры, например:</p>
+<ul>
+<li>
+<p>Метод ожидания, который просто запускает будущее как задачу, закрепленную за текущим потоком, блокируя этот поток до тех пор, пока результат не будет получен и возвращен.</p>
+</li>
+<li>
+<p>Метод spawn в пуле потоков, который запускает future как независимую задачу в пуле.</p>
+</li>
+</ul>
+<p>Эти функции выполнения создают задачу, которая содержит будущее и отвечает за его опрос. В случае ожидания опрос происходит немедленно; для порождения опрос происходит после того, как задача запланирована на рабочий поток.</p>
+<p>Как бы ни начался опрос, если какой-либо из внутренних футур дал результат NotReady, он может привести к остановке всей задачи - задаче может потребоваться дождаться возникновения какого-либо события, прежде чем она сможет продолжить. При синхронном вводе-выводе именно здесь поток блокируется. Задачи представляют собой эквивалент этой модели: задача «блокируется», уступая место своему исполнителю после установки себя в качестве обратного вызова для событий, которых она ожидает.</p>
+<p>Возвращаясь к примеру чтения из сокета, по результату NotReady задача может быть добавлена в таблицу диспетчеризации цикла событий, чтобы она была разбужена, когда сокет станет готовым, и в этот момент он повторно опросит свое будущее. Однако важно то, что экземпляр задачи остается фиксированным в течение всего времени существования будущего, которое он выполняет, поэтому для создания или установки этого обратного вызова не требуется выделения.</p>
+<p>Завершая аналогию с потоками, задачи предоставляют API парковки / отмены для «блокировки» и пробуждения: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">/// Returns a handle to the current task to call unpark at a later date.
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">park</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> Task</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Task </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Indicate that the task should attempt to poll its future in a timely fashion.
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">unpark</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Блокировка будущего - это вопрос использования park для обработки его задачи, помещения результирующей задачи в некоторую очередь пробуждения для интересующего события и возврата NotReady. Когда происходит интересующее событие, дескриптор задачи может использоваться для пробуждения задачи, например перепланировав его для выполнения в пуле потоков. Точная механика парковки / снятия с парковки зависит от исполнителя задачи.</p>
+<p>В некотором смысле модель задач является экземпляром «зеленой» (также известной как облегченная) потоковой передачи: мы планируем потенциально большое количество асинхронных задач на гораздо меньшее количество реальных потоков ОС, и большинство этих задач блокируются на каком-то событии в большинстве случаев. времени. Однако есть существенное отличие от старой модели зеленых потоков Rust: задачи не требуют собственного стека. Фактически, все данные, необходимые для задачи, содержатся в ее будущем. Это означает, что мы можем аккуратно обойти проблемы динамического роста стека и обмена стеками, предоставляя нам действительно легкие задачи без каких-либо последствий для системы во время выполнения.</p>
+<p>Возможно, удивительно, что будущее в задаче компилируется в конечный автомат, так что каждый раз, когда задача просыпается для продолжения опроса, она продолжает выполнение из текущего состояния - работая точно так же, как вручную свернутый код на основе mio. Этот момент легче всего увидеть на примере, поэтому давайте вернемся к соединению.</p>
+<h3 id="primer-prisoedinites-k-modeli-osnovannoi-na-sprose">Пример: присоединитесь к модели, основанной на спросе</h3>
+<p>Чтобы реализовать функцию соединения, мы представим новый конкретный тип, Join, который отслеживает необходимое состояние: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">join</span><span>&lt;F</span><span style="color:#bfbab0cc;">:</span><span> Future, G</span><span style="color:#bfbab0cc;">:</span><span> Future&gt;(</span><span style="color:#f29718;">f</span><span style="color:#bfbab0cc;">:</span><span> F, </span><span style="color:#f29718;">g</span><span style="color:#bfbab0cc;">:</span><span> G) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Join&lt;F, G&gt; {
+</span><span>    Join</span><span style="color:#f29668;">::</span><span>BothRunning(f</span><span style="color:#bfbab0cc;">,</span><span> g)
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Join</span><span>&lt;F: Future, G: Future&gt; {
+</span><span>    BothRunning(F</span><span style="color:#bfbab0cc;">,</span><span> G)</span><span style="color:#bfbab0cc;">,
+</span><span>    FirstDone(F</span><span style="color:#f29668;">::</span><span>Item</span><span style="color:#bfbab0cc;">,</span><span> G)</span><span style="color:#bfbab0cc;">,
+</span><span>    SecondDone(F</span><span style="color:#bfbab0cc;">, </span><span>G</span><span style="color:#f29668;">::</span><span>Item)</span><span style="color:#bfbab0cc;">,
+</span><span>    Done</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;F, G&gt; Future </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Join</span><span>&lt;F, G&gt; </span><span style="color:#ff7733;">where</span><span> F</span><span style="color:#bfbab0cc;">:</span><span> Future, G</span><span style="color:#bfbab0cc;">:</span><span> Future {
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Item </span><span style="color:#f29668;">= </span><span>(F</span><span style="color:#f29668;">::</span><span>Item</span><span style="color:#bfbab0cc;">, </span><span>G</span><span style="color:#f29668;">::</span><span>Item)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">poll</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Async&lt;</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Item&gt; {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// navigate the state machine
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Первое, на что следует обратить внимание, это то, что Join - это перечисление, варианты которого представляют состояния в «машине состояний соединения»:</p>
+<ul>
+<li>BothRunning: оба базовых футуры все еще исполняются.</li>
+<li>FirstDone: первое будущее принесло значение, но второе все еще выполняется.</li>
+<li>SecondDone: второе будущее принесло значение, но первое все еще выполняется.</li>
+<li>Готово: оба футуры завершены, и их значения возвращены.</li>
+</ul>
+<p>Перечисления в Rust представлены без каких-либо указателей или выделения кучи; вместо этого размер перечисления равен размеру наибольшего варианта. Именно этого мы и хотим - этот размер представляет собой «высшую точку» этой маленькой государственной машины.</p>
+<p>Метод опроса здесь будет пытаться продвинуться через конечный автомат, при необходимости опрашивая базовые футуры.</p>
+<p>Напомним, что цель соединения состоит в том, чтобы позволить двум его футурам работать одновременно, стремясь к финишу. Например, каждый из двух футур может представлять подзадачи, выполняющиеся параллельно в пуле потоков. Когда эти подзадачи все еще выполняются, опрос их будущего вернет NotReady, эффективно «блокируя» будущее присоединения, в то же время сохраняя дескриптор внешней Задачи, чтобы разбудить ее, когда они закончатся. Затем две подзадачи могут соревноваться, чтобы разбудить задачу, но это нормально: метод unpark для пробуждения задачи является потокобезопасным и гарантирует, что задача будет опрашивать свое будущее хотя бы один раз после любого вызова unpark. Таким образом, синхронизация обрабатывается раз и навсегда на уровне задачи, не требуя комбинаторов, таких как соединение, для выделения или обработки самой синхронизации.</p>
+<ul>
+<li>Возможно, вы заметили, что опрос принимает &amp;mut self, что означает, что данное будущее нельзя опрашивать одновременно - будущее имеет уникальный доступ к своему содержимому во время опроса. Это гарантирует автоматическая синхронизация.</li>
+</ul>
+<p>И последнее. Комбинаторы, такие как join, воплощают в себе «маленькие» конечные автоматы, но поскольку некоторые из этих состояний включают дополнительные футуры, они позволяют вкладывать дополнительные конечные автоматы. Другими словами, опрос одного из базовых футур для соединения может включать в себя пошаговое выполнение его конечного автомата перед выполнением шагов в конечном конечном автомате соединения. Тот факт, что использование трейта Future не влечет за собой выделения кучи или динамической отправки, является ключом к тому, чтобы эта работа была эффективной.</p>
+<p>В общем, «большое» будущее, которым управляет задача, состоящая из большой цепочки будущих, связанных комбинаторами, именно таким образом воплощает в себе «большой» вложенный конечный автомат. Еще раз, представление Rust enum означает, что необходимое пространство - это размер состояния на «большой» машине с наибольшим размером занимаемой площади. Пространство для этого «большого» будущего выделяется задачей за один раз: либо в стеке (для исполнителя ожидания), либо в куче (для порождения). В конце концов, данные должны где-то жить, но главное - избегать постоянных распределений по мере работы конечного автомата, вместо этого заранее освобождая место для всего. </p>
+<h2 id="futury-v-masshtabe">Футуры в масштабе</h2>
+<p>Мы познакомились с основами футур, ориентированных на спрос, но есть ряд опасений по поводу устойчивости, которые мы также хотим рассмотреть. Оказывается, что эти проблемы естественным образом решаются моделью, ориентированной на спрос. Давайте взглянем на некоторые из самых важных.</p>
+<h3 id="otmena">Отмена</h3>
+<p>Футуры часто используются для обозначения существенной работы, которая выполняется одновременно. Иногда становится ясно, что эта работа больше не нужна, возможно, из-за того, что истек тайм-аут, или клиент закрыл соединение, или нужный ответ был найден каким-то другим способом.</p>
+<p>В подобных ситуациях вам нужна какая-то форма отмены: возможность сказать будущему, чтобы оно прекратилось, потому что вы больше не заинтересованы в его результате.</p>
+<p>В модели, основанной на спросе, аннулирование в основном «выпадает». Все, что вам нужно сделать, это перестать опрашивать будущее, вместо этого «отбросить» его (термин Rust для уничтожения данных). И это обычно является естественным следствием вложенных конечных автоматов, таких как Join. Футуры, вычисление которых требует некоторых особых усилий для отмены (например, отмена вызова RPC), могут предоставлять эту логику как часть своей реализации Drop.</p>
+<h3 id="obratnoe-davlenie">Обратное давление</h3>
+<p>Другим важным аспектом масштабного использования футур (и их близкого родственника, потоков) является противодавление: способность перегруженного компонента в одной части системы замедлять ввод от других компонентов. Например, если у сервера есть невыполненные транзакции базы данных для обслуживания невыполненных запросов, он должен замедлить прием новых запросов.</p>
+<p>Как и отмена, противодавление в значительной степени выпадает из нашей модели для футур и потоков. Это связано с тем, что задачи могут быть «заблокированы» на неопределенный срок будущим / потоком, возвращающим NotReady, и уведомлены о продолжении опроса в более позднее время. В примере с транзакциями базы данных, если постановка транзакции в очередь сама представлена как будущее, служба базы данных может вернуть NotReady для замедления запросов. Часто такие результаты NotReady передаются в обратном направлении по системе, например разрешая обратное давление течь от службы базы данных обратно к определенному клиентскому соединению, а затем обратно к общему диспетчеру соединений. Такие каскады - естественное следствие модели, ориентированной на спрос.</p>
+<h3 id="soobshchenie-o-prichine-probuzhdeniia">Сообщение о причине пробуждения</h3>
+<p>Если вы знакомы с такими интерфейсами, как epoll, возможно, вы заметили, что в модели парковки / разблокировки чего-то не хватает: она не позволяет задаче узнать, почему она проснулась.</p>
+<p>Это может быть проблемой для определенных видов футур, которые предполагают одновременный опрос большого количества других футур - вам не нужно повторно опрашивать все, чтобы определить, какое под-будущее действительно способно добиться прогресса.</p>
+<p>Чтобы справиться с этой проблемой, библиотека предлагает своего рода «epoll для всех»: возможность связывать «события отмены парковки» с заданным дескриптором Задачи. То есть могут быть разные дескрипторы одной и той же задачи, плавающие вокруг, все из которых могут использоваться для пробуждения задачи, но каждый из которых несет разные события отмены парковки. Проснувшись, будущее в задаче может изучить эти незапаркованные события, чтобы определить, что произошло. Подробнее см. В документации.
+Подведение итогов</p>
+<p>Мы ознакомились с основными принципами проектирования, лежащими в основе библиотеки футур и потоков Rust. Подводя итог, можно сказать, что все сводится к нескольким ключевым идеям:</p>
+<ul>
+<li>
+<p>Инкапсулируйте текущие футуры в задачи, которые служат единым постоянным «обратным вызовом» на будущее.</p>
+</li>
+<li>
+<p>Реализуйте футуры в стиле, ориентированном на спрос, а не на обратный вызов.</p>
+</li>
+<li>
+<p>Используйте систему трейтов Rust, чтобы позволить скомпонованным футурам превратиться в большие конечные машины.</p>
+</li>
+</ul>
+<p>Вместе эти идеи дают надежную, эргономичную библиотеку футур с нулевой стоимостью.</p>
+<p>Как я упоминал в начале поста, мы очень активно работаем над уровнями над базовой библиотекой футур - слоями, которые включают определенные модели ввода-вывода (например, mio), а также предоставляют инструменты еще более высокого уровня для создания серверов. Эти слои являются частью проекта Tokio, и вы можете прочитать больше об общем видении в моей предыдущей публикации. По мере того, как эти API стабилизируются, ожидайте увидеть больше сообщений с их описанием! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

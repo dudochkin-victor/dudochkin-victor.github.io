@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Постоянное хранилище учетных записей | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/persistent-account-storage/#appendvec">AppendVec</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/persistent-account-storage/#indeks-uchetnoi-zapisi">Индекс учетной записи</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/persistent-account-storage/#kornevye-forki"><small>- Корневые форки</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/persistent-account-storage/#vyvoz-musora">Вывоз мусора</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/persistent-account-storage/#vosstanovlenie-indeksa">Восстановление индекса</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/persistent-account-storage/#snimki">Снимки</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/persistent-account-storage/#predstavlenie">Представление</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Постоянное хранилище учетных записей</h1>
+
+<p>Набор учетных записей представляет собой текущее вычисленное состояние всех транзакций, которые были обработаны валидатором. Каждый валидатор должен поддерживать весь этот набор. Каждый блок, предлагаемый сетью, представляет собой изменение в этом наборе, а поскольку каждый блок является потенциальной точкой отката, изменения должны быть обратимыми.</p>
+<p>Постоянные хранилища, такие как NVME, в 20–40 раз дешевле, чем DDR. Проблема с постоянным хранилищем заключается в том, что производительность записи и чтения намного ниже, чем у DDR. Необходимо соблюдать осторожность при чтении или записи данных. И чтение, и запись могут быть разделены между несколькими накопителями и доступны параллельно. Этот проект предлагает структуру данных, которая допускает одновременное чтение и запись в хранилище. Записи оптимизируются с помощью структуры данных AppendVec, которая позволяет одному писателю выполнять добавление, предоставляя доступ многим одновременным считывателям. Индекс учетных записей поддерживает указатель на точку, в которой учетная запись была добавлена ​​к каждой вилке, что устраняет необходимость в явной проверке состояния.</p>
+<h2 id="appendvec">AppendVec</h2>
+<p>AppendVec — это структура данных, которая допускает произвольное чтение одновременно с одной записью только для добавления. Увеличение или изменение емкости AppendVec требует монопольного доступа. Это реализовано с помощью атомарного смещения, которое обновляется в конце завершенного добавления.</p>
+<p>Базовая память для AppendVec — это отображаемый в память файл. Файлы, отображаемые в памяти, обеспечивают быстрый произвольный доступ, а подкачка выполняется операционной системой.</p>
+<h2 id="indeks-uchetnoi-zapisi">Индекс учетной записи</h2>
+<p>Индекс учетной записи предназначен для поддержки единого индекса для всех учетных записей, разветвленных в настоящее время.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>type AppendVecId = usize;
+</span><span>
+</span><span>type Fork = u64;
+</span><span>
+</span><span>struct AccountMap(Hashmap&lt;Fork, (AppendVecId, u64)&gt;);
+</span><span>
+</span><span>type AccountIndex = HashMap&lt;Pubkey, AccountMap&gt;;
+</span></code></pre>
+<p>Индекс представляет собой сопоставление открытых ключей учетной записи с картой вилок и расположением данных учетной записи в AppendVec. Чтобы получить версию учетной записи для определенного форка:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>/// Load the account for the pubkey.
+</span><span>/// This function will load the account from the specified fork, falling back to the fork&#39;s parents
+</span><span>/// * fork - a virtual Accounts instance, keyed by Fork.  Accounts keep track of their parents with Forks,
+</span><span>///       the persistent store
+</span><span>/// * pubkey - The Account&#39;s public key.
+</span><span>pub fn load_slow(&amp;self, id: Fork, pubkey: &amp;Pubkey) -&gt; Option&lt;&amp;Account&gt;
+</span></code></pre>
+<p>Чтение выполняется путем указания на отображаемое в памяти местоположение в <code>AppendVecId</code> с сохраненным смещением. Справку можно вернуть без копии.</p>
+<h3 id="kornevye-forki">Корневые форки</h3>
+<p><a href="tower-bft/">Tower BFT</a> в конечном итоге выбирает вилку в качестве корневой вилки, и вилка сжимается. Раздавленную/корневую вилку нельзя откатить.</p>
+<p>Когда вилка раздавлена, все учетные записи ее родителей, еще не присутствующие в вилке, переносятся в вилку путем обновления индексов. Учетные записи с нулевым балансом в раздавленном форке удаляются из форка путем обновления индексов.</p>
+<p>Аккаунт может быть <em>собран мусором</em>, когда раздавливание делает его недоступным.</p>
+<p>Возможны три варианта:</p>
+<ul>
+<li>Поддерживать HashSet корневых вилок. Ожидается, что один будет создаваться каждую секунду. Позже все дерево может быть удалено сборщиком мусора. В качестве альтернативы, если каждая вилка ведет счетчик ссылок на учетные записи, сборка мусора может происходить каждый раз при обновлении местоположения индекса.</li>
+<li>Удалите все обрезанные вилки из индекса. Любые оставшиеся ветки с меньшим номером, чем корень, могут считаться корневыми.</li>
+<li>Просканируйте индекс, перенесите все старые корни в новые. Любые оставшиеся разветвления ниже нового корня могут быть удалены позже.</li>
+</ul>
+<h2 id="vyvoz-musora">Вывоз мусора</h2>
+<p>По мере обновления учетных записей они перемещаются в конец AppendVec. После исчерпания емкости можно создать новый AppendVec и хранить в нем обновления. Со временем ссылки на старый AppendVec исчезнут, потому что все учетные записи были обновлены, а старый AppendVec можно удалить.</p>
+<p>Чтобы ускорить этот процесс, можно переместить Аккаунты, которые недавно не обновлялись, в начало нового AppendVec. Эта форма сборки мусора может быть реализована без эксклюзивных блокировок каких-либо структур данных, за исключением обновления индекса.</p>
+<p>Первоначальная реализация сборки мусора заключается в том, что когда все учетные записи в AppendVec становятся устаревшими, она используется повторно. Учетные записи не обновляются и не перемещаются после добавления.</p>
+<h2 id="vosstanovlenie-indeksa">Восстановление индекса</h2>
+<p>Каждый поток банка имеет эксклюзивный доступ к учетным записям во время добавления, поскольку блокировки учетных записей не могут быть сняты до тех пор, пока данные не будут зафиксированы. Но нет явного порядка записи между отдельными файлами AppendVec. Чтобы создать порядок, индекс поддерживает атомарный счетчик версии записи. Каждое добавление к AppendVec записывает номер версии записи индекса для этого добавления в записи для Пользователя в AppendVec.</p>
+<p>Чтобы восстановить индекс, все файлы AppendVec можно читать в любом порядке, а последняя версия записи для каждой вилки должна храниться в индексе.</p>
+<h2 id="snimki">Снимки</h2>
+<p>Для моментального снимка базовые отображаемые в память файлы в AppendVec должны быть сброшены на диск. Индекс также может быть записан на диск.</p>
+<h2 id="predstavlenie">Представление</h2>
+<ul>
+<li>Записи только для добавления выполняются быстро. Твердотельные накопители и NVMe, а также все структуры данных ядра на уровне ОС позволяют выполнять добавления так быстро, как позволяет пропускная способность PCI или NVMe (2700 МБ/с).</li>
+<li>Каждый поток воспроизведения и банковского обслуживания одновременно записывает в свой собственный AppendVec.</li>
+<li>Каждый AppendVec потенциально может размещаться на отдельном NVMe.</li>
+<li>Каждый поток воспроизведения и банка имеет одновременный доступ для чтения ко всем AppendVec без блокировки записи.</li>
+<li>Индекс требует монопольной блокировки записи для записи. Однопоточная производительность для обновлений HashMap составляет порядка 10 млн в секунду.</li>
+<li>Этапы банковского обслуживания и воспроизведения должны использовать 32 потока на NVMe. NVM имеют оптимальную производительность с 32 одновременными операциями чтения или записи.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

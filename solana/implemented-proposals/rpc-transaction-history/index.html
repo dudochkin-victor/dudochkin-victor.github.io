@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Долгосрочная история транзакций RPC | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/rpc-transaction-history/#skhema-tablitsy">Схема таблицы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/rpc-transaction-history/#dostup-k-bol-shoi-tablitse">Доступ к большой таблице</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/rpc-transaction-history/#zapolnenie-dannymi">Заполнение данными</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/rpc-transaction-history/#tablitsa-blokov-blok"><small>- Таблица блоков: блок</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/rpc-transaction-history/#tablitsa-poiska-podpisi-tranzaktsii-adresa-uchetnoi-zapisi-tx-by-addr"><small>- Таблица поиска подписи транзакции адреса учетной записи: tx-by-addr</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/rpc-transaction-history/#tablitsa-poiska-podpisi-tranzaktsii-tx"><small>- Таблица поиска подписи транзакции: tx</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Долгосрочная история транзакций RPC</h1>
+
+<p>Необходимо, чтобы RPC обслуживал как минимум 6 месяцев истории транзакций. Текущая история порядка нескольких дней недостаточна для нижестоящих пользователей.</p>
+<p>Данные транзакций за 6 месяцев практически не могут храниться в реестре RocksDB валидатора, поэтому необходимо внешнее хранилище данных. Бухгалтерская книга rockdb валидатора будет продолжать служить основным источником данных, а затем вернется к внешнему хранилищу данных.</p>
+<p>Затронутые конечные точки RPC:</p>
+<ul>
+<li><a href="developing/clients/jsonrpc-api.md#getfirstavailableblock">getFirstAvailableBlock</a></li>
+<li><a href="developing/clients/jsonrpc-api.md#getconfirmedblock">getConfirmedBlock</a></li>
+<li><a href="developing/clients/jsonrpc-api.md#getconfirmedblocks">getConfirmedBlocks</a></li>
+<li><a href="developing/clients/jsonrpc-api.md#getconfirmedsignaturesforaddress">getConfirmedSignaturesForAddress</a></li>
+<li><a href="developing/clients/jsonrpc-api.md#getconfirmedtransaction">getConfirmedTransaction</a></li>
+<li><a href="developing/clients/jsonrpc-api.md#getsignaturestatuses">getSignatureStatuses</a></li>
+<li><a href="developing/clients/jsonrpc-api.md#getblocktime">getBlockTime</a></li>
+</ul>
+<p>Некоторые ограничения дизайна системы:</p>
+<ul>
+<li>Объем данных для хранения и поиска может быстро достигать терабайтов и является неизменным.</li>
+<li>Система должна быть максимально легкой для SRE. Например, кластер базы данных SQL, для которого требуется SRE для постоянного мониторинга и перебалансировки узлов, нежелателен.</li>
+<li>Данные должны быть доступны для поиска в режиме реального времени - пакетные запросы, выполнение которых занимает минуты или часы, неприемлемы.</li>
+<li>Легко реплицировать данные по всему миру, чтобы разместить их вместе с конечными точками RPC, которые будут их использовать.</li>
+<li>Взаимодействие с внешним хранилищем данных должно быть простым и не зависеть от рискованных малоиспользуемых библиотек кода, поддерживаемых сообществом.</li>
+</ul>
+<p>Исходя из этих ограничений, в качестве хранилища данных выбран продукт Google BigTable.</p>
+<h2 id="skhema-tablitsy">Схема таблицы</h2>
+<p>Экземпляр BigTable используется для хранения всех данных транзакций, разбитых на разные таблицы для быстрого поиска.</p>
+<p>Новые данные могут быть скопированы в экземпляр в любое время, не затрагивая существующие данные, и все данные неизменны. Как правило, ожидается, что новые данные будут загружены после завершения текущей эпохи, но нет ограничений на частоту дампов данных.</p>
+<p>Очистка старых данных выполняется автоматически путем соответствующей настройки политики хранения данных таблиц экземпляров, они просто исчезают. Поэтому порядок добавления данных становится важным. Например, если данные из эпохи N-1 добавляются после данных из эпохи N, более старые данные эпохи переживут более новые данные. Однако, помимо создания <em>дырок</em> в результатах запроса, такое неупорядоченное удаление не будет иметь негативных последствий. Обратите внимание, что этот метод очистки эффективно позволяет хранить неограниченное количество данных транзакций, ограниченное только денежными затратами на это.</p>
+<p>Макет таблицы поддерживает только существующие конечные точки RPC. Для новых конечных точек RPC в будущем могут потребоваться дополнения к схеме и, возможно, повторение всех транзакций для создания необходимых метаданных.</p>
+<h2 id="dostup-k-bol-shoi-tablitse">Доступ к большой таблице</h2>
+<p>BigTable имеет конечную точку gRPC, доступ к которой можно получить с помощью <a href="https://crates.io/crates/crate">tonic</a>] и необработанного API protobuf, поскольку в настоящее время не существует крейта Rust более высокого уровня для BigTable. На практике это усложняет анализ результатов запросов BigTable, но не является серьезной проблемой.</p>
+<h2 id="zapolnenie-dannymi">Заполнение данными</h2>
+<p>Текущее заполнение данных экземпляра будет происходить с периодичностью эпохи за счет использования новой команды solana-ledger-tool, которая преобразует данные rockdb для заданного диапазона слотов в схему экземпляра.</p>
+<p>Тот же процесс будет запущен один раз вручную для заполнения существующих данных реестра.</p>
+<h3 id="tablitsa-blokov-blok">Таблица блоков: <code>блок</code></h3>
+<p>Эта таблица содержит данные сжатого блока для данного слота.</p>
+<p>Ключ строки генерируется путем использования 16-значного шестнадцатеричного представления слота в нижнем регистре, чтобы гарантировать, что самый старый слот с подтвержденным блоком всегда будет первым при перечислении строк. например, ключ строки для слота 42 будет 000000000000002a.</p>
+<p>Данные строки представляют собой сжатую структуру StoredConfirmedBlock.</p>
+<h3 id="tablitsa-poiska-podpisi-tranzaktsii-adresa-uchetnoi-zapisi-tx-by-addr">Таблица поиска подписи транзакции адреса учетной записи: <code>tx-by-addr</code></h3>
+<p>Эта таблица содержит транзакции, которые влияют на данный адрес.</p>
+<p>Ключ строки: <code>&lt;base58 address&gt;/&lt;slot-id-one's-compliment-hex-slot-0-prefixed-to-16-digits&gt;</code>. Данные строки представляют собой сжатую структуру TransactionByAddrInfo.</p>
+<p>Получение комплимента слота позволяет составлять список слотов, гарантируя, что самый новый слот с транзакциями, которые влияют на адрес, всегда будет указан первым.</p>
+<p>Адреса Sysvar не индексируются. Как бы часто ни использовались такие программы, как Vote или System, они, скорее всего, будут иметь строку для каждого подтвержденного слота.</p>
+<h3 id="tablitsa-poiska-podpisi-tranzaktsii-tx">Таблица поиска подписи транзакции: <code>tx</code></h3>
+<p>Эта таблица сопоставляет подпись транзакции с ее подтвержденным блоком и индексом в этом блоке.</p>
+<p>Ключ строки — это подпись транзакции в кодировке base58.
+Данные строки представляют собой сжатую структуру TransactionInfo.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

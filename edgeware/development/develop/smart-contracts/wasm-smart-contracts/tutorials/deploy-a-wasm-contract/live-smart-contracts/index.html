@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Живые смарт-контракты | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/deploy-a-wasm-contract/live-smart-contracts/#zhivye-smart-kontrakty-beresheet">Живые смарт-контракты — Beresheet </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/deploy-a-wasm-contract/live-smart-contracts/#kheshi-koda">Хэши кода </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/deploy-a-wasm-contract/live-smart-contracts/#dobavit-kheshi-koda">Добавить хэши кода </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/deploy-a-wasm-contract/live-smart-contracts/#sviazhites-s-nami-dlia-bol-shego-vovlecheniia">Свяжитесь с нами для большего вовлечения </a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Живые смарт-контракты</h1>
+
+<h2 id="zhivye-smart-kontrakty-beresheet">Живые смарт-контракты — Beresheet <a id="live-smart-contracts-beresheet"></a></h2>
+<p>Edgeware обладает волшебной функциональностью: вы <strong>загрузите свой контракт один раз</strong> и сможете <strong>создавать экземпляр много раз</strong>.</p>
+<blockquote>
+<p><a href="https://wiki.polkadot.network/docs/en/build-build-with-polkadot#so-you-want-to-build-a-smart-contract">Кэширование</a>. Контракты кэшируются по умолчанию и, следовательно, это означает, что их нужно развернуть только один раз, а затем создавать экземпляры столько раз, сколько вы хотите. Это помогает свести к минимуму нагрузку хранилища на цепочку. Вдобавок к этому, когда контракт больше не используется и экзистенциальный депозит слит, код будет стерт из хранилища (известный как жатва).</p>
+</blockquote>
+<p>Мы развернули для вас несколько контрактов в [Beresheet — наша тестовая сеть (open Apps)](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fberesheet1.edgewa.re# /contracts), чтобы вам было легко играть. Вам просто нужно загрузить определенные метаданные (ABI) для конкретного контракта, чтобы ваш браузер их понял.</p>
+<ul>
+<li>📚 <a href="https://docs.edgewa.re/contribute-and-engage/develop/edgeware-smart-contracts/wasm-advanced">Вы можете найти метаданные здесь</a></li>
+<li>⛽️ <a href="https://beresheet-faucet.vercel.app/">Кран</a></li>
+<li>⛽️ <a href="https://t.me/edg_developers">Если кран не работает, посетите нас в Telegram</a></li>
+</ul>
+<h2 id="kheshi-koda">Хэши кода <a id="code-hashes"></a></h2>
+<ul>
+<li>
+<p>erc20</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0x3d9c89932759e97326550ae1ede0efc9ff570e170645ba0538da79a3129a6720
+</span></code></pre>
+</li>
+<li>
+<p>erc721</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0xa30ed09d749f8647f63dbc40fad83b278cdc559968b4aece805f6514ccce357e
+</span></code></pre>
+</li>
+<li>
+<p>incrementer</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0xa0de565eb4be2fdaac56cb1dc0fd6199d0f1f3c5cc1d53929b6f47ea4b6c9afb
+</span></code></pre>
+</li>
+<li>
+<p>multisig_plain</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0xe93c49ad335a33202bd5e4c6d250495d12f424e655da330a2fd90c97c1cd7938
+</span></code></pre>
+</li>
+<li>
+<p>trait-erc20</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0x1ab1a476dc17e3ba900cc66098998a659a345ce5075e6b7f97cb6e0000a9ab4d
+</span></code></pre>
+</li>
+<li>
+<p>trait-flipper</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0x93ec7d302ff5ecc5ca8f0602805d6068f036bfaa2bd7883e2f550a919b8ee735
+</span></code></pre>
+</li>
+<li>
+<p>dns</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0xa0c4b6d7f5428cb74e4dc771dbdf8f2ee588cb58d14a24f99a798fc82d6687cb
+</span></code></pre>
+</li>
+<li>
+<p>delegator</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0x08e221640f02aba842be94139dc4f1c5048605f25ec8d85a13b60bd4e15779ea
+</span></code></pre>
+</li>
+<li>
+<p>contract terminate</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0xd67d39fe76eae342b621bd79f3b70c51f2c744c1c5f3f01b66609f412be7bc8f
+</span></code></pre>
+</li>
+</ul>
+<h2 id="dobavit-kheshi-koda">Добавить хэши кода <a id="add-code-hashes"></a></h2>
+<p><a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fberesheet1.edgewa.re#/contracts">Перейти к договорам</a></p>
+<p><img src="https://contracts.edgewa.re/0/assets/live-add-codehash.png" alt="" /></p>
+<p>Скопируйте один из хэшей кода сверху, поместите их в хэш кода, назовите его и выберите метаданные, этот json, он должен выглядеть так</p>
+<p><img src="https://contracts.edgewa.re/0/assets/live-save-codehash.png" alt="" /></p>
+<h2 id="sviazhites-s-nami-dlia-bol-shego-vovlecheniia">Свяжитесь с нами для большего вовлечения <a id="reach-us-for-more-engagement"></a></h2>
+<p>Рад, что вы прошли через это! 🥰 Мы стремимся помочь вам в ваших исследованиях с помощью чернил Edgeware! особенность расчесывания. Мы <strong>будем рады узнать о вашем опыте и предложениях, которые вы можете нам предложить.</strong>. Вы можете свободно <a href="https://linktr.ee/edg_developers">общаться с нами в каналах Edgeware, таких как Discord, Element и Telegram</a>, мы можем помочь вам с проблемами, которые могут у вас возникнуть, или с проектом, который вы хотите финансировать. через нашу <a href="https://docs.edgewa.re/edgeware-runtime/treasury">программу казначейства</a>. Не стесняйтесь делиться своими отзывами на наших каналах, всегда есть место для улучшения! 🙌</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

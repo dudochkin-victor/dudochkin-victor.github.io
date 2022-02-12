@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Развертывание контракта | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/deploy-a-wasm-contract/deploying-your-contract/#bystryi-trek">Быстрый трек</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/deploy-a-wasm-contract/deploying-your-contract/#razmeshchenie-vashego-koda-v-blokcheine">Размещение вашего кода в блокчейне</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/wasm-smart-contracts/tutorials/deploy-a-wasm-contract/deploying-your-contract/#sozdanie-ekzempliara-vashego-kontrakta">Создание экземпляра вашего контракта</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Развертывание контракта</h1>
+
+<p>Теперь, когда мы сгенерировали двоичный файл Wasm из нашего исходного кода и запустили узел Substrate, мы хотим развернуть этот контракт в нашей цепочке блоков Substrate.</p>
+<p>Развертывание смарт-контрактов на Substrate немного отличается от традиционных блокчейнов смарт-контрактов.</p>
+<p>В то время как совершенно новый блок исходного кода смарт-контракта развертывается каждый раз, когда вы отправляете контракт на другие платформы, Substrate предпочитает оптимизировать это поведение. Например, стандартный токен ERC20 развертывался в Ethereum тысячи раз, иногда только с изменениями начальной конфигурации (через функцию «конструктора» Solidity). Каждый из этих экземпляров занимает место в блокчейне, эквивалентное размеру исходного кода контракта, хотя на самом деле код не был изменен.</p>
+<p>В Substrate процесс развертывания контракта разделен на две части:</p>
+<ol>
+<li>Размещение вашего кода в блокчейне</li>
+<li>Создание экземпляра вашего контракта</li>
+</ol>
+<p>С помощью этого шаблона код контракта, такой как стандарт ERC20, может быть помещен в блокчейн один раз, но инстанцировано любое количество раз. Нет необходимости постоянно загружать один и тот же исходный код и тратить место в блокчейне.</p>
+<h2 id="bystryi-trek">Быстрый трек</h2>
+<p>Если вы пропустили предыдущие шаги и просто хотите увидеть взаимодействие с чернилами! смарт-контракт, загрузите <a href="https://contracts.edgewa.re/0/assets/flipper.wasm">flipper.wasm</a> и [metadata.json](https://contracts.edgewa.re/0/assets/flipper .json)</p>
+<h2 id="razmeshchenie-vashego-koda-v-blokcheine">Размещение вашего кода в блокчейне</h2>
+<p>Когда ваш узел разработки Substrate запущен, вы можете вернуться в <a href="https://polkadot.js.org/apps/">пользовательский интерфейс Polkadot</a>, где вы сможете взаимодействовать со своим блокчейном.</p>
+<p>На вкладке <strong>Разработчик</strong> щелкните специально разработанный раздел <a href="https://polkadot.js.org/apps/?rpc=ws%3A%2F%2F127.0.0.1%3A9944#/contracts">Контракты</a>. пользовательского интерфейса.</p>
+<p>В разделе <strong>Контракты</strong> выберите <strong>&quot;Загрузить и развернуть код&quot;</strong>.</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/111106282-2ec9d800-852b-11eb-8e31-6a0af519f0fe.jpg" alt="" /></p>
+<p>Во всплывающем окне выберите <em><strong>учетную запись развертывания</strong></em> с некоторым балансом учетной записи, например «Дэйв». В качестве <em><strong>метаданных контракта</strong></em> выберите файл JSON. В <em><strong>скомпилированном контракте WASM</strong></em> выберите созданный нами файл <code>flipper.wasm</code>. Имя пакета кода будет &quot;flipper&quot;. Когда все параметры заполнены, нажмите <strong>Далее</strong>.<img src="https://user-images.githubusercontent.com/32852637/111107417-2f636e00-852d-11eb-8fe4-2a665627685d.PNG" alt="docsdeploy1" /></p>
+<h2 id="sozdanie-ekzempliara-vashego-kontrakta">Создание экземпляра вашего контракта</h2>
+<p>Смарт-контракты существуют как расширение системы учетных записей в блокчейне. Таким образом, создание экземпляра этого контракта создаст новый «AccountId», который будет хранить любой баланс, управляемый смарт-контрактом, и позволит нам взаимодействовать с контрактом.</p>
+<p>Чтобы создать экземпляр нашего контракта, нам просто нужно предоставить этому контрактному счету <em><strong>пожертвование</strong></em> в размере 10 единиц, чтобы заплатить арендную плату за хранение и установить <em><strong>максимально допустимый газ</strong></em> в значение(<code>1 000 000 </code>):</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/111108637-a69a0180-852f-11eb-8536-3172307771ed.PNG" alt="" /></p>
+<blockquote>
+<p><strong>Примечание.</strong> Как упоминалось ранее, создание контракта предполагает создание новой учетной записи. Таким образом, вы должны быть уверены, что предоставили контрактному счету как минимум экзистенциальный депозит, определенный вашей цепочкой блоков. Мы также должны быть в состоянии оплатить арендную плату по контракту (<strong><code>пожертвование</code></strong>). Если мы израсходуем весь этот депозит, контракт станет недействительным. Мы всегда можем пополнить баланс контракта и сохранить его в цепочке.</p>
+</blockquote>
+<p>Затем вы <strong>разрешите</strong> контракт, <strong>подписав и отправив</strong>. Вы также можете оставить чаевые автору блока, если хотите.</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/111108711-ca5d4780-852f-11eb-8f27-b482aacabfeb.PNG" alt="" /></p>
+<p>Когда вы нажимаете <strong>Deploy</strong>, вы должны увидеть ряд событий, включая создание новой учетной записи (<code>system.NewAccount</code>) и создание экземпляра контракта (<code>contracts.instantiate</code>):</p>
+<p><img src="https://user-images.githubusercontent.com/32852637/111108864-0f817980-8530-11eb-9a43-da24dc192bfa.PNG" alt="" /></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

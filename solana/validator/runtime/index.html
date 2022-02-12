@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Runtime | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/runtime/#runtime">Runtime</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/runtime/#struktura-akkaunta"><small>- Структура аккаунта</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/runtime/#mekhanizm-tranzaktsii">Механизм транзакций</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/runtime/#ispolnenie"><small>- Исполнение</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/runtime/#interfeis-sistemnoi-programmy"><small>- Интерфейс системной программы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/runtime/#gosudarstvennaia-bezopasnost-programmy"><small>- Государственная безопасность программы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/runtime/#primechaniia"><small>- Примечания</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/runtime/#budushchaia-rabota">Будущая работа</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Runtime</h1>
+
+<h2 id="runtime">Runtime</h2>
+<p>Среда выполнения представляет собой параллельный обработчик транзакций. Транзакции указывают свои зависимости данных заранее, а динамическое выделение памяти является явным. Отделив программный код от состояния, в котором он работает, среда выполнения может управлять одновременным доступом. Транзакции с доступом только к учетным записям только для чтения выполняются параллельно, тогда как транзакции с доступом к учетным записям с возможностью записи сериализуются. Среда выполнения взаимодействует с программой через точку входа с четко определенным интерфейсом. Данные, хранящиеся в учетной записи, представляют собой непрозрачный тип, массив байтов. Программа имеет полный контроль над своим содержимым.</p>
+<p>Структура транзакции определяет список открытых ключей и подписей для этих ключей, а также последовательный список инструкций, которые будут выполняться в состояниях, связанных с ключами учетной записи. Чтобы транзакция была зафиксирована, все инструкции должны быть выполнены успешно; если произойдет какое-либо прерывание, вся транзакция не будет зафиксирована.</p>
+<h4 id="struktura-akkaunta">Структура аккаунта</h4>
+<p>Учетные записи поддерживают баланс лампы и память для конкретной программы.</p>
+<h2 id="mekhanizm-tranzaktsii">Механизм транзакций</h2>
+<p>Механизм сопоставляет открытые ключи с учетными записями и направляет их к точке входа программы.</p>
+<h3 id="ispolnenie">Исполнение</h3>
+<p>Транзакции группируются и обрабатываются в конвейере. TPU и TVU идут немного другим путем. Среда выполнения TPU гарантирует, что запись PoH произойдет до фиксации памяти.</p>
+<p>Среда выполнения TVU гарантирует, что проверка PoH выполняется до того, как среда выполнения обработает какие-либо транзакции.</p>
+<p><img src="/img/runtime.svg" alt="Runtime pipeline" /></p>
+<p>На этапе <em>execute</em> загружаемые аккаунты не имеют зависимостей данных, поэтому все программы могут выполняться параллельно.</p>
+<p>Среда выполнения применяет следующие правила:</p>
+<ol>
+<li>Только программа <em>owner</em> может изменять содержимое учетной записи. Это означает, что при назначении вектор данных гарантированно равен нулю.</li>
+<li>Суммарные остатки на всех счетах равны до и после совершения транзакции.</li>
+<li>После выполнения транзакции балансы счетов только для чтения должны быть равны балансам до транзакции.</li>
+<li>Все инструкции в транзакции выполняются атомарно. В случае сбоя все изменения учетной записи отбрасываются.</li>
+</ol>
+<p>Выполнение программы включает сопоставление открытого ключа программы с точкой входа, которая принимает указатель на транзакцию и массив загруженных учетных записей.</p>
+<h3 id="interfeis-sistemnoi-programmy">Интерфейс системной программы</h3>
+<p>Интерфейс лучше всего описывается <code>Instruction::data</code>, который кодирует пользователь.</p>
+<ul>
+<li><code>CreateAccount</code> - позволяет пользователю создать учетную запись с выделенным массивом данных и назначить ее Программе.</li>
+<li><code>CreateAccountWithSeed</code> – То же, что и <code>CreateAccount</code>, но адрес новой учетной записи получается из
+<ul>
+<li>публичный ключ счета финансирования,</li>
+<li>мнемоническая строка (seed), и</li>
+<li>публичный ключ Программы</li>
+</ul>
+</li>
+<li>«Назначить» — позволяет пользователю назначить существующую учетную запись программе.</li>
+<li><code>Перевод</code> - Переводы лампортов между аккаунтами.</li>
+</ul>
+<h3 id="gosudarstvennaia-bezopasnost-programmy">Государственная безопасность программы</h3>
+<p>Для правильной работы блокчейна программный код должен быть устойчивым к пользовательскому вводу. Вот почему в этом дизайне программный специфический код является единственным кодом, который может изменить состояние массива байтов данных в присвоенных ему Учетных записях. Это также причина, по которой <code>Assign</code> или <code>CreateAccount</code> должны обнулить данные. В противном случае у программы не было бы возможности отличить недавно назначенные данные учетной записи от естественно сгенерированного перехода состояния без некоторых дополнительных метаданных из среды выполнения, чтобы указать, что эта память назначена, а не сгенерирована изначально.</p>
+<p>Для передачи сообщений между программами принимающая программа должна принять сообщение и скопировать состояние. Но на практике копия не нужна и нежелательна. Программа-получатель может прочитать состояние, принадлежащее другим Пользователям, не копируя его, и во время чтения имеет гарантию состояния программы-отправителя.</p>
+<h3 id="primechaniia">Примечания</h3>
+<ul>
+<li>Нет динамического выделения памяти. Клиенту необходимо использовать инструкции CreateAccount для создания памяти перед передачей ее другой программе. Эта инструкция может быть объединена в одну транзакцию с вызовом самой программы.</li>
+<li><code>CreateAccount</code> и <code>Assign</code> гарантируют, что когда учетная запись назначается программе, данные учетной записи инициализируются нулями.</li>
+<li>Транзакции, которые назначают учетную запись программе или выделяют пространство, должны быть подписаны закрытым ключом адреса учетной записи, если только учетная запись не создается с помощью <code>CreateAccountWithSeed</code>, и в этом случае нет соответствующего закрытого ключа для адреса учетной записи/pubkey.</li>
+<li>После назначения в программу учетная запись не может быть переназначена.</li>
+<li>Среда выполнения гарантирует, что код программы является единственным кодом, который может изменять данные Пользователя, которому назначена Пользователя.</li>
+<li>Runtime гарантирует, что программа может тратить только лэмпорты, которые находятся в аккаунтах, которые ей назначены.</li>
+<li>Время выполнения гарантирует, что остатки, принадлежащие счетам, сбалансированы до и после транзакции.</li>
+<li>Среда выполнения гарантирует успешное выполнение всех инструкций при фиксации транзакции.</li>
+</ul>
+<h2 id="budushchaia-rabota">Будущая работа</h2>
+<ul>
+<li><a href="https://github.com/solana-labs/solana/issues/1485">Продолжения и сигналы для длительных транзакций</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

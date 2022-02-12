@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust Performance: история о perf и flamegraph в Linux | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#kontekst">Контекст</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#programma">Программа</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#testy">Тесты</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#izmerenie-izmerenie-izmerenie">Измерение, измерение, измерение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#udar-ob-stenu-stanovitsia-luchshe">Удар об стену - становится лучше</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#nastroika-rust">Настройка Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#perf">perf</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#flamegrafy">Фламеграфы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#uvelichenie-vremeni-vypolneniia-rabot">Увеличение времени выполнения работ</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#pogruzhenie-glubzhe">Погружение глубже</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#samaia-goriachaia-petlia-v-strane">Самая горячая петля в стране</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#idiomatichnost-idiomatichnost-idiomatichnost">Идиоматичность (Идиоматичность? Идиоматичность?)</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#sdelai-sam">Сделай сам</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#eto-takoi-golyi-metall">Это такой (голый) металл</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#zapros-na-vkliuchenie">Запрос на включение</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#proshchal-nye-mysli">Прощальные мысли</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#obnovlenie-25-07-16">Обновление (25.07.16)</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-performance-a-story-featuring-perf-and-flamegraph-on-linux/#obratnaia-sviaz">Обратная связь?</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust Performance: история о perf и flamegraph в Linux</h1>
+
+<p><a href="https://blog.anp.lol/rust/2016/07/24/profiling-rust-perf-flamegraph/">Перевод</a> | Автор оригинала: Adam Perry</p>
+<p>Получение некоторого выигрыша в производительности в программе Rust с 7-строчным diff, с использованием cargo bench, perf и flamegraph в Linux.</p>
+<h2 id="kontekst">Контекст</h2>
+<p>Я работаю над программой Rust, которая выполняет интенсивный анализ сотен гигабайт данных. На прошлой неделе я потратил пару дней, работая над улучшением производительности во время выполнения, и в конце концов наткнулся на стену. Уже существует несколько хороших сообщений в блогах о профилировании Rust, на которые я неоднократно ссылался в прошлом, но ни один из них полностью не охватывал то, что я хотел здесь сделать: использовать perf + flamegraph. Я слышал от нескольких людей, что perf - потрясающий инструмент (и это так!), А флеймографы выглядят круто и кажутся полезными.</p>
+<p>Это долгая история обучения этому. Если вы еще не выполняли профилирование с помощью Rust, надеюсь, эта учетная запись может служить примером, когда вам нужно будет сделать это в следующий раз. Есть и некоторые не совсем интуитивные вещи, которые я обнаружил в ходе расследования.</p>
+<h2 id="programma">Программа</h2>
+<p>Программа, над которой я работаю в $ DAY_JOB, выполняет анализ «метагеномных образцов» (последовательностей ДНК, собранных из смешанных биологических образцов). Он использует несколько структур данных, которые являются общими для приложений биоинформатики, и, к счастью, крэйт rust-bio уже выполняет здесь большую часть тяжелой работы (очевидный переход на будущее). Эта программа довольно быстрая, но еще недостаточно быстрая.</p>
+<h2 id="testy">Тесты</h2>
+<p>Перед обязательным рекламным сообщением «Измерьте все», я думаю, было бы неискренним в сообщении о производительности не указывать на то, что автоматические тесты имеют неоценимое значение при внесении нефункциональных изменений. Если у вас есть набор тестов, которому вы можете доверять, чтобы убедиться, что ваши изменения верны, можно быстро перейти к улучшению производительности.</p>
+<h2 id="izmerenie-izmerenie-izmerenie">Измерение, измерение, измерение</h2>
+<p>Очевидно, что при работе над улучшением какой-либо метрики (например, времени выполнения) очень важно измерять влияние своих изменений. Особенно, если вы полагаетесь на оптимизирующие компиляторы, которые произошли от какого-то семейства непостоянных жутких зверей. Такие очевидные изменения, как «Я объединю эти две ветви в одну проверку» или «Я удалю проверку границ для этого доступа к массиву», могут показаться вам, чтобы убрать количество выполненных вычислений, но также могут в конечном итоге скрыть важную информацию. от оптимизатора, что отрицательно скажется на вашей общей производительности. Они также могут сделать вашу программу зловещей, поэтому, хотя я не эксперт, я уверен, что вы должны измерять все, что вы делаете, чтобы повлиять на производительность. И не используйте просто / usr / bin / time -v, хотя это только начало.</p>
+<p>Я построил несколько базовых тестов для запуска с помощью ночного тестера Rust. Он выполняет некоторую статистическую работу, чтобы запустить тест достаточное количество раз, чтобы иметь хорошее представление о его фактическом времени выполнения, и легко предоставляет меру отклонений, с которыми он столкнулся при этом. В процессе написания этой статьи я заметил интересный пост в моем ленте в Твиттере о важности отслеживания доверительных интервалов при измерении результатов тестов. Это то, что в тестах Rust прилагается приличное усилие, хотя я обычно по-прежнему вызываю Cargo Bench несколько раз, чтобы убедиться, что все остается в пределах заявленного диапазона. К счастью, тестирование производительности в Rust не зависит от JIT или другой магии виртуальной машины, что значительно упрощает сбор стабильных результатов.</p>
+<p>После того, как вы написали несколько тестов производительности (хорошее руководство см. В приведенной выше книге Rust, а в качестве примера приведен пример, который я написал для rust-bio), вам нужно запустить их, используя ночной компилятор, начиная с июля 2016 года. К счастью, Используя rustup, очень легко использовать ночной компилятор для запуска тестов (или clippy), при этом используя стабильный компилятор для повседневной разработки: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ rustup run nightly cargo bench
+</span><span>
+</span><span>... cargo builds your dependencies
+</span><span>... cargo builds your benchmarks
+</span><span>...
+</span><span>...
+</span><span>... cargo is still building your benchmarks
+</span><span>...
+</span><span>... cargo starts running your benchmarks
+</span><span>... cargo skips some non-benchmark tests
+</span><span>
+</span><span>Running target/release/distance-76e9e0fb6e8adddc
+</span><span>
+</span><span>running 5 tests
+</span><span>test bench_hamming_dist_equal_str_1000iter   ... bench: 3,042,154 ns/iter (+/- 102,699)
+</span><span>... and so on
+</span><span>
+</span><span>test result: ok. 0 passed; 0 failed; 0 ignored; 5 measured
+</span></code></pre>
+<p>Та-да!</p>
+<p>Как я уже сказал, когда я впервые начал работать над улучшением времени выполнения этой программы, я написал пару небольших тестов, и все шло отлично. Я бы внес изменения, запустил тесты, подождал 20-30 минут и посмотрел, повысились или снизились некоторые цифры. Фантастика! Я добился большого прогресса в этом.</p>
+<h2 id="udar-ob-stenu-stanovitsia-luchshe">Удар об стену - становится лучше</h2>
+<p>Затем произошло несколько проблем. Во-первых, 20-30 минут - это очень долгий срок, чтобы выяснить, оказал ли ваш 5-байтовый diff существенное влияние на производительность вашей программы. Во-вторых, у меня закончились очевидные изменения. Что делать после того, как вы полностью исключили вызовы clone(), выполнили все мыслимые параллельно, удалили все несущественные проверки и вычисления? Что ж, разберись, на что тратится время. Это относительно просто, если вы можете просто отметить записи журнала и выполнить небольшое «профилирование printf». Не так просто обрабатывать миллионы входных данных, каждый из которых обрабатывается за достаточно короткое время, так что временные метки регистрации не будут иметь значения.</p>
+<p>Затем я настроил свои тесты производительности для работы с perf и flamegraph, чтобы я мог выяснить, на что тратилось больше всего времени, и впоследствии построить более быстрый, но все же полезный тест только для этих функций.</p>
+<h2 id="nastroika-rust">Настройка Rust</h2>
+<p>Если вы следили за моими спорадическими псевдо-примерами, у вас, вероятно, установлен rustup и загружен ночной Rust, и, вероятно, у вас также есть некоторые тесты, написанные для работы с тестовым жгутом Rust. Как упоминалось выше, вам также понадобятся символы отладки в ваших двоичных файлах, если вы хотите использовать perf. Обычный способ сделать это (опуская флаг --release в вашей сборке) не будет работать по двум причинам:</p>
+<ol>
+<li>Обычно мы заботимся о профиле производительности оптимизированных двоичных файлов.</li>
+<li>Cargo bench создает ваш проект с включенным флагом --release за кулисами.</li>
+</ol>
+<p>Итак, временно добавьте это в свой Cargo.toml или измените существующий профиль выпуска: </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">profile</span><span style="color:#bfbab0cc;">.</span><span style="color:#59c2ff;">release</span><span>]
+</span><span style="color:#59c2ff;">debug </span><span>= </span><span style="color:#f29718;">true
+</span></code></pre>
+<p>Вам также может потребоваться добавить lto = false в ваш профиль выпуска. Я столкнулся с несколькими проблемами при попытке использовать LTO одновременно с включенными отладочными символами.</p>
+<h2 id="perf">perf</h2>
+<p>perf - отличный инструмент для профилирования процесса Linux на основе выборки. В вики есть хороший учебник, и Брендан Грегг также подготовил несколько очень хороших учебных материалов. Если вы здесь, чтобы узнать, как использовать perf с Rust, вы можете выполнить следующие основные шаги, а затем перейти по этим ссылкам, чтобы узнать, как это действительно сделать для ваших (возможно, более продвинутых) вариантов использования.</p>
+<p>В основном, мое использование perf включает:</p>
+<ol>
+<li>Запуск моей программы с использованием записи perf, чтобы проверить ее выполнение.</li>
+<li>Анализ результатов с использованием комбинации диаграмм пламени, отчета о производительности и аннотации производительности.</li>
+</ol>
+<p>Есть множество других отличных вещей, которые может выполнять perf, например, отслеживание определенных событий ядра, подсчет попаданий / промахов в кеш и другая статистика, профилирование поведения JIT (например, в JVM или V8) и, возможно, другие. Однако, исходя из моего ограниченного опыта, большую часть времени, если вы выполняете профилирование ЦП, вам просто нужно понять, на что тратится время и почему.</p>
+<h2 id="flamegrafy">Фламеграфы</h2>
+<p>График пламени - это действительно хороший визуальный способ представить процессорное время (или другие ресурсы) программы. Если вы следите за мной, я предполагаю, что вы установили perf, а также разместили скрипты flamegraph где-нибудь в своем PATH.</p>
+<p>Допустим, вы хотите быстро визуализировать, где программа проводит время. Скажем, эта программа представляет собой тестовый тест Rust с гипотетическим названием magic_bench и что она содержит функцию magic_bench, которая вас интересует. Вы можете запустить такие команды:</p>
+<p>Создайте исполняемый файл нашего теста, не запуская его: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo bench --no-run
+</span></code></pre>
+<p>Запустите его через perf и запустите только тот тест, который нас интересует (обязательно включите параметр -g, который включает запись графика вызовов - обязательное условие для flamegraph): </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ perf record -g target/release/magic_bench-* --bench magic
+</span></code></pre>
+<p>Построим флеймеграф всей программы: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ perf script | stackcollapse-perf | flamegraph &gt; flame.svg
+</span></code></pre>
+<p>Если мы откроем flame.svg, мы увидим очень удобную визуализацию времени процессора, затрачиваемого на различные вызовы функций. Горизонтальное пространство соответствует проценту времени выполнения родителя, потраченного на данную функцию.</p>
+<p>Однако в моем конкретном случае эталонный тест должен был инициализировать очень дорогостоящий индекс, прежде чем он сможет выполнить любой из запросов эталонного теста, и это заняло примерно 98% времени выполнения эталонного теста, уменьшая полезность всего программного флеймографа. .</p>
+<p>Отличная часть скриптов stackcollapse для flamegraph заключается в том, что они позволяют искать функции, соответствующие шаблону. Совет: все жгуты тестов Rust вызывают закрытие, например, так: bencher.iter (|| do_measured_thing()), легко позволяя вам использовать grep для вызовов закрытий, чтобы ограничить флеймограф в основном внутренним, неинициализационным циклом вашего теста: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ perf script | stackcollapse-perf | grep closure | flamegraph &gt; flame.svg
+</span></code></pre>
+<p>Это дает такой флеймеграф, где цикл теста сам по себе является главной достопримечательностью:</p>
+<p><img src="/imgs/posts/ae87c847_01.svg" alt="пламеграф просто закрытие" /></p>
+<p>Забавная история: видите ли вы две коробки во втором сверху ряду, которые даже не достаточно велики, чтобы на них можно было разместить ярлыки? Да, вот где я потратил около дня на улучшение, прежде чем я начал углубленное профилирование. Измеряйте, измеряйте, измеряйте.</p>
+<h2 id="uvelichenie-vremeni-vypolneniia-rabot">Увеличение времени выполнения работ</h2>
+<p>Итак, я обнаружил, что подавляющее большинство времени, которое я трачу на запросы к этим структурам данных, заканчивается вызовом библиотеки: bio::data_structures::bwt::Occ::get. Если я смогу написать быстрый тест для этой функции (и друзей), я, вероятно, смогу немного быстрее повторить и попробовать различные улучшения. Так я и сделал!</p>
+<p>И вот график закрытия этого теста, просто чтобы подтвердить, что его профилирование несколько похоже на гораздо более длительный тест из моего приложения: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cd ~/rust-projects/rust-bio
+</span><span>$ cargo bench --no-run &amp;&amp; \
+</span><span>    perf record -g target/release/fmindex-* --bench seed &amp;&amp; \
+</span><span>    perf script | stackcollapse-perf | grep closure | flamegraph &gt; flame.svg
+</span></code></pre>
+<p>В результате чего:</p>
+<p><img src="/imgs/posts/ae87c847_02.svg" alt="закрытие пламени" /></p>
+<h2 id="pogruzhenie-glubzhe">Погружение глубже</h2>
+<p>С помощью приведенной выше команды мы сгенерировали флеймеграф, но в процессе perf также сохранил большой файл данных honkin, который мы можем использовать для дальнейшего анализа без повторного запуска наших тестов. У perf есть несколько хороших обозревателей TUI и GUI для профилирования данных, поэтому, например, мы можем запустить отчет perf, чтобы получить иерархию профилированных функций с возможностью навигации с клавиатуры:</p>
+<p><img src="/imgs/posts/ae87c847_03.png" alt="использование отчета о перфомансе без фильтрации" /></p>
+<p>В этом конкретном случае мы снова сталкиваемся с проблемой, когда сам тест теряется в коде, который инициализирует индексы. Есть очень удобный флаг --symbol-filter $ FILTER, который вы можете передать в отчет о перфомансе, чтобы получить тот же эффект, что и при поиске свернутых стеков для графа пламени: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ perf report --symbol-filter closure
+</span></code></pre>
+<p><img src="/imgs/posts/ae87c847_04.png" alt="использование отчета о перфомансе с фильтром для закрытия" /></p>
+<p>perf также позволяет просматривать аннотированный исходный код с помощью команды perf annotate. Однако, если мы хотим ограничить вывод этой команды одним вызовом функции и ее дочерними элементами, мы должны знать точный символ, AFAIK. Флаг --symbol-filter для передачи аннотации отсутствует, но если вы нажмете Enter, когда нужная функция выделена в TUI отчета, он позволит вам выбрать открытие аннотированного источника только для этой функции:</p>
+<p><img src="/imgs/posts/ae87c847_05.png" alt="вход в меню perf для одной функции" /></p>
+<h2 id="samaia-goriachaia-petlia-v-strane">Самая горячая петля в стране</h2>
+<p>Прежде чем перейти к аннотированному исходному тексту и дизассемблированию этой функции: flamegraph показал, что большая часть времени тестирования тратится на bio::data_structures::bwt::Occ::get. В rust-bio этот тип и его метод являются частью реализации индекса FM. Это супер классная структура данных, которая позволяет выполнять очень эффективный поиск точных совпадений строки поиска в смехотворно больших текстах. Это достигается путем объединения некоторых очень интересных свойств нескольких различных индексов, один из которых является выборочным подсчетом появления символов в преобразовании Барроуза-Уиллера (подсказка: он также включает в себя некоторую темную магию и кровные пакты). Именно эта структура выборки данных (названная Occ в rust-bio) запрашивается для получения частоты появления байта до заданной точки в BWT.</p>
+<p>Вот функция, о которой идет речь, как она присутствует в rust-bio: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">bwt</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>BWTSlice, </span><span style="color:#f29718;">r</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// self.k is our sampling rate, so find our last sampled checkpoint
+</span><span>    </span><span style="color:#ff7733;">let</span><span> i </span><span style="color:#f29668;">=</span><span> r </span><span style="color:#f29668;">/ </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>k</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// count all the matching bytes b/t the closest checkpoint and our desired lookup
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// return the sampled checkpoint for this character + the manual count we just did
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>occ[i][a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>] </span><span style="color:#f29668;">+
+</span><span>        bwt[(i </span><span style="color:#f29668;">* </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>k) </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">..</span><span> r </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">c</span><span>| (c </span><span style="color:#f29668;">==</span><span> a) </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">fold</span><span>(</span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">e</span><span>| s </span><span style="color:#f29668;">+</span><span> e)
+</span><span>}
+</span></code></pre>
+<p>Он извлекает отсчет выборки до этой точки, а затем подсчитывает любые совпадающие символы в BWT от точки выборки до точки нашего поиска. Вот базовая производительность этой версии функции в тесте, который я написал для проверки производительности этих поисков FM Index: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo bench search
+</span><span>...
+</span><span>     Running target/release/fmindex-3d950d5fe462c0d1
+</span><span>
+</span><span>running 1 test
+</span><span>test search_index_seeds ... bench:      52,239 ns/iter (+/- 403)
+</span></code></pre>
+<p>Стоит отметить, что эта среда выполнения предназначена для полного поиска по индексу, а не только для выполнения функции Occ::get. Тест выполняет поиск местоположений для нескольких строк поиска, и индекс FM может вызывать Occ::get много раз для каждого из этих поисков.</p>
+<p>Вот небольшая часть исходного кода этой функции с аннотациями, как и было обещано. Вы можете видеть, что perf отображает процентное значение в левом столбце (% от общего числа выборок для этого символа), выделяет общие инструкции зеленым, выделяет горячие инструкции красным, а также чередует исходный источник с соответствующей сборкой, где это возможно:</p>
+<p><img src="/imgs/posts/ae87c847_06.png" alt="аннотация perf к исходной функции" /></p>
+<p>Подождите, «небольшая часть»? Да, есть несколько экранов сборки для того, что по сути является поиском в 2D-массиве, за которым следует цикл подсчета по части другого массива. Что-то пошло не так!</p>
+<p>Все (включая меня) говорят мне, что итераторы Rust - это волшебство, и что в сочетании с магией LLVM все должно быть мономорфизировано, свернуто константой, встроено и поднято петлей и ... Я вообще-то не знаю, как работают оптимизации компилятора. Но общее мнение таково, что использование итераторов часто дает LLVM более чем достаточно информации о рассматриваемых циклах для создания кричащего быстрого кода, основанного на хороших высокоуровневых абстракциях. И хотя я могу показаться немного саркастичным по этому поводу, я лично измерил по крайней мере полдюжины горячих петель, в которых адаптеры итераторов Rust превосходят мои созданные вручную петли. Конечно, я не большой любитель петель, но меня это всегда впечатляло.</p>
+<h2 id="idiomatichnost-idiomatichnost-idiomatichnost">Идиоматичность (Идиоматичность? Идиоматичность?)</h2>
+<p>Прежде чем избыток оптимизированной сборки заставит нас бежать из страха перед адаптерами итераторов, возможно, есть способ получше. Во-первых, отображение логического значения как целого числа и сворачивание его в аккумуляторную переменную - это несколько своеобразный способ подсчета количества элементов в срезе, которые соответствуют предикату. Возможно, Rust / LLVM просто выражает свое недоумение единственным известным ему способом? Может быть, немного более идиоматичный набор адаптеров итераторов был бы более приемлемым и удовлетворил бы божества сверхъестественной оптимизации? Как насчет фильтра и счетчика? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">bwt</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>BWTSlice, </span><span style="color:#f29718;">r</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// self.k is our sampling rate, so find our last sampled checkpoint
+</span><span>    </span><span style="color:#ff7733;">let</span><span> i </span><span style="color:#f29668;">=</span><span> r </span><span style="color:#f29668;">/ </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>k</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// count all the matching bytes b/t the closest checkpoint and our desired lookup
+</span><span>    </span><span style="color:#ff7733;">let</span><span> count </span><span style="color:#f29668;">=</span><span> bwt[(i </span><span style="color:#f29668;">* </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>k) </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">..</span><span> r </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span>]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">filter</span><span>(|</span><span style="color:#f29668;">&amp;&amp;</span><span style="color:#f29718;">c</span><span>| c </span><span style="color:#f29668;">==</span><span> a)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">count</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// return the sampled checkpoint for this character + the manual count we just did
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>occ[i][a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>] </span><span style="color:#f29668;">+</span><span> count
+</span><span>}
+</span></code></pre>
+<p>Результаты: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo bench search
+</span><span>...
+</span><span>     Running target/release/fmindex-3d950d5fe462c0d1
+</span><span>
+</span><span>running 1 test
+</span><span>test search_index_seeds ... bench:      34,485 ns/iter (+/- 947)
+</span></code></pre>
+<p>Поскольку я слишком многословен, чтобы вы могли легко увидеть цифры из исходной версии, я отмечу, что, по моим подсчетам, это увеличение скорости на ~ 34% по сравнению с предыдущей версией, и это улучшение, выходящее далеко за рамки сообщенных полос ошибок. с помощью тестовой системы Rust.</p>
+<p>Ура! Если мы снова запустим тест через запись perf, мы сможем запустить разборку и посмотреть, что изменилось. Разборка намного меньше, и нет никаких запутывающих блоков из многих повторяющихся инструкций. Это вся функция (исключая обработчики паники только на снимке экрана):</p>
+<p><img src="/imgs/posts/ae87c847_07.png" alt="аннотация perf для идиоматической версии итератора" /></p>
+<p>Возможность разместить всю функцию на одном экране - хороший знак, не так ли? Наши тесты все еще проходят, производительность повышается, и для тех же функций используется гораздо меньше инструкций, что является хорошим трэйтом того, что ранее не вызываемые оптимизации ворвались в мир смертных, чтобы насладиться самой сутью нашей программы.</p>
+<h2 id="sdelai-sam">Сделай сам</h2>
+<p>Может, мы сможем сделать это еще быстрее? Это очень горячая петля, и любые победы здесь пойдут на пользу. Оптимизация итератора в Rust обычно довольно хороша, но, возможно, оптимизатору будет легче справиться с ручным подсчетом элементов. Как насчет старой доброй мутации переменной счетчика? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">bwt</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>BWTSlice, </span><span style="color:#f29718;">r</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// self.k is our sampling rate, so find our last sampled checkpoint
+</span><span>    </span><span style="color:#ff7733;">let</span><span> i </span><span style="color:#f29668;">=</span><span> r </span><span style="color:#f29668;">/ </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>k</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> count </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// count all the matching bytes b/t the closest checkpoint and our desired lookup
+</span><span>    </span><span style="color:#ff7733;">for</span><span> idx </span><span style="color:#f29668;">in </span><span>(i </span><span style="color:#f29668;">* </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>k) </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">..</span><span> r </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">if</span><span> bwt[idx] </span><span style="color:#f29668;">==</span><span> a {
+</span><span>            count </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// return the sampled checkpoint for this character + the manual count we just did
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>occ[i][a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>] </span><span style="color:#f29668;">+</span><span> count
+</span><span>}
+</span></code></pre>
+<p>Результаты: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo bench search
+</span><span>...
+</span><span>     Running target/release/fmindex-3d950d5fe462c0d1
+</span><span>
+</span><span>running 1 test
+</span><span>test search_index_seeds ... bench:      35,309 ns/iter (+/- 327)
+</span></code></pre>
+<p>Разница находится в пределах шкалы ошибок как для «идиоматических итераторов», так и для этой «хипстерской» версии. Однако несколько последовательных прогонов подтверждают, что эти средние значения достаточно стабильны. Так что, хотя на некоторых запусках это может быть быстрее, чем предыдущая версия, кажется, что в целом это, вероятно, немного медленнее. Глядя на самый верх этого снимка экрана с разборкой, можно увидеть, что несколько процентов количества инструкций, похоже, тратятся на сравнения, которые предназначены для переходов к границам, проверяют обработчики паники (perf - это круто):</p>
+<p><img src="/imgs/posts/ae87c847_08.png" alt="perf annotate на границах проверена версия индексации" /></p>
+<p>Страшные границы снова проверяют удары. Это избавляет нас от считывания концов Vecs, которые составляют эти индексы, но это также стоит нам циклов.</p>
+<h2 id="eto-takoi-golyi-metall">Это такой (голый) металл</h2>
+<p>Что, если мы будем использовать небезопасное индексирование? Из построения Vecs и из множества тестов мы знаем, что мы вряд ли выйдем за границы, и если производительность будет достаточно хорошей, мы всегда можем вернуться и добавить assert в начало функции. Может быть, если мы воспользуемся каким-нибудь разумным небезопасным способом пропустить проверки границ, мы сократим эти несколько процентов? </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">get</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">bwt</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>BWTSlice, </span><span style="color:#f29718;">r</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">usize </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// self.k is our sampling rate, so find our last sampled checkpoint
+</span><span>    </span><span style="color:#ff7733;">let</span><span> i </span><span style="color:#f29668;">=</span><span> r </span><span style="color:#f29668;">/ </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>k</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> count </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// count all the matching bytes b/t the closest checkpoint and our desired lookup
+</span><span>    </span><span style="color:#ff7733;">for</span><span> idx </span><span style="color:#f29668;">in </span><span>(i </span><span style="color:#f29668;">* </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>k) </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">..</span><span> r </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1 </span><span>{
+</span><span>        </span><span style="color:#ff7733;">unsafe </span><span>{
+</span><span>            </span><span style="color:#ff7733;">if </span><span style="color:#f29668;">*</span><span>bwt</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_unchecked</span><span>(idx) </span><span style="color:#f29668;">==</span><span> a {
+</span><span>                count </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// return the sampled checkpoint for this character + the manual count we just did
+</span><span>    </span><span style="color:#ff7733;">unsafe </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>occ</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_unchecked</span><span>(i)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_unchecked</span><span>(a </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>) </span><span style="color:#f29668;">+</span><span> count
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Результаты: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo bench search
+</span><span>...
+</span><span>     Running target/release/fmindex-3d950d5fe462c0d1
+</span><span>
+</span><span>running 1 test
+</span><span>test search_index_seeds ... bench:      46,067 ns/iter (+/- 238)
+</span></code></pre>
+<p>Это... намного хуже, чем любое из внесенных нами улучшений, и определенно выходит за пределы допустимой погрешности этих тестов.</p>
+<p>Святая корова! Что случилось? Похоже, оптимизатор здесь не слишком перегружен. Дизассемблирование содержит множество инструкций, которые не были необходимыми или полезными в безопасной версии этой функции, и выглядят очень похоже на исходную версию, только без вызовов функций итератора:</p>
+<p><img src="/imgs/posts/ae87c847_09.png" alt="аннотация perf для версии get_unchecked" /></p>
+<p>Важное примечание: всякий раз, когда кто-то вроде меня защищает Rust и говорит вам, что вы «всегда можете удалить проверки границ в горячих циклах», напоминайте им, что в некоторых случаях это может не помочь. Я не искал исчерпывающим образом в системе отслеживания проблем Rust, чтобы увидеть, является ли это ошибкой, так что, возможно, она уже устраняется. Тем не менее, удаление проверок границ не является большой красной волшебной кнопкой «сделать быстрее», и, как я, возможно, уже упоминал, вам абсолютно необходимо измерить влияние на производительность «очевидных» изменений.</p>
+<p>Также интересно, когда я пробую версию индексации с проверкой границ в своей более крупной программе, она иногда работает на несколько процентов лучше, чем пример идиоматического итератора! Поймите, ритуалы призыва для оптимизации загадочны и полны нюансов и опасностей. Версия с непроверенным индексированием все еще там неэффективна, и я подозреваю, что Rust, вероятно, мог бы лучше выводить LLVM IR без проверки границ, или регистрировать разные проходы LLVM или что-то в этом роде, но я не эксперт здесь, это даже отдаленно не смешно.</p>
+<h2 id="zapros-na-vkliuchenie">Запрос на включение</h2>
+<p>Открытый исходный код - это фантастика! Мне не только не нужно было писать все эти структуры данных самому, но я также могу делиться своими улучшениями с кем-либо еще, кто их использует. Запрос на вытягивание был объединен, и в ближайшее время улучшение производительности должно быть доступно на crates.io.</p>
+<p>Хотя для моего варианта использования производительность иногда немного лучше при использовании версии с индексированием с проверкой границ (в отличие от адаптеров итераторов), поскольку у меня нет доказательств того, что это было бы полезно для других приложений, которых я не делал. думаю, что это будет разумно для апстрима.</p>
+<h2 id="proshchal-nye-mysli">Прощальные мысли</h2>
+<p>Инструменты для профилирования - это круто! Это было бы гораздо труднее исследовать без сложных инструментов. Во-первых, было бы невозможно просто обнаружить, что функция Occ::get отнимает так много времени. Более того, детальное рассмотрение последствий внесенных в него изменений было бы в лучшем случае затруднительным. Наконец, понимание природы замедления / ускорения имеет неоценимое значение для будущих усилий по оптимизации.</p>
+<p>Производительность сгенерированного кода всегда будет немного изменяться. И сейчас много внимания уделяется производительности компилятора, но, как ни странно, еще не предпринимается никаких попыток систематически отслеживать производительность скомпилированных программ на Rust. Я пробовал это раньше и не очень далеко продвинулся, есть ярлык I-slow для проблем, которым уделяется много внимания (так что откройте его, если вы обнаружите плохой кодогенератор), а также проблема отслеживания для создания набор регрессионных тестов perf, который может прогрессировать или не прогрессировать.</p>
+<p>Мне сказали, что всякий раз, когда MIR включается по умолчанию, он позволяет выполнять новые оптимизации в интерфейсе Rust до того, как будет сгенерирован любой IR LLVM. Это может радикально изменить то, какой вид ручной оптимизации оказывает влияние. Я попытался запустить эти тесты с RUSTFLAGS = &quot;- Z orbit&quot; и не увидел разницы. Предполагая, что я использовал правильный флаг (ха!), MIR trans ведет себя аналогично генерации кода по умолчанию для этого случая ... пока.</p>
+<p>Я полностью забыл включить измерения или снимки экрана, но когда я попытался вручную выполнить итерацию по срезу (без использования адаптеров итератора, но и без ручного индексирования), я не добился значительного повышения производительности по сравнению с версией, проиндексированной вручную, показанной здесь. Это, безусловно, требует дальнейшего изучения. (похоже, что это, вероятно, из-за некачественной векторизации, см. Обновление ниже)</p>
+<p>Если вы пишете код, критичный к производительности, отнеситесь к этому с недоверием, когда Rustaceans скажет вам, что Vec::get_unchecked должен улучшить производительность. Очевидно, это правда во многих случаях (включая те, над которыми я недавно работал), но измерять, измерять ... ох, я устал писать это. </p>
+<h2 id="obnovlenie-25-07-16">Обновление (25.07.16)</h2>
+<p>Что касается /r/rust, /u/Aatch провел очень глубокий анализ результатов сборки (за пределами моего понимания) и пришел к очень интересным выводам. По сути, удаление проверок границ фактически позволяет векторизовать цикл, и именно версия SIMD работает намного медленнее.</p>
+<p>Я упустил тот факт, что в примерах документации, которые я скопировал для теста, я использовал очень низкое значение k в Occ. Поэтому, когда LLVM смог векторизовать функцию, векторизованная версия всегда вызывалась на входах, слишком маленьких, чтобы воспользоваться преимуществами векторизованных сумм при ручном подсчете BWT.</p>
+<p>Это было бы интересной странностью (разве не безумие, что оптимизации сделали это намного медленнее?), За исключением того факта, что k = 3 намного ниже, чем типичное использование в реальном мире, AFAICT. Одно приложение C++, которое я часто вижу, использовало значения по умолчанию для k = 32, и я возился с компромиссами с гораздо более высокими частотами дискретизации, такими как 128 или 256. Оказывается, векторизованная версия работает ужасно быстро (даже с безопасным кодом), как только вы частота дискретизации выше 32. Я открыл PR, чтобы обсудить эти компромиссы.</p>
+<p>Я не думаю, что это изменит полезность демонстрации того, как использовать эти инструменты с Rust, но это определенно бросает мне вызов! И это определенно подчеркивает важность разумного измерения и двойной проверки своих предположений!</p>
+<h2 id="obratnaia-sviaz">Обратная связь?</h2>
+<p>Большое спасибо pczarn и краткости в # rust-offtopic за то, что вы нашли время прочитать это и предоставили очень полезные правки.</p>
+<p>Контактные ссылки находятся в нижнем колонтитуле. Обычно я нахожусь в #rust на irc.mozilla.org как anp.</p>
+<p>Я также разместил это в Hacker News и в сабреддите /r/rust, если вы хотите обсудить это в любом из этих мест.</p>
+<p>РЕДАКТИРОВАТЬ: Моя публикация в HN действительно никуда не делась, но похоже, что она была повторно отправлена. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Вектор Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rusts-vector/#osnovy-vektora">Основы вектора</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rusts-vector/#vektor-i-iterator">Вектор и итератор</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rusts-vector/#slishkom-mnogo-iteratorov-dlia-vypolneniia-iteratsii">Слишком много итераторов для выполнения итерации</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rusts-vector/#vydelenie-pamiati">Выделение памяти</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rusts-vector/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Вектор Rust</h1>
+
+<p><a href="https://blog.frankel.ch/start-rust/9/">Перевод</a> | Автор оригинала: Nicolas Fränkel</p>
+<p>Скажу честно: изначально я хотел описать все коллекции, доступные в Rust, а также связанные с ними концепции. Затем я начал немного копаться в этом и решил, что это будет (намного) слишком долго. По этой причине я ограничу область видимости типом Vec.</p>
+<p>Это 9-й пост в серии статей о Start Rust.</p>
+<ol>
+<li>Моя первая чашка Rust</li>
+<li>Моя вторая чашка Rust</li>
+<li>Упражнения &quot;Рустлингс&quot; - часть 1.</li>
+<li>Упражнения &quot;Рустлингс&quot; - часть 2.</li>
+<li>Rust на интерфейсе.</li>
+<li>Контроллер Rust для Kubernetes</li>
+<li>Rust и JVM</li>
+<li>diceroller, образец проекта на Rust.</li>
+<li>Вектор Rust (этот пост)</li>
+</ol>
+<p>Вот диаграмма, в которую мы углубимся:</p>
+<p><img src="/imgs/posts/aaf9ac20_01.svg" alt="векторная диаграмма классов Rust" /></p>
+<h2 id="osnovy-vektora">Основы вектора</h2>
+<p>Из документации:</p>
+<blockquote>
+<p>Тип непрерывного растущего массива, записываемый как Vec<T> и произносимый как «вектор».</p>
+</blockquote>
+<p>Как и в случае с Java ArrayList, Vec поддерживается массивом. Когда массив достигает полной емкости, Vec резервирует новый массив с большей емкостью и копирует элементы из исходного массива во вновь созданный. Затем освобождает первое. Обратите внимание, что коллекция может выделять массив большего размера, чем необходимо, чтобы избежать частого перераспределения.</p>
+<p>Чтобы добавить значения в Vec, нам нужно использовать дополнительный шаг, например, функцию push(): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> v </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>v</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>v</span><span style="color:#f29668;">.</span><span style="color:#f07178;">push</span><span>(</span><span style="color:#f29718;">5</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Функции, которые создают новые Vec, инициализируют их без элементов. Если мы хотим создать Vec и значения одновременно, Rust предлагает vec! макрос. Мы можем заменить приведенный выше код следующим однострочным: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> v </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>На этом этапе, если вы уже немного поработали в Rust, вы, вероятно, не узнали ничего нового. Вместо того, чтобы описывать каждую функцию в Vec - они очень похожи на те, что есть в других языках - давайте немного исследуем их.</p>
+<h2 id="vektor-i-iterator">Вектор и итератор</h2>
+<p>Итератор - это шаблон проектирования, описанный в классической книге &quot;Шаблоны проектирования: элементы объектно-ориентированного программного обеспечения многократного использования&quot;:</p>
+<blockquote>
+<p>Намерение: предоставить объект, который пересекает некоторую совокупную структуру, абстрагируясь от предположений о реализации этой структуры.</p>
+</blockquote>
+<ul>
+<li>Шаблон итератора</li>
+</ul>
+<p>Хотя в книге описан Iterator, ничто не ограничивает этот шаблон только языками ООП. Это довольно распространенная абстракция.</p>
+<p>Rust предоставляет трейт Iterator, а Vec реализует его. Следовательно, мы можем просмотреть его значения: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> v </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let mut</span><span> iter </span><span style="color:#f29668;">=</span><span> v</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>()</span><span style="color:#bfbab0cc;">;                       
+</span><span style="color:#ff7733;">loop </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">=</span><span> iter</span><span style="color:#f29668;">.</span><span style="color:#f07178;">next</span><span>()</span><span style="color:#bfbab0cc;">;                   
+</span><span>    </span><span style="color:#ff7733;">if</span><span> value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_some</span><span>() {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;value: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> value</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>        </span><span style="color:#ff7733;">break</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Создайте итератор. Поскольку вызов next() изменяет состояние iter, он должен быть изменяемым.</li>
+<li>Получите следующее значение</li>
+</ol>
+<p>Если бы я получал доллар за каждую ошибку, возникшую из-за неуместного оператора break, я бы сейчас наверняка был богат. Если вы сломаетесь слишком рано, вы потеряете ценности; слишком поздно, и ад вырвется наружу (каламбур). По этой причине, for наряду с итератором лучше подходит. Мы можем переписать приведенный выше код как: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> v </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">for</span><span> value </span><span style="color:#f29668;">in</span><span> v</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {                        
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;value: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Короче, безопаснее, а значит, лучше</li>
+</ol>
+<h2 id="slishkom-mnogo-iteratorov-dlia-vypolneniia-iteratsii">Слишком много итераторов для выполнения итерации</h2>
+<p>Что интересно, мы можем немного изменить приведенный выше код, чтобы удалить вызов iter(). Это все еще работает! </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> v </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">5</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">for</span><span> value </span><span style="color:#f29668;">in</span><span> v {                               
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;value: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Магия!</li>
+</ol>
+<p>На самом деле это не волшебство, а синтаксический сахар Rust в действии. циклы for принимают итераторы. Тем не менее, некоторые экземпляры можно преобразовать в итераторы «на лету». Тип должен реализовывать трейт IntoIterator и его функцию into_iter(), чтобы иметь право. Как видно из диаграммы выше, это случай Vec.</p>
+<p>Если вы спросите себя, в чем разница между iter() и into_inter(), утешитесь тем, что меня тоже интересовало. После некоторого исследования я нашел этот блестящий ответ:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span> TL;DR:
+</span><span>
+</span><span> - Итератор, возвращаемый into_iter, может давать любой из T, &amp;T или &amp;mut T, в зависимости от контекста.
+</span><span> - Итератор, возвращаемый iter, по соглашению даст &amp;T.
+</span><span> - Итератор, возвращаемый iter_mut, по соглашению даст &amp;mut T.
+</span></code></pre>
+<ul>
+<li>В чем разница между iter и into_iter?</li>
+</ul>
+<p>Наконец, вы можете создать Vec из итератора благодаря FromIterator. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Foo </span><span>{
+</span><span>    count</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Iterator </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Foo </span><span>{                           
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Item </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">u8</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">next</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>Item&gt; {
+</span><span>        </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>count {
+</span><span>            </span><span style="color:#f29718;">0 </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>count </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>count </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Option</span><span style="color:#f29668;">::</span><span>Some(</span><span style="color:#f29718;">1</span><span>)                   
+</span><span>            }
+</span><span>            </span><span style="color:#f29718;">1 </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>count </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>count </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Option</span><span style="color:#f29668;">::</span><span>Some(</span><span style="color:#f29718;">5</span><span>)                   
+</span><span>            }
+</span><span>            </span><span style="color:#f29668;">_ =&gt; </span><span style="font-style:italic;color:#39bae6;">None                             
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> i </span><span style="color:#f29668;">=</span><span> Foo { count</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> v </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>from_iter(i)</span><span style="color:#bfbab0cc;">;                        
+</span><span style="color:#ff7733;">for</span><span> value </span><span style="color:#f29668;">in</span><span> v {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;value: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<ol>
+<li>Реализуем собственный Итератор.</li>
+<li>Сначала верните 1, затем 5, затем ничего.</li>
+<li>Создайте Vec из нашего итератора.</li>
+</ol>
+<h2 id="vydelenie-pamiati">Выделение памяти</h2>
+<p>До сих пор мы упустили из виду один аспект Vec: на самом деле это определение Vec&lt;T, A: Allocator = Global&gt;. Хотя T - это тип элементов, содержащихся в Vec, мы не рассматривали A, который выделяет память. Я не буду описывать эту тему подробно, потому что в настоящее время у меня нет соответствующих знаний. Тем не менее, я считаю, что упомянуть об этом интересно, поскольку ни один другой язык, о котором я знаю, не дает такой возможности.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Реализация Allocator может выделять, увеличивать, сжимать и освобождать произвольные блоки данных, описанные с помощью Layout.
+</span></code></pre>
+<ul>
+<li>std::alloc::Allocator</li>
+</ul>
+<p><img src="/imgs/posts/aaf9ac20_02.svg" alt="диаграмма классов Rust's Allocator" /></p>
+<p>Rust по умолчанию использует глобальный распределитель памяти. Он делегирует другому распределителю: это система, если вы не зарегистрируете его с атрибутом #[global_allocator].</p>
+<p>Таким образом, Vec&lt;T, A&gt; позволяет использовать другой распределитель, нежели тот, который определен централизованно. Одним из возможных вариантов использования может быть создание распределителя, отслеживающего выделенные байты только для экземпляра Vec.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>На этом я закончил мои увлечения Vec. В этом посте я попытался избежать обычной обработки такого рода постов и немного исследовать их. Хотя в большинстве случаев выделенный распределитель памяти не требуется, я думаю, что это хороший трюк, о котором следует помнить на всякий случай.
+Чтобы пойти дальше:</p>
+<ul>
+<li>Модуль std::collections</li>
+<li>Сохранение списков значений с векторами</li>
+<li>Struct std::vec::Vec</li>
+<li>В чем разница между iter и into_iter? </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

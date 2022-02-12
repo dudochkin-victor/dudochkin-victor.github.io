@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Знакомство с быстрым, безопасным и полным веб-сервисом в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#rust">Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#osnova">Основа</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#proverka-dizel-nogo-topliva-i-zaprosov-vo-vremia-kompiliatsii"><small>- Проверка дизельного топлива и запросов во время компиляции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#bystraia-no-ne-samaia-bystraia-model-parallelizma"><small>- Быстрая (но не самая быстрая) модель параллелизма</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#sinkhronnye-aktery"><small>- Синхронные актеры</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#upravlenie-podkliucheniem"><small>- Управление подключением</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#ergonomicheskoe-preimushchestvo-sinkhronnogo-koda"><small>- Эргономическое преимущество синхронного кода</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#medlenno-no-tol-ko-otnositel-no-ochen-ochen-bystro"><small>- Медленно, но только относительно &quot;очень, ОЧЕНЬ быстро&quot;</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#obrabotka-oshibok">Обработка ошибок</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#po-promezhutochnogo-sloia">ПО промежуточного слоя</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#asinkhronnost-na-vsem-puti-vniz"><small>- Асинхронность на всем пути вниз</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#http-testirovanie">HTTP-тестирование</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/touring-a-fast-safe-and-complete-web-service-in-rust/#reziume-iavliaetsia-li-rust-budushchim-otkazoustoichivosti">Резюме: является ли Rust будущим отказоустойчивости?</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Знакомство с быстрым, безопасным и полным веб-сервисом в Rust</h1>
+
+<p><a href="https://brandur.org/rust-web">Перевод</a> | Автор оригинала: Brandur</p>
+<p>Уже много лет у меня кризис веры в переводимые языки. С ними быстро и весело работать в небольших масштабах, но когда у вас есть крупный проект, их привлекательный внешний вид быстро смывается. Большая программа на Ruby или JavaScript (и это лишь некоторые из них) в производстве - это бесконечная игра в шутку: вы решаете одну проблему только для того, чтобы найти новую где-то еще. Независимо от того, сколько тестов вы напишете или насколько хорошо дисциплинирована ваша команда, любая новая разработка обязательно приведет к потоку ошибок, которые необходимо будет исправлять в течение месяцев или лет.</p>
+<p>Центральное место в проблеме занимают края. Люди будут надежно проделывать хорошую работу по построению и тестированию счастливых путей, но мы, люди, ужасно не умеем учитывать крайние условия, и именно эти грани и углы вызывают проблемы на протяжении многих лет, в течение которых программа работает.</p>
+<p>Такие ограничения, как компилятор и система распознавания типов, - это инструменты, которые помогают нам находить эти грани и думать о них. В мире языков программирования существует широкий спектр вседозволенности, и прямо сейчас мой тезис состоит в том, что больше времени, потраченного на разработку, удовлетворяющую правилам языка, приведет к тому, что меньше времени будет тратиться на устранение проблем в Интернете.</p>
+<h2 id="rust">Rust</h2>
+<p>Если можно построить более надежные системы с помощью языков программирования с более строгими ограничениями, как насчет языков с наиболее строгими ограничениями? Я полностью перешагнул границы диапазона и создал веб-сервис на Rust, языке, печально известном своим бескомпромиссным компилятором.</p>
+<p>Язык все еще новый и несколько непрактичный. Изучение правил, касающихся типов, владения и продолжительности жизни, было утомительным занятием. Несмотря на трудности, это был интересный опыт обучения, и он работает. Я сталкиваюсь с меньшим количеством забытых граничных условий, и ошибок времени выполнения становится меньше. Широкий рефакторинг больше не вызывает ужаса.</p>
+<p>Здесь мы рассмотрим некоторые из наиболее новых идей и возможностей Rust, его основных библиотек и различных фреймворков, которые делают это возможным.</p>
+<h2 id="osnova">Основа</h2>
+<p>Я построил свой сервис на actix-web, веб-фреймворке, основанном на actix, библиотеке акторов для Rust. actix похож на то, что вы можете увидеть в таком языке, как Erlang, за исключением того, что он добавляет еще одну степень надежности и скорости за счет интенсивного использования сложных систем типов и параллелизма Rust. Например, для актора невозможно получить сообщение, которое он не может обработать во время выполнения, потому что оно было бы запрещено во время компиляции.</p>
+<p>Есть небольшая вероятность, что вы узнаете это имя, потому что actix-web пробился на вершину тестов TechEmpower. Программы, созданные для такого рода тестов, часто оказываются немного надуманными из-за их оптимизации, но это теперь надуманный код Rust, который занимает первое место в списке с надуманным кодом C++ и Java. Но независимо от того, как вы относитесь к достоверности программ тестирования, вывод состоит в том, что actix-web работает быстро.</p>
+<p><img src="/imgs/posts/1bf5b159_01.png" alt="Rust неизменно занимает место в рейтинге TechEmpower наряду с C++ и Java" /></p>
+<p>Rust неизменно занимает место в рейтинге TechEmpower наряду с C++ и Java.</p>
+<p>Автор actix-web (и actix) фиксирует колоссальный объем кода - проекту всего около шести месяцев, и он не только уже более полнофункциональный и с лучшими API-интерфейсами, чем веб-фреймворки на других языках с открытым исходным кодом, но и больше, чем многие фреймворки, финансируемые крупными организациями с огромными командами разработчиков. Такие тонкости, как HTTP / 2, WebSockets, быстрые ответы, плавное завершение работы, HTTPS, поддержка файлов cookie, обслуживание статических файлов и хорошая инфраструктура тестирования доступны прямо из коробки. Документация все еще немного грубовата, но я еще не обнаружил ни одной ошибки. </p>
+<h3 id="proverka-dizel-nogo-topliva-i-zaprosov-vo-vremia-kompiliatsii">Проверка дизельного топлива и запросов во время компиляции</h3>
+<p>Я использовал дизельное топливо в качестве ORM, чтобы поговорить с Postgres. Самым приятным в этом проекте является то, что это ORM, написанный кем-то с большим прошлым опытом создания ORM, потратившим много времени в окопах с Active Record. Многие из ловушек, характерных для ORM предыдущих поколений, удалось избежать - например, дизель не пытается делать вид, что диалекты SQL во всех основных базах данных одинаковы, он исключает настраиваемый DSL для миграции (вместо этого используется необработанный SQL), и он не выполняет автоматическое управление подключением на глобальном уровне. Он действительно встраивает мощные функции Postgres, такие как upsert и jsonb, прямо в основную библиотеку и по возможности обеспечивает мощные механизмы безопасности.</p>
+<p>Большинство моих запросов к базе данных написаны с использованием типобезопасного DSL дизельного двигателя. Если я неправильно ссылаюсь на поле, пытаюсь вставить кортеж в неправильную таблицу или даже создаю невозможное соединение, компилятор сообщает мне об этом. Вот типичная операция (в данном случае пакет Postgres INSERT INTO ... ON CONFLICT ... или &quot;upsert&quot;): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>time_helpers</span><span style="color:#f29668;">::</span><span>log_timed(</span><span style="color:#f29668;">&amp;</span><span>log</span><span style="color:#f29668;">.</span><span style="color:#f07178;">new</span><span>(</span><span style="color:#f07178;">o!</span><span>(</span><span style="color:#c2d94c;">&quot;step&quot; </span><span style="color:#f29668;">=&gt; </span><span style="color:#c2d94c;">&quot;upsert_episodes&quot;</span><span>))</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29718;">_log</span><span>| {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(diesel</span><span style="color:#f29668;">::</span><span>insert_into(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>table)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">values</span><span>(ins_episodes)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">on_conflict</span><span>((schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>podcast_id</span><span style="color:#bfbab0cc;">, </span><span>schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>guid))
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">do_update</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">set</span><span>((
+</span><span>            schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>description</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(</span><span style="color:#f07178;">excluded</span><span>(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>description))</span><span style="color:#bfbab0cc;">,
+</span><span>            schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>explicit</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(</span><span style="color:#f07178;">excluded</span><span>(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>explicit))</span><span style="color:#bfbab0cc;">,
+</span><span>            schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>link_url</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(</span><span style="color:#f07178;">excluded</span><span>(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>link_url))</span><span style="color:#bfbab0cc;">,
+</span><span>            schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>media_type</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(</span><span style="color:#f07178;">excluded</span><span>(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>media_type))</span><span style="color:#bfbab0cc;">,
+</span><span>            schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>media_url</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(</span><span style="color:#f07178;">excluded</span><span>(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>media_url))</span><span style="color:#bfbab0cc;">,
+</span><span>            schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>podcast_id</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(</span><span style="color:#f07178;">excluded</span><span>(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>podcast_id))</span><span style="color:#bfbab0cc;">,
+</span><span>            schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>published_at</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(</span><span style="color:#f07178;">excluded</span><span>(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>published_at))</span><span style="color:#bfbab0cc;">,
+</span><span>            schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>title</span><span style="color:#f29668;">.</span><span style="color:#f07178;">eq</span><span>(</span><span style="color:#f07178;">excluded</span><span>(schema</span><span style="color:#f29668;">::</span><span>episode</span><span style="color:#f29668;">::</span><span>title))</span><span style="color:#bfbab0cc;">,
+</span><span>        ))
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_results</span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>conn)
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">chain_err</span><span>(|| </span><span style="color:#c2d94c;">&quot;Error upserting podcast episodes&quot;</span><span>)</span><span style="color:#f29668;">?</span><span>)
+</span><span>})
+</span></code></pre>
+<p>Более сложный SQL сложно представить с помощью DSL, но, к счастью, есть отличная альтернатива в виде встроенного в Rust include_str! макрос. Он принимает содержимое файла во время компиляции, и мы можем легко передать его дизелю для привязки параметров и выполнения: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>diesel</span><span style="color:#f29668;">::</span><span>sql_query(</span><span style="color:#f07178;">include_str!</span><span>(</span><span style="color:#c2d94c;">&quot;../sql/cleaner_directory_search.sql&quot;</span><span>))
+</span><span>    </span><span style="color:#f29668;">.</span><span>bind</span><span style="color:#f29668;">::</span><span>&lt;Text, </span><span style="color:#f29668;">_</span><span>&gt;(</span><span style="color:#f29718;">DIRECTORY_SEARCH_DELETE_HORIZON</span><span>)
+</span><span>    </span><span style="color:#f29668;">.</span><span>bind</span><span style="color:#f29668;">::</span><span>&lt;BigInt, </span><span style="color:#f29668;">_</span><span>&gt;(</span><span style="color:#f29718;">DELETE_LIMIT</span><span>)
+</span><span>    </span><span style="color:#f29668;">.</span><span>get_result</span><span style="color:#f29668;">::</span><span>&lt;DeleteResults&gt;(conn)
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">chain_err</span><span>(|| </span><span style="color:#c2d94c;">&quot;Error deleting directory search content batch&quot;</span><span>)
+</span></code></pre>
+<p>Запрос находится в собственном файле .sql: </p>
+<pre data-lang="sql" style="background-color:#0f1419;color:#bfbab0;" class="language-sql "><code class="language-sql" data-lang="sql"><span style="color:#ff7733;">WITH</span><span> expired </span><span style="color:#f29668;">AS</span><span> (
+</span><span>    </span><span style="color:#ff7733;">SELECT</span><span> id
+</span><span>    </span><span style="color:#ff7733;">FROM</span><span> directory_search
+</span><span>    </span><span style="color:#ff7733;">WHERE</span><span> retrieved_at </span><span style="color:#f29668;">&lt;</span><span> NOW() </span><span style="color:#f29668;">-</span><span> $</span><span style="color:#f29718;">1</span><span>::interval
+</span><span>    </span><span style="color:#ff7733;">LIMIT</span><span> $</span><span style="color:#f29718;">2
+</span><span>),
+</span><span>deleted_batch </span><span style="color:#f29668;">AS</span><span> (
+</span><span>    </span><span style="color:#ff7733;">DELETE FROM</span><span> directory_search
+</span><span>    </span><span style="color:#ff7733;">WHERE</span><span> id </span><span style="color:#f29668;">IN</span><span> (
+</span><span>        </span><span style="color:#ff7733;">SELECT</span><span> id
+</span><span>        </span><span style="color:#ff7733;">FROM</span><span> expired
+</span><span>    )
+</span><span>    RETURNING id
+</span><span>)
+</span><span style="color:#ff7733;">SELECT </span><span style="color:#f07178;">COUNT</span><span>(</span><span style="font-style:italic;color:#39bae6;">*</span><span>)
+</span><span style="color:#ff7733;">FROM</span><span> deleted_batch;
+</span></code></pre>
+<p>При таком подходе мы теряем проверку SQL во время компиляции, но получаем прямой доступ к чистой силе семантики SQL и отличной подсветке синтаксиса в вашем любимом редакторе.</p>
+<h3 id="bystraia-no-ne-samaia-bystraia-model-parallelizma">Быстрая (но не самая быстрая) модель параллелизма</h3>
+<p>actix-web работает на базе tokio, библиотеки быстрого цикла событий, которая является краеугольным камнем истории параллелизма 1. При запуске HTTP-сервера actix-web порождает количество рабочих процессов, равное количеству логических ядер на сервере, каждое в своем собственный поток, и у каждого свой токио-реактор.</p>
+<p>Обработчики HTTP могут быть написаны разными способами. Мы могли бы написать такой, который возвращает контент синхронно: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">index</span><span>(</span><span style="color:#f29718;">req</span><span style="color:#bfbab0cc;">:</span><span> HttpRequest) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Bytes {
+</span><span>    </span><span style="color:#f29668;">...
+</span><span>}
+</span></code></pre>
+<p>Это заблокирует базовый реактор tokio до его завершения, что уместно в ситуациях, когда не требуется выполнять другие вызовы блокировки; например, рендеринг статического представления из памяти или ответ на проверку работоспособности.</p>
+<p>Мы также можем написать обработчик HTTP, который возвращает упакованное будущее. Это позволяет нам объединить в цепочку серию асинхронных вызовов, чтобы гарантировать, что реактор никогда не будет без необходимости заблокирован. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">index</span><span>(</span><span style="color:#f29718;">req</span><span style="color:#bfbab0cc;">:</span><span> HttpRequest) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Box</span><span>&lt;Future&lt;Item=HttpResponse, Error=Error&gt;&gt; {
+</span><span>    </span><span style="color:#f29668;">...
+</span><span>}
+</span></code></pre>
+<p>Примерами этого могут быть ответ файла, который мы читаем с диска (блокировка ввода-вывода, хотя и минимальная), или ожидание ответа от нашей базы данных. Ожидая результатов в будущем, базовый реактор tokio с радостью выполнит другие запросы.</p>
+<p><img src="/imgs/posts/1bf5b159_02.svg" alt="Пример модели параллелизма с actix-web" /></p>
+<p>Пример модели параллелизма с actix-web.</p>
+<h3 id="sinkhronnye-aktery">Синхронные актеры</h3>
+<p>Поддержка футур в Rust широко распространена, но не универсальна. Примечательно, что дизель не поддерживает асинхронные операции, поэтому все его операции будут блокироваться. Использование его непосредственно в HTTP-обработчике actix-web заблокировало бы tokio-реактор потока и не позволило бы этому исполнителю обслуживать другие запросы до завершения операции.</p>
+<p>К счастью, у actix есть отличное решение этой проблемы в виде синхронных актеров. Это субъекты, которые рассчитывают выполнять свои рабочие нагрузки синхронно, поэтому каждому назначается собственный выделенный поток на уровне ОС. Абстракция SyncArbiter предназначена для простого запуска нескольких копий одного типа акторов, каждая из которых совместно использует очередь сообщений, чтобы можно было легко отправить работу набору (указан как адрес ниже): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Start 3 `DbExecutor` actors, each with its own database
+</span><span style="font-style:italic;color:#5c6773;">// connection, and each in its own thread
+</span><span style="color:#ff7733;">let</span><span> addr </span><span style="color:#f29668;">= </span><span>SyncArbiter</span><span style="color:#f29668;">::</span><span>start(</span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">, </span><span>|| {
+</span><span>    DbExecutor(SqliteConnection</span><span style="color:#f29668;">::</span><span>establish(</span><span style="color:#c2d94c;">&quot;test.db&quot;</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>())
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Хотя операции внутри синхронного актора блокируются, другим субъектам в системе, таким как HTTP-воркеры, не нужно ждать завершения какого-либо из них - они получают назад будущее, которое представляет результат сообщения, чтобы они могли выполнять другую работу.</p>
+<p>В моей реализации быстрые рабочие нагрузки, такие как парсинг параметров и визуализация представлений, выполняются внутри обработчиков, а синхронные акторы никогда не вызываются, если в этом нет необходимости. Когда ответ требует операций с базой данных, сообщение отправляется синхронному субъекту, а базовый токио-реактор HTTP-исполнителя обслуживает другой трафик, ожидая разрешения будущего. Когда это происходит, он отображает HTTP-ответ с результатом и отправляет его обратно ожидающему клиенту.</p>
+<h3 id="upravlenie-podkliucheniem">Управление подключением</h3>
+<p>На первый взгляд, введение синхронных акторов в систему может показаться чисто недостатком, поскольку они являются верхней границей параллелизма. Однако этот предел также может быть преимуществом. Одна из первых проблем масштабирования, с которой вы, вероятно, столкнетесь с Postgres, - это его скромные ограничения на максимальное количество разрешенных одновременных подключений. Даже самые большие экземпляры на Heroku или GCP (Google Cloud Platform) имеют максимум 500 подключений, а меньшие экземпляры имеют ограничения, которые намного ниже (моя небольшая база данных GCP ограничивает меня до 25). Большие приложения с грубыми схемами управления соединениями (например, Rails, а также многие другие), как правило, прибегают к таким решениям, как PgBouncer, чтобы обойти проблему.</p>
+<p>Указание количества синхронных участников по расширению также подразумевает максимальное количество подключений, которые служба будет использовать, что приводит к идеальному контролю над ее использованием.</p>
+<p><img src="/imgs/posts/1bf5b159_03.svg" alt="Соединения поддерживаются только тогда, когда синхронному актеру он нужен" /></p>
+<p>Соединения поддерживаются только тогда, когда он нужен синхронному актору.</p>
+<p>Я написал свои синхронные акторы, чтобы проверять отдельные соединения из пула соединений (r2d2) только при начале работы и возвращать их обратно после того, как они будут выполнены. Когда служба простаивает, запускается или завершается, она не использует никаких подключений. Сравните это со многими веб-фреймворками, где принято открывать соединение с базой данных при запуске рабочего и сохранять его открытым, пока рабочий рабочий. Этот подход требует ~ 2x соединения для плавного перезапуска, потому что все поэтапно подключенные рабочие немедленно устанавливают соединение, даже если все поэтапно отключенные рабочие все еще держатся за одно.</p>
+<h3 id="ergonomicheskoe-preimushchestvo-sinkhronnogo-koda">Эргономическое преимущество синхронного кода</h3>
+<p>Синхронные операции не так быстры, как чисто асинхронный подход, но их преимущество заключается в простоте использования. Приятно, что футуры бывают быстрыми, но их правильная компоновка требует времени, а ошибки компилятора, которые они генерируют, если вы допустили ошибку, действительно являются кошмаром, что приводит к тому, что на отладку уходит много времени.</p>
+<p>Написание синхронного кода происходит быстрее и проще, и меня лично устраивает несколько неоптимальная скорость выполнения, если это означает, что я могу быстрее реализовать больше основной логики предметной области.</p>
+<h3 id="medlenno-no-tol-ko-otnositel-no-ochen-ochen-bystro">Медленно, но только относительно &quot;очень, ОЧЕНЬ быстро&quot;</h3>
+<p>Это может показаться пренебрежительным по отношению к характеристикам производительности этой модели, но имейте в виду, что она медленная по сравнению с чисто асинхронным стеком (то есть футурами повсюду). Это все еще концептуально продуманная модель параллелизма с реальным параллелизмом, и по сравнению почти с любыми другими фреймворками и языками программирования, она по-прежнему очень-очень быстрая. Я пишу Ruby в своей повседневной работе, и по сравнению с нашей беспоточной моделью (нормальной для Ruby, потому что GIL ограничивает производительность потоков) с использованием процессов разветвления на виртуальной машине без уплотняющего сборщика мусора, мы говорим о более высокой скорости и эффективности памяти на несколько порядков. , без труда.</p>
+<p>В конце концов, ваша база данных будет узким местом для параллелизма, а модель синхронных акторов поддерживает примерно столько параллелизма, сколько мы можем ожидать от нее, а также поддерживает максимальную пропускную способность для любых действий, которые не требуются. доступ к базе данных. </p>
+<h2 id="obrabotka-oshibok">Обработка ошибок</h2>
+<p>Как и любая хорошая программа на Rust, API почти повсюду возвращают тип Result. Футуры проходят через свою собственную версию Result, содержащую либо успешный результат, либо ошибку.</p>
+<p>Я использую цепочку ошибок, чтобы определять свои ошибки. Большинство из них являются внутренними, но я определил определенную группу с явной целью взаимодействия с пользователем: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">error_chain!</span><span>{
+</span><span>    errors {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">//
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// User errors
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">//
+</span><span>
+</span><span>        BadRequest(message</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">String</span><span>) {
+</span><span>            </span><span style="color:#f07178;">description</span><span>(</span><span style="color:#c2d94c;">&quot;Bad request&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#f07178;">display</span><span>(</span><span style="color:#c2d94c;">&quot;Bad request: {}&quot;</span><span style="color:#bfbab0cc;">,</span><span> message)</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Когда пользователю необходимо сообщить об ошибке, я обязательно сопоставил ее с одним из типов ошибок пользователя: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>Params</span><span style="color:#f29668;">::</span><span>build(log</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>request)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map_err</span><span>(|</span><span style="color:#f29718;">e</span><span>|
+</span><span>    ErrorKind</span><span style="color:#f29668;">::</span><span>BadRequest(e</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()
+</span><span>)
+</span></code></pre>
+<p>После ожидания синхронного актора и попытки создать успешный HTTP-ответ я потенциально обрабатываю пользовательскую ошибку и визуализирую ее. Реализация оказывается довольно элегантной (обратите внимание, что в будущем композиция будет отличаться от and_then тем, что она обрабатывает успех или неудачу, получая Результат, в отличие от and_then, которое только цепляется за успех): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> message </span><span style="color:#f29668;">= </span><span>server</span><span style="color:#f29668;">::</span><span>Message</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29668;">&amp;</span><span>log</span><span style="color:#bfbab0cc;">,</span><span> params)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Send message to synchronous actor
+</span><span>sync_addr
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">send</span><span>(message)
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|</span><span>actor_response</span><span style="color:#f29668;">| </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Transform actor response to HTTP response
+</span><span>    }
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">then</span><span>(|</span><span style="color:#f29718;">res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;HttpResponse&gt;|
+</span><span>        server</span><span style="color:#f29668;">::</span><span>transform_user_error(res</span><span style="color:#bfbab0cc;">,</span><span> render_user_error)
+</span><span>    )
+</span><span>    </span><span style="color:#f29668;">.</span><span style="color:#f07178;">responder</span><span>()
+</span></code></pre>
+<p>Ошибки, не предназначенные для того, чтобы пользователь мог их увидеть, регистрируются, и actix-web отображает их как внутреннюю ошибку сервера 500 (хотя в какой-то момент я, скорее всего, добавлю для них пользовательский рендерер).</p>
+<p>Вот transform_user_error. Функция рендеринга является абстракцией, поэтому мы можем повторно использовать ее в общем случае между API, который отображает ответы JSON, и веб-сервером, который отображает HTML. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">transform_user_error</span><span>&lt;F&gt;(</span><span style="color:#f29718;">res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;HttpResponse&gt;, </span><span style="color:#f29718;">render</span><span style="color:#bfbab0cc;">:</span><span> F) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;HttpResponse&gt;
+</span><span style="color:#ff7733;">where
+</span><span>    F</span><span style="color:#bfbab0cc;">:</span><span> FnOnce(StatusCode, String) -&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;HttpResponse&gt;,
+</span><span>{
+</span><span>    </span><span style="color:#ff7733;">match</span><span> res {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(e </span><span style="color:#f29668;">@</span><span> Error(ErrorKind</span><span style="color:#f29668;">::</span><span>BadRequest(</span><span style="color:#f29668;">_</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">_</span><span>)) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// `format!` activates the `Display` traits and shows our error&#39;s `display`
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">// definition
+</span><span>            </span><span style="color:#f07178;">render</span><span>(StatusCode</span><span style="color:#f29668;">::</span><span style="color:#f29718;">BAD_REQUEST</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> e))
+</span><span>        }
+</span><span>        r </span><span style="color:#f29668;">=&gt;</span><span> r</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="po-promezhutochnogo-sloia">ПО промежуточного слоя</h2>
+<p>Как и веб-фреймворки на многих языках, actix-web поддерживает промежуточное ПО. Вот простой пример, который инициализирует регистратор для каждого запроса и устанавливает его в расширения запроса (набор состояний запроса, который будет существовать, пока существует запрос): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub mod </span><span style="color:#59c2ff;">log_initializer </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Middleware</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Extension</span><span>(pub Logger)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">impl</span><span>&lt;S</span><span style="color:#bfbab0cc;">: </span><span>server</span><span style="color:#f29668;">::</span><span>State&gt; actix_web</span><span style="color:#f29668;">::</span><span>middleware</span><span style="color:#f29668;">::</span><span>Middleware&lt;S&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Middleware </span><span>{
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">start</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">req</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>HttpRequest&lt;S&gt;) </span><span style="color:#bfbab0cc;">-&gt; </span><span>actix_web</span><span style="color:#f29668;">::</span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;Started&gt; {
+</span><span>            </span><span style="color:#ff7733;">let</span><span> log </span><span style="color:#f29668;">=</span><span> req</span><span style="color:#f29668;">.</span><span style="color:#f07178;">state</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            req</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extensions</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">insert</span><span>(Extension(log))</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(Started</span><span style="color:#f29668;">::</span><span>Done)
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">response</span><span>(
+</span><span>            </span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>,
+</span><span>            </span><span style="color:#f29718;">_req</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>HttpRequest&lt;S&gt;,
+</span><span>            </span><span style="color:#f29718;">resp</span><span style="color:#bfbab0cc;">:</span><span> HttpResponse,
+</span><span>        ) </span><span style="color:#bfbab0cc;">-&gt; </span><span>actix_web</span><span style="color:#f29668;">::</span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;Response&gt; {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(Response</span><span style="color:#f29668;">::</span><span>Done(resp))
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/// Shorthand for getting a usable `Logger` out of a request.
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">log</span><span>&lt;S</span><span style="color:#bfbab0cc;">: </span><span>server</span><span style="color:#f29668;">::</span><span>State&gt;(</span><span style="color:#f29718;">req</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span>HttpRequest&lt;S&gt;) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Logger {
+</span><span>        req</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extensions</span><span>()</span><span style="color:#f29668;">.</span><span>get</span><span style="color:#f29668;">::</span><span>&lt;Extension&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0.</span><span style="color:#f07178;">clone</span><span>()
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Приятной особенностью является то, что состояние промежуточного программного обеспечения привязано к типу, а не к строке (как, например, вы можете найти с Rack в Ruby). Это не только дает преимущество проверки типов во время компиляции, так что вы не можете ошибиться при вводе ключа, но также дает промежуточному программному обеспечению возможность контролировать свою модульность. Если бы мы хотели строго инкапсулировать промежуточное ПО, описанное выше, мы могли бы удалить pub из расширения, чтобы оно стало закрытым. Любые другие модули, которые попытались получить доступ к его регистратору, не смогли бы сделать это с помощью проверок видимости в компиляторе.</p>
+<h3 id="asinkhronnost-na-vsem-puti-vniz">Асинхронность на всем пути вниз</h3>
+<p>Как и обработчики, промежуточное ПО actix-web может быть асинхронным, возвращая future вместо Result. Это, например, позволит нам реализовать промежуточное ПО с ограничением скорости, которое обращается к Redis таким образом, чтобы не блокировать HTTP worker. Я уже упоминал, что actix-web работает довольно быстро?</p>
+<h2 id="http-testirovanie">HTTP-тестирование</h2>
+<p>actix-web содержит несколько рекомендаций по методикам тестирования HTTP. Я остановился на серии модульных тестов, которые используют TestServerBuilder для создания минимального приложения, содержащего единственный целевой обработчик, а затем выполняют запрос против него. Это хороший компромисс, потому что, несмотря на то, что тесты минимальны, они, тем не менее, используют сквозной фрагмент HTTP-стека, что делает их быстрыми и полными: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">test</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">test_handler_graphql_get</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> bootstrap </span><span style="color:#f29668;">= </span><span>TestBootstrap</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> server </span><span style="color:#f29668;">=</span><span> bootstrap</span><span style="color:#f29668;">.</span><span>server_builder</span><span style="color:#f29668;">.</span><span style="color:#f07178;">start</span><span>(|</span><span style="color:#f29718;">app</span><span>| {
+</span><span>        app</span><span style="color:#f29668;">.</span><span style="color:#f07178;">middleware</span><span>(middleware</span><span style="color:#f29668;">::</span><span>log_initializer</span><span style="color:#f29668;">::</span><span>Middleware)
+</span><span>            </span><span style="color:#f29668;">.</span><span style="color:#f07178;">handler</span><span>(handler_graphql_get)
+</span><span>    })</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> req </span><span style="color:#f29668;">=</span><span> server
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">client</span><span>(
+</span><span>            Method</span><span style="color:#f29668;">::</span><span style="color:#f29718;">GET</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;/?query=</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>test_helpers</span><span style="color:#f29668;">::</span><span>url_encode(</span><span style="color:#ff7733;">b</span><span style="color:#c2d94c;">&quot;{podcast{id}}&quot;</span><span>))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        )
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">finish</span><span>()
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> resp </span><span style="color:#f29668;">=</span><span> server</span><span style="color:#f29668;">.</span><span style="color:#f07178;">execute</span><span>(req</span><span style="color:#f29668;">.</span><span style="color:#f07178;">send</span><span>())</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(StatusCode</span><span style="color:#f29668;">::</span><span style="color:#f29718;">OK</span><span style="color:#bfbab0cc;">,</span><span> resp</span><span style="color:#f29668;">.</span><span style="color:#f07178;">status</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> value </span><span style="color:#f29668;">= </span><span>test_helpers</span><span style="color:#f29668;">::</span><span>read_body_json(resp)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The `json!` macro is really cool:
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(</span><span style="color:#f07178;">json!</span><span>({</span><span style="color:#c2d94c;">&quot;data&quot;</span><span style="color:#bfbab0cc;">: </span><span>{</span><span style="color:#c2d94c;">&quot;podcast&quot;</span><span style="color:#bfbab0cc;">: </span><span>[]}})</span><span style="color:#bfbab0cc;">,</span><span> value)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Я активно использую serde_json (стандартная библиотека кодирования и декодирования Rust JSON) json! макрос, используемый в последней строке приведенного выше кода. Если вы присмотритесь, то заметите, что встроенный JSON не является строкой - json! позволяет мне записывать фактическую нотацию JSON прямо в мой код, который проверяется и преобразуется компилятором в допустимую структуру Rust. Это, безусловно, самый элегантный подход к тестированию ответов HTTP JSON, который я когда-либо видел на любом языке программирования.</p>
+<h2 id="reziume-iavliaetsia-li-rust-budushchim-otkazoustoichivosti">Резюме: является ли Rust будущим отказоустойчивости?</h2>
+<p>Было бы справедливо сказать, что я мог бы написать эквивалентный сервис на Ruby за десятую часть времени, которое мне потребовалось, чтобы написать этот на Rust. Отчасти это требует обучения Rust, но многое - нет - язык краток для написания, но успокоение компилятора часто бывает долгим и утомительным процессом.</p>
+<p>Тем не менее, я снова и снова сталкивался с тем, что преодолевал это последнее препятствие, запускал свою программу и испытывал эйфорию в стиле Хаскеля, когда видел, как она работает именно так, как я предполагал. Сравните это с интерпретируемым языком, на котором вы запускаете его с 15-й попытки, и даже тогда граничные условия почти наверняка все еще неверны. Rust также делает возможными большие изменения - для меня нет ничего необычного в рефакторинге тысячи строк за раз и, опять же, после этого программа отлично работает. Любой, кто видел большую программу на интерпретируемом языке в производственном масштабе, знает, что вы никогда не развернете масштабный рефакторинг для важной службы, кроме как небольшими фрагментами - все остальное слишком рискованно.</p>
+<p>Стоит ли писать свой следующий веб-сервис на Rust? Я еще не знаю, но сейчас мы подходим к тому моменту, когда вы должны хотя бы рассмотреть это. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

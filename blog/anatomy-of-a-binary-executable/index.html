@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Анатомия двоичного исполняемого файла | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/anatomy-of-a-binary-executable/#formaty-failov-i-zagolovki-failov">Форматы файлов и заголовки файлов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/anatomy-of-a-binary-executable/#zagolovki-programm">Заголовки программ</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/anatomy-of-a-binary-executable/#tablitsa-zagolovkov-razdelov">Таблица заголовков разделов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/anatomy-of-a-binary-executable/#razdel-vypolneniia">Раздел выполнения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/anatomy-of-a-binary-executable/#reziume">Резюме</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/anatomy-of-a-binary-executable/#poleznye-ssylki">Полезные ссылки</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Анатомия двоичного исполняемого файла</h1>
+
+<p><a href="https://oswalt.dev/2020/11/anatomy-of-a-binary-executable/">Перевод</a> | Автор оригинала: Matt Oswalt</p>
+<p>Несмотря на то, что я занимаюсь разработкой программного обеспечения уже несколько лет, я всегда думал об одном вопросе, и до сих пор у меня не было ни времени, ни терпения, чтобы ответить на него: что такое бинарный исполняемый файл в любом случае? ?</p>
+<p>Для этого примера я написал очень простую программу на Rust, которая включает функцию «sum» для сложения двух целых чисел, и я вызываю ее из main(): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">sum</span><span>(</span><span style="color:#f29718;">5</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">8</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">sum</span><span>(</span><span style="color:#f29718;">a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>, </span><span style="color:#f29718;">b</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">i32 </span><span>{
+</span><span>    a </span><span style="color:#f29668;">+</span><span> b
+</span><span>}
+</span></code></pre>
+<p>Мой код на Rust всегда структурирован по принципу Cargo, поэтому я могу скомпилировать свою программу, запустив сборку Cargo, и это создаст для меня двоичный файл в каталоге target / debug /. Я назвал свой крэйт rbin, так что это имя двоичного файла, который создается в этом месте: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>~$ cargo build
+</span><span>   Compiling rbin v0.1.0 (/home/mierdin/Code/rbin)
+</span><span>    Finished dev [unoptimized + debuginfo] target(s) in 0.15s
+</span><span>
+</span><span>~$ ls -lha target/debug/rbin
+</span><span>-rwxrwxr-x 2 mierdin mierdin 3.1M Nov  3 22:46 target/debug/rbin
+</span></code></pre>
+<p>В наши дни действительно легко принимать такие вопросы как должное, но если вам интересно, вы можете спросить:</p>
+<blockquote>
+<p>&quot;Но что это за файл?&quot;</p>
+</blockquote>
+<p>Я имею в виду, что мы все обычно знаем, что это «исполняемый файл», поскольку мы его запускаем, и наша программа выполняется. Но что это значит? Что содержится в этом файле, что означает, что наш компьютер автоматически просто знает, как его запустить? И как это возможно, что программа с 7 строками кода может занимать более 3 мегабайт дискового пространства?!?</p>
+<p>Оказывается, чтобы создать исполняемый файл для этой до смешного простой программы, компилятор Rust должен включать в себя довольно много дополнительного программного обеспечения, чтобы это стало возможным.</p>
+<h2 id="formaty-failov-i-zagolovki-failov">Форматы файлов и заголовки файлов</h2>
+<p>Что ж, оказывается, существует широко распространенный формат для этих вещей, называемый «Executable and Linkable Format» или ELF!</p>
+<blockquote>
+<p>Обратите внимание, что я не буду здесь всесторонне описывать ELF (есть много других ресурсов, многие из которых я буду ссылаться) - скорее, это исследование того, что входит в двоичный файл Rust с простейшими настройками по умолчанию и некоторыми наблюдения по поводу того, что мне кажется интересным.</p>
+</blockquote>
+<p>ELF - широко известный и популярный формат, особенно в мире Linux, но есть и другие. Операционные системы, такие как Windows и macOS, имеют свой собственный формат, и это большая причина, по которой при компиляции (или просто загрузке) программного обеспечения вы должны указать операционную систему, в которой вы хотите его запустить. Это верно, несмотря на то, что базовый машинный код, который выполняет вашу программу, может быть одинаковым на всех из них (например, x86_64).</p>
+<p>Исключительный визуальный фрагмент формата ELF можно найти по ссылке на страницу википедии ELF выше, я обнаружил, что постоянно возвращаюсь к нему, когда пишу этот пост:</p>
+<p><img src="/imgs/posts/a030f11e_01.png" alt="Схема исполняемого и связываемого форматов ELF, автор Анж Альбертини" /></p>
+<p>Обычно исполняемые форматы, подобные этому, указывают магическое число в самом начале файла, чтобы формат можно было легко идентифицировать. Он занимает первые четыре байта в заголовке файла. Это очень важное поле, потому что до тех пор, пока мы не сможем правильно идентифицировать файл ELF, мы не можем ожидать, что с ним сделаем что-нибудь «ELF-y». Мы знаем, где должны быть определенные биты информации в файле ELF, но сначала мы должны определить, используя эти байты, что это то, чего мы можем ожидать.</p>
+<p>Утилита readelf чрезвычайно полезна для печати всех видов полезных метаданных и связанных таблиц информации, содержащихся в файле ELF. Однако эта утилита ожидает - естественно, - что читаемый файл на самом деле является файлом ELF, и даже дает полезную подсказку о том, что ожидаемые «магические байты» для файла, отличного от ELF, не установлены должным образом при использовании с файлом, отличным от ELF. файл, поэтому он не пытается прочитать остальное: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>~$ readelf -l .gitignore
+</span><span>
+</span><span>readelf: Error: Not an ELF file - it has the wrong magic bytes at the start
+</span></code></pre>
+<p>После идентификации весь остальной файл может быть идентифицирован с помощью байтовых смещений (то есть количества байтов от нуля).</p>
+<blockquote>
+<p>Для тех, кто привык смотреть на захват сетевых пакетов, все это должно показаться вам очень знакомым, поскольку именно так мы узнаем, где расположены определенные поля в заголовке пакета. Кадры Ethernet имеют предсказуемую преамбулу и ограничитель начала кадра. В Ethernet также есть поле, называемое «Ethertype», которое дает представление о том, какой протокол содержится в кадре Ethernet (что позволяет компьютерам также анализировать это поле). Так же, как Ethernet имеет стандартный набор байтовых смещений, которые указывают, где должны быть представлены различные поля, формат ELF определяет свои собственные смещения для всех полей, предоставляя полезную идентификационную информацию и информацию о выполнении в заголовке файла, который затем указывает на другие важные места. внутри файла.</p>
+</blockquote>
+<p>В этом заголовке содержится вся полезная информация, но, в частности, поле e_entry в заголовке файла указывает на место смещения, с которого должно начинаться выполнение. Это «точка входа» для программы. Мы определенно будем немного следить за этим в кроличьей норе.</p>
+<p>Мы снова можем использовать readelf, на этот раз для правильного файла ELF (наша программа на Rust), а также использовать флаг -h для отображения заголовка файла: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>~$ readelf -h target/debug/rbin
+</span><span>
+</span><span>ELF Header:
+</span><span>  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+</span><span>  Class:                             ELF64
+</span><span>  Data:                              2&#39;s complement, little endian
+</span><span>  Version:                           1 (current)
+</span><span>  OS/ABI:                            UNIX - System V
+</span><span>  ABI Version:                       0
+</span><span>  Type:                              DYN (Shared object file)
+</span><span>  Machine:                           Advanced Micro Devices X86-64
+</span><span>  Version:                           0x1
+</span><span>  Entry point address:               0x5070
+</span><span>  Start of program headers:          64 (bytes into file)
+</span><span>  Start of section headers:          3195368 (bytes into file)
+</span><span>  Flags:                             0x0
+</span><span>  Size of this header:               64 (bytes)
+</span><span>  Size of program headers:           56 (bytes)
+</span><span>  Number of program headers:         12
+</span><span>  Size of section headers:           64 (bytes)
+</span><span>  Number of section headers:         42
+</span><span>  Section header string table index: 41
+</span></code></pre>
+<p>Итак, «магическое число» позволяет нам анализировать, по крайней мере, остальную часть заголовка файла, которая содержит не только информацию о файле, но и расположение байтовых смещений для других важных частей файла. Один из них - «Начало заголовков программы», которое начинается после 64 байтов.</p>
+<h2 id="zagolovki-programm">Заголовки программ</h2>
+<p>Таблица заголовка программы содержит информацию, которая позволяет операционной системе выделить память и загрузить программу. Это также называется образом процесса. Вы можете думать об этом как о списке «инструкций», которые говорят системе выполнять различные действия с фрагментами памяти, чтобы подготовиться к выполнению этой программы.</p>
+<p>Утилита readelf также позволяет нам читать заголовки программ с помощью флага -l: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>~$ readelf -l target/debug/rbin
+</span><span>
+</span><span>Elf file type is DYN (Shared object file)
+</span><span>Entry point 0x5070
+</span><span>There are 12 program headers, starting at offset 64
+</span><span>
+</span><span>Program Headers:
+</span><span>  Type           Offset             VirtAddr           PhysAddr
+</span><span>                 FileSiz            MemSiz              Flags  Align
+</span><span>  PHDR           0x0000000000000040 0x0000000000000040 0x0000000000000040
+</span><span>                 0x00000000000002a0 0x00000000000002a0  R      0x8
+</span><span>  INTERP         0x00000000000002e0 0x00000000000002e0 0x00000000000002e0
+</span><span>                 0x000000000000001c 0x000000000000001c  R      0x1
+</span><span>      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+</span><span>  LOAD           0x0000000000000000 0x0000000000000000 0x0000000000000000
+</span><span>                 0x0000000000004ed8 0x0000000000004ed8  R      0x1000
+</span><span>  LOAD           0x0000000000005000 0x0000000000005000 0x0000000000005000
+</span><span>                 0x0000000000030571 0x0000000000030571  R E    0x1000
+</span><span>  LOAD           0x0000000000036000 0x0000000000036000 0x0000000000036000
+</span><span>                 0x000000000000be44 0x000000000000be44  R      0x1000
+</span><span>  LOAD           0x0000000000042520 0x0000000000043520 0x0000000000043520
+</span><span>                 0x0000000000002b18 0x0000000000002cf8  RW     0x1000
+</span><span>  DYNAMIC        0x0000000000044740 0x0000000000045740 0x0000000000045740
+</span><span>                 0x0000000000000230 0x0000000000000230  RW     0x8
+</span><span>  NOTE           0x00000000000002fc 0x00000000000002fc 0x00000000000002fc
+</span><span>                 0x0000000000000044 0x0000000000000044  R      0x4
+</span><span>  TLS            0x0000000000042520 0x0000000000043520 0x0000000000043520
+</span><span>                 0x0000000000000000 0x00000000000000d8  R      0x20
+</span><span>  GNU_EH_FRAME   0x000000000003aa8c 0x000000000003aa8c 0x000000000003aa8c
+</span><span>                 0x0000000000000d84 0x0000000000000d84  R      0x4
+</span><span>  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+</span><span>                 0x0000000000000000 0x0000000000000000  RW     0x10
+</span><span>  GNU_RELRO      0x0000000000042520 0x0000000000043520 0x0000000000043520
+</span><span>                 0x0000000000002ae0 0x0000000000002ae0  R      0x1
+</span><span>
+</span><span> Section to Segment mapping:
+</span><span>  Segment Sections...
+</span><span>   00     
+</span><span>   01     .interp 
+</span><span>   02     .interp .note.gnu.build-id .note.ABI-tag .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt 
+</span><span>   03     .init .plt .plt.got .text .fini 
+</span><span>   04     .rodata .debug_gdb_scripts .eh_frame_hdr .eh_frame .gcc_except_table 
+</span><span>   05     .init_array .fini_array .data.rel.ro .dynamic .got .data .bss 
+</span><span>   06     .dynamic 
+</span><span>   07     .note.gnu.build-id .note.ABI-tag 
+</span><span>   08     .tbss 
+</span><span>   09     .eh_frame_hdr 
+</span><span>   10     
+</span><span>   11     .init_array .fini_array .data.rel.ro .dynamic .got 
+</span></code></pre>
+<p>Каждый тип заголовка программы делает что-то свое с фрагментом памяти (сегментом). Рядом с каждым заголовком можно найти два 64-битных (это ведь 64-битный ELF) шестнадцатеричных значений. Как указано в верхней части вывода заголовка, верхнее значение - это смещение в памяти сегмента, на который ссылается заголовок (где он расположен). Значение ниже - это размер этого конкретного сегмента в файле.</p>
+<p>Каждый сегмент подразделяется на разделы, о которых мы поговорим позже. А пока обратите внимание на таблицу «сопоставление разделов с сегментами» под заголовками программ. Видите, как они пронумерованы? Эти числа соответствуют положению заголовков программы выше. Итак, первый заголовок (который имеет тип PHDR) относится к сегменту 00, второй (который оказывается INTERP) - к 01 и так далее.</p>
+<p>Полный обзор типов заголовков программы можно найти здесь, но краткое объяснение каждого сегмента нашей фактической программы и того, что указывает соответствующий тип заголовка, следует делать с этим сегментом, можно найти ниже: </p>
+<table><thead><tr><th>Segment Number</th><th>Header Type</th><th>Explanation</th></tr></thead><tbody>
+<tr><td>00</td><td>PHDR</td><td>Указывает расположение и размер самой таблицы заголовков программы</td></tr>
+<tr><td>01</td><td>INTERP</td><td>Указывает расположение интерпретатора в системе, используемого для динамического связывания. Это позволяет нам просто использовать библиотеки в системе, вместо того, чтобы компилировать все эти библиотеки в двоичный файл (это называется статической компоновкой).</td></tr>
+<tr><td>02-05</td><td>LOAD</td><td>Эти сегменты загружаются в память. Обратите внимание, что в сегменте 03 установлен флаг E, который указывает, что именно здесь находится наш исполняемый код.</td></tr>
+<tr><td>06</td><td>DYNAMIC</td><td>Предоставляет информацию о динамической компоновке, например о том, какие библиотеки в системе интерпретатор должен предоставить доступ во время выполнения.</td></tr>
+<tr><td>07</td><td>NOTE</td><td>Это обычно используется для хранения таких вещей, как ABI (и версия), используемые в этой программе для связи с базовой операционной системой.</td></tr>
+<tr><td>08</td><td>TLS</td><td>Локальное хранилище потока</td></tr>
+<tr><td>09</td><td>GNU_EH_FRAME</td><td>Кадр раскрутки информации. Используется для обработки исключений</td></tr>
+<tr><td>10</td><td>GNU_STACK</td><td>Используется для явного запроса на выполнение стека (обратите внимание на вывод выше, этот бит не установлен)</td></tr>
+<tr><td>11</td><td>GNU_RELRO</td><td>Задает область памяти, которая должна быть доступна только для чтения после загрузки (перемещения).</td></tr>
+</tbody></table>
+<p>Теперь мы лучше понимаем, что, по мнению компилятора Rust, должно быть включено в таблицу заголовков программы - в частности, как Rust рекомендует, чтобы наш компьютер готовился к запуску скомпилированной программы - опять же, в простейшем случае по умолчанию. Некоторые выводы из этого:</p>
+<ul>
+<li>Обратите внимание, что в выводе readelf, когда мы увидели тип заголовка INTERP для сегмента 01, мы увидели предварительный просмотр запрашиваемого интерпретатора, /lib64/ld-linux-x86-64.so.2. Вы можете запустить его самостоятельно, и он немного расскажет вам о себе. Довольно круто!</li>
+<li>Наличие типов заголовков INTERP и DYNAMIC подразумевает, что динамическое связывание используется по умолчанию при компиляции программ на Rust, что не странно - многие скомпилированные языки заставляют вас указывать, хотите ли вы статически связанный двоичный файл.</li>
+</ul>
+<h2 id="tablitsa-zagolovkov-razdelov">Таблица заголовков разделов</h2>
+<p>Таблица заголовков разделов обычно находится ближе к концу файла ELF, и ее основная задача - предоставлять информацию для целей связывания, но я также счел полезным понять содержимое каждого раздела - в частности, размер каждого: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>~$ readelf -S target/debug/rbin
+</span><span>There are 42 section headers, starting at offset 0x30c1e8:
+</span><span>
+</span><span>Section Headers:
+</span><span>  [Nr] Name              Type             Address           Offset
+</span><span>       Size              EntSize          Flags  Link  Info  Align
+</span><span>  [ 0]                   NULL             0000000000000000  00000000
+</span><span>       0000000000000000  0000000000000000           0     0     0
+</span><span>  [ 1] .interp           PROGBITS         00000000000002e0  000002e0
+</span><span>       000000000000001c  0000000000000000   A       0     0     1
+</span><span>  [ 2] .note.gnu.build-i NOTE             00000000000002fc  000002fc
+</span><span>       0000000000000024  0000000000000000   A       0     0     4
+</span><span>  [ 3] .note.ABI-tag     NOTE             0000000000000320  00000320
+</span><span>       0000000000000020  0000000000000000   A       0     0     4
+</span><span>  [ 4] .gnu.hash         GNU_HASH         0000000000000340  00000340
+</span><span>       0000000000000024  0000000000000000   A       5     0     8
+</span><span>  [ 5] .dynsym           DYNSYM           0000000000000368  00000368
+</span><span>       0000000000000720  0000000000000018   A       6     1     8
+</span><span>  [ 6] .dynstr           STRTAB           0000000000000a88  00000a88
+</span><span>       000000000000052d  0000000000000000   A       0     0     1
+</span><span>  [ 7] .gnu.version      VERSYM           0000000000000fb6  00000fb6
+</span><span>       0000000000000098  0000000000000002   A       5     0     2
+</span><span>  [ 8] .gnu.version_r    VERNEED          0000000000001050  00001050
+</span><span>       00000000000000f0  0000000000000000   A       6     4     8
+</span><span>  [ 9] .rela.dyn         RELA             0000000000001140  00001140
+</span><span>       0000000000003d50  0000000000000018   A       5     0     8
+</span><span>  [10] .rela.plt         RELA             0000000000004e90  00004e90
+</span><span>       0000000000000048  0000000000000018  AI       5    26     8
+</span><span>  [11] .init             PROGBITS         0000000000005000  00005000
+</span><span>       000000000000001b  0000000000000000  AX       0     0     4
+</span><span>  [12] .plt              PROGBITS         0000000000005020  00005020
+</span><span>       0000000000000040  0000000000000010  AX       0     0     16
+</span><span>  [13] .plt.got          PROGBITS         0000000000005060  00005060
+</span><span>       0000000000000008  0000000000000008  AX       0     0     8
+</span><span>  [14] .text             PROGBITS         0000000000005070  00005070
+</span><span>       00000000000304f3  0000000000000000  AX       0     0     16
+</span><span>  [15] .fini             PROGBITS         0000000000035564  00035564
+</span><span>       000000000000000d  0000000000000000  AX       0     0     4
+</span><span>  [16] .rodata           PROGBITS         0000000000036000  00036000
+</span><span>       0000000000004a69  0000000000000000   A       0     0     16
+</span><span>  [17] .debug_gdb_script PROGBITS         000000000003aa69  0003aa69
+</span><span>       0000000000000022  0000000000000001 AMS       0     0     1
+</span><span>  [18] .eh_frame_hdr     PROGBITS         000000000003aa8c  0003aa8c
+</span><span>       0000000000000d84  0000000000000000   A       0     0     4
+</span><span>  [19] .eh_frame         PROGBITS         000000000003b810  0003b810
+</span><span>       00000000000049e0  0000000000000000   A       0     0     8
+</span><span>  [20] .gcc_except_table PROGBITS         00000000000401f0  000401f0
+</span><span>       0000000000001c54  0000000000000000   A       0     0     4
+</span><span>  [21] .tbss             NOBITS           0000000000043520  00042520
+</span><span>       00000000000000d8  0000000000000000 WAT       0     0     32
+</span><span>  [22] .init_array       INIT_ARRAY       0000000000043520  00042520
+</span><span>       0000000000000010  0000000000000008  WA       0     0     8
+</span><span>  [23] .fini_array       FINI_ARRAY       0000000000043530  00042530
+</span><span>       0000000000000008  0000000000000008  WA       0     0     8
+</span><span>  [24] .data.rel.ro      PROGBITS         0000000000043538  00042538
+</span><span>       0000000000002208  0000000000000000  WA       0     0     8
+</span><span>  [25] .dynamic          DYNAMIC          0000000000045740  00044740
+</span><span>       0000000000000230  0000000000000010  WA       6     0     8
+</span><span>  [26] .got              PROGBITS         0000000000045970  00044970
+</span><span>       0000000000000678  0000000000000008  WA       0     0     8
+</span><span>  [27] .data             PROGBITS         0000000000046000  00045000
+</span><span>       0000000000000038  0000000000000000  WA       0     0     8
+</span><span>  [28] .bss              NOBITS           0000000000046038  00045038
+</span><span>       00000000000001e0  0000000000000000  WA       0     0     8
+</span><span>  [29] .comment          PROGBITS         0000000000000000  00045038
+</span><span>       000000000000002a  0000000000000001  MS       0     0     1
+</span><span>  [30] .debug_aranges    PROGBITS         0000000000000000  00045062
+</span><span>       0000000000008700  0000000000000000           0     0     1
+</span><span>  [31] .debug_pubnames   PROGBITS         0000000000000000  0004d762
+</span><span>       00000000000479a9  0000000000000000           0     0     1
+</span><span>  [32] .debug_info       PROGBITS         0000000000000000  0009510b
+</span><span>       00000000000ba088  0000000000000000           0     0     1
+</span><span>  [33] .debug_abbrev     PROGBITS         0000000000000000  0014f193
+</span><span>       000000000000102c  0000000000000000           0     0     1
+</span><span>  [34] .debug_line       PROGBITS         0000000000000000  001501bf
+</span><span>       000000000005f7cd  0000000000000000           0     0     1
+</span><span>  [35] .debug_frame      PROGBITS         0000000000000000  001af990
+</span><span>       00000000000001f0  0000000000000000           0     0     8
+</span><span>  [36] .debug_str        PROGBITS         0000000000000000  001afb80
+</span><span>       00000000000ce162  0000000000000001  MS       0     0     1
+</span><span>  [37] .debug_pubtypes   PROGBITS         0000000000000000  0027dce2
+</span><span>       000000000000068b  0000000000000000           0     0     1
+</span><span>  [38] .debug_ranges     PROGBITS         0000000000000000  0027e36d
+</span><span>       000000000007e400  0000000000000000           0     0     1
+</span><span>  [39] .symtab           SYMTAB           0000000000000000  002fc770
+</span><span>       00000000000055f8  0000000000000018          40   642     8
+</span><span>  [40] .strtab           STRTAB           0000000000000000  00301d68
+</span><span>       000000000000a2cb  0000000000000000           0     0     1
+</span><span>  [41] .shstrtab         STRTAB           0000000000000000  0030c033
+</span><span>       00000000000001b1  0000000000000000           0     0     1
+</span><span>Key to Flags:
+</span><span>  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+</span><span>  L (link order), O (extra OS processing required), G (group), T (TLS),
+</span><span>  C (compressed), x (unknown), o (OS specific), E (exclude),
+</span><span>  l (large), p (processor specific)
+</span></code></pre>
+<p>Если вы преобразуете размер каждого раздела из шестнадцатеричного в десятичный и сложите их, вы получите 3190428 (байтов), что действительно близко к общему размеру файла 3198056, как сообщает ls. Итак, с помощью этой таблицы разделов мы можем начать понимать, откуда берутся все эти данные, и понимать, где искать дальше.</p>
+<p>Я оставлю это здесь пока, но этот урок дает действительно хороший обзор этой таблицы.</p>
+<h2 id="razdel-vypolneniia">Раздел выполнения</h2>
+<p>Ну что теперь? Что на самом деле выполняется?</p>
+<p>Хотя у readelf есть несколько флагов для проверки содержимого этих разделов, вместо этого мы будем использовать инструмент под названием objdump, который намного лучше показывает разбивку содержимого каждого раздела как в необработанных шестнадцатеричных кодах операций и аргументах, так и в интерпретируемая сборка: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>objdump -d -C target/debug/rbin -EL -M intel --insn-width=8 | less
+</span></code></pre>
+<p>Некоторые указатели на флаги, которые я передаю:</p>
+<ul>
+<li>Флаг -d указывает objdump дизассемблировать все исполняемые разделы. Это приведет к созданию инструкций по сборке рядом с соответствующим машинным кодом на выходе.</li>
+<li>-C target / debug / rbin указывает на расположение двоичного файла для дизассемблирования.</li>
+<li>-M Intel указывает, что формат Intel следует использовать при интерпретации машинного кода и отображении в сборке.</li>
+<li>--insn-width = 8 - это эстетическое предпочтение для меня - мне нравится, чтобы машинный код отображался в одной строке, и иногда он может быть длиной 8 байт (по умолчанию 7)</li>
+<li>Остальные | less направляет вывод в less, что позволяет мне просматривать вывод с помощью клавиш со стрелками, перемещаться вверх и вниз и с легкостью выполнять поиск.</li>
+</ul>
+<blockquote>
+<p>Флаг -S чередует исходный код Rust внутри сборки, поэтому мы можем точно видеть, какие строки Rust привели к каким строкам машинного кода. Я пропустил это, потому что я сам буду объяснять соответствующие строки, и это делает примеры более простыми, но определенно используйте этот флаг самостоятельно, так как это было очень полезно для меня.</p>
+</blockquote>
+<p>В заголовке файла мы видели ссылку на точку входа в память. Напоминаем, что это был 0x5070. После того, как заголовок файла и заголовки программы будут проанализированы и сегменты загружены в память, компьютер начнет выполнение инструкций, начиная с этой позиции. Итак, давайте перейдем к этой позиции в выводе objdump и будем использовать ее в качестве отправной точки. Обратите внимание, что это можно найти в разделе .text, который мы только что рассмотрели:</p>
+<p>Разборка раздела .text: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0000000000005070 &lt;_start&gt;:
+</span><span>    5070:       f3 0f 1e fa                     endbr64 
+</span><span>    5074:       31 ed                           xor    ebp,ebp
+</span><span>    5076:       49 89 d1                        mov    r9,rdx
+</span><span>    5079:       5e                              pop    rsi
+</span><span>    507a:       48 89 e2                        mov    rdx,rsp
+</span><span>    507d:       48 83 e4 f0                     and    rsp,0xfffffffffffffff0
+</span><span>    5081:       50                              push   rax
+</span><span>    5082:       54                              push   rsp
+</span><span>    5083:       4c 8d 05 b6 04 03 00            lea    r8,[rip+0x304b6]        # 35540 &lt;__libc_csu_fini&gt;
+</span><span>    508a:       48 8d 0d 3f 04 03 00            lea    rcx,[rip+0x3043f]        # 354d0 &lt;__libc_csu_init&gt;
+</span><span>    5091:       48 8d 3d 38 03 00 00            lea    rdi,[rip+0x338]        # 53d0 &lt;main&gt;
+</span><span>    5098:       ff 15 92 0b 04 00               call   QWORD PTR [rip+0x40b92]        # 45c30 &lt;__libc_start_main@GLIBC_2.2.5&gt;
+</span><span>    509e:       f4                              hlt    
+</span><span>    509f:       90                              nop
+</span></code></pre>
+<p>В среднем столбце (начиная с endbr64) показана инструкция x86_64, выполняемая в этой строке. Крайний правый столбец содержит параметры для каждой из этих операций. Ближе к концу мы видим, что компилятор Rust предоставил несколько полезных подсказок о том, куда будет двигаться выполнение дальше. По адресу 0x5091 мы видим инструкцию с интересным комментарием справа: # 53d0 <main>. Это Rust, который дает нам понять, что выполнение перемещается на смещение памяти 0x53d0. Прокручивая вниз, мы видим, где именно это происходит: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>00000000000053d0 &lt;main&gt;:
+</span><span>    53d0:       48 83 ec 18                     sub    rsp,0x18
+</span><span>    53d4:       8a 05 8f 56 03 00               mov    al,BYTE PTR [rip+0x3568f]        # 3aa69 &lt;__rustc_debug_gdb_scripts_section__&gt;
+</span><span>    53da:       48 63 cf                        movsxd rcx,edi
+</span><span>    53dd:       48 8d 3d 0c ff ff ff            lea    rdi,[rip+0xffffffffffffff0c]        # 52f0 &lt;rbin::main&gt;
+</span><span>    53e4:       48 89 74 24 10                  mov    QWORD PTR [rsp+0x10],rsi
+</span><span>    53e9:       48 89 ce                        mov    rsi,rcx
+</span><span>    53ec:       48 8b 54 24 10                  mov    rdx,QWORD PTR [rsp+0x10]
+</span><span>    53f1:       88 44 24 0f                     mov    BYTE PTR [rsp+0xf],al
+</span><span>    53f5:       e8 e6 fd ff ff                  call   51e0 &lt;std::rt::lang_start&gt;
+</span><span>    53fa:       48 83 c4 18                     add    rsp,0x18
+</span><span>    53fe:       c3                              ret    
+</span><span>    53ff:       90                              nop
+</span></code></pre>
+<p>Опять же, у нас есть еще одна подсказка: # 52f0 <a href="rbin::main">rbin::main</a>. На этот раз мы прокручиваем вверх, чтобы найти этот адрес и, в свою очередь, фактический машинный код, представляющий нашу функцию main():</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>00000000000052f0 &lt;rbin::main&gt;:
+</span><span>    52f0:       48 83 ec 78                     sub    rsp,0x78
+</span><span>    52f4:       48 8b 05 8d e2 03 00            mov    rax,QWORD PTR [rip+0x3e28d]        # 43588 &lt;__do_global_dtors_aux_fini_array_entry+0&gt;
+</span><span>    52fb:       bf 05 00 00 00                  mov    edi,0x5
+</span><span>    5300:       be 08 00 00 00                  mov    esi,0x8
+</span><span>    5305:       48 89 44 24 18                  mov    QWORD PTR [rsp+0x18],rax
+</span><span>    530a:       e8 81 00 00 00                  call   5390 &lt;rbin::sum&gt;
+</span><span>    530f:       89 44 24 6c                     mov    DWORD PTR [rsp+0x6c],eax
+</span><span>    5313:       48 8d 35 46 f4 02 00            lea    rsi,[rip+0x2f446]        # 34760 &lt;core::fmt::num::imp::&lt;impl core::fmt::Display for &gt;
+</span><span>    531a:       48 8d 44 24 6c                  lea    rax,[rsp+0x6c]
+</span><span>    531f:       48 89 44 24 60                  mov    QWORD PTR [rsp+0x60],rax
+</span><span>    5324:       48 8b 44 24 60                  mov    rax,QWORD PTR [rsp+0x60]
+</span><span>    5329:       48 89 44 24 70                  mov    QWORD PTR [rsp+0x70],rax
+</span><span>    532e:       48 89 c7                        mov    rdi,rax
+</span><span>    5331:       e8 4a fe ff ff                  call   5180 &lt;core::fmt::ArgumentV1::new&gt;
+</span><span>    5336:       48 89 44 24 10                  mov    QWORD PTR [rsp+0x10],rax
+</span><span>    533b:       48 89 54 24 08                  mov    QWORD PTR [rsp+0x8],rdx
+</span><span>    5340:       48 8b 44 24 10                  mov    rax,QWORD PTR [rsp+0x10]
+</span><span>    5345:       48 89 44 24 50                  mov    QWORD PTR [rsp+0x50],rax
+</span><span>    534a:       48 8b 4c 24 08                  mov    rcx,QWORD PTR [rsp+0x8]
+</span><span>    534f:       48 89 4c 24 58                  mov    QWORD PTR [rsp+0x58],rcx
+</span><span>    5354:       48 8d 54 24 50                  lea    rdx,[rsp+0x50]
+</span><span>    5359:       48 8d 7c 24 20                  lea    rdi,[rsp+0x20]
+</span><span>    535e:       48 8b 74 24 18                  mov    rsi,QWORD PTR [rsp+0x18]
+</span><span>    5363:       41 b8 02 00 00 00               mov    r8d,0x2
+</span><span>    5369:       48 89 14 24                     mov    QWORD PTR [rsp],rdx
+</span><span>    536d:       4c 89 c2                        mov    rdx,r8
+</span><span>    5370:       48 8b 0c 24                     mov    rcx,QWORD PTR [rsp]
+</span><span>    5374:       41 b8 01 00 00 00               mov    r8d,0x1
+</span><span>    537a:       e8 c1 00 00 00                  call   5440 &lt;core::fmt::Arguments::new_v1&gt;
+</span><span>    537f:       48 8d 7c 24 20                  lea    rdi,[rsp+0x20]
+</span><span>    5384:       ff 15 16 0b 04 00               call   QWORD PTR [rip+0x40b16]        # 45ea0 &lt;_GLOBAL_OFFSET_TABLE_+0x530&gt;
+</span><span>    538a:       48 83 c4 78                     add    rsp,0x78
+</span><span>    538e:       c3                              ret    
+</span><span>    538f:       90                              nop
+</span></code></pre>
+<p>Как вы понимаете, здесь есть о чем рассказать - слишком много, чтобы охватить эту статью. Поэтому вместо этого мы рассмотрим инструкции, которые наиболее актуальны для примера кода в начале этого сообщения. Не стесняйтесь ознакомиться с инструкциями, которые я не раскрываю подробно - я просмотрел и нашел их поучительными.</p>
+<blockquote>
+<p>Если вы новичок в чтении ассемблера, как и я, хорошая новость заключается в том, что существует множество руководств, которые могут помочь вам понять, что здесь происходит. Я нашел это руководство и это резюме полезными, но есть много других, которые тоже работают хорошо - просто помните о синтаксисе сборки, которую вы используете (помните, что я использую Intel для этого сообщения).</p>
+</blockquote>
+<p>Сначала мы замечаем, что в верхней части кода этой функции мы видим, что первая операция требует 120 (0x78) байт пространства стека. Обычно в верхней части блока машинного кода каждой функции можно увидеть: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>52f0:       48 83 ec 78                     sub    rsp,0x78
+</span></code></pre>
+<p>Напомним, наша программа определяет два целочисленных литерала (5 и 8) в качестве параметров нашей функции суммы, поэтому компилятор Rust перемещает оба этих значения в регистры edi и esi: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>52fb:       bf 05 00 00 00                  mov    edi,0x5
+</span><span>5300:       be 08 00 00 00                  mov    esi,0x8
+</span></code></pre>
+<p>Мы почти готовы вызвать нашу функцию суммы, но прежде чем мы сможем это сделать, нам нужно что-то сделать с регистром rax:</p>
+<blockquote>
+<p>По соглашению% rax используется для хранения возвращаемого значения функции, если оно существует.</p>
+</blockquote>
+<p>Значение, возвращаемое суммой, в конечном итоге будет сохранено в регистре rax, но если вы посмотрите внимательно, мы уже переместили значение в rax в нашей основной функции. Итак, прежде чем мы вызовем сумму, мы должны переместить это значение в безопасное место.</p>
+<blockquote>
+<p>Если %rax содержит значение, которое вызывающий абонент хочет сохранить, вызывающий должен скопировать это значение в «безопасное» место перед выполнением вызова.</p>
+</blockquote>
+<p>Наш компилятор знает, что наша функция суммы будет использовать 18 байтов пространства стека (как мы увидим, когда посмотрим на код функции суммы), поэтому мы можем безопасно переместить это значение в область памяти, которая смещена на 18 байтов от текущий указатель стека: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>5305:       48 89 44 24 18                  mov    QWORD PTR [rsp+0x18],rax   #TODO Why does this happen before the function call?
+</span></code></pre>
+<p>Наконец, мы можем вызвать нашу функцию суммы: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>530a:       e8 81 00 00 00                  call   5390 &lt;rbin::sum&gt;
+</span></code></pre>
+<p>Давайте посмотрим на эту ячейку памяти (5390) - я снова предоставлю всю сборку для этой функции, а затем подробно изучу соответствующие инструкции: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>0000000000005390 &lt;rbin::sum&gt;:
+</span><span>    5390:       48 83 ec 18                     sub    rsp,0x18
+</span><span>    5394:       89 7c 24 10                     mov    DWORD PTR [rsp+0x10],edi
+</span><span>    5398:       89 74 24 14                     mov    DWORD PTR [rsp+0x14],esi
+</span><span>    539c:       01 f7                           add    edi,esi
+</span><span>    539e:       0f 90 c0                        seto   al
+</span><span>    53a1:       a8 01                           test   al,0x1
+</span><span>    53a3:       89 7c 24 0c                     mov    DWORD PTR [rsp+0xc],edi
+</span><span>    53a7:       75 09                           jne    53b2 &lt;rbin::sum+0x22&gt;
+</span><span>    53a9:       8b 44 24 0c                     mov    eax,DWORD PTR [rsp+0xc]
+</span><span>    53ad:       48 83 c4 18                     add    rsp,0x18
+</span><span>    53b1:       c3                              ret    
+</span><span>    53b2:       48 8d 3d 57 0c 03 00            lea    rdi,[rip+0x30c57]        # 36010 &lt;str.0&gt;
+</span><span>    53b9:       48 8d 15 d0 e1 03 00            lea    rdx,[rip+0x3e1d0]        # 43590 &lt;__do_global_dtors_aux_fini_array_entry+0x60&gt;
+</span><span>    53c0:       48 8d 05 b9 ad 02 00            lea    rax,[rip+0x2adb9]        # 30180 &lt;core::panicking::panic&gt;
+</span><span>    53c7:       be 1c 00 00 00                  mov    esi,0x1c
+</span><span>    53cc:       ff d0                           call   rax
+</span><span>    53ce:       0f 0b                           ud2    
+</span></code></pre>
+<p>Как это было сделано с функцией main() и как уже упоминалось ранее, эта функция выделяет 18 байт пространства стека: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>5390:       48 83 ec 18                     sub    rsp,0x18
+</span></code></pre>
+<p>Затем мы перемещаем значения в регистры edi и esi, которые, если вы помните из основной функции, хранят параметры для нашей функции суммы. Здесь следует отметить несколько моментов: смещения памяти rsp + 0x10 и rsp + 0x14 находятся в выделенном нами пространстве стека. Фактически, для каждого местоположения достаточно места для хранения 4-байтового значения. Это имеет смысл, потому что оба должны быть именно такими - 32-битными целыми числами! </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>5394:       89 7c 24 10                     mov    DWORD PTR [rsp+0x10],edi
+</span><span>5398:       89 74 24 14                     mov    DWORD PTR [rsp+0x14],esi
+</span></code></pre>
+<p>Затем мы складываем эти два значения. Эта операция работает путем добавления значения второго операнда к первому, поэтому после завершения этой операции edi больше не будет представлять один из наших параметров, а будет результатом нашей операции сложения: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>539c:       01 f7                           add    edi,esi
+</span></code></pre>
+<p>Затем мы перемещаем результат этой операции, теперь хранящийся в edi, в пространство стека, а затем снова оттуда в регистр eax </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>53a3:       89 7c 24 0c                     mov    DWORD PTR [rsp+0xc],edi
+</span><span>53a9:       8b 44 24 0c                     mov    eax,DWORD PTR [rsp+0xc]
+</span></code></pre>
+<p>Наконец, мы можем вернуть пространство стека и вернуться к месту вызова в основной функции: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>53ad:       48 83 c4 18                     add    rsp,0x18
+</span><span>53b1:       c3                              ret 
+</span></code></pre>
+<p>Вернемся к нашей основной функции, операции, следующие сразу за нашим вызовом sum, перемещают результат, сохраненный в eax, в пространство стека, а затем оттуда в регистр rax. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>530f:       89 44 24 6c                     mov    DWORD PTR [rsp+0x6c],eax # eax is where our sum function placed the result of our addition
+</span><span>5313:       48 8d 35 46 f4 02 00            lea    rsi,[rip+0x2f446]        # 34760 &lt;core::fmt::num::imp::&lt;impl core::fmt::Display for &gt;
+</span><span>531a:       48 8d 44 24 6c                  lea    rax,[rsp+0x6c]
+</span></code></pre>
+<p>Это был очень ограниченный взгляд на многочисленные операции, генерируемые компилятором Rust, которые на первый взгляд выглядят очень простой операцией. Представьте, как должно выглядеть сложное приложение! Было множество других случаев, которые мы не рассмотрели, например, те, которые приводят к сбою программы, поэтому, пожалуйста, найдите время, чтобы использовать команды, которые я показал выше, чтобы посмотреть на свой собственный код и изучить его.</p>
+<h2 id="reziume">Резюме</h2>
+<p>Это было небольшое путешествие, но, надеюсь, вы продолжили его и узнали столько же, сколько и я! В итоге:</p>
+<ul>
+<li>
+<p>Фактический формат исполняемого файла - ELF. Существует много разных форматов, но это очень распространенный в операционных системах на базе Linux. В исполняемом двоичном файле содержится огромное количество метаданных, которые легко проверять с помощью легко доступных инструментов.</p>
+</li>
+<li>
+<p>Фактический машинный код - это машинный код x86. Этот набор команд поддерживается многими аппаратными платформами, и по этой причине считается «аппаратно-независимым». Это просто означает, что этот набор инструкций может использоваться не только на определенном типе оборудования, но и широко принят и поддерживается.</p>
+</li>
+<li>
+<p>Интерпретация двоичных инструкций (как шестнадцатеричных кодов операций) - Intel. Это менее значимо для компьютера и более значимо для меня, поскольку на уровне машинного кода нет «intel vs att». Это всего лишь интерпретация, которая позволяет нам сделать машинный код более читаемым и доступным для записи.</p>
+</li>
+<li>
+<p>Фактический исполняемый код, который помещается в двоичный файл, зависит от компилятора. Как мы видели, даже простой пример приводит к довольно небольшому количеству машинного кода. Мы проделали довольно простую операцию и работали только с выделениями памяти стека, которые довольно хорошо обрабатываются компилятором. Выделение кучи немного сложнее и требует согласования с операционной системой. Вы можете себе представить, что компилятор должен проделать много работы, чтобы просто получить жизнеспособную программу - не говоря уже о дополнительных проверках, которые делает что-то вроде компилятора Rust, чтобы уберечь нас от всех видов проблем с памятью. Попробуйте дизассемблировать более сложную программу и попытаться проследить различные ветви логики через базовую сборку!</p>
+</li>
+</ul>
+<h2 id="poleznye-ssylki">Полезные ссылки</h2>
+<p>Я связался с некоторыми полезными ресурсами в этом посте, но вот несколько других, которые, по моему мнению, были полезными, но не вошли в содержание выше: </p>
+<ul>
+<li>Документациф x86 ABI</li>
+<li>Регистры в x86 ассемблере</li>
+<li>Классный веб-дизассемблер</li>
+<li>Как запускаются программы: двоичные файлы ELF</li>
+<li>Magnifying Glasses для Rust ассемблера</li>
+<li>cargo-asm: подкоманда cargo, которая отображает ассемблер или llvm-ir, сгенерированную для исходного кода Rust.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор Swift против Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/choosing-swift-vs-rust/#konvergentnaia-evoliutsiia">Конвергентная эволюция</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/choosing-swift-vs-rust/#sfokusirovannaia-evoliutsiia">Сфокусированная эволюция</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/choosing-swift-vs-rust/#odin-primer-serializatsiia"><small>- Один пример: сериализация</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/choosing-swift-vs-rust/#drugoi-primer-podderzhka-prilozheniia-v-veb-brauzere"><small>- Другой пример: поддержка приложения в веб-браузере</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/choosing-swift-vs-rust/#stsenarii-protiv-optimizatsii">Сценарии против оптимизации</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/choosing-swift-vs-rust/#vzaimodeistvie">Взаимодействие</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Выбор Swift против Rust</h1>
+
+<p><a href="https://medium.com/@eonil/choosing-swift-vs-rust-237bcb45d97b">Перевод</a> | Автор оригинала: Eonil</p>
+<p>И Swift, и Rust - хорошие инструменты, у них есть свои плюсы и минусы. Проблема в том, что мне нужно сосредоточиться на одном деле, потому что у меня нет бесконечных ресурсов. Поэтому мне нужно строить предположения о будущем.</p>
+<h2 id="konvergentnaia-evoliutsiia">Конвергентная эволюция</h2>
+<p>Язык развивается. В долгосрочном будущем Swift получит уникальное владение, семантику перемещения и поддержку макета памяти. В Rust будет больше удобства и поддержки инструментов. В конце концов, они оба будут эволюционировать одновременно. Но путь туда будет совсем другим.</p>
+<h2 id="sfokusirovannaia-evoliutsiia">Сфокусированная эволюция</h2>
+<p>Разница в отрывках. Ресурсы ограничены. Разработчики должны установить приоритет и сосредоточиться на небольшом количестве целей. Обычно эти цели устанавливаются с учетом непосредственных потребностей поставщиков ресурсов, поэтому направление развития определяется тем, кто поддерживает ресурсы.</p>
+<ul>
+<li>Swift в основном поддерживается Apple. Поддержка сообщества очень слабая.</li>
+<li>Rust в основном поддерживается Mozilla. Поддержка сообщества очень сильна.</li>
+</ul>
+<p>Основным сторонником Swift является Apple. Ближайшая проблема Apple - обеспечить лучшую среду разработки для своих платформ. Swift также обещает лучшую поддержку платформ сторонних производителей, но с гораздо меньшим приоритетом. Apple хотела улучшить Objective-C и не заменять свой код C++ на более низкий уровень сейчас. Это делает главным приоритетом Swift лучшую поддержку разработки приложений пользовательского интерфейса Apple. Для них важнее совместимость с Objective-C, улучшенный синтаксис, поддержка IDE, поддержка DSL. Макет памяти на самом деле не имеет большого значения для разработки приложений пользовательского интерфейса. Команда Apple Swift потратит гораздо больше времени на реализацию более гладкой межоперационной поддержки Objective-C или существующей платформы Apple, а не на проверку заимствований.</p>
+<p>Основным сторонником Rust является Mozilla. Ближайшая проблема Mozilla - продуктивность. Они устали от крайне низкой производительности C++ и хотят немедленно заменить C++. В наши дни веб-браузеры похожи на ОС. Разработка веб-браузера требует поддержки функций уровня разработки ОС. Им прямо сейчас нужны контроль компоновки памяти, сериализация, поддержка в реальном времени, нулевая абстракция, семантика перемещения, статическая межпоточная безопасность. Вот почему Rust предоставляет такие возможности сейчас, а не позже.</p>
+<h3 id="odin-primer-serializatsiia">Один пример: сериализация</h3>
+<p>Одним из примеров является поддержка сериализации. Rust несколько раз пытался обеспечить сериализацию, и в конце концов они получили serde. serde основан на генерации статического кода и может кодировать каждое дерево значений в Rust, включая типы сумм (перечисления с параметрическими значениями), с помощью нескольких строк кода. Более того, serde - это не волшебство компилятора. Это простой макрос, как и любой другой написанный вами код. Если вас не устраивает serde, вы можете реализовать свою собственную.</p>
+<p>Соответствующее положение Swift - Codable. Удивительно, но он не может кодировать / декодировать типы сумм с первого раза. Может быть, в конечном итоге это произойдет, но никто не знает, когда, потому что его приоритет сильно отстает от других вещей, таких как привязка данных или поддержка ключевых путей. Хуже того, Codable по-прежнему нужен гораздо более сложный код, такой как дерьмо CodingKey, для правильного управления сериализацией. Кроме того, Codable - это полное волшебство компилятора, и нет никакого способа улучшить его, если вы не создадите свой собственный компилятор. А для участия в разработке компилятора Swift вы должны быть опытным программистом на C++. Если вы хотите улучшить Swift, вам нужно писать код на C++. Это ужасно, но на самом деле не проблема для Apple, поскольку у них есть почти бесконечное количество денег, чтобы нанять людей, которые разберутся с любым дерьмом. Но я не Apple. Все, что у меня есть, - это только мое личное время, и я не хочу тратить свою жизнь на то, чтобы написать повторяющееся декодирование типа суммы или загадочные ошибки C++. </p>
+<h3 id="drugoi-primer-podderzhka-prilozheniia-v-veb-brauzere">Другой пример: поддержка приложения в веб-браузере</h3>
+<p>Другой пример - поддержка приложений в веб-браузере. И Swift, и Rust относятся к семейству LLVM и могут быть скомпилированы в WASM. Здесь Rust уже имеет определенный уровень поддержки целевого веб-браузера, а Swift - нет.</p>
+<p>Я не утверждаю, что Apple ненавидит Swift в веб-браузерах. Swift в веб-браузерах на самом деле добавляет больше достоинств языку Swift и может быть полезен для Apple. Но у Apple нет причин уделять этому приоритетное внимание. Apple сначала нужно поддержать свою платформу. А браузеры… ну, может, позже.</p>
+<h2 id="stsenarii-protiv-optimizatsii">Сценарии против оптимизации</h2>
+<p>До сих пор я заметил, что Swift разработан и разрабатывается как язык сценариев приложений. В отличие от других языков сценариев, Swift потенциально может поддерживать более низкоуровневые операции, но я думаю, что будет болезненно использовать такие низкоуровневые функции, даже если они реализуют это, потому что Swift ориентирован на приложения более высокого уровня. Я думаю, что Swift нацелен на Python, и было бы здорово, если бы я смог заменить Python скриптом Swift.
+Rust стремится заменить C++. Rust жертвует удобством ради производительности и предсказуемости.</p>
+<h2 id="vzaimodeistvie">Взаимодействие</h2>
+<p>Идеальная ситуация - высокий уровень взаимодействия. Напишите код Rust для моделирования обработки чисел и напишите код Swift для управления ими. Если Swift добавит уникальную семантику владения и перемещения, это будет более осуществимо.</p>
+<p>Для меня идеальной стратегией было бы сначала сосредоточиться на Rust. И подождите, пока Swift реализует семантику перемещения и уникальное владение. После этого сделать так, чтобы они играли хорошо, было бы намного проще, и, возможно, мы сможем смешать их изначально.</p>
+<p>Я надеюсь, что когда-нибудь смогу это сделать. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

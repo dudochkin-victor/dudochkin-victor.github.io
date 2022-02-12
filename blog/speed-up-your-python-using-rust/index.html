@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ускорьте свой Python с помощью Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#chto-takoe-rust">Что такое Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#s-uchastiem"><small>- С участием</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#pochemu-eto-vazhno-dlia-razrabotchika-python"><small>- Почему это важно для разработчика Python?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#python-inogda-rabotaet-medlenno"><small>- Python иногда работает медленно</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#primer"><small>- Пример</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#rasshirenie-python-s-pomoshch-iu-rust">Расширение Python с помощью Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#sozdaite-novyi-kreit"><small>- Создайте новый крэйт</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#redaktirovat-cargo-toml"><small>- Редактировать Cargo.toml</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#redaktirovat-src-lib-rs"><small>- Редактировать src&#x2F;lib.rs</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#a-teper-postroim-ego-s-cargo"><small>- А теперь построим его с cargo</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#import-iz-python-i-sravnenie-rezul-tatov"><small>- Импорт из Python и сравнение результатов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#benchmark"><small>- Бенчмарк</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#obnovleniia-i-uluchsheniia">Обновления и улучшения</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#iteratsiia-tol-ko-odin-raz"><small>- Итерация только один раз</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#python-with-itertools"><small>- Python with itertools</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#pochemu-ne-c-c-nim-go-lua-pypy-drugoi-iazyk"><small>- Почему не C&#x2F;C++ &#x2F; Nim &#x2F; Go &#x2F; Ĺua &#x2F; PyPy &#x2F; {другой язык}?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#novye-rezul-taty"><small>- Новые результаты</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#vyvod">Вывод</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#ispol-zovannaia-literatura">Использованная литература</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#prisoediniaites-k-soobshchestvu"><small>- Присоединяйтесь к сообществу:</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/speed-up-your-python-using-rust/#avtor"><small>- Автор</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Ускорьте свой Python с помощью Rust</h1>
+
+<p><a href="https://developers.redhat.com/blog/2017/11/16/speed-python-using-rust">Перевод</a> | Автор оригинала: Bruno Rocha</p>
+<h2 id="chto-takoe-rust">Что такое Rust?</h2>
+<p>Rust - это язык системного программирования, который работает невероятно быстро, предотвращает сбои и гарантирует безопасность потоков.</p>
+<h3 id="s-uchastiem">С участием</h3>
+<ul>
+<li>абстракции с нулевой стоимостью</li>
+<li>семантика перемещения</li>
+<li>гарантированная сохранность памяти</li>
+<li>потоки без гонок данных</li>
+<li>дженерики на основе трэйтов</li>
+<li>сопоставление с образцом</li>
+<li>вывод типа</li>
+<li>минимальное время работы</li>
+<li>эффективные привязки C</li>
+</ul>
+<p>Описание взято с сайта rust-lang.org.</p>
+<h3 id="pochemu-eto-vazhno-dlia-razrabotchika-python">Почему это важно для разработчика Python?</h3>
+<p>Лучшее описание Rust я услышал от Элиаса (члена группы Telegram Rust Brazil).</p>
+<ul>
+<li>Rust - это язык, который позволяет создавать абстракции высокого уровня, но без отказа от низкоуровневого контроля, то есть контроля того, как данные представлены в памяти, контроля над тем, какую потоковую модель вы хотите использовать и т.д.</li>
+<li>Rust - это язык, который обычно может обнаруживать во время компиляции наихудшие ошибки параллелизма и управления памятью (такие как доступ к данным в разных потоках без синхронизации или использование данных после того, как они были освобождены), но дает вам возможность избежать ошибок в этом случае. вы действительно знаете, что делаете.</li>
+<li>Rust - это язык, который, поскольку у него нет среды выполнения, можно использовать для интеграции с любой средой выполнения; вы можете написать собственное расширение на Rust, которое вызывается программой node.js, или программой python, или программой на ruby, lua и т.д., и, однако, вы можете написать сценарий программы на Rust, используя эти языки. - «Элиас Габриэль Амарал да Силва»</li>
+</ul>
+<p>Существует множество пакетов Rust, которые помогут вам расширить Python с помощью Rust.</p>
+<p>Я могу упомянуть Milksnake, созданную Армином Ронахером (создателем Flask), а также привязки PyO3 The Rust для интерпретатора Python.</p>
+<h4 id="sm-polnyi-spisok-literatury-vnizu-etoi-stat-i">См. Полный список литературы внизу этой статьи.</h4>
+<p>Посмотрим на это в действии</p>
+<p>Для этого поста я собираюсь использовать Rust Cpython, это единственный, который я тестировал, он совместим со стабильной версией Rust и нашел его простым в использовании.</p>
+<blockquote>
+<p>PyO3 - это форк rust-cpython, поставляется со многими улучшениями, но работает только с ночной версией Rust, поэтому я предпочел использовать стабильную версию для этого сообщения, в любом случае приведенные здесь примеры должны работать также с PyO3.</p>
+</blockquote>
+<p>Плюсы: легко писать функции на Rust и импортировать их из Python, и, как вы увидите по тестам, это стоит того с точки зрения производительности.</p>
+<p>Минусы: для распространения вашего проекта / библиотеки / фреймворка потребуется, чтобы модуль Rust был скомпилирован в целевой системе из-за различий в среде и архитектуре, будет этап компиляции, которого у вас нет при установке библиотек Pure Python, вы может упростить использование rust-setuptools или MilkSnake для встраивания двоичных данных в Python Wheels.</p>
+<h3 id="python-inogda-rabotaet-medlenno">Python иногда работает медленно</h3>
+<p>Да, Python известен тем, что в некоторых случаях он «медленный», и хорошая новость заключается в том, что это не имеет особого значения в зависимости от целей и приоритетов вашего проекта. Для большинства проектов эта деталь не будет иметь большого значения.</p>
+<p>Однако вы можете столкнуться с редким случаем, когда отдельная функция или модуль занимает слишком много времени и определяется как узкое место в производительности вашего проекта, что часто происходит при синтаксическом анализе строк и обработке изображений.</p>
+<h3 id="primer">Пример</h3>
+<p>Допустим, у вас есть функция Python, которая выполняет обработку строк, возьмите следующий простой пример подсчета пар повторяющихся символов, но имейте в виду, что этот пример можно воспроизвести с другими функциями обработки строк или любым другим обычно медленным процессом в Python. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span># How many subsequent-repeated group of chars are in the given string? 
+</span><span>abCCdeFFghiJJklmnopqRRstuVVxyZZ... {millions of chars here}
+</span><span>  1   2    3        4    5   6
+</span></code></pre>
+<p>Python медленно обрабатывает большие строки, поэтому вы можете использовать pytest-benchmark для сравнения функции Pure Python (с Iterator Zipping) с реализацией Regexp. </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span># Using a Python3.6 environment
+</span><span>$ pip3 install pytest pytest-benchmark
+</span></code></pre>
+<p>Затем напишите новую программу Python с именем doubles.py </p>
+<pre data-lang="py" style="background-color:#0f1419;color:#bfbab0;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#ff7733;">import </span><span>re
+</span><span style="color:#ff7733;">import </span><span>string
+</span><span style="color:#ff7733;">import </span><span>random
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Python ZIP version
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">count_doubles</span><span>(</span><span style="color:#f29718;">val</span><span>):
+</span><span>    total </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0
+</span><span>    </span><span style="font-style:italic;color:#5c6773;"># there is an improved version later on this post
+</span><span>    </span><span style="color:#ff7733;">for </span><span>c1</span><span style="color:#bfbab0cc;">, </span><span>c2 </span><span style="color:#ff7733;">in </span><span style="color:#f07178;">zip</span><span>(val</span><span style="color:#bfbab0cc;">, </span><span>val[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">:</span><span>]):
+</span><span>        </span><span style="color:#ff7733;">if </span><span>c1 </span><span style="color:#f29668;">== </span><span>c2:
+</span><span>            total </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1
+</span><span>    </span><span style="color:#ff7733;">return </span><span>total
+</span><span>
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Python REGEXP version
+</span><span>double_re </span><span style="color:#f29668;">= </span><span>re</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">compile</span><span>(</span><span style="color:#ff7733;">r</span><span style="color:#c2d94c;">&#39;(</span><span style="color:#f29718;">?=</span><span style="color:#c2d94c;">(</span><span style="color:#f29718;">.</span><span style="color:#c2d94c;">)</span><span style="color:#ff7733;">\1</span><span style="color:#c2d94c;">)&#39;</span><span>)
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">count_doubles_regex</span><span>(</span><span style="color:#f29718;">val</span><span>):
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f07178;">len</span><span>(double_re</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">findall</span><span>(val))
+</span><span>
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;"># Benchmark it
+</span><span style="font-style:italic;color:#5c6773;"># generate 1M of random letters to test it
+</span><span>val </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;&#39;</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">join</span><span>(random</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">choice</span><span>(string</span><span style="color:#f29668;">.</span><span>ascii_letters) </span><span style="color:#ff7733;">for </span><span>i </span><span style="color:#ff7733;">in </span><span style="color:#f07178;">range</span><span>(</span><span style="color:#f29718;">1000000</span><span>))
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">test_pure_python</span><span>(</span><span style="color:#f29718;">benchmark</span><span>):
+</span><span>    </span><span style="color:#ffb454;">benchmark</span><span>(count_doubles</span><span style="color:#bfbab0cc;">, </span><span>val)
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">test_regex</span><span>(</span><span style="color:#f29718;">benchmark</span><span>):
+</span><span>    </span><span style="color:#ffb454;">benchmark</span><span>(count_doubles_regex</span><span style="color:#bfbab0cc;">, </span><span>val)
+</span></code></pre>
+<p>Запустите pytest для сравнения: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ pytest doubles.py                                                                                                           
+</span><span>=============================================================================
+</span><span>platform linux -- Python 3.6.0, pytest-3.2.3, py-1.4.34, pluggy-0.4.
+</span><span>benchmark: 3.1.1 (defaults: timer=time.perf_counter disable_gc=False min_roun
+</span><span>rootdir: /Projects/rustpy, inifile:
+</span><span>plugins: benchmark-3.1.1
+</span><span>collected 2 items
+</span><span>
+</span><span>doubles.py ..
+</span><span>
+</span><span>
+</span><span>-----------------------------------------------------------------------------
+</span><span>Name (time in ms)         Min                Max               Mean          
+</span><span>-----------------------------------------------------------------------------
+</span><span>test_regex            24.6824 (1.0)      32.3960 (1.0)      27.0167 (1.0)    
+</span><span>test_pure_python      51.4964 (2.09)     62.5680 (1.93)     52.8334 (1.96)   
+</span><span>-----------------------------------------------------------------------------
+</span></code></pre>
+<p>Для сравнения возьмем Среднее:</p>
+<ul>
+<li>Regexp - 27.0167 &lt;- меньше значит лучше</li>
+<li>Python Zip - 52,8334</li>
+</ul>
+<h2 id="rasshirenie-python-s-pomoshch-iu-rust">Расширение Python с помощью Rust</h2>
+<h3 id="sozdaite-novyi-kreit">Создайте новый крэйт</h3>
+<p>crate - так мы называем Rust Packages.</p>
+<p>После установки Rust (рекомендуемый способ - https://www.rustup.rs/) Rust также доступен в репозиториях Fedora и RHEL с помощью набора инструментов Rust.</p>
+<p>Я использовал rustc 1.21.0</p>
+<p>В этой же папке запустите: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cargo new pyext-myrustlib
+</span></code></pre>
+<p>Он создает новый проект Rust в той же папке под названием pyext-myrustlib, содержащий Cargo.toml (Cargo - это менеджер пакетов Rust), а также src/lib.rs (где мы пишем реализацию нашей библиотеки).</p>
+<h3 id="redaktirovat-cargo-toml">Редактировать Cargo.toml</h3>
+<p>Он будет использовать крэйт rust-cpython в качестве зависимости и укажет Cargo создать dylib для импорта из Python. </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">package</span><span>]
+</span><span style="color:#59c2ff;">name </span><span>= </span><span style="color:#c2d94c;">&quot;pyext-myrustlib&quot;
+</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.1.0&quot;
+</span><span style="color:#59c2ff;">authors </span><span>= [</span><span style="color:#c2d94c;">&quot;Bruno Rocha &lt;rochacbruno@gmail.com&gt;&quot;</span><span>]
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">lib</span><span>]
+</span><span style="color:#59c2ff;">name </span><span>= </span><span style="color:#c2d94c;">&quot;myrustlib&quot;
+</span><span style="color:#59c2ff;">crate-type </span><span>= [</span><span style="color:#c2d94c;">&quot;dylib&quot;</span><span>]
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">dependencies</span><span style="color:#bfbab0cc;">.</span><span style="color:#59c2ff;">cpython</span><span>]
+</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.1&quot;
+</span><span style="color:#59c2ff;">features </span><span>= [</span><span style="color:#c2d94c;">&quot;extension-module&quot;</span><span>]
+</span></code></pre>
+<h3 id="redaktirovat-src-lib-rs">Редактировать src/lib.rs</h3>
+<p>Что нам нужно сделать:</p>
+<ol>
+<li>Импортируйте все макросы из cpython crate.</li>
+<li>Возьмите типы Python и PyResult из CPython в нашу библиотеку.</li>
+<li>Напишите реализацию функции count_doubles в Rust, обратите внимание, что она очень похожа на версию Pure Python, за исключением:
+<ul>
+<li>Он принимает Python в качестве первого аргумента, который является ссылкой на интерпретатор Python и позволяет Rust использовать Python GIL.</li>
+<li>Получает значение типа &amp;str в качестве ссылки.</li>
+<li>Возвращает PyResult, который является типом, допускающим возникновение исключений Python.</li>
+<li>Возвращает объект PyResult в Ok(всего) (Result - это тип перечисления, который представляет либо успех (Ok), либо неудачу (Err)), и поскольку наша функция должна вернуть PyResult, компилятор позаботится о том, чтобы обернуть наш Ok на этом тип. (обратите внимание, что наш PyResult ожидает возвращаемого значения u64).</li>
+</ul>
+</li>
+<li>Использование py_module_initializer! Мы регистрируем новые атрибуты в библиотеке, включая <strong>doc</strong>, а также добавляем атрибут count_doubles, ссылающийся на нашу реализацию функции в Rust.
+<ul>
+<li>Внимание к именам libmyrustlib, initlibmyrustlib и PyInit.</li>
+<li>Мы тоже пробуем! макрос, который эквивалентен Python'stry .. за исключением.</li>
+<li>Return Ok(()) -() - это пустой кортеж результатов, эквивалент None в Python. </li>
+</ul>
+</li>
+</ol>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> cpython</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">use </span><span>cpython</span><span style="color:#f29668;">::</span><span>{Python</span><span style="color:#bfbab0cc;">,</span><span> PyResult}</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_doubles</span><span>(</span><span style="color:#f29718;">_py</span><span style="color:#bfbab0cc;">:</span><span> Python, </span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>PyResult&lt;</span><span style="color:#ff7733;">u64</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> total </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// There is an improved version later on this post
+</span><span>    </span><span style="color:#ff7733;">for </span><span>(c1</span><span style="color:#bfbab0cc;">,</span><span> c2) </span><span style="color:#f29668;">in</span><span> val</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">zip</span><span>(val</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">skip</span><span>(</span><span style="color:#f29718;">1</span><span>)) {
+</span><span>        </span><span style="color:#ff7733;">if</span><span> c1 </span><span style="color:#f29668;">==</span><span> c2 {
+</span><span>            total </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(total)
+</span><span>}
+</span><span>
+</span><span style="color:#f07178;">py_module_initializer!</span><span>(libmyrustlib</span><span style="color:#bfbab0cc;">,</span><span> initlibmyrustlib</span><span style="color:#bfbab0cc;">,</span><span> PyInit_myrustlib</span><span style="color:#bfbab0cc;">, </span><span>|</span><span style="color:#f29718;">py</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">m </span><span>| {
+</span><span>    </span><span style="color:#f07178;">try!</span><span>(m</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(py</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;__doc__&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;This module is implemented in Rust&quot;</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">try!</span><span>(m</span><span style="color:#f29668;">.</span><span style="color:#f07178;">add</span><span>(py</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;count_doubles&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">py_fn!</span><span>(py</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">count_doubles</span><span>(val</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>))))</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(())
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h3 id="a-teper-postroim-ego-s-cargo">А теперь построим его с cargo</h3>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo build --release
+</span><span>    Finished release [optimized] target(s) in 0.0 secs
+</span><span>
+</span><span>$ ls -la target/release/libmyrustlib*
+</span><span>target/release/libmyrustlib.d
+</span><span>target/release/libmyrustlib.so*  &lt;-- Our dylib is here
+</span></code></pre>
+<p>Теперь давайте скопируем сгенерированную .so lib в ту же папку, где находится наш doubles.py.</p>
+<blockquote>
+<p>В Fedora вы должны получить. Поэтому в другой системе вы можете получить .dylib, и вы можете переименовать его, изменив расширение на .so. </p>
+</blockquote>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cd ..
+</span><span>$ ls
+</span><span>doubles.py pyext-myrustlib/
+</span><span>
+</span><span>$ cp pyext-myrustlib/target/release/libmyrustlib.so myrustlib.so
+</span><span>
+</span><span>$ ls
+</span><span>doubles.py myrustlib.so pyext-myrustlib/
+</span></code></pre>
+<p>Наличие myrustlib.so в той же папке или добавление к вашему пути Python позволяет напрямую импортировать его, прозрачно, как это был модуль Python.</p>
+<h3 id="import-iz-python-i-sravnenie-rezul-tatov">Импорт из Python и сравнение результатов</h3>
+<p>Отредактируйте свой doubles.py, импортировав нашу версию, реализованную в Rust, и добавив для нее тест. </p>
+<pre data-lang="py" style="background-color:#0f1419;color:#bfbab0;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#ff7733;">import </span><span>re
+</span><span style="color:#ff7733;">import </span><span>string
+</span><span style="color:#ff7733;">import </span><span>random
+</span><span style="color:#ff7733;">import </span><span>myrustlib   </span><span style="font-style:italic;color:#5c6773;">#  &lt;-- Import the Rust implemented module (myrustlib.so)
+</span><span>
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">count_doubles</span><span>(</span><span style="color:#f29718;">val</span><span>):
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">&quot;&quot;&quot;Count repeated pair of chars ins a string&quot;&quot;&quot;
+</span><span>    total </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0
+</span><span>    </span><span style="color:#ff7733;">for </span><span>c1</span><span style="color:#bfbab0cc;">, </span><span>c2 </span><span style="color:#ff7733;">in </span><span style="color:#f07178;">zip</span><span>(val</span><span style="color:#bfbab0cc;">, </span><span>val[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">:</span><span>]):
+</span><span>        </span><span style="color:#ff7733;">if </span><span>c1 </span><span style="color:#f29668;">== </span><span>c2:
+</span><span>            total </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1
+</span><span>    </span><span style="color:#ff7733;">return </span><span>total
+</span><span>
+</span><span>
+</span><span>double_re </span><span style="color:#f29668;">= </span><span>re</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">compile</span><span>(</span><span style="color:#ff7733;">r</span><span style="color:#c2d94c;">&#39;(</span><span style="color:#f29718;">?=</span><span style="color:#c2d94c;">(</span><span style="color:#f29718;">.</span><span style="color:#c2d94c;">)</span><span style="color:#ff7733;">\1</span><span style="color:#c2d94c;">)&#39;</span><span>)
+</span><span>
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">count_doubles_regex</span><span>(</span><span style="color:#f29718;">val</span><span>):
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f07178;">len</span><span>(double_re</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">findall</span><span>(val))
+</span><span>
+</span><span>
+</span><span>val </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&#39;&#39;</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">join</span><span>(random</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">choice</span><span>(string</span><span style="color:#f29668;">.</span><span>ascii_letters) </span><span style="color:#ff7733;">for </span><span>i </span><span style="color:#ff7733;">in </span><span style="color:#f07178;">range</span><span>(</span><span style="color:#f29718;">1000000</span><span>))
+</span><span>
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">test_pure_python</span><span>(</span><span style="color:#f29718;">benchmark</span><span>):
+</span><span>    </span><span style="color:#ffb454;">benchmark</span><span>(count_doubles</span><span style="color:#bfbab0cc;">, </span><span>val)
+</span><span>
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">test_regex</span><span>(</span><span style="color:#f29718;">benchmark</span><span>):
+</span><span>    </span><span style="color:#ffb454;">benchmark</span><span>(count_doubles_regex</span><span style="color:#bfbab0cc;">, </span><span>val)
+</span><span>
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">test_rust</span><span>(</span><span style="color:#f29718;">benchmark</span><span>):   </span><span style="font-style:italic;color:#5c6773;">#  &lt;-- Benchmark the Rust version
+</span><span>    </span><span style="color:#ffb454;">benchmark</span><span>(myrustlib</span><span style="color:#f29668;">.</span><span>count_doubles</span><span style="color:#bfbab0cc;">, </span><span>val)
+</span></code></pre>
+<h3 id="benchmark">Бенчмарк</h3>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ pytest doubles.py
+</span><span>==============================================================================
+</span><span>platform linux -- Python 3.6.0, pytest-3.2.3, py-1.4.34, pluggy-0.4.
+</span><span>benchmark: 3.1.1 (defaults: timer=time.perf_counter disable_gc=False min_round
+</span><span>rootdir: /Projects/rustpy, inifile:
+</span><span>plugins: benchmark-3.1.1
+</span><span>collected 3 items
+</span><span>
+</span><span>doubles.py ...
+</span><span>
+</span><span>
+</span><span>-----------------------------------------------------------------------------
+</span><span>Name (time in ms)         Min                Max               Mean          
+</span><span>-----------------------------------------------------------------------------
+</span><span>test_rust              2.5555 (1.0)       2.9296 (1.0)       2.6085 (1.0)    
+</span><span>test_regex            25.6049 (10.02)    27.2190 (9.29)     25.8876 (9.92)   
+</span><span>test_pure_python      52.9428 (20.72)    56.3666 (19.24)    53.9732 (20.69)  
+</span><span>-----------------------------------------------------------------------------
+</span></code></pre>
+<p>Для сравнения возьмем Среднее: </p>
+<ul>
+<li>Rust - 2.6085 &lt;-- чем меньше тем лучше </li>
+<li>Regexp - 25.8876</li>
+<li>Python Zip - 53.9732</li>
+</ul>
+<p>Реализация Rust может быть в 10 раз быстрее, чем Python Regex, и в 21 раз быстрее, чем версия Pure Python.</p>
+<p>Интересно, что версия Regex всего в 2 раза быстрее Pure Python :)</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span> Эти числа имеют смысл только для этого конкретного сценария, для других случаев сравнение может быть другим.
+</span></code></pre>
+<h2 id="obnovleniia-i-uluchsheniia">Обновления и улучшения</h2>
+<p>После публикации этой статьи я получил несколько комментариев о r / python, а также о r / rust.</p>
+<p>Вклады поступали в виде запросов на извлечение, и вы можете отправить новый, если считаете, что функции можно улучшить.</p>
+<p>Благодаря: Джошу Стоуну мы получили лучшую реализацию для Rust, которая выполняет итерацию строки только один раз, а также эквивалент Python.</p>
+<p>Благодаря: Purple Pixie мы получили реализацию Python с использованием itertools, однако эта версия не работает лучше и все еще требует улучшений.</p>
+<h3 id="iteratsiia-tol-ko-odin-raz">Итерация только один раз</h3>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_doubles_once</span><span>(</span><span style="color:#f29718;">_py</span><span style="color:#bfbab0cc;">:</span><span> Python, </span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>PyResult&lt;</span><span style="color:#ff7733;">u64</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> total </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> chars </span><span style="color:#f29668;">=</span><span> val</span><span style="color:#f29668;">.</span><span style="color:#f07178;">chars</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#ff7733;">mut</span><span> c1) </span><span style="color:#f29668;">=</span><span> chars</span><span style="color:#f29668;">.</span><span style="color:#f07178;">next</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">for</span><span> c2 </span><span style="color:#f29668;">in</span><span> chars {
+</span><span>            </span><span style="color:#ff7733;">if</span><span> c1 </span><span style="color:#f29668;">==</span><span> c2 {
+</span><span>                total </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>            c1 </span><span style="color:#f29668;">=</span><span> c2</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(total)
+</span><span>}
+</span></code></pre>
+<pre data-lang="py" style="background-color:#0f1419;color:#bfbab0;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#ff7733;">def </span><span style="color:#ffb454;">count_doubles_once</span><span>(</span><span style="color:#f29718;">val</span><span>):
+</span><span>    total </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0
+</span><span>    chars </span><span style="color:#f29668;">= </span><span style="color:#f07178;">iter</span><span>(val)
+</span><span>    c1 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">next</span><span>(chars)
+</span><span>    </span><span style="color:#ff7733;">for </span><span>c2 </span><span style="color:#ff7733;">in </span><span>chars:
+</span><span>        </span><span style="color:#ff7733;">if </span><span>c1 </span><span style="color:#f29668;">== </span><span>c2:
+</span><span>            total </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1
+</span><span>        c1 </span><span style="color:#f29668;">= </span><span>c2
+</span><span>    </span><span style="color:#ff7733;">return </span><span>total
+</span></code></pre>
+<h3 id="python-with-itertools">Python with itertools</h3>
+<pre data-lang="py" style="background-color:#0f1419;color:#bfbab0;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#ff7733;">import </span><span>itertools
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">count_doubles_itertools</span><span>(</span><span style="color:#f29718;">val</span><span>):
+</span><span>    c1s, c2s </span><span style="color:#f29668;">= </span><span>itertools</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">tee</span><span>(val)
+</span><span>    </span><span style="color:#f07178;">next</span><span>(c2s</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">None</span><span>)
+</span><span>    total </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0
+</span><span>    </span><span style="color:#ff7733;">for </span><span>c1</span><span style="color:#bfbab0cc;">, </span><span>c2 </span><span style="color:#ff7733;">in </span><span style="color:#f07178;">zip</span><span>(c1s</span><span style="color:#bfbab0cc;">, </span><span>c2s):
+</span><span>        </span><span style="color:#ff7733;">if </span><span>c1 </span><span style="color:#f29668;">== </span><span>c2:
+</span><span>            total </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1
+</span><span>    </span><span style="color:#ff7733;">return </span><span>total
+</span></code></pre>
+<h3 id="pochemu-ne-c-c-nim-go-lua-pypy-drugoi-iazyk">Почему не C/C++ / Nim / Go / Ĺua / PyPy / {другой язык}?</h3>
+<p>Хорошо, это не цель этого поста, этот пост никогда не был о сравнении Rust X с другим языком, этот пост был специально о том, как использовать Rust для расширения и ускорения Python, и тем самым это означает, что у вас есть веская причина для выбора Rust, а не другой язык, или его экосистема, или его безопасность, и инструменты, или просто для того, чтобы следить за шумихой, или просто потому, что вам нравится Rust, не имеет значения, по какой причине, этот пост здесь, чтобы показать, как использовать его с Python.</p>
+<p>Я (лично) могу сказать, что Rust является более перспективным, поскольку он новый, и в нем будет много улучшений, в том числе из-за его экосистемы, инструментов и сообщества, а также потому, что я чувствую себя комфортно с синтаксисом Rust, мне он очень нравится!</p>
+<p>Итак, как и ожидалось, люди начали жаловаться на использование других языков, и это стало своего рода эталоном, и я думаю, что это круто!</p>
+<p>Так что в рамках моего запроса на улучшения некоторые люди из Hacker News также прислали идеи, martinxyz отправил реализацию с использованием C и SWIG, которая работает очень хорошо.</p>
+<p>Код C (шаблон swig опущен) </p>
+<pre data-lang="cpp" style="background-color:#0f1419;color:#bfbab0;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="font-style:italic;color:#39bae6;">uint64_t </span><span style="color:#ffb454;">count_byte_doubles</span><span>(</span><span style="color:#ff7733;">char </span><span style="color:#f29668;">* </span><span style="color:#f29718;">str</span><span>) {
+</span><span>  </span><span style="font-style:italic;color:#39bae6;">uint64_t</span><span> count </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#ff7733;">while </span><span>(str[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">&amp;&amp;</span><span>str[</span><span style="color:#f29718;">1</span><span>]) {
+</span><span>    </span><span style="color:#ff7733;">if </span><span>(str[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">==</span><span> str[</span><span style="color:#f29718;">1</span><span>]) count</span><span style="color:#f29668;">++</span><span style="color:#bfbab0cc;">;
+</span><span>    str</span><span style="color:#f29668;">++</span><span style="color:#bfbab0cc;">;
+</span><span>  }
+</span><span>  </span><span style="color:#ff7733;">return</span><span> count</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>А наш товарищ из Red Hatter Джош Стоун снова улучшил реализацию Rust, заменив символы байтами, так что это честная конкуренция с C, поскольку C сравнивает байты вместо символов Unicode. </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">count_doubles_once_bytes</span><span>(</span><span style="color:#f29718;">_py</span><span style="color:#bfbab0cc;">:</span><span> Python, </span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">str</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>PyResult&lt;</span><span style="color:#ff7733;">u64</span><span>&gt; {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> total </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> chars </span><span style="color:#f29668;">=</span><span> val</span><span style="color:#f29668;">.</span><span style="color:#f07178;">bytes</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">if let </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(</span><span style="color:#ff7733;">mut</span><span> c1) </span><span style="color:#f29668;">=</span><span> chars</span><span style="color:#f29668;">.</span><span style="color:#f07178;">next</span><span>() {
+</span><span>        </span><span style="color:#ff7733;">for</span><span> c2 </span><span style="color:#f29668;">in</span><span> chars {
+</span><span>            </span><span style="color:#ff7733;">if</span><span> c1 </span><span style="color:#f29668;">==</span><span> c2 {
+</span><span>                total </span><span style="color:#f29668;">+= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>            }
+</span><span>            c1 </span><span style="color:#f29668;">=</span><span> c2</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(total)
+</span><span>}
+</span></code></pre>
+<p>Есть также идеи сравнить понимание списка Python и numpy, поэтому я включил сюда </p>
+<p>Numpy:</p>
+<pre data-lang="py" style="background-color:#0f1419;color:#bfbab0;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#ff7733;">import </span><span>numpy </span><span style="color:#ff7733;">as </span><span>np
+</span><span>
+</span><span style="color:#ff7733;">def </span><span style="color:#ffb454;">count_double_numpy</span><span>(</span><span style="color:#f29718;">val</span><span>):
+</span><span>    ng</span><span style="color:#f29668;">=</span><span>np</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">fromstring</span><span>(val</span><span style="color:#bfbab0cc;">,</span><span style="color:#f29718;">dtype</span><span style="color:#f29668;">=</span><span>np</span><span style="color:#f29668;">.</span><span>byte)
+</span><span>    </span><span style="color:#ff7733;">return </span><span>np</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">sum</span><span>(ng[</span><span style="color:#bfbab0cc;">:</span><span style="color:#f29668;">-</span><span style="color:#f29718;">1</span><span>]</span><span style="color:#f29668;">==</span><span>ng[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">:</span><span>])
+</span></code></pre>
+<p>Понимание списка </p>
+<pre data-lang="py" style="background-color:#0f1419;color:#bfbab0;" class="language-py "><code class="language-py" data-lang="py"><span style="color:#ff7733;">def </span><span style="color:#ffb454;">count_doubles_comprehension</span><span>(</span><span style="color:#f29718;">val</span><span>):
+</span><span>    </span><span style="color:#ff7733;">return </span><span style="color:#f07178;">sum</span><span>(</span><span style="color:#f29718;">1 </span><span style="color:#ff7733;">for </span><span>c1</span><span style="color:#bfbab0cc;">, </span><span>c2 </span><span style="color:#ff7733;">in </span><span style="color:#f07178;">zip</span><span>(val</span><span style="color:#bfbab0cc;">, </span><span>val[</span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">:</span><span>]) </span><span style="color:#ff7733;">if </span><span>c1 </span><span style="color:#f29668;">== </span><span>c2)
+</span></code></pre>
+<p>Полный тестовый пример находится в файле test_all.py репозитория.</p>
+<h3 id="novye-rezul-taty">Новые результаты</h3>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span> Имейте в виду, что сравнение было выполнено в той же среде и может иметь некоторые отличия при запуске в другой среде с использованием другого компилятора и/или других тегов. 
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>-------------------------------------------------------------------------------------------------
+</span><span>Name (time in us)                     Min                    Max                   Mean          
+</span><span>-------------------------------------------------------------------------------------------------
+</span><span>test_rust_bytes_once             476.7920 (1.0)         830.5610 (1.0)         486.6116 (1.0)    
+</span><span>test_c_swig_bytes_once           795.3460 (1.67)      1,504.3380 (1.81)        827.3898 (1.70)   
+</span><span>test_rust_once                   985.9520 (2.07)      1,483.8120 (1.79)      1,017.4251 (2.09)   
+</span><span>test_numpy                     1,001.3880 (2.10)      2,461.1200 (2.96)      1,274.8132 (2.62)   
+</span><span>test_rust                      2,555.0810 (5.36)      3,066.0430 (3.69)      2,609.7403 (5.36)   
+</span><span>test_regex                    24,787.0670 (51.99)    26,513.1520 (31.92)    25,333.8143 (52.06)  
+</span><span>test_pure_python_once         36,447.0790 (76.44)    48,596.5340 (58.51)    38,074.5863 (78.24)  
+</span><span>test_python_comprehension     49,166.0560 (103.12)   50,832.1220 (61.20)    49,699.2122 (102.13) 
+</span><span>test_pure_python              49,586.3750 (104.00)   50,697.3780 (61.04)    50,148.6596 (103.06) 
+</span><span>test_itertools                56,762.8920 (119.05)   69,660.0200 (83.87)    58,402.9442 (120.02) 
+</span><span>-------------------------------------------------------------------------------------------------
+</span></code></pre>
+<ul>
+<li>Новая реализация Rust, сравнивающая байты, в 2 раза лучше, чем старая, сравнивающая символы Unicode.</li>
+<li>Версия Rust по-прежнему лучше, чем C с использованием SWIG</li>
+<li>Rust, сравнивающий символы Unicode, по-прежнему лучше, чем numpy</li>
+<li>Однако Numpy лучше, чем первая реализация Rust, в которой была проблема двойной итерации по символам Unicode.</li>
+<li>Использование понимания списка не имеет существенного значения, чем использование чистого Python</li>
+</ul>
+<p>Если вы хотите предложить изменения или улучшения, отправьте PR здесь: https://github.com/rochacbruno/rust-python-example/</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Возвращаясь к цели этого поста «Как ускорить ваш Python с помощью Rust», мы начали с:</p>
+<ul>
+<li>Чистая функция Python, занимающая 102 мс.</li>
+<li>Улучшено с помощью Numpy (который реализован в C) до 3 мс.</li>
+<li>Закончилось тем, что Rust занял 1 мс.</li>
+</ul>
+<p>В этом примере Rust работал в 100 раз быстрее, чем наш Pure Python.</p>
+<p>Rust не спасет вас волшебным образом, вы должны знать язык, чтобы иметь возможность реализовать умное решение, и после правильного внедрения оно стоит столько же, сколько C с точки зрения производительности, а также поставляется с потрясающими инструментами, экосистемой, сообществом и бонусами безопасности.</p>
+<p>Возможно, Rust еще не является предпочтительным языком общего назначения по уровню сложности и, возможно, не лучший выбор для написания общих простых приложений, таких как веб-сайты и сценарии автоматизации тестирования.</p>
+<p>Однако для определенных частей проекта, где Python, как известно, является узким местом, и ваш естественный выбор будет заключаться в реализации расширения C/C++, написание этого расширения на Rust кажется простым и более удобным в обслуживании.</p>
+<p>В Rust еще много улучшений и множество других крэйтов, предлагающих интеграцию Python &lt;--&gt; Rust. Даже если вы не добавляете язык в свой пояс с инструментами прямо сейчас, действительно стоит смотреть в будущее!</p>
+<h2 id="ispol-zovannaia-literatura">Использованная литература</h2>
+<p>Фрагменты кода для показанных здесь примеров доступны в репозитории GitHub: https://github.com/rochacbruno/rust-python-example.</p>
+<p>Примеры в этой публикации вдохновлены докладом «Расширение Python с помощью Rust» Самуэля Кормье-Ииджимы из Pycon Canada. видео здесь: https://www.youtube.com/watch?v=-ylbuEzkG4M.</p>
+<p>Также My Python - это маленький Rust-y Дэна Каллахана из Pycon Montreal. видео здесь: https://www.youtube.com/watch?v=3CwJ0MH-4MA.</p>
+<p>Другие ссылки: </p>
+<ul>
+<li>https://github.com/mitsuhiko/snaek</li>
+<li>https://github.com/PyO3/pyo3</li>
+<li>https://pypi.python.org/pypi/setuptools-rust</li>
+<li>https://github.com/mckaymatt/cookiecutter-pypackage-rust-cross-platform-publish</li>
+<li>http://jakegoulding.com/rust-ffi-omnibus/</li>
+<li>https://github.com/urschrei/polylabel-rs/blob/master/src/ffi.rs</li>
+<li>https://bheisler.github.io/post/calling-rust-in-python/</li>
+<li>https://github.com/saethlin/rust-lather</li>
+</ul>
+<h4 id="prisoediniaites-k-soobshchestvu">Присоединяйтесь к сообществу:</h4>
+<p>Присоединяйтесь к сообществу Rust, вы можете найти ссылки на группы в https://www.rust-lang.org/en-US/community.html.</p>
+<p>Если вы говорите по-португальски, я рекомендую вам присоединиться к https://t.me/rustlangbr, а на Youtube есть http://bit.ly/canalrustbr.</p>
+<h3 id="avtor">Автор</h3>
+<p>Бруно Роча</p>
+<ul>
+<li>Старший инженер по качеству Red Hat</li>
+<li>Обучение Python и Flask на CursoDePython.com.br</li>
+<li>Сотрудник Python Software Foundation</li>
+<li>Член исследовательской группы RustBR</li>
+<li>Дополнительная информация: http://about.me/rochacbruno и http://brunorocha.org </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

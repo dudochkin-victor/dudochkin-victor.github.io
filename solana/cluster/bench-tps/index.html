@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Бенчмарк кластера | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/bench-tps/#nastroika-konfiguratsii">Настройка конфигурации</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/bench-tps/#kran">Кран</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/bench-tps/#odnouzlovaia-testovaia-set">Одноузловая тестовая сеть</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/bench-tps/#mnogouzlovaia-testovaia-set">Многоузловая тестовая сеть</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/bench-tps/#demonstratsiia-klienta-testovoi-seti">Демонстрация клиента тестовой сети</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/bench-tps/#otladka-testovoi-seti">Отладка тестовой сети</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/bench-tps/#testovaia-set-dlia-razrabotchikov">Тестовая сеть для разработчиков</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Бенчмарк кластера</h1>
+
+<p>Git-репозиторий Solana содержит все сценарии, которые могут вам понадобиться для запуска собственной локальной тестовой сети. В зависимости от того, чего вы хотите достичь, вы можете запустить другой вариант, поскольку полноценная, многоузловая тестовая сеть с повышенной производительностью значительно сложнее в настройке, чем одноузловая тестовая нода только на Rust. Если вы хотите разрабатывать функции высокого уровня, такие как эксперименты со смарт-контрактами, избавьте себя от некоторых головных болей при настройке и придерживайтесь демоверсии с одним узлом только для Rust. Если вы занимаетесь оптимизацией производительности конвейера транзакций, рассмотрите расширенную демонстрацию с одним узлом. Если вы работаете над консенсусом, вам понадобится как минимум многоузловая демонстрация только для Rust. Если вы хотите воспроизвести наши показатели TPS, запустите расширенную демонстрацию с несколькими узлами.</p>
+<p>Для всех четырех вариантов вам понадобится последняя версия набора инструментов Rust и исходный код Solana:</p>
+<p>Сначала настройте Rust, Cargo и системные пакеты, как описано в Solana <a href="https://github.com/solana-labs/solana#1-install-rustc-cargo-and-rustfmt">README</a>.</p>
+<p>Теперь проверьте код с github:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">git</span><span> clone https://github.com/solana-labs/solana.git
+</span><span style="color:#f07178;">cd</span><span> solana
+</span></code></pre>
+<p>Демонстрационный код иногда ломается между выпусками, поскольку мы добавляем новые низкоуровневые функции, поэтому, если вы впервые запускаете демоверсию, вы повысите свои шансы на успех, если посмотрите [последний выпуск](https:// github.com/solana-labs/solana/releases), прежде чем продолжить:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span>TAG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">$</span><span>(</span><span style="color:#ffb454;">git</span><span style="color:#c2d94c;"> describe</span><span style="color:#f29718;"> --tags </span><span style="color:#c2d94c;">$</span><span>(</span><span style="color:#ffb454;">git</span><span style="color:#c2d94c;"> rev-list</span><span style="color:#f29718;"> --tags --max-count</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1</span><span>))
+</span><span style="color:#ffb454;">git</span><span> checkout $TAG
+</span></code></pre>
+<h3 id="nastroika-konfiguratsii">Настройка конфигурации</h3>
+<p>Убедитесь, что важные программы, такие как программа голосования, созданы до запуска каких-либо узлов. Обратите внимание, что мы используем релизную сборку для хорошей производительности.
+Если вам нужна отладочная сборка, используйте только <code>cargo build</code> и опустите часть команды <code>NDEBUG=1</code>.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">cargo</span><span> build</span><span style="color:#f29718;"> --release
+</span></code></pre>
+<p>Сеть инициализируется регистром генезиса, созданным при выполнении следующего скрипта.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span>NDEBUG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span style="color:#ffb454;">./multinode-demo/setup.sh
+</span></code></pre>
+<h3 id="kran">Кран</h3>
+<p>Для того, чтобы валидаторы и клиенты работали, нам нужно запустить кран, чтобы выдать несколько тестовых токенов. Сборщик доставляет «аэродропы» в стиле Милтона Фридмана (бесплатные токены для запрашивающих клиентов) для использования в тестовых транзакциях.</p>
+<p>Запустите кран с помощью:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span>NDEBUG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span style="color:#ffb454;">./multinode-demo/faucet.sh
+</span></code></pre>
+<h3 id="odnouzlovaia-testovaia-set">Одноузловая тестовая сеть</h3>
+<p>Прежде чем запускать валидатор, убедитесь, что вы знаете IP-адрес машины, которую вы хотите использовать в качестве загрузочного валидатора для демонстрации, и убедитесь, что порты udp 8000–10000 открыты на всех машинах, на которых вы хотите протестировать.</p>
+<p>Теперь запустите валидатор начальной загрузки в отдельной оболочке:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span>NDEBUG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span style="color:#ffb454;">./multinode-demo/bootstrap-validator.sh
+</span></code></pre>
+<p>Подождите несколько секунд, пока сервер инициализируется. Когда он будет готов к приему транзакций, он напечатает «лидер готов...». Лидер запросит несколько токенов у сборщика, если у него их нет. Кран не должен быть запущен для последующих запусков лидера.</p>
+<h3 id="mnogouzlovaia-testovaia-set">Многоузловая тестовая сеть</h3>
+<p>Чтобы запустить многоузловую тестовую сеть, после запуска узла-лидера запустите несколько дополнительных валидаторов в отдельных оболочках:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span>NDEBUG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span style="color:#ffb454;">./multinode-demo/validator-x.sh
+</span></code></pre>
+<p>Чтобы запустить валидатор с повышенной производительностью в Linux, в вашей системе должен быть установлен <a href="https://developer.nvidia.com/cuda-downloads">CUDA 10.0</a>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">./fetch-perf-libs.sh
+</span><span>NDEBUG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span>SOLANA_CUDA</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span style="color:#ffb454;">./multinode-demo/bootstrap-validator.sh
+</span><span>NDEBUG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span>SOLANA_CUDA</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span style="color:#ffb454;">./multinode-demo/validator.sh
+</span></code></pre>
+<h3 id="demonstratsiia-klienta-testovoi-seti">Демонстрация клиента тестовой сети</h3>
+<p>Теперь, когда ваша тестовая сеть с одним узлом или несколькими узлами запущена и работает, давайте отправим в нее несколько транзакций!
+В отдельной оболочке запустите клиент:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span>NDEBUG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span style="color:#ffb454;">./multinode-demo/bench-tps.sh </span><span style="font-style:italic;color:#5c6773;"># runs against localhost by default
+</span></code></pre>
+<p>Что только что произошло? Демонстрационная версия клиента запускает несколько потоков для отправки 500 000 транзакций в тестовую сеть как можно быстрее. Затем клиент периодически пингует тестовую сеть, чтобы увидеть, сколько транзакций он обработал за это время. Обратите внимание, что демонстрация намеренно заполняет сеть пакетами UDP, так что сеть почти наверняка отбросит их кучу. Это гарантирует, что у тестовой сети есть возможность достичь 710 000 TPS. Демонстрация клиента завершается после того, как он убедился, что тестовая сеть не будет обрабатывать никаких дополнительных транзакций. Вы должны увидеть несколько измерений TPS, напечатанных на экране. В варианте с несколькими узлами вы также увидите измерения TPS для каждого узла валидатора.</p>
+<h3 id="otladka-testovoi-seti">Отладка тестовой сети</h3>
+<p>В коде есть несколько полезных отладочных сообщений, вы можете включить их для каждого модуля и уровня. Перед запуском лидера или валидатора установите обычную переменную среды RUST_LOG.</p>
+<p>Например</p>
+<ul>
+<li>
+<p>Чтобы включить <code>info</code> везде и <code>debug</code> только в модуле solana::banking_stage:</p>
+</li>
+<li><pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ff7733;">export </span><span>RUST_LOG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">solana=info,solana::banking_stage=debug
+</span></code></pre>
+</li>
+<li>
+<p>Чтобы включить ведение журнала программы BPF:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ff7733;">export </span><span>RUST_LOG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">solana_bpf_loader=trace
+</span></code></pre>
+</li>
+</ul>
+<p>Обычно мы используем <code>debug</code> для нечастых отладочных сообщений, <code>trace</code> для потенциально частых сообщений и <code>info</code> для ведения журнала, связанного с производительностью.</p>
+<p>Вы также можете подключиться к запущенному процессу с помощью GDB. Процесс лидера называется <em>solana-validator</em>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> gdb
+</span><span style="color:#ffb454;">attach </span><span style="color:#f29668;">&lt;</span><span>PID</span><span style="color:#f29668;">&gt;
+</span><span style="color:#f07178;">set</span><span> logging on
+</span><span style="color:#ffb454;">thread</span><span> apply all bt
+</span></code></pre>
+<p>Это сбросит все трассировки стека потоков в gdb.txt.</p>
+<h2 id="testovaia-set-dlia-razrabotchikov">Тестовая сеть для разработчиков</h2>
+<p>В этом примере клиент подключается к нашей общедоступной тестовой сети. Чтобы запустить валидаторы в тестовой сети, вам нужно открыть порты udp <code>8000-10000</code>.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span>NDEBUG</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">1 </span><span style="color:#ffb454;">./multinode-demo/bench-tps.sh</span><span style="color:#f29718;"> --entrypoint</span><span> entrypoint.devnet.solana.com:8001</span><span style="color:#f29718;"> --faucet</span><span> api.devnet.solana.com:9900</span><span style="color:#f29718;"> --duration</span><span> 60</span><span style="color:#f29718;"> --tx_count</span><span> 50
+</span></code></pre>
+<p>Вы можете наблюдать за результатами транзакций вашего клиента на нашей <a href="https://metrics.solana.com:3000/d/monitor/cluster-telemetry?var-testnet=devnet">панели показателей</a></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

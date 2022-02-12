@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Отправка и получение токенов | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/transfer-tokens/#proverka-vashego-koshel-ka">Проверка вашего кошелька</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/transfer-tokens/#razdaite-neskol-ko-tokenov-chtoby-nachat"><small>- Раздайте несколько токенов, чтобы начать</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/transfer-tokens/#prover-te-svoi-balans"><small>- Проверьте свой баланс</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/transfer-tokens/#sozdaite-vtoroi-adres-koshel-ka"><small>- Создайте второй адрес кошелька</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/transfer-tokens/#perevesti-tokeny-s-pervogo-koshel-ka-na-vtoroi-adres"><small>- Перевести токены с первого кошелька на второй адрес</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/transfer-tokens/#polnyi-primer-testovogo-perenosa"><small>- Полный пример тестового переноса</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/transfer-tokens/#poluchit-tokeny">Получить токены</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/transfer-tokens/#otpravit-tokeny">Отправить токены</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Отправка и получение токенов</h1>
+
+<p>На этой странице описывается, как получать и отправлять токены SOL с помощью инструментов командной строки с кошельком командной строки, например <a href="../wallet-guide/paper-wallet/">бумажным кошельком</a>, <a href="../wallet-guide/file-system-wallet/">кошельком файловой системы</a> или <a href="../wallet-guide/hardware-wallets/">аппаратный кошелек</a>. Прежде чем начать, убедитесь, что вы создали кошелек и имеете доступ к его адресу (pubkey) и паре ключей для подписи. Ознакомьтесь с нашими <a href="../cli/conventions.md#keypair-conventions">условиями ввода пар ключей для разных типов кошельков</a>.</p>
+<h2 id="proverka-vashego-koshel-ka">Проверка вашего кошелька</h2>
+<p>Прежде чем делиться своим открытым ключом с другими, вы можете сначала убедиться, что ключ действителен и что вы действительно владеете соответствующим закрытым ключом.</p>
+<p>В этом примере мы создадим второй кошелек в дополнение к вашему первому кошельку, а затем переведем на него несколько токенов. Это подтвердит, что вы можете отправлять и получать токены с помощью выбранного типа кошелька.</p>
+<p>В этом тестовом примере используется наша тестовая сеть для разработчиков, которая называется devnet. Токены, выпущенные в devnet, не имеют ценности, поэтому не беспокойтесь, если вы их потеряете.</p>
+<h4 id="razdaite-neskol-ko-tokenov-chtoby-nachat">Раздайте несколько токенов, чтобы начать</h4>
+<p>Во-первых, <em>airdrop</em> себе несколько игровых жетонов в devnet.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> airdrop 1 </span><span style="color:#f29668;">&lt;</span><span>RECIPIENT_ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-url https://api.devnet.solana.com
+</span></code></pre>
+<p>где вы заменяете текст <code>&lt;RECIPIENT_ACCOUNT_ADDRESS&gt;</code> своим открытым ключом/адресом кошелька в кодировке base58.</p>
+<h4 id="prover-te-svoi-balans">Проверьте свой баланс</h4>
+<p>Подтвердите, что аирдроп прошел успешно, проверив баланс аккаунта. Он должен вывести <code>1 SOL</code>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> balance </span><span style="color:#f29668;">&lt;</span><span>ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-url https://api.devnet.solana.com
+</span></code></pre>
+<h4 id="sozdaite-vtoroi-adres-koshel-ka">Создайте второй адрес кошелька</h4>
+<p>Нам понадобится новый адрес для получения наших токенов. Создайте вторую пару ключей и запишите ее открытый ключ:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> new</span><span style="color:#f29718;"> --no-passphrase --no-outfile
+</span></code></pre>
+<p>Вывод будет содержать адрес после текста <code>pubkey:</code>. Скопируйте адрес. Мы будем использовать его на следующем шаге.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>pubkey: GKvqsuNcnwWqPzzuhLmGi4rzzh55FhJtGizkhHaEJqiV
+</span></code></pre>
+<p>Вы также можете создать второй (или несколько) кошелек любого типа: <a href="../wallet-guide/paper-wallet#creating-multiple-paper-wallet-address">бумажный</a>, [файловая система](../wallet -guide/file-system-wallet.md#creating-multiple-file-system-wallet-addresss), или [аппаратное обеспечение](../wallet-guide/hardware-wallets.md#multiple-addresses-on-a- единый аппаратный кошелек).</p>
+<h4 id="perevesti-tokeny-s-pervogo-koshel-ka-na-vtoroi-adres">Перевести токены с первого кошелька на второй адрес</h4>
+<p>Затем докажите, что вы владеете токенами, разосланными по воздуху, передав их. Кластер Solana примет передачу только в том случае, если вы подпишите транзакцию парой закрытых ключей, соответствующей открытому ключу отправителя в транзакции.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> transfer</span><span style="color:#f29718;"> --from </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR</span><span style="color:#f29668;">&gt; &lt;</span><span>RECIPIENT_ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#f29718;">0</span><span>.5</span><span style="color:#f29718;"> --allow-unfunded-recipient --url</span><span> https://api.devnet.solana.com</span><span style="color:#f29718;"> --fee-payer </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>где вы заменяете <code>&lt;KEYPAIR&gt;</code> на путь к паре ключей в вашем первом кошельке и заменяете <code>&lt;RECIPIENT_ACCOUNT_ADDRESS&gt;</code> на адрес вашего второго кошелька.</p>
+<p>Подтвердите обновленные балансы с помощью <code>solana balance</code>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> balance </span><span style="color:#f29668;">&lt;</span><span>ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-url http://api.devnet.solana.com
+</span></code></pre>
+<p>где <code>&lt;ACCOUNT_ADDRESS&gt;</code> — это либо открытый ключ из вашей пары ключей, либо открытый ключ получателя.</p>
+<h4 id="polnyi-primer-testovogo-perenosa">Полный пример тестового переноса</h4>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> solana-keygen new</span><span style="color:#f29718;"> --outfile</span><span> my_solana_wallet.json   </span><span style="font-style:italic;color:#5c6773;"># Creating my first wallet, a file system wallet
+</span><span style="color:#ffb454;">Generating</span><span> a new keypair
+</span><span style="color:#ffb454;">For</span><span> added security, enter a passphrase (empty for no passphrase)</span><span style="color:#f07178;">:
+</span><span style="color:#ffb454;">Wrote</span><span> new keypair to my_solana_wallet.json
+</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">=========================================================================
+</span><span style="color:#ffb454;">pubkey:</span><span> DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK                          </span><span style="font-style:italic;color:#5c6773;"># Here is the address of the first wallet
+</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">=========================================================================
+</span><span style="color:#ffb454;">Save</span><span> this seed phrase to recover your new keypair:
+</span><span style="color:#ffb454;">width</span><span> enhance concert vacant ketchup eternal spy craft spy guard tag punch    </span><span style="font-style:italic;color:#5c6773;"># If this was a real wallet, never share these words on the internet like this!
+</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">=========================================================================
+</span><span>
+</span><span style="color:#ffb454;">$</span><span> solana airdrop 1 DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK</span><span style="color:#f29718;"> --url</span><span> https://api.devnet.solana.com  </span><span style="font-style:italic;color:#5c6773;"># Airdropping 1 SOL to my wallet&#39;s address/pubkey
+</span><span style="color:#ffb454;">Requesting</span><span> airdrop of 1 SOL from 35.233.193.70:9900
+</span><span style="color:#ffb454;">1</span><span> SOL
+</span><span>
+</span><span style="color:#ffb454;">$</span><span> solana balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK</span><span style="color:#f29718;"> --url</span><span> https://api.devnet.solana.com </span><span style="font-style:italic;color:#5c6773;"># Check the address&#39;s balance
+</span><span style="color:#ffb454;">1</span><span> SOL
+</span><span>
+</span><span style="color:#ffb454;">$</span><span> solana-keygen new</span><span style="color:#f29718;"> --no-outfile  </span><span style="font-style:italic;color:#5c6773;"># Creating a second wallet, a paper wallet
+</span><span style="color:#ffb454;">Generating</span><span> a new keypair
+</span><span style="color:#ffb454;">For</span><span> added security, enter a passphrase (empty for no passphrase)</span><span style="color:#f07178;">:
+</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">===================================================================
+</span><span style="color:#ffb454;">pubkey:</span><span> 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv                   </span><span style="font-style:italic;color:#5c6773;"># Here is the address of the second, paper, wallet.
+</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">===================================================================
+</span><span style="color:#ffb454;">Save</span><span> this seed phrase to recover your new keypair:
+</span><span style="color:#ffb454;">clump</span><span> panic cousin hurt coast charge engage fall eager urge win love   </span><span style="font-style:italic;color:#5c6773;"># If this was a real wallet, never share these words on the internet like this!
+</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">===================================================================
+</span><span>
+</span><span style="color:#ffb454;">$</span><span> solana transfer</span><span style="color:#f29718;"> --from</span><span> my_solana_wallet.json 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv 0.5</span><span style="color:#f29718;"> --allow-unfunded-recipient --url</span><span> https://api.devnet.solana.com</span><span style="color:#f29718;"> --fee-payer</span><span> my_solana_wallet.json  </span><span style="font-style:italic;color:#5c6773;"># Transferring tokens to the public address of the paper wallet
+</span><span style="color:#ffb454;">3gmXvykAd1nCQQ7MjosaHLf69Xyaqyq1qw2eu1mgPyYXd5G4v1rihhg1CiRw35b9fHzcftGKKEu4mbUeXY2pEX2z  </span><span style="font-style:italic;color:#5c6773;"># This is the transaction signature
+</span><span>
+</span><span style="color:#ffb454;">$</span><span> solana balance DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK</span><span style="color:#f29718;"> --url</span><span> https://api.devnet.solana.com
+</span><span style="color:#ffb454;">0.499995</span><span> SOL  </span><span style="font-style:italic;color:#5c6773;"># The sending account has slightly less than 0.5 SOL remaining due to the 0.000005 SOL transaction fee payment
+</span><span>
+</span><span style="color:#ffb454;">$</span><span> solana balance 7S3P4HxJpyyigGzodYwHtCxZyUQe9JiBMHyRWXArAaKv</span><span style="color:#f29718;"> --url</span><span> https://api.devnet.solana.com
+</span><span style="color:#ffb454;">0.5</span><span> SOL  </span><span style="font-style:italic;color:#5c6773;"># The second wallet has now received the 0.5 SOL transfer from the first wallet
+</span></code></pre>
+<h2 id="poluchit-tokeny">Получить токены</h2>
+<p>Чтобы получить токены, вам понадобится адрес, на который другие могут отправлять токены. В Solana адрес кошелька является открытым ключом пары ключей. Существует множество методов генерации пар ключей. Выбранный вами метод будет зависеть от того, как вы решите хранить пары ключей. Пары ключей хранятся в кошельках. Перед получением токенов вам необходимо <a href="../wallet-guide/cli/">создать кошелек</a>. После завершения у вас должен быть открытый ключ для каждой сгенерированной вами пары ключей. Открытый ключ представляет собой длинную строку символов base58. Его длина варьируется от 32 до 44 символов.</p>
+<h2 id="otpravit-tokeny">Отправить токены</h2>
+<p>Если у вас уже есть SOL и вы хотите отправить кому-то токены, вам потребуется путь к вашей паре ключей, их открытый ключ в кодировке base58 и количество токенов для передачи. После того, как вы соберете это, вы можете передать токены с помощью команды <code>solana transfer</code>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> transfer</span><span style="color:#f29718;"> --from </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR</span><span style="color:#f29668;">&gt; &lt;</span><span>RECIPIENT_ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt; &lt;</span><span>AMOUNT</span><span style="color:#f29668;">&gt; </span><span style="color:#bfbab0cc;">-</span><span>-fee-payer </span><span style="color:#f29668;">&lt;</span><span>KEYPAIR</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+<p>Подтвердите обновленные балансы с помощью <code>solana balance</code>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> balance </span><span style="color:#f29668;">&lt;</span><span>ACCOUNT_ADDRESS</span><span style="color:#f29668;">&gt;
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>C против Rust: что выбрать для программирования аппаратных абстракций | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/c-vs-rust-which-to-choose-for-programming-hardware-abstractions/#pobitovaia-operatsiia-nad-znacheniiami-registrov-v-c">Побитовая операция над значениями регистров в C</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/c-vs-rust-which-to-choose-for-programming-hardware-abstractions/#pobitovye-operatsii-nad-znacheniiami-registrov-v-rust">Побитовые операции над значениями регистров в Rust</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/c-vs-rust-which-to-choose-for-programming-hardware-abstractions/#realizatsiia-rust-dlia-prostoty-ispol-zovaniia">Реализация Rust для простоты использования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/c-vs-rust-which-to-choose-for-programming-hardware-abstractions/#ispol-zovanie-rust-s-uchetom-bezopasnosti">Использование Rust с учетом безопасности</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/c-vs-rust-which-to-choose-for-programming-hardware-abstractions/#v-samyi-raz-s-rust-i-bezopasno-i-dostupno">В самый раз с Rust: и безопасно, и доступно</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/c-vs-rust-which-to-choose-for-programming-hardware-abstractions/#udar-po-shinam">Удар по шинам</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/c-vs-rust-which-to-choose-for-programming-hardware-abstractions/#usloviia-sboia-dekodirovaniia">Условия сбоя декодирования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/c-vs-rust-which-to-choose-for-programming-hardware-abstractions/#v-zakliuchenii">В заключении</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>C против Rust: что выбрать для программирования аппаратных абстракций</h1>
+
+<p><a href="https://opensource.com/article/20/1/c-vs-rust-abstractions">Перевод</a> | Автор оригинала: Dan Pittman</p>
+<p><strong>Использование программирования на уровне типов в Rust может сделать аппаратные абстракции более безопасными</strong></p>
+<p>Иллюстрация инструментов</p>
+<p>Rust становится все более популярным языком программирования, который позиционируется как лучший выбор для аппаратных интерфейсов. Его часто сравнивают с C по уровню абстракции. В этой статье объясняется, как Rust может обрабатывать побитовые операции разными способами, и предлагает решение, обеспечивающее безопасность и простоту использования. </p>
+<table><thead><tr><th>Language</th><th>Origin</th><th>Official description</th><th>Overview</th></tr></thead><tbody>
+<tr><td>C</td><td>1972</td><td>C - это язык программирования общего назначения, который отличается экономичностью выражения, современным потоком управления и структурами данных, а также богатым набором операторов. (Источник: Основы CS)</td><td>C - это императивный язык, разработанный для относительно простой компиляции, обеспечивающей низкоуровневый доступ к памяти. (Источник: W3schools.in)</td></tr>
+<tr><td>Rust</td><td>2010</td><td>Язык, позволяющий каждому создавать надежное и эффективное программное обеспечение (Источник: веб-сайт Rust)</td><td>Rust - это многопарадигмальный системный язык программирования, ориентированный на безопасность, особенно на безопасный параллелизм. (Источник: Википедия)</td></tr>
+</tbody></table>
+<h2 id="pobitovaia-operatsiia-nad-znacheniiami-registrov-v-c">Побитовая операция над значениями регистров в C</h2>
+<p>В мире системного программирования, где вы можете писать драйверы оборудования или напрямую взаимодействовать с устройствами с отображением в память, взаимодействие почти всегда осуществляется через регистры с отображением в память, предоставляемые оборудованием. Обычно вы взаимодействуете с этими вещами с помощью побитовых операций над некоторым числовым типом фиксированной ширины.</p>
+<p>Например, представьте себе 8-битный регистр с тремя полями: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>+----------+------+-----------+---------+
+</span><span>| (unused) | Kind | Interrupt | Enabled |
+</span><span>+----------+------+-----------+---------+
+</span><span>   5-7       2-4        1          0
+</span></code></pre>
+<p>Число под именем поля указывает биты, используемые этим полем в регистре. Чтобы включить этот регистр, вы должны записать значение 1, представленное в двоичном формате как 0000_0001, чтобы установить бит разрешенного поля. Однако часто у вас также есть существующая конфигурация в реестре, которую вы не хотите беспокоить. Допустим, вы хотите разрешить прерывания на устройстве, но при этом хотите, чтобы устройство оставалось включенным. Для этого вы должны объединить значение поля Interrupt со значением поля Enabled. Вы бы сделали это с помощью побитовых операций: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>1 | (1 &lt;&lt; 1)
+</span></code></pre>
+<p>Это дает вам двоичное значение 0000_0011 путем или-ввода 1 с 2, которое вы получаете, сдвигая 1 влево на 1. Вы можете записать это в свой регистр, оставив его включенным, но также разрешив прерывания.</p>
+<p>Об этом много нужно держать в голове, особенно когда вы имеете дело с потенциально сотнями регистров для полной системы. На практике вы делаете это с помощью мнемоники, которая отслеживает положение поля в регистре и его ширину, т. Е. Какова его верхняя граница?</p>
+<p>Вот пример одной из этих мнемоник. Это макросы C, которые заменяют свои вхождения на код с правой стороны. Это сокращение для приведенного выше реестра. Левая часть &amp; помещает вас в позицию для этого поля, а правая часть ограничивает вас только битами этого поля: </p>
+<pre data-lang="cpp" style="background-color:#0f1419;color:#bfbab0;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#ff7733;">#define </span><span style="color:#ffb454;">REG_ENABLED_FIELD</span><span>(</span><span style="color:#f29718;">x</span><span>) (x </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">0</span><span>) </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">1
+</span><span style="color:#ff7733;">#define </span><span style="color:#ffb454;">REG_INTERRUPT_FIELD</span><span>(</span><span style="color:#f29718;">x</span><span>) (x </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">1</span><span>) </span><span style="color:#f29668;">&amp; </span><span style="color:#f29718;">2
+</span><span style="color:#ff7733;">#define </span><span style="color:#ffb454;">REG_KIND_FIELD</span><span>(</span><span style="color:#f29718;">x</span><span>) (x </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">2</span><span>) </span><span style="color:#f29668;">&amp; </span><span>(</span><span style="color:#f29718;">7 </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">2</span><span>)
+</span></code></pre>
+<p>Затем вы могли бы использовать их, чтобы абстрагироваться от вывода значения регистра, например: </p>
+<pre data-lang="cpp" style="background-color:#0f1419;color:#bfbab0;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#ff7733;">void </span><span style="color:#ffb454;">set_reg_val</span><span>(reg</span><span style="color:#f29668;">* </span><span style="color:#f29718;">u8</span><span style="color:#bfbab0cc;">,</span><span> val </span><span style="color:#f29718;">u8</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">enable_reg_with_interrupt</span><span>(reg* </span><span style="color:#ff7733;">u8</span><span>) {
+</span><span>    </span><span style="color:#f07178;">set_reg_val</span><span>(reg</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">REG_ENABLED_FIELD</span><span>(</span><span style="color:#f29718;">1</span><span>) </span><span style="color:#f29668;">| </span><span style="color:#f29718;">REG_INTERRUPT_FIELD</span><span>(</span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это состояние искусства. Фактически, именно так в ядре Linux появляется основная масса драйверов.</p>
+<p>Есть ли способ лучше? Считайте благом для безопасности и выразительности, если бы система типов была основана на исследованиях современных языков программирования. То есть, что вы могли бы сделать с более богатой и выразительной системой шрифтов, чтобы сделать этот процесс более безопасным и разумным?</p>
+<h2 id="pobitovye-operatsii-nad-znacheniiami-registrov-v-rust">Побитовые операции над значениями регистров в Rust</h2>
+<p>Продолжая регистр выше в качестве примера: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>+----------+------+-----------+---------+
+</span><span>| (unused) | Kind | Interrupt | Enabled |
+</span><span>+----------+------+-----------+---------+
+</span><span>   5-7       2-4        1          0
+</span></code></pre>
+<p>Как вы могли бы выразить такую вещь в типах Rust?</p>
+<p>Вы начнете аналогичным образом, определив константы для смещения каждого поля, т. Е. Насколько далеко он от младшего значащего бита, и его маски. Маска - это значение, двоичное представление которого может использоваться для обновления или чтения поля из регистра: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">const </span><span style="color:#f29718;">ENABLED_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">ENABLED_OFFSET</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">INTERRUPT_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">INTERRUPT_OFFSET</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">KIND_MASK</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">7 </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span style="color:#f29718;">KIND_OFFSET</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Затем вы объявите тип поля и выполните свои операции для преобразования заданного значения в его релевантное для позиции значение для использования внутри регистра:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Field </span><span>{
+</span><span>    value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Field </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">mask</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>, </span><span style="color:#f29718;">offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>, </span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        Field {
+</span><span>            value</span><span style="color:#bfbab0cc;">: </span><span>(val </span><span style="color:#f29668;">&lt;&lt;</span><span> offset) </span><span style="color:#f29668;">&amp;</span><span> mask</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Наконец, вы будете использовать тип Register, который охватывает числовой тип, соответствующий ширине вашего регистра. Регистр имеет функцию обновления, которая обновляет регистр с указанным полем: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Register</span><span>(</span><span style="color:#ff7733;">u8</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Register </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">update</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">:</span><span> Field) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0 </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0 </span><span style="color:#f29668;">|</span><span> field</span><span style="color:#f29668;">.</span><span>value</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">enable_register</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> reg) {
+</span><span>    reg</span><span style="color:#f29668;">.</span><span style="color:#f07178;">update</span><span>(Field</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">ENABLED_MASK</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">ENABLED_OFFSET</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>В Rust вы можете использовать структуры данных для представления полей, прикреплять их к определенным регистрам и обеспечивать лаконичную и разумную эргономику при взаимодействии с оборудованием. В этом примере используются самые основные средства, предоставляемые Rust; независимо от того, добавленная структура снижает плотность в некоторой степени из приведенного выше примера C. Теперь поле - это именованная вещь, а не число, полученное из теневых побитовых операторов, а регистры - это типы с состоянием - один дополнительный уровень абстракции по сравнению с оборудованием.</p>
+<h2 id="realizatsiia-rust-dlia-prostoty-ispol-zovaniia">Реализация Rust для простоты использования</h2>
+<p>Первый переписывание на Rust - это хорошо, но не идеально. Вы должны не забыть ввести маску и смещение, и вы рассчитываете их вручную, что чревато ошибками. Люди плохо справляются с точными и повторяющимися задачами - мы склонны уставать или терять концентрацию, и это приводит к ошибкам. Переписывание масок и смещений вручную, по одному регистру за раз, почти наверняка закончится плохо. Эту задачу лучше всего доверить машине.</p>
+<p>Во-вторых, подумайте более структурно: что, если бы существовал способ передать в тип поля информацию о маске и смещении? Что, если бы вы могли обнаружить ошибки в своей реализации в том, как вы обращаетесь к аппаратным регистрам и взаимодействуете с ними во время компиляции, вместо того, чтобы обнаруживать их во время выполнения? Возможно, вы можете использовать одну из стратегий, обычно используемых для выявления проблем во время компиляции, например типов.</p>
+<p>Вы можете изменить предыдущий пример, используя typenum, библиотеку, которая предоставляет числа и арифметику на уровне типа. Здесь вы параметризуете тип поля с его маской и смещением, делая его доступным для любого экземпляра поля без необходимости включать его на сайте вызова: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">macro_use</span><span>] </span><span style="color:#ff7733;">extern crate</span><span> typenum</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">use </span><span>core</span><span style="color:#f29668;">::</span><span>marker</span><span style="color:#f29668;">::</span><span>PhantomData</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">use </span><span>typenum</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Now we&#39;ll add Mask and Offset to Field&#39;s type
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Field</span><span>&lt;Mask</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Offset</span><span style="color:#bfbab0cc;">:</span><span> Unsigned&gt; {
+</span><span>    value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>    _mask</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;Mask&gt;,
+</span><span>    _offset</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;Offset&gt;,
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// We can use type aliases to give meaningful names to
+</span><span style="font-style:italic;color:#5c6773;">// our fields (and not have to remember their offsets and masks).
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegEnabled </span><span style="color:#f29668;">= </span><span>Field&lt;U1, U0&gt;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegInterrupt </span><span style="color:#f29668;">= </span><span>Field&lt;U2, U1&gt;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegKind </span><span style="color:#f29668;">= </span><span>Field&lt;op</span><span style="color:#ff3333;">!</span><span>(</span><span style="color:#f29718;">U7 </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">U2</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">U2</span><span style="color:#f29668;">&gt;</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Теперь, при повторном посещении конструктора Field, вы можете опустить параметры маски и смещения, потому что тип содержит эту информацию: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;Mask</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Offset</span><span style="color:#bfbab0cc;">:</span><span> Unsigned&gt; </span><span style="color:#59c2ff;">Field</span><span>&lt;Mask, Offset&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self </span><span>{
+</span><span>        Field {
+</span><span>            value</span><span style="color:#bfbab0cc;">: </span><span>(val </span><span style="color:#f29668;">&lt;&lt; </span><span>Offset</span><span style="color:#f29668;">::</span><span style="color:#f29718;">U8</span><span>) </span><span style="color:#f29668;">&amp; </span><span>Mask</span><span style="color:#f29668;">::</span><span style="color:#f29718;">U8</span><span style="color:#bfbab0cc;">,
+</span><span>            _mask</span><span style="color:#bfbab0cc;">:</span><span> PhantomData</span><span style="color:#bfbab0cc;">,
+</span><span>            _offset</span><span style="color:#bfbab0cc;">:</span><span> PhantomData</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// And to enable our register...
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">enable_register</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> reg) {
+</span><span>    reg</span><span style="color:#f29668;">.</span><span style="color:#f07178;">update</span><span>(RegEnabled</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">1</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Выглядит неплохо, но ... что произойдет, если вы сделаете ошибку относительно того, поместится ли данное значение в поле? Рассмотрим простую опечатку, в которой вы указываете 10 вместо 1: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">enable_register</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> reg) {
+</span><span>    reg</span><span style="color:#f29668;">.</span><span style="color:#f07178;">update</span><span>(RegEnabled</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">10</span><span>))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Каков ожидаемый результат в приведенном выше коде? Что ж, код установит этот бит включения в 0, потому что 10 &amp; 1 = 0. Это прискорбно; было бы неплохо узнать, подходит ли значение, которое вы пытаетесь записать в поле, в это поле, прежде чем пытаться выполнить запись. На самом деле, я бы подумал об отключении старших битов ошибочного значения поля неопределенного поведения (вздох).</p>
+<h2 id="ispol-zovanie-rust-s-uchetom-bezopasnosti">Использование Rust с учетом безопасности</h2>
+<p>Как в общем случае проверить, соответствует ли значение поля заданному положению? Больше цифр на уровне типов!</p>
+<p>Вы можете добавить параметр ширины в поле и использовать его, чтобы убедиться, что заданное значение может поместиться в поле: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Field</span><span>&lt;Width</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Mask</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Offset</span><span style="color:#bfbab0cc;">:</span><span> Unsigned&gt; {
+</span><span>    value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>    _mask</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;Mask&gt;,
+</span><span>    _offset</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;Offset&gt;,
+</span><span>    _width</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;Width&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegEnabled </span><span style="color:#f29668;">= </span><span>Field&lt;U1,U1, U0&gt;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegInterrupt </span><span style="color:#f29668;">= </span><span>Field&lt;U1, U2, U1&gt;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegKind </span><span style="color:#f29668;">= </span><span>Field&lt;U3, op</span><span style="color:#ff3333;">!</span><span>(</span><span style="color:#f29718;">U7 </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">U2</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">U2</span><span style="color:#f29668;">&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;Width</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Mask</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Offset</span><span style="color:#bfbab0cc;">:</span><span> Unsigned&gt; </span><span style="color:#59c2ff;">Field</span><span>&lt;Width, Mask, Offset&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">val</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Option</span><span>&lt;</span><span style="color:#ff7733;">Self</span><span>&gt; {
+</span><span>        </span><span style="color:#ff7733;">if</span><span> val </span><span style="color:#f29668;">&lt;= </span><span>(</span><span style="color:#f29718;">1 </span><span style="color:#f29668;">&lt;&lt; </span><span>Width</span><span style="color:#f29668;">::</span><span style="color:#f29718;">U8</span><span>) </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1 </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Some</span><span>(Field {
+</span><span>                value</span><span style="color:#bfbab0cc;">: </span><span>(val </span><span style="color:#f29668;">&lt;&lt; </span><span>Offset</span><span style="color:#f29668;">::</span><span style="color:#f29718;">U8</span><span>) </span><span style="color:#f29668;">&amp; </span><span>Mask</span><span style="color:#f29668;">::</span><span style="color:#f29718;">U8</span><span style="color:#bfbab0cc;">,
+</span><span>                _mask</span><span style="color:#bfbab0cc;">:</span><span> PhantomData</span><span style="color:#bfbab0cc;">,
+</span><span>                _offset</span><span style="color:#bfbab0cc;">:</span><span> PhantomData</span><span style="color:#bfbab0cc;">,
+</span><span>                _width</span><span style="color:#bfbab0cc;">:</span><span> PhantomData</span><span style="color:#bfbab0cc;">,
+</span><span>            })
+</span><span>        } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">None
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Теперь вы можете создать поле, только если заданное значение подходит! В противном случае у вас есть None, что сигнализирует о том, что произошла ошибка, вместо того, чтобы отсекать старшие биты значения и молча записывать неожиданное значение.</p>
+<p>Учтите, однако, что это вызовет ошибку во время выполнения. Однако мы знали заранее, какое значение хотим написать, помните? Учитывая это, мы можем научить компилятор полностью отклонять программу с недопустимым значением поля - нам не нужно ждать, пока мы ее запустим!</p>
+<p>На этот раз вы добавите границу трейта (предложение where) к новой реализации new, называемой new_checked, которая запрашивает, чтобы входящее значение было меньше или равным максимально возможному значению, которое может содержать поле с заданной шириной: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Field</span><span>&lt;Width</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Mask</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Offset</span><span style="color:#bfbab0cc;">:</span><span> Unsigned&gt; {
+</span><span>    value</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u8</span><span>,
+</span><span>    _mask</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;Mask&gt;,
+</span><span>    _offset</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;Offset&gt;,
+</span><span>    _width</span><span style="color:#bfbab0cc;">: </span><span>PhantomData&lt;Width&gt;,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegEnabled </span><span style="color:#f29668;">= </span><span>Field&lt;U1, U1, U0&gt;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegInterrupt </span><span style="color:#f29668;">= </span><span>Field&lt;U1, U2, U1&gt;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">RegKind </span><span style="color:#f29668;">= </span><span>Field&lt;U3, op</span><span style="color:#ff3333;">!</span><span>(</span><span style="color:#f29718;">U7 </span><span style="color:#f29668;">&lt;&lt; </span><span style="color:#f29718;">U2</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">U2</span><span style="color:#f29668;">&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;Width</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Mask</span><span style="color:#bfbab0cc;">:</span><span> Unsigned, Offset</span><span style="color:#bfbab0cc;">:</span><span> Unsigned&gt; </span><span style="color:#59c2ff;">Field</span><span>&lt;Width, Mask, Offset&gt; {
+</span><span>    </span><span style="color:#ff7733;">const fn </span><span style="color:#ffb454;">new_checked</span><span>&lt;V</span><span style="color:#bfbab0cc;">:</span><span> Unsigned&gt;() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">Self
+</span><span>    </span><span style="color:#ff7733;">where
+</span><span>        V</span><span style="color:#bfbab0cc;">: </span><span>IsLessOrEqual&lt;op</span><span style="color:#ff3333;">!</span><span>((U1 &lt;&lt; Width) </span><span style="color:#ff3333;">-</span><span> U1), Output = True&gt;,
+</span><span>    {
+</span><span>        Field {
+</span><span>            value: (</span><span style="color:#ff7733;">V</span><span style="color:#f29668;">::</span><span>U8 &lt;&lt; </span><span style="color:#ff7733;">Offset</span><span style="color:#f29668;">::</span><span>U8) </span><span style="color:#f29668;">&amp; </span><span style="color:#ff7733;">Mask</span><span style="color:#f29668;">::</span><span>U8,
+</span><span>            _mask</span><span style="color:#bfbab0cc;">:</span><span> PhantomData,
+</span><span>            _offset</span><span style="color:#bfbab0cc;">:</span><span> PhantomData,
+</span><span>            _width</span><span style="color:#bfbab0cc;">:</span><span> PhantomData,
+</span><span>        </span><span style="color:#ff3333;">}
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Только числа, для которых содержится это свойство, имеют реализацию этой трэйты, поэтому, если вы используете число, которое не подходит, оно не будет скомпилировано. Посмотри!</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">enable_register</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> reg) {
+</span><span>    reg</span><span style="color:#f29668;">.</span><span style="color:#f07178;">update</span><span>(RegEnabled</span><span style="color:#f29668;">::</span><span>new_checked</span><span style="color:#f29668;">::</span><span>&lt;U10&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>12 |     reg.update(RegEnabled::new_checked::&lt;U10&gt;());
+</span><span>   |                           ^^^^^^^^^^^^^^^^ expected struct `typenum::B0`, found struct `typenum::B1`
+</span><span>   |
+</span><span>   = note: expected type `typenum::B0`
+</span><span>           found type `typenum::B1`
+</span></code></pre>
+<p>new_checked не сможет создать программу, которая имеет ошибочно слишком высокое значение для поля. Ваша опечатка не взорвется во время выполнения, потому что у вас никогда не было бы артефакта для запуска.</p>
+<p>Вы приближаетесь к пику Rust с точки зрения того, насколько безопасно вы можете сделать аппаратное взаимодействие с отображением памяти. Однако то, что вы написали в первом примере на C, было гораздо более лаконичным, чем набор параметров типа, который у вас получился. Можно ли вообще с этим справиться, когда вы говорите о потенциально сотнях или даже тысячах регистров?</p>
+<h2 id="v-samyi-raz-s-rust-i-bezopasno-i-dostupno">В самый раз с Rust: и безопасно, и доступно</h2>
+<p>Раньше я назвал вычисление масок вручную проблематичным, но я проделал ту же самую проблемную вещь, хотя и на уровне шрифта. Хотя использовать такой подход приятно, чтобы добраться до точки, когда вы можете написать любой код, потребуется довольно много шаблонов и ручной транскрипции (здесь я говорю о синонимах типов).</p>
+<p>Наша команда хотела что-то вроде регистров TockOS mmio, но такой, который бы генерировал безопасные реализации с наименьшим возможным объемом ручной транскрипции. В результате мы получили макрос, который генерирует необходимый шаблон для получения Tock-подобного API с проверкой границ на основе типов. Чтобы использовать его, запишите некоторую информацию о регистре, его полях, их ширине и смещениях, а также необязательных значениях, подобных перечислению (если вы хотите придать «смысл» возможным значениям, которые может иметь поле): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">register! </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The register&#39;s name
+</span><span>    Status</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The type which represents the whole register.
+</span><span>    </span><span style="color:#ff7733;">u8</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The register&#39;s mode, ReadOnly, ReadWrite, or WriteOnly.
+</span><span>    </span><span style="color:#f29718;">RW</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// And the fields in this register.
+</span><span>    Fields [
+</span><span>        On    </span><span style="color:#f29718;">WIDTH</span><span>(</span><span style="color:#f29718;">U1</span><span>) </span><span style="color:#f29718;">OFFSET</span><span>(</span><span style="color:#f29718;">U0</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        Dead  </span><span style="color:#f29718;">WIDTH</span><span>(</span><span style="color:#f29718;">U1</span><span>) </span><span style="color:#f29718;">OFFSET</span><span>(</span><span style="color:#f29718;">U1</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>        Color </span><span style="color:#f29718;">WIDTH</span><span>(</span><span style="color:#f29718;">U3</span><span>) </span><span style="color:#f29718;">OFFSET</span><span>(</span><span style="color:#f29718;">U2</span><span>) [
+</span><span>            Red    </span><span style="color:#f29668;">= </span><span style="color:#f29718;">U1</span><span style="color:#bfbab0cc;">,
+</span><span>            Blue   </span><span style="color:#f29668;">= </span><span style="color:#f29718;">U2</span><span style="color:#bfbab0cc;">,
+</span><span>            Green  </span><span style="color:#f29668;">= </span><span style="color:#f29718;">U3</span><span style="color:#bfbab0cc;">,
+</span><span>            Yellow </span><span style="color:#f29668;">= </span><span style="color:#f29718;">U4
+</span><span>        ]
+</span><span>    ]
+</span><span>}
+</span></code></pre>
+<p>Отсюда вы можете сгенерировать типы регистров и полей, как в предыдущем примере, где индексы - ширина, маска и смещение - являются производными от значений, вводимых в разделах WIDTH и OFFSET определения поля. Также обратите внимание, что все эти числа являются типичными; они собираются войти прямо в определения вашего поля!</p>
+<p>Сгенерированный код предоставляет пространства имен для регистров и связанных с ними полей через имя, данное регистру и полям. Это полный рот; вот как это выглядит: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">Status </span><span>{
+</span><span>    </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Register</span><span>(</span><span style="color:#ff7733;">u8</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">On </span><span>{
+</span><span>        </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Field</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// There is of course more to this definition
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">Dead </span><span>{
+</span><span>        </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Field</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>    </span><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">Color </span><span>{
+</span><span>        </span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Field</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">pub const</span><span> Red</span><span style="color:#bfbab0cc;">:</span><span> Field </span><span style="color:#f29668;">= </span><span>Field</span><span style="color:#f29668;">::</span><span>&lt;U1&gt;new()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// &amp;c.
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Сгенерированный API содержит номинально ожидаемые примитивы чтения и записи для получения необработанного значения регистра, но у него также есть способы получить значение отдельного поля, выполнить коллективные действия и выяснить, является ли какой-либо (или весь) набор битов набор. Вы можете прочитать документацию по полностью сгенерированному API.</p>
+<h2 id="udar-po-shinam">Удар по шинам</h2>
+<p>Как выглядит использование этих определений для реального устройства? Будет ли код завален параметрами типа, скрывающими из виду реальную логику?</p>
+<p>Нет! Используя синонимы типов и вывод типов, вам вообще никогда не придется думать о части программы на уровне типов. Вы можете напрямую взаимодействовать с оборудованием и автоматически получать гарантии, связанные с ограничениями.</p>
+<p>Вот пример блока регистров UART. Я пропущу объявление самих регистров, так как это было бы слишком много, чтобы включать его здесь. Вместо этого он начинается с «блока» регистров, а затем помогает компилятору узнать, как искать в регистрах указатель на заголовок блока. Мы делаем это, реализуя Deref и DerefMut: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">repr</span><span>(C)]
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">UartBlock </span><span>{
+</span><span>    rx</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">UartRX</span><span style="color:#f29668;">::</span><span>Register,
+</span><span>    _padding1</span><span style="color:#bfbab0cc;">:</span><span> [</span><span style="color:#ff7733;">u32</span><span>; 15],
+</span><span>    tx</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">UartTX</span><span style="color:#f29668;">::</span><span>Register,
+</span><span>    _padding2</span><span style="color:#bfbab0cc;">:</span><span> [</span><span style="color:#ff7733;">u32</span><span>; 15],
+</span><span>    control1</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">UartControl1</span><span style="color:#f29668;">::</span><span>Register,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Regs </span><span>{
+</span><span>    addr</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">usize</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>Deref </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Regs </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Target </span><span style="color:#f29668;">=</span><span> UartBlock</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">deref</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span>UartBlock {
+</span><span>        </span><span style="color:#ff7733;">unsafe </span><span>{ </span><span style="color:#f29668;">&amp;*</span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>addr </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*const</span><span> UartBlock) }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span>DerefMut </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Regs </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">deref_mut</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> UartBlock {
+</span><span>        </span><span style="color:#ff7733;">unsafe </span><span>{ </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29668;">*</span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>addr </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*mut</span><span> UartBlock) }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Как только это будет сделано, использовать эти регистры так же просто, как read() и modify(): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// A pretend register block.
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> x </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">0_</span><span style="color:#ff7733;">u32</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">33</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> regs </span><span style="color:#f29668;">=</span><span> Regs {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Some shenanigans to get at `x` as though it were a
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// pointer. Normally you&#39;d be given some address like
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// `0xDEADBEEF` over which you&#39;d instantiate a `Regs`.
+</span><span>        addr</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> x </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*mut </span><span>[</span><span style="color:#ff7733;">u32</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">33</span><span>] </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(regs</span><span style="color:#f29668;">.</span><span>rx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    regs</span><span style="color:#f29668;">.</span><span>control1
+</span><span>        </span><span style="color:#f29668;">.</span><span style="color:#f07178;">modify</span><span>(UartControl1</span><span style="color:#f29668;">::</span><span>Enable</span><span style="color:#f29668;">::</span><span>Set </span><span style="color:#f29668;">+ </span><span>UartControl1</span><span style="color:#f29668;">::</span><span>RecvReadyInterrupt</span><span style="color:#f29668;">::</span><span>Set)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// The first bit and the 10th bit should be set.
+</span><span>    </span><span style="color:#f07178;">assert_eq!</span><span>(regs</span><span style="color:#f29668;">.</span><span>control1</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read</span><span>()</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">0b_10_0000_0001</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Когда мы работаем со значениями времени выполнения, мы используем Option, как мы видели ранее. Здесь я использую unwrap, но в реальной программе с неизвестными входами вы, вероятно, захотите проверить, что вы получили Some от этого нового вызова: 1,2 </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// A pretend register block.
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> x </span><span style="color:#f29668;">= </span><span>[</span><span style="color:#f29718;">0_</span><span style="color:#ff7733;">u32</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">33</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> regs </span><span style="color:#f29668;">=</span><span> Regs {
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Some shenanigans to get at `x` as though it were a
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// pointer. Normally you&#39;d be given some address like
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// `0xDEADBEEF` over which you&#39;d instantiate a `Regs`.
+</span><span>        addr</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> x </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">*mut </span><span>[</span><span style="color:#ff7733;">u32</span><span style="color:#bfbab0cc;">; </span><span style="color:#f29718;">33</span><span>] </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> input </span><span style="color:#f29668;">=</span><span> regs</span><span style="color:#f29668;">.</span><span>rx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_field</span><span>(UartRX</span><span style="color:#f29668;">::</span><span>Data</span><span style="color:#f29668;">::</span><span>Field</span><span style="color:#f29668;">::</span><span>Read)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    regs</span><span style="color:#f29668;">.</span><span>tx</span><span style="color:#f29668;">.</span><span style="color:#f07178;">modify</span><span>(UartTX</span><span style="color:#f29668;">::</span><span>Data</span><span style="color:#f29668;">::</span><span>Field</span><span style="color:#f29668;">::</span><span>new(input)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h2 id="usloviia-sboia-dekodirovaniia">Условия сбоя декодирования</h2>
+<p>В зависимости от вашего личного болевого порога вы могли заметить, что ошибки почти неразборчивы. Взгляните на не очень тонкое напоминание о том, о чем я говорю: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0271]: type mismatch resolving `&lt;typenum::UInt&lt;typenum::UInt&lt;typenum::UInt&lt;typenum::UInt&lt;typenum::UInt&lt;typenum::UTerm, typenum::B1&gt;, typenum::B0&gt;, typenum::B1&gt;, typenum::B0&gt;, typenum::B0&gt; as typenum::IsLessOrEqual&lt;typenum::UInt&lt;typenum::UInt&lt;typenum::UInt&lt;typenum::UInt&lt;typenum::UTerm, typenum::B1&gt;, typenum::B0&gt;, typenum::B1&gt;, typenum::B0&gt;&gt;&gt;::Output == typenum::B1`
+</span><span>  --&gt; src/main.rs:12:5
+</span><span>   |
+</span><span>12 |     less_than_ten::&lt;U20&gt;();
+</span><span>   |     ^^^^^^^^^^^^^^^^^^^^ expected struct `typenum::B0`, found struct `typenum::B1`
+</span><span>   |
+</span><span>   = note: expected type `typenum::B0`
+</span><span>       found type `typenum::B1`
+</span></code></pre>
+<p>Ожидаемая часть typenum::B0, найденная в части typenum::B1, имеет смысл, но что за ерунда <code>typenum::UInt &lt;typenum::UInt, typenum::UInt…</code>? Ну, typenum представляет числа как двоичные cons-ячейки! Подобные ошибки затрудняют, особенно когда у вас есть несколько из этих чисел уровня типа, ограниченных узкими кругами, чтобы узнать, о каком числе идет речь. Если, конечно, вы не привыкли переводить барочные двоичные представления в десятичные.</p>
+<p>После того, как U100-й раз попытался расшифровать какой-либо смысл этого беспорядка, товарищ по команде сошел с ума и больше не собирался его выносить и сделал небольшую утилиту tnfilt, чтобы разобрать смысл из страданий, которые представляют собой двоичные cons-ячейки с пространством имен . tnfilt берет обозначение в стиле cons-ячейки и заменяет его разумными десятичными числами. Мы думаем, что другие столкнутся с аналогичными трудностями, поэтому поделились tnfilt. Вы можете использовать это так: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo build 2&gt;&amp;1 | tnfilt
+</span></code></pre>
+<p>Он преобразует вывод выше во что-то вроде этого: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0271]: type mismatch resolving `&lt;U20 as typenum::IsLessOrEqual&lt;U10&gt;&gt;::Output == typenum::B1`
+</span></code></pre>
+<p>Теперь это имеет смысл!</p>
+<h2 id="v-zakliuchenii">В заключении</h2>
+<p>Регистры с отображением в память используются повсеместно при взаимодействии с аппаратным обеспечением из программного обеспечения, и существует множество способов изобразить эти взаимодействия, каждый из которых занимает свое место в спектре простоты использования и безопасности. Мы обнаружили, что использование программирования на уровне типов для проверки взаимодействия регистров с отображением памяти во время компиляции дало нам необходимую информацию для создания более безопасного программного обеспечения. Этот код доступен в крэйте ограниченных регистров (пакет Rust).
+Наша команда начала прямо на границе более безопасной части этого спектра безопасности, а затем попыталась выяснить, как переместить ползунок простоты использования ближе к легкому концу. Благодаря этим амбициям родились ограниченные регистры, и мы используем их каждый раз, когда сталкиваемся с устройствами с отображением памяти в наших приключениях в Оксоне.</p>
+<hr />
+<ol>
+<li>
+<p>Технически чтение из поля регистра, по определению, даст значение только в установленных пределах, но никто из нас не живет в чистом мире, и вы никогда не знаете, что произойдет, когда в игру вступят внешние системы. Вы здесь по велению богов оборудования, поэтому вместо того, чтобы принуждать вас к ситуации «возможной паники», это дает вам возможность справиться с делом «Этого никогда не должно случиться».</p>
+</li>
+<li>
+<p>get_field выглядит немного странно. В частности, я смотрю на часть Field::Read. Поле - это тип, и вам нужен экземпляр этого типа для передачи в get_field. Более чистый API может выглядеть примерно так: </p>
+</li>
+</ol>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>regs</span><span style="color:#f29668;">.</span><span>rx</span><span style="color:#f29668;">.</span><span>get_field</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#ff7733;">UartRx</span><span style="color:#f29668;">::</span><span style="color:#ff7733;">Data</span><span style="color:#f29668;">::</span><span>Field&gt;()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Но помните, что поле - это синоним типа, который имеет фиксированные индексы для ширины, смещения и т.д. Чтобы иметь возможность параметризовать get_field таким образом, вам потребуются типы более высокого порядка. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

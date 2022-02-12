@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Откуда ты::откуда | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/where-are-you-from-from/#vremia-dlia-primera">Время для примера!</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/where-are-you-from-from/#perekrestok">Перекресток</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/where-are-you-from-from/#podvedenie-itogov">Подведение итогов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/where-are-you-from-from/#bonus">Бонус!</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Откуда ты::откуда</h1>
+
+<p><a href="https://llogiq.github.io/2015/11/27/from-into.html">Перевод</a> | Автор оригинала: Andre Bogus</p>
+<p>А во что ты превратился::во что?</p>
+<p>(Эта статья написана на Rust 1.4)</p>
+<p>На этот раз давайте взглянем на трэйты From и Into (и некоторые связанные) и зададим вопрос, когда и для чего их использовать. Обратите внимание, что есть специализации (например, IntoIterator) и варианты (например, FromStr) этих черт; хорошо знать об этом при написании кода на Rust.</p>
+<p>From и Into подобны зеркалам друг друга. От абстракции к исходному типу, тогда как в абстракции к целевому типу. Для каждого T есть бланкет Into<T> impl с соответствующей реализацией From&lt;<em>&gt;, поэтому, если вы являетесь автором библиотеки, вам следует подумать о реализации From&lt;</em>&gt; для своих типов и прибегать только к реализациям Into &lt;_&gt; для типов. вы не можете реализовать From для из-за правила сиротства (которое, к сожалению, недостаточно документировано. Ошибка E0117 содержит товары, если вы хотите читать дальше).</p>
+<p>Но реализация From / Into - это только полдела. Другая половина - знать, где их использовать. Если вы какое-то время программируете на Rust, вы заметите, что мы, Rustaceans, широко используем систему типов; следовательно, существует много типов, а это означает, что существует большое количество мест, где необходимы преобразования в другие типы.</p>
+<h2 id="vremia-dlia-primera">Время для примера!</h2>
+<p>Допустим, у нас есть довольно скучная функция foo(bar: &amp;Bar), где Bar - это фактический тип (а не трэйта). В нашем случае у нас также есть тип Blob, который содержит Bar. Также модуль имеет тип Buzz, который можно преобразовать в панель.</p>
+<p>Поскольку мы ожидаем, что наш Blob, использующий клиентов, будет использовать функцию foo, мы реализуем From&lt;&amp;Blob&gt; для &amp;Bar, а пока мы находимся в нем, реализуем From&lt;&amp;Buzz&gt; для Bar (возможно, также Buzz без ссылки. Если Buzz - это Copy, мы можем опустить реализация &amp;Buzz и полагаться на принуждение deref). Код такой: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>convert</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Bar </span><span>{ num</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32 </span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Blob </span><span>{ bar</span><span style="color:#bfbab0cc;">:</span><span> Bar }
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Buzz </span><span>{ num</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i16 </span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Blob&gt; </span><span style="color:#ff7733;">for </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a </span><span style="color:#59c2ff;">Bar </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">blob</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Blob) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Bar { </span><span style="color:#f29668;">&amp;</span><span>blob</span><span style="color:#f29668;">.</span><span>bar }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Buzz&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Bar </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">buzz</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Buzz) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Bar { Bar{ num</span><span style="color:#bfbab0cc;">:</span><span> buzz</span><span style="color:#f29668;">.</span><span>num </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">i32 </span><span>} }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>(</span><span style="color:#f29718;">bar</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Bar) {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> _num </span><span style="color:#f29668;">=</span><span> bar</span><span style="color:#f29668;">.</span><span>num</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/* some code here */
+</span><span>}
+</span></code></pre>
+<p>Теперь у наших клиентов, вызывающих foo(_), есть эти два вызова: foo(&amp;blob.into()) и foo(buzz.into()). Если у нас более двух экземпляров, эти вызовы .into() становятся довольно часто повторяющимися. Если все вызовы выполняются в рамках нашего собственного кода, мы можем сделать вывод, что эта стоимость приемлема, и двигаться дальше. Однако для библиотечных API мы, вероятно, хотим сделать лучше.</p>
+<p>Можем ли мы переместить .into() в нашу функцию foo? Возможно, используя трэйту Into? Давай попробуем. Мы меняем foo(_) на следующее: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// foo is now generic: It takes anything that we can turn into a Bar reference 
+</span><span style="font-style:italic;color:#5c6773;">// of any lifetime (which btw. precludes us from returning the Bar reference)
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>&lt;</span><span style="color:#ff7733;">&#39;b</span><span>, B</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Into</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;b</span><span> Bar&gt;&gt;(</span><span style="color:#f29718;">bar</span><span style="color:#bfbab0cc;">:</span><span> B) {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> _num </span><span style="color:#f29668;">=</span><span> bar</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into</span><span>()</span><span style="color:#f29668;">.</span><span>num</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">/* some code here */
+</span><span>}
+</span></code></pre>
+<p>Теперь мы можем изменить наши вызовы foo(blob.into()) на foo(blob), что неплохо. К сожалению для нас, мы получаем ошибку при вызове foo(buzz.into()): </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>conv.rs:30:15: 30:21 error: unable to infer enough type information about `_`; type annotations or generic parameter binding required [E0282]
+</span><span>conv.rs:30     foo(&amp;buzz.into());
+</span><span>                         ^~~~~~
+</span><span>conv.rs:30:15: 30:21 help: run `rustc --explain E0282` to see a detailed explanation
+</span><span>error: aborting due to previous error
+</span></code></pre>
+<p>Хорошо, rustc не нашел подходящей реализации Into, потому что для этого потребовалось бы автоматическое создание ссылок, что не реализовано в Rust (я мог бы добавить, что по уважительной причине). Проблема здесь в различии между Bar и &amp;Bar. В более простом примере этого даже не произошло бы. Увы, в действительности все не так просто.</p>
+<h2 id="perekrestok">Перекресток</h2>
+<p>Теперь у нас есть несколько вариантов решения этой проблемы. Учитывая, что наш Bar может быть Copy, мы можем просто #[derive(Copy, Clone)] для него и изменить нашу реализацию From&lt;&amp;Blob&gt;, чтобы создать новый Bar без ссылки. Нам также нужно изменить foo(_), чтобы взять любой &lt;B: Into <Bar>&gt; (удалив &amp;’b), чтобы получить: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Blob&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Bar </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">blob</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Blob) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Bar { blob</span><span style="color:#f29668;">.</span><span>bar }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>&lt;B</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Into</span><span>&lt;Bar&gt;(bar: B) </span><span style="color:#ff3333;">{ </span><span style="color:#f29668;">..</span><span> }
+</span></code></pre>
+<p>Теперь мы также можем удалить вызов into() из вызовов foo для больших двоичных объектов, и все станет блестящим (обратите внимание, что наш foo фактически создаст копию полосы, содержащейся в любом большом двоичном объекте, но при четырех байтах в стеке это обходится довольно дешево. другие типы, компромисс может быть другим). From спас положение, и мы можем обмануть все кляксы и жужжания по своему желанию. Также пользователи нашего foo могут реализовать Into <Bar>, чтобы свободно использовать наш foo(_) со своими типами. Радуги и единороги в изобилии!</p>
+<p>Другой вариант - пойти на пастбище и найти std::заимствовать::корову (помните?), Что означает внесение небольшой платы за время выполнения для большей гибкости. Здесь нам это не нужно, но для более сложных баров это может окупиться: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>convert</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>borrow</span><span style="color:#f29668;">::*</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// we still need to derive Clone here or create our own ToOwned implementation, 
+</span><span style="font-style:italic;color:#5c6773;">// though we don&#39;t actually need it here.
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Clone)]
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Bar </span><span>{
+</span><span>    num</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Blob </span><span>{ bar</span><span style="color:#bfbab0cc;">:</span><span> Bar }
+</span><span>
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Buzz </span><span>{ num</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i16 </span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>&gt; </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Blob&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Cow</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, Bar&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">blob</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Blob) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, Bar&gt; { Cow</span><span style="color:#f29668;">::</span><span>Borrowed(</span><span style="color:#f29668;">&amp;</span><span>blob</span><span style="color:#f29668;">.</span><span style="color:#f07178;">borrow</span><span>()</span><span style="color:#f29668;">.</span><span>bar) }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl</span><span>&lt;</span><span style="color:#ff7733;">&#39;a</span><span>, </span><span style="color:#ff7733;">&#39;b</span><span>&gt; </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;a</span><span> Buzz&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Cow</span><span>&lt;</span><span style="color:#ff7733;">&#39;b</span><span>, Bar&gt; {
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">buzz</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Buzz) </span><span style="color:#bfbab0cc;">-&gt; </span><span>Cow&lt;</span><span style="color:#ff7733;">&#39;b</span><span>, Bar&gt; { Cow</span><span style="color:#f29668;">::</span><span>Owned(Bar{ num</span><span style="color:#bfbab0cc;">:</span><span> buzz</span><span style="color:#f29668;">.</span><span>num </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">i32 </span><span>}) }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foo</span><span>&lt;</span><span style="color:#ff7733;">&#39;b</span><span>, B</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Into</span><span>&lt;Cow&lt;</span><span style="color:#ff7733;">&#39;b</span><span>, Bar&gt;&gt;&gt;(</span><span style="color:#f29718;">bar</span><span style="color:#bfbab0cc;">:</span><span> B) { </span><span style="color:#f29668;">.. </span><span>}
+</span></code></pre>
+<p>Теперь код обобщается во время компиляции по типу, который, в свою очередь, обобщает во время выполнения, может ли тип превратиться в заимствованный или принадлежащий Bar. В зависимости от того, насколько сложен foo(_) и насколько велик Bar, затраты времени выполнения могут быть незначительными.</p>
+<p>(Кстати, doener redditor напоминает мне, что было бы неплохо использовать наш новый foo(..) в качестве оболочки для предыдущей функции foo(_: Bar). Это обеспечит клонирование минимально необходимого кода во время мономорфизация, при которой универсальная функция создается для каждого типа, с которым она вызывается)</p>
+<p>Наконец, мы могли отказаться от Into и создать свой собственный трейт AsBar, который мы реализуем как для &amp;Blob, так и для &amp;Buzz, что даст нам максимальную гибкость. Однако это означает, что другим крэйтам, желающим повторно использовать наш foo(_), также понадобятся их типы для реализации нашего трейта AsBar, поэтому нам нужно сделать его общедоступным и задокументировать. Я оставлю эту версию в качестве упражнения читателю.</p>
+<h2 id="podvedenie-itogov">Подведение итогов</h2>
+<p>Что мы узнали? Into может сделать наши функции намного более гибкими и предоставить нашим клиентам более удобный интерфейс при реализации библиотеки. Обратной стороной является то, что универсальные шаблоны усложняют документацию, но улучшенная простота использования, вероятно, того стоит - особенно если нашу функцию можно повторно использовать со многими типами, и мы не хотим иметь специальные функции для каждого типа ввода.</p>
+<p>Повторное использование From / Into избавляет нас от части работы по созданию, документированию и тестированию наших собственных черт для выполнения общих преобразований в наших методах, и они делают наши интерфейсы очень удобными. Только когда нам понадобится еще больше гибкости, мы можем реализовать для этого свои собственные трэйты.</p>
+<h2 id="bonus">Бонус!</h2>
+<p>Redditor летающая овца хотел бы, чтобы я упомянул, что реализация From очень полезна для обработки ошибок (его пример следует):</p>
+<p>обычная ошибка упаковки выглядит примерно так (если вы ленивы и не применяете std::error::Error): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Debug)]
+</span><span style="color:#ff7733;">pub enum </span><span style="color:#59c2ff;">Error </span><span>{ TooLong(</span><span style="color:#ff7733;">usize</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> Io(io</span><span style="color:#f29668;">::</span><span>Error) }
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="font-style:italic;color:#39bae6;">From</span><span>&lt;io</span><span style="color:#f29668;">::</span><span>Error&gt; </span><span style="color:#ff7733;">for </span><span style="color:#59c2ff;">Error </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#f29718;">e</span><span style="color:#bfbab0cc;">: </span><span>io</span><span style="color:#f29668;">::</span><span>Error) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Error { Error</span><span style="color:#f29668;">::</span><span>Io(e) }
+</span><span>}
+</span></code></pre>
+<p>then you’re able to simply use try!(_) to wrap another error into yours.</p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">foobar</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>, Error&gt; {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> foo </span><span style="color:#f29668;">= </span><span style="color:#f07178;">try!</span><span>(</span><span style="color:#f07178;">some_io_operation</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">match</span><span> foo</span><span style="color:#f29668;">.</span><span style="color:#f07178;">len</span><span>() {
+</span><span>        </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="color:#f29718;">12 </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(foo)</span><span style="color:#bfbab0cc;">,
+</span><span>        n </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(Error</span><span style="color:#f29668;">::</span><span>TooLong(n))</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Также redditor killercup порекомендовал крэйт с быстрой ошибкой, который дает нам макрос, позволяющий в спешке танцевать перенос ошибок.</p>
+<p>Обсудите на /r/rust и/или rust-users. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust для JavaScript-разработчиков - Обзор экосистемы инструментов | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#nastroika">Настройка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#cargo">Cargo</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#nastroika-proekta">Настройка проекта</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#cargo-toml">Cargo.toml</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#upravlenie-zavisimostiami">Управление зависимостями</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#instrumenty-razrabotki">Инструменты разработки</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#task-runner"><small>- Task Runner</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#zhivaia-perezagruzka"><small>- Живая перезагрузка</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#linter-i-formatter"><small>- Линтер и форматтер</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-javascript-developers-tooling-ecosystem-overview/#proverka-uiazvimosti"><small>- Проверка уязвимости</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust для JavaScript-разработчиков - Обзор экосистемы инструментов</h1>
+
+<p><a href="https://www.sheshbabu.com/posts/rust-for-javascript-developers-tooling-ecosystem-overview/">Перевод</a> | Автор оригинала: Shesh</p>
+<p>Это первая часть из серии о знакомстве с языком Rust для JavaScript-разработчиков. Вот все главы:</p>
+<ol>
+<li>Обзор инструментальной экосистемы</li>
+<li>Переменные и типы данных</li>
+<li>Функции и поток управления</li>
+<li>Сопоставление с образцом и перечисления</li>
+</ol>
+<p>Мне легче понять что-то новое, если это было объяснено в терминах того, что я уже знаю - я думал, что могут быть другие, как я :)</p>
+<p>Вот версия tl;dr: </p>
+<table><thead><tr><th>Tool</th><th>JavaScript</th><th>Rust</th></tr></thead><tbody>
+<tr><td>Version Manager</td><td>nvm</td><td>rustup</td></tr>
+<tr><td>Package Manager</td><td>npm</td><td>Cargo</td></tr>
+<tr><td>Package Registry</td><td>npmjs.com</td><td>crates.io</td></tr>
+<tr><td>Package Manifest</td><td>package.json</td><td>Cargo.toml</td></tr>
+<tr><td>Dependency Lockfile</td><td>package-lock.json</td><td>Cargo.lock</td></tr>
+<tr><td>Task Runner</td><td>npm scripts, gulp etc</td><td>make, cargo-make</td></tr>
+<tr><td>Live Reload</td><td>nodemon</td><td>cargo-watch</td></tr>
+<tr><td>Linter</td><td>ESLint, TSLint, JSLint</td><td>Clippy</td></tr>
+<tr><td>Formatter</td><td>Prettier</td><td>rustfmt</td></tr>
+<tr><td>Dependency Vulnerability Checker</td><td>npm audit</td><td>cargo-audit</td></tr>
+</tbody></table>
+<h2 id="nastroika">Настройка</h2>
+<p>Rust устанавливается с помощью команды rustup. rustup похож на nvm в Node.js. Вы можете использовать его для установки и управления несколькими версиями Rust и многого другого.</p>
+<h2 id="cargo">Cargo</h2>
+<p>Установка Rust с помощью rustup также устанавливает Cargo аналогично тому, как установка Node.js также устанавливает NPM. Cargo - это пакетный менеджер Rust, который будет вам хорошо знаком, если вы раньше использовали NPM.</p>
+<p>Пакеты Rust называются «крэйтами», и они загружаются из реестра crates.io аналогично тому, как пакеты NPM загружаются с npmjs.com.</p>
+<p>NPM в первую очередь является менеджером пакетов, но также используется как средство выполнения задач с помощью функции сценариев npm. Cargo имеет встроенную поддержку для общих задач, таких как запуск кода, построение кода и т.д. Cargo имеет такие функции, как рабочие области (аналогичные lerna), переопределения зависимостей (аналогично пакету исправлений) из коробки. Это также средство запуска тестов (аналогично mocha, jest и т.д.), Средство выполнения тестов и т.д.</p>
+<p>В общем, Cargo - это NPM на стероидах!</p>
+<h2 id="nastroika-proekta">Настройка проекта</h2>
+<p>Создание нового проекта выполняется запуском </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo new hello_rust
+</span></code></pre>
+<p>Это чем-то похоже на npm init. Это создает каталог под названием «hello_rust» со следующими файлами: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>hello_rust
+</span><span>├── .git
+</span><span>├── .gitignore
+</span><span>├── Cargo.toml
+</span><span>└─┬ src
+</span><span>  └── main.rs
+</span></code></pre>
+<h2 id="cargo-toml">Cargo.toml</h2>
+<p>Это файл манифеста пакета, аналогичный package.json. Файл блокировки (эквивалент package-lock.json) называется Cargo.lock. Открыв Cargo.toml, вы увидите знакомый макет: </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">package</span><span>]
+</span><span style="color:#59c2ff;">name </span><span>= </span><span style="color:#c2d94c;">&quot;hello_rust&quot;
+</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.1.0&quot;
+</span><span style="color:#59c2ff;">authors </span><span>= [</span><span style="color:#c2d94c;">&quot;sheshbabu&quot;</span><span>]
+</span><span style="color:#59c2ff;">edition </span><span>= </span><span style="color:#c2d94c;">&quot;2018&quot;
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span></code></pre>
+<p>Таблица [package] содержит метаданные, такие как имя крэйта, автор, ключевые слова и т.д. Таблица [dependencies] похожа на объект dependencies в package.json. Cargo.toml также поддерживает [dev-dependencies], аналогичные devDependencies.</p>
+<h2 id="upravlenie-zavisimostiami">Управление зависимостями</h2>
+<p>Установка новой зависимости выполняется вручную путем редактирования файла Cargo.toml, добавления зависимости в [зависимости] и запуска сборки Cargo. Например, если мы хотим установить крэйт «serde», нам нужно отредактировать файл Cargo.toml следующим образом: </p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">package</span><span>]
+</span><span style="color:#59c2ff;">name </span><span>= </span><span style="color:#c2d94c;">&quot;hello_rust&quot;
+</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.1.0&quot;
+</span><span style="color:#59c2ff;">authors </span><span>= [</span><span style="color:#c2d94c;">&quot;sheshbabu&quot;</span><span>]
+</span><span style="color:#59c2ff;">edition </span><span>= </span><span style="color:#c2d94c;">&quot;2018&quot;
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#ff3333;">+ serde = &quot;1.0.106&quot;
+</span></code></pre>
+<p>и беги </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>$ cargo build
+</span></code></pre>
+<p>Точно так же, чтобы удалить или обновить зависимость, нам нужно вручную отредактировать файл Cargo.toml и запустить сборку Cargo. Сначала меня смутило наличие команды Cargo install, но она оказалась эквивалентом npm install -g.</p>
+<p>Если вы хотите что-то похожее на npm install, npm update или npm uninstall, вы можете установить Cargo-edit, который расширяет Cargo с помощью подкоманд Cargo add, cargo rm и cargo upgrade.</p>
+<p>Вы также можете указать версию зависимости, используя шаблоны, аналогичные NPM.</p>
+<h2 id="instrumenty-razrabotki">Инструменты разработки</h2>
+<h3 id="task-runner">Task Runner</h3>
+<p>Cargo поддерживает выполнение общих задач, таких как сборка, запуск, тестирование и т.д. Но если вам нужно что-то похожее на сценарии NPM, вы можете использовать make или cargo-make.</p>
+<h3 id="zhivaia-perezagruzka">Живая перезагрузка</h3>
+<p>Nodemon - важный инструмент для разработки Node.js - он отслеживает изменения в файлах и автоматически перезапускает приложение. Cargo-watch - аналог в мире Rust.</p>
+<h3 id="linter-i-formatter">Линтер и форматтер</h3>
+<p>В Rust есть встроенный линтер под названием Clippy и форматтер под названием rustfmt. Они эквивалентны ESLint и Prettier в экосистеме JS. Крючки Precommit можно управлять с помощью карго-хаски.</p>
+<h3 id="proverka-uiazvimosti">Проверка уязвимости</h3>
+<p>Сканирование на наличие уязвимостей в зависимостях выполняется с помощью Cargo-audit и очень похоже на аудит npm.</p>
+<p>Спасибо за чтение! Не стесняйтесь подписываться на меня в Твиттере, чтобы увидеть больше подобных сообщений :) </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

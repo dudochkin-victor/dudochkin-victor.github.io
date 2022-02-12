@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Руководство по Rust для новичков | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#predvaritel-nye-trebovaniia">Предварительные требования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#zapustit-proekt">Запустить проект</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#zapusk-hello-world"><small>- Запуск «Hello, World!»</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#planiruite-igru-s-pomoshch-iu-tipov-i-struktur">Планируйте игру с помощью типов и структур</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#game-rs-modifitsirovany-dlia-doski-i-khodov-igroka"><small>- Game.rs модифицированы для доски и ходов игрока</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#doska"><small>- Доска</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#povoroty"><small>- Повороты</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#igra"><small>- Игра</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#realizuite-igru">Реализуйте игру</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#konstruktsiia-igry"><small>- Конструкция игры</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#kak-vy-igraete-v-igru"><small>- Как вы играете в игру?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#izmenenie-situatsii"><small>- Изменение ситуации</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#posmotrim-na-dosku"><small>- Посмотрим на доску</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#igrok-tvoia-ochered"><small>- Игрок, твоя очередь</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#perechislenie-rezul-tatov"><small>- Перечисление результатов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#vernut-sia-k-igre"><small>- Вернуться к игре</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#podtverdite-svoi-kod">Подтвердите свой код</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#funktsiia-proverki"><small>- Функция проверки</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#k-botu">К боту</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#metod-to-board-location"><small>- Метод to_board_location</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#chat-bot"><small>- чат-бот</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#my-chempiony">Мы - чемпионы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#nemnogo-bulevoi-algebry"><small>- Немного булевой алгебры</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#khoteli-by-vy-snova-sygrat">Хотели бы вы снова сыграть?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#metod-player-is-finished"><small>- Метод player_is_finished</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#apparatnyi-sbros-ispravliaet-vse">Аппаратный сброс исправляет все</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#metod-sbrosa"><small>- Метод сброса</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#metod-get-next-turn"><small>- Метод get_next_turn</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#zapuskaem-i-skompiliruem-igru">Запускаем и скомпилируем игру</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#skompiliruite-igru"><small>- Скомпилируйте игру</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#poslednie-mysli">Последние мысли</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/beginners-guide-to-rust/#sleduiushchie-shagi"><small>- Следующие шаги</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Руководство по Rust для новичков</h1>
+
+<p><a href="https://developer.ibm.com/articles/os-using-rust/">Перевод</a> | Автор оригинала: Dylan Hicks</p>
+<p>Используйте свои навыки Rust, создав простую игру в крестики-нолики.</p>
+<p>Как я уже упоминал в первой части этой серии, мне очень нравится Rust. Этот статически скомпилированный язык безопасен для памяти и не зависит от операционной системы, поэтому его можно запускать на любом компьютере. Rust дает вам скорость и низкоуровневые преимущества системного языка без надоедливой сборки мусора таких языков, как C# и Java.</p>
+<p>Нет лучшего способа выучить язык, чем начать им пользоваться. Эта статья поможет вам использовать Rust, показывая, как создать простую игру в крестики-нолики с использованием этого языка. Следуйте инструкциям, чтобы создать свою собственную забавную игру.</p>
+<h2 id="predvaritel-nye-trebovaniia">Предварительные требования</h2>
+<p>Начните с прочтения первой части этой серии, &quot;Руководство по Rust для новичков&quot;. Я покажу вам, как установить и запустить Rust, опишу его основные функции и познакомлю вас с концепциями, необходимыми для начала работы. В этой статье я не буду описывать все аспекты языка, поэтому вам нужно разобраться в основах языка.</p>
+<h2 id="zapustit-proekt">Запустить проект</h2>
+<p>Во-первых, вам нужно настроить свой проект. Вы можете использовать Cargo для создания новой исполняемой двоичной программы из терминала: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cd ~/Documents
+</span><span>cargo new tic_tac_toe –bin
+</span></code></pre>
+<p>В древовидной программе ваш новый каталог tic_tac_toe выглядит так: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>cd tic_tac_toe
+</span><span>tree .
+</span><span>.
+</span><span>??? Cargo.toml
+</span><span>??? src
+</span><span>    ??? main.rs
+</span></code></pre>
+<p>Файл main.rs должен состоять из следующих строк: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello, world!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Запустить программу так же просто, как создать ее, как запустить «Hello, World!» показывает.</p>
+<h3 id="zapusk-hello-world">Запуск «Hello, World!»</h3>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  cargo build
+</span><span>    Compiling...
+</span><span>     Finished...
+</span><span>  cargo run
+</span><span>     Finished...
+</span><span>      Running...
+</span><span>Hello, world!
+</span></code></pre>
+<p>Теперь вам также понадобится файл для игрового модуля. Создайте этот файл, выполнив следующую командную строку: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>touch ./src/game.rs
+</span></code></pre>
+<p>После настройки проекта и каталогов вы можете погрузиться в описание игры.</p>
+<h2 id="planiruite-igru-s-pomoshch-iu-tipov-i-struktur">Планируйте игру с помощью типов и структур</h2>
+<p>Классическая игра в крестики-нолики состоит из двух основных компонентов: доски и поворотов для каждого игрока. Доска представляет собой пустой массив 3 × 3, и повороты указывают, какой игрок должен сделать ход. Чтобы перевести эту функциональность, вы должны отредактировать файл game.rs, созданный в последнем разделе (см. Листинг 2).</p>
+<h4 id="game-rs-modifitsirovany-dlia-doski-i-khodov-igroka">Game.rs модифицированы для доски и ходов игрока</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Board </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">enum </span><span style="color:#59c2ff;">Turn </span><span>{
+</span><span>    Player</span><span style="color:#bfbab0cc;">,
+</span><span>    Bot</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">pub struct </span><span style="color:#59c2ff;">Game </span><span>{
+</span><span>    board</span><span style="color:#bfbab0cc;">:</span><span> Board,
+</span><span>    current_turn</span><span style="color:#bfbab0cc;">:</span><span> Turn,
+</span><span>}
+</span></code></pre>
+<p>Возможно, вы заметили здесь странный синтаксис, но не беспокойтесь: я опишу это по ходу дела.</p>
+<h3 id="doska">Доска</h3>
+<p>Чтобы преобразовать игровое поле, вы используете ключевое слово type для псевдонима Board, которое будет синонимом типа Vec&lt;Vec<String>&gt;. Теперь Board - это простой тип двумерного вектора строк. Я бы использовал здесь char, потому что единственными значениями в массиве будут x, o или число, указывающее на открытую позицию.</p>
+<h3 id="povoroty">Повороты</h3>
+<p>Ход просто указывает, какой игрок должен выбрать место, поэтому структура перечисления работает идеально. На каждом ходу просто сопоставляйте вариант Turn, чтобы вызывать соответствующие методы.</p>
+<h3 id="igra">Игра</h3>
+<p>Наконец, вы должны создать объект Game, содержащий доску и текущий ход. Но ждать! Где методы для структуры Game? Не бойтесь: это дальше.</p>
+<h2 id="realizuite-igru">Реализуйте игру</h2>
+<p>Какие методы составляют игру в крестики-нолики? Ну есть очереди. Каждый ход отображается доска, игрок делает ход, доска отображается снова и проверяется условие выигрыша. Если игра была выиграна, игра объявляет, какой игрок выиграл, и предлагает ему сыграть снова. Если никто не выиграл игру, игра переключает текущего игрока и начинает следующий ход. Очевидно, что внутри каждого хода есть более тонкие проблемы, в зависимости от игрока, но вы можете просто нырнуть отсюда.</p>
+<p>Сначала вы создаете конструкцию, вложенную в блок impl, как показано в листинге 3.</p>
+<h4 id="konstruktsiia-igry">Конструкция игры</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Game </span><span>{
+</span><span>    </span><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">new</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> Game {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> first_row </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;1&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;2&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;3&quot;</span><span>)]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> second_row </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;4&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;5&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;6&quot;</span><span>)]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> third_row </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;7&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;8&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;9&quot;</span><span>)]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        Game {
+</span><span>            board</span><span style="color:#bfbab0cc;">: </span><span style="color:#f07178;">vec!</span><span>[first_row</span><span style="color:#bfbab0cc;">,</span><span> second_row</span><span style="color:#bfbab0cc;">,</span><span> third_row]</span><span style="color:#bfbab0cc;">,
+</span><span>            current_turn</span><span style="color:#bfbab0cc;">: </span><span>Turn</span><span style="color:#f29668;">::</span><span>Player</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Статический метод new создает и возвращает структуру Game. Это стандартное имя для конструктора объекта в Rust.</p>
+<p>Вы должны связать переменную члена правления с двумерным вектором объектов String. Вместо того, чтобы оставлять каждое место пустым, обратите внимание, что я заполнил их числом, обозначающим доступные позиции для каждого хода. Затем привяжите переменную-член current_turn к значению Turn::Player. Эта линия означает, что в каждой игре игрок ходит первым.</p>
+<h3 id="kak-vy-igraete-v-igru">Как вы играете в игру?</h3>
+<p>Первый метод служит картой для программы. Вы добавляете этот метод в блок impl Game (вместе с остальными методами в этом разделе). В листинге 4 показан метод.</p>
+<h4 id="karta-igrovoi-programmy">Карта игровой программы</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub fn </span><span style="color:#ffb454;">play_game</span><span>( </span><span style="color:#f29718;">self</span><span>) {
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> finished </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">while </span><span style="color:#f29668;">!</span><span>finished {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">play_turn</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">if </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">game_is_won</span><span>() {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">print_board</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>current_turn {
+</span><span>                Turn</span><span style="color:#f29668;">::</span><span>Player </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;You won!&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>                Turn</span><span style="color:#f29668;">::</span><span>Bot </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;You lost!&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            finished </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>player_is_finished()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">reset</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        }
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>current_turn </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_next_turn</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Легко увидеть ход игры. Используя бесконечный цикл, вы переходите от одного поворота к другому, чередуя current_turn. По этой причине вы используете изменяемое заимствование для себя, потому что внутреннее состояние игры меняется с каждым ходом.</p>
+<p>Это перечисление уже приносит свои плоды, потому что, если игра выиграна, информация о том, кто выиграл игру, встроена. Затем вы сообщаете игроку, что он или она выиграли или проиграли. Кроме того, вы сбрасываете доску в исходное состояние, что полезно, если пользователь хочет снова сыграть.</p>
+<p>Обратите внимание, что это будет единственный метод pub, кроме new. Это означает, что play_game и new - единственные методы, к которым другая библиотека имеет доступ при использовании объектов Game. Все остальные методы, статические или другие, являются частными.</p>
+<h3 id="izmenenie-situatsii">Изменение ситуации</h3>
+<p>Первый вспомогательный метод, используемый в методе play_game, - это play_turn. В листинге 5 показана эта изящная маленькая функция.</p>
+<h4 id="funktsiia-play-turn">Функция play_turn</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">play_turn</span><span>( </span><span style="color:#f29718;">self</span><span>) {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">print_board</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(token</span><span style="color:#bfbab0cc;">,</span><span> valid_move) </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>current_turn {
+</span><span>        Turn</span><span style="color:#f29668;">::</span><span>Player </span><span style="color:#f29668;">=&gt; </span><span>(
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;X&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_player_move</span><span>())</span><span style="color:#bfbab0cc;">,
+</span><span>        Turn</span><span style="color:#f29668;">::</span><span>Bot </span><span style="color:#f29668;">=&gt; </span><span>(
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;O&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">get_bot_move</span><span>())</span><span style="color:#bfbab0cc;">,
+</span><span>    }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let </span><span>(row</span><span style="color:#bfbab0cc;">,</span><span> col) </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>to_board_location(valid_move)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[row][col] </span><span style="color:#f29668;">=</span><span> token</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Это сложно. Сначала вы распечатываете доску, чтобы пользователь знал, какие позиции доступны (полезно, даже когда очередь бота). Затем, в зависимости от варианта current_turn, вы назначаете переменные token и valid_move, используя деконструкцию кортежа и сопоставление.</p>
+<p>token - это строка X или O для игрока или бота соответственно. valid_move - это целое число от 1 до 9, то есть место на доске не занято. Затем эта переменная преобразуется в соответствующую строку и столбец платы с помощью статического метода to_board_location. (Self с заглавной буквой S возвращает тип self - в данном случае Game.)</p>
+<h3 id="posmotrim-na-dosku">Посмотрим на доску</h3>
+<p>Теперь, когда вы настроили play_turn, вам нужен метод для печати. В листинге 6 показан этот метод.</p>
+<h4 id="pechat-igrovogo-polia">Печать игрового поля</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">print_board</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> separator </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;+---+---+---+&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#95e6cb;">\n</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> separator)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> row </span><span style="color:#f29668;">in  </span><span>{
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;| </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;"> |</span><span style="color:#95e6cb;">\n</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> row</span><span style="color:#f29668;">.</span><span style="color:#f07178;">join</span><span>(</span><span style="color:#c2d94c;">&quot; | &quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> separator)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#f07178;">print!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#95e6cb;">\n</span><span style="color:#c2d94c;">&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>В этом методе вы используете цикл for для печати ASCII-представления строк на плате. Строка временной переменной является ссылкой на каждый вектор на плате. Используя метод соединения, вы можете превратить строку в String и распечатать это новое значение с добавленным разделителем String.</p>
+<p>Теперь, когда функция печати работает, вы, наконец, можете перейти к получению действительных ходов для игрока и бота.</p>
+<h3 id="igrok-tvoia-ochered">Игрок, твоя очередь</h3>
+<p>Пока что эта программа представляет собой серию жестко запрограммированных возвратов без участия игрока. Листинг 7 меняет это.</p>
+<h4 id="nastroika-ocherednosti">Настройка очередности</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_player_move</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u32 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">loop </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let mut</span><span> player_input </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(
+</span><span>            </span><span style="color:#c2d94c;">&quot;</span><span style="color:#95e6cb;">\n</span><span style="color:#c2d94c;">Please enter your move (an integer between </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#c2d94c;">            1 and 9): &quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">match </span><span>io</span><span style="color:#f29668;">::</span><span>stdin()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_line</span><span>( player_input) {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(
+</span><span>                </span><span style="color:#c2d94c;">&quot;Error reading input, try again!&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">validate</span><span>() {
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(err) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> err)</span><span style="color:#bfbab0cc;">,
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(num) </span><span style="color:#f29668;">=&gt; </span><span style="color:#ff7733;">return</span><span> num</span><span style="color:#bfbab0cc;">,
+</span><span>            }</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Суть этого метода сводится к следующему: он зацикливается бесконечно, если игрок не предоставит допустимый ход для игры.</p>
+<p>Первое выражение соответствия после приглашения пользователя пытается прочитать ввод пользователя в строку - player_input - и проверяет, возникает ли при этом ошибка. Модуль io предоставляет эту функциональность; вы должны импортировать этот модуль в начало файла game.rs. Его метод stdin(). Read_line (stdin() возвращает объект дескриптора в текущий стандартный ввод). Вот мой импорт модуля io: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use </span><span>std</span><span style="color:#f29668;">::</span><span>io</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Также важно отметить, что метод read_line, изменяя заданную строку, также возвращает перечисление с именем Result. Я не говорил о Result в своей вводной статье, поэтому коснусь его далее.</p>
+<h3 id="perechislenie-rezul-tatov">Перечисление результатов</h3>
+<p>Результат - это так называемый алгебраический тип. Это перечисление с двумя вариантами: Ok и Err. Каждый вариант может содержать данные, например String или i32.</p>
+<p>В случае read_line возвращаемый результат является специальной версией модуля io, что означает, что Err - это особый вариант io::Error. Напротив, Ok - это то же самое, что и исходный вариант Result, и в этом случае содержит целое число, которое представляет количество прочитанных байтов. Result - это полезное перечисление, которое помогает убедиться, что вы обрабатываете все возможные ошибки во время компиляции, а не во время выполнения.</p>
+<p>Еще одно родственное перечисление, широко распространенное в Rust, - Option. Вместо Ok и Err его вариантами являются None (который не содержит данных) и Some(который содержит). Опция полезна тем же способом, что и nullptr в C++ или None в Python.</p>
+<p>В чем разница между Option и Result и когда их использовать? Вот мои ответы. Во-первых, если вы ожидаете, что функция ничего не вернет, используйте Option. Используйте Result для функций, которые, как вы ожидаете, всегда будут успешными, но которые могут дать сбой, а это означает, что ошибка должна быть обнаружена. Понятно? Здорово. Вернемся к методу get_player_move.</p>
+<h3 id="vernut-sia-k-igre">Вернуться к игре</h3>
+<p>Я остановился на чтении ввода от плеера. Если происходит ошибка чтения ввода пользователя, программа уведомляет пользователя и просит его или ее ввести другой ввод. Если ошибки не возникает, программа достигает второго выражения соответствия. Обратите внимание на использование подчеркиваний (_): они говорят Rust, что вы не привязываете данные внутри вариантов результата Ok или Err, что вы делаете во втором выражении соответствия.</p>
+<p>Это выражение соответствия проверяет, допустима ли переменная player_input. Если это не так, код возвращает ошибку (о которой игра предупреждает игрока) и запрашивает у игрока допустимый ввод. Если player_input действителен, то возвращается этот ввод, преобразованный в целое число с помощью метода проверки.</p>
+<h2 id="podtverdite-svoi-kod">Подтвердите свой код</h2>
+<p>Когда ядро игры написано, неплохо написать функцию проверки. В листинге 8 показан код.</p>
+<h3 id="funktsiia-proverki">Функция проверки</h3>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">validate</span><span>(, </span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Resultu32</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">String </span><span>{
+</span><span>    </span><span style="color:#ff7733;">match</span><span> input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>()</span><span style="color:#f29668;">.</span><span>parse</span><span style="color:#f29668;">::</span><span>u32() {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(
+</span><span>                </span><span style="color:#c2d94c;">&quot;Please input a valid unsigned integer!&quot;</span><span>))</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(number) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#ff7733;">if </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_valid_move</span><span>(number) {
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(number)
+</span><span>            } </span><span style="color:#ff7733;">else </span><span>{
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(
+</span><span>                    </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(
+</span><span>                        </span><span style="color:#c2d94c;">&quot;Please input a number, between </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#c2d94c;">                        1 and 9, not already chosen!&quot;</span><span>))
+</span><span>            }
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Просматривая этот вывод построчно, вот суть метода.</p>
+<p>Сначала программа возвращает перечисление Result. Я не рассматривал шаблоны типов, но в основном вы утверждаете, что вариант Ok для Result должен содержать целое число u32, а вариант Err должен содержать String. Почему результат возвращается сюда? Что ж, ожидается, что метод пройдет и выдаст ошибку только в том случае, если заданный ввод:</p>
+<ul>
+<li>Не целое число;</li>
+<li>Недействительное место из-за занятости; или</li>
+<li>Недопустимое местоположение, поскольку целое число не равно 1–9.</li>
+</ul>
+<p>Затем программа пытается преобразовать ввод в u32, используя метод синтаксического анализа input. Turbofish,::type - это особый аспект некоторых функций, который сообщает им, какой тип возвращать. В этом случае он одновременно сообщает синтаксическому анализатору, что нужно попытаться преобразовать ввод в u32, и устанавливает вариант Ok для результата для хранения u32. Если ввод не может быть преобразован, код возвращает ошибку, указывающую, что ввод не был целым числом без знака. Однако, если он успешно преобразован, код передает ввод через другую вспомогательную функцию: is_valid_move.</p>
+<p>Почему есть еще одна вспомогательная функция для проверки? Из предыдущего списка возможных ошибок номер 1 специфичен для пользователя. Бот всегда будет давать целое число. Вот почему вы используете проверку только для проверки ответа игрока. is_valid_move проверяет две другие возможные ошибки.</p>
+<p>В листинге 9 показан последний фрагмент кода проверки.</p>
+<h4 id="eshche-nemnogo-proverki">Еще немного проверки</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">is_valid_move</span><span>(, </span><span style="color:#f29718;">unchecked_move</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>    </span><span style="color:#ff7733;">match</span><span> unchecked_move {
+</span><span>        </span><span style="color:#f29718;">1</span><span style="color:#f29668;">...</span><span style="color:#f29718;">9 </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let </span><span>(row</span><span style="color:#bfbab0cc;">,</span><span> col) </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">Self</span><span style="color:#f29668;">::</span><span>to_board_location(
+</span><span>                unchecked_move)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[row][col]</span><span style="color:#f29668;">.</span><span style="color:#f07178;">as_str</span><span>() {
+</span><span>                </span><span style="color:#c2d94c;">&quot;X&quot; </span><span style="color:#f29668;">| </span><span style="color:#c2d94c;">&quot;O&quot; </span><span style="color:#f29668;">=&gt; </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">,
+</span><span>                 </span><span style="color:#f29668;">_ =&gt; </span><span style="color:#f29718;">true</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>        </span><span style="color:#f29668;">_ =&gt; </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Достаточно просто. Если значение unchecked_move не находится в диапазоне от 1 до 9 (включительно), то это недопустимый ход. В противном случае код вынужден проверять, был ли уже сделан ход. Как и раньше в play_turn, вы преобразуете unchecked_move в соответствующую строку и столбец на доске. Затем вы можете проверить, есть ли это место на доске. Если местоположение - X или O, то ход недействителен.</p>
+<h2 id="k-botu">К боту</h2>
+<p>Прежде чем переходить к написанию метода для получения движения бота, создайте статический метод to_board_location, который показан в листинге 10.</p>
+<h4 id="metod-to-board-location">Метод to_board_location</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">to_board_location</span><span>(</span><span style="color:#f29718;">game_move</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span>(</span><span style="color:#ff7733;">usize</span><span>, </span><span style="color:#ff7733;">usize</span><span>) {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> row </span><span style="color:#f29668;">= </span><span>(game_move </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span>) </span><span style="color:#f29668;">/ </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> col </span><span style="color:#f29668;">= </span><span>(game_move </span><span style="color:#f29668;">- </span><span style="color:#f29718;">1</span><span>) </span><span style="color:#f29668;">% </span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    (row </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">,</span><span> col </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span>)
+</span><span>}
+</span></code></pre>
+<p>Этот метод немного обманывает, потому что вы знаете, что когда to_board_location вызывается в validate и play_turn, аргумент game_move является целым числом от 1 до 9 (включительно). Вы устанавливаете этот метод как статический, потому что математика не связана с игровым объектом. Доска для крестиков-ноликов всегда 3x3.</p>
+<h3 id="chat-bot">чат-бот</h3>
+<p>Ваш код может получить ход от игрока, но рассмотрите возможность использования бота. Во-первых, ход бота должен быть случайным числом, что означает, что вам нужно импортировать сторонний крэйт rand. Во-вторых, вы продолжаете генерировать этот случайный ход до тех пор, пока он не достигнет допустимого местоположения, используя метод is_valid_move. Затем игра должна уведомить игрока о том, какой ход сделал бот, и вернуть ход.</p>
+<p>Вы импортируете и устанавливаете этот крэйт rand в файле Cargo.toml с rand в качестве зависимости. В листинге 11 показан файл. </p>
+<h4 id="cargo-toml">Cargo.toml</h4>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">package</span><span>]
+</span><span style="color:#59c2ff;">name </span><span>= </span><span style="color:#c2d94c;">&quot;tic_tac_toe&quot;
+</span><span style="color:#59c2ff;">version </span><span>= </span><span style="color:#c2d94c;">&quot;0.1.0&quot;
+</span><span style="color:#59c2ff;">authors </span><span>= [</span><span style="color:#c2d94c;">&quot;Dylan Hicks dirtgrub.dylanhicks@gmail.com&quot;</span><span>]
+</span><span>
+</span><span>[</span><span style="color:#59c2ff;">dependencies</span><span>]
+</span><span style="color:#59c2ff;">rand </span><span>= </span><span style="color:#c2d94c;">&quot;0.4&quot;
+</span></code></pre>
+<p>Поместите эту команду в начало файла game.rs над импортом io: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">use</span><span> rand</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>С крэйтом rand для генерации случайного числа вам нужен метод, чтобы получить ход от бота. В листинге 12 показан этот метод. </p>
+<h4 id="the-bot-move-method">The bot_move method</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_bot_move</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u32 </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> bot_move</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">u32 </span><span style="color:#f29668;">= </span><span>rand</span><span style="color:#f29668;">::</span><span>random</span><span style="color:#f29668;">::</span><span>u32() </span><span style="color:#f29668;">% </span><span style="color:#f29718;">9 </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">while </span><span style="color:#f29668;">!</span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">is_valid_move</span><span>(bot_move) {
+</span><span>        bot_move </span><span style="color:#f29668;">= </span><span>rand</span><span style="color:#f29668;">::</span><span>random</span><span style="color:#f29668;">::</span><span>u32() </span><span style="color:#f29668;">% </span><span style="color:#f29718;">9 </span><span style="color:#f29668;">+ </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Bot played moved at: </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> bot_move)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    bot_move
+</span><span>}
+</span></code></pre>
+<p>Это было безболезненно, правда?</p>
+<p>Этот метод завершает зависимости метода play_turn. Теперь вам нужно создать метод, чтобы проверить, была ли игра выиграна.</p>
+<h2 id="my-chempiony">Мы - чемпионы</h2>
+<p>Теперь вы собираетесь немного поиграться с булевой алгеброй (немного булевой алгебры).</p>
+<h4 id="nemnogo-bulevoi-algebry">Немного булевой алгебры</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">game_is_won</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> all_same_row </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> all_same_col </span><span style="color:#f29668;">= </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for</span><span> index </span><span style="color:#f29668;">in </span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span style="color:#f29718;">3 </span><span>{
+</span><span>        all_same_row </span><span style="color:#f29668;">|=
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[index][</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">== </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[index][</span><span style="color:#f29718;">1</span><span>]
+</span><span>             </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[index][</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">== </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[index][</span><span style="color:#f29718;">2</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>        all_same_col </span><span style="color:#f29668;">|=
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">0</span><span>][index] </span><span style="color:#f29668;">== </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">1</span><span>][index]
+</span><span>             </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">1</span><span>][index] </span><span style="color:#f29668;">== </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">2</span><span>][index]</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> all_same_diag_1 </span><span style="color:#f29668;">=
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">0</span><span>][</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">== </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">1</span><span>][</span><span style="color:#f29718;">1</span><span>]
+</span><span>         </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">1</span><span>][</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">== </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">2</span><span>][</span><span style="color:#f29718;">2</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> all_same_diag_2 </span><span style="color:#f29668;">=
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">0</span><span>][</span><span style="color:#f29718;">2</span><span>] </span><span style="color:#f29668;">== </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">1</span><span>][</span><span style="color:#f29718;">1</span><span>]
+</span><span>         </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">1</span><span>][</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">== </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board[</span><span style="color:#f29718;">2</span><span>][</span><span style="color:#f29718;">0</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        (all_same_row </span><span style="color:#f29668;">||</span><span> all_same_col </span><span style="color:#f29668;">||</span><span> all_same_diag_1 </span><span style="color:#f29668;">||
+</span><span>         all_same_diag_2)
+</span><span>}
+</span></code></pre>
+<p>Во время цикла for вы одновременно проверяете строки и столбцы, чтобы увидеть, выполнено ли условие выигрыша для Tic-Tac-Toe (то есть три X или O подряд). Вы делаете это с помощью | =, что похоже на + =, но вместо оператора сложения он использует оператор или. Затем вы проверяете, совпадают ли все две диагонали с одним и тем же символом. Наконец, вы возвращаете, было ли выполнено какое-либо из условий выигрыша, используя некоторую булеву алгебру. Еще три метода, и готово.</p>
+<h2 id="khoteli-by-vy-snova-sygrat">Хотели бы вы снова сыграть?</h2>
+<p>Если вы вернетесь и посмотрите на метод play_game на карте игровой программы, вы увидите, что код продолжает цикл до тех пор, пока не будет выполнено завершение. Это происходит только в том случае, если метод player_is_finished истинен. Этот метод должен быть основан на ответе игрока: да или нет (метод player_is_finished).</p>
+<h4 id="metod-player-is-finished">Метод player_is_finished</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">player_is_finished</span><span>() </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">bool </span><span>{
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> player_input </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Are you finished playing (y/n)?:&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">match </span><span>io</span><span style="color:#f29668;">::</span><span>stdin()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_line</span><span>( player_input) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> temp </span><span style="color:#f29668;">=</span><span> player_input</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_lowercase</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            temp</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>() </span><span style="color:#f29668;">== </span><span style="color:#c2d94c;">&quot;y&quot; </span><span style="color:#f29668;">||</span><span> temp</span><span style="color:#f29668;">.</span><span style="color:#f07178;">trim</span><span>() </span><span style="color:#f29668;">== </span><span style="color:#c2d94c;">&quot;yes&quot;
+</span><span>        }
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(</span><span style="color:#f29668;">_</span><span>) </span><span style="color:#f29668;">=&gt; </span><span style="color:#f29718;">false</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Когда я изначально писал этот метод, я решил, что было бы лучше, если бы я просто обработал случай «да» ввода игрока, что означает, что все остальные входные данные возвращают ложь. Опять же, это статический метод, потому что он не использует никаких данных, которые несет сам.</p>
+<h2 id="apparatnyi-sbros-ispravliaet-vse">Аппаратный сброс исправляет все</h2>
+<p>Один из последних методов, используемых в play_game, - это сброс, показанный в листинге 15.</p>
+<h4 id="metod-sbrosa">Метод сброса</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">reset</span><span>( </span><span style="color:#f29718;">self</span><span>) {
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>current_turn </span><span style="color:#f29668;">= </span><span>Turn</span><span style="color:#f29668;">::</span><span>Player</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>board </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>        </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;1&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;2&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;3&quot;</span><span>)]</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;4&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;5&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;6&quot;</span><span>)]</span><span style="color:#bfbab0cc;">,
+</span><span>        </span><span style="color:#f07178;">vec!</span><span>[
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;7&quot;</span><span>)</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;8&quot;</span><span>)</span><span style="color:#bfbab0cc;">,
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;9&quot;</span><span>)]</span><span style="color:#bfbab0cc;">,
+</span><span>    ]</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Все, что делает этот метод, - это устанавливает для переменных-членов игры их значения по умолчанию.</p>
+<p>Последний метод, который вам понадобится для завершения игры, - это get_next_turn, показанный в листинге 16.</p>
+<h4 id="metod-get-next-turn">Метод get_next_turn</h4>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_next_turn</span><span>() </span><span style="color:#bfbab0cc;">-&gt;</span><span> Turn {
+</span><span>    </span><span style="color:#ff7733;">match </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>current_turn {
+</span><span>        Turn</span><span style="color:#f29668;">::</span><span>Player </span><span style="color:#f29668;">=&gt; </span><span>Turn</span><span style="color:#f29668;">::</span><span>Bot</span><span style="color:#bfbab0cc;">,
+</span><span>        Turn</span><span style="color:#f29668;">::</span><span>Bot </span><span style="color:#f29668;">=&gt; </span><span>Turn</span><span style="color:#f29668;">::</span><span>Player</span><span style="color:#bfbab0cc;">,
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Этот метод просто проверяет, какой из автоматов включен, и возвращает обратное.</p>
+<h2 id="zapuskaem-i-skompiliruem-igru">Запускаем и скомпилируем игру</h2>
+<p>Когда модуль game.rs завершен, main.rs теперь в той точке, в которой вы можете скомпилировать игру и начать играть (скомпилировать игру).</p>
+<h3 id="skompiliruite-igru">Скомпилируйте игру</h3>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">mod </span><span style="color:#59c2ff;">game</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">use </span><span>game</span><span style="color:#f29668;">::</span><span>Game</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Welcome to Tic-Tac-Toe!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> game </span><span style="color:#f29668;">= </span><span>Game</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    game</span><span style="color:#f29668;">.</span><span style="color:#f07178;">play_game</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Вот и все. Вы только что объявили, что игровой модуль существует в этом проекте с помощью мода, и ввели объект Game в область видимости с использованием. Затем вы создали игровой объект с помощью Game::new() и сказали объекту начать игру. Теперь запустите его с помощью Cargo (Запустите игру).</p>
+<h4 id="zapuskaem-igru">Запускаем игру</h4>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>  cargo run
+</span><span>   Compiling tic_tac_toe v0.1.0...
+</span><span>    Finished dev [unoptimized + debuginfo]...
+</span><span>     Running...
+</span><span>Welcome to Tic-Tac-Toe!
+</span><span>
+</span><span>+---+---+---+
+</span><span>| 1 | 2 | 3 |
+</span><span>+---+---+---+
+</span><span>| 4 | 5 | 6 |
+</span><span>+---+---+---+
+</span><span>| 7 | 8 | 9 |
+</span><span>+---+---+---+
+</span><span>
+</span><span>Please enter your move (an integer between 1 and 9):
+</span><span>...
+</span></code></pre>
+<h2 id="poslednie-mysli">Последние мысли</h2>
+<p>Как вы узнали из этого руководства, Rust - это универсальный язык, который имеет простоту использования Java, C# или Python, но скорость и мощность C или C++. Этот код не только компилируется и быстро, но и все проблемы с памятью и ошибками обрабатываются во время компиляции, а не во время выполнения, сокращая количество человеческих ошибок, возможных в коде.</p>
+<h3 id="sleduiushchie-shagi">Следующие шаги</h3>
+<p>Чтобы увидеть код, который я создал для этой статьи, посетите мой репозиторий GitHub. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Разработка на Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#maket-proekta">Макет проекта</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#zavisimosti-proekta">Зависимости проекта</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#kak-postroit">Как построить</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#kak-proverit">Как проверить</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#tochka-vkhoda-v-programmu">Точка входа в программу</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#deserializatsiia-parametrov"><small>- Десериализация параметров</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#tipy-dannykh"><small>- Типы данных</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#kucha">Куча</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#ogranicheniia">Ограничения</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#v-zavisimosti-ot-rand">В зависимости от Rand</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#logirovanie">Логирование</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#panika">Паника</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#pol-zovatel-skii-obrabotchik-paniki"><small>- Пользовательский обработчик паники</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#vychislit-biudzhet">Вычислить бюджет</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#elf-damp">ELF Дамп</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/developing/on-chain-programs/developing-rust/#primery">Примеры</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Разработка на Rust</h1>
+
+<p>Solana поддерживает написание сетевых программ с использованием языка программирования <a href="https://www.rust-lang.org/">Rust</a>.</p>
+<h2 id="maket-proekta">Макет проекта</h2>
+<p>Программы Solana Rust следуют типичному <a href="https://doc.rust-lang.org/cargo/guide/project-layout.html">макету проекта Rust</a>:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>/inc/
+</span><span>/src/
+</span><span>/Cargo.toml
+</span></code></pre>
+<p>Программы Solana Rust могут напрямую зависеть друг от друга, чтобы получить доступ к помощникам инструкций при выполнении <a href="developing/programming-model/calling-between-programs.md#cross-program-invocations">межпрограммных вызовов</a>. При этом важно не использовать символы точки входа зависимой программы, поскольку они могут конфликтовать с собственными символами программы. Чтобы избежать этого, программы должны определить функцию «no-entrypoint» в «Cargo.toml» и использовать для исключения точки входа.</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token/program/Cargo.toml#L12">Определить функцию</a></li>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token/program/src/lib.rs#L12">Исключить точку входа</a></li>
+</ul>
+<p>Затем, когда другие программы включают эту программу в качестве зависимости, они должны делать это с помощью функции «no-entrypoint».</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana-program-library/blob/fca9836a2c8e18fc7e3595287484e9acd60a8f64/token-swap/program/Cargo.toml#L22">Включить без точки входа</a></li>
+</ul>
+<h2 id="zavisimosti-proekta">Зависимости проекта</h2>
+<p>Как минимум, программы Solana Rust должны загружаться в крейт <a href="https://crates.io/crates/solana-program">solana-program</a>.</p>
+<p>Программы Solana BPF имеют некоторые ограничения, которые могут препятствовать включению некоторых ящиков в качестве зависимостей или требовать специальной обработки.</p>
+<p>Например:</p>
+<ul>
+<li>Ящики, требующие, чтобы архитектура была подмножеством тех, которые поддерживаются официальной цепочкой инструментов. Для этого нет обходного пути, если только этот крейт не разветвлен и к нему не добавлены проверки архитектуры BPF.</li>
+<li>Ящики могут зависеть от <code>rand</code>, который не поддерживается в детерминированной программной среде Solana. Чтобы включить крейт, зависящий от ранда, обратитесь к Зависит от ранда.</li>
+<li>Крейты могут переполнять стек, даже если код переполнения стека не включен в саму программу. Для получения дополнительной информации см. <a href="overview/">Стек</a>.</li>
+</ul>
+<h2 id="kak-postroit">Как построить</h2>
+<p>Сначала настройте среду:</p>
+<ul>
+<li>Установите последнюю стабильную версию Rust с https://rustup.rs/</li>
+<li>Установите последние инструменты командной строки Solana с https://docs.solana.com/cli/install-solana-cli-tools.</li>
+</ul>
+<p>Обычная сборка груза доступна для создания программ на вашем хост-компьютере, которые можно использовать для модульного тестирования:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> cargo build
+</span></code></pre>
+<p>Чтобы создать специальную программу, такую как токен SPL, для цели Solana BPF, которую можно развернуть в кластере:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> cd </span><span style="color:#f29668;">&lt;</span><span>the program directory</span><span style="color:#f29668;">&gt;
+</span><span style="color:#ffb454;">$</span><span> cargo build-bpf
+</span></code></pre>
+<h2 id="kak-proverit">Как проверить</h2>
+<p>Программы Solana можно тестировать с помощью традиционного механизма «грузового теста».
+прямое выполнение программных функций.</p>
+<p>Чтобы упростить тестирование в среде, которая больше соответствует рабочему кластеру, разработчики могут использовать крейт <a href="https://crates.io/crates/solana-program-test"><code>program-test</code></a>. Крейт «program-test» запускает локальный экземпляр среды выполнения и позволяет тестам отправлять несколько транзакций, сохраняя состояние на время теста.</p>
+<p>Для получения дополнительной информации <a href="https://github.com/solana-labs/solana-program-library/blob/master/examples/rust/sysvar/tests/functional.rs">пример теста в sysvar</a> показывает, как инструкция, содержащая sysvar отправляется и обрабатывается программой.</p>
+<h2 id="tochka-vkhoda-v-programmu">Точка входа в программу</h2>
+<p>Программы экспортируют известный символ точки входа, который среда выполнения Solana ищет и вызывает при вызове программы. Solana поддерживает несколько <a href="overview.md#versions">версий загрузчика BPF</a>, и точки входа могут различаться между ними. Программы должны быть написаны и развернуты для одного и того же загрузчика. Подробнее см. <a href="%D0%BE%D0%B1%D0%B7%D0%BE%D1%80#%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D1%87%D0%B8%D0%BA%D0%B8">обзор</a>.</p>
+<p>В настоящее время поддерживаются два загрузчика <a href="https://github.com/solana-labs/solana/blob/d9b0fc0e3eec67dfe4a97d9298b15969b2804fab/sdk/program/src/bpf_loader.rs#L17">BPF Loader</a> и [загрузчик BPF устарел](https: //github.com/solana-labs/solana/blob/d9b0fc0e3eec67dfe4a97d9298b15969b2804fab/sdk/program/src/bpf_loader_deprecated.rs#L14)</p>
+<p>Они оба имеют одно и то же необработанное определение точки входа, ниже приведен необработанный символ, который ищет и вызывает среда выполнения:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">pub unsafe extern </span><span style="color:#c2d94c;">&quot;C&quot; </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">entrypoint</span><span>(</span><span style="color:#f29718;">input</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">*mut u8</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">u64</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Эта точка входа принимает общий массив байтов, который содержит сериализованные параметры программы (идентификатор программы, учетные записи, данные инструкций и т. д.). Для десериализации параметров каждый загрузчик содержит свой собственный макрос-оболочку, который экспортирует необработанную точку входа, десериализует параметры, вызывает определяемую пользователем функцию обработки инструкций и возвращает результаты.</p>
+<p>Вы можете найти макросы точки входа здесь:</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana/blob/9b1199cdb1b391b00d510ed7fc4866bdf6ee4eb3/sdk/program/src/entrypoint.rs#L42">Макрос точки входа загрузчика BPF</a></li>
+<li><a href="https://github.com/solana-labs/solana/blob/9b1199cdb1b391b00d510ed7fc4866bdf6ee4eb3/sdk/program/src/entrypoint_deprecated.rs#L38">Макрос точки входа BPF Loader устарел</a></li>
+</ul>
+<p>Программно определяемая функция обработки инструкций, которую вызывает макрос точки входа, должна иметь следующую форму:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">pub type </span><span style="color:#59c2ff;">ProcessInstruction </span><span style="color:#f29668;">=
+</span><span>    </span><span style="color:#ff7733;">fn</span><span>(program_id</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey</span><span style="color:#bfbab0cc;">,</span><span> accounts</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[AccountInfo]</span><span style="color:#bfbab0cc;">,</span><span> instruction_data</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">u8</span><span>]) </span><span style="color:#bfbab0cc;">-&gt;</span><span> ProgramResult</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Обратитесь к <a href="https://github.com/solana-labs/example-helloworld/blob/1e049076e10be8712b1a725d2d886ce0cd036b2e/src/program-rust/src/lib.rs#L19">использованию точки входа в helloworld</a> в качестве примера того, как подходят друг-другу.</p>
+<h3 id="deserializatsiia-parametrov">Десериализация параметров</h3>
+<p>Каждый загрузчик предоставляет вспомогательную функцию, которая десериализует входные параметры программы в типы Rust. Макросы точки входа автоматически вызывают помощник десериализации:</p>
+<ul>
+<li><a href="https://github.com/solana-labs/solana/blob/d9b0fc0e3eec67dfe4a97d9298b15969b2804fab/sdk/program/src/entrypoint.rs#L146">Десериализация загрузчика BPF</a></li>
+<li><a href="https://github.com/solana-labs/solana/blob/d9b0fc0e3eec67dfe4a97d9298b15969b2804fab/sdk/program/src/entrypoint_deprecated.rs#L57">Загрузчик BPF отказался от десериализации</a></li>
+</ul>
+<p>Некоторым программам может потребоваться выполнить десериализацию самостоятельно, и они могут это сделать, предоставив собственную реализацию необработанной точки входа. Обратите внимание, что предоставленные функции десериализации сохраняют ссылки на сериализованный массив байтов для переменных, которые программа может изменять (lamports, данные учетной записи). Причина этого в том, что по возвращении загрузчик прочитает эти изменения, чтобы их можно было зафиксировать. Если программа реализует собственную функцию десериализации, она должна гарантировать, что любые изменения, которые программа хочет зафиксировать, будут записаны обратно во входной массив байтов.</p>
+<p>Подробности о том, как загрузчик сериализует входные данные программы, можно найти в документах <a href="overview.md#input-parameter-serialization">Сериализация входных параметров</a>.</p>
+<h3 id="tipy-dannykh">Типы данных</h3>
+<p>Макросы точки входа загрузчика вызывают функцию процессора команд, определяемую программой, со следующими параметрами:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>program_id</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>Pubkey</span><span style="color:#bfbab0cc;">,
+</span><span>accounts</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[AccountInfo]</span><span style="color:#bfbab0cc;">,
+</span><span>instruction_data</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>[</span><span style="color:#ff7733;">u8</span><span>]
+</span></code></pre>
+<p>Идентификатор программы — это открытый ключ выполняемой в данный момент программы.</p>
+<p>Учетные записи представляют собой упорядоченный фрагмент учетных записей, на которые ссылается инструкция и представленный в виде <a href="https://github.com/solana-labs/solana/blob/d9b0fc0e3eec67dfe4a97d9298b15969b2804fab/sdk/program/src/account_info.rs#L12">AccountInfo</a> структуры. Место счета в массиве указывает на его значение, например, при передаче лэмпортов инструкция может определить первый счет как источник, а второй как место назначения.</p>
+<p>Члены структуры <code>AccountInfo</code> доступны только для чтения, за исключением <code>lamports</code> и <code>data</code>. Оба могут быть изменены программой в соответствии с <a href="developing/programming-model/accounts.md#policy">политикой применения во время выполнения</a>. Оба этих члена защищены конструкцией Rust <code>RefCell</code>, поэтому они должны быть заимствованы для чтения или записи в них. Причина этого в том, что они оба указывают на исходный массив входных байтов, но в срезе учетных записей может быть несколько записей, которые указывают на одну и ту же учетную запись. Использование <code>RefCell</code> гарантирует, что программа случайно не выполнит перекрывающиеся операции чтения/записи одних и тех же базовых данных через несколько структур <code>AccountInfo</code>. Если программа реализует собственную функцию десериализации, следует позаботиться о правильной обработке повторяющихся учетных записей.</p>
+<p>Данные инструкции представляют собой массив байтов общего назначения из <a href="%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0/%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C/%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D0%B8%D0%B8.md#instruction-data">данных инструкции инструкции</a>, которые обрабатываются.</p>
+<h2 id="kucha">Куча</h2>
+<p>Программы на Rust реализуют кучу напрямую, определяя пользовательский [<code>global_allocator</code>]</p>
+<p>Программы могут реализовывать свой собственный <code>global_allocator</code> в зависимости от своих конкретных потребностей.
+Дополнительные сведения см. в пример пользовательской кучи.</p>
+<h2 id="ogranicheniia">Ограничения</h2>
+<p>Сетевые программы Rust поддерживают большинство Rust libstd, libcore и liballoc, а также многие сторонние крейты.</p>
+<p>Существуют некоторые ограничения, поскольку эти программы работают в однопоточной среде с ограниченными ресурсами и должны быть детерминированными:</p>
+<ul>
+<li>Нет доступа к
+<ul>
+<li><code>rand</code></li>
+<li><code>std::fs</code></li>
+<li><code>std::net</code></li>
+<li><code>std::os</code></li>
+<li><code>std::future</code></li>
+<li><code>std::process</code></li>
+<li><code>std::sync</code></li>
+<li><code>std::task</code></li>
+<li><code>std::thread</code></li>
+<li><code>std::time</code></li>
+</ul>
+</li>
+<li>Ограниченный доступ к:
+<ul>
+<li><code>std::hash</code></li>
+<li><code>std::os</code></li>
+</ul>
+</li>
+<li>Bincode чрезвычайно затратен в вычислительном отношении как в циклах, так и в глубине вызовов, и его следует избегать.</li>
+<li>Следует избегать форматирования строк, так как оно требует значительных вычислительных ресурсов.</li>
+<li>Нет поддержки <code>println!</code>, <code>print!</code>, вместо этого следует использовать Solana [помощники ведения журнала](# logging).</li>
+<li>Среда выполнения накладывает ограничение на количество инструкций, которые программа может выполнить во время обработки одной инструкции. См. <a href="developing/programming-model/runtime.md#compute-budget">вычислительный бюджет</a> для получения дополнительной информации.</li>
+</ul>
+<h2 id="v-zavisimosti-ot-rand">В зависимости от Rand</h2>
+<p>Программы вынуждены работать детерминировано, поэтому случайные числа недоступны. Иногда программа может зависеть от ящика, который сам зависит от <code>rand</code>, даже если программа не использует какие-либо функции случайных чисел. Если программа зависит от <code>rand</code>, компиляция завершится ошибкой, потому что для Solana нет поддержки <code>get-random</code>. Обычно ошибка выглядит так:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error: target is not supported, for more information see: https://docs.rs/getrandom/#unsupported-targets
+</span><span>   --&gt; /Users/jack/.cargo/registry/src/github.com-1ecc6299db9ec823/getrandom-0.1.14/src/lib.rs:257:9
+</span><span>    |
+</span><span>257 | /         compile_error!(&quot;\
+</span><span>258 | |             target is not supported, for more information see: \
+</span><span>259 | |             https://docs.rs/getrandom/#unsupported-targets\
+</span><span>260 | |         &quot;);
+</span><span>    | |___________^
+</span></code></pre>
+<p>Чтобы обойти эту проблему с зависимостями, добавьте следующую зависимость в файл <code>Cargo.toml</code> программы:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>getrandom = { version = &quot;0.1.14&quot;, features = [&quot;dummy&quot;] }
+</span></code></pre>
+<p>или если зависимость от getrandom v0.2, добавьте:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>getrandom = { version = &quot;0.2.2&quot;, features = [&quot;custom&quot;] }
+</span></code></pre>
+<h2 id="logirovanie">Логирование</h2>
+<p>Макрос <code>println!</code> в Rust требует больших вычислительных ресурсов и не поддерживается. Вместо этого предоставляется вспомогательный макрос <a href="https://github.com/solana-labs/solana/blob/d9b0fc0e3eec67dfe4a97d9298b15969b2804fab/sdk/program/src/log.rs#L33"><code>msg!</code></a>.</p>
+<p><code>msg!</code> имеет две формы:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">msg!</span><span>(</span><span style="color:#c2d94c;">&quot;A string&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>или</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">msg!</span><span>(</span><span style="color:#f29718;">0_64</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1_64</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2_64</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3_64</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">4_64</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Обе формы выводят результаты в журналы программы. Если программа того пожелает, она может эмулировать <code>println!</code>, используя <code>format!</code>:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">msg!</span><span>(</span><span style="color:#c2d94c;">&quot;Some variable: {:?}&quot;</span><span style="color:#bfbab0cc;">,</span><span> variable)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Раздел <a href="debugging.md#logging">debugging</a> содержит больше информации о работе с журналами программ. Rust examples содержит пример ведения журнала.</p>
+<h2 id="panika">Паника</h2>
+<p><code>panic!</code>, <code>assert!</code> и результаты внутренней паники Rust по умолчанию печатаются в <a href="debugging.md#logging">журналы программы</a>.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>INFO  solana_runtime::message_processor] Finalized account CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ
+</span><span>INFO  solana_runtime::message_processor] Call BPF program CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ
+</span><span>INFO  solana_runtime::message_processor] Program log: Panicked at: &#39;assertion failed: `(left == right)`
+</span><span>      left: `1`,
+</span><span>     right: `2`&#39;, rust/panic/src/lib.rs:22:5
+</span><span>INFO  solana_runtime::message_processor] BPF program consumed 5453 of 200000 units
+</span><span>INFO  solana_runtime::message_processor] BPF program CGLhHSuWsp1gT4B7MY2KACqp9RUwQRhcUFfVSuxpSajZ failed: BPF program panicked
+</span></code></pre>
+<h3 id="pol-zovatel-skii-obrabotchik-paniki">Пользовательский обработчик паники</h3>
+<p>Программы могут переопределить обработчик паники по умолчанию, предоставив свою собственную реализацию.</p>
+<p>Сначала определите функцию <code>custom-panic</code> в файле <code>Cargo.toml</code> программы.</p>
+<pre data-lang="toml" style="background-color:#0f1419;color:#bfbab0;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[</span><span style="color:#59c2ff;">features</span><span>]
+</span><span style="color:#59c2ff;">default </span><span>= [</span><span style="color:#c2d94c;">&quot;custom-panic&quot;</span><span>]
+</span><span style="color:#59c2ff;">custom-panic </span><span>= []
+</span></code></pre>
+<p>Then provide a custom implementation of the panic handler:</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(</span><span style="color:#ffb454;">all</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;custom-panic&quot;</span><span style="color:#bfbab0cc;">,</span><span> target_arch </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;bpf&quot;</span><span>))]
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">custom_panic</span><span>(</span><span style="color:#f29718;">info</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>core</span><span style="color:#f29668;">::</span><span>panic</span><span style="color:#f29668;">::</span><span>PanicInfo&lt;&#39;</span><span style="color:#f29668;">_</span><span>&gt;) {
+</span><span>    solana_program</span><span style="color:#f29668;">::</span><span>msg</span><span style="color:#f29668;">!</span><span>(</span><span style="color:#c2d94c;">&quot;program custom panic enabled&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    solana_program</span><span style="color:#f29668;">::</span><span>msg</span><span style="color:#f29668;">!</span><span>(</span><span style="color:#c2d94c;">&quot;{}&quot;</span><span style="color:#bfbab0cc;">,</span><span> info)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>В приведенном выше фрагменте показана реализация по умолчанию, но разработчики могут заменить ее чем-то, что лучше соответствует их потребностям.</p>
+<p>Одним из побочных эффектов поддержки полных сообщений паники по умолчанию является то, что программы несут затраты, связанные с добавлением большего количества реализации Rust <code>libstd</code> в общий объект программы. Типичные программы уже будут использовать достаточное количество <code>libstd</code> и могут не заметить значительного увеличения размера общего объекта. Но программы, которые явно пытаются быть очень маленькими, избегая <code>libstd</code>, могут иметь значительное влияние (~ 25 КБ). Чтобы устранить это влияние, программы могут предоставлять свой собственный обработчик паники с пустой реализацией.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">cfg</span><span>(</span><span style="color:#ffb454;">all</span><span>(feature </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;custom-panic&quot;</span><span style="color:#bfbab0cc;">,</span><span> target_arch </span><span style="color:#f29668;">= </span><span style="color:#c2d94c;">&quot;bpf&quot;</span><span>))]
+</span><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">no_mangle</span><span>]
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">custom_panic</span><span>(</span><span style="color:#f29718;">info</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>core</span><span style="color:#f29668;">::</span><span>panic</span><span style="color:#f29668;">::</span><span>PanicInfo&lt;&#39;</span><span style="color:#f29668;">_</span><span>&gt;) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Do nothing to save space
+</span><span>}
+</span></code></pre>
+<h2 id="vychislit-biudzhet">Вычислить бюджет</h2>
+<p>Используйте системный вызов <a href="https://github.com/solana-labs/solana/blob/d9b0fc0e3eec67dfe4a97d9298b15969b2804fab/sdk/program/src/log.rs#L141"><code>sol_log_compute_units()</code></a>, чтобы записать сообщение, содержащее оставшееся число. вычислительных единиц, которые программа может использовать, прежде чем выполнение будет остановлено</p>
+<p>См. <a href="developing/programming-model/runtime.md#compute-budget">вычислить бюджет</a> для получения дополнительной информации.</p>
+<h2 id="elf-damp">ELF Дамп</h2>
+<p>Внутреннее устройство общего объекта BPF можно сбросить в текстовый файл, чтобы получить более полное представление о составе программы и о том, что она может делать во время выполнения. Дамп будет содержать как информацию об ELF, так и список всех символов и инструкций, которые их реализуют. Некоторые из сообщений журнала ошибок загрузчика BPF будут ссылаться на определенные номера инструкций, в которых произошла ошибка. Эти ссылки можно найти в дампе ELF, чтобы идентифицировать нарушающую инструкцию и ее контекст.</p>
+<p>Чтобы создать файл дампа:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> cd </span><span style="color:#f29668;">&lt;</span><span>program directory</span><span style="color:#f29668;">&gt;
+</span><span style="color:#ffb454;">$</span><span> cargo build-bpf</span><span style="color:#f29718;"> --dump
+</span></code></pre>
+<h2 id="primery">Примеры</h2>
+<p>Репозиторий <a href="https://github.com/solana-labs/solana-program-library/tree/master/examples/rust">Solana Program Library github</a> содержит коллекцию примеров Rust.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Простая оплата и проверка состояния | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#naivnyi-podkhod">Наивный подход</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#legkie-klienty">Легкие клиенты</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#kvitantsii">Квитанции</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#dokazatel-stvo-vkliucheniia-tranzaktsii"><small>- Доказательство включения транзакции</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#proverka-sostoianiia-akkaunta"><small>- Проверка состояния аккаунта</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#golosa-validatora"><small>- Голоса валидатора</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#tsepochka-zapisei"><small>- Цепочка записей</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#proverka"><small>- Проверка</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/simple-payment-and-state-verification/#sinteticheskoe-sostoianie"><small>- Синтетическое состояние</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Простая оплата и проверка состояния</h1>
+
+<p>Часто полезно разрешить клиентам с низким уровнем ресурсов участвовать в кластере Solana. Будь то экономическое участие или исполнение контракта, проверка того, что деятельность клиента была принята сетью, обычно обходится дорого. В этом предложении излагается механизм, с помощью которого такие клиенты могут подтвердить, что их действия были зафиксированы в состоянии реестра, с минимальными затратами ресурсов и доверием третьих сторон.</p>
+<h2 id="naivnyi-podkhod">Наивный подход</h2>
+<p>Валидаторы хранят подписи недавно подтвержденных транзакций в течение короткого периода времени, чтобы гарантировать, что они не будут обработаны более одного раза. Валидаторы предоставляют конечную точку JSON RPC, которую клиенты могут использовать для запроса кластера, если транзакция была недавно обработана. Валидаторы также предоставляют уведомление PubSub, с помощью которого клиент регистрируется для получения уведомления, когда данная подпись наблюдается валидатором. Хотя эти два механизма позволяют клиенту проверить платеж, они не являются доказательством и полагаются на полное доверие валидатору.</p>
+<p>Мы опишем способ минимизировать это доверие, используя Merkle Proofs, чтобы закрепить ответ валидатора в леджере, позволяя клиенту самостоятельно подтвердить, что достаточное количество предпочитаемых им валидаторов подтвердило транзакцию. Требование нескольких аттестаций валидатора еще больше снижает доверие к валидатору, поскольку увеличивает как техническую, так и экономическую сложность компрометации нескольких других участников сети.</p>
+<h2 id="legkie-klienty">Легкие клиенты</h2>
+<p>«Легкий клиент» — это участник кластера, который сам не запускает валидатор. Этот легкий клиент обеспечит более высокий уровень безопасности, чем доверие к удаленному валидатору, не требуя, чтобы легкий клиент тратил много ресурсов на проверку реестра.</p>
+<p>Вместо того, чтобы предоставлять подписи транзакций непосредственно легкому клиенту, валидатор вместо этого генерирует доказательство Меркла из интересующей транзакции в корень дерева Меркла всех транзакций в блоке включения. Этот Merkle Root хранится в записи реестра, за которую голосуют валидаторы, что обеспечивает легитимность консенсуса. Дополнительный уровень безопасности для легкого клиента зависит от начального канонического набора валидаторов, которых легкий клиент считает заинтересованными сторонами кластера. По мере изменения этого набора клиент может обновить свой внутренний набор известных валидаторов с помощью <a href="simple-payment-and-state-verification.md#receipts">квитанций</a>. Это может стать проблемой при большом количестве делегированных ставок.</p>
+<p>Сами валидаторы могут захотеть использовать облегченные клиентские API из соображений производительности.
+Например, во время первоначального запуска валидатора валидатор может использовать предоставленную кластером контрольную точку состояния и проверять ее с помощью квитанции.</p>
+<h2 id="kvitantsii">Квитанции</h2>
+<p>Квитанция является минимальным доказательством того, что; транзакция была включена в блок, что за этот блок проголосовали предпочитаемые клиентом наборы валидаторов и что голоса достигли желаемой глубины подтверждения.</p>
+<h3 id="dokazatel-stvo-vkliucheniia-tranzaktsii">Доказательство включения транзакции</h3>
+<p>Доказательство включения транзакции — это структура данных, которая содержит путь Меркла от транзакции через Entry-Merkle к Block-Merkle, который включается в Bank-Hash с требуемым набором голосов валидатора. Цепочка записей PoH, содержащая последующие голоса валидатора, полученные из Bank-Hash, является доказательством подтверждения.</p>
+<h4 id="tranzaktsiia-merkle">Транзакция Меркле</h4>
+<p>Entry-Merkle — это Merkle Root, включающий все транзакции в данной записи, отсортированные по подписи. Каждая транзакция в записи уже мерклена здесь:
+https://github.com/solana-labs/solana/blob/b6bfed64cb159ee67bb6bdbaefc7f833bbed3563/ledger/src/entry.rs#L205.
+Это означает, что мы можем показать, что транзакция «T» была включена в запись «E».</p>
+<p>Block-Merkle — это корень Merkle всех Entry-Merkles, секвенированных в блоке.</p>
+<p><img src="/img/spv-block-merkle.svg" alt="Block Merkle Diagram" /></p>
+<p>Вместе два доказательства меркла показывают, что транзакция «T» была включена в блок с банковским хэшем «B».</p>
+<p>Accounts-Hash — это хэш конкатенации хэшей состояния каждой учетной записи, измененной в течение текущего слота.</p>
+<p>Статус транзакции необходим для квитанции, потому что квитанция о состоянии создается для блока. В блоке могут появиться две транзакции с одним и тем же состоянием, и поэтому невозможно сделать вывод только по состоянию, успешно или неудачно транзакция, зафиксированная в реестре, изменила предполагаемое состояние. Может потребоваться кодирование не полного кода состояния, а одного бита состояния, указывающего на успех транзакции.</p>
+<p>В настоящее время Block-Merkle не реализован, поэтому для проверки того, что «E» была записью в блоке с хэшем банка «B», нам нужно будет предоставить все хэши записей в блоке. В идеале этот Блок-Меркл должен быть реализован, так как альтернатива очень неэффективна.</p>
+<h4 id="zagolovki-blokov">Заголовки блоков</h4>
+<p>Чтобы проверить доказательства включения транзакций, легкие клиенты должны иметь возможность делать выводы о топологии разветвлений в сети.</p>
+<p>Более конкретно, легкий клиент должен будет отслеживать входящие заголовки блоков, чтобы, имея два хэша банка для блоков «А» и «В», он мог определить, является ли «А» предком «В» (ниже раздел «Оптимистическое подтверждение»). Доказательство объясняет, почему!). Содержимое заголовка — это поля, необходимые для вычисления хэша банка.</p>
+<p>Bank-Hash — это хэш объединения Block-Merkle и Accounts-Hash, описанный выше в разделе «Transaction Merkle».</p>
+<p><img src="/img/spv-bank-hash.svg" alt="Bank Hash Diagram" /></p>
+<p>В коде:</p>
+<p>https://github.com/solana-labs/solana/blob/b6bfed64cb159ee67bb6bdbaefc7f833bbed3563/runtime/src/bank.rs#L3468-L3473</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>        let mut hash = hashv(&amp;[
+</span><span>            // bank hash of the parent block
+</span><span>            self.parent_hash.as_ref(),
+</span><span>            // hash of all the modifed accounts
+</span><span>            accounts_delta_hash.hash.as_ref(),
+</span><span>            // Number of signatures processed in this block
+</span><span>            &amp;signature_count_buf,
+</span><span>            // Last PoH hash in this block
+</span><span>            self.latest_blockhash().as_ref(),
+</span><span>        ]);
+</span></code></pre>
+<p>Хорошее место для реализации этой логики наряду с существующей логикой потоковой передачи в логике воспроизведения валидатора: https://github.com/solana-labs/solana/blob/b6bfed64cb159ee67bb6bdbaefc7f833bbed3563/core/src/replay_stage.rs#L1092-L1096</p>
+<h4 id="optimisticheskoe-podtverzhdenie">Оптимистическое подтверждение</h4>
+<p>В настоящее время оптимистичное подтверждение обнаруживается с помощью прослушивателя, который отслеживает сплетни и конвейер воспроизведения для голосов:
+https://github.com/solana-labs/solana/blob/b6bfed64cb159ee67bb6bdbaefc7f833bbed3563/core/src/cluster_info_vote_listener.rs#L604-L614.</p>
+<p>Каждое голосование представляет собой подписанную транзакцию, которая включает в себя банковский хэш блока, за который проголосовал валидатор, то есть «B» из раздела «Транзакция Merkle» выше.
+Как только определенный порог <code>T</code> сети проголосовал за блок, блок считается оптимально подтвержденным. Голоса, сделанные этой группой валидаторов «T», необходимы, чтобы показать, что блок с хэшем банка «B» был оптимистично подтвержден.</p>
+<p>Однако, за исключением некоторых метаданных, сами подписанные голоса в настоящее время нигде не хранятся, поэтому их нельзя получить по запросу. Эти голоса, вероятно, должны быть сохранены в базе данных Rocksdb, проиндексированы ключом <code>(Slot, Hash, Pubkey)</code>, который представляет слот голосования, банковский хеш голосования и публичный ключ счета голосования, ответственный за голосование.</p>
+<p>Вместе доказательства меркла транзакции и оптимистического подтверждения могут быть предоставлены подписчикам через RPC путем расширения существующей логики подписки подписи. Клиенты, подписавшиеся на уровень подтверждения «Подтверждено», уже уведомляются об обнаружении оптимистичного подтверждения, можно указать флаг, сигнализирующий о том, что два приведенных выше доказательства также должны быть возвращены.</p>
+<p>Важно отметить, что оптимистическое подтверждение «B» также подразумевает, что все блоки-предки «B» также будут подтверждены оптимистично, а также что не все блоки будут подтверждены оптимистично.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>B -&gt; B&#39;
+</span></code></pre>
+<p>Таким образом, в приведенном выше примере, если блок «B» оптимально подтвержден, то и «B» тоже. Таким образом, если транзакция была в блоке «B», меркл транзакции в доказательстве будет для блока «B», но голоса, представленные в доказательстве, будут для блока «B». Вот почему заголовки в разделе «Заголовки блока» выше важны, клиент должен будет убедиться, что «B» действительно является предком «B».</p>
+<h4 id="dokazatel-stvo-raspredeleniia-doli">Доказательство распределения доли</h4>
+<p>Получив приведенные выше доказательства меркла транзакции и оптимистического подтверждения, клиент может убедиться, что транзакция «T» была подтверждена оптимистично в блоке с банковским хэшем «B». Последний недостающий элемент — это то, как проверить, что голоса в приведенных выше оптимистичных доказательствах действительно составляют действительный «T» процент от ставки, необходимой для соблюдения гарантий безопасности «оптимистического подтверждения».</p>
+<p>Один из способов приблизиться к этому может состоять в том, чтобы для каждой эпохи, когда набор ставок меняется, записывать все доли в системную учетную запись, а затем валидаторы подписывались на эту системную учетную запись. Затем полные узлы могут предоставить меркл, доказывающий, что состояние системной учетной записи было обновлено в некотором блоке «B», а затем показать, что блок «B» был оптимистично подтвержден/укоренен.</p>
+<h3 id="proverka-sostoianiia-akkaunta">Проверка состояния аккаунта</h3>
+<p>Состояние счета (баланс или другие данные) можно проверить, отправив транзакцию с инструкцией <strong><em>TBD</em></strong> в кластер. Затем клиент может использовать доказательство включения транзакции, чтобы проверить, согласен ли кластер с тем, что учетная запись достигла ожидаемого состояния.</p>
+<h3 id="golosa-validatora">Голоса валидатора</h3>
+<p>Лидеры должны объединить голоса валидатора по весу стейка в единую запись.
+Это уменьшит количество записей, необходимых для создания квитанции.</p>
+<h3 id="tsepochka-zapisei">Цепочка записей</h3>
+<p>Квитанция имеет PoH-ссылку от корня платежа или состояния Merkle Path к списку последовательных голосов проверки.</p>
+<p>Он содержит следующее:</p>
+<ul>
+<li>Транзакция -&gt; Вход-Меркле -&gt; Блок-Меркле -&gt; Банк-Хэш</li>
+</ul>
+<p>И вектор записей PoH:</p>
+<ul>
+<li>Записи голосования валидатора</li>
+<li>Клещи</li>
+<li>Легкие записи</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>/// This Entry definition skips over the transactions and only contains the
+</span><span>/// hash of the transactions used to modify PoH.
+</span><span>LightEntry {
+</span><span>    /// The number of hashes since the previous Entry ID.
+</span><span>    pub num_hashes: u64,
+</span><span>    /// The SHA-256 hash `num_hashes` after the previous Entry ID.
+</span><span>    hash: Hash,
+</span><span>    /// The Merkle Root of the transactions encoded into the Entry.
+</span><span>    entry_hash: Hash,
+</span><span>}
+</span></code></pre>
+<p>Легкие записи реконструируются из записей и просто показывают запись Merkle Root, которая была смешана с хэшем PoH, вместо полного набора транзакций.</p>
+<p>Клиентам не требуется начальное состояние голосования. Алгоритм <a href="../implemented-proposals/tower-bft/">выбора форка</a> определен таким образом, что только голоса, которые появляются после транзакции, обеспечивают окончательность транзакции, и окончательность не зависит от начального состояния.</p>
+<h3 id="proverka">Проверка</h3>
+<p>Легкий клиент, который знает о валидаторах набора квалифицированного большинства, может проверить получение, следуя Пути Меркла к цепочке PoH. Block-Merkle — это корень Merkle, который будет отображаться в голосовании, включенном в Заявку. Легкий клиент может имитировать <a href="../implemented-proposals/tower-bft/">выбор форка</a> для последовательных голосований и убедиться, что получение подтверждено при желаемом пороге блокировки.</p>
+<h3 id="sinteticheskoe-sostoianie">Синтетическое состояние</h3>
+<p>Синтетическое состояние должно быть вычислено в Bank-Hash вместе с состоянием, сгенерированным банком.</p>
+<p>Например:</p>
+<ul>
+<li>Счета валидатора эпохи, их ставки и веса.</li>
+<li>Расчетные ставки комиссионных</li>
+</ul>
+<p>Эти значения должны иметь запись в Bank-Hash. Они должны жить под известными учетными записями и, следовательно, иметь индекс в конкатенации хэшей.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

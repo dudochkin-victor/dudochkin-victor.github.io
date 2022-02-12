@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Кошелек файловой системы | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/file-system-wallet/#prezhde-chem-vy-nachnete">Прежде чем вы начнете</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/file-system-wallet/#sozdanie-pary-kliuchei-koshel-ka-failovoi-sistemy">Создание пары ключей кошелька файловой системы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/file-system-wallet/#sver-te-svoi-adres-s-failom-pary-kliuchei">Сверьте свой адрес с файлом пары ключей</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/wallet-guide/file-system-wallet/#sozdanie-neskol-kikh-adresov-koshel-ka-failovoi-sistemy">Создание нескольких адресов кошелька файловой системы</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Кошелек файловой системы</h1>
+
+<p>В этом документе описывается, как создать и использовать кошелек файловой системы с инструментами Solana CLI. Кошелек файловой системы существует в виде незашифрованного файла пары ключей в файловой системе вашего компьютера.</p>
+<blockquote>
+<p>Кошельки файловой системы являются <strong>наименее безопасным</strong> методом хранения токенов SOL. Хранение большого количества токенов в кошельке файловой системы <strong>не рекомендуется</strong>.</p>
+</blockquote>
+<h2 id="prezhde-chem-vy-nachnete">Прежде чем вы начнете</h2>
+<p>Убедитесь, что у вас есть
+<a href="../cli/install-solana-cli-tools/">установлены инструменты командной строки Solana</a></p>
+<h2 id="sozdanie-pary-kliuchei-koshel-ka-failovoi-sistemy">Создание пары ключей кошелька файловой системы</h2>
+<p>Используйте инструмент командной строки Solana solana-keygen для создания файлов пары ключей. Например, запустите из командной строки следующее:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">mkdir </span><span style="font-style:italic;color:#39bae6;">~</span><span>/my-solana-wallet
+</span><span style="color:#ffb454;">solana-keygen</span><span> new</span><span style="color:#f29718;"> --outfile </span><span style="font-style:italic;color:#39bae6;">~</span><span>/my-solana-wallet/my-keypair.json
+</span></code></pre>
+<p>Этот файл содержит вашу <strong>незашифрованную</strong> пару ключей. На самом деле, даже если вы укажете пароль, этот пароль применяется к исходной фразе восстановления, а не к файлу. Не делитесь этим файлом с другими. Любой, у кого есть доступ к этому файлу, будет иметь доступ ко всем токенам, отправленным на его открытый ключ. Вместо этого вы должны поделиться только его открытым ключом. Чтобы отобразить его открытый ключ, запустите:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> pubkey </span><span style="font-style:italic;color:#39bae6;">~</span><span>/my-solana-wallet/my-keypair.json
+</span></code></pre>
+<p>Он выведет строку символов, например:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>ErRr1caKzK8L8nn4xmEWtimYRiTCAZXjBtVphuZ5vMKy
+</span></code></pre>
+<p>Это открытый ключ, соответствующий паре ключей в <code>~/my-solana-wallet/my-keypair.json</code>. Открытый ключ файла пары ключей — это ваш <em>адрес кошелька</em>.</p>
+<h2 id="sver-te-svoi-adres-s-failom-pary-kliuchei">Сверьте свой адрес с файлом пары ключей</h2>
+<p>Чтобы убедиться, что у вас есть закрытый ключ для данного адреса, используйте
+<code>solana-keygen проверить</code>:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> verify </span><span style="color:#f29668;">&lt;</span><span>PUBKEY</span><span style="color:#f29668;">&gt; </span><span style="font-style:italic;color:#39bae6;">~</span><span>/my-solana-wallet/my-keypair.json
+</span></code></pre>
+<p>где <code>&lt;PUBKEY&gt;</code> заменяется адресом вашего кошелька.
+Команда выведет «Успех», если данный адрес совпадает с адресом в вашем файле пары ключей, и «Ошибка» в противном случае.</p>
+<h2 id="sozdanie-neskol-kikh-adresov-koshel-ka-failovoi-sistemy">Создание нескольких адресов кошелька файловой системы</h2>
+<p>Вы можете создать столько адресов кошельков, сколько захотите. Просто повторите шаги в разделе Создание кошелька файловой системы и обязательно используйте новое имя файла или путь с аргументом <code>--outfile</code>.
+Несколько адресов кошелька могут быть полезны, если вы хотите передавать токены между своими учетными записями для разных целей.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>График инфляции | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/ed_overview/ed_validation_client_economics/ed-vce-state-validation-protocol-based-rewards/#skorrektirovannaia-dokhodnost-po-steikingu">Скорректированная доходность по стейкингу</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>График инфляции</h1>
+
+<p><strong>Возможны изменения. Следите за последними экономическими дискуссиями на форумах Solana: https://forums.solana.com</strong></p>
+<p>Валидаторы-клиенты выполняют две функциональные роли в сети Solana:</p>
+<ul>
+<li>Подтвердить (голосовать) текущее глобальное состояние их наблюдаемого PoH.</li>
+<li>Быть избранным «лидером» в циклическом расписании со взвешиванием по доле, в течение которого они несут ответственность за сбор невыполненных транзакций и включение их в наблюдаемый PoH, тем самым обновляя глобальное состояние сети и обеспечивая непрерывность цепи.</li>
+</ul>
+<p>Вознаграждения клиентов-валидаторов за эти услуги должны распределяться в конце каждой эпохи Соланы. Как обсуждалось ранее, компенсация клиентам-валидаторам предоставляется через комиссию, взимаемую с годового уровня инфляции на основе протокола, распределенного пропорционально весу доли каждого узла-валидатора (см. ниже), а также доступных комиссий за транзакции, заявленные лидером. при каждой ротации лидера. т.е. в течение того времени, когда данный клиент-валидатор избирается лидером, он имеет возможность удерживать часть комиссии за каждую транзакцию за вычетом указанной в протоколе суммы, которая уничтожается (см. )).</p>
+<p>Эффективная годовая доходность ставок на основе протокола (%) за эпоху, полученная клиентами проверки, должна быть функцией:</p>
+<ul>
+<li>текущий глобальный уровень инфляции, полученный из заранее определенного графика выпуска антиинфляционных акций (см. <a href="ed_vce_overview/">Валидация-клиентская экономика</a>)</li>
+<li>доля застейканных SOL от текущего общего оборотного предложения,</li>
+<li>комиссия, взимаемая службой валидации,</li>
+<li>время работы/участие [% доступных слотов, за которые валидатор имел возможность проголосовать] данного валидатора за предыдущую эпоху.</li>
+</ul>
+<p>Первый фактор является функцией только параметров протокола (т.е. не зависит от поведения валидатора в данную эпоху) и приводит к графику инфляции, предназначенному для стимулирования раннего участия, обеспечения четкой денежной стабильности и обеспечения оптимальной безопасности в сети.</p>
+<p>В качестве первого шага к пониманию влияния <em>Графика инфляции</em> на экономику Соланы мы смоделировали верхний и нижний диапазоны того, как может выглядеть выпуск токенов с течением времени, учитывая текущие диапазоны изучаемых параметров Графика инфляции.</p>
+<p>Конкретно:</p>
+<ul>
+<li><em>Начальный уровень инфляции</em>: 7-9%</li>
+<li><em>Уровень дезинфляции</em>: -14-16%</li>
+<li><em>Долгосрочный уровень инфляции</em>: 1-2%</li>
+</ul>
+<p>Используя эти диапазоны для моделирования ряда возможных графиков инфляции, мы можем исследовать инфляцию во времени:</p>
+<p><img src="/img/p_inflation_schedule_ranges_w_comments.png" alt="" /></p>
+<p>На приведенном выше графике указаны средние значения диапазона, чтобы проиллюстрировать вклад каждого параметра.
+На основе этих смоделированных <em>графиков инфляции</em> мы также можем прогнозировать диапазоны выпуска токенов с течением времени.</p>
+<p><img src="/img/p_total_supply_ranges.png" alt="" /></p>
+<p>Наконец, мы можем оценить <em>Staked Yield</em> для SOL с стейкингом, если введем дополнительный параметр, который обсуждался ранее, <em>% от SOL</em> с стейкингом:</p>
+<p>$$
+%~\text{SOL Staked} = \frac{\text{Total SOL Staked}}{\text{Total Current Supply}}
+$$</p>
+<p>В этом случае, поскольку <em>% ставки SOL</em> является параметром, который необходимо оценивать (в отличие от параметров <em>График инфляции</em>), проще использовать конкретные параметры <em>График инфляции</em> и исследовать диапазон <em>% ставки SOL</em>. Для приведенного ниже примера мы выбрали средний диапазон параметров, рассмотренных выше:</p>
+<ul>
+<li><em>Начальный уровень инфляции</em>: 8%</li>
+<li><em>Уровень дезинфляции</em>: -15%</li>
+<li><em>Долгосрочный уровень инфляции</em>: 1,5%</li>
+</ul>
+<p>Значения <em>% Staked SOL</em> варьируются от 60% до 90%, что, по нашему мнению, покрывает вероятный диапазон, который мы ожидаем наблюдать, основываясь на отзывах сообществ инвесторов и валидаторов, а также на том, что наблюдается на сопоставимом Proof-of-Stake. протоколы.</p>
+<p><img src="/img/p_ex_staked_yields.png" alt="" /></p>
+<p>Опять же, вышеприведенный пример показывает пример <em>Staked Yield</em>, который стейкер может ожидать с течением времени в сети Solana с указанным <em>Графиком инфляции</em>. Это идеализированный <em>Staked Yield</em>, поскольку он не учитывает влияние времени безотказной работы валидатора на вознаграждения, комиссии валидатора, потенциальное регулирование доходности и потенциальные инциденты сокращения. Кроме того, игнорируется тот факт, что <em>% поставленного SOL</em> является динамическим по замыслу - экономические стимулы, установленные этим <em>Графиком инфляции</em>.</p>
+<h3 id="skorrektirovannaia-dokhodnost-po-steikingu">Скорректированная доходность по стейкингу</h3>
+<p>Полная оценка потенциального дохода от стейкинга токенов должна учитывать <em>разбавление токенов</em> стейкинга_ и его влияние на доход от стейкинга. Для этого мы определяем <em>скорректированную доходность по стейкингу</em> как изменение доли владения токенами, поставленными на стейкинг, из-за распределения эмиссии инфляции. т.е. положительный разводняющий эффект инфляции.</p>
+<p>Мы можем изучить <em>скорректированную доходность стейкинга</em> как функцию уровня инфляции и процента токенов, размещенных в сети. Мы можем увидеть это на графике для различных фракций ставок здесь:</p>
+<p><img src="/img/p_ex_staked_dilution.png" alt="" /></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

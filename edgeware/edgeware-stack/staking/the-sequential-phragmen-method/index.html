@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Последовательный метод Фрагмена | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/the-sequential-phragmen-method/#chto-takoe-posledovatel-nyi-metod-phragmen">Что такое последовательный метод Phragmen?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/the-sequential-phragmen-method/#gde-ispol-zuetsia-metod-phragmen-v-edgeware">Где используется метод Phragmen в Edgeware?</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/the-sequential-phragmen-method/#npos-vybory-validatora"><small>- NPoS: выборы валидатора</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/the-sequential-phragmen-method/#vybory-v-sovet"><small>- Выборы в Совет</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/the-sequential-phragmen-method/#chto-eto-znachit-dlia-operatorov-uzlov">Что это значит для операторов узлов?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-stack/staking/the-sequential-phragmen-method/#vneshnie-resursy">Внешние ресурсы</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Последовательный метод Фрагмена</h1>
+
+<p><a href="https://wiki.polkadot.network/docs/en/learn-phragmen">Подробнее о методе последовательных фрагментов</a></p>
+<h2 id="chto-takoe-posledovatel-nyi-metod-phragmen">Что такое последовательный метод Phragmen?</h2>
+<p>Последовательный метод Фрагмена - это метод выборов с несколькими победителями, введенный Эдвардом Фрагменом в 1890-х годах.</p>
+<p>Цитата ниже, взятая из ссылки <a href="https://arxiv.org/pdf/1611.08826.pdf">документ Phragmen</a>, резюмирует цель последовательного метода Phragmen:</p>
+<blockquote>
+<p>Проблема, которую пытаются решить методы Фрагмена, состоит в том, чтобы выбрать набор заданного числа людей из большего набора кандидатов. Фрагмен обсудил это в контексте парламентских выборов в многомандатном округе; та же проблема может, конечно, возникнуть и на местных выборах, но также и во многих других ситуациях, таких как выборы правления или комитета в организации.</p>
+</blockquote>
+<h2 id="gde-ispol-zuetsia-metod-phragmen-v-edgeware">Где используется метод Phragmen в Edgeware?</h2>
+<h3 id="npos-vybory-validatora">NPoS: выборы валидатора</h3>
+<p>Последовательный метод Phragmen используется в схеме Nominated Proof-of-Stake для выбора валидаторов на основе их собственной собственной ставки и доли, полученной от номинаторов. Он также пытается уравнять веса между валидаторами после каждого тура выборов. Поскольку в Polkadot валидаторам платят одинаково, важно, чтобы доля каждого валидатора была распределена. Метод выравнивания запускается дважды для каждого выбора валидатора. Первая итерация выполнит грубое выравнивание среди всех кандидатов-валидаторов, чтобы определить подмножество, которое станет следующими активными валидаторами. Вторая итерация проводится только среди избранных кандидатов, чтобы уравнять долю между избранными.</p>
+<h3 id="vybory-v-sovet">Выборы в Совет</h3>
+<p>Метод Фрагмена также используется в механизме выборов совета. Когда вы голосуете за членов совета, вы можете выбрать до 16 разных кандидатов, а затем разместить зарезервированную облигацию, которая является весом вашего голоса. Фрагмены будут баллотироваться один раз на каждых выборах, чтобы определить лучших кандидатов, которые займут должности в совете, а затем снова среди лучших кандидатов, чтобы максимально уравнять вес голосов за ними.</p>
+<h2 id="chto-eto-znachit-dlia-operatorov-uzlov">Что это значит для операторов узлов?</h2>
+<p>Phragmen работает в фоновом режиме и не требует от вас дополнительных усилий. Тем не менее, полезно понимать, как это работает, поскольку это означает, что не вся ставка, которую вы номинировали, окажется на вашем валидаторе после выборов. Номинаторы, скорее всего, назначат несколько разных валидаторов, которые, по их мнению, хорошо справятся с работой своих узлов.</p>
+<p>Вы можете использовать скрипт <a href="https://github.com/kianenigma/offline-phragmen">offline-phragmen</a> для предсказания исхода выборов валидатора перед началом новой эры.</p>
+<h2 id="vneshnie-resursy">Внешние ресурсы</h2>
+<ul>
+<li><a href="https://research.web3.foundation/en/latest/polkadot/NPoS/4.%20Sequential%20Phragm%C3%A9n%E2%80%99s%20method/">Страница исследования W3F по методу последовательных фрагментов</a> - Формальная адаптация метода Phragmen применительно к валидаторам Polkadot.</li>
+<li><a href="https://github.com/w3f/consensus/tree/master/NPoS">Эталонные реализации Python</a> - Реализации простых и сложных методов Phragmen.</li>
+<li><a href="https://github.com/paritytech/substrate/blob/master/core/phragmen/src/lib.rs">Реализация субстрата</a> - реализация Rust, используемая в библиотеке модулей времени выполнения субстрата.</li>
+<li><a href="https://arxiv.org/pdf/1611.08826.pdf">Методы выборов Фрагмена и Тиле</a> - 95-страничный документ, подробно объясняющий методы выборов Фрагмена.</li>
+<li><a href="https://github.com/kianenigma/offline-phragmen">Offline Phragmen</a> - Скрипт для генерации результатов выборов валидатора Phragmen перед началом эры.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

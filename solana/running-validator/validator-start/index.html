@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Запуск валидатора | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#nastroika-interfeisa-komandnoi-stroki-solana">Настройка интерфейса командной строки Solana</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#podtverzhdenie-dostupnosti-klastera">Подтверждение доступности кластера</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#vkliuchenie-cuda">Включение CUDA</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#nastroika-sistemy">Настройка системы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#linuks"><small>- Линукс</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#sozdat-lichnost">Создать личность</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#identifikatsiia-bumazhnogo-koshel-ka"><small>- Идентификация бумажного кошелька</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#kliuchevaia-para-tshcheslaviia"><small>- Ключевая пара тщеславия</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#dopolnitel-naia-konfiguratsiia-solana-cli">Дополнительная конфигурация Solana CLI</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#airdrop-i-proverka-balansa-validatora">Аирдроп и проверка баланса валидатора</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#sozdat-avtorizovannuiu-uchetnuiu-zapis-dlia-sniatiia-sredstv">Создать авторизованную учетную запись для снятия средств</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#sozdat-uchetnuiu-zapis-dlia-golosovaniia">Создать учетную запись для голосования</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#izvestnye-validatory">Известные валидаторы</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#podkliuchite-svoi-validator">Подключите свой валидатор</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#upravlenie-raspredeleniem-portov-lokal-noi-seti"><small>- Управление распределением портов локальной сети</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#ogranichenie-razmera-reestra-dlia-ekonomii-mesta-na-diske"><small>- Ограничение размера реестра для экономии места на диске</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#sistemnyi-blok"><small>- Системный блок</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#logirovanie"><small>- Логирование</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#otkliuchit-proverku-portov-dlia-uskoreniia-perezapuska"><small>- Отключить проверку портов для ускорения перезапуска</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#ispol-zovanie-virtual-nogo-diska-s-perelivom-v-svop-dlia-bazy-uchetnykh-zapisei-dlia-snizheniia-iznosa-ssd"><small>- Использование виртуального диска с переливом в своп для базы учетных записей для снижения износа SSD</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/running-validator/validator-start/#indeksatsiia-akkaunta"><small>- Индексация аккаунта</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Запуск валидатора</h1>
+
+<h2 id="nastroika-interfeisa-komandnoi-stroki-solana">Настройка интерфейса командной строки Solana</h2>
+<p>solana cli включает команды настройки get и set для автоматической установки аргумента --url для команд cli. Например:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> config set</span><span style="color:#f29718;"> --url</span><span> http://api.devnet.solana.com
+</span></code></pre>
+<p>Хотя в этом разделе показано, как подключиться к кластеру Devnet, шаги аналогичны для других <a href="../clusters/">кластеров Solana</a>.</p>
+<h2 id="podtverzhdenie-dostupnosti-klastera">Подтверждение доступности кластера</h2>
+<p>Перед подключением узла проверки работоспособности проверьте, доступен ли кластер для вашего компьютера, получив количество транзакций:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> transaction-count
+</span></code></pre>
+<p>Просмотрите <a href="https://metrics.solana.com:3000/d/monitor/cluster-telemetry">панель метрик</a>, чтобы получить дополнительные сведения об активности кластера.</p>
+<h2 id="vkliuchenie-cuda">Включение CUDA</h2>
+<p>Если на вашем компьютере установлен GPU с CUDA (в настоящее время только для Linux), включите аргумент <code>--cuda</code> в <code>solana-validator</code>.</p>
+<p>Когда ваш валидатор запущен, найдите следующее сообщение в журнале, указывающее, что CUDA включена: <code>&quot;[&lt;timestamp&gt; solana::validator] CUDA включена&quot;</code></p>
+<h2 id="nastroika-sistemy">Настройка системы</h2>
+<h3 id="linuks">Линукс</h3>
+<h4 id="avtomaticheskii">Автоматический</h4>
+<p>Репозиторий solana включает в себя демона для настройки параметров системы для оптимизации производительности (а именно, путем увеличения буфера UDP ОС и пределов сопоставления файлов).</p>
+<p>Демон (<code>solana-sys-tuner</code>) включен в бинарную версию solana. Перезапустите его, <em>перед</em> перезапуском вашего валидатора, после каждого обновления программного обеспечения, чтобы убедиться, что применяются последние рекомендуемые настройки.</p>
+<p>Чтобы запустить его:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo </span><span>$(</span><span style="color:#f07178;">command </span><span style="color:#f29718;">-v</span><span> solana-sys-tuner)</span><span style="color:#f29718;"> --user </span><span>$(</span><span style="color:#ffb454;">whoami</span><span>) </span><span style="color:#f29668;">&gt;</span><span> sys-tuner.log </span><span style="color:#f29718;">2</span><span style="color:#f29668;">&gt;&amp;</span><span style="color:#f29718;">1 </span><span style="color:#f29668;">&amp;
+</span></code></pre>
+<h4 id="rukovodstvo">Руководство</h4>
+<p>Если вы предпочитаете управлять настройками системы самостоятельно, вы можете сделать это с помощью следующих команд.</p>
+<h5 id="uvelichit-bufer-udp"><strong>Увеличить буфер UDP</strong></h5>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> bash</span><span style="color:#f29718;"> -c </span><span style="color:#c2d94c;">&quot;cat &gt;/etc/sysctl.d/20-solana-udp-buffers.conf &lt;&lt;EOF
+</span><span style="color:#c2d94c;"># Increase UDP buffer size
+</span><span style="color:#c2d94c;">net.core.rmem_default = 134217728
+</span><span style="color:#c2d94c;">net.core.rmem_max = 134217728
+</span><span style="color:#c2d94c;">net.core.wmem_default = 134217728
+</span><span style="color:#c2d94c;">net.core.wmem_max = 134217728
+</span><span style="color:#c2d94c;">EOF&quot;
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> sysctl</span><span style="color:#f29718;"> -p</span><span> /etc/sysctl.d/20-solana-udp-buffers.conf
+</span></code></pre>
+<h5 id="uvelichen-limit-otobrazhaemykh-failov-pamiati"><strong>Увеличен лимит отображаемых файлов памяти</strong></h5>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> bash</span><span style="color:#f29718;"> -c </span><span style="color:#c2d94c;">&quot;cat &gt;/etc/sysctl.d/20-solana-mmaps.conf &lt;&lt;EOF
+</span><span style="color:#c2d94c;"># Increase memory mapped files limit
+</span><span style="color:#c2d94c;">vm.max_map_count = 1000000
+</span><span style="color:#c2d94c;">EOF&quot;
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> sysctl</span><span style="color:#f29718;"> -p</span><span> /etc/sysctl.d/20-solana-mmaps.conf
+</span></code></pre>
+<p>и</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>LimitNOFILE=1000000
+</span></code></pre>
+<p>в раздел <code>[Service]</code> вашего служебного файла systemd, если вы его используете, в противном случае добавьте</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>DefaultLimitNOFILE=1000000
+</span></code></pre>
+<p>в <code>[Manager]</code> раздел <code>/etc/systemd/system.conf</code>.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> systemctl daemon-reload
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sudo</span><span> bash</span><span style="color:#f29718;"> -c </span><span style="color:#c2d94c;">&quot;cat &gt;/etc/security/limits.d/90-solana-nofiles.conf &lt;&lt;EOF
+</span><span style="color:#c2d94c;"># Increase process file descriptor count limit
+</span><span style="color:#c2d94c;">* - nofile 1000000
+</span><span style="color:#c2d94c;">EOF&quot;
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#5c6773;">### Close all open sessions (log out then, in again) ###
+</span></code></pre>
+<h2 id="sozdat-lichnost">Создать личность</h2>
+<p>Создайте пару идентификационных ключей для вашего валидатора, запустив:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> new</span><span style="color:#f29718;"> -o </span><span style="font-style:italic;color:#39bae6;">~</span><span>/validator-keypair.json
+</span></code></pre>
+<p>Открытый ключ идентификации теперь можно просмотреть, запустив:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> pubkey </span><span style="font-style:italic;color:#39bae6;">~</span><span>/validator-keypair.json
+</span></code></pre>
+<blockquote>
+<p>Примечание. Файл «validator-keypair.json» также является вашим закрытым ключом (ed25519).</p>
+</blockquote>
+<h3 id="identifikatsiia-bumazhnogo-koshel-ka">Идентификация бумажного кошелька</h3>
+<p>Вы можете создать бумажный кошелек для своего файла идентификации вместо записи файла пары ключей на диск с помощью:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> new</span><span style="color:#f29718;"> --no-outfile
+</span></code></pre>
+<p>Соответствующий открытый ключ удостоверения теперь можно просмотреть, запустив:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> pubkey ASK
+</span></code></pre>
+<p>а затем введите исходную фразу.</p>
+<p>См. <a href="../wallet-guide/paper-wallet/">Использование бумажного кошелька</a> для получения дополнительной информации.</p>
+<p>+++</p>
+<h3 id="kliuchevaia-para-tshcheslaviia">Ключевая пара тщеславия</h3>
+<p>Вы можете сгенерировать собственную пару ключей с помощью solana-keygen. Например:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> grind</span><span style="color:#f29718;"> --starts-with</span><span> e1v1s:1
+</span></code></pre>
+<p>Вы можете запросить, чтобы сгенерированная пара ключей была выражена в виде исходной фразы, которая позволяет восстановить пару ключей из исходной фразы и необязательно предоставленной фразы-пароля (обратите внимание, что это значительно медленнее, чем шлифовка без мнемоники):</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> grind</span><span style="color:#f29718;"> --use-mnemonic --starts-with</span><span> e1v1s:1
+</span></code></pre>
+<p>В зависимости от запрошенной строки поиск соответствия может занять несколько дней...</p>
+<p>+++</p>
+<p>Ваша пара ключей идентификации валидатора однозначно идентифицирует вашего валидатора в сети. ** Крайне важно создать резервную копию этой информации. **</p>
+<p>Если вы не сделаете резервную копию этой информации, вы НЕ СМОЖЕТЕ ВОССТАНОВИТЬ СВОЙ ВАЛИДАТОР, если потеряете к нему доступ. Если это произойдет, ВЫ ТАКЖЕ ПОТЕРЯЕТЕ СВОЕ РАСПРЕДЕЛЕНИЕ SOL.</p>
+<p>Чтобы создать резервную копию пары ключей, идентифицирующих валидатор, <strong>создайте резервную копию файла «validator-keypair.json» или исходной фразы в безопасном месте.</strong></p>
+<h2 id="dopolnitel-naia-konfiguratsiia-solana-cli">Дополнительная конфигурация Solana CLI</h2>
+<p>Теперь, когда у вас есть пара ключей, установите конфигурацию solana для использования вашей пары ключей валидатора для всех следующих команд:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> config set</span><span style="color:#f29718;"> --keypair </span><span style="font-style:italic;color:#39bae6;">~</span><span>/validator-keypair.json
+</span></code></pre>
+<p>Вы должны увидеть следующий вывод:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>Config File: /home/solana/.config/solana/cli/config.yml
+</span><span>RPC URL: http://api.devnet.solana.com
+</span><span>WebSocket URL: ws://api.devnet.solana.com/ (computed)
+</span><span>Keypair Path: /home/solana/validator-keypair.json
+</span><span>Commitment: confirmed
+</span></code></pre>
+<h2 id="airdrop-i-proverka-balansa-validatora">Аирдроп и проверка баланса валидатора</h2>
+<p>Раздайте себе немного SOL, чтобы начать:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> airdrop 1
+</span></code></pre>
+<p>Обратите внимание, что аирдропы доступны только в Devnet и Testnet. Оба ограничены 1 SOL за запрос.</p>
+<p>Чтобы просмотреть текущий баланс:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana balance
+</span></code></pre>
+<p>Или посмотреть подробнее:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>solana balance --lamports
+</span></code></pre>
+<p>Узнайте больше о <a href="../introduction.md#what-are-sols">различии между SOL и lamports здесь</a>.</p>
+<h2 id="sozdat-avtorizovannuiu-uchetnuiu-zapis-dlia-sniatiia-sredstv">Создать авторизованную учетную запись для снятия средств</h2>
+<p>Если вы еще этого не сделали, создайте пару ключей авторизованного отзывателя, которая будет использоваться в качестве высшей инстанции для вашего валидатора. Эта пара ключей будет иметь полномочия для выхода из вашей учетной записи для голосования, а также дополнительные полномочия для изменения всех других аспектов вашей учетной записи для голосования. Излишне говорить, что это очень важная пара ключей, поскольку любой, кто ею владеет, может вносить любые изменения в вашу учетную запись для голосования, в том числе стать ее владельцем на постоянной основе.
+Поэтому очень важно хранить пару ключей авторизованного получателя в безопасном месте. Его не нужно хранить в вашем валидаторе, и его нельзя хранить где-либо, откуда к нему могут получить доступ посторонние лица. Чтобы создать пару ключей авторизованного снимающего:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> new</span><span style="color:#f29718;"> -o </span><span style="font-style:italic;color:#39bae6;">~</span><span>/authorized-withdrawer-keypair.json
+</span></code></pre>
+<h2 id="sozdat-uchetnuiu-zapis-dlia-golosovaniia">Создать учетную запись для голосования</h2>
+<p>Если вы еще этого не сделали, создайте пару ключей учетной записи для голосования и создайте учетную запись для голосования в сети. Если вы выполнили этот шаг, вы должны увидеть «vote-account-keypair.json» в вашем каталоге среды выполнения Solana:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-keygen</span><span> new</span><span style="color:#f29718;"> -o </span><span style="font-style:italic;color:#39bae6;">~</span><span>/vote-account-keypair.json
+</span></code></pre>
+<p>Следующая команда может быть использована для создания вашей учетной записи для голосования в блокчейне со всеми параметрами по умолчанию:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> create-vote-account </span><span style="font-style:italic;color:#39bae6;">~</span><span>/vote-account-keypair.json </span><span style="font-style:italic;color:#39bae6;">~</span><span>/validator-keypair.json </span><span style="font-style:italic;color:#39bae6;">~</span><span>/authorized-withdrawer-keypair.json
+</span></code></pre>
+<p>Не забудьте переместить авторизованную пару ключей для снятия средств в очень безопасное место после выполнения вышеуказанной команды.</p>
+<p>Узнайте больше о <a href="vote-accounts/">создании и управлении учетной записью для голосования</a>.</p>
+<h2 id="izvestnye-validatory">Известные валидаторы</h2>
+<p>Если вы знаете и уважаете другие операторы валидатора, вы можете указать это в командной строке с аргументом <code>--known-validator &lt;PUBKEY&gt;</code> для <code>solana-validator</code>. Вы можете указать несколько, повторив аргумент <code>--known-validator &lt;PUBKEY1&gt; --known-validator &lt;PUBKEY2&gt;</code>.
+Это имеет два эффекта: один из них, когда валидатор загружается с --only-known-rpc, он будет запрашивать только этот набор известных узлов для загрузки данных генезиса и моментальных снимков. Другой заключается в том, что в сочетании с опцией <code>--halt-on-known-validators-accounts-hash-mismatch</code>, он будет отслеживать корневой хеш меркла всего состояния учетных записей других известных узлов по сплетням, и если хэши производят какие-либо несоответствие, валидатор остановит узел, чтобы валидатор не мог голосовать или обрабатывать потенциально неверные значения состояния. На данный момент слот, на котором валидатор публикует хэш, привязан к интервалу снапшотов. Чтобы эта функция работала, все валидаторы в известном наборе должны быть установлены на одно и то же значение интервала моментальных снимков или кратное ему.</p>
+<p>Настоятельно рекомендуется использовать эти параметры, чтобы предотвратить загрузку злонамеренного состояния моментального снимка или отклонение состояния учетной записи.</p>
+<h2 id="podkliuchite-svoi-validator">Подключите свой валидатор</h2>
+<p>Подключитесь к кластеру, выполнив:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-validator </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --identity </span><span style="font-style:italic;color:#39bae6;">~</span><span>/validator-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --vote-account </span><span style="font-style:italic;color:#39bae6;">~</span><span>/vote-account-keypair.json </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --rpc-port</span><span> 8899 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --entrypoint</span><span> entrypoint.devnet.solana.com:8001 </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --limit-ledger-size </span><span style="color:#bfbab0cc;">\
+</span><span style="color:#f29718;">  --log </span><span style="font-style:italic;color:#39bae6;">~</span><span>/solana-validator.log
+</span></code></pre>
+<p>Чтобы заставить валидатор вести журнал в консоли, добавьте аргумент <code>--log -</code>, иначе валидатор автоматически запишется в файл.</p>
+<p>Бухгалтерская книга будет помещена в каталог <code>ledger/</code> по умолчанию, используйте аргумент <code>--ledger</code>, чтобы указать другое место.</p>
+<blockquote>
+<p>Примечание. Вы можете использовать
+<a href="../wallet-guide/paper-wallet/">исходная фраза бумажного кошелька</a>
+для вашего <code>--identity</code> и/или
+Пары ключей <code>--authorized-voter</code>. Чтобы использовать их, передайте соответствующий аргумент как
+<code>solana-validator --identity ASK... --authorized-voter ASK...</code>
+и вам будет предложено ввести исходные фразы и необязательную парольную фразу.</p>
+</blockquote>
+<p>Подтвердите, что ваш валидатор подключен к сети, открыв новый терминал и выполнив:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span> gossip
+</span></code></pre>
+<p>Если ваш валидатор подключен, его публичный ключ и IP-адрес появятся в списке.</p>
+<h3 id="upravlenie-raspredeleniem-portov-lokal-noi-seti">Управление распределением портов локальной сети</h3>
+<p>По умолчанию валидатор будет динамически выбирать доступные сетевые порты в диапазоне 8000-10000, и его можно переопределить с помощью <code>--dynamic-port-range</code>. Например, solana-validator --dynamic-port-range 11000-11020 ...&quot; ограничит валидатор портами 11000-11020.</p>
+<h3 id="ogranichenie-razmera-reestra-dlia-ekonomii-mesta-na-diske">Ограничение размера реестра для экономии места на диске</h3>
+<p>Параметр <code>--limit-ledger-size</code> позволяет вам указать, сколько леджеров <a href="../terminology.md#shred">клочков</a> ваш узел сохраняет на диске. Если вы не укажете этот параметр, валидатор будет хранить всю книгу до тех пор, пока не закончится место на диске.</p>
+<p>Значение по умолчанию пытается сохранить использование диска леджера ниже 500 ГБ. Можно запросить большее или меньшее использование диска, добавив аргумент к <code>--limit-ledger-size</code>, если это необходимо. Проверьте <code>solana-validator --help</code> для предельного значения по умолчанию, используемого <code>--limit-ledger-size</code>. Дополнительная информация о выборе пользовательского предельного значения <a href="https://github.com/solana-labs/solana/blob/583cec922b6107e0f85c7e14cb5e642bc7dfb340/core/src/ledger_cleanup_service.rs#L15-L26">доступна здесь</a>.</p>
+<h3 id="sistemnyi-blok">Системный блок</h3>
+<p>Запуск валидатора как единицы systemd — это один из простых способов управлять работой в фоновом режиме.</p>
+<p>Предполагая, что на вашем компьютере есть пользователь с именем sol, создайте файл <code>/etc/systemd/system/sol.service</code> со следующим:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>[Unit]
+</span><span>Description=Solana Validator
+</span><span>After=network.target
+</span><span>Wants=solana-sys-tuner.service
+</span><span>StartLimitIntervalSec=0
+</span><span>
+</span><span>[Service]
+</span><span>Type=simple
+</span><span>Restart=always
+</span><span>RestartSec=1
+</span><span>User=sol
+</span><span>LimitNOFILE=1000000
+</span><span>LogRateLimitIntervalSec=0
+</span><span>Environment=&quot;PATH=/bin:/usr/bin:/home/sol/.local/share/solana/install/active_release/bin&quot;
+</span><span>ExecStart=/home/sol/bin/validator.sh
+</span><span>
+</span><span>[Install]
+</span><span>WantedBy=multi-user.target
+</span></code></pre>
+<p>Теперь создайте <code>/home/sol/bin/validator.sh</code>, чтобы включить желаемую командную строку <code>solana-validator</code>. Убедитесь, что для запуска процесса проверки используется команда «exec» (например, «exec solana-validator...»). Это важно, потому что без этого logrotate в конечном итоге будет убивать валидатор каждый раз, когда журналы ротируются.</p>
+<p>Убедитесь, что запуск <code>/home/sol/bin/validator.sh</code> вручную запускает валидатор, как и ожидалось. Не забудьте пометить его как исполняемый с помощью <code>chmod +x /home/sol/bin/validator.sh</code></p>
+<p>Запустите службу с помощью:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">$</span><span> sudo systemctl enable</span><span style="color:#f29718;"> --now</span><span> sol
+</span></code></pre>
+<h3 id="logirovanie">Логирование</h3>
+<h4 id="nastroika-vyvoda-zhurnala">Настройка вывода журнала</h4>
+<p>Сообщения, которые валидатор отправляет в журнал, можно контролировать с помощью переменной среды RUST_LOG. Подробности можно найти в <a href="https://docs.rs/env_logger/latest/env_logger/#enabling-logging">документации</a> для ящика <code>env_logger</code> Rust.</p>
+<p>Учтите, что если вывод журнала будет уменьшен, это может затруднить отладку проблем, возникших позже. Если будет запрошена поддержка со стороны команды, любые изменения необходимо будет отменить и воспроизвести проблему, прежде чем можно будет оказать помощь.</p>
+<h4 id="rotatsiia-zhurnala">Ротация журнала</h4>
+<p>Файл журнала валидатора, указанный в <code>--log ~/solana-validator.log</code>, может со временем стать очень большим, поэтому рекомендуется настроить ротацию журнала.</p>
+<p>Валидатор повторно откроет его, когда получит сигнал «USR1», который является базовым примитивом, обеспечивающим ротацию журнала.</p>
+<p>Если валидатор запускается скриптом-оболочкой, важно запускать процесс с помощью <code>exec</code> (<code>exec solana-validator...</code>) при использовании logrotate.
+Это предотвратит отправку сигнала <code>USR1</code> в процесс скрипта вместо валидатора, что уничтожит их обоих.</p>
+<h4 id="ispol-zovanie-logrotate">Использование logrotate</h4>
+<p>Пример настройки для <code>logrotate</code>, который предполагает, что валидатор работает как служба systemd с именем <code>sol.service</code> и записывает файл журнала в /home/sol/solana-validator.log:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="font-style:italic;color:#5c6773;"># Setup log rotation
+</span><span>
+</span><span style="color:#ffb454;">cat </span><span style="color:#f29668;">&gt;</span><span> logrotate.sol </span><span style="color:#f29668;">&lt;&lt;</span><span style="color:#ff7733;">EOF
+</span><span style="color:#c2d94c;">/home/sol/solana-validator.log {
+</span><span style="color:#c2d94c;">  rotate 7
+</span><span style="color:#c2d94c;">  daily
+</span><span style="color:#c2d94c;">  missingok
+</span><span style="color:#c2d94c;">  postrotate
+</span><span style="color:#c2d94c;">    systemctl kill -s USR1 sol.service
+</span><span style="color:#c2d94c;">  endscript
+</span><span style="color:#c2d94c;">}
+</span><span style="color:#ff7733;">EOF
+</span><span style="color:#ffb454;">sudo</span><span> cp logrotate.sol /etc/logrotate.d/sol
+</span><span style="color:#ffb454;">systemctl</span><span> restart logrotate.service
+</span></code></pre>
+<p>Как упоминалось ранее, убедитесь, что если вы используете logrotate, любой созданный вами сценарий, который запускает процесс проверки solana, использует для этого «exec» (пример: «exec solana-validator ...&quot;); в противном случае, когда logrotate отправит свой сигнал валидатору, закрывающий скрипт умрет и унесет с собой процесс валидатора.</p>
+<h3 id="otkliuchit-proverku-portov-dlia-uskoreniia-perezapuska">Отключить проверку портов для ускорения перезапуска</h3>
+<p>Как только ваш валидатор заработает нормально, вы можете сократить время, необходимое для перезапуска вашего валидатора, добавив флаг <code>--no-port-check</code> в командную строку <code>solana-validator</code>.</p>
+<h3 id="ispol-zovanie-virtual-nogo-diska-s-perelivom-v-svop-dlia-bazy-uchetnykh-zapisei-dlia-snizheniia-iznosa-ssd">Использование виртуального диска с переливом в своп для базы учетных записей для снижения износа SSD</h3>
+<p>Если на вашем компьютере достаточно оперативной памяти, для хранения базы данных учетных записей можно использовать виртуальный диск tmpfs (<a href="https://man7.org/linux/man-pages/man5/tmpfs.5.html">tmpfs</a>).</p>
+<p>При использовании tmpfs важно также настроить своп на вашем компьютере, чтобы избежать периодической нехватки пространства tmpfs.</p>
+<p>Рекомендуется использовать раздел tmpfs объемом 300 ГБ с соответствующим разделом подкачки объемом 250 ГБ.</p>
+<p>Пример конфигурации:</p>
+<ol>
+<li><code>sudo mkdir /mnt/solana-accounts</code></li>
+<li>Добавьте раздел tmpfs размером 300 ГБ, добавив новую строку, содержащую <code>tmpfs /mnt/solana-accounts tmpfs rw,size=300G,user=sol 0 0</code> в <code>/etc/fstab</code> (при условии, что ваш валидатор работает под пользователем «соль»). <strong>ВНИМАНИЕ: если вы неправильно отредактируете /etc/fstab, ваша машина может перестать загружаться</strong></li>
+<li>Создайте не менее 250 ГБ пространства подкачки</li>
+</ol>
+<ul>
+<li>Выберите устройство для использования вместо <code>SWAPDEV</code> для оставшейся части этих инструкций. В идеале выберите свободный раздел диска размером 250 ГБ или больше на быстром диске. Если он недоступен, создайте файл подкачки с помощью <code>sudo dd if=/dev/zero of=/swapfile bs=1MiB count=250KiB</code>, установите его разрешения с помощью <code>sudo chmod 0600 /swapfile</code> и используйте <code>/swapfile</code> как <code>SWAPDEV</code> для остальных инструкций</li>
+<li>Отформатируйте устройство для использования в качестве подкачки с помощью sudo mkswap SWAPDEV.</li>
+</ul>
+<ol start="4">
+<li>Добавьте файл подкачки в <code>/etc/fstab</code> с новой строкой, содержащей <code>SWAPDEV swap swap defaults 0 0</code></li>
+<li>Включите своп с помощью <code>sudo swapon -a</code> и смонтируйте tmpfs с помощью <code>sudo mount /mnt/solana-accounts/</code></li>
+<li>Подтвердите, что своп активен с помощью <code>free -g</code>, а tmpfs смонтирован с помощью <code>mount</code></li>
+</ol>
+<p>Теперь добавьте аргумент --accounts /mnt/solana-accounts к аргументам командной строки solana-validator и перезапустите валидатор.</p>
+<h3 id="indeksatsiia-akkaunta">Индексация аккаунта</h3>
+<p>По мере роста числа заполненных учетных записей в кластере запросы RPC с данными учетных записей сканируют весь набор учетных записей, например <a href="developing/clients/jsonrpc-api.md#getprogramaccounts"><code>getProgramAccounts</code></a> и <a href="developing/clients/jsonrpc-api.md#gettokenaccountsbydelegate">SPL-token-specific запросы</a> — может работать плохо. Если вашему валидатору необходимо поддерживать какой-либо из этих запросов, вы можете использовать параметр --account-index, чтобы активировать один или несколько индексов учетных записей в памяти, которые значительно улучшают производительность RPC за счет индексации учетных записей по ключевому полю. В настоящее время поддерживаются следующие значения параметров:</p>
+<ul>
+<li><code>program-id</code>: каждая учетная запись индексируется своей программой-владельцем; используется <a href="developing/clients/jsonrpc-api.md#getprogramaccounts"><code>getProgramAccounts</code></a></li>
+<li><code>spl-token-mint</code>: каждая учетная запись токена SPL индексируется своим токеном Mint; используется <a href="developing/clients/jsonrpc-api.md#gettokenaccountsbydelegate">getTokenAccountsByDelegate</a> и <a href="developing/clients/jsonrpc-api.md#gettokenlargestaccounts">getTokenLargestAccounts</a></li>
+<li><code>spl-token-owner</code>: каждая учетная запись токена SPL индексируется по адресу владельца токена; используется запросами <a href="developing/clients/jsonrpc-api.md#gettokenaccountsbyowner">getTokenAccountsByOwner</a> и <a href="developing/clients/jsonrpc-api.md#getprogramaccounts"><code>getProgramAccounts</code></a>, которые включают фильтр владельца токена spl.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

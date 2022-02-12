@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Распараллеливание Enjarify в Go и Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#optimizatsiia">Оптимизация</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#dizain">Дизайн</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#idti"><small>- Идти</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#rust"><small>- Rust</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#rezul-taty">Результаты</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#bonusnyi-raund-rezul-taty-potokovoi-peredachi"><small>- Бонусный раунд - Результаты потоковой передачи</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#idti-1"><small>- Идти</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#rust-1"><small>- Rust</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#okonchatel-nye-rezul-taty">Окончательные результаты</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/parallelizing-enjarify-in-go-and-rust/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Распараллеливание Enjarify в Go и Rust</h1>
+
+<p><a href="https://medium.com/@robertgrosse/parallelizing-enjarify-in-go-and-rust-21055d64af7e">Перевод</a> | Автор оригинала: Robert Grosse</p>
+<p>В прошлом году я переписал Enjarify на Go и Rust, чтобы узнать больше о языках и сравнить сложность, многословность, производительность и подверженность ошибкам языков, а также написал сообщение с подробным описанием своих выводов. Для простоты я измерил только однопоточную производительность, но ряд комментаторов посчитали, что это было несправедливо по отношению к Go, потому что простой параллелизм - один из основных аргументов в пользу языка, под которым они предположительно подразумевали параллелизм, не говоря уже о Робе Пайке. Поэтому я решил распараллелить код и написать новый пост с подробным описанием результатов.</p>
+<h2 id="optimizatsiia">Оптимизация</h2>
+<p>Во-первых, вот показатели производительности из исходного сообщения.</p>
+<p><img src="/imgs/posts/138898df_01.png" alt="Время хеш-тестов: Rust 135 секунд, Go 290 секунд, Python 1328 секунд" /></p>
+<p>В исходном посте мой код был просто протестирован как есть. Однако при написании версии Rust у меня было несколько идей по оптимизации, которые я хотел попробовать перенести на версию Go, а версия Go также содержала кучу кода, который был написан скорее простым, чем быстрым. Я решил потратить некоторое время на то, чтобы оптимизировать (однопоточный) код Go и Rust, чтобы увидеть, какая разница в производительности является естественной, а не неоптимальной реализацией.</p>
+<p>Как оказалось, мне удалось сделать версию Go намного быстрее, хотя и не по тем причинам, которых я ожидал. Например, ручная мономорфизация TreeList привела лишь к небольшому ускорению, а многие микрооптимизации не оказали заметного воздействия или ухудшили положение. Между тем, самое большое улучшение произошло из-за изменения, которое, как я изначально ожидал, замедлит работу. Даже с профилировщиком сложно догадаться, как можно ускорить код, хотя я полагаю, что с опытом это станет проще. Между тем, версия Rust уже была намного быстрее, но я все же смог найти два улучшения.</p>
+<p>Кроме того, я также обновил языковые версии, но это имело в основном негативные последствия. CPython поднялся до 3.5.2, что фактически замедлило его примерно на 5%. Обновление до последней версии Rust не дало заметного эффекта. Go 1.8rc1 был примерно на 10% медленнее, поэтому я остановился на 1.7. Обратите внимание, что это только для исходного однопоточного теста - в более поздней параллельной версии не было заметной разницы между 1,7 и 1,8, но я использовал числа 1,7 для согласованности. Большим победителем стал Pypy. В моем предыдущем посте Pypy был опущен из-за того, что он медленнее, чем CPython, но любая ошибка, которая была исправлена за это время, поэтому Pypy теперь включен.</p>
+<p><img src="/imgs/posts/138898df_01.png" alt="Диаграмма" /></p>
+<p>Rust: 82,5 секунды, Go 165 секунд, Pypy 310 секунд, CPython 1402 секунды.</p>
+<p>Rust стал на 64% быстрее, а Go стал на 76% быстрее, что снизило соотношение Go / Rust с 2,15 до 2,0. Также интересно, что Pypy был почти таким же быстрым, как неоптимизированная версия Go из исходного сообщения. Это указывает на то, что если Pypy доступен, и вы мало что знаете об оптимизации Go и имеет значение только однопоточная производительность, вы можете не увидеть увеличения скорости от переписывания кода Python в Go, хотя версия Go все равно будет быстрее для краткосрочных задач. из-за отсутствия JIT-разминки.</p>
+<p>В любом случае, взяв это за основу, пришло время распараллелить код Go и Rust. Я не стал беспокоиться о версии для Python по понятным причинам. </p>
+<h2 id="dizain">Дизайн</h2>
+<p>Первый вопрос при распараллеливании - что и где распараллеливать. К счастью, тест хеш-тестов, который я использовал, уже поразительно параллелен. Он состоит из запуска Enjarify для каждого из 7 тестовых файлов со всеми 256 возможными комбинациями проходов и распечатки хэша вывода. Изначально я создал его для обнаружения непреднамеренных изменений в поведении во время работы над Enjarify, но он также служит удобным автономным тестом.</p>
+<p>Очевидным подходом было бы распараллелить цикл хэш-тестов и запустить тесты 1792 параллельно. Однако это выглядело немного искусственно, поскольку не привело бы к каким-либо улучшениям для нормального использования Enjarify. Другое очевидное место для распараллеливания - это основной цикл трансляции, который переводит каждый класс в предоставленном файле (ах) dex в файл классов Java, процесс, который полностью независим от других классов. Нет смысла пытаться распараллелить с более высокой степенью детализации, потому что перевод каждого отдельного класса по своей сути является последовательным из-за того, что все методы и поля в классе совместно используют один пул констант.</p>
+<p>Распараллеливание цикла перевода будет хорошо работать при обычном использовании Enjarify, где вы обычно переводите один файл apk с тысячами классов, но не сильно поможет при хэш-тестах, когда один файл с 1–6 классами переводится сотни раз. Поэтому в своих экспериментах я решил, что и цикл хэш-тестов, и цикл трансляции должны быть параллельны.</p>
+<h3 id="idti">Идти</h3>
+<p>Основной примитив параллелизма в Go - это каналы. Фактически, настолько важно, чтобы это был один из трех универсальных типов в языке и имел свой собственный выделенный синтаксис. Стандартная библиотека также предоставляет обычные мьютексы, атомики и т.д., Но я стремился к простейшему и наиболее идиоматическому подходу, а это означало придерживаться каналов.</p>
+<p>Очевидный подход - создать горутину для каждой задачи и заставить их всех записывать результат в один канал после завершения. К сожалению, это не работает, потому что результаты будут получены не по порядку. После некоторого исследования того, какие паттерны считаются идиоматическими, я решил использовать паттерн семафорного канала.</p>
+<p>Это включает в себя выделение среза для хранения всех результатов заранее и выполнение каждой горутиной записи вывода в заранее определенном месте в этом срезе. Затем они отправляют по каналу тип нулевого размера, чтобы указать завершение. Родительский поток получает по каналу один раз для каждой горутины, а затем читает фрагмент, который теперь содержит весь вывод. </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span>results </span><span style="color:#f29668;">:= </span><span>[][</span><span style="color:#f29718;">3</span><span>]</span><span style="font-style:italic;color:#39bae6;">string</span><span>{}
+</span><span>sem </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">chan struct</span><span>{}</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">9999</span><span>)
+</span><span>
+</span><span style="color:#ff7733;">for </span><span style="font-style:italic;color:#39bae6;">_</span><span style="color:#bfbab0cc;">, </span><span>data </span><span style="color:#f29668;">:= </span><span style="color:#ff7733;">range </span><span>dexs {
+</span><span>	dex_ </span><span style="color:#f29668;">:= </span><span>dex</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Parse</span><span>(data)
+</span><span>	n </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">len</span><span>(dex_</span><span style="color:#f29668;">.</span><span>Classes)
+</span><span>	oldlen </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">len</span><span>(results)
+</span><span>	results </span><span style="color:#f29668;">= </span><span style="color:#f07178;">append</span><span>(results</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">make</span><span>([][</span><span style="color:#f29718;">3</span><span>]</span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">, </span><span>n)</span><span style="color:#f29668;">...</span><span>)
+</span><span>
+</span><span>	</span><span style="color:#ff7733;">for </span><span>i</span><span style="color:#bfbab0cc;">, </span><span>cls </span><span style="color:#f29668;">:= </span><span style="color:#ff7733;">range </span><span>dex_</span><span style="color:#f29668;">.</span><span>Classes {
+</span><span>		</span><span style="color:#ff7733;">go func</span><span>(</span><span style="color:#f29718;">cls </span><span>dex</span><span style="color:#f29668;">.</span><span style="color:#ff7733;">DexClass</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">result </span><span style="color:#f29668;">*</span><span>[</span><span style="color:#f29718;">3</span><span>]</span><span style="font-style:italic;color:#39bae6;">string</span><span>) {
+</span><span>			unicode_name </span><span style="color:#f29668;">:= </span><span style="color:#ffb454;">Decode</span><span>(cls</span><span style="color:#f29668;">.</span><span>Name) </span><span style="color:#f29668;">+ </span><span style="color:#c2d94c;">&quot;.class&quot;
+</span><span>			result[</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">= </span><span>unicode_name
+</span><span>
+</span><span>			</span><span style="color:#ff7733;">if </span><span>class_data</span><span style="color:#bfbab0cc;">, </span><span>err </span><span style="color:#f29668;">:= </span><span>jvm</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ToClassFile</span><span>(cls</span><span style="color:#bfbab0cc;">, </span><span>opts)</span><span style="color:#bfbab0cc;">; </span><span>err </span><span style="color:#f29668;">== </span><span style="color:#f29718;">nil </span><span>{
+</span><span>				result[</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">= </span><span>class_data
+</span><span>			} </span><span style="color:#ff7733;">else </span><span>{
+</span><span>				result[</span><span style="color:#f29718;">2</span><span>] </span><span style="color:#f29668;">= </span><span>err</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Error</span><span>()
+</span><span>			}
+</span><span>			sem </span><span style="color:#f29668;">&lt;- </span><span style="color:#ff7733;">struct</span><span>{}{}
+</span><span>		}(cls</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29668;">&amp;</span><span>results[oldlen</span><span style="color:#f29668;">+</span><span>i])
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#ff7733;">for </span><span>i </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">; </span><span>i </span><span style="color:#f29668;">&lt; </span><span>n</span><span style="color:#bfbab0cc;">; </span><span>i</span><span style="color:#f29668;">++ </span><span>{
+</span><span>		</span><span style="color:#f29668;">&lt;-</span><span>sem
+</span><span>	}
+</span><span>}
+</span><span style="color:#ff7733;">return </span><span>results
+</span></code></pre>
+<p>И, конечно же, я проделал то же самое с циклом хэш-тестов. Это немного сложнее, потому что распечатка хэшей и вычисление окончательного хэша должны выполняться по порядку. Поэтому я разделил цикл на две части - одну, которая выполняет все фактические вычисления, а затем второй цикл, который ожидает, пока это не будет выполнено, и распечатывает результаты по порядку. </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span>sem </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">chan struct</span><span>{}</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">9999</span><span>)
+</span><span>outputs </span><span style="color:#f29668;">:= </span><span>[</span><span style="color:#f29718;">256 </span><span style="color:#f29668;">* </span><span style="color:#f29718;">7</span><span>][][</span><span style="color:#f29718;">2</span><span>]</span><span style="font-style:italic;color:#39bae6;">string</span><span>{}
+</span><span>
+</span><span style="color:#ff7733;">for </span><span>test </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">; </span><span>test </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">; </span><span>test</span><span style="color:#f29668;">++ </span><span>{
+</span><span>  name </span><span style="color:#f29668;">:= </span><span>fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Sprintf</span><span>(</span><span style="color:#c2d94c;">&quot;test</span><span style="color:#f29718;">%d</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>test)
+</span><span>  dir </span><span style="color:#f29668;">:= </span><span>path</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Join</span><span>(</span><span style="color:#c2d94c;">&quot;..&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;tests&quot;</span><span style="color:#bfbab0cc;">, </span><span>name)
+</span><span>  rawdex </span><span style="color:#f29668;">:= </span><span style="color:#ffb454;">Read</span><span>(path</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Join</span><span>(dir</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;classes.dex&quot;</span><span>))
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">for </span><span>bits </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">; </span><span>bits </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">; </span><span>bits</span><span style="color:#f29668;">++ </span><span>{
+</span><span>    </span><span style="color:#ff7733;">go func</span><span>(</span><span style="color:#f29718;">test</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">bits </span><span style="font-style:italic;color:#39bae6;">int</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">rawdex </span><span style="font-style:italic;color:#39bae6;">string</span><span>) {
+</span><span>      opts </span><span style="color:#f29668;">:= </span><span>jvm</span><span style="color:#f29668;">.</span><span>Options{bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">1 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">2 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">4 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">8 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">16 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">16</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">32 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">64 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">64</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">128 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">128</span><span>}
+</span><span>      results </span><span style="color:#f29668;">:= </span><span style="color:#ffb454;">translate</span><span>(opts</span><span style="color:#bfbab0cc;">, </span><span>rawdex)
+</span><span>
+</span><span>      output </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>([][</span><span style="color:#f29718;">2</span><span>]</span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">len</span><span>(results))
+</span><span>      outputs[(test</span><span style="color:#f29668;">-</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#f29668;">*</span><span style="color:#f29718;">256</span><span style="color:#f29668;">+</span><span>bits] </span><span style="color:#f29668;">= </span><span>output
+</span><span>
+</span><span>      </span><span style="color:#ff7733;">for </span><span>i </span><span style="color:#f29668;">:= </span><span style="color:#ff7733;">range </span><span>results {
+</span><span>        cls </span><span style="color:#f29668;">:= </span><span>results[i][</span><span style="color:#f29718;">1</span><span>]
+</span><span>        util</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Assert</span><span>(cls </span><span style="color:#f29668;">!= </span><span style="color:#c2d94c;">&quot;&quot;</span><span>)
+</span><span>        output[i][</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">= </span><span>cls
+</span><span>        output[i][</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">hash</span><span>(cls)
+</span><span>      }
+</span><span>      sem </span><span style="color:#f29668;">&lt;- </span><span style="color:#ff7733;">struct</span><span>{}{}
+</span><span>    }(test</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#bfbab0cc;">, </span><span>rawdex)
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">for </span><span>i </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">; </span><span>i </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">7</span><span style="color:#f29668;">*</span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">; </span><span>i</span><span style="color:#f29668;">++ </span><span>{
+</span><span>  </span><span style="color:#f29668;">&lt;-</span><span>sem
+</span><span>}
+</span><span>
+</span><span>fullhash </span><span style="color:#f29668;">:= </span><span style="color:#c2d94c;">&quot;&quot;
+</span><span style="color:#ff7733;">for </span><span>test </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">; </span><span>test </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">; </span><span>test</span><span style="color:#f29668;">++ </span><span>{
+</span><span>  name </span><span style="color:#f29668;">:= </span><span>fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Sprintf</span><span>(</span><span style="color:#c2d94c;">&quot;test</span><span style="color:#f29718;">%d</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>test)
+</span><span>  fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Print</span><span>(name </span><span style="color:#f29668;">+ </span><span style="color:#c2d94c;">&quot;</span><span style="color:#95e6cb;">\n</span><span style="color:#c2d94c;">&quot;</span><span>)
+</span><span>  </span><span style="color:#ff7733;">for </span><span>bits </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">; </span><span>bits </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">; </span><span>bits</span><span style="color:#f29668;">++ </span><span>{
+</span><span>    </span><span style="color:#ff7733;">for </span><span style="font-style:italic;color:#39bae6;">_</span><span style="color:#bfbab0cc;">, </span><span>pair </span><span style="color:#f29668;">:= </span><span style="color:#ff7733;">range </span><span>outputs[(test</span><span style="color:#f29668;">-</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#f29668;">*</span><span style="color:#f29718;">256</span><span style="color:#f29668;">+</span><span>bits] {
+</span><span>      fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Printf</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">%08b %x</span><span style="color:#95e6cb;">\n</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">uint8</span><span>(bits)</span><span style="color:#bfbab0cc;">, </span><span>pair[</span><span style="color:#f29718;">1</span><span>])
+</span><span>      fullhash </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">hash</span><span>(fullhash </span><span style="color:#f29668;">+ </span><span>pair[</span><span style="color:#f29718;">0</span><span>])
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<h3 id="rust">Rust</h3>
+<p>В отличие от Go, в Rust параллелизм возлагается на библиотеки. В этом случае я решил использовать Rayon. Прежде чем суслики будут жаловаться, что это несправедливо, я потратил некоторое время на поиски эквивалентных библиотек Go, но не смог их найти.</p>
+<p>Rayon выполняет всю буферизацию и упорядочение результатов за вас, поэтому его намного удобнее использовать, чем версию Go. В этом случае большая часть работы была связана с переписыванием моих лупов в стиле iter / map / collect. Как только это было сделано, фактическое распараллеливание сводилось просто к импорту Rayon и изменению iter на par_iter. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> results </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">for</span><span> data </span><span style="color:#f29668;">in</span><span> dexes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> dex </span><span style="color:#f29668;">= </span><span>dex</span><span style="color:#f29668;">::</span><span>DexFile</span><span style="color:#f29668;">::</span><span>new(data)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> dex_classes </span><span style="color:#f29668;">=</span><span> dex</span><span style="color:#f29668;">.</span><span style="color:#f07178;">parse_classes</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(dex_classes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">par_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">cls</span><span>| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> unicode_name </span><span style="color:#f29668;">= </span><span>mutf8</span><span style="color:#f29668;">::</span><span>decode(cls</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_owned</span><span>() </span><span style="color:#f29668;">+ </span><span style="color:#c2d94c;">&quot;.class&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>panic</span><span style="color:#f29668;">::</span><span>catch_unwind(panic</span><span style="color:#f29668;">::</span><span>AssertUnwindSafe(|| {
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(jvm</span><span style="color:#f29668;">::</span><span>writeclass</span><span style="color:#f29668;">::</span><span>to_class_file(</span><span style="color:#f29668;">&amp;</span><span>cls</span><span style="color:#bfbab0cc;">,</span><span> opts))
+</span><span>        }))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or_else</span><span>(|</span><span style="color:#f29718;">err</span><span>| {
+</span><span>            </span><span style="color:#ff7733;">let</span><span> error_string </span><span style="color:#f29668;">=</span><span> err</span><span style="color:#f29668;">.</span><span>downcast</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">b</span><span>| </span><span style="color:#f29668;">*</span><span>b)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">or_else</span><span>(|</span><span style="color:#f29718;">err</span><span>| {
+</span><span>                err</span><span style="color:#f29668;">.</span><span>downcast</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">s</span><span>| s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())
+</span><span>            })</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#c2d94c;">&quot;panic with unknown type&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(error_string)
+</span><span>        })</span><span style="color:#bfbab0cc;">;
+</span><span>        (unicode_name</span><span style="color:#bfbab0cc;">,</span><span> res)
+</span><span>    })</span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt;&gt;())</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>results
+</span></code></pre>
+<p>Код Go также имеет эквивалентный шаблон обработки паники, но он находится в другом месте кода и, следовательно, не показан выше. В общем, я старался сохранить максимально похожий дизайн высокого уровня между тремя версиями.</p>
+<p>Как и раньше, мне пришлось разбить цикл на хеш-тесты и поместить операторы печати после того, как были вычислены все результаты. Однако версия Rust потребовала больших изменений, чтобы избавиться от вложенного цикла. Вероятно, есть способ превратить вложенный цикл в итератор, совместимый с Rayon, но мне не хотелось разбираться в этом, поэтому я переписал код с помощью одного цикла итераций 7 * 256, используя модуль для получения исходных индексов. Кроме того, я убрал загрузку тестовых файлов из цикла, чтобы облегчить время жизни. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> testfiles </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">1</span><span style="color:#f29668;">..</span><span style="color:#f29718;">8</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">test</span><span>| </span><span style="color:#f07178;">read</span><span>(</span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;../tests/test</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">/classes.dex&quot;</span><span style="color:#bfbab0cc;">,</span><span> test)))</span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt;&gt;()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> outputs</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;(BString, String)&gt;&gt; </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>(</span><span style="color:#f29718;">7</span><span style="color:#f29668;">*</span><span style="color:#f29718;">256</span><span>))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_par_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">ind</span><span>| {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> ti </span><span style="color:#f29668;">= </span><span>(ind </span><span style="color:#f29668;">/ </span><span style="color:#f29718;">256</span><span>) </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> bits </span><span style="color:#f29668;">=</span><span> ind </span><span style="color:#f29668;">% </span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> dexes </span><span style="color:#f29668;">= &amp;</span><span>testfiles[ti</span><span style="color:#f29668;">..</span><span>ti</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> results </span><span style="color:#f29668;">= </span><span style="color:#f07178;">translate</span><span>(Options</span><span style="color:#f29668;">::</span><span>from(bits </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u8</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> dexes)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> output </span><span style="color:#f29668;">=</span><span> results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|(_</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">res</span><span>)| {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> cls </span><span style="color:#f29668;">=</span><span> res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> digest </span><span style="color:#f29668;">= </span><span style="color:#f07178;">hexdigest</span><span>(</span><span style="color:#f29668;">&amp;</span><span>cls)</span><span style="color:#bfbab0cc;">;
+</span><span>        (cls</span><span style="color:#bfbab0cc;">,</span><span> digest)
+</span><span>    })</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    output
+</span><span>})</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let mut</span><span> fullhash </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">for </span><span>(ind</span><span style="color:#bfbab0cc;">,</span><span> pairs) </span><span style="color:#f29668;">in</span><span> outputs</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">enumerate</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> bits </span><span style="color:#f29668;">=</span><span> ind </span><span style="color:#f29668;">% </span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">if</span><span> bits</span><span style="color:#f29668;">==</span><span style="color:#f29718;">0 </span><span>{</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;test</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>(ind</span><span style="color:#f29668;">/</span><span style="color:#f29718;">256</span><span>)</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;</span><span>}
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">for </span><span>(cls</span><span style="color:#bfbab0cc;">,</span><span> digest) </span><span style="color:#f29668;">in</span><span> pairs {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:08b} {}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> bits</span><span style="color:#bfbab0cc;">,</span><span> digest)</span><span style="color:#bfbab0cc;">;
+</span><span>        fullhash</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(cls)</span><span style="color:#bfbab0cc;">;
+</span><span>        fullhash </span><span style="color:#f29668;">= </span><span style="color:#f07178;">hash</span><span>(</span><span style="color:#f29668;">&amp;</span><span>fullhash)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="rezul-taty">Результаты</h2>
+<p>На моей 8-ядерной машине (4 физических ядра) результирующий код Go снизился до среднего значения 48,0 секунд, а код Rust снизился до 23,7 секунды. Это означает, что оба имеют ускорение примерно в 3,4 раза. Есть несколько возможных объяснений отсутствия полного масштабирования - закон Амдала, затраты на синхронизацию, конфликты между ядрами в кеш-памяти и т.д., Но я не пытался глубоко исследовать это. Удивительно, что коэффициент ускорения для двух языков примерно одинаков, поскольку нет априорной причины, по которой какой-либо из этих факторов был бы одинаковым в обоих случаях. В любом случае это означает, что код Rust был примерно в два раза быстрее кода Go в каждом тесте - неоптимизированном, оптимизированном и параллельном.</p>
+<h3 id="bonusnyi-raund-rezul-taty-potokovoi-peredachi">Бонусный раунд - Результаты потоковой передачи</h3>
+<p>Приведенный выше параллельный код дал хорошее ускорение, но у него есть недостаток, заключающийся в том, что вывод командной строки неинтересен. Последовательная версия распечатывала каждую строку так быстро, как только могла, что приводило к непрерывному потоку результатов, но параллельная версия вообще ничего не распечатывала, пока все не было сделано.</p>
+<p>Поэтому я решил посмотреть, смогу ли я это исправить, сохранив параллельные вычисления. Очевидно, что еще должна быть некоторая буферизация, но должна быть возможность распечатать, скажем, первую строку, как только будет готов первый результат, затем дождаться второго результата, если это еще не сделано, и так далее.</p>
+<h3 id="idti-1">Идти</h3>
+<p>В версии Go реализовать потоковую передачу было легко, хотя для каждой горутины требовался отдельный канал, что выглядело грязным. В соответствии с мантрой Go «разделяйте память посредством общения», я решил создать единственный канал для вывода, с упорядочением, обеспечиваемым передачей этого канала между горутинами через отдельный набор каналов. Каждой горутине передаются два канала, причем выходной конец одного канала подключен к входному концу канала, передаваемому следующей горутине. </p>
+<pre data-lang="go" style="background-color:#0f1419;color:#bfbab0;" class="language-go "><code class="language-go" data-lang="go"><span>outputChan </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">OutputChan</span><span>)
+</span><span>syncChan </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">chan OutputChan</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>)
+</span><span>syncChan2 </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">chan OutputChan</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>)
+</span><span>syncChan </span><span style="color:#f29668;">&lt;- </span><span>outputChan
+</span><span>
+</span><span style="color:#ff7733;">for </span><span>test </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">; </span><span>test </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">; </span><span>test</span><span style="color:#f29668;">++ </span><span>{
+</span><span>  name </span><span style="color:#f29668;">:= </span><span>fmt</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Sprintf</span><span>(</span><span style="color:#c2d94c;">&quot;test</span><span style="color:#f29718;">%d</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>test)
+</span><span>  dir </span><span style="color:#f29668;">:= </span><span>path</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Join</span><span>(</span><span style="color:#c2d94c;">&quot;..&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;tests&quot;</span><span style="color:#bfbab0cc;">, </span><span>name)
+</span><span>  rawdex </span><span style="color:#f29668;">:= </span><span style="color:#ffb454;">Read</span><span>(path</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Join</span><span>(dir</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;classes.dex&quot;</span><span>))
+</span><span>
+</span><span>  </span><span style="color:#ff7733;">for </span><span>bits </span><span style="color:#f29668;">:= </span><span style="color:#f29718;">0</span><span style="color:#bfbab0cc;">; </span><span>bits </span><span style="color:#f29668;">&lt; </span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">; </span><span>bits</span><span style="color:#f29668;">++ </span><span>{
+</span><span>    </span><span style="color:#ff7733;">go func</span><span>(</span><span style="color:#f29718;">bits </span><span style="font-style:italic;color:#39bae6;">int</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">rawdex </span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">inchan </span><span style="color:#f29668;">&lt;-</span><span style="color:#ff7733;">chan OutputChan</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">outchan </span><span style="color:#ff7733;">chan</span><span style="color:#f29668;">&lt;- </span><span style="color:#ff7733;">OutputChan</span><span>) {
+</span><span>      opts </span><span style="color:#f29668;">:= </span><span>jvm</span><span style="color:#f29668;">.</span><span>Options{bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">1 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">2 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">4 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">8 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">16 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">16</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">32 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">32</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">64 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">64</span><span style="color:#bfbab0cc;">, </span><span>bits</span><span style="color:#f29668;">&amp;</span><span style="color:#f29718;">128 </span><span style="color:#f29668;">== </span><span style="color:#f29718;">128</span><span>}
+</span><span>      results </span><span style="color:#f29668;">:= </span><span style="color:#ffb454;">translate</span><span>(opts</span><span style="color:#bfbab0cc;">, </span><span>rawdex)
+</span><span>
+</span><span>      output </span><span style="color:#f29668;">:= </span><span style="color:#f07178;">make</span><span>([][</span><span style="color:#f29718;">2</span><span>]</span><span style="font-style:italic;color:#39bae6;">string</span><span style="color:#bfbab0cc;">, </span><span style="color:#f07178;">len</span><span>(results))
+</span><span>      </span><span style="color:#ff7733;">for </span><span>i </span><span style="color:#f29668;">:= </span><span style="color:#ff7733;">range </span><span>results {
+</span><span>        cls </span><span style="color:#f29668;">:= </span><span>results[i][</span><span style="color:#f29718;">1</span><span>]
+</span><span>        util</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">Assert</span><span>(cls </span><span style="color:#f29668;">!= </span><span style="color:#c2d94c;">&quot;&quot;</span><span>)
+</span><span>        output[i][</span><span style="color:#f29718;">0</span><span>] </span><span style="color:#f29668;">= </span><span>cls
+</span><span>        output[i][</span><span style="color:#f29718;">1</span><span>] </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">hash</span><span>(cls)
+</span><span>      }
+</span><span>
+</span><span>      c </span><span style="color:#f29668;">:= &lt;-</span><span>inchan
+</span><span>      c </span><span style="color:#f29668;">&lt;- </span><span>output
+</span><span>      outchan </span><span style="color:#f29668;">&lt;- </span><span>c
+</span><span>    }(bits</span><span style="color:#bfbab0cc;">, </span><span>rawdex</span><span style="color:#bfbab0cc;">, </span><span>syncChan</span><span style="color:#bfbab0cc;">, </span><span>syncChan2)
+</span><span>
+</span><span>    syncChan </span><span style="color:#f29668;">= </span><span>syncChan2
+</span><span>    syncChan2 </span><span style="color:#f29668;">= </span><span style="color:#f07178;">make</span><span>(</span><span style="color:#ff7733;">chan OutputChan</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">1</span><span>)
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Цикл перевода в main.go остался нетронутым.</p>
+<h3 id="rust-1">Rust</h3>
+<p>Стриминг оказался намного сложнее реализовать в версии Rust. Во-первых, Rayon в настоящее время не поддерживает это, поэтому я решил вырвать Rayon и вместо этого попробовать Futures. Я мог бы оставить Rayon для цикла перевода и использовать только футуры для цикла хэш-тестов, но я беспокоился, что наличие нескольких библиотек с независимыми пулами потоков может вызвать проблемы. (По иронии судьбы, оказалось наоборот).</p>
+<p>Очевидный способ реализовать потоковую передачу с футурами - создать список футур, каждый из которых представляет одну итерацию цикла. Затем вы просто ждете первого, затем второго и т.д. Это оказалось на самом деле проще, чем я ожидал (бокс не требуется).</p>
+<p>В отличие от Rayon, Futures требует, чтобы вы явно создавали пул потоков, а не неявно создавали глобальный пул потоков, но это не имело большого значения. Настоящая проблема заключалась в отсутствии потоков с заданной областью видимости.</p>
+<p>Как и большинство библиотек Rust, Rayon и Futures::CpuPool принимают закрытие, которое представляет работу, которую нужно выполнить. В Rayon они имеют ограниченную область видимости - работа гарантированно завершится до того, как вы вернетесь, и, следовательно, замыкания могут безопасно содержать ссылки на стек. Фактически, они могут в основном делать все, что может делать не-закрывающий код в одном и том же месте, а вывод типа замыкания Rust означает, что он просто работает.</p>
+<p>К сожалению, Futures этого не поддерживает. CpuPool::spawn_fn() имеет статическую границу, что означает, что переданные замыкания не могут ссылаться на какие-либо данные стека, так как они думают, что они могут пережить порождающий поток.</p>
+<p>Для внешнего цикла хеш-тестов это было несложно. Я просто засунул пул и тестовые файлы в Arcs. Однако мне потребовалось время, чтобы придумать подходящий способ клонирования и перемещения их в закрытие, поскольку сообщение об ошибке rustc в этом случае совершенно бесполезно. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> pool </span><span style="color:#f29668;">= </span><span>Arc</span><span style="color:#f29668;">::</span><span>new(CpuPool</span><span style="color:#f29668;">::</span><span>new_num_cpus())</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> testfiles </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">1</span><span style="color:#f29668;">..</span><span style="color:#f29718;">8</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">test</span><span>| </span><span style="color:#f07178;">read</span><span>(</span><span style="color:#f07178;">format!</span><span>(</span><span style="color:#c2d94c;">&quot;../tests/test</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">/classes.dex&quot;</span><span style="color:#bfbab0cc;">,</span><span> test)))</span><span style="color:#f29668;">.</span><span>collect</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt;&gt;()</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> testfiles </span><span style="color:#f29668;">= </span><span>Arc</span><span style="color:#f29668;">::</span><span>new(testfiles)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let</span><span> output_futures</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt; </span><span style="color:#f29668;">= </span><span>(</span><span style="color:#f29718;">0</span><span style="color:#f29668;">..</span><span>(</span><span style="color:#f29718;">7</span><span style="color:#f29668;">*</span><span style="color:#f29718;">256</span><span>))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">ind</span><span>| {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> testfiles </span><span style="color:#f29668;">=</span><span> testfiles</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> pool2 </span><span style="color:#f29668;">=</span><span> pool</span><span style="color:#f29668;">.</span><span style="color:#f07178;">clone</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    pool</span><span style="color:#f29668;">.</span><span style="color:#f07178;">spawn_fn</span><span>(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|| </span><span>{
+</span><span>        </span><span style="color:#ff7733;">let</span><span> ti </span><span style="color:#f29668;">= </span><span>(ind </span><span style="color:#f29668;">/ </span><span style="color:#f29718;">256</span><span>) </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">usize</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> bits </span><span style="color:#f29668;">=</span><span> ind </span><span style="color:#f29668;">% </span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> dexes </span><span style="color:#f29668;">= &amp;</span><span>testfiles[ti</span><span style="color:#f29668;">..</span><span>ti</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span>]</span><span style="color:#bfbab0cc;">;
+</span><span>      
+</span><span>        </span><span style="color:#ff7733;">let</span><span> results </span><span style="color:#f29668;">= </span><span style="color:#f07178;">translate</span><span>(</span><span style="color:#f29668;">&amp;</span><span>pool2</span><span style="color:#bfbab0cc;">, </span><span>Options</span><span style="color:#f29668;">::</span><span>from(bits </span><span style="color:#f29668;">as </span><span style="color:#ff7733;">u8</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> dexes)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="color:#ff7733;">let</span><span> output </span><span style="color:#f29668;">=</span><span> results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|(_</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">res</span><span>)| {
+</span><span>            </span><span style="color:#ff7733;">let</span><span> cls </span><span style="color:#f29668;">=</span><span> res</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let</span><span> digest </span><span style="color:#f29668;">= </span><span style="color:#f07178;">hexdigest</span><span>(</span><span style="color:#f29668;">&amp;</span><span>cls)</span><span style="color:#bfbab0cc;">;
+</span><span>            (cls</span><span style="color:#bfbab0cc;">,</span><span> digest)
+</span><span>        })</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt;,()&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(output)</span><span style="color:#bfbab0cc;">;
+</span><span>        res
+</span><span>    })
+</span><span>})</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">let mut</span><span> fullhash </span><span style="color:#f29668;">= </span><span style="color:#f07178;">vec!</span><span>[]</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">for </span><span>(ind</span><span style="color:#bfbab0cc;">,</span><span> fut) </span><span style="color:#f29668;">in</span><span> output_futures</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">enumerate</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> bits </span><span style="color:#f29668;">=</span><span> ind </span><span style="color:#f29668;">% </span><span style="color:#f29718;">256</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">if</span><span> bits</span><span style="color:#f29668;">==</span><span style="color:#f29718;">0 </span><span>{</span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;test</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">, </span><span>(ind</span><span style="color:#f29668;">/</span><span style="color:#f29718;">256</span><span>)</span><span style="color:#f29668;">+</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;</span><span>}
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> pairs </span><span style="color:#f29668;">=</span><span> fut</span><span style="color:#f29668;">.</span><span style="color:#f07178;">wait</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">for </span><span>(cls</span><span style="color:#bfbab0cc;">,</span><span> digest) </span><span style="color:#f29668;">in</span><span> pairs {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:08b} {}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> bits</span><span style="color:#bfbab0cc;">,</span><span> digest)</span><span style="color:#bfbab0cc;">;
+</span><span>        fullhash</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(cls)</span><span style="color:#bfbab0cc;">;
+</span><span>        fullhash </span><span style="color:#f29668;">= </span><span style="color:#f07178;">hash</span><span>(</span><span style="color:#f29668;">&amp;</span><span>fullhash)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>С другой стороны, цикл перевода замыкается на DexClass &lt;'a&gt;, что не так просто исправить. DexClass анализируется из входного файла dex, и он заимствовал ссылки в указанный файл. К сожалению, весь код синтаксического анализа dex и весь код, который использует проанализированные данные, предполагает, что он работает с заимствованными ссылками. Нет безопасного способа сделать его статичным, не внося серьезных изменений в код, чего я не хотел делать, тем более что это изначально излишняя пессимизация.</p>
+<p>С тяжелым сердцем я обратился к самому опасному из небезопасных, mem::transmute, чтобы трансмутировать жизнь. В этом случае это должно быть безопасно, потому что все футуры ожидаются, пока заимствованные данные еще живы, но это очень легко испортить, и нет никакого способа узнать. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let mut</span><span> results </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Vec</span><span style="color:#f29668;">::</span><span>new()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">for</span><span> data </span><span style="color:#f29668;">in</span><span> dexes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">iter</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> dex </span><span style="color:#f29668;">= </span><span>dex</span><span style="color:#f29668;">::</span><span>DexFile</span><span style="color:#f29668;">::</span><span>new(data)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> dex_classes </span><span style="color:#f29668;">=</span><span> dex</span><span style="color:#f29668;">.</span><span style="color:#f07178;">parse_classes</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// futures_cpupool, y u no scoped threads?
+</span><span>    </span><span style="color:#ff7733;">let</span><span> unsafe_classes</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;dex</span><span style="color:#f29668;">::</span><span>DexClass&lt;</span><span style="color:#ff7733;">&#39;static</span><span>&gt;&gt; </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">unsafe</span><span>{ mem</span><span style="color:#f29668;">::</span><span>transmute(dex_classes) }</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">let</span><span> result_futures</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Vec</span><span>&lt;</span><span style="color:#f29668;">_</span><span>&gt; </span><span style="color:#f29668;">=</span><span> unsafe_classes</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">cls</span><span>| {
+</span><span>        pool</span><span style="color:#f29668;">.</span><span style="color:#f07178;">spawn_fn</span><span>(</span><span style="color:#ff7733;">move </span><span style="color:#f29668;">|| </span><span>{
+</span><span>            </span><span style="color:#ff7733;">let</span><span> unicode_name </span><span style="color:#f29668;">= </span><span>mutf8</span><span style="color:#f29668;">::</span><span>decode(cls</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_owned</span><span>() </span><span style="color:#f29668;">+ </span><span style="color:#c2d94c;">&quot;.class&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>            </span><span style="color:#ff7733;">let</span><span> res </span><span style="color:#f29668;">= </span><span>panic</span><span style="color:#f29668;">::</span><span>catch_unwind(panic</span><span style="color:#f29668;">::</span><span>AssertUnwindSafe(|| {
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>(jvm</span><span style="color:#f29668;">::</span><span>writeclass</span><span style="color:#f29668;">::</span><span>to_class_file(</span><span style="color:#f29668;">&amp;</span><span>cls</span><span style="color:#bfbab0cc;">,</span><span> opts))
+</span><span>            }))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or_else</span><span>(|</span><span style="color:#f29718;">err</span><span>| {
+</span><span>                </span><span style="color:#ff7733;">let</span><span> error_string </span><span style="color:#f29668;">=</span><span> err</span><span style="color:#f29668;">.</span><span>downcast</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="font-style:italic;color:#39bae6;">String</span><span>&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">b</span><span>| </span><span style="color:#f29668;">*</span><span>b)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">or_else</span><span>(|</span><span style="color:#f29718;">err</span><span>| {
+</span><span>                    err</span><span style="color:#f29668;">.</span><span>downcast</span><span style="color:#f29668;">::</span><span>&lt;</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">&#39;static str</span><span>&gt;()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">s</span><span>| s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())
+</span><span>                })</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap_or</span><span>(</span><span style="color:#c2d94c;">&quot;panic with unknown type&quot;</span><span style="color:#f29668;">.</span><span style="color:#f07178;">to_string</span><span>())</span><span style="color:#bfbab0cc;">;
+</span><span>                </span><span style="font-style:italic;color:#39bae6;">Err</span><span>(error_string)
+</span><span>            })</span><span style="color:#bfbab0cc;">;
+</span><span>            </span><span style="color:#ff7733;">let</span><span> res</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">Result</span><span>&lt;</span><span style="color:#f29668;">_</span><span>,()&gt; </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Ok</span><span>((unicode_name</span><span style="color:#bfbab0cc;">,</span><span> res))</span><span style="color:#bfbab0cc;">;
+</span><span>            res
+</span><span>        })
+</span><span>    })</span><span style="color:#f29668;">.</span><span style="color:#f07178;">collect</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    results</span><span style="color:#f29668;">.</span><span style="color:#f07178;">extend</span><span>(result_futures</span><span style="color:#f29668;">.</span><span style="color:#f07178;">into_iter</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">fut</span><span>| fut</span><span style="color:#f29668;">.</span><span style="color:#f07178;">wait</span><span>()</span><span style="color:#f29668;">.</span><span style="color:#f07178;">unwrap</span><span>()))</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>results
+</span></code></pre>
+<p>После всего этого код, наконец, скомпилирован ... и запущен ... и не дал никаких результатов.</p>
+<p>Я до сих пор не уверен, в чем именно заключалась проблема, но после некоторой отладки я в конце концов догадался, что использование одного и того же пула потоков для обоих циклов каким-то образом вызывает тупик. Я изменил его, чтобы запускать каждый перевод в отдельном пуле потоков, и, наконец, это сработало.</p>
+<h2 id="okonchatel-nye-rezul-taty">Окончательные результаты</h2>
+<p>Обе версии передают результаты на консоль без снижения производительности. Версия Go немного «дёргается» - она делает паузу на некоторое время, затем сразу распечатывает кучу результатов, а затем снова делает паузу. Это не удивительно, поскольку результаты выполняются параллельно и хранятся в буфере, но это немного разочаровывает. Использование небуферизованного выходного канала уменьшило рывки, но не устранило их.</p>
+<p>Версия на Rust только немного дёргается. Вам нужно будет очень внимательно присмотреться, чтобы отличить его от исходной последовательной версии, не считая того факта, что теперь он работает в 3,5 раза быстрее.</p>
+<p>Я не думаю, что резкость доказывает, что Rust лучше - вероятно, это просто случайность, какой алгоритм планирования здесь лучше, но это была интересная разница.</p>
+<p>Версия Rust также снизилась с 23,7 секунды до 23,1 секунды. Я не уверен, связано ли это с Rayon или CpuPool или это связано с распечаткой результатов параллельно с вычислениями.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Распараллеливание неплохо ни на одном из языков. У каждого свои недостатки. В случае с Go это связано с отсутствием реальной системы типов. В случае с Rust это связано с тем, что библиотеки незрелые и не делают все, что вам нужно.</p>
+<p>Как и раньше, мой опыт работы с Go показывает, что вы всегда знаете, какой у вас набор инструментов, но этот набор инструментов не очень велик, и вам нужно тратить время на размышления о том, какой способ создать то, что вы хотите, является наименее уродливым. С Rust вы тратите время на изучение библиотек и API, но полученный код лучше, чем его эквивалент в Go.</p>
+<p>Кроме того, большая часть повторяющейся работы в Go тратится на изобретение велосипеда, что легко, но не нужно. Rust решает эту проблему с помощью вывода типов, обобщений, эргономичных встроенных функций и т.д. Rust также требует кучи повторяющейся работы, но, по крайней мере, для решения интересных задач - доказательства безопасности, исключения распределения и т.д. Go решает эту проблему даже не пытающийся. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

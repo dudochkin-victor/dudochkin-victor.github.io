@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Коэффициент Джини в Edgeware | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/lockdrop/gini-coefficient-of-edgeware/#description-avtor-tom-aivi-ot-imeni-commonwealth-labs-pervonachal-no-opublikovano-na-saite-commonwealth-im-i-adaptirovano-dlia-docs-edgewa-re">description:Автор: Том Айви от имени Commonwealth Labs. Первоначально опубликовано на сайте Commonwealth.im и адаптировано для docs.edgewa.re.</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/lockdrop/gini-coefficient-of-edgeware/#analiz-koeffitsienta-dzhini">Анализ коэффициента Джини</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/lockdrop/gini-coefficient-of-edgeware/#predosterezheniia"><small>- Предостережения</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/lockdrop/gini-coefficient-of-edgeware/#dolgosrochnye-protsenty"><small>- Долгосрочные проценты</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/lockdrop/gini-coefficient-of-edgeware/#prodolzhenie-eksperimentov-s-upravleniem">Продолжение экспериментов с управлением</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/edgeware-runtime/lockdrop/gini-coefficient-of-edgeware/#k-chemu-eto-nas-privodit"><small>- К чему это нас приводит?</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Коэффициент Джини в Edgeware</h1>
+
+<hr />
+<h2 id="description-avtor-tom-aivi-ot-imeni-commonwealth-labs-pervonachal-no-opublikovano-na-saite-commonwealth-im-i-adaptirovano-dlia-docs-edgewa-re">description:
+Автор: Том Айви от имени Commonwealth Labs. Первоначально опубликовано на сайте Commonwealth.im и адаптировано для docs.edgewa.re.</h2>
+<h2 id="analiz-koeffitsienta-dzhini"><strong>Анализ коэффициента Джини</strong></h2>
+<p>Общая сумма ETH, заблокированная в стандартном процессе, составила 1 199 728 ETH, а сигнальные средства — 4 346 544 ETH. Это демонстрирует сильную уверенность и интерес как к контрактам, лежащим в основе блокировки, так и к прогрессу в технологии блокчейна, который представляет Edgeware. На сегодняшний день существует более 4000 различных адресов Edgeware, в основном созданных в процессе блокировки из более чем 10 000 транзакций.</p>
+<p>Механизм блокировки был в первую очередь разработан для более децентрализованного и равноправного распределения служебных токенов при строгом отборе преданных пользователей и держателей. Это было достигнуто за счет «перезарядки» силы небольших сумм за счет использования времени в качестве рычага: блокировка дольше, получить больше.</p>
+<p>Для многих криптосетей децентрализация системы анализируется с использованием <a href="https://en.wikipedia.org/wiki/Gini_coefficient">коэффициента Джини</a>, который рассматривает распределение богатства. Мы предоставляем коэффициент Джини 0,694 для Edgeware. На следующих диаграммах показано распределение токенов Edgeware, а затем <a href="https://en.wikipedia.org/wiki/Lorenz_curve">кривая Лоренца</a> и коэффициент Джини нашего анализа.</p>
+<p><img src="https://lh3.googleusercontent.com/TpeGRDY7Wi4xvMkw968PksrPn0ZuwxM6BSwwVXGguwg_LXFbruyjQIKnwybLbR4jOR2eOx5vDrkshBjQzmrg3-yWZWzIylmr1TpKd3uROcTiIna49yDkD-lWWPO81sa_ASNtOEoV" alt="Distribution of Edgeware tokens of top 4.2% of Accounts" /></p>
+<p><img src="https://lh4.googleusercontent.com/fKYymIwRa5YX8gC5J27wuzIaqtGHltwdfaNqALCdi8R4d1yFgL4obXHFj3pWi4Wiqub3yItY_xnwMSNxzeIqmIAlScpgk34D8ufa_rMvQPY_ecrhSEOArmGjrioBhw-beFh-uSD2" alt="Lorenz Curve and Gini Coefficient of Edgeware Token Distribution" /></p>
+<h3 id="predosterezheniia">Предостережения</h3>
+<ul>
+<li>Некоторые из крупнейших раздач получены от [бирж, таких как Binance](https://www.binance.com/en/blog/376024539711221760/Did-You-Hold-ETH-on-Binance-Congratulations-Youll-Get-Free- Edgeware-токены). Эти учетные записи сигнализировали от имени своих пользователей и объявили о планах распределения выделенных средств среди соответствующих держателей ETH, поэтому их активы на самом деле не соответствуют отдельным лицам. Это создает смещение в сторону более высокого коэффициента Джини, чем на самом деле имеет сеть.</li>
+<li>Несколько адресов могут быть привязаны к одному и тому же владельцу, что может повлиять на окончательный коэффициент в любом направлении - невозможно сказать, какие счета могут или не могут быть под контролем одного и того же лица.</li>
+<li>Самое главное, анализ коэффициента Джини чувствителен к небольшим суммам, которых в дистрибутиве Edgeware очень много.
+– Для окончательного анализа дистрибутива Edgeware мы смоделировали [анализ сети Google BigQuery](https://cloud.google.com/blog/products/data-analytics/introduction-six-new-cryptocurrencies-in-bigquery- общедоступные наборы данных и как их анализировать), чтобы создать набор результатов, более сопоставимый с существующими сетями. Поскольку Edgeware, будучи новым, не имеет около 10000 адресов, мы можем использовать процент в качестве относительной меры. <a href="https://coinmetrics.io/charts/#assets=btc,eth_left=AdrActCnt_right=AdrActCnt_zoom=1567468800000,1570060800000">Coinmetrics.io сообщает, что на момент анализа Google</a> номера активных счетов для Ethereum, например, имели всего 233 701 тыс. адресов. Когда Google изучил 10 000 лучших адресов, они изучили 4,2% самых популярных учетных записей.</li>
+<li>Для сравнения, первые 4,2 процента адресов Edgeware составляют основу <a href="https://docs.google.com/spreadsheets/d/1Dmf0ZK8WBRPBLZ95Gf95gHIEMB2uhTG5v9yjesgABI4/edit#gid=71362133">нашего набора данных</a>. Чтобы найти коэффициент Джини, мы ввели значения этих счетов в <a href="http://shlegeris.com/gini">простой калькулятор Джини. </a>Коэффициент примерно для 90 % всех токенов Edgeware, распространяемых посредством блокировки. Давайте сравним коэффициент Джини Edgeware, равный 0,694, с лучшими криптосетями, найденными Google BigQuery:<img src="https://lh4.googleusercontent.com/aL5M2FDvbegv8LLXnvauhD6C7efMA4yKd33ur-Puld_NBb_Q6pJFqcTOz4SOXDP22R83j2xUCNGb50aKjaG7ZkKGlGWtaVhclIhdrAzlcroLXWw07sqQ_JJag3gIZfZdvtamjLoP" alt="" /></li>
+</ul>
+<p><em>Коэффициенты Джини популярных криптосетей (10 тыс. лучших адресов)</em> [<em>измерено Google BigQuery</em>](https://cloud.google.com/blog/products/data-analytics/introduction-six-new-cryptocurrencies-in-bigquery- общедоступные наборы данных и как их анализировать)</p>
+<p>Если мы сосредоточимся на начальном времени запуска этих сетей, ни одна из сетей не будет иметь значение менее 0,55, ** ставя блокировку Edgeware как наиболее децентрализованное распределение токенов. ** \ (Google отмечает в своем анализе, что цифры Dash могут быть ненадежными из-за к функциям конфиденциальности.)</p>
+<p>Поскольку контракты блокировки доказали свою функциональность и безопасность, мы ожидаем, что будущее использование механизма будет еще более справедливым, поскольку структура бонусов улучшена, а пользователи доверяют контрактам для участия в более длительных периодах блокировки.</p>
+<h3 id="dolgosrochnye-protsenty"><strong>Долгосрочные проценты</strong></h3>
+<p>В ICO или других методах распределения токенов капитал порождает капитал. Однако в режиме блокировки количество пользователей может быть увеличено за счет временных предпочтений — бонусов за более длительное участие. Таким образом, это позволило многим держателям небольших сумм ETH показать свои предпочтения. Подавляющая часть шкафчиков предпочла запираться не на 3 месяца, а на максимальный срок — 12 месяцев. Это показывает нам, что они имеют долгосрочный интерес к сети. Более того, люди сигнализировали о своем участии другими способами: более 130 адресов указывали, что они хотели бы подтвердить свое участие. Эта сумма была подкреплена более чем 70 валидаторами, участвовавшими в ходе этой последней тестовой сети.</p>
+<h2 id="prodolzhenie-eksperimentov-s-upravleniem"><strong>Продолжение экспериментов с управлением</strong></h2>
+<p><strong>Диллон Чен</strong></p>
+<p>Как мы обсуждали перед запуском lockdrop. Одной из целей для нас было дальнейшее экспериментирование с управлением. Можно с уверенностью сказать, что несколько семян были посажены. Во-первых, мы видели, как многие команды работают над дальнейшими экспериментами по распределению токенов — например, NuCypher и <a href="https://blog.nucypher.com/the-worklock/">Worklock</a>. Добавляя соглашение и выделяя только тем, кто проверяет <em>и</em> добавляя косую черту, становится намного интереснее.</p>
+<p>Этот эксперимент не ограничивался другими проектами, то же самое распределение блокировки также использовалось для запуска отдельной сети, Straightedge. Мы рады видеть, как это развивается.</p>
+<p>В <a href="https://commonwealth.im/#!/edgeware/proposal/discussion/7">Commonwealth</a> участники сообщества предлагали сделать блокировку не только одним активом. Это то, за что система управления Edgeware может проголосовать после запуска любых будущих дистрибутивов EDG. Или еще один эксперимент. Управление — это непрерывный процесс, поэтому мы создали инструменты для держателей EDG, чтобы они могли легко участвовать в этом сообществе процессов, чтобы <em>полностью</em> использовать токен:</p>
+<ul>
+<li>Голосуйте за членов совета, чтобы помочь определить будущее направление Edgeware.</li>
+<li>Делегируйте EDG валидаторам и связывайтесь с их собственными валидаторскими позициями, чтобы помочь защитить сеть Edgeware.</li>
+<li>Голосуйте за предложения казначейства, чтобы помочь поддержать текущие эксперименты, ускорить внедрение и вознаградить самых активных участников сети.</li>
+<li>Климатические DAO</li>
+<li><a href="https://commonwealth.im/#!/edgeware/proposal/discussion/43">Финансирование программы послов</a></li>
+<li>Проведение всемирной конференции <strong>EdgeCon</strong></li>
+</ul>
+<h3 id="k-chemu-eto-nas-privodit"><strong>К чему это нас приводит?</strong></h3>
+<p>Сообществу предстоит исследовать немало неизведанных территорий. Есть несколько предложений, которыми мы рады поделиться в Содружестве. Через несколько месяцев мы будем делиться новостями об улучшениях, достигнутых сообществом!</p>
+<p><a href="http://commonwealth.im/">Существующие предложения см. на сайте Commonwealth.im.</a></p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

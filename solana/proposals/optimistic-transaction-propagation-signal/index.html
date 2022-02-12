@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Оптимистичный сигнал распространения транзакции | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-transaction-propagation-signal/#tekushchee-povedenie-povtornoi-peredachi">Текущее поведение повторной передачи</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-transaction-propagation-signal/#determinirovannoe-derevo-povtornoi-peredachi">Детерминированное дерево повторной передачи</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-transaction-propagation-signal/#poluchenie-povtorno-peredannogo-fragmenta">Получение повторно переданного фрагмента</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-transaction-propagation-signal/#rekomendatsii-po-summirovaniiu-stavok"><small>- Рекомендации по суммированию ставок:</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-transaction-propagation-signal/#obshchie-soobrazheniia"><small>- Общие Соображения:</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-transaction-propagation-signal/#voprosy"><small>- Вопросы</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/optimistic-transaction-propagation-signal/#primechaniia">Примечания</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Оптимистичный сигнал распространения транзакции</h1>
+
+<h2 id="tekushchee-povedenie-povtornoi-peredachi">Текущее поведение повторной передачи</h2>
+<p>Дерево ретрансляции в настоящее время учитывает:</p>
+<ol>
+<li>Узлы разбивки по эпохам</li>
+<li>пиры tvu (отфильтровано по контактной информации и измельченной версии)</li>
+<li>текущий валидатор</li>
+</ol>
+<p>объединение (1), (2) и (3) дедупликация этого списка записей по ключу публикации предпочтение записей с контактной информацией фильтрация этого списка по записям с контактной информацией</p>
+<p>Затем этот список случайным образом перемешивается по весу ставки.</p>
+<p>Затем фрагменты ретранслируются до соседей FANOUT и до потомков FANOUT.</p>
+<h2 id="determinirovannoe-derevo-povtornoi-peredachi">Детерминированное дерево повторной передачи</h2>
+<p><code>weighted_shuffle</code> будет использовать детерминированное начальное число, когда <code>enable_deterministic_seed</code> включен на основе тройки (слот уничтожения, индекс уничтожения, публичный ключ лидера):</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>if enable_deterministic_seed(self.slot(), root_bank) {
+</span><span>    hashv(&amp;[
+</span><span>        &amp;self.slot().to_le_bytes(),
+</span><span>        &amp;self.index().to_le_bytes(),
+</span><span>        &amp;leader_pubkey.to_bytes(),
+</span><span>    ])
+</span></code></pre>
+<p>Во-первых, будут учитываться только узлы, привязанные к эпохе, независимо от наличия контактной информации (и, возможно, включая сам узел валидатора).</p>
+<p>Детерминистическое упорядочение узлов, привязанных к эпохе, будет создано на основе дерминистического измельчения с использованием weighted_shuffle.</p>
+<p>Пусть <code>neighbor_set</code> будет выбран из числа до FANOUT соседей текущего узла.
+Пусть <code>child_set</code> будет выбран из дочерних элементов FANOUT текущего узла.</p>
+<p>Отфильтровать <code>neighbor_set</code> по контактной информации.
+Отфильтровать <code>child_set</code> по контактной информации.</p>
+<p>Пусть epoch_set будет объединением neighbor_set и child_set.</p>
+<p>Пусть <code>remaining_set</code> будет всеми остальными узлами с контактной информацией, не содержащейся в <code>epoch_set</code>.</p>
+<p>Если <code>epoch_set.len &lt; 2*FANOUT</code>, мы можем случайным образом выбрать до узлов <code>2*FANOUT - epoch_set.len</code> для повторной передачи из <code>remaining_set</code>.</p>
+<h2 id="poluchenie-povtorno-peredannogo-fragmenta">Получение повторно переданного фрагмента</h2>
+<p>Если текущий узел валидатора не входит в набор узлов, привязанных к эпохе, для эпохи уничтожения, то нельзя получить информацию о ранней повторной передаче.</p>
+<p>Вычислите детерминированное начальное число измельчения.</p>
+<p>Запустите детерминированное перемешивание epoch_stakes.</p>
+<p>Найдите положение себя в соседнем или дочернем наборах.</p>
+<p>Вычислите сумму ставок всех узлов на текущем и предыдущем уровнях распределения.</p>
+<h3 id="rekomendatsii-po-summirovaniiu-stavok">Рекомендации по суммированию ставок:</h3>
+<ul>
+<li>Сумма ставок может включать доли узлов, которые были пропущены на предыдущих уровнях распределения из-за отсутствия контактной информации.</li>
+<li>Текущий узел был частью оригинальной перетасовки эпохи от ретранслятора, но был отфильтрован из-за отсутствия контактной информации. Текущий узел впоследствии получает повторную передачу фрагмента и предполагает, что повторная передача была результатом расчета детерминированного дерева, а не последующего случайного выбора.
+Это должно быть безопасным, потому что текущий узел недооценит предыдущий вес доли в дереве повторной передачи.</li>
+</ul>
+<h3 id="obshchie-soobrazheniia">Общие Соображения:</h3>
+<p>атака лидером (уровень 0):</p>
+<ul>
+<li>передает клок для распространения по дереву как обычно</li>
+<li>дополнительно передает фрагмент (или фальшивый фрагмент) непосредственно узлу (узлам) на уровне &gt;= 2, заставляя узел (узлы) полагать, что обработан больший процент дерева повторной передачи дерева</li>
+</ul>
+<p>атака узлом на уровне n:</p>
+<ul>
+<li>повторно передает фрагмент узлу (узлам) на уровне &gt;=n+2, заставляя узел (узлы) полагать, что был обработан больший процент дерева повторной передачи дерева</li>
+</ul>
+<h3 id="voprosy">Вопросы</h3>
+<ul>
+<li>Должны ли принимающие узлы пытаться проверить, что источник фрагмента был повторно передан с ожидаемого узла? Если да, то рассмотрение спуфинга?</li>
+<li>Как потребляется эта информация?</li>
+</ul>
+<h2 id="primechaniia">Примечания</h2>
+<p>На практике сигналы должны попадать в следующие сегменты:</p>
+<ol>
+<li>текущий лидер (может сигнализировать уровень 1 при отправке широковещательной рассылки)</li>
+<li>слой 1
+1.1. может сигнализировать уровню 1, когда получен фрагмент
+1.2. может сигнализировать уровень 1 + подмножество уровня 2, когда отправляется повторная передача</li>
+<li>слой 2
+3.1. может сигнализировать уровню 2, когда получен фрагмент
+3.2. может сигнализировать уровень 2 + подмножество уровня 3, когда отправляется retrnasmit</li>
+<li>Текущий узел не является членом разбивочных узлов эпохи, сигнал не может быть отправлен</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

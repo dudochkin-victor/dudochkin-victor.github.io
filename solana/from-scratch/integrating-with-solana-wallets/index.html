@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>8. Интеграция с кошельками Solana | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#ustanovka-bibliotek-koshel-ka-solana">Установка библиотек кошелька Solana</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#ispol-zovanie-provaidera-koshel-ka">Использование провайдера кошелька</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#ispol-zovanie-komponentov-pol-zovatel-skogo-interfeisa-koshel-ka">Использование компонентов пользовательского интерфейса кошелька</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#obnovlenie-dizaina-knopki-koshel-ka">Обновление дизайна кнопки кошелька</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#podkliuchaem-svoi-koshelek">Подключаем свой кошелек</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#dostup-k-dannym-koshel-ka">Доступ к данным кошелька</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#kak-i-chto"><small>- Как и что?</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#anchor-koshelek"><small>- Anchor кошелек</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#reaktivnye-peremennye-v-vuejs"><small>- Реактивные переменные в VueJS</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#ispol-zovanie-dannykh-koshel-ka-v-komponentakh"><small>- Использование данных кошелька в компонентах</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#nam-nuzhno-bol-she-dannykh">Нам нужно больше данных</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#dostup-k-workspace">Доступ к workspace</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#ispol-zovanie-workspace">Использование workspace</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/integrating-with-solana-wallets/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>8. Интеграция с кошельками Solana</h1>
+
+<p><a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/integrating-with-solana-wallets">Перевод</a> | Автор оригинала: Loris</p>
+<p>ЭПИЗОД 8</p>
+<p>2 МЕСЯЦА НАЗАД</p>
+<p>ЧТЕНИЕ 20 МИН.</p>
+<p>На данный момент у нас есть приятный пользовательский интерфейс для отправки и чтения твитов, но ничего не подключено к нашей программе Solana. Кроме того, у нас нет возможности узнать, какой кошелек подключен в браузере пользователя. Итак, давайте это исправим.</p>
+<p>В этом эпизоде мы сосредоточимся на интеграции нашего интерфейса с поставщиками кошельков Solana, такими как <a href="https://phantom.app/">Phantom</a> или <a href="https://solflare.com/">Solfare</a>, чтобы мы могли отправлять транзакции. от имени пользователя. Как только у нас будет доступ к подключенному кошельку, мы сможем создать объект <code>Program</code>, как мы это делали в наших тестах.</p>
+<p>Хорошо, давайте начнем!</p>
+<h2 id="ustanovka-bibliotek-koshel-ka-solana">Установка библиотек кошелька Solana</h2>
+<p>К счастью для нас, у Solana есть несколько официальных библиотек JavaScript, которые могут помочь нам интегрироваться со многими поставщиками кошельков.</p>
+<p>Эти библиотеки <a href="https://github.com/solana-labs/wallet-adapter">доступны на GitHub</a>, и даже есть пакеты для Vue 3! Итак, давайте установим эти библиотеки прямо сейчас. Нам понадобится один для основной логики «адаптера кошелька», один для логики Vue 3, один для компонентов Vue 3 и один для импорта [всех поддерживаемых кошельков](https://github.com/solana-labs/wallet -адаптер#кошельки).</p>
+<p>Запустите следующее в вашем каталоге <code>app</code>, чтобы установить их.</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">npm</span><span> install @solana/wallet-adapter-base </span><span style="color:#bfbab0cc;">\
+</span><span>    @solana/wallet-adapter-vue </span><span style="color:#bfbab0cc;">\
+</span><span>    @solana/wallet-adapter-vue-ui </span><span style="color:#bfbab0cc;">\
+</span><span>    @solana/wallet-adapter-wallets
+</span></code></pre>
+<h2 id="ispol-zovanie-provaidera-koshel-ka">Использование провайдера кошелька</h2>
+<p>После установки этих библиотек первое, что нам нужно сделать, это использовать компонент WalletProvider. Этот компонент немного особенный и не отображает ничего, кроме своего содержимого. Однако он предоставляет данные своим потомкам с помощью <a href="https://v3.vuejs.org/guide/composition-api-provide-inject.html#provide-inject">provide/inject</a> API VueJS. Если вы знакомы с React, это очень похоже на использование контекста React. Возьмем следующий пример.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">wallet-provider</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">some-other-component</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">some-other-component</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">wallet-provider</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Этот код визуально эквивалентен использованию <code>&lt;some-other-component&gt;</code> непосредственно в шаблоне. Однако этот компонент теперь будет иметь доступ ко всем данным, необходимым для получения подключенного кошелька, и даже к методам инициирования такого подключения. Позже в этом эпизоде мы объясним, что мы получаем и как это получить, а пока давайте посмотрим, как настроить этот компонент WalletProvider.</p>
+<p>Внутри скриптовой части вашего компонента App.vue добавьте следующие строки.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ useRoute } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue-router&#39;
+</span><span style="color:#ff7733;">import </span><span>TheSidebar </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./components/TheSidebar&#39;
+</span><span style="color:#ff7733;">import </span><span>{ getPhantomWallet</span><span style="color:#bfbab0cc;">, </span><span>getSolflareWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-wallets&#39;
+</span><span style="color:#ff7733;">import </span><span>{ WalletProvider } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>route </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useRoute</span><span>()
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>wallets </span><span style="color:#f29668;">= </span><span>[
+</span><span>    </span><span style="color:#ffb454;">getPhantomWallet</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>    </span><span style="color:#ffb454;">getSolflareWallet</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>]
+</span></code></pre>
+<p>Этот код делает две вещи.</p>
+<ol>
+<li>Он импортирует двух поставщиков кошельков: Phantom и Solflare. Затем он регистрирует этих двух провайдеров кошельков в массиве кошельков. Хотя в этой серии мы будем использовать только эти два, обратите внимание, что вы можете использовать любого из <a href="https://github.com/solana-labs/wallet-adapter#wallets">поддерживаемых поставщиков кошельков, перечисленных здесь</a>. Чтобы добавить что-то еще, импортируйте соответствующий метод из <code>@solana/wallet-adapter-wallets</code> и добавьте его в массив <code>wallets</code>.</li>
+<li>Он импортирует компонент WalletProvider, чтобы мы могли использовать его в нашем шаблоне.</li>
+</ol>
+<p>Затем нам нужно передать этот массив <code>кошельков</code> компоненту <code>WalletProvider</code>, чтобы он знал, каких провайдеров кошельков мы хотим поддерживать. Кроме того, мы будем использовать режим «автоматического подключения» для этого компонента, чтобы он автоматически пытался повторно подключить кошелек пользователя при обновлении страницы.</p>
+<p>Чтобы сделать все это, нам нужно обернуть содержимое нашего шаблона <code>App.vue</code> внутри компонента <code>WalletProvider</code> и предоставить следующие реквизиты.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">wallet-provider </span><span style="color:#ffb454;">:wallets</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;wallets&quot; </span><span style="color:#ffb454;">auto-connect</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;w-full max-w-3xl lg:max-w-4xl mx-auto&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">&lt;!-- Sidebar. --&gt;
+</span><span>            </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">the-sidebar </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;py-4 md:py-8 md:pl-4 md:pr-8 fixed w-20 md:w-64&quot;</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">the-sidebar</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">&lt;!-- Main --&gt;
+</span><span>            </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">main </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;flex-1 border-r border-l ml-20 md:ml-64 min-h-screen&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>                </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">header </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;flex space-x-6 items-center justify-between px-8 py-4 border-b&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>                    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;text-xl font-bold&quot; </span><span style="color:#ffb454;">v-text</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;route.name&quot;</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;
+</span><span>                </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">header</span><span style="color:#39bae690;">&gt;
+</span><span>                </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">router-view</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">router-view</span><span style="color:#39bae690;">&gt;
+</span><span>            </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">main</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">wallet-provider</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Поскольку мы упаковываем все содержимое нашего компонента <code>App.vue</code> в компонент <code>WalletProvider</code>, каждый компонент внутри нашего приложения теперь будет иметь доступ к данным кошелька. Кроме того, у них будет доступ к различным методам, позволяющим пользователю выбрать поставщика кошелька и подключиться к нему.</p>
+<p>К счастью, эти библиотеки кошельков также предоставляют компоненты пользовательского интерфейса, которые обрабатывают все это за нас.</p>
+<h2 id="ispol-zovanie-komponentov-pol-zovatel-skogo-interfeisa-koshel-ka">Использование компонентов пользовательского интерфейса кошелька</h2>
+<p>Из библиотек кошельков, которые мы импортировали ранее, одна из них — <code>@solana/wallet-adapter-vue-ui</code> — также предоставляет компоненты VueJS, которые позволяют пользователю выбирать поставщика кошелька и подключаться к нему. Он содержит кнопку для запуска процесса, модальное окно для выбора поставщика кошелька и раскрывающийся список, который можно использовать после подключения для копирования вашего адреса, смены поставщика или отключения.</p>
+<p>Все это можно добавить в ваше приложение с помощью следующих компонентов.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">wallet-modal-provider</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">wallet-multi-button</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">wallet-multi-button</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">wallet-modal-provider</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Компонент <code>&lt;wallet-modal-provider&gt;</code> предоставляет небольшой контекст для отображения и скрытия модальных окон, в то время как компонент <code>&lt;wallet-multi-button&gt;</code> содержит весь дизайн и логику, позволяющие пользователям подключать свои кошельки.</p>
+<p>В настоящее время у нас есть поддельная кнопка «Выбрать кошелек» на боковой панели. Таким образом, давайте заменим его двумя компонентами выше, чтобы связать наши кошельки по-настоящему.</p>
+<p>Внутри скриптовой части компонента TheSidebar.vue добавьте следующую строку для импорта компонентов.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ WalletMultiButton</span><span style="color:#bfbab0cc;">, </span><span>WalletModalProvider } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue-ui&#39;
+</span></code></pre>
+<p>Затем используйте их внутри части шаблона и удалите фальшивую кнопку.</p>
+<pre data-lang="diff" style="background-color:#0f1419;color:#bfbab0;" class="language-diff "><code class="language-diff" data-lang="diff"><span style="color:#f07178;">- &lt;!-- TODO: Connect wallet --&gt;
+</span><span style="color:#f07178;">- &lt;div class=&quot;bg-pink-500 text-center w-full text-white rounded-full px-4 py-2&quot;&gt;
+</span><span style="color:#f07178;">-     Select a wallet
+</span><span style="color:#f07178;">- &lt;/div&gt;
+</span><span style="color:#c2d94c;">+ &lt;wallet-modal-provider&gt;
+</span><span style="color:#c2d94c;">+     &lt;wallet-multi-button&gt;&lt;/wallet-multi-button&gt;
+</span><span style="color:#c2d94c;">+ &lt;/wallet-modal-provider&gt;
+</span></code></pre>
+<p>И последнее, но не менее важное: нам нужно импортировать CSS для правильного оформления этих компонентов. Добавьте следующую строку в файл main.js. Важно добавить его <em>перед</em> нашим файлом <code>main.css</code>, чтобы мы могли внести некоторые изменения в дизайн в следующем разделе.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#5c6773;">// CSS.
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue-ui/styles.css&#39;
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&#39;./main.css&#39;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// ...
+</span></code></pre>
+<p>Круто! На этом этапе вы должны быть в состоянии скомпилировать свое приложение — используя <code>npm run serve</code> — и подключить свой кошелек! </p>
+<p>Обратите внимание: если у вас еще не установлен кошелек или расширение для браузера, такое как Phantom, не беспокойтесь об этом, мы займемся этим через минуту. Но сначала давайте посмотрим, как выглядит кнопка нашего кошелька.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/connect-wallet-1.png" alt="Screenshot of the application with the &quot;Connect Wallet&quot; modal opened." /></p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/connect-wallet-2.png" alt="Screenshot of the application with a connected wallet and the dropdown menu opened." /></p>
+<p>В целом, не так уж и плохо, но стиль не совсем соответствует остальной части нашего приложения, а раскрывающийся список не выровнен должным образом, так что давайте это исправим.</p>
+<h2 id="obnovlenie-dizaina-knopki-koshel-ka">Обновление дизайна кнопки кошелька</h2>
+<p>К счастью для нас, все компоненты пользовательского интерфейса, предоставляемые библиотекой <code>@solana/wallet-adapter-vue-ui</code>, используют классы CSS, которые мы можем переопределить, чтобы настроить их стиль.</p>
+<p>Итак, давайте сделаем это. Откройте файл main.css и добавьте следующие строки в конец файла.</p>
+<pre data-lang="css" style="background-color:#0f1419;color:#bfbab0;" class="language-css "><code class="language-css" data-lang="css"><span style="color:#ffb454;">.wallet-adapter-dropdown </span><span>{
+</span><span>    @apply w-full;
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">.wallet-adapter-button </span><span>{
+</span><span>    @apply rounded-full w-full;
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">.wallet-adapter-button-trigger </span><span>{
+</span><span>    @apply bg-pink-500 justify-center !important;
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">.wallet-adapter-dropdown-list </span><span>{
+</span><span>    @apply </span><span style="color:#39bae6;">top</span><span>-auto </span><span style="color:#39bae6;">bottom</span><span>-full md</span><span style="color:#bfbab0cc;">:</span><span style="font-style:italic;color:#f29668;">top</span><span>-full md:</span><span style="font-style:italic;color:#f29668;">bottom</span><span>-</span><span style="font-style:italic;color:#f29668;">auto</span><span> md:</span><span style="font-style:italic;color:#f29668;">left</span><span style="color:#f29718;">-0</span><span> md:</span><span style="font-style:italic;color:#f29668;">right</span><span>-</span><span style="font-style:italic;color:#f29668;">auto</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span>
+</span><span style="color:#ffb454;">.wallet-adapter-dropdown-list-active </span><span>{
+</span><span>    @apply </span><span style="color:#39bae6;">transform </span><span>-</span><span style="color:#39bae6;">translate</span><span>-y-3 md</span><span style="color:#bfbab0cc;">:</span><span>translate-y</span><span style="color:#f29718;">-3</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Директива <code>@apply</code> позволяет нам писать CSS, используя классы TailwindCSS для удобства. Кроме того, мы просто обновляем некоторые классы CSS.</p>
+<p>Хорошо, давайте теперь посмотрим на нашу кнопку кошелька.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/connect-wallet-3.png" alt="Screenshot of the application with a connected wallet and the dropdown menu opened with the new design." /></p>
+<p>Намного лучше!</p>
+<h2 id="podkliuchaem-svoi-koshelek">Подключаем свой кошелек</h2>
+<p>Стоит отметить, что кошелек, который вы собираетесь использовать в своем браузере, обычно отличается от кошелька, который мы создали ранее в этой серии для запуска наших тестов в консоли. Первый обычно является вашим «настоящим» кошельком, а второй — просто кошельком, который ваш локальный компьютер использует для запуска тестов или использования инструментов CLI. Они могут быть одинаковыми, если вы хотите, чтобы они были, но я предпочитаю держать их отдельно.</p>
+<p>Теперь, если у вас уже есть кошелек, зарегистрированный у поставщика кошельков, такого как Phantom или Solflare, вы уже должны быть готовы к работе. Если вы используете другого поставщика кошельков, не стесняйтесь добавлять его в массив <code>wallets</code>, который мы определили ранее.</p>
+<p>Однако, если у вас нет кошелька или поставщика кошелька, установленного в качестве расширения браузера, вам нужно будет сделать это для взаимодействия с вашим приложением. Для этого я рекомендую установить <a href="https://phantom.app/">Phantom</a> в ваш браузер. Это очень популярный поставщик кошельков с удобным пользовательским интерфейсом. После установки вы можете выполнить шаги по созданию нового кошелька непосредственно в расширении Phantom. Обязательно сохраните фразу восстановления в надежном месте, так как она может восстановить весь кошелек, включая закрытый ключ.</p>
+<p>По умолчанию ваш кошелек покажет вам деньги или активы, которые у вас есть в кластере «mainnet». Кластер «mainnet» — это, по сути, настоящий кластер, в котором хранятся реальные деньги. Однако тот же кошелек можно использовать в других кластерах, таких как «devnet» — живой кластер с фальшивыми деньгами для тестирования — или «localnet» — ваш локальный кластер.</p>
+<p>Таким образом, если вы хотите видеть свои деньги или активы в других кластерах, вы можете сделать это, изменив настройку в поставщике вашего кошелька. В Phantom вы можете сделать это, щелкнув значок шестеренки, затем перейдя к настройке «Изменить сеть» и выбрав здесь свой кластер.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/phantom-switch-network.png" alt="Three screenshots of the Phantom app to show how to change the network." /></p>
+<p>Обратите внимание, что изменение этого параметра необязательно, поскольку оно влияет только на активы, отображаемые поставщиком кошелька. Это не влияет на то, в какой кластер наше приложение отправляет транзакции. Мы настроим это в нашем коде чуть позже в этой статье.</p>
+<h2 id="dostup-k-dannym-koshel-ka">Доступ к данным кошелька</h2>
+<p>На этом этапе пользователи могут подключить свой кошелек к нашему приложению, и мы можем получить доступ к этим данным в нашем компоненте VueJS. Но как нам получить доступ к этим данным и что мы на самом деле из них получаем?</p>
+<h3 id="kak-i-chto">Как и что?</h3>
+<p>Начнем с <code>как</code>.</p>
+<p>Вы можете получить доступ к данным, предоставленным компонентом <code>WalletProvider</code>, используя <code>useWallet</code>, компонуемый из библиотеки <code>@solana/wallet-adapter-vue</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ useWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span style="color:#ff7733;">const </span><span>data </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWallet</span><span>()
+</span></code></pre>
+<p>Пока вы вызываете <code>useWallet()</code> внутри компонента, у вас будет доступ к свойствам и методам, связанным с подключенным кошельком.</p>
+<p>Так что же мы на самом деле получаем от <code>useWallet()</code>?</p>
+<ul>
+<li><code>wallet</code>. Потенциально наиболее интересной для нас информацией является подключенный кошелек пользователя. Если пользователь подключил кошелек, это будет объект, содержащий его публичный ключ. В противном случае это свойство будет <code>null</code>.</li>
+<li><code>ready</code>, <code>connected</code>, <code>connecting</code> и <code>disconnecting</code>. Это полезные логические значения, позволяющие нам понять, в каком состоянии мы находимся. Например, мы можем использовать логическое значение <code>connected</code>, чтобы узнать, подключил ли пользователь свой кошелек или нет.</li>
+<li>Методы <code>select</code>, <code>connect</code> и <code>disconnect</code> позволяют нам выбирать, подключаться и отключаться от поставщика кошелька. Нам не нужно использовать эти методы напрямую, поскольку они уже используются компонентами пользовательского интерфейса кошелька, которые мы импортировали ранее.</li>
+<li>Методы <code>sendTransaction</code>, <code>signTransaction</code>, <code>signAllTransactions</code> и <code>signMessage</code> позволяют нам подписывать сообщения и/или транзакции от имени подключенного кошелька. Хотя мы не будем использовать их напрямую, Anchor требует, чтобы некоторые из этих методов были внутри его объекта <code>wallet</code>.</li>
+</ul>
+<h3 id="anchor-koshelek">Anchor кошелек</h3>
+<p>Как видите, useWallet() дает нам много детализированной информации, которую можно использовать для взаимодействия с подключенным кошельком. Из-за этого объект <code>wallet</code>, который он предоставляет, не совместим с определением кошелька Anchor. Если вы помните следующую диаграмму из эпизода 5, вы можете видеть, что Anchor использует свой собственный объект <code>Wallet</code> для взаимодействия с подключенным кошельком и подписания транзакций от его имени.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/diagram-wallet-not-compatible.png" alt="Diagram from episode 5 showing the incompatibility with the wallet provided by &quot;useWallet()&quot;." /></p>
+<p>Чтобы получить объект, совместимый с определением кошелька Anchor, мы можем использовать еще один компонуемый объект под названием <code>useAnchorWallet</code>. Это вернет объект <code>кошелька</code>, который может подписывать транзакции.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ useAnchorWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span style="color:#ff7733;">const </span><span>wallet </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useAnchorWallet</span><span>()
+</span></code></pre>
+<p>Точно так же мы можем соединить нашу предыдущую диаграмму Anchor с нашей совершенно новой интеграцией кошелька.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/diagram-wallet-compatible.png" alt="Previous diagram using &quot;useAnchorWallet()&quot; to connect &quot;WalletAdapter&quot; with the &quot;Wallet&quot; object from Anchor." /></p>
+<h3 id="reaktivnye-peremennye-v-vuejs">Реактивные переменные в VueJS</h3>
+<p>Я хотел бы сделать здесь небольшую паузу, чтобы поговорить о реактивных переменных в Vue 3. Если вы не знакомы с ними, часть кода, который вы прочитаете позже, может быть немного запутанной.</p>
+<p><strong>Большинство перечисленных выше свойств являются реактивными и заключены в объекты <code>Ref</code></strong>. Если вы не знакомы с переменными <code>Ref</code> Vue, они гарантируют, что содержимое переменной <strong>передается по ссылке</strong>, а не <strong>по значению</strong>.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/pass-by-reference-vs-pass-by-value-animation.gif" alt="Pass by reference vs pass by value animation using a cup of coffee and its content to illustrate the two." /></p>
+<p>Это означает, что, имея ссылку на переменную <code>Ref</code>, мы можем изменить ее содержимое, и любой код, использующий эту переменную, может быть уведомлен о таком изменении. Чтобы получить доступ к содержимому переменной <code>Ref</code>, вы должны получить доступ к ее свойству <code>value</code> — например. <code>wallet.value</code> — если вы не используете эту переменную внутри шаблона VueJS, в этом случае VueJS автоматически сделает это за вас. Подробнее о них можно прочитать в <a href="https://v3.vuejs.org/guide/composition-api-introduction.html#reactive-variables-with-ref">документации Vue</a> или — если вы привыкли к React — <a href="https://twitter.com/lorismatic/status/1445672788153577472?s=20">это может помочь</a>.</p>
+<p>Вот небольшой пример, чтобы обобщить, как мы можем получить доступ к переменным <code>Ref</code>. Внутри скриптовой части мы используем <code>value</code>. Внутри части шаблона мы этого не делаем.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">script </span><span style="color:#ffb454;">setup</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#ff7733;">import </span><span>{ ref } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">const </span><span>name </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#c2d94c;">&#39;Loris&#39;</span><span>)
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(name</span><span style="color:#f29668;">.</span><span>value) </span><span style="font-style:italic;color:#5c6773;">// Outputs: Loris
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">script</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span><span>  </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;</span><span>{{ name }}</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt; </span><span style="font-style:italic;color:#5c6773;">&lt;!-- Displays: Loris --&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<h3 id="ispol-zovanie-dannykh-koshel-ka-v-komponentakh">Использование данных кошелька в компонентах</h3>
+<p>Хорошо, давайте применим то, что мы узнали, на практике.</p>
+<p>На данный момент любой желающий может увидеть форму, которая позволяет пользователям отправлять твиты. Однако эта форма должна быть видна только пользователям, которые подключили свои кошельки, так что давайте это исправим.</p>
+<p>В части скрипта компонента <code>TweetForm.vue</code> импортируйте составной файл <code>useWallet</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ computed</span><span style="color:#bfbab0cc;">, </span><span>ref</span><span style="color:#bfbab0cc;">, </span><span>toRefs } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useAutoresizeTextarea</span><span style="color:#bfbab0cc;">, </span><span>useCountCharacterLimit</span><span style="color:#bfbab0cc;">, </span><span>useSlug } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span style="color:#ff7733;">import </span><span>{ sendTweet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span></code></pre>
+<p>Затем в шаблонной части компонента — в разделе <code>Permissions</code> — обновите следующую строку.</p>
+<pre data-lang="diff" style="background-color:#0f1419;color:#bfbab0;" class="language-diff "><code class="language-diff" data-lang="diff"><span>  // Permissions.
+</span><span style="color:#f07178;">- const connected = ref(true) // TODO: Check connected wallet.
+</span><span style="color:#c2d94c;">+ const { connected } = useWallet()
+</span></code></pre>
+<p>Это будет использовать переменную <code>connected</code> из данных кошелька, а не всегда <code>true</code>, как это было раньше.</p>
+<p>Если вы заглянете внутрь шаблона этого компонента, то увидите, что эта переменная <code>connected</code> используется для переключения того, какой HTML мы показываем пользователю: либо форму, либо пустое состояние.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div </span><span style="color:#ffb454;">v-if</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;connected&quot; </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;px-8 py-4 border-b&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">&lt;!-- Form here... --&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div </span><span style="color:#ffb454;">v-else class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;px-8 py-4 bg-gray-50 text-gray-500 text-center border-b&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>        Connect your wallet to start tweeting...
+</span><span>    </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>И это все! Теперь форму твита могут видеть только пользователи с подключенными кошельками.</p>
+<p>Сделаем еще один. На этот раз мы позаботимся о том, чтобы страница профиля не отображалась на боковой панели, если вы не подключены.</p>
+<p>В части сценария компонента <code>TheSidebar.vue</code> импортируйте и вызовите <code>useWallet</code>, чтобы получить доступ к переменной <code>connected</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ WalletMultiButton</span><span style="color:#bfbab0cc;">, </span><span>WalletModalProvider } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue-ui&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span style="color:#ff7733;">const </span><span>{ connected } </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWallet</span><span>()
+</span></code></pre>
+<p>Затем внутри шаблона найдите комментарий «TODO: Проверить подключенный кошелек». Под этим комментарием замените <code>v-if=&quot;true&quot;</code> на <code>v-if=&quot;connected&quot;</code> и вуаля! Вы также можете удалить этот комментарий <code>TODO</code> прямо сейчас.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">aside </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;flex flex-col items-center md:items-stretch space-y-2 md:space-y-4&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">&lt;!-- ... --&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;flex flex-col items-center md:items-stretch space-y-2&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>              </span><span style="font-style:italic;color:#5c6773;">&lt;!-- ... --&gt;
+</span><span>            </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">router-link </span><span style="color:#ffb454;">v-if</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;connected&quot; </span><span style="color:#ffb454;">:to</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;{ name: &#39;Profile&#39; }&quot; </span><span style="color:#ffb454;">...</span><span style="color:#39bae690;">&gt;
+</span><span>                </span><span style="font-style:italic;color:#5c6773;">&lt;!-- ... --&gt;
+</span><span>            </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">router-link</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;fixed bottom-8 right-8 md:static w-48 md:w-full&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>            </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">wallet-modal-provider</span><span style="color:#39bae690;">&gt;
+</span><span>                </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">wallet-multi-button</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">wallet-multi-button</span><span style="color:#39bae690;">&gt;
+</span><span>            </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">wallet-modal-provider</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">aside</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Напомним, вот что вы должны увидеть, если у вас есть подключенный кошелек.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/wallet-connected.png" alt="Screenshot of the home page when a wallet is connected. We can see the profile page link in the sidebar and the tweet form on the home page." /></p>
+<p>И вот что вы должны увидеть, если вы этого не сделаете. т.е. нет страницы профиля и формы твита.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/wallet-not-connected.png" alt="Screenshot of the home page when no wallet is connected. We can no longer see the profile page link in the sidebar nor the tweet form on the home page that now says &quot;Connect your wallet to start tweeting...&quot;." /></p>
+<h2 id="nam-nuzhno-bol-she-dannykh">Нам нужно больше данных</h2>
+<p>Хорошо, давайте сделаем глубокий вдох и посмотрим, чего мы уже достигли в этом эпизоде.</p>
+<ul>
+<li>Мы импортировали <code>WalletProvider</code>, который предоставляет все необходимое для подключения кошелька и доступа к его данным.</li>
+<li>Мы импортировали некоторые компоненты пользовательского интерфейса, которые позволяют пользователям подключать свои кошельки.</li>
+<li>Мы получили доступ к данным, предоставленным <code>WalletProvider</code>, используя <code>useWallet()</code> в различных компонентах.</li>
+<li>Мы обнаружили, что можем использовать <code>useAnchorWallet()</code> для получения объекта <code>кошелька</code>, совместимого с Anchor.</li>
+</ul>
+<p>Итак, если мы обратимся к нашей диаграмме, которая представляет все объекты, необходимые Anchor для создания Программы, мы увидим, что в настоящее время у нас есть только одна часть головоломки: <code>Wallet</code>.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/diagram-wallet-only.png" alt="Previous diagram where &quot;WalletAdapter&quot; points to Anchor's &quot;Wallet&quot; object but this time &quot;Wallet&quot; is highlighted in red to show that we've only got this piece of information so far." /></p>
+<p>Чтобы у нас было все необходимое для взаимодействия с нашей программой Solana, нам нужно заполнить оставшуюся часть головоломки. К счастью для нас, часть <code>Wallet</code> было труднее всего найти, поскольку нам нужно было интегрироваться с поставщиками кошельков, что мы сейчас и сделали.</p>
+<p>Anchor называет всю эту картину «Workspace», потому что она дает нам все необходимое для работы с нашей программой.</p>
+<h2 id="dostup-k-workspace">Доступ к workspace</h2>
+<p>Хорошо, давайте заполним недостающие части головоломки и создадим наше рабочее пространство. Мы создадим новый файл <code>useWorkspace.js</code> в папке <code>composables</code> и зарегистрируем его в <code>composables/index.js</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">export </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./useAutoresizeTextarea&#39;
+</span><span style="color:#ff7733;">export </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./useCountCharacterLimit&#39;
+</span><span style="color:#ff7733;">export </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./useFromRoute&#39;
+</span><span style="color:#ff7733;">export </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./useSlug&#39;
+</span><span style="color:#ff7733;">export </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./useWorkspace&#39;
+</span></code></pre>
+<p>Внутри компонуемого <code>useWorkspace.js</code> мы будем использовать API предоставления/вставки из VueJS для ввода данных в наши компоненты так же, как это делает <code>WalletProvider</code>. Для этого нам нужен метод initWorkspace, который инициализирует наш контекст, и метод useWorkspace, который обращается к нему. Вот как мы можем сделать это с помощью VueJS.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ inject</span><span style="color:#bfbab0cc;">, </span><span>provide } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>workspaceSymbol </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Symbol</span><span>()
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">useWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#ffb454;">inject</span><span>(workspaceSymbol)
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">initWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ffb454;">provide</span><span>(workspaceSymbol</span><span style="color:#bfbab0cc;">, </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// Provided data here...
+</span><span>    })
+</span><span>}
+</span></code></pre>
+<p>Давайте начнем с простого, импортировав подключенный кошелек Anchor и предоставив его в качестве данных. Таким образом, нам не нужно использовать другие составные компоненты для доступа к подключенному кошельку. У нас будет все в одном месте.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ inject</span><span style="color:#bfbab0cc;">, </span><span>provide } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useAnchorWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>workspaceSymbol </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Symbol</span><span>()
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">useWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#ffb454;">inject</span><span>(workspaceSymbol)
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">initWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>wallet </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useAnchorWallet</span><span>()
+</span><span>
+</span><span>    </span><span style="color:#ffb454;">provide</span><span>(workspaceSymbol</span><span style="color:#bfbab0cc;">, </span><span>{
+</span><span>        wallet</span><span style="color:#bfbab0cc;">,
+</span><span>    })
+</span><span>}
+</span></code></pre>
+<p>Следующее, что нам нужно, это объект Connection. Для этого нам просто нужно знать, с каким кластером или сетью мы хотим взаимодействовать. А пока мы продолжим развивать наше приложение локально. Поэтому мы жестко закодируем URL-адрес нашего локального хоста: <code>http://127.0.0.1:8899</code>. У нас будет более динамичный способ справиться с этим в будущем, когда мы развернемся в devnet.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1130-solana-8-wallets/diagram-with-localhost.png" alt="Previous diagram with a new &quot;localhost&quot; node pointing to the &quot;Cluster&quot; node and the array says &quot;hardcoded&quot;." /></p>
+<p>Итак, давайте создадим новый объект <code>Connection</code>, используя этот URL-адрес кластера, и также предоставим его как данные.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ inject</span><span style="color:#bfbab0cc;">, </span><span>provide } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useAnchorWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ Connection } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>workspaceSymbol </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Symbol</span><span>()
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">useWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#ffb454;">inject</span><span>(workspaceSymbol)
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">initWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>wallet </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useAnchorWallet</span><span>()
+</span><span>    </span><span style="color:#ff7733;">const </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Connection</span><span>(</span><span style="color:#c2d94c;">&#39;http://127.0.0.1:8899&#39;</span><span>)
+</span><span>
+</span><span>    </span><span style="color:#ffb454;">provide</span><span>(workspaceSymbol</span><span style="color:#bfbab0cc;">, </span><span>{
+</span><span>        wallet</span><span style="color:#bfbab0cc;">,
+</span><span>        connection</span><span style="color:#bfbab0cc;">,
+</span><span>    })
+</span><span>}
+</span></code></pre>
+<p>Мы знаем, что <code>Connection + Wallet = Provider</code>, поэтому теперь мы можем создать новый объект <code>Provider</code>. Однако этот объект-поставщик должен быть «вычисляемым» свойством, чтобы он воссоздавался при изменении свойства <code>wallet</code>, например. он отключен или подключен как другой кошелек.</p>
+<p>Вот как мы можем добиться этого с помощью VueJS. Обратите внимание, как мы получаем доступ к кошельку, используя <code>wallet.value</code> внутри метода <code>computed</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ inject</span><span style="color:#bfbab0cc;">, </span><span>provide</span><span style="color:#bfbab0cc;">, </span><span>computed } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useAnchorWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ Connection } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;
+</span><span style="color:#ff7733;">import </span><span>{ Provider } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@project-serum/anchor&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>workspaceSymbol </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Symbol</span><span>()
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">useWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#ffb454;">inject</span><span>(workspaceSymbol)
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">initWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>wallet </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useAnchorWallet</span><span>()
+</span><span>    </span><span style="color:#ff7733;">const </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Connection</span><span>(</span><span style="color:#c2d94c;">&#39;http://127.0.0.1:8899&#39;</span><span>)
+</span><span>    </span><span style="color:#ff7733;">const </span><span>provider </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">computed</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Provider</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>wallet</span><span style="color:#f29668;">.</span><span>value))
+</span><span>
+</span><span>    </span><span style="color:#ffb454;">provide</span><span>(workspaceSymbol</span><span style="color:#bfbab0cc;">, </span><span>{
+</span><span>        wallet</span><span style="color:#bfbab0cc;">,
+</span><span>        connection</span><span style="color:#bfbab0cc;">,
+</span><span>        provider</span><span style="color:#bfbab0cc;">,
+</span><span>    })
+</span><span>}
+</span></code></pre>
+<p>Затем нам нужно получить доступ к файлу <code>IDL</code>, который представляет собой файл JSON, представляющий структуру нашей программы. Этот файл автоматически создается в папке target в корне нашего проекта, поэтому давайте получим к нему доступ прямо оттуда.</p>
+<p>Обратите внимание, что это не будет работать, когда приложение развернуто на сервере само по себе, так как целевая папка будет пустой, но мы позаботимся об этом позже, когда будем развертывать в devnet.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ inject</span><span style="color:#bfbab0cc;">, </span><span>provide</span><span style="color:#bfbab0cc;">, </span><span>computed } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useAnchorWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ Connection } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;
+</span><span style="color:#ff7733;">import </span><span>{ Provider } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@project-serum/anchor&#39;
+</span><span style="color:#ff7733;">import </span><span>idl </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;../../../target/idl/solana_twitter.json&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>workspaceSymbol </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Symbol</span><span>()
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">useWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#ffb454;">inject</span><span>(workspaceSymbol)
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">initWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>wallet </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useAnchorWallet</span><span>()
+</span><span>    </span><span style="color:#ff7733;">const </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Connection</span><span>(</span><span style="color:#c2d94c;">&#39;http://127.0.0.1:8899&#39;</span><span>)
+</span><span>    </span><span style="color:#ff7733;">const </span><span>provider </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">computed</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Provider</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>wallet</span><span style="color:#f29668;">.</span><span>value))
+</span><span>
+</span><span>    </span><span style="color:#ffb454;">provide</span><span>(workspaceSymbol</span><span style="color:#bfbab0cc;">, </span><span>{
+</span><span>        wallet</span><span style="color:#bfbab0cc;">,
+</span><span>        connection</span><span style="color:#bfbab0cc;">,
+</span><span>        provider</span><span style="color:#bfbab0cc;">,
+</span><span>    })
+</span><span>}
+</span></code></pre>
+<p>Наконец, поскольку <code>IDL + Provider = Program</code>, теперь мы можем создать наш программный объект. Здесь мы также будем использовать вычисляемое свойство, потому что <code>provider</code> также является реактивным.</p>
+<p>Помимо запроса объектов <code>idl</code> и <code>provider</code>, для создания <code>Program</code> также требуется ее адрес как экземпляр <code>PublicKey</code>. К счастью для нас, файл IDL уже содержит эту информацию в разделе idl.metadata.address. Нам просто нужно обернуть это в объект PublicKey и передать его программе.</p>
+<p>⛔️ <strong>Предупреждение</strong>: переменная <code>metadata.address</code>, содержащая идентификатор нашей программы, будет доступна только после запуска <code>anchor deploy</code>, потому что именно тогда Anchor узнает, по какому адресу была развернута программа. Поэтому, если вы запустите <code>anchor build</code> без запуска <code>anchor deploy</code>, вы получите следующую ошибку: <code>Cannot read properties of undefined (reading 'address')</code>.</p>
+<p>И вот оно! Окончательный код нашего составного файла <code>useWorkspace.js</code>, который дает нам доступ ко всему, что нам нужно для взаимодействия с нашей программой Solana.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span>{ inject</span><span style="color:#bfbab0cc;">, </span><span>provide</span><span style="color:#bfbab0cc;">, </span><span>computed } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useAnchorWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ Connection</span><span style="color:#bfbab0cc;">, </span><span>PublicKey } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/web3.js&#39;
+</span><span style="color:#ff7733;">import </span><span>{ Provider</span><span style="color:#bfbab0cc;">, </span><span>Program } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@project-serum/anchor&#39;
+</span><span style="color:#ff7733;">import </span><span>idl </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;../../../target/idl/solana_twitter.json&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>programID </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">PublicKey</span><span>(idl</span><span style="color:#f29668;">.</span><span>metadata</span><span style="color:#f29668;">.</span><span>address)
+</span><span style="color:#ff7733;">const </span><span>workspaceSymbol </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">Symbol</span><span>()
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">useWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#ffb454;">inject</span><span>(workspaceSymbol)
+</span><span>
+</span><span style="color:#ff7733;">export const </span><span style="color:#ffb454;">initWorkspace </span><span style="color:#f29668;">= </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>wallet </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useAnchorWallet</span><span>()
+</span><span>    </span><span style="color:#ff7733;">const </span><span>connection </span><span style="color:#f29668;">= new </span><span style="color:#59c2ff;">Connection</span><span>(</span><span style="color:#c2d94c;">&#39;http://127.0.0.1:8899&#39;</span><span>)
+</span><span>    </span><span style="color:#ff7733;">const </span><span>provider </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">computed</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Provider</span><span>(connection</span><span style="color:#bfbab0cc;">, </span><span>wallet</span><span style="color:#f29668;">.</span><span>value))
+</span><span>    </span><span style="color:#ff7733;">const </span><span>program </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">computed</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span style="color:#f29668;">new </span><span style="color:#59c2ff;">Program</span><span>(idl</span><span style="color:#bfbab0cc;">, </span><span>programID</span><span style="color:#bfbab0cc;">, </span><span>provider</span><span style="color:#f29668;">.</span><span>value))
+</span><span>
+</span><span>    </span><span style="color:#ffb454;">provide</span><span>(workspaceSymbol</span><span style="color:#bfbab0cc;">, </span><span>{
+</span><span>        wallet</span><span style="color:#bfbab0cc;">,
+</span><span>        connection</span><span style="color:#bfbab0cc;">,
+</span><span>        provider</span><span style="color:#bfbab0cc;">,
+</span><span>        program</span><span style="color:#bfbab0cc;">,
+</span><span>    })
+</span><span>}
+</span></code></pre>
+<p>Теперь все, что нам нужно сделать, это вызвать этот метод <code>initWorkspace</code> внутри компонента, чтобы он предоставил данные рабочей области всем своим потомкам.</p>
+<p>В папке <code>components</code> создайте новый компонент <code>WorkspaceProvider.vue</code> и вставьте следующий код.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">script </span><span style="color:#ffb454;">setup</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#ff7733;">import </span><span>{ initWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span style="color:#ffb454;">initWorkspace</span><span>()
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">script</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">slot</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">slot</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Затем внутри нашего компонента App.vue мы импортируем только что созданный WorkspaceProvider и используем его в шаблоне. Он должен обернуть все содержимое нашего шаблона, кроме компонента <code>WalletProvider</code>, который должен быть отрисован первым, чтобы компонент <code>WorkspaceProvider</code> мог получить доступ к своим данным.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">script </span><span style="color:#ffb454;">setup</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#ff7733;">import </span><span>{ useRoute } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue-router&#39;
+</span><span style="color:#ff7733;">import </span><span>TheSidebar </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;./components/TheSidebar&#39;
+</span><span style="color:#ff7733;">import </span><span>{ getPhantomWallet</span><span style="color:#bfbab0cc;">, </span><span>getSolflareWallet } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-wallets&#39;
+</span><span style="color:#ff7733;">import </span><span>{ WalletProvider } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@solana/wallet-adapter-vue&#39;
+</span><span style="color:#ff7733;">import </span><span>WorkspaceProvider </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/WorkspaceProvider&#39;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">script</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">wallet-provider </span><span style="color:#ffb454;">:wallets</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;wallets&quot; </span><span style="color:#ffb454;">auto-connect</span><span style="color:#39bae690;">&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">workspace-provider</span><span style="color:#39bae690;">&gt;
+</span><span>            </span><span style="font-style:italic;color:#5c6773;">&lt;!-- ... --&gt;
+</span><span>        </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">workspace-provider</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">wallet-provider</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Все готово! Теперь мы можем получить доступ к данным рабочей области из любого компонента нашего приложения.</p>
+<h2 id="ispol-zovanie-workspace">Использование workspace</h2>
+<p>Прежде чем мы закончим эту статью, давайте кратко рассмотрим, как мы можем получить доступ к этим данным рабочей области в наших компонентах.</p>
+<p>Мы воспользуемся этой возможностью, чтобы обновить адрес кошелька на странице профиля.</p>
+<p>Если вы откроете компонент <code>PageProfile.vue</code>, вы должны увидеть открытый ключ, жестко закодированный в шаблоне.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div </span><span style="color:#ffb454;">v-if</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;true&quot; </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;border-b px-8 py-4 bg-gray-50&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>    B1AfN7AgpMyctfFbjmvRAvE1yziZFDb9XCwydBjJwtRN
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Теперь, когда у нас есть доступ к реальному подключенному кошельку, давайте заменим его открытым ключом.</p>
+<pre data-lang="html" style="background-color:#0f1419;color:#bfbab0;" class="language-html "><code class="language-html" data-lang="html"><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">script </span><span style="color:#ffb454;">setup</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#ff7733;">import </span><span>{ ref</span><span style="color:#bfbab0cc;">, </span><span>watchEffect } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;vue&#39;
+</span><span style="color:#ff7733;">import </span><span>{ fetchTweets } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/api&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetForm </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetForm&#39;
+</span><span style="color:#ff7733;">import </span><span>TweetList </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/components/TweetList&#39;
+</span><span style="color:#ff7733;">import </span><span>{ useWorkspace } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@/composables&#39;
+</span><span>
+</span><span style="color:#ff7733;">const </span><span>tweets </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>([])
+</span><span style="color:#ff7733;">const </span><span>loading </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">ref</span><span>(</span><span style="color:#f29718;">true</span><span>)
+</span><span style="color:#ff7733;">const </span><span>{ wallet } </span><span style="color:#f29668;">= </span><span style="color:#ffb454;">useWorkspace</span><span>()
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// ...
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">script</span><span style="color:#39bae690;">&gt;
+</span><span>
+</span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">div </span><span style="color:#ffb454;">v-if</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;wallet&quot; </span><span style="color:#ffb454;">class</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;border-b px-8 py-4 bg-gray-50&quot;</span><span style="color:#39bae690;">&gt;
+</span><span>        {{ wallet.publicKey.toBase58() }}
+</span><span>    </span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">div</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">tweet-form </span><span style="color:#ffb454;">@added</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;addTweet&quot;</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">tweet-form</span><span style="color:#39bae690;">&gt;
+</span><span>    </span><span style="color:#39bae690;">&lt;</span><span style="color:#59c2ff;">tweet-list </span><span style="color:#ffb454;">:tweets</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;tweets&quot; </span><span style="color:#ffb454;">:loading</span><span style="color:#bfbab0cc;">=</span><span style="color:#c2d94c;">&quot;loading&quot;</span><span style="color:#39bae690;">&gt;&lt;/</span><span style="color:#59c2ff;">tweet-list</span><span style="color:#39bae690;">&gt;
+</span><span style="color:#39bae690;">&lt;/</span><span style="color:#59c2ff;">template</span><span style="color:#39bae690;">&gt;
+</span></code></pre>
+<p>Как видите, мы:</p>
+<ol>
+<li>Импортирован компонуемый файл useWorkspace.</li>
+<li>Извлек все необходимые переменные из <code>useWorkspace()</code> — здесь объект <code>кошелька</code>.</li>
+<li>Использовал объект <code>wallet</code> внутри нашего шаблона для отображения его открытого ключа в формате base 58.</li>
+</ol>
+<p>Это был простой пример, но теперь мы можем сделать гораздо больше. Как и в наших тестах, теперь мы можем получить доступ к объекту <code>program</code> и использовать его различные API для взаимодействия с нашей программой Solana, что мы и будем делать в следующих нескольких эпизодах.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Во-первых, молодцы, что зашли так далеко! Честно говоря, этот сериал был настоящим путешествием, и я очень рад видеть, что многие из вас с нетерпением ждут следующих эпизодов.</p>
+<p>Хотя интеграция с кошельками стала для нас очень простой благодаря репозиторию <a href="https://github.com/solana-labs/wallet-adapter">wallet-adapters</a> и предоставляемым им библиотекам JavaScript, нам все равно пришлось их настраивать. правильно и понимать различные концепции по пути. Но посмотрите, что мы имеем сейчас:</p>
+<ul>
+<li>Пользователи могут подключать свои кошельки.</li>
+<li>Наше приложение может получить доступ к данным о подключенном кошельке и действовать соответствующим образом.</li>
+<li>Наше приложение имеет доступ к полному рабочему пространству, что позволяет ему взаимодействовать с нашей программой Solana так же, как мы это делали в наших тестах.</li>
+</ul>
+<p>Это огромный прогресс по сравнению с нашим фиктивным приложением, которое раньше ничего не делало!</p>
+<p>Как обычно, вы можете получить доступ к коду этого эпизода в ветке ниже и сравнить его с предыдущим эпизодом.</p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/tree/episode-8">Просмотреть эпизод 8 на GitHub</a></p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/compare/episode-7...episode-8">Сравните с Эпизодом 7</a></p>
+<p>В следующем эпизоде мы заменим фиктивные данные из наших файлов <code>api</code> и используем наше совершенно новое рабочее пространство для извлечения реальных твитов из нашей программы Solana.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

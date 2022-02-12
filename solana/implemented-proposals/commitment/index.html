@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Обязательство | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/commitment/#raschet-rpc">Расчет RPC</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/commitment/#vychislenie-metriki-priverzhennosti">Вычисление метрики приверженности</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Обязательство</h1>
+
+<p>Метрика приверженности предназначена для того, чтобы предоставить клиентам меру подтверждения сети и уровней ставок в конкретном блоке. Затем клиенты могут использовать эту информацию для получения собственных показателей приверженности.</p>
+<h1 id="raschet-rpc">Расчет RPC</h1>
+<p>Клиенты могут запрашивать метрики фиксации у валидатора для подписи <code>s</code> через <code>get_block_commitment(s: Signature) -&gt; BlockCommitment</code> через RPC. Структура <code>BlockCommitment</code> содержит массив u64 <code>[u64, MAX_CONFIRMATIONS]</code>. Этот массив представляет собой метрику обязательства для конкретного блока «N», который содержит подпись «s» для последнего блока «M», за который проголосовал валидатор.</p>
+<p>Запись «s» с индексом «i» в массиве «BlockCommitment» означает, что валидатор наблюдал общую долю «s» в кластере, достигшую «i» подтверждений в блоке «N», как это наблюдалось в некотором блоке «M». В этом массиве будут элементы MAX_CONFIRMATIONS, представляющие все возможное количество подтверждений от 1 до MAX_CONFIRMATIONS.</p>
+<h1 id="vychislenie-metriki-priverzhennosti">Вычисление метрики приверженности</h1>
+<p>Построение этой структуры <code>BlockCommitment</code> использует уже выполненные вычисления для достижения консенсуса. Функция <code>collect_vote_lockouts</code> в <code>consensus.rs</code> создает HashMap, где каждая запись имеет вид <code>(b, s)</code>, где <code>s</code> – сумма ставки в банке <code>b</code>.</p>
+<p>Это вычисление выполняется для голосующего банка-кандидата &quot;b&quot; следующим образом.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>   let output: HashMap&lt;b, Stake&gt; = HashMap::new();
+</span><span>   for vote_account in b.vote_accounts {
+</span><span>       for v in vote_account.vote_stack {
+</span><span>           for a in ancestors(v) {
+</span><span>               f(*output.get_mut(a), vote_account, v);
+</span><span>           }
+</span><span>       }
+</span><span>   }
+</span></code></pre>
+<p>где <code>f</code> — некоторая функция накопления, которая изменяет запись <code>Ставка</code> для слота <code>а</code> некоторыми данными, полученными из голосования <code>v</code> и <code>vote_account</code> (ставка, блокировка и т. д.). Обратите внимание, что «предки» здесь включают только те слоты, которые присутствуют в кеше текущего состояния. Подписи для банков, предшествующие тем, которые присутствуют в кеше состояния, в любом случае не будут доступны для запроса, поэтому эти банки не включены в расчеты обязательств здесь.</p>
+<p>Теперь мы можем естественным образом расширить вышеприведенное вычисление, чтобы также создать массив BlockCommitment для каждого банка b следующим образом:</p>
+<ol>
+<li>Добавление ForkCommitmentCache для сбора структур BlockCommitment.</li>
+<li>Замена <code>f</code> на <code>f'</code> таким образом, чтобы приведенное выше вычисление также создавало это <code>BlockCommitment</code> для каждого банка <code>b</code>.</li>
+</ol>
+<p>Мы продолжим с деталями 2), так как 1) тривиально.</p>
+<p>Прежде чем продолжить, следует отметить, что для некоторого счета голосования валидатора «a» количество локальных подтверждений для этого валидатора в слоте «s» равно «v.num_confirmations», где «v» — наименьший голос в стеке голосов. a.votes<code>таким образом, что</code>v.slot &gt;= s` (т.е. нет необходимости смотреть какие-либо голоса &gt; v, так как количество подтверждений будет ниже).</p>
+<p>Теперь, более конкретно, мы увеличим приведенное выше вычисление до:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>   let output: HashMap&lt;b, Stake&gt; = HashMap::new();
+</span><span>   let fork_commitment_cache = ForkCommitmentCache::default();
+</span><span>   for vote_account in b.vote_accounts {
+</span><span>       // vote stack is sorted from oldest vote to newest vote
+</span><span>       for (v1, v2) in vote_account.vote_stack.windows(2) {
+</span><span>           for a in ancestors(v1).difference(ancestors(v2)) {
+</span><span>               f&#39;(*output.get_mut(a), *fork_commitment_cache.get_mut(a), vote_account, v);
+</span><span>           }
+</span><span>       }
+</span><span>   }
+</span></code></pre>
+<p>где <code>f'</code> определяется как:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>    fn f`(
+</span><span>        stake: &amp;mut Stake,
+</span><span>        some_ancestor: &amp;mut BlockCommitment,
+</span><span>        vote_account: VoteAccount,
+</span><span>        v: Vote, total_stake: u64
+</span><span>    ){
+</span><span>        f(stake, vote_account, v);
+</span><span>        *some_ancestor.commitment[v.num_confirmations] += vote_account.stake;
+</span><span>    }
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

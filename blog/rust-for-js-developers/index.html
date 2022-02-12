@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rust для JS разработчиков | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-js-developers/#chto-takoe-rust">Что такое Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-js-developers/#kliuchevye-osobennosti-rust">Ключевые особенности Rust</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-js-developers/#tipy"><small>- Типы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-js-developers/#neizmennost"><small>- Неизменность</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-js-developers/#pravo-sobstvennosti"><small>- Право собственности</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-js-developers/#struktury">Структуры</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-js-developers/#chto-ia-mogu-delat-s-rust">Что я могу делать с Rust?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/rust-for-js-developers/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Rust для JS разработчиков</h1>
+
+<p><a href="https://www.codegram.com/blog/rust-for-js-developers/">Перевод</a> | Автор оригинала: David Morcillo</p>
+<p>Хорошее введение в Rust с точки зрения разработчика JavaScript.</p>
+<p>Когда я впервые прочитал про Rust, это не вызвало у меня интереса. Около двух лет назад я работал веб-разработчиком, в основном используя JavaScript, и подумал, что Rust не для меня, потому что в тот момент это выглядело очень сложно.</p>
+<p>В начале этого года я решил начать изучать Rust самостоятельно. Что изменилось за это время? Я все еще веб-разработчик, но знание того, что я смогу написать программу на Rust, скомпилировать ее в WebAssembly и выполнить ее в браузере, было той искрой, которая зажгла мою мотивацию.</p>
+<p>В этом посте я собираюсь представить Rust с точки зрения разработчика JavaScript, сделав несколько параллельных сравнений. Надеюсь, это мотивирует вас попробовать!</p>
+<h2 id="chto-takoe-rust">Что такое Rust?</h2>
+<p>Язык программирования Rust был создан Mozilla, а его первая стабильная версия была выпущена примерно в 2015 году. Это выглядит так: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hello, World!&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Выглядит не так уж и страшно, правда? Можно сказать, что это почти похоже на JavaScript, но это просто программа hello world, и она немного сложнее! Прежде чем рассматривать некоторые особенности языка, давайте поместим Rust в спектр языков программирования следующим образом:</p>
+<p><img src="/imgs/posts/e2e4d13d_01.png" alt="Rust в спектре языков программирования" /></p>
+<p>Существует четкое различие между языками программирования:</p>
+<ul>
+<li>Низкоуровневый: такие языки, как C++, которые имеют доступ к управлению памятью, считаются низкоуровневыми и работают очень быстро. Они также очень небезопасны, потому что очень легко испортить память, и могут случиться плохие вещи!</li>
+<li>Высокий уровень: с другой стороны, такие языки, как JavaScript, не имеют такого детального доступа к памяти (есть сборщик мусора, который обрабатывает все за нас) и считаются безопасными языками, поэтому иногда они могут быть медленными.</li>
+</ul>
+<p>Rust можно считать быстрым и безопасным, но он не дается бесплатно: требуется крутая кривая обучения, а время компиляции может быть немного большим даже для небольших примеров.</p>
+<h2 id="kliuchevye-osobennosti-rust">Ключевые особенности Rust</h2>
+<p>Как и любому языку программирования, здесь есть что охватить, но я решил сосредоточиться на четырех темах, которые необходимы для изучения языка и начала работы над ним.</p>
+<h3 id="tipy">Типы</h3>
+<p>JavaScript - это язык с динамической типизацией, и мы можем делать некоторые забавные вещи, например вычитать число 1 из строки wat и получать неожиданные результаты. Это возможно, потому что система типов не является строгой. В Rust, если вы попытаетесь выполнить простое сложение двух чисел разного типа, вы получите ошибку компиляции: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> a</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32 </span><span style="color:#f29668;">= </span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let</span><span> b</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f64  </span><span style="color:#f29718;">1.0</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> a </span><span style="color:#f29668;">+</span><span> b)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ERROR: a and b are not of the same type.
+</span><span>}
+</span></code></pre>
+<p>Когда вы начнете работать с Rust, у вас будет много ошибок, и вы, вероятно, сначала возненавидите компилятор:</p>
+<p>Piture: Некоторые</p>
+<p>Если вы чувствуете себя этой собакой и постоянно боретесь с компилятором Rust, не волнуйтесь! Все мы были там.</p>
+<h3 id="neizmennost">Неизменность</h3>
+<p>Функциональные языки хорошо известны тем, что работают с неизменяемыми структурами. Как разработчики JavaScript, мы не обязаны работать с неизменяемостью, но популярные библиотеки, такие как Redux и Immutable.js, научили нас этим передовым методам. Сегодня у нас есть ключевые слова let и const для объявления изменяемых и неизменяемых переменных соответственно.</p>
+<p>В Rust мы будем использовать let для объявления переменных, и по умолчанию они будут неизменяемыми. Если мы хотим использовать изменяемые данные, нам нужно добавить ключевое слово mut в объявление следующим образом: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">let mut</span><span> b </span><span style="color:#f29668;">= </span><span style="color:#f29718;">1</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    a </span><span style="color:#f29668;">= </span><span style="color:#f29718;">43</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ERROR: a is not mutable
+</span><span>    b </span><span style="color:#f29668;">= </span><span style="color:#f29718;">2</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<h3 id="pravo-sobstvennosti">Право собственности</h3>
+<p>На мой взгляд, это самая сложная концепция для изучения Rust, потому что она действительно отличается от других языков, над которыми я работал, но это ключ, который делает Rust быстрым и безопасным в использовании!</p>
+<p>Когда вы назначаете некоторые данные переменной, говорят, что они принадлежат переменной, и у каждой части данных может быть только один владелец. Давайте посмотрим на это в действии: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;hello&quot;</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// x owns the &quot;hello&quot; string
+</span><span>    </span><span style="color:#ff7733;">let</span><span> a </span><span style="color:#f29668;">=</span><span> x</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// At this point a owns the &quot;hello&quot; string and x is no longer valid
+</span><span>    </span><span style="color:#f07178;">do_something</span><span>(x)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ERROR: x cannot be used anymore!
+</span><span>}
+</span></code></pre>
+<p>В Rust нет нулевых и неопределенных значений, поэтому мы не можем использовать переменную, у которой нет значения. В предыдущем примере, когда мы присвоили x, мы перемещаем значение из x в a, поэтому в этот момент x не имеет допустимого значения. То же самое и с функциями: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;hello&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">do_something</span><span>(x)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">do_other_thing</span><span>(x)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// ERROR: x cannot be used anymore!
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">do_something</span><span>(</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">:</span><span> String) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Do something with s
+</span><span>}
+</span></code></pre>
+<p>Когда мы вызываем метод do_something, мы перемещаем значение из x в s, аргумент, полученный функцией. После выполнения функции мы возвращаемся в main, и x больше не имеет допустимого значения.</p>
+<p>Предыдущее поведение не всегда желательно, и поэтому в Rust мы можем заимствовать вещи! Если вы не хотите перемещать значение из одной переменной в другую, используйте такие ссылки: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> x </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;hello&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">do_something</span><span>(</span><span style="color:#f29668;">&amp;</span><span>x)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#f07178;">do_other_thing</span><span>(</span><span style="color:#f29668;">&amp;</span><span>x)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// This is ok now because we are not moving the value
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">do_something</span><span>(</span><span style="color:#f29718;">s</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>String) {
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Do something with s
+</span><span>}
+</span></code></pre>
+<p>Когда мы имеем дело с владением и заимствованием, компилятор Rust хочет, чтобы мы играли хорошо, поэтому он предупредит нас, если вы попытаетесь сделать что-то не так.</p>
+<p>Если вы запутались, узнав о владении и заимствовании, ничего страшного! Ваш мозг начал заниматься управлением памятью, и иногда это может причинять боль. Я рекомендую вам посмотреть это видео, чтобы узнать больше по этой теме.</p>
+<h2 id="struktury">Структуры</h2>
+<p>Rust не является объектно-ориентированным языком, но у него есть некоторые функции, которые могут имитировать поведение, присутствующее в таких языках. Когда мы работаем с классами в JavaScript, мы имеем дело и с данными, и с методами в одном и том же месте. В Rust мы собираемся отделить представление данных от методов, которые ими управляют, следующим образом: </p>
+<pre data-lang="rs" style="background-color:#0f1419;color:#bfbab0;" class="language-rs "><code class="language-rs" data-lang="rs"><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Dog </span><span>{
+</span><span>    name</span><span style="color:#bfbab0cc;">:</span><span> String,
+</span><span>    score</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Dog </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">say_something</span><span>(</span><span style="color:#f29718;">self</span><span>: </span><span style="color:#f29668;">&amp;</span><span>Dog) {
+</span><span>        </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;Hey, my name is </span><span style="color:#f29718;">{}</span><span style="color:#c2d94c;">... I mean WOOF!&quot;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>name)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> dog </span><span style="color:#f29668;">=</span><span> Dog { name</span><span style="color:#bfbab0cc;">: </span><span style="font-style:italic;color:#39bae6;">String</span><span style="color:#f29668;">::</span><span>from(</span><span style="color:#c2d94c;">&quot;Boira&quot;</span><span>)</span><span style="color:#bfbab0cc;">,</span><span> score</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">13 </span><span>}</span><span style="color:#bfbab0cc;">;
+</span><span>    dog</span><span style="color:#f29668;">.</span><span style="color:#f07178;">say_something</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Структура Dog очень похожа на объект JavaScript, но это не так. Структура - это форма некоторых данных, которые будут иметь два именованных поля: имя и оценка. Под структурой вы можете увидеть блок реализации (для краткости подразумеваемый). Мы можем объявить методы, которые будут манипулировать данными подобным образом, и заметить, что если мы хотим связать функцию с этими данными, нам нужно передать self в качестве первого аргумента. Это вроде как Python, не так ли?</p>
+<p>Если мы опускаем самооценку, мы объявляем метод, не связанный с какой-либо конкретной частью данных. Вы можете думать об этом как о статическом методе в классе JavaScript.</p>
+<h2 id="chto-ia-mogu-delat-s-rust">Что я могу делать с Rust?</h2>
+<p>Первое, что вам нужно сделать, это установить Rust, и это не может быть проще. Посетите сайт https://rustup.rs/, чтобы загрузить официальный установщик набора инструментов. Это похоже на проект nvm, который обычно используется с JavaScript.</p>
+<p>Тогда вам понадобятся некоторые библиотеки, поэтому не начинайте с нуля. Точно так же, как у нас есть пакеты Node в JavaScript, мы будем иметь дело с крэйтами в Rust. Посетите crates.io, официальный реестр крэйтов, чтобы узнать больше о крэйтах Rust.</p>
+<p>Поскольку Rust очень универсален, существует множество тем, в которых можно использовать Rust, и сообщество приложило все усилия, чтобы отслеживать их на разных веб-сайтах:</p>
+<ul>
+<li>
+<p>www.arewewebyet.org: Даже если не существует таких зрелых фреймворков, как Ruby on Rails, вы могли бы построить кое-что! Я рекомендую взглянуть на фреймворк Rocket, если вы хотите заняться веб-разработкой. Вы даже можете создавать API-интерфейсы GraphQL с помощью Juniper!</p>
+</li>
+<li>
+<p>www.arewegameyet.com: Полный контроль над управлением памятью необходим для создания игр, так что Rust - прекрасный кандидат! Если вас интересует разработка игр, я рекомендую вам проверить игровой движок Amethyst.</p>
+</li>
+<li>
+<p>www.arewelearningyet.com: Еще одна тема, которая сейчас широко популярна, - это машинное обучение. Экосистема Rust на данный момент не очень завершена, и, возможно, сейчас она не так хороша, как Python, для машинного обучения, но если вам интересна тема, проверьте их веб-сайт!</p>
+</li>
+</ul>
+<p>Наконец, если вы занимаетесь веб-разработкой, вам повезло! Вы можете создавать программы, компилировать их и использовать все вместе с существующим кодом JavaScript. Технология, которая сделала это возможным, - это WebAssembly, и ее можно использовать прямо сейчас во всех современных браузерах.</p>
+<p>Если вы хотите попробовать, я рекомендую вам прочитать официальную книгу Rust и WebAssembly.</p>
+<h2 id="vyvod">Вывод</h2>
+<p>Rust - действительно крутой язык для изучения, и с его помощью можно построить много чего! Если вы веб-разработчик, как и я, вам будет очень интересна вся тема WebAssembly, и я надеюсь, что смогу писать об этом в будущих сообщениях.</p>
+<p>Если вы хотите начать работать с Rust, я рекомендую вам заглянуть в официальную книгу и попробовать написать некоторые существующие программы JavaScript с Rust. Ведь во многом практика - ключ к успеху!</p>
+<p>Наконец, этот пост был вдохновлен докладом, который я представил на встрече JS Coders, и вы можете проверить слайды здесь.</p>
+<p>Фотография на обложке: Phil Hearing. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

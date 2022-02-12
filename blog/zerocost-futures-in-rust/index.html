@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Футуры с нулевой стоимостью в Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-futures-in-rust/#pochemu-asinkhronnyi-vvod-vyvod">Почему асинхронный ввод-вывод?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-futures-in-rust/#futury">Футуры</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-futures-in-rust/#streams">Streams</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-futures-in-rust/#nulevaia-stoimost">Нулевая стоимость?</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/zerocost-futures-in-rust/#budushchee">Будущее</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Футуры с нулевой стоимостью в Rust</h1>
+
+<p><a href="http://aturon.github.io/blog/2016/08/11/futures/">Перевод</a> | Автор оригинала: Aaron Turon</p>
+<p>Одним из ключевых пробелов в экосистеме Rust была сильная история быстрого и производительного асинхронного ввода-вывода. У нас есть прочная основа, такая как библиотека mio, но она очень низкого уровня: вы должны напрямую подключать конечные автоматы и манипулировать обратными вызовами.</p>
+<p>Мы хотели чего-то более высокого уровня, с лучшей эргономикой, но также с лучшей компоновкой, поддерживающей экосистему асинхронных абстракций, которые все работают вместе. Эта история может показаться знакомой: это та же цель, которая привела к введению футур (также называемых обещаниями) на многих языках с некоторыми из них, поддерживающими асинхронный / ожидающий сахар.</p>
+<p>Основным принципом Rust является способность создавать абстракции с нулевой стоимостью, и это приводит к одной дополнительной цели для нашей истории асинхронного ввода-вывода: в идеале абстракция, такая как Futures, должна компилироваться до чего-то эквивалентного конечному автомату и ... код обратного вызова, который мы пишем сегодня (без дополнительных затрат времени выполнения).</p>
+<p>За последние пару месяцев мы с Алексом Крайтоном разработали бесплатную фьючерсную библиотеку для Rust, которая, как мы полагаем, позволяет достичь этих целей. (Спасибо Карлу Лерче, Иегуде Кац и Николасу Мацакису за идеи, сделанные на этом пути.)</p>
+<p>Сегодня мы рады начать серию блогов о новой библиотеке. В этом посте представлены основные моменты, несколько ключевых идей и некоторые предварительные тесты. Последующие публикации продемонстрируют, как функции Rust объединяются в дизайне этой абстракции с нулевой стоимостью. И уже есть руководство, которое поможет вам начать работу.</p>
+<h2 id="pochemu-asinkhronnyi-vvod-vyvod">Почему асинхронный ввод-вывод?</h2>
+<p>Прежде чем углубляться в будущее, будет полезно немного поговорить о прошлом.</p>
+<p>Давайте начнем с простого ввода-вывода, который вы, возможно, захотите выполнить: чтения определенного количества байтов из сокета. В Rust для этого есть функция read_exact: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// reads 256 bytes into `my_vec`
+</span><span>socket</span><span style="color:#f29668;">.</span><span style="color:#f07178;">read_exact</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut</span><span> my_vec[</span><span style="color:#f29668;">..</span><span style="color:#f29718;">256</span><span>])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Быстрая викторина: что произойдет, если мы еще не получили достаточно байтов от сокета?</p>
+<p>В сегодняшнем Rust ответ заключается в том, что текущий поток блокируется, засыпая до тех пор, пока не станет доступно больше байтов. Но так было не всегда.</p>
+<p>Вначале в Rust была модель «зеленых нитей», мало чем отличавшаяся от Go. Вы могли развернуть большое количество легких задач, которые затем были запланированы на реальные потоки ОС (иногда называемые «потоками M: N»). В зеленой модели потоков такая функция, как read_exact, блокирует текущую задачу, но не базовый поток ОС; вместо этого планировщик задач переключается на другую задачу. Это замечательно, потому что вы можете масштабироваться до очень большого количества задач, большинство из которых заблокированы, при использовании лишь небольшого количества потоков ОС.</p>
+<p>Проблема в том, что зеленые потоки расходились с амбициями Rust стать настоящей заменой C, без навязанной системы времени выполнения или затрат на FFI: мы не смогли найти стратегию реализации, которая не повлекла бы за собой серьезных глобальных затрат. Вы можете прочитать больше в RFC, который удалил зеленые потоки.</p>
+<p>Итак, если мы хотим обрабатывать большое количество одновременных подключений, многие из которых ждут ввода-вывода, но мы хотим свести количество потоков ОС к минимуму, что еще мы можем сделать?</p>
+<p>Асинхронный ввод-вывод - это ответ - и, по сути, он также используется для реализации зеленой потоковой передачи.</p>
+<p>Вкратце, с помощью асинхронного ввода-вывода вы можете попытаться выполнить операцию ввода-вывода без блокировки. Если это не может быть выполнено немедленно, вы можете повторить попытку позже. Чтобы это работало, ОС предоставляет такие инструменты, как epoll, позволяющие запрашивать, какие из большого набора объектов ввода-вывода готовы к чтению или записи - по сути, это API, предоставляемый mio.</p>
+<p>Проблема в том, что есть много болезненной работы по отслеживанию всех интересующих вас событий ввода-вывода и отправке их по нужным обратным вызовам (не говоря уже о программировании исключительно на основе обратных вызовов). Это одна из ключевых проблем, которую решает будущее.</p>
+<h2 id="futury">Футуры</h2>
+<p>Так что же будущее?</p>
+<p>По сути, будущее представляет собой ценность, которая может быть еще не готова. Обычно будущее становится полным (значение готово) из-за события, происходящего где-то в другом месте. Хотя мы рассматривали это с точки зрения базового ввода-вывода, вы можете использовать будущее для представления широкого спектра событий, например:</p>
+<ul>
+<li>
+<p>Запрос к базе данных, выполняемый в пуле потоков. Когда запрос завершается, будущее завершается, и его значение является результатом запроса.</p>
+</li>
+<li>
+<p>Вызов RPC на сервер. Когда сервер отвечает, будущее завершено, и его значение - это ответ сервера.</p>
+</li>
+<li>
+<p>Тайм-аут. Когда время истекает, будущее завершается, и его значение просто() («единичное» значение в Rust).</p>
+</li>
+<li>
+<p>Долговременная задача с интенсивной загрузкой ЦП, выполняемая в пуле потоков. Когда задача завершается, будущее завершается, и его значение является возвращаемым значением задачи.</p>
+</li>
+<li>
+<p>Чтение байтов из сокета. Когда байты готовы, будущее завершено - и в зависимости от стратегии буферизации байты могут быть возвращены напрямую или записаны как побочный эффект в некоторый существующий буфер.</p>
+</li>
+</ul>
+<p>И так далее. Дело в том, что футуры применимы к асинхронным событиям всех форм и размеров. Асинхронность отражается в том факте, что вы получаете будущее сразу, без блокировок, даже если значение, которое представляет будущее, станет готовым только в какое-то неизвестное время в… будущем.</p>
+<p>В Rust мы представляем футуры как трэйту (то есть интерфейс), примерно: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">trait </span><span style="color:#59c2ff;">Future </span><span>{
+</span><span>    </span><span style="color:#ff7733;">type </span><span style="color:#59c2ff;">Item</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// ... lots more elided ...
+</span><span>}
+</span></code></pre>
+<p>Тип «Предмет» говорит о том, какую ценность принесет будущее, когда оно будет завершено.</p>
+<p>Возвращаясь к нашему предыдущему списку примеров, мы можем написать несколько функций, производящих разные футуры (используя синтаксис impl): </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Lookup a row in a table by the given id, yielding the row when finished
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">get_row</span><span>(</span><span style="color:#f29718;">id</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">i32</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> impl Future&lt;Item = Row&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Makes an RPC call that will yield an i32
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">id_rpc</span><span>(</span><span style="color:#f29718;">server</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29668;">&amp;</span><span>RpcServer) </span><span style="color:#bfbab0cc;">-&gt;</span><span> impl Future&lt;Item = </span><span style="color:#ff7733;">i32</span><span>&gt;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Writes an entire string to a TcpStream, yielding back the stream when finished
+</span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">write_string</span><span>(</span><span style="color:#f29718;">socket</span><span style="color:#bfbab0cc;">:</span><span> TcpStream, </span><span style="color:#f29718;">data</span><span style="color:#bfbab0cc;">:</span><span> String) </span><span style="color:#bfbab0cc;">-&gt;</span><span> impl Future&lt;Item = TcpStream&gt;</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Все эти функции будут немедленно возвращать свое будущее, независимо от того, завершено ли событие, которое представляет будущее; функции не блокируются.</p>
+<p>Когда вы комбинируете футуры, все становится действительно интереснее. Есть бесконечное количество способов сделать это, например:</p>
+<ul>
+<li>
+<p>Последовательная композиция: f.and_then (| val | some_new_future (val)). Дает вам future, которое выполняет future f, берет созданный val для построения другого future some_new_future (val), а затем выполняет это future.</p>
+</li>
+<li>
+<p>Отображение: f.map (| val | some_new_value (val)). Дает вам future, которое выполняет future f и дает результат some_new_value (val).</p>
+</li>
+<li>
+<p>Присоединение: f.join (g). Дает вам future, в котором футуры f и g выполняются параллельно, и завершается, когда они оба завершены, возвращая оба их значения.</p>
+</li>
+<li>
+<p>Выбор: f.select (g). Дает вам future, в котором футуры f и g выполняются параллельно, и завершается, когда одно из них завершается, возвращая свое значение и другое future. (Хотите добавить тайм-аут к любому будущему? Просто выберите это будущее и тайм-аут будущего!)</p>
+</li>
+</ul>
+<p>В качестве простого примера, используя приведенные выше футуры, мы могли бы написать что-то вроде: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#f07178;">id_rpc</span><span>(</span><span style="color:#f29668;">&amp;</span><span>my_server)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">id</span><span>| {
+</span><span>    </span><span style="color:#f07178;">get_row</span><span>(id)
+</span><span>})</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">row</span><span>| {
+</span><span>    json</span><span style="color:#f29668;">::</span><span>encode(row)
+</span><span>})</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">encoded</span><span>| {
+</span><span>    </span><span style="color:#f07178;">write_string</span><span>(my_socket</span><span style="color:#bfbab0cc;">,</span><span> encoded)
+</span><span>})
+</span></code></pre>
+<blockquote>
+<p>См. Этот код для более подробного примера.</p>
+</blockquote>
+<p>Это неблокирующий код, который проходит через несколько состояний: сначала мы выполняем вызов RPC для получения идентификатора; затем ищем соответствующую строку; затем кодируем его в json; затем записываем его в сокет. Под капотом этот код будет компилироваться до фактического конечного автомата, который выполняется с помощью обратных вызовов (без накладных расходов), но мы можем написать его в стиле, который не далек от простого кода блокировки. (Rustaceans заметят, что эта история очень похожа на Iterator в стандартной библиотеке.) Эргономичный высокоуровневый код, который компилируется в конечный автомат и обратные вызовы: вот что мы искали!</p>
+<p>Также стоит учесть, что каждый из используемых здесь футур может происходить из другой библиотеки. Абстракция футур позволяет легко комбинировать их все вместе.</p>
+<h2 id="streams">Streams</h2>
+<p>Но подождите - это еще не все! Продолжая продвигать будущие «комбинаторы», вы сможете не только достичь паритета с помощью простого блокирующего кода, но и делать вещи, которые в противном случае могут быть сложными или болезненными. Чтобы увидеть пример, нам понадобится еще одно понятие: потоки.</p>
+<p>Футуры - это одно значение, которое в конечном итоге будет произведено, но многие источники событий, естественно, создают поток значений с течением времени. Например, входящие TCP-соединения или входящие запросы к сокету являются естественными потоками.</p>
+<p>Библиотека футур также включает в себя трейт Stream, который очень похож на футуры, но настроен для создания последовательности значений с течением времени. В нем есть набор комбинаторов, некоторые из которых работают с футурами. Например, если s - это поток, вы можете написать: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>s</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">val</span><span>| </span><span style="color:#f07178;">some_future</span><span>(val))
+</span></code></pre>
+<p>Этот код предоставит вам новый поток, который работает, сначала извлекая значение val из s, затем вычисляя из него some_future (val), затем выполняя это future и возвращая его значение, а затем делая это снова и снова, чтобы получить следующее значение в ручей.</p>
+<p>Давайте посмотрим на реальный пример: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#5c6773;">// Given an `input` I/O object create a stream of requests
+</span><span style="color:#ff7733;">let</span><span> requests </span><span style="color:#f29668;">= </span><span>ParseStream</span><span style="color:#f29668;">::</span><span>new(input)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// For each request, run our service&#39;s `process` function to handle the request
+</span><span style="font-style:italic;color:#5c6773;">// and generate a response
+</span><span style="color:#ff7733;">let</span><span> responses </span><span style="color:#f29668;">=</span><span> requests</span><span style="color:#f29668;">.</span><span style="color:#f07178;">and_then</span><span>(|</span><span style="color:#f29718;">req</span><span>| service</span><span style="color:#f29668;">.</span><span style="color:#f07178;">process</span><span>(req))</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// Create a new future that&#39;ll write out each response to an `output` I/O object
+</span><span>StreamWriter</span><span style="color:#f29668;">::</span><span>new(responses</span><span style="color:#bfbab0cc;">,</span><span> output)
+</span></code></pre>
+<p>Здесь мы написали ядро простого сервера, оперируя потоками. Это не ракетостроение, но немного увлекательно манипулировать значениями, такими как ответы, которые представляют собой все, что производит сервер.</p>
+<p>Давайте сделаем все поинтереснее. Предположим, что протокол конвейерный, т. Е. Что клиент может отправлять дополнительные запросы в сокет до получения ответа от обрабатываемых. Мы хотим фактически обрабатывать запросы последовательно, но здесь есть возможность некоторого параллелизма: мы могли бы читать и анализировать несколько запросов вперед, пока текущий запрос обрабатывается. Сделать это так же просто, как вставить еще один комбинатор в нужное место: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">let</span><span> requests </span><span style="color:#f29668;">= </span><span>ParseStream</span><span style="color:#f29668;">::</span><span>new(input)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">let</span><span> responses </span><span style="color:#f29668;">=</span><span> requests</span><span style="color:#f29668;">.</span><span style="color:#f07178;">map</span><span>(|</span><span style="color:#f29718;">req</span><span>| service</span><span style="color:#f29668;">.</span><span style="color:#f07178;">process</span><span>(req))</span><span style="color:#f29668;">.</span><span style="color:#f07178;">buffered</span><span>(</span><span style="color:#f29718;">32</span><span>)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">// &lt;--
+</span><span>StreamWriter</span><span style="color:#f29668;">::</span><span>new(responsesm</span><span style="color:#bfbab0cc;">,</span><span> output)
+</span></code></pre>
+<p>Комбинатор с буферизацией принимает поток футур и буферизует его на некоторую фиксированную величину. Буферизация потока означает, что он будет охотно извлекать больше, чем запрошенное количество элементов, и хранить полученные футуры в буфере для последующей обработки. В данном случае это означает, что мы будем читать и анализировать до 32 дополнительных запросов параллельно, одновременно выполняя процесс на текущем.</p>
+<p>Это относительно простые примеры использования футур и потоков, но, надеюсь, они передают некоторое представление о том, как комбинаторы могут дать вам возможность выполнять очень высокоуровневое асинхронное программирование.</p>
+<h2 id="nulevaia-stoimost">Нулевая стоимость?</h2>
+<p>Я несколько раз утверждал, что наша библиотека Futures предоставляет абстракцию с нулевой стоимостью, поскольку она компилируется в нечто очень близкое к коду конечного автомата, который вы пишете вручную. Чтобы сделать это более конкретным:</p>
+<ul>
+<li>
+<p>Ни один из будущих комбинаторов не требует выделения памяти. Когда мы делаем такие вещи, как цепное использование and_then, мы не только не выделяем, мы фактически создаем большое перечисление, которое представляет конечный автомат. (Для каждой «задачи» требуется одно выделение, которое обычно соответствует одному на соединение.)</p>
+</li>
+<li>
+<p>Когда наступает событие, требуется только одна динамическая отправка.</p>
+</li>
+<li>
+<p>Отсутствие дополнительных затрат на синхронизацию; если вы хотите связать данные, которые живут в вашем цикле событий, и получить к ним однопоточный доступ из Futures, мы дадим вам инструменты для этого.</p>
+</li>
+</ul>
+<p>И так далее. Позже в блогах будут подробно описаны эти утверждения и показано, как мы используем Rust для достижения нулевых затрат.</p>
+<p>Но доказательство в пудинге. Мы написали простую структуру HTTP-сервера, minihttp, которая поддерживает конвейерную обработку и TLS. Этот сервер использует футуры на каждом уровне своей реализации, от чтения байтов из сокета до обработки потоков запросов. Помимо того, что это приятный способ написания сервера, это обеспечивает довольно сильный стресс-тест на накладные расходы абстракции футур.</p>
+<p>Чтобы получить базовую оценку этих накладных расходов, мы затем реализовали тест TechEmpower с открытым текстом. Этот микробенчмарк тестирует HTTP-сервер «привет, мир», отправляя ему огромное количество одновременных и конвейерных запросов. Поскольку «работа», которую сервер выполняет для обработки запросов, тривиальна, производительность в значительной степени является отражением основных накладных расходов серверной инфраструктуры (и в нашем случае фреймворка Futures).</p>
+<p>TechEmpower используется для сравнения очень большого количества веб-фреймворков на разных языках. Мы сравнили minihttp с несколькими главными претендентами:</p>
+<ul>
+<li>
+<p>Rapidoid, Java-фреймворк, который показал лучшие результаты в последнем раунде официальных тестов.</p>
+</li>
+<li>
+<p>Go, реализация, использующая поддержку HTTP стандартной библиотеки Go.</p>
+</li>
+<li>
+<p>fasthttp, конкурент стандартной библиотеки Go.</p>
+</li>
+<li>
+<p>node.js.</p>
+</li>
+</ul>
+<p>Вот результаты в количестве «Hello world!», Обслуживаемых в секунду на 8-ядерной машине Linux:</p>
+<p><img src="/imgs/posts/dcc33392_01.png" alt="Диаграмма" /></p>
+<p>Можно с уверенностью сказать, что футуры не предполагают значительных накладных расходов.</p>
+<p>Обновление: чтобы предоставить дополнительные доказательства, мы добавили сравнение minihttp с версией конечного автомата с прямым кодированием в Rust (см. «Raw mio» в ссылке). Эти два значения находятся в пределах 0,3% друг от друга. </p>
+<h2 id="budushchee">Будущее</h2>
+<p>На этом мы завершаем наше бурное знакомство с футурами с нулевой стоимостью в Rust. Мы увидим более подробную информацию о дизайне в следующих публикациях.</p>
+<p>На данный момент библиотека вполне пригодна для использования и довольно тщательно документирована; он поставляется с учебным пособием и множеством примеров, в том числе:</p>
+<ul>
+<li>простой эхо-сервер TCP;</li>
+<li>эффективный прокси-сервер SOCKSv5;</li>
+<li>minihttp, высокоэффективный HTTP-сервер, поддерживающий TLS и использующий парсер Hyper;</li>
+<li>пример использования minihttp для TLS-соединений,</li>
+</ul>
+<p>а также различные интеграции, например основанный на футурых интерфейс для curl. Мы активно работаем с несколькими людьми из сообщества Rust, чтобы интегрировать их в их работу; если вам интересно, свяжитесь с Алексом или со мной!</p>
+<p>Если вы хотите выполнять низкоуровневое программирование ввода-вывода с помощью futures, вы можете использовать futures-mio для этого поверх mio. Мы думаем, что это захватывающее направление для развития программирования асинхронного ввода-вывода в Rust в целом, и в последующих публикациях будет более подробно рассказано о механике.</p>
+<p>В качестве альтернативы, если вы просто хотите говорить по HTTP, вы можете работать поверх minihttp, предоставив службу: функцию, которая принимает HTTP-запрос и возвращает будущий HTTP-ответ. Такая абстракция RPC / сервисов открывает двери для написания большого количества многоразового «промежуточного программного обеспечения» для серверов и получила большую популярность в библиотеке Twitter Finagle для Scala; он также используется в библиотеке Facebook Wangle. В мире Rust уже существует библиотека под названием Tokio, которая создает абстракцию общих служб на основе нашей библиотеки Futures и может выполнять роль, аналогичную Finagle.</p>
+<p>Впереди огромный объем работы:</p>
+<ul>
+<li>
+<p>Во-первых, мы очень хотим услышать отзывы о будущем ядра и абстракциях потоков, а также есть некоторые конкретные детали дизайна некоторых комбинаторов, в которых мы не уверены.</p>
+</li>
+<li>
+<p>Во-вторых, хотя мы создали ряд будущих абстракций на основе базовых концепций ввода-вывода, определенно есть больше возможностей для изучения, и мы будем признательны за помощь в их изучении.</p>
+</li>
+<li>
+<p>В более широком смысле, существует бесконечное количество «привязок» будущего для различных библиотек (как на C, так и на Rust) для написания; Если у вас есть библиотека, для которой вам нужны привязки Futures, мы будем рады помочь!</p>
+</li>
+<li>
+<p>В более долгосрочной перспективе очевидным конечным шагом будет изучение нотации async / await поверх Futures, возможно, таким же образом, как это предлагается в Javascript. Но прежде чем рассматривать такой шаг, мы хотим получить больше опыта, используя футуры непосредственно в качестве библиотеки.</p>
+</li>
+</ul>
+<p>Какими бы ни были ваши интересы, мы будем рады услышать от вас - мы acrichto и aturon на IRC-каналах Rust. Приходите поздороваться! </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

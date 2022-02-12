@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Сервис Gossip | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#obzor-spleten">Обзор сплетен</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#zapisi-spleten">Записи сплетен</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#interfeis-sluzhby-spleten">Интерфейс службы сплетен</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#push-soobshchenie"><small>- Push-сообщение</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#otpravka-odnorangovykh-uzlov-udalenie-soobshcheniia"><small>- Отправка одноранговых узлов, удаление сообщения</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#vytashchit-soobshchenie"><small>- Вытащить сообщение</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#ochistka">Очистка</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#ataki-zatmeniia">Атаки Затмения</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#vesa-na-osnove-vremeni-i-doli"><small>- Веса на основе времени и доли</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#vytashchit-soobshchenie-1"><small>- Вытащить сообщение</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#push-soobshchenie-1"><small>- Push-сообщение</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/validator/gossip/#zametnye-otlichiia-ot-plumtree">Заметные отличия от PlumTree</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Сервис Gossip</h1>
+
+<p>Служба сплетен действует как шлюз к узлам в <a href="terminology.md#control-plane">плоскости управления</a>. Валидаторы используют службу для обеспечения доступности информации для всех других узлов в кластере. Сервис транслирует информацию, используя <a href="https://en.wikipedia.org/wiki/Gossip_protocol">Gossip протокол</a>.</p>
+<h2 id="obzor-spleten">Обзор сплетен</h2>
+<p>Узлы постоянно обмениваются подписанными объектами данных между собой для управления кластером. Например, они делятся своей контактной информацией, высотой книги и голосами.</p>
+<p>Каждую десятую долю секунды каждый узел отправляет сообщение «push» и/или сообщение «pull». Сообщения push и pull могут вызывать ответы, а push-сообщения могут пересылаться другим пользователям в кластере.</p>
+<p>Gossip работает на хорошо известном порту UDP/IP или порте в известном диапазоне. После загрузки кластера узлы сообщают друг другу, где найти их конечную точку сплетен (адрес сокета).</p>
+<h2 id="zapisi-spleten">Записи сплетен</h2>
+<p>Записи, распространяемые через сплетни, произвольны, но подписаны и версии (с отметкой времени) по мере необходимости, чтобы иметь смысл для принимающего их узла. Если узел получает две записи из одного и того же источника, он обновляет свою собственную копию записью с самой последней меткой времени.</p>
+<h2 id="interfeis-sluzhby-spleten">Интерфейс службы сплетен</h2>
+<h3 id="push-soobshchenie">Push-сообщение</h3>
+<p>Узел отправляет push-сообщение, чтобы сообщить кластеру, что у него есть информация для совместного использования. Узлы отправляют push-сообщения push-пирам PUSH_FANOUT.</p>
+<p>Получив push-сообщение, узел проверяет сообщение на предмет:</p>
+<ol>
+<li>
+<p>Дублирование: если сообщение было просмотрено ранее, узел отбрасывает сообщение и может ответить <code>PushMessagePrune</code>, если оно перенаправлено с узла с низкой долей.</p>
+</li>
+<li>
+<p>Новые данные: если сообщение новое для узла</p>
+<ul>
+<li>
+<p>Сохраняет новую информацию с обновленной версией в информации о своем кластере и очищает все предыдущие старые значения.</p>
+</li>
+<li>
+<p>Сохраняет сообщение в <code>push_once</code> (используется для обнаружения дубликатов, очищается после <code>PUSH_MSG_TIMEOUT * 5</code> мс)</p>
+</li>
+<li>
+<p>Ретранслирует сообщения своим пуш-пирам</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Срок действия: узлы отбрасывают push-сообщения старше PUSH_MSG_TIMEOUT.</p>
+</li>
+</ol>
+<h3 id="otpravka-odnorangovykh-uzlov-udalenie-soobshcheniia">Отправка одноранговых узлов, удаление сообщения</h3>
+<p>Узлы случайным образом выбирают своих пуш-пиров из активного набора известных пиров. Узел сохраняет этот выбор в течение относительно долгого времени. Когда получено сообщение об удалении, узел отбрасывает одноранговый узел, отправивший сообщение об удалении. Отсечение указывает на то, что к этому узлу существует другой, более взвешенный путь, чем прямой толчок.</p>
+<p>Набор push-пиров обновляется за счет ротации нового узла в наборе каждые <code>PUSH_MSG_TIMEOUT/2</code> миллисекунды.</p>
+<h3 id="vytashchit-soobshchenie">Вытащить сообщение</h3>
+<p>Узел отправляет пулл-сообщение, чтобы узнать у кластера, есть ли какая-либо новая информация. Сообщение о вытягивании отправляется одному узлу случайным образом и содержит фильтр Блума, который представляет то, что у него уже есть. Узел, получающий сообщение о вытягивании, перебирает его значения и строит ответ на вытягивание вещей, которые не попали в фильтр и подошли бы к сообщению.</p>
+<p>Узел строит вытягивающий фильтр Блума, перебирая текущие значения и недавно очищенные значения.</p>
+<p>Узел обрабатывает элементы в ответе на извлечение так же, как он обрабатывает новые данные в push-сообщении.</p>
+<h2 id="ochistka">Очистка</h2>
+<p>Узлы сохраняют предыдущие версии значений (те, которые были обновлены путем извлечения или отправки) и значения с истекшим сроком действия (те, которые старше <code>GOSSIP_PULL_CRDS_TIMEOUT_MS</code>) в <code>purged_values</code> (вещи, которые у меня были недавно). Узлы удаляют <code>purged_values</code>, которые старше <code>5 * GOSSIP_PULL_CRDS_TIMEOUT_MS</code>.</p>
+<h2 id="ataki-zatmeniia">Атаки Затмения</h2>
+<p>Атака eclipse — это попытка захватить набор соединений узла с конечными точками противника.</p>
+<p>Это относится к нашей реализации следующим образом.</p>
+<ul>
+<li>Сообщения Pull выбирают случайный узел из сети. Атака eclipse на <em>pull</em> потребует от злоумышленника повлиять на случайный выбор таким образом, чтобы для извлечения выбирались только враждебные узлы.</li>
+<li>Push-сообщения поддерживают активный набор узлов и выбирают случайный ответвления для каждого push-сообщения. Атака затмения на <em>push</em> повлияет на выбор активного набора или случайный выбор разветвления.</li>
+</ul>
+<h3 id="vesa-na-osnove-vremeni-i-doli">Веса на основе времени и доли</h3>
+<p>Веса рассчитываются на основе «времени, прошедшего с момента последнего выбора» и «натурального логарифма» «веса ставки».</p>
+<p>Взятие «ln» веса ставки позволяет дать всем узлам более справедливые шансы на покрытие сети за разумное время. Это помогает нормализовать большие возможные различия в весе доли между узлами. Таким образом, узлу с низким «весом доли» по сравнению с узлом с большим «весом доли» придется ждать всего несколько кратных ln («доля») секунд, прежде чем он будет выбран.</p>
+<p>У противника нет возможности влиять на эти параметры.</p>
+<h3 id="vytashchit-soobshchenie-1">Вытащить сообщение</h3>
+<p>Узел выбирается в качестве цели извлечения на основе весов, описанных выше.</p>
+<h3 id="push-soobshchenie-1">Push-сообщение</h3>
+<p>Сообщение об удалении может только удалить злоумышленника из потенциального соединения.</p>
+<p>Как и в случае <em>pull message</em>, узлы выбираются в активный набор на основе весов.</p>
+<h2 id="zametnye-otlichiia-ot-plumtree">Заметные отличия от PlumTree</h2>
+<p>Описанный здесь активный протокол push-уведомлений основан на
+<a href="https://haslab.uminho.pt/sites/default/files/jop/files/lpr07a.pdf">Plum Tree</a>.
+Основные отличия:</p>
+<ul>
+<li>Push-сообщения имеют настенные часы, подписанные отправителем. По истечении срока действия настенных часов сообщение удаляется. Ограничение прыжков трудно реализовать в условиях состязательности.</li>
+<li>Lazy Push не реализован, потому что не очевидно, как предотвратить подделку злоумышленником отпечатка сообщения. Наивный подход позволил бы противнику получить приоритет для вытягивания на основе его ввода.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

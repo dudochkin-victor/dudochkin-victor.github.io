@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>6. Получение твитов из программы | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-from-the-program/#poluchenie-vsekh-tvitov">Получение всех твитов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-from-the-program/#fil-tratsiia-tvitov-po-avtoru">Фильтрация твитов по автору</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-from-the-program/#fil-tr-datasize"><small>- Фильтр dataSize</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-from-the-program/#fil-tr-memcmp"><small>- Фильтр memcmp</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-from-the-program/#ispol-zuite-fil-tr-memcmp-dlia-otkrytogo-kliucha-avtora"><small>- Используйте фильтр memcmp для открытого ключа автора.</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-from-the-program/#fil-tratsiia-tvitov-po-teme">Фильтрация твитов по теме</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/from-scratch/fetching-tweets-from-the-program/#vyvod">Вывод</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>6. Получение твитов из программы</h1>
+
+<p><a href="https://lorisleiva.com/create-a-solana-dapp-from-scratch/fetching-tweets-from-the-program">Перевод</a> | Автор оригинала: Loris</p>
+<p>ЭПИЗОД 6</p>
+<p>2 МЕСЯЦА НАЗАД</p>
+<p>ЧТЕНИЕ 8 МИН.</p>
+<p>Давайте посмотрим, что мы уже узнали. Внедрение программы Solana, которая создает учетные записи <code>Tweet</code>... Проверьте! ✅ Взаимодействие с нашей программой из клиента для отправки твитов в блокчейн... Проверка! ✅ Получение всех наших твитов, чтобы показать их нашим пользователям... Хм... Нет! ❌</p>
+<p>Давайте научимся это делать прямо сейчас! Мы добавим несколько тестов, которые извлекают несколько твитов и гарантируют, что мы получим правильные твиты в нужном количестве.</p>
+<h2 id="poluchenie-vsekh-tvitov">Получение всех твитов</h2>
+<p>Давайте начнем с простого, извлекая все учетные записи <code>Tweet</code>, когда-либо созданные в блокчейне.</p>
+<p>В предыдущем эпизоде мы узнали, что Anchor предоставляет небольшой API для каждого типа учетной записи внутри объекта <code>program</code>. Например, чтобы получить API учетной записи <code>Tweet</code> нам нужно получить доступ к «program.account.tweet».</p>
+<p>Ранее мы использовали метод <code>fetch</code> внутри этого API для получения конкретной учетной записи на основе ее открытого ключа. Теперь воспользуемся другим методом <code>all</code>, который просто возвращает их все!</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>tweetAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>()</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Точно так же у нас есть массив всех когда-либо созданных учетных записей твитов.</p>
+<p>Давайте добавим новый тест в конец файла <code>tests/solana-twitter.ts</code>. Мы добавляем его в конце, потому что нам нужно убедиться, что у нас есть учетные записи для извлечения. <strong>Первые 5 тестов завершаются созданием 3 учетных записей твитов</strong> — так как 2 теста убедитесь, что учетные записи не создаются при определенных условиях.</p>
+<p>Поэтому наш новый тест извлечет все учетные записи и убедится, что у нас их ровно 3.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ffb454;">it</span><span>(</span><span style="color:#c2d94c;">&#39;can fetch all tweets&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweetAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    assert</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">equal</span><span>(tweetAccounts</span><span style="color:#f29668;">.</span><span>length</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Теперь, если мы запустим <code>anchor test</code>, мы должны увидеть, что все 6 тестов пройдены! </p>
+<p>Обратите внимание, что для того, чтобы этот новый тест всегда работал, нам нужно убедиться, что наша локальная книга пуста, прежде чем запускать тесты. При запуске «теста привязки» Anchor делает это автоматически, запуская новую пустую локальную книгу.</p>
+<p>Однако, если вы запускаете тесты со своим собственным локальным реестром — запустив «solana-test-validator» и «anchor run test» в другом сеансе терминала, — обязательно сбросьте локальный реестр перед запуском тестов, выйдя из текущего локального реестра. леджер и начать новую пустую, используя <code>solana-test-validator --reset</code>. Если вы этого не сделаете, то при следующем запуске тестов у вас будет 6 твит-аккаунтов, и поэтому наш новый тест не пройдет.</p>
+<p>Это относится к пользователям Apple M1, которые должны запускать <code>solana-test-validator --no-bpf-jit --reset</code> и <code>anchor test --skip-local-validator</code> вместо <code>anchor test</code>. Просто убедитесь, что вы перезапускаете локальный реестр перед каждым запуском тестов.</p>
+<h2 id="fil-tratsiia-tvitov-po-avtoru">Фильтрация твитов по автору</h2>
+<p>Хорошо, давайте перейдем к нашему следующему тесту. мы знаем, как получить все когда-либо созданные учетные записи <code>Tweet</code>, но как мы можем получить все учетные записи, соответствующие определенным критериям? Например, как мы можем получить все учетные записи <code>Tweet</code> от определенного автора?</p>
+<p>Оказывается, вы можете предоставить массив фильтров для метода <code>all()</code> выше, чтобы сузить область вашего результата.</p>
+<p>Solana поддерживает только <a href="https://docs.solana.com/developing/clients/jsonrpc-api#filters">2 типа фильтров</a>, и оба они довольно примитивны.</p>
+<h3 id="fil-tr-datasize">Фильтр <code>dataSize</code></h3>
+<p>Первый фильтр, называемый dataSize, довольно прост. Вы указываете ему <strong>размер в байтах</strong>, и он будет возвращать только те учетные записи, которые точно соответствуют этому размеру.</p>
+<p>Например, таким образом мы можем создать фильтр dataSize размером 2000 байт.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span>{
+</span><span>    </span><span style="color:#59c2ff;">dataSize</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">2000</span><span style="color:#bfbab0cc;">,
+</span><span>}
+</span></code></pre>
+<p>Все, что больше или меньше 2000 байт, не будет включено в результат.</p>
+<p>Поскольку все наши учетные записи <code>Tweet</code> имеют размер 1376 байт, это не очень полезно для нас.</p>
+<h3 id="fil-tr-memcmp">Фильтр memcmp</h3>
+<p>Второй фильтр, называемый memcmp, немного полезнее. Это позволяет нам сравнивать <strong>массив байтов</strong> с данными аккаунта по <strong>определенному смещению</strong>.</p>
+<p>Это означает, что нам нужно предоставить массив байтов, которые должны присутствовать в данных учетной записи в определенной позиции, и он будет возвращать только эти учетные записи.</p>
+<p>Итак, нам нужно предоставить 2 вещи:</p>
+<ul>
+<li><code>offset</code>: позиция (в байтах), с которой мы должны начать сравнение данных. Это ожидает целое число.</li>
+<li>Массив <code>bytes</code>: данные для сравнения с данными учетной записи. <strong>Этот массив байтов должен быть закодирован в базе 58</strong>.</li>
+</ul>
+<p>Например, предположим, что я хотел получить все учетные записи, у которых мой открытый ключ находится на 42-м байте. Затем я мог бы использовать следующий фильтр <code>memcmp</code>.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span>{
+</span><span>    </span><span style="color:#59c2ff;">memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>        </span><span style="color:#59c2ff;">offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">42</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Starting from the 42nd byte.
+</span><span>        </span><span style="color:#59c2ff;">bytes</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;B1AfN7AgpMyctfFbjmvRAvE1yziZFDb9XCwydBjJwtRN&#39;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// My base-58 encoded public key.
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Обратите внимание, что фильтры memcmp сравнивают только точные данные. Мы не можем, например, проверить, что целое число в определенной позиции меньше заданного числа. Тем не менее, этот фильтр <code>memcmp</code> достаточно мощный, чтобы мы могли использовать его в нашем твиттер-подобном dApp.</p>
+<h3 id="ispol-zuite-fil-tr-memcmp-dlia-otkrytogo-kliucha-avtora">Используйте фильтр memcmp для открытого ключа автора.</h3>
+<p>Ладно, вернемся к делу. Давайте используем этот фильтр <code>memcmp</code> для фильтрации твитов от данного автора.</p>
+<p>Итак, нам нужны две вещи: <code>offset</code> и <code>bytes</code>. Для смещения нам нужно узнать, где в данных хранится публичный ключ автора. К счастью, мы уже сделали всю эту работу в третьем эпизоде.</p>
+<p>Мы знаем, что первые 8 байтов зарезервированы для дискриминатора, а затем следует открытый ключ автора. Поэтому наше смещение просто: <code>8</code>.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1125-solana-6-test-fetch-all/tweet-account-size-start-author.jpg" alt="The final storage diagram of episode 3 with an arrow pointing to the 8th byte saying &quot;Author starts at the 8th byte&quot;." /></p>
+<p>Теперь для <code>bytes</code> нам нужно предоставить открытый ключ в кодировке base-58. В целях нашего теста мы будем использовать открытый ключ нашего кошелька для получения всех твитов, опубликованных кошельком.</p>
+<p>В итоге мы получаем следующий фрагмент кода.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>authorPublicKey </span><span style="color:#f29668;">= </span><span>program</span><span style="color:#f29668;">.</span><span>provider</span><span style="color:#f29668;">.</span><span>wallet</span><span style="color:#f29668;">.</span><span>publicKey
+</span><span style="color:#ff7733;">const </span><span>tweetAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>([
+</span><span>    {
+</span><span>        memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>            offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>            bytes</span><span style="color:#bfbab0cc;">: </span><span>authorPublicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Учитывая, что только две из трех учетных записей <code>Tweet</code>, созданных в тестах, относятся к нашему кошельку, переменная <code>tweetAccounts</code> должна содержать только две учетные записи.</p>
+<p>Давайте поместим этот код в новый тест и убедимся, что мы вернем ровно две учетные записи.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ffb454;">it</span><span>(</span><span style="color:#c2d94c;">&#39;can filter tweets by author&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>authorPublicKey </span><span style="color:#f29668;">= </span><span>program</span><span style="color:#f29668;">.</span><span>provider</span><span style="color:#f29668;">.</span><span>wallet</span><span style="color:#f29668;">.</span><span>publicKey
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweetAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>([
+</span><span>        {
+</span><span>            memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>                offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>                bytes</span><span style="color:#bfbab0cc;">: </span><span>authorPublicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>    ])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    assert</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">equal</span><span>(tweetAccounts</span><span style="color:#f29668;">.</span><span>length</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Давайте будем немного более строгими в этом тесте и убедимся, что обе учетные записи внутри <code>tweetAccounts</code> действительно принадлежат нашему кошельку.</p>
+<p>Для этого мы пройдемся по массиву <code>tweetAccounts</code>, используя <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">функцию <code>every</code></a> который возвращает <code>true</code> тогда и только тогда, когда предоставленный обратный вызов возвращает <code>true</code> для каждой учетной записи.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ffb454;">it</span><span>(</span><span style="color:#c2d94c;">&#39;can filter tweets by author&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>authorPublicKey </span><span style="color:#f29668;">= </span><span>program</span><span style="color:#f29668;">.</span><span>provider</span><span style="color:#f29668;">.</span><span>wallet</span><span style="color:#f29668;">.</span><span>publicKey
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweetAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>([
+</span><span>        {
+</span><span>            memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>                offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>                bytes</span><span style="color:#bfbab0cc;">: </span><span>authorPublicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>    ])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    assert</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">equal</span><span>(tweetAccounts</span><span style="color:#f29668;">.</span><span>length</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    assert</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ok</span><span>(tweetAccounts</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">every</span><span>(</span><span style="color:#f29718;">tweetAccount </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>        </span><span style="color:#ff7733;">return </span><span>tweetAccount</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>author</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>() </span><span style="color:#f29668;">=== </span><span>authorPublicKey</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">toBase58</span><span>()
+</span><span>    }))
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Готово! У нас есть второй тест, и мы умеем фильтровать по авторам! 🎉</p>
+<p>Вам может быть интересно, почему мы получаем доступ к открытому ключу автора через <code>tweetAccount.account.author</code>, тогда как при использовании метода <code>fetch</code> мы обращались к нему напрямую через <code>tweetAccount.author</code>. Это потому, что методы <code>fetch</code> и <code>all</code> не возвращают одни и те же объекты.</p>
+<p>При использовании <code>fetch</code> мы получаем учетную запись <code>Tweet</code> со всеми проанализированными данными.</p>
+<p>При использовании <code>all</code> мы получаем тот же объект, но внутри объекта-оболочки, который также предоставляет свой <code>publicKey</code>. При использовании <code>fetch</code> мы уже предоставляем открытый ключ учетной записи, поэтому этому методу не обязательно возвращать его. Однако при использовании <code>all</code> мы не знаем открытый ключ этих учетных записей, и поэтому Anchor заключает объект учетной записи в другой объект, чтобы дать нам больше контекста. Вот почему мы получаем доступ к данным учетной записи через <code>tweetAccount.account</code>.</p>
+<p>Вот небольшая диаграмма, чтобы обобщить это.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1125-solana-6-test-fetch-all/solana-fetch-all-difference.png" alt="Little diagram showing what &quot;fetch(publicKey)&quot; and &quot;all()&quot; return. The former returns a &quot;Tweet&quot; account directly whereas the latter returns 3 objects containing both a &quot;Tweet&quot; account and a public key." /></p>
+<h2 id="fil-tratsiia-tvitov-po-teme">Фильтрация твитов по теме</h2>
+<p>Фильтрация твитов по теме очень похожа на фильтрацию твитов по автору. Нам по-прежнему нужен фильтр memcpm, но с другими параметрами.</p>
+<p>Начнем со смещения. Опять же, если мы посмотрим на то, как структурирована наша учетная запись <code>Tweet</code>, мы увидим, что тема начинается с 52-го байта.</p>
+<p><img src="https://lorisleiva.com/assets/articles/2021/1125-solana-6-test-fetch-all/tweet-account-size-start-topic.jpg" alt="The final storage diagram of episode 3 with an arrow pointing to the 52nd byte saying &quot;Topic starts at the 52nd byte&quot;." /></p>
+<p>Это потому, что у нас есть 8 байтов для дискриминатора, 32 байта для автора, 8 байтов для метки времени и дополнительные 4 байта для «префикса строки», который сообщает нам реальную длину нашей темы в байтах.</p>
+<p>Итак, давайте добавим эти числа явно в фильтр <code>memcmp</code>, чтобы его было легче поддерживать в будущем.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>tweetAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>([
+</span><span>    {
+</span><span>        memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>            offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>                </span><span style="color:#f29718;">32 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Author public key.
+</span><span>                </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Timestamp.
+</span><span>                </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Topic string prefix.
+</span><span>            bytes</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&#39;&#39;</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// TODO
+</span><span>        }
+</span><span>    }
+</span><span>])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Далее нам нужно указать тему для поиска в наших тестах. Поскольку две из трех учетных записей, созданных в ходе тестов, используют тему <code>veganism</code>, давайте воспользуемся ею.</p>
+<p>Тем не менее, мы не можем просто указать <code>'veganism'</code> в виде строки для свойства <code>bytes</code>. Это должен быть массив байтов в кодировке base-58. Для этого нам сначала нужно преобразовать нашу строку в буфер, который мы затем можем закодировать в базе 58.</p>
+<ul>
+<li>Мы можем преобразовать строку в буфер, используя <code>Buffer.from('some string')</code>.</li>
+<li>Мы можем кодировать буфер в base-58, используя <code>bs58.encode(buffer)</code>.</li>
+</ul>
+<p>Переменная <code>Buffer</code> уже доступна глобально, но это не относится к переменной <code>bs58</code>, которую нам нужно явно импортировать в начале нашего тестового файла.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">import </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">as </span><span>anchor </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@project-serum/anchor&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">import </span><span>{ Program } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;@project-serum/anchor&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">import </span><span>{ SolanaTwitter } </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&#39;../target/types/solana_twitter&#39;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">import </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">as </span><span>assert </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&quot;assert&quot;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">import </span><span style="color:#f29718;">* </span><span style="color:#ff7733;">as </span><span>bs58 </span><span style="color:#ff7733;">from </span><span style="color:#c2d94c;">&quot;bs58&quot;</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Итак, теперь мы можем, наконец, заполнить свойство <code>bytes</code> нашей темой <code>veganism</code>, закодированной в base-58.</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ff7733;">const </span><span>tweetAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>([
+</span><span>    {
+</span><span>        memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>            offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>                </span><span style="color:#f29718;">32 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Author public key.
+</span><span>                </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Timestamp.
+</span><span>                </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Topic string prefix.
+</span><span>            bytes</span><span style="color:#bfbab0cc;">: </span><span>bs58</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">encode</span><span>(</span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#c2d94c;">&#39;veganism&#39;</span><span>))</span><span style="color:#bfbab0cc;">,
+</span><span>        }
+</span><span>    }
+</span><span>])</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Как и в нашем предыдущем тесте, давайте создадим новый тест, который утверждает, что <code>tweetAccounts</code> содержит только две учетные записи и что обе они имеют тему <code>veganism</code> .</p>
+<pre data-lang="js" style="background-color:#0f1419;color:#bfbab0;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#ffb454;">it</span><span>(</span><span style="color:#c2d94c;">&#39;can filter tweets by topics&#39;</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">async </span><span>() </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="color:#ff7733;">const </span><span>tweetAccounts </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>program</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>tweet</span><span style="color:#f29668;">.</span><span style="color:#f07178;">all</span><span>([
+</span><span>        {
+</span><span>            memcmp</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>                offset</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Discriminator.
+</span><span>                    </span><span style="color:#f29718;">32 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Author public key.
+</span><span>                    </span><span style="color:#f29718;">8 </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#5c6773;">// Timestamp.
+</span><span>                    </span><span style="color:#f29718;">4</span><span style="color:#bfbab0cc;">, </span><span style="font-style:italic;color:#5c6773;">// Topic string prefix.
+</span><span>                bytes</span><span style="color:#bfbab0cc;">: </span><span>bs58</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">encode</span><span>(</span><span style="font-style:italic;color:#39bae6;">Buffer</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">from</span><span>(</span><span style="color:#c2d94c;">&#39;veganism&#39;</span><span>))</span><span style="color:#bfbab0cc;">,
+</span><span>            }
+</span><span>        }
+</span><span>    ])</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    assert</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">equal</span><span>(tweetAccounts</span><span style="color:#f29668;">.</span><span>length</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    assert</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">ok</span><span>(tweetAccounts</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">every</span><span>(</span><span style="color:#f29718;">tweetAccount </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>        </span><span style="color:#ff7733;">return </span><span>tweetAccount</span><span style="color:#f29668;">.</span><span>account</span><span style="color:#f29668;">.</span><span>topic </span><span style="color:#f29668;">=== </span><span style="color:#c2d94c;">&#39;veganism&#39;
+</span><span>    }))
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<h2 id="vyvod">Вывод</h2>
+<p>Получение и фильтрация нескольких учетных записей твитов... Проверьте! ✅</p>
+<p>Поздравляем, теперь у вас есть полностью протестированная программа Solana! Теперь мы можем потратить оставшееся время на реализацию клиента JavaScript для нашей программы, с которым могут взаимодействовать наши пользователи. К счастью, поскольку мы так многому научились, написав тесты, это покажется вам очень знакомым.</p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/tree/episode-6">Просмотреть эпизод 6 на GitHub</a></p>
+<p><a href="https://github.com/lorisleiva/solana-twitter/compare/episode-5...episode-6">Сравните с Эпизодом 5</a></p>
+<p>Увидимся в следующем эпизоде, где мы начнем формировать наше приложение VueJS. Пойдем!</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>README-driven Development | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/readmedriven-development/#tl-dr">tl;dr</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/readmedriven-development/#opishite-vse"><small>- Опишите все</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/readmedriven-development/#na-primere"><small>- На примере</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/readmedriven-development/#chto-vy-khotite-chtoby-vashe-programmnoe-obespechenie-vypolnialo">Что вы хотите, чтобы ваше программное обеспечение выполняло</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/readmedriven-development/#i-opublikuite-readme">И опубликуйте README</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>README-driven Development</h1>
+
+<p><a href="https://deterministic.space/readme-driven-development.html">Перевод</a> | Автор оригинала: Pascal Hertleif</p>
+<p>Как и большинство других (\w) методов DD1, «разработка под управлением README» направляет ваш подход к разработке программного обеспечения. Этот подход лучше всего работает для небольших автономных проектов или библиотек, поверхность API которых не больше, чем умещается в кучке заметок. И, конечно же, для проектов, о которых вы, возможно, не захотели писать прямо сейчас, а просто подумали в душе, это показалось хорошей идеей.</p>
+<p>Предпосылка проста:</p>
+<blockquote>
+<p>Перед написанием любого кода напишите файл README, описывающий, что должно делать ваше программное обеспечение.</p>
+</blockquote>
+<p>(Я обычно называю файл README.md и использую синтаксис Markdown, но вы, конечно, можете делать все, что захотите.)</p>
+<h2 id="tl-dr">tl;dr</h2>
+<ul>
+<li>Опишите все
+<ul>
+<li>На примере</li>
+</ul>
+</li>
+<li>Что вы хотите, чтобы ваше программное обеспечение выполняло</li>
+<li>И опубликуйте README</li>
+</ul>
+<h3 id="opishite-vse">Опишите все</h3>
+<p>Помимо обычной метаинформации вроде</p>
+<ul>
+<li>общее описание проекта,</li>
+<li>имя авторов,</li>
+<li>ссылки на другие страницы (например, сгенерированная документация по API),</li>
+<li>лицензия, под которой это опубликовано,</li>
+<li>и, возможно, текущий статус сборки,</li>
+</ul>
+<p>ваш файл README должен содержать довольно точное описание того, как использовать это программное обеспечение.</p>
+<p>Эти вопросы могут помочь:</p>
+<ul>
+<li>Что вам нужно написать, чтобы показать, как этим пользоваться?</li>
+<li>Какие функции вам нужно показать, чтобы пользователь (и разработчик!) Понял - к чему вы стремились?</li>
+<li>Как вы хотите использовать вашу программу / библиотеку?</li>
+</ul>
+<p>Замечательно то, что вы не описываете текущее состояние существующего проекта, а описываете идеальное состояние, которое вы хотели бы иметь.</p>
+<h3 id="na-primere">На примере</h3>
+<p>Допустим, вы хотите написать библиотеку, которая может извлекать наиболее доминирующие цвета из файла изображения2: вам нужно показать</p>
+<ol>
+<li>как загрузить библиотеку,</li>
+<li>какие функции / структуры данных может использовать пользователь,</li>
+<li>как загрузить изображение,</li>
+<li>а затем, какие данные вы получите обратно.</li>
+</ol>
+<p>Представьте себе наиболее удобный для этого API и запишите его.</p>
+<h2 id="chto-vy-khotite-chtoby-vashe-programmnoe-obespechenie-vypolnialo">Что вы хотите, чтобы ваше программное обеспечение выполняло</h2>
+<p>Рассматривайте свой README как тестовый файл - буквально! Структурируйте примеры (кода) таким образом, чтобы их можно было запустить и они работали (после того, как вы написали код).</p>
+<p>Вы можете использовать такие инструменты, как скептик, чтобы извлекать блоки кода из файлов Markdown и запускать их как модульные тесты.</p>
+<h2 id="i-opublikuite-readme">И опубликуйте README</h2>
+<p>После того, как вы написали файл README, вы должны его опубликовать. Вероятно, с большим предупреждением «ЭТО ПРОСТО ИДЕЯ ТАК ДАЛЕКО». Может быть, просто как Gist, но определенно в том месте, где вы (или другие) можете легко начать реализацию описанных вами функций.</p>
+<p>После публикации этого сообщения Солти Рандо сообщил мне, что Том Престон-Вернер уже писал о разработке, управляемой Readme, в 2010 году!</p>
+<ol>
+<li>
+<p>Например, разработка на основе тестирования, разработка на основе поведения или разработка на основе календаря.</p>
+</li>
+<li>
+<p>Был там, сделал то. (Хотя этот README довольно плохой.)</p>
+</li>
+</ol>
+<p>Спасибо за чтение.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

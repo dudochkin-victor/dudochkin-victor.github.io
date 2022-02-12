@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Делегирование ставок и вознаграждения | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#osnovnoi-dizain">Основной дизайн</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#passivnoe-delegirovanie">Пассивное делегирование</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#akkaunty-dlia-golosovaniia-i-stavok">Аккаунты для голосования и ставок</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#golosovanie"><small>- голосование</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#voteinstruction-initialize-voteinit"><small>- VoteInstruction::Initialize(VoteInit)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#voteinstruction-authorize-pubkey-voteauthorize"><small>- VoteInstruction::Authorize(Pubkey, VoteAuthorize)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#voteinstruction-vote-vote"><small>- VoteInstruction::Vote(Vote)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#stakestate"><small>- StakeState</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#stakestate-stake"><small>- StakeState::Stake</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#stakestate-rewardspool"><small>- StakeState::RewardsPool</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#stakeinstruction-delegatestake"><small>- StakeInstruction::DelegateStake</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#stakeinstruction-authorize-pubkey-stakeauthorize"><small>- StakeInstruction::Authorize(Pubkey, StakeAuthorize)</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#stakeinstruction-deaktivirovat"><small>- StakeInstruction::Деактивировать</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#stakeinstruction-withdraw-u64"><small>- StakeInstruction::Withdraw(u64)</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#preimushchestva-konstruktsii">Преимущества конструкции</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#primer-potoka-vyzovov">Пример потока вызовов</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#nagrady-za-steking">Награды за стекинг</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#osnovy"><small>- Основы</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#ekonomika"><small>- Экономика</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#poluchenie-kreditov"><small>- Получение кредитов</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#progrev-stavki-kuldaun-vyvod"><small>- Прогрев ставки, кулдаун, вывод</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#sniatie"><small>- Снятие</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cluster/stake-delegation-and-rewards/#blokirovka"><small>- Блокировка</small></a>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Делегирование ставок и вознаграждения</h1>
+
+<p>Стейкеры получают вознаграждение за помощь в проверке реестра. Они делают это, делегируя свою долю узлам валидатора. Эти валидаторы выполняют всю рутинную работу по воспроизведению реестра и отправке голосов на учетную запись для каждого узла, на которую участники могут делегировать свои доли. Остальная часть кластера использует эти голоса, взвешенные по ставкам, для выбора блока при возникновении разветвлений. И валидатор, и стейкер нуждаются в некотором экономическом стимуле, чтобы сыграть свою роль. Валидатор должен получить компенсацию за свое оборудование, а стейкер должен получить компенсацию за риск сокращения своей доли. Экономика освещена в <a href="../implemented-proposals/staking-rewards/">вознаграждениях за стекинг</a>. В этом разделе, с другой стороны, описывается основная механика его реализации.</p>
+<h2 id="osnovnoi-dizain">Основной дизайн</h2>
+<p>Общая идея заключается в том, что валидатор владеет учетной записью для голосования. Учетная запись Vote отслеживает голоса валидатора, подсчитывает кредиты, сгенерированные валидатором, и предоставляет любое дополнительное состояние валидатора. Учетная запись Vote не знает о делегированных ей ставках и не имеет веса стейкинга.</p>
+<p>Отдельная учетная запись Stake (созданная стейкером) называет учетную запись Vote, на которую делегируется ставка. Полученные вознаграждения пропорциональны количеству поставленных лампортов. Аккаунт Stake принадлежит только стейкеру. Некоторая часть лампортов, хранящихся в этой учетной записи, является ставкой.</p>
+<h2 id="passivnoe-delegirovanie">Пассивное делегирование</h2>
+<p>Любое количество учетных записей Stake может делегироваться одной учетной записи Vote без интерактивного действия со стороны удостоверения личности, контролирующего учетную запись Vote или отправляющего голоса на учетную запись.</p>
+<p>Общая ставка, выделенная для учетной записи Vote, может быть рассчитана по сумме всех учетных записей Stake, которые имеют открытый ключ учетной записи Vote как <code>StakeState::Stake::voter_pubkey</code>.</p>
+<h2 id="akkaunty-dlia-golosovaniia-i-stavok">Аккаунты для голосования и ставок</h2>
+<p>Процесс вознаграждения разделен на две программы в сети. Программа Vote решает проблему сокращения ставок. Программа Stake действует как хранитель пула вознаграждений и обеспечивает пассивное делегирование. Программа Stake отвечает за выплату вознаграждений стейкеру и избирателю, когда показано, что делегат стейкера участвовал в проверке реестра.</p>
+<h3 id="golosovanie">голосование</h3>
+<p>VoteState — это текущее состояние всех голосов, которые валидатор отправил в сеть. VoteState содержит следующую информацию о состоянии:</p>
+<ul>
+<li><code>votes</code> - Структура данных отправленных голосов.</li>
+<li><code>кредиты</code> – общее количество вознаграждений, полученных этой программой голосования за время ее существования.</li>
+<li><code>root_slot</code> - последний слот для достижения полной блокировки, необходимой для вознаграждений.</li>
+<li><code>commission</code> - комиссия, взимаемая этим VoteState за любые вознаграждения, требуемые счетами Stake стейкера. Это процентный потолок вознаграждения.</li>
+<li>Account::lamports - Накопленные лампорты от комиссии. Они не считаются ставками.</li>
+<li><code>authorized_voter</code> - только этот идентификатор имеет право подавать голоса. Это поле может быть изменено только этим идентификатором.</li>
+<li><code>node_pubkey</code> - узел Solana, который голосует в этом аккаунте.</li>
+<li><code>authorized_withdrawer</code> - личность лица, отвечающего за лампы этой учетной записи, отдельно от адреса учетной записи и авторизованного лица, подписывающего голоса.</li>
+</ul>
+<h3 id="voteinstruction-initialize-voteinit">VoteInstruction::Initialize(VoteInit)</h3>
+<ul>
+<li>
+<p><code>account[0]</code> - RW - Состояние голосования.</p>
+<p><code>VoteInit</code> содержит <code>node_pubkey</code>, <code>authorized_voter</code>, <code>authorized_withdrawer</code> и <code>commission</code> новой учетной записи для голосования.</p>
+<p>другие члены VoteState по умолчанию.</p>
+</li>
+</ul>
+<h3 id="voteinstruction-authorize-pubkey-voteauthorize">VoteInstruction::Authorize(Pubkey, VoteAuthorize)</h3>
+<p>Обновляет учетную запись новым авторизованным избирателем или отзывателем в соответствии с параметром VoteAuthorize (<code>Voter</code> или <code>Withdrawer</code>). Транзакция должна быть подписана текущим <code>authorized_voter</code> или <code>authorized_withdrawer</code> учетной записи для голосования.</p>
+<ul>
+<li><code>account[0]</code> - RW - Состояние голосования.
+Для <code>VoteState::authorized_voter</code> или <code>authorized_withdrawer</code> установлено значение <code>Pubkey</code>.</li>
+</ul>
+<h3 id="voteinstruction-vote-vote">VoteInstruction::Vote(Vote)</h3>
+<ul>
+<li><code>account[0]</code> - RW - Состояние голосования.
+<code>VoteState::lockouts</code> и <code>VoteState::credits</code> обновляются в соответствии с правилами блокировки голосования, см. <a href="../implemented-proposals/tower-bft/">Tower BFT</a>.</li>
+<li><code>account[1]</code> - RO - <code>sysvar::slot_hashes</code> Список некоторых N самых последних слотов и их хэшей для проверки голосования.</li>
+<li><code>account[2]</code> - RO - <code>sysvar::clock</code> Текущее сетевое время, выраженное в слотах, эпохах.</li>
+</ul>
+<h3 id="stakestate">StakeState</h3>
+<p>StakeState принимает одну из четырех форм: StakeState::Uninitialized, StakeState::Initialized, StakeState::Stake и StakeState::RewardsPool. В стейкинге используются только первые три формы, но интерес представляет только StakeState::Stake. Все RewardsPools создаются при генезисе.</p>
+<h3 id="stakestate-stake">StakeState::Stake</h3>
+<p>StakeState::Stake — это текущий параметр делегирования <strong>стейкера</strong>, который содержит следующую информацию о состоянии:</p>
+<ul>
+<li>Account::lamports - Доступные для стейкинга Lamports.</li>
+<li><code>stake</code> - сумма ставки (с учетом прогрева и перезарядки) для получения вознаграждения, всегда меньше или равна Account::lamports.</li>
+<li><code>voter_pubkey</code> - pubkey экземпляра VoteState, которому делегированы lamports.</li>
+<li><code>credits_observed</code> - общее количество кредитов, заявленных за время существования программы.</li>
+<li><code>activated</code> - эпоха, в которой эта ставка была активирована/делегирована. Полная ставка будет засчитана после разминки.</li>
+<li><code>деактивировано</code> - эпоха, в которой эта ставка была деактивирована, требуется несколько периодов восстановления, прежде чем учетная запись будет полностью деактивирована, и ставка доступна для снятия.</li>
+<li><code>authorized_staker</code> - публичный ключ лица, которое должно подписывать транзакции делегирования, активации и деактивации.</li>
+<li><code>authorized_withdrawer</code> - личность лица, отвечающего за лампы этой учетной записи, отдельно от адреса учетной записи и авторизованного стейкера.</li>
+</ul>
+<h3 id="stakestate-rewardspool">StakeState::RewardsPool</h3>
+<p>Чтобы избежать единой общесетевой блокировки или конкуренции при погашении, 256 RewardsPools являются частью генезиса с заранее определенными ключами, каждый из которых имеет кредиты std::u64::MAX, чтобы иметь возможность удовлетворять погашения в соответствии со стоимостью баллов.</p>
+<p>Stakes и RewardsPool — это учетные записи, принадлежащие одной и той же программе «Stake».</p>
+<h3 id="stakeinstruction-delegatestake">StakeInstruction::DelegateStake</h3>
+<p>Учетная запись Stake перемещается из формы Initialized в форму StakeState::Stake или из деактивированной (т.е. полностью охлажденной) формы StakeState::Stake в активированную форму StakeState::Stake. Вот как стейкеры выбирают учетную запись для голосования и узел валидатора, на который делегируются их лампы стейк-аккаунта. Транзакция должна быть подписана авторизованным_стейкером доли.</p>
+<ul>
+<li><code>account[0]</code> - RW - Экземпляр StakeState::Stake. <code>StakeState::Stake::credits_observed</code> инициализируется как <code>VoteState::credits</code>, <code>StakeState::Stake::voter_pubkey</code> инициализируется как <code>account[1]</code>. Если это начальное делегирование ставки, <code>StakeState::Stake::stake</code> инициализируется балансом счета в лэмпортах, <code>StakeState::Stake::activated</code> инициализируется текущей эпохой банка, а <code>StakeState::Stake</code> ::deactivated` инициализируется как std::u64::MAX</li>
+<li><code>account[1]</code> - R - Экземпляр VoteState.</li>
+<li><code>account[2]</code> - R - учетная запись sysvar::clock, несет информацию о текущей эпохе банка.</li>
+<li><code>account[3]</code> - R - учетная запись sysvar::stakehistory, содержит информацию об истории ставок.</li>
+<li><code>account[4]</code> - R - учетная запись на ставке::Конфигурация, содержит конфигурацию разогрева, восстановления и слэшинга.</li>
+</ul>
+<h3 id="stakeinstruction-authorize-pubkey-stakeauthorize">StakeInstruction::Authorize(Pubkey, StakeAuthorize)</h3>
+<p>Обновляет учетную запись новым авторизованным стейкером или снимающим в соответствии с параметром StakeAuthorize (<code>Стейкер</code> или <code>Снимающий</code>). Транзакция должна быть подписана текущим <code>authorized_staker</code> или <code>authorized_withdrawer</code> учетной записи Stake. Срок действия любой блокировки доли должен быть истек, или хранитель блокировки также должен подписать транзакцию.</p>
+<ul>
+<li>
+<p><code>account[0]</code> - RW - StakeState.</p>
+<p>Для <code>StakeState::authorized_staker</code> или <code>authorized_withdrawer</code> установлено значение <code>Pubkey</code>.</p>
+</li>
+</ul>
+<h3 id="stakeinstruction-deaktivirovat">StakeInstruction::Деактивировать</h3>
+<p>Стейкер может пожелать выйти из сети. Для этого он должен сначала деактивировать свою ставку и дождаться восстановления.
+Транзакция должна быть подписана авторизованным_стейкером доли.</p>
+<ul>
+<li><code>account[0]</code> - RW - Деактивируемый экземпляр StakeState::Stake.</li>
+<li><code>account[1]</code> - R - счет sysvar::clock из банка, который содержит текущую эпоху.</li>
+</ul>
+<p>StakeState::Stake::deactivated устанавливается на текущую эпоху + время восстановления. К этому времени ставка учетной записи упадет до нуля, и Account::lamports будет доступен для вывода.</p>
+<h3 id="stakeinstruction-withdraw-u64">StakeInstruction::Withdraw(u64)</h3>
+<p>Лампорты со временем накапливаются на счете Stake, и любое превышение над активированной ставкой может быть снято. Транзакция должна быть подписана авторизованным_сборщиком ставки.</p>
+<ul>
+<li><code>account[0]</code> - RW - StakeState::Stake, с которого нужно вывести средства.</li>
+<li><code>account[1]</code> - RW - Счет, на который должны быть зачислены выведенные лэмпорты.</li>
+<li><code>account[2]</code> - R - счет sysvar::clock из банка, который содержит текущую эпоху, для расчета ставки.</li>
+<li><code>account[3]</code> - R - sysvar::stake_history учетная запись из банка, в которой хранится история прогрева/отката кола.</li>
+</ul>
+<h2 id="preimushchestva-konstruktsii">Преимущества конструкции</h2>
+<ul>
+<li>Единое голосование для всех стейкеров.</li>
+<li>Очистка переменной кредита не требуется для получения вознаграждения.</li>
+<li>Каждая делегированная ставка может претендовать на вознаграждение независимо.</li>
+<li>Комиссия за работу вносится, когда запрашивается вознаграждение делегированной ставкой.</li>
+</ul>
+<h2 id="primer-potoka-vyzovov">Пример потока вызовов</h2>
+<p><img src="/img/passive-staking-callflow.png" alt="Passive Staking Callflow" /></p>
+<h2 id="nagrady-za-steking">Награды за стекинг</h2>
+<p>Конкретная механика и правила режима вознаграждения валидатора описаны здесь. Награды зарабатываются путем делегирования доли валидатору, который правильно голосует. Голосование неправильно подвергает ставки этого валидатора <a href="../proposals/slashing/">слэшингу</a>.</p>
+<h3 id="osnovy">Основы</h3>
+<p>Сеть выплачивает вознаграждение за часть сетевой <a href="../terminology.md#inflation">инфляции</a>. Количество лампортов, доступных для выплаты вознаграждений за эпоху, фиксировано и должно быть поровну разделено между всеми узлами с ставками в соответствии с их относительным весом ставки и участием. Весовая единица называется <a href="../terminology.md#%D1%82%D0%BE%D1%87%D0%BA%D0%B0">точка</a>.</p>
+<p>Награды за эпоху недоступны до конца этой эпохи.</p>
+<p>В конце каждой эпохи общее количество очков, заработанных в течение эпохи, суммируется и используется для деления доли вознаграждения от инфляции эпохи, чтобы получить значение в очках. Это значение записывается в банке в <a href="../terminology.md#sysvar">sysvar</a>, который сопоставляет эпохи с точечными значениями.</p>
+<p>Во время погашения программа ставок подсчитывает очки, заработанные ставкой для каждой эпохи, умножает их на стоимость очков эпохи и переводит эту сумму лампортов со счета вознаграждений на счета ставок и голосов в соответствии с настройками комиссии счета голосов.</p>
+<h3 id="ekonomika">Экономика</h3>
+<p>Стоимость точки за эпоху зависит от совокупного участия в сети. Если участие в эпохе падает, баллы для тех, кто участвует, выше.</p>
+<h3 id="poluchenie-kreditov">Получение кредитов</h3>
+<p>Валидаторы зарабатывают один кредит голоса за каждый правильный голос, который превышает максимальную блокировку, то есть каждый раз, когда учетная запись для голосования валидатора удаляет слот из своего списка блокировки, делая этот голос корневым для узла.</p>
+<p>Стейкеры, делегировавшие полномочия этому валидатору, зарабатывают баллы пропорционально своей ставке. Заработанные очки являются результатом кредитов голосов и ставок.</p>
+<h3 id="progrev-stavki-kuldaun-vyvod">Прогрев ставки, кулдаун, вывод</h3>
+<p>Ставки, однажды делегированные, не вступают в силу немедленно. Сначала они должны пройти период разогрева. В этот период какая-то часть ставки считается «действующей», а остальная – «активирующейся». Изменения происходят на границах эпох.</p>
+<p>Программа ставок ограничивает скорость изменения общей доли сети, что отражено в <code>config::warmup_rate</code> программы ставок (установлено на 25% за эпоху в текущей реализации).</p>
+<p>Сумма ставки, которая может быть разогрета в каждую эпоху, зависит от общей эффективной ставки предыдущей эпохи, общей активирующей ставки и настроенной скорости разогрева программы ставок.</p>
+<p>Перезарядка работает так же. После того, как ставка деактивирована, некоторая ее часть считается «действующей», а также «деактивируемой». По мере того, как ставка остывает, она продолжает приносить вознаграждение и подвергаться рубке, но также становится доступной для вывода.</p>
+<p>Ставки Bootstrap не подлежат прогреву.</p>
+<p>Награды выплачиваются против «эффективной» части ставки за эту эпоху.</p>
+<h4 id="primer-razminki">Пример разминки</h4>
+<p>Рассмотрим ситуацию с одной долей в 1000, активированной в эпоху N, с коэффициентом прогрева сети 20% и неактивной общей долей в сети в эпоху N, равной 2000.</p>
+<p>В эпоху N+1 сумма, доступная для активации для сети, составляет 400 (20% от 2000), а в эпоху N этот пример ставки является единственной активируемой ставкой, и поэтому имеет право на всю комнату для разминки. доступный.</p>
+<table><thead><tr><th align="left">epoch</th><th align="right">effective</th><th align="right">activating</th><th align="right">total effective</th><th align="right">total activating</th></tr></thead><tbody>
+<tr><td align="left">N-1</td><td align="right"></td><td align="right"></td><td align="right">2,000</td><td align="right">0</td></tr>
+<tr><td align="left">N</td><td align="right">0</td><td align="right">1,000</td><td align="right">2,000</td><td align="right">1,000</td></tr>
+<tr><td align="left">N+1</td><td align="right">400</td><td align="right">600</td><td align="right">2,400</td><td align="right">600</td></tr>
+<tr><td align="left">N+2</td><td align="right">880</td><td align="right">120</td><td align="right">2,880</td><td align="right">120</td></tr>
+<tr><td align="left">N+3</td><td align="right">1000</td><td align="right">0</td><td align="right">3,000</td><td align="right">0</td></tr>
+</tbody></table>
+<p>Were 2 stakes (X and Y) to activate at epoch N, they would be awarded a portion of the 20% in proportion to their stakes. At each epoch effective and activating for each stake is a function of the previous epoch's state.</p>
+<table><thead><tr><th align="left">epoch</th><th align="right">X eff</th><th align="right">X act</th><th align="right">Y eff</th><th align="right">Y act</th><th align="right">total effective</th><th align="right">total activating</th></tr></thead><tbody>
+<tr><td align="left">N-1</td><td align="right"></td><td align="right"></td><td align="right"></td><td align="right"></td><td align="right">2,000</td><td align="right">0</td></tr>
+<tr><td align="left">N</td><td align="right">0</td><td align="right">1,000</td><td align="right">0</td><td align="right">200</td><td align="right">2,000</td><td align="right">1,200</td></tr>
+<tr><td align="left">N+1</td><td align="right">333</td><td align="right">667</td><td align="right">67</td><td align="right">133</td><td align="right">2,400</td><td align="right">800</td></tr>
+<tr><td align="left">N+2</td><td align="right">733</td><td align="right">267</td><td align="right">146</td><td align="right">54</td><td align="right">2,880</td><td align="right">321</td></tr>
+<tr><td align="left">N+3</td><td align="right">1000</td><td align="right">0</td><td align="right">200</td><td align="right">0</td><td align="right">3,200</td><td align="right">0</td></tr>
+</tbody></table>
+<h3 id="sniatie">Снятие</h3>
+<p>В любое время могут быть выведены только лэмпорты, превышающие эффективную+активирующую ставку. Это означает, что во время разминки фактически ни одна ставка не может быть отозвана. Во время перезарядки любые жетоны, превышающие действующую ставку, могут быть изъяты (активация == 0). Поскольку заработанные вознаграждения автоматически добавляются к ставкам, снятие средств, как правило, возможно только после деактивации.</p>
+<h3 id="blokirovka">Блокировка</h3>
+<p>Счета ставок поддерживают понятие блокировки, когда баланс счета ставок недоступен для вывода до определенного времени. Блокировка определяется как высота эпохи, то есть минимальная высота эпохи, которая должна быть достигнута сетью, прежде чем баланс счета доли будет доступен для снятия, если транзакция также не подписана указанным хранителем. Эта информация собирается при создании учетной записи доли и сохраняется в поле Блокировка состояния учетной записи доли. Изменение авторизованного стейкера или вывода средств также подлежит блокировке, поскольку такая операция фактически является переводом.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

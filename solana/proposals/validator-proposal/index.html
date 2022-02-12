@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Валидатор | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/validator-proposal/#istoriia">История</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/validator-proposal/#raznitsa-mezhdu-proverkoi-i-operezheniem">Разница между проверкой и опережением</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/validator-proposal/#predlagaemyi-dizain">Предлагаемый дизайн</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/proposals/validator-proposal/#zametnye-izmeneniia">Заметные изменения</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Валидатор</h1>
+
+<h2 id="istoriia">История</h2>
+<p>Когда мы впервые запустили Solana, целью было снизить риски для наших требований TPS. Мы знали, что при оптимистичном контроле параллелизма и достаточно длинных лидерских слотах консенсус PoS не представлял самого большого риска для TPS. Это была проверка подписи на основе графического процессора, конвейерная обработка программного обеспечения и параллельный банкинг. Так родился ТПУ. Достигнув отметки в 100 000 TPS, мы разделили команду на одну группу, работающую над достижением 710 000 TPS, и другую, чтобы конкретизировать конвейер валидатора. Так родился TVU. Текущая архитектура является следствием постепенного развития с таким порядком и приоритетами проекта. Это не отражение того, что мы когда-либо считали наиболее технически элегантным срезом этих технологий.
+В контексте ротации лидеров четкое различие между лидерством и валидацией стирается.</p>
+<h2 id="raznitsa-mezhdu-proverkoi-i-operezheniem">Разница между проверкой и опережением</h2>
+<p>Фундаментальное различие между конвейерами заключается в наличии PoH. В лидере мы обрабатываем транзакции, удаляя плохие, а затем помечаем результат PoH-хешем. В валидаторе мы проверяем этот хэш, отделяем его и точно так же обрабатываем транзакции. Единственное отличие состоит в том, что если валидатор увидит плохую транзакцию, он не сможет просто удалить ее, как это делает лидер, потому что это приведет к изменению хэша PoH. Вместо этого он отклоняет весь блок. Другое различие между конвейерами заключается в том, что происходит <em>после</em> банковского обслуживания. Лидер передает записи нижестоящим валидаторам, тогда как валидатор уже сделал это в RetransmitStage, что является оптимизацией времени подтверждения. Конвейер проверки, с другой стороны, имеет один последний шаг. Каждый раз, когда он заканчивает обработку блока, ему необходимо взвесить все форки, которые он наблюдает, возможно, проголосовать, и если это так, сбросить свой хэш PoH на хэш блока, за который он только что проголосовал.</p>
+<h2 id="predlagaemyi-dizain">Предлагаемый дизайн</h2>
+<p>Мы разворачиваем множество слоев абстракции и создаем единый конвейер, который может включать режим лидера всякий раз, когда идентификатор валидатора появляется в расписании лидера.</p>
+<h2 id="zametnye-izmeneniia">Заметные изменения</h2>
+<ul>
+<li>Поднимите FetchStage и BroadcastStage из TPU</li>
+<li>BankForks переименован в Banktree</li>
+<li>TPU переходит на новый крейт без сокетов под названием solana-tpu.</li>
+<li>BankingStage TPU поглощает ReplayStage</li>
+<li>ТВУ уходит</li>
+<li>Новый RepairStage поглощает Shred Fetch Stage и запросы на ремонт.</li>
+<li>Служба JSON RPC не является обязательной и используется для отладки. Вместо этого он должен быть частью отдельного исполняемого файла solana-blockstreamer.</li>
+<li>Новый MulticastStage поглощает ретранслируемую часть RetransmitStage.</li>
+<li>MulticastStage после Blockstore</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

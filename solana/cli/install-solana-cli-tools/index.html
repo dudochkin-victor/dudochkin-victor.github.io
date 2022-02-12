@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Установка набора инструментов Solana | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/install-solana-cli-tools/#ispol-zuite-instrument-ustanovki-solana">Используйте инструмент установки Solana</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/install-solana-cli-tools/#macos-i-linux"><small>- MacOS и Linux</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/install-solana-cli-tools/#okna"><small>- Окна</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/install-solana-cli-tools/#skachat-gotovye-dvoichnye-faily">Скачать готовые двоичные файлы</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/install-solana-cli-tools/#linuks"><small>- Линукс</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/install-solana-cli-tools/#macos"><small>- MacOS</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/install-solana-cli-tools/#okna-1"><small>- Окна</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/cli/install-solana-cli-tools/#sborka-iz-iskhodnogo-koda">Сборка из исходного кода</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Установка набора инструментов Solana</h1>
+
+<p>Существует несколько способов установки инструментов Solana на ваш компьютер в зависимости от вашего предпочтительного рабочего процесса:</p>
+<ul>
+<li>Использовать инструмент установки Solana (самый простой вариант)</li>
+<li>Загрузить готовые двоичные файлы</li>
+<li>Сборка из исходного кода</li>
+</ul>
+<h2 id="ispol-zuite-instrument-ustanovki-solana">Используйте инструмент установки Solana</h2>
+<h3 id="macos-i-linux">MacOS и Linux</h3>
+<ul>
+<li>
+<p>Откройте ваше любимое приложение терминала</p>
+</li>
+<li>
+<p>Установите выпуск Solana <a href="https://github.com/solana-labs/solana/releases/tag/LATEST_SOLANA_RELEASE_VERSION">LATEST_SOLANA_RELEASE_VERSION</a> на свой компьютер, запустив:</p>
+</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">sh</span><span style="color:#f29718;"> -c </span><span style="color:#c2d94c;">&quot;$</span><span>(</span><span style="color:#ffb454;">curl</span><span style="color:#f29718;"> -sSfL</span><span style="color:#c2d94c;"> https://release.solana.com/LATEST_SOLANA_RELEASE_VERSION/install</span><span>)</span><span style="color:#c2d94c;">&quot;
+</span></code></pre>
+<ul>
+<li>
+<p>Вы можете заменить <code>LATEST_SOLANA_RELEASE_VERSION</code> тегом выпуска, соответствующим версии программного обеспечения желаемого выпуска, или использовать одно из трех символических имен канала: <code>stable</code>, <code>beta</code> или <code>edge</code>.</p>
+</li>
+<li>
+<p>Следующий вывод указывает на успешное обновление:</p>
+</li>
+</ul>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>downloading LATEST_SOLANA_RELEASE_VERSION installer
+</span><span>Configuration: /home/solana/.config/solana/install/config.yml
+</span><span>Active release directory: /home/solana/.local/share/solana/install/active_release
+</span><span>* Release version: LATEST_SOLANA_RELEASE_VERSION
+</span><span>* Release URL: https://github.com/solana-labs/solana/releases/download/LATEST_SOLANA_RELEASE_VERSION/solana-release-x86_64-unknown-linux-gnu.tar.bz2
+</span><span>Update successful
+</span></code></pre>
+<ul>
+<li>В зависимости от вашей системы сообщение об окончании программы установки может предложить вам</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">Please</span><span> update your PATH environment variable to include the solana programs:
+</span></code></pre>
+<ul>
+<li>Если вы получили указанное выше сообщение, скопируйте и вставьте под ним рекомендуемую команду, чтобы обновить <code>PATH</code>.</li>
+<li>Подтвердите, что у вас установлена нужная версия solana, запустив:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span style="color:#f29718;"> --version
+</span></code></pre>
+<ul>
+<li>После успешной установки <code>solana-install update</code> можно использовать для простого обновления программного обеспечения Solana до более новой версии в любое время.</li>
+</ul>
+<p>+++</p>
+<h3 id="okna">Окна</h3>
+<ul>
+<li>
+<p>Откройте командную строку (<code>cmd.exe</code>) от имени администратора.</p>
+<ul>
+<li>Найдите командную строку в строке поиска Windows. Когда появится приложение командной строки, щелкните правой кнопкой мыши и выберите «Открыть от имени администратора». Если появится всплывающее окно с вопросом «Вы хотите разрешить этому приложению вносить изменения в ваше устройство?», нажмите «Да».</li>
+</ul>
+</li>
+<li>
+<p>Скопируйте и вставьте следующую команду, затем нажмите Enter, чтобы загрузить установщик Solana во временный каталог:</p>
+</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">curl</span><span> https://release.solana.com/LATEST_SOLANA_RELEASE_VERSION/solana-install-init-x86_64-pc-windows-msvc.exe</span><span style="color:#f29718;"> --output</span><span> C:</span><span style="color:#95e6cb;">\s</span><span>olana-install-tmp</span><span style="color:#95e6cb;">\s</span><span>olana-install-init.exe</span><span style="color:#f29718;"> --create-dirs
+</span></code></pre>
+<ul>
+<li>Скопируйте и вставьте следующую команду, затем нажмите Enter, чтобы установить последнюю версию Solana. Если вы видите всплывающее окно безопасности вашей системы, выберите, чтобы разрешить запуск программы.</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">C:</span><span style="color:#95e6cb;">\s</span><span style="color:#ffb454;">olana-install-tmp</span><span style="color:#95e6cb;">\s</span><span style="color:#ffb454;">olana-install-init.exe</span><span> LATEST_SOLANA_RELEASE_VERSION
+</span></code></pre>
+<ul>
+<li>
+<p>После завершения установки нажмите Enter.</p>
+</li>
+<li>
+<p>Закройте окно командной строки и снова откройте новое окно командной строки как обычный пользователь.</p>
+<ul>
+<li>Найдите «Командная строка» в строке поиска, затем щелкните левой кнопкой мыши значок приложения командной строки, не нужно запускать от имени администратора)</li>
+</ul>
+</li>
+<li>
+<p>Подтвердите, что у вас установлена нужная версия solana, введя:</p>
+</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana</span><span style="color:#f29718;"> --version
+</span></code></pre>
+<ul>
+<li>После успешной установки <code>solana-install update</code> можно использовать для простого обновления программного обеспечения Solana до более новой версии в любое время.</li>
+</ul>
+<h2 id="skachat-gotovye-dvoichnye-faily">Скачать готовые двоичные файлы</h2>
+<p>Если вы предпочитаете не использовать <code>solana-install</code> для управления установкой, вы можете вручную загрузить и установить двоичные файлы.</p>
+<h3 id="linuks">Линукс</h3>
+<p>Загрузите двоичные файлы, перейдя по адресу <a href="https://github.com/solana-labs/solana/releases/latest">https://github.com/solana-labs/solana/releases/latest</a>, загрузите <strong>solana- release-x86_64-unknown-linux-msvc.tar.bz2</strong>, затем распакуйте архив:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">tar</span><span> jxf solana-release-x86_64-unknown-linux-gnu.tar.bz2
+</span><span style="color:#f07178;">cd</span><span> solana-release/
+</span><span style="color:#ff7733;">export </span><span>PATH</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">$</span><span>PWD</span><span style="color:#c2d94c;">/bin:$</span><span>PATH
+</span></code></pre>
+<h3 id="macos">MacOS</h3>
+<p>Загрузите двоичные файлы, перейдя по адресу <a href="https://github.com/solana-labs/solana/releases/latest">https://github.com/solana-labs/solana/releases/latest</a>, загрузите <strong>solana- release-x86_64-apple-darwin.tar.bz2</strong>, затем распакуйте архив:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">tar</span><span> jxf solana-release-x86_64-apple-darwin.tar.bz2
+</span><span style="color:#f07178;">cd</span><span> solana-release/
+</span><span style="color:#ff7733;">export </span><span>PATH</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">$</span><span>PWD</span><span style="color:#c2d94c;">/bin:$</span><span>PATH
+</span></code></pre>
+<h3 id="okna-1">Окна</h3>
+<ul>
+<li>
+<p>Загрузите двоичные файлы, перейдя по адресу <a href="https://github.com/solana-labs/solana/releases/latest">https://github.com/solana-labs/solana/releases/latest</a>, загрузите <strong>solana. -release-x86_64-pc-windows-msvc.tar.bz2</strong>, затем распакуйте архив с помощью WinZip или аналогичного.</p>
+</li>
+<li>
+<p>Откройте командную строку и перейдите в каталог, в который вы распаковали двоичные файлы, и запустите:</p>
+</li>
+</ul>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#f07178;">cd</span><span> solana-release/
+</span><span style="color:#f07178;">set</span><span> PATH=%cd%/bin</span><span style="color:#f29668;">;</span><span style="color:#ffb454;">%</span><span>PATH</span><span style="color:#ffb454;">%
+</span></code></pre>
+<h2 id="sborka-iz-iskhodnogo-koda">Сборка из исходного кода</h2>
+<p>Если вы не можете использовать готовые двоичные файлы или предпочитаете собирать их самостоятельно из исходного кода, перейдите по адресу [https://github.com/solana-labs/solana/releases/latest](https://github.com/solana- labs/solana/releases/latest) и загрузите архив <strong>Исходный код</strong>. Извлеките код и создайте двоичные файлы с помощью:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">./scripts/cargo-install-all.sh</span><span> .
+</span><span style="color:#ff7733;">export </span><span>PATH</span><span style="color:#f29668;">=</span><span style="color:#c2d94c;">$</span><span>PWD</span><span style="color:#c2d94c;">/bin:$</span><span>PATH
+</span></code></pre>
+<p>Затем вы можете запустить следующую команду, чтобы получить тот же результат, что и с готовыми двоичными файлами:</p>
+<pre data-lang="bash" style="background-color:#0f1419;color:#bfbab0;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#ffb454;">solana-install</span><span> init
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

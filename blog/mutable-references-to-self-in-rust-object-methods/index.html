@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Изменяемые ссылки на &#x27;self&#x27; в объектных методах Rust | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/mutable-references-to-self-in-rust-object-methods/#pravo-sobstvennosti-snova-zabastovalo">Право собственности снова забастовало</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/mutable-references-to-self-in-rust-object-methods/#na-pomoshch-prikhodiat-izmenchivye-otsylki">На помощь приходят изменчивые отсылки!</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/blog/mutable-references-to-self-in-rust-object-methods/#kogda-nibud-ia-uznaiu">Когда-нибудь я узнаю</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Изменяемые ссылки на &#x27;self&#x27; в объектных методах Rust</h1>
+
+<p><a href="https://oswalt.dev/2020/05/mutable-references-to-self-in-rusts-object-methods/">Перевод</a> | Автор оригинала: Matt Oswalt</p>
+<p>В последнее время я работаю над графическим программированием на Rust, как продолжение моих первых шагов с языком. В рамках этой работы я создал созданный мной тип Vec3f для хранения декартовых координат данного вектора: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Copy</span><span style="color:#bfbab0cc;">,</span><span> Clone</span><span style="color:#bfbab0cc;">,</span><span> Debug)]
+</span><span style="color:#ff7733;">struct </span><span style="color:#59c2ff;">Vec3f </span><span>{
+</span><span>    x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>    y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>,
+</span><span>    z</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32
+</span><span>}
+</span></code></pre>
+<p>В ходе естественной работы мне потребовалось добавить определенные методы для этого типа, чтобы я мог выполнять вычисления, такие как перекрестное произведение и скалярное / скалярное произведение. Эти функции довольно просты и читают информацию из экземпляра Vec3f (self), выполняют какие-то вычисления и возвращают какой-то результат, обычно новый экземпляр Vec3f или простой f32. </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Vec3f </span><span>{
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">new</span><span>(</span><span style="color:#f29718;">x</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>, </span><span style="color:#f29718;">y</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>, </span><span style="color:#f29718;">z</span><span style="color:#bfbab0cc;">: </span><span style="color:#ff7733;">f32</span><span>) </span><span style="color:#bfbab0cc;">-&gt;</span><span> Vec3f {
+</span><span>        Vec3f { x</span><span style="color:#bfbab0cc;">:</span><span> x</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">:</span><span> y</span><span style="color:#bfbab0cc;">,</span><span> z</span><span style="color:#bfbab0cc;">:</span><span> z }
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">magnitude</span><span>(</span><span style="color:#f29718;">self</span><span>) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f32 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">dot</span><span>(</span><span style="font-style:italic;color:#39bae6;">self</span><span>)</span><span style="color:#f29668;">.</span><span style="color:#f07178;">sqrt</span><span>()
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">dot</span><span>(</span><span style="color:#f29718;">self</span><span>, </span><span style="color:#f29718;">other</span><span style="color:#bfbab0cc;">:</span><span> Vec3f) </span><span style="color:#bfbab0cc;">-&gt; </span><span style="color:#ff7733;">f32 </span><span>{
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>x </span><span style="color:#f29668;">*</span><span> other</span><span style="color:#f29668;">.</span><span>x </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>y </span><span style="color:#f29668;">*</span><span> other</span><span style="color:#f29668;">.</span><span>y </span><span style="color:#f29668;">+ </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>z </span><span style="color:#f29668;">*</span><span> other</span><span style="color:#f29668;">.</span><span>z
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>В некоторых случаях я хочу сделать больше. Например, распространенной задачей в графическом программировании является «нормализация» вектора, то есть активное изменение его свойств так, чтобы его направление не изменилось, но его величина уменьшилась до 1. Такой вектор также называется единичным вектором. .</p>
+<p>Это делается путем умножения каждого свойства на результат деления 1,0 на исходную величину вектора. В своей первоначальной попытке я придумал следующее: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">impl </span><span style="color:#59c2ff;">Vec3f </span><span>{
+</span><span>
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// We intend on mutating this instance of `Vec3f` in-place, so we want
+</span><span>   </span><span style="font-style:italic;color:#5c6773;">// to declare the `self` parameter with the `mut` keyword.
+</span><span>   </span><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">normalize</span><span>(</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) {
+</span><span>        </span><span style="color:#ff7733;">let</span><span> mag </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">magnitude</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// We&#39;re reading from a property of &quot;self&quot; to form part of the calculation,
+</span><span>        </span><span style="font-style:italic;color:#5c6773;">// and feeding the result back into the appropriate property.
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>x </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>x </span><span style="color:#f29668;">* </span><span>(</span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">/</span><span> mag)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>y </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>y </span><span style="color:#f29668;">* </span><span>(</span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">/</span><span> mag)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>z </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>z </span><span style="color:#f29668;">* </span><span>(</span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">/</span><span> mag)</span><span style="color:#bfbab0cc;">;
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Чтобы продемонстрировать, мы можем вызвать эту функцию просто, сначала создав экземпляр Vec3f с именем v, с некоторыми выдуманными координатами, а затем вызвав его метод normalize(), который должен изменить координаты на месте, чтобы гарантировать, что вектор нормализован.</p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">main</span><span>() {
+</span><span>  </span><span style="color:#ff7733;">let mut</span><span> v </span><span style="color:#f29668;">= </span><span>Vec3f</span><span style="color:#f29668;">::</span><span>new(</span><span style="color:#f29718;">1.</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">2.</span><span style="color:#bfbab0cc;">, </span><span style="color:#f29718;">3.</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  v</span><span style="color:#f29668;">.</span><span style="color:#f07178;">normalize</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>  </span><span style="color:#f07178;">println!</span><span>(</span><span style="color:#c2d94c;">&quot;</span><span style="color:#f29718;">{:?}</span><span style="color:#c2d94c;">&quot;</span><span style="color:#bfbab0cc;">,</span><span> v)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>Однако вывод, показанный оператором println, похоже, указывает на то, что что-то не так: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>Vec3f { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">1.0</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">2.0</span><span style="color:#bfbab0cc;">,</span><span> z</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">3.0 </span><span>}
+</span></code></pre>
+<p>По какой-то причине координаты нашего вектора не изменились. Чтобы начать устранение этой проблемы, я добавил оператор отладки в конец функции normalize(), и кажется, что свойства координат для self действительно были изменены в этом месте. Однако наш оператор отладки в функции main() не отображает эти изменения - он по-прежнему показывает исходные значения без изменений.</p>
+<p>Что дает?!?</p>
+<h2 id="pravo-sobstvennosti-snova-zabastovalo">Право собственности снова забастовало</h2>
+<p>Оказывается, это еще один случай, когда модель собственности Rust пытается удержать меня от совершения глупостей.</p>
+<p>Первое, что напомнило мне о проблеме, - это предупреждение компилятора: </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>warning: variable does not need to be mutable
+</span><span>  --&gt; examples/blogexample.rs:30:7
+</span><span>   |
+</span><span>30 |   let mut v = Vec3f::new(1., 2., 3.);
+</span><span>   |       ----^
+</span><span>   |       |
+</span><span>   |       help: remove this `mut`
+</span></code></pre>
+<p>Мне было странно, что Rust говорил мне, что мне не нужно объявлять это изменяемым. Функция normalize() обязательно должна изменять v - в этом вся ее цель. Так что это ключевое слово должно быть необходимо.</p>
+<p>Вы можете заметить, что я аннотирую свой тип Vec3f для автоматического получения некоторых реализаций, а именно: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#bfbab0cc;">#</span><span>[</span><span style="color:#ffb454;">derive</span><span>(Copy</span><span style="color:#bfbab0cc;">,</span><span> Clone</span><span style="color:#bfbab0cc;">,</span><span> Debug)]
+</span></code></pre>
+<p>Если мы удалим это и попытаемся скомпилировать, вы сразу поймете, почему:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0382]: use of moved value: `self`
+</span><span>  --&gt; examples/blogexample.rs:15:18
+</span><span>   |
+</span><span>14 |     fn magnitude(self) -&gt; f32 {
+</span><span>   |                  ---- move occurs because `self` has type `Vec3f`, which does not implement the `Copy` trait
+</span><span>15 |         self.dot(self).sqrt()
+</span><span>   |         ----     ^^^^ value used here after move
+</span><span>   |         |
+</span><span>   |         value moved here
+</span><span>
+</span><span>error[E0382]: use of moved value: `self.z`
+</span><span>  --&gt; examples/blogexample.rs:22:18
+</span><span>   |
+</span><span>18 |     fn normalize(mut self) {
+</span><span>   |                  -------- move occurs because `self` has type `Vec3f`, which does not implement the `Copy` trait
+</span><span>19 |         let mag = self.magnitude();
+</span><span>   |                   ---- value moved here
+</span><span>...
+</span><span>22 |         self.z = self.z * (1.0 / mag);
+</span><span>   |                  ^^^^^^ value used here after move
+</span></code></pre>
+<p>Перед попыткой реализовать функцию normalize() я добавил эту аннотацию, чтобы мы могли беспрепятственно использовать свойства Vec3f для вычислений. До сих пор нам просто нужно было вернуть новые значения, такие как тип f32, на основе вычислений, которые мы можем получить, просто прочитав свойства вектора. Нам не нужно было их менять, просто прочтите их.</p>
+<p>Это методы объекта, которые используют первый параметр self (очень похоже на то, как это делает Python). Одно из правил владения Rust заключается в том, что у ценности может быть только один владелец. Поскольку тип Vec3f изначально не имел метода для копирования или клонирования самого себя (что имеет место для любого типа без аннотации), он переместил право собственности на значение в метод.</p>
+<p>Из-за такого поведения любой код после этого перемещения не может продолжать использовать значение. Мы даже не можем использовать макрос println для печати результата после функции normalize(): </p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>error[E0382]: borrow of moved value: `v`
+</span><span>  --&gt; examples/blogexample.rs:33:20
+</span><span>   |
+</span><span>31 |   let v = Vec3f::new(1., 2., 3.);
+</span><span>   |       - move occurs because `v` has type `Vec3f`, which does not implement the `Copy` trait
+</span><span>32 |   v.normalize();
+</span><span>   |   - value moved here
+</span><span>33 |   println!(&quot;{:?}&quot;, v);
+</span><span>   |                    ^ value borrowed here after move
+</span></code></pre>
+<p>Итак, очевидно, что нам нужна функция копирования, по крайней мере, так, как это реализовано в настоящее время. Это предоставляет компилятору альтернативу перемещению владения этими значениями в область, где остальная часть нашего кода остается высыхать.</p>
+<h2 id="na-pomoshch-prikhodiat-izmenchivye-otsylki">На помощь приходят изменчивые отсылки!</h2>
+<p>Итак, мы выяснили, что для компиляции нашего кода нам нужно аннотировать наши структуры, чтобы мы автоматически получали для них возможности копирования / клонирования. Однако это не решает нашу первоначальную проблему, заключающуюся в том, что наш объектный метод не выглядел на самом деле изменяющим наш экземпляр Vec3f, как мы хотели.</p>
+<p>Итак, поскольку теперь мы знаем, что в контексте этого метода self на самом деле является копией этого значения, внезапно становится очевидным, что все, что мы делаем, - это изменяем это скопированное значение, а не исходный экземпляр, который по-прежнему принадлежит переменная v в нашей функции main().</p>
+<p>Есть другой способ, который не требует перемещения или копирования, и это объявить self в этой функции как изменяемую ссылку. Мы можем сделать это, добавив амперсанд перед ключевым словом mut: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#ff7733;">fn </span><span style="color:#ffb454;">normalize</span><span>(</span><span style="color:#f29668;">&amp;</span><span style="color:#ff7733;">mut </span><span style="color:#f29718;">self</span><span>) {
+</span><span>    </span><span style="color:#ff7733;">let</span><span> mag </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span style="color:#f07178;">magnitude</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>x </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>x </span><span style="color:#f29668;">* </span><span>(</span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">/</span><span> mag)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>y </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>y </span><span style="color:#f29668;">* </span><span>(</span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">/</span><span> mag)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>z </span><span style="color:#f29668;">= </span><span style="font-style:italic;color:#39bae6;">self</span><span style="color:#f29668;">.</span><span>z </span><span style="color:#f29668;">* </span><span>(</span><span style="color:#f29718;">1.0 </span><span style="color:#f29668;">/</span><span> mag)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span></code></pre>
+<p>До этого изменения, поскольку self было копией значения, все, что мы делали, это заявляли, что хотим иметь возможность видоизменить эту копию. Добавляя амперсанд, мы позволяем функции нормализации фактически заимствовать право собственности на исходное значение. Теперь вместе с ключевым словом mut мы можем вносить изменения. Повторный запуск этого примера показывает нормализованный вектор: </p>
+<pre data-lang="rust" style="background-color:#0f1419;color:#bfbab0;" class="language-rust "><code class="language-rust" data-lang="rust"><span>Vec3f { x</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0.26726124</span><span style="color:#bfbab0cc;">,</span><span> y</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0.5345225</span><span style="color:#bfbab0cc;">,</span><span> z</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">0.8017837 </span><span>}
+</span></code></pre>
+<blockquote>
+<p>Обратите внимание, что Rust допускает только одну изменяемую ссылку на переменную за раз, но, к счастью, это все, что нам нужно. Наша функция нормализации заимствует ссылку, вносит быстрые изменения и возвращает ее. Вызывающий код блокируется до тех пор, пока это не будет сделано, после чего область, в которой была создана изменяемая ссылка, исчезнет.</p>
+</blockquote>
+<h2 id="kogda-nibud-ia-uznaiu">Когда-нибудь я узнаю</h2>
+<p>Я все еще новичок в Rust, и должен сказать, что я прочитал главу о владении и заимствовании несколько раз, и не думаю, что действительно «понял», пока эта проблема не укусила меня. Нет ничего лучше нескольких боевых шрамов, чтобы по-настоящему усвоить трудные уроки! :)</p>
+<p>Надеюсь, это вам помогло. </p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

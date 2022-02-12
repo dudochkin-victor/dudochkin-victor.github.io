@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Настройка мониторинга | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/setting-up-monitoring/#nastroika-servera-monitoringa-mmonit">Настройка сервера мониторинга mmonit</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/setting-up-monitoring/#nastroika-monit-na-otdel-nom-uzle">Настройка monit на отдельном узле</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/advanced-topics/setting-up-monitoring/#monitoring-rabotosposobnosti-api">Мониторинг работоспособности API</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Настройка мониторинга</h1>
+
+<p>Если вы используете валидатор или публичный узел, вам следует настроить системный мониторинг, чтобы знать, отключается ли ваш узел, и, если возможно, перезапустить его автоматически.</p>
+<p>В этом руководстве объясняется, как настроить <strong>monit</strong> и <strong>mmonit</strong> для достижения этой цели:</p>
+<ul>
+<li>
+<p>Monit — это инструмент мониторинга процессов, который может перезапустить ваш узел, если он зависает.</p>
+</li>
+<li>
+<p>Mmonit — это панель мониторинга, которая показывает производительность (процессор, память, оповещения и т. д.) узлов мониторинга.</p>
+</li>
+</ul>
+<p>(Если вам не нужна панель мониторинга, вы можете сразу перейти к разделу, посвященному настройке <code>monit</code> на отдельном узле.)</p>
+<p>В руководстве предполагается, что вы используете Ubuntu 18.04.</p>
+<h2 id="nastroika-servera-monitoringa-mmonit">Настройка сервера мониторинга <code>mmonit</code></h2>
+<p>Для сервера мониторинга должно быть достаточно небольшого сервера (например, 1 ГБ памяти). По умолчанию в качестве базы данных будет использоваться SQLite. Это означает, что если вы удалите каталог monit, все зарегистрированные события будут потеряны!</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>apt install -y monit
+</span><span>wget https://mmonit.com/dist/mmonit-3.7.3-linux-x64.tar.gz
+</span><span>tar -vxzf mmonit-3.7.3-linux-x64.tar.gz
+</span><span>mv mmonit-3.7.3 mmonit
+</span></code></pre>
+<p>Используйте monit, чтобы поддерживать mmonit в рабочем состоянии:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>{
+</span><span>    echo &#39;check process mmonit with pidfile &#39;`pwd`&#39;/mmonit/logs/mmonit.pid&#39;
+</span><span>    echo &#39;  start program = &quot;&#39;`pwd`&#39;/mmonit/bin/mmonit&quot;&#39;
+</span><span>    echo &#39;  stop program = &quot;&#39;`pwd`&#39;/mmonit/bin/mmonit stop&quot;&#39;
+</span><span>    echo &#39;set httpd port 2812 and use address localhost&#39;
+</span><span>    echo &#39;  allow localhost&#39;
+</span><span>} &gt; /etc/monit/monitrc
+</span><span>
+</span><span>monit reload
+</span><span>monit validate
+</span></code></pre>
+<p>Чтобы запустить панель управления mmonit вручную, вы можете использовать команду <code>mmonit/bin/mmonit</code>. Чтобы остановить, используйте <code>mmonit/bin/mmonit stop</code>.</p>
+<p>Теперь перейдите к узлу в браузере, например, <code>http://monitor.edgewa.re:8080/</code>. Войдите в систему с именем пользователя «admin» и паролем «swordfish» и измените имя пользователя и пароль по умолчанию.</p>
+<p>У вас должно получиться два пользователя; admin — это то, что вы будете использовать для входа в систему, а другого пользователя — это то, что вы предоставите узлам, которые передают данные на сервер мониторинга.</p>
+<h2 id="nastroika-monit-na-otdel-nom-uzle">Настройка <code>monit</code> на отдельном узле</h2>
+<p>SSH в свой узел.</p>
+<p>Прежде чем продолжить, установите соответствующее имя хоста для узла, например.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>hostnamectl set-hostname validator1
+</span></code></pre>
+<p>Установите monit.</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>apt install -y monit
+</span></code></pre>
+<p>Настройте веб-перехватчик Slack (необязательно):</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>export WEBHOOK=[slack webhook url]
+</span><span>{
+</span><span>    echo &#39;URL=&quot;&#39;$WEBHOOK&#39;&quot;&#39;
+</span><span>    echo &quot;PAYLOAD=&#39;{\&quot;text\&quot;: \&quot;`hostname` restarted edgeware.service\&quot;}&#39;&quot;
+</span><span>    echo &#39;curl -s -X POST --data-urlencode &quot;payload=$PAYLOAD&quot; $URL&#39;
+</span><span>} &gt; /root/slack_notify.sh
+</span><span>
+</span><span>chmod 755 /root/slack_notify.sh
+</span></code></pre>
+<p>Настройте конфигурацию Monit для проверки службы Edgeware с 10-секундными интервалами, перезапустите, если ЦП &gt; 90% за пять проверок (~50сек) и публиковать события в mmonit.</p>
+<p>Если вы используете mmonit, укажите имя пользователя и пароль, которые вы установили для mmonit выше. В противном случае вам следует удалить разделы, в которых используются имя пользователя и пароль, указанные ниже:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>export USER=edgeware
+</span><span>export PASSWORD=[password]
+</span><span>export TARGET=[domain]
+</span><span>{
+</span><span>    echo &#39;set daemon 10&#39;
+</span><span>    echo &#39;set log /var/log/monit.log&#39;
+</span><span>    echo &#39;set idfile /var/lib/monit/id&#39;
+</span><span>    echo &#39;set statefile /var/lib/monit/state&#39;
+</span><span>    echo &#39;set eventqueue&#39;
+</span><span>    echo &#39;  basedir /var/lib/monit/events&#39;
+</span><span>    echo &#39;  slots 100                    &#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;check process edgeware matching target/release/edgeware&#39;
+</span><span>    echo &#39;  start program = &quot;/bin/systemctl restart edgeware&quot;&#39;
+</span><span>    echo &#39;  stop program = &quot;/bin/systemctl kill edgeware&quot;&#39;
+</span><span>    echo &#39;  if cpu &gt; 90% for 20 cycles then exec &quot;/bin/systemctl stop edgeware&quot; and repeat every 10 cycles&#39;
+</span><span>    echo &#39;  if cpu &gt; 90% for 64 cycles then exec &quot;/bin/systemctl kill edgeware&quot; and repeat every 10 cycles&#39;
+</span><span>    echo &#39;  if cpu &gt; 90% for 64 cycles then alert&#39;
+</span><span>    echo &#39;  if does not exist for 1 cycles then start&#39;
+</span><span>    echo &#39;  if does not exist for 1 cycles then exec &quot;/bin/bash -c /root/slack_notify.sh&quot;&#39;
+</span><span>    echo &#39;&#39;
+</span><span>    echo &#39;set mmonit http://&#39;$USER:$PASSWORD@$TARGET&#39;:8080/collector&#39;
+</span><span>    echo &#39;set httpd port 2812 and use address localhost&#39;
+</span><span>    echo &#39;  allow localhost&#39;
+</span><span>    echo &#39;  allow &#39;$USER:$PASSWORD
+</span><span>} &gt; /etc/monit/monitrc
+</span><span>
+</span><span>chmod 600 /etc/monit/monitrc
+</span><span>
+</span><span>monit reload
+</span><span>monit validate
+</span></code></pre>
+<p>Обратитесь к <a href="https://mmonit.com/monit/documentation/monit.html">документации monit</a>, если вы хотите настроить оповещения по электронной почте или другие дополнительные проверки на своем узле.</p>
+<h2 id="monitoring-rabotosposobnosti-api">Мониторинг работоспособности API</h2>
+<p>Пока что monit будет проверять только то, что узел не остается загруженным на 100% ЦП в течение продолжительных периодов времени. Теперь мы можем добавить еще одну проверку, которая использует API, чтобы убедиться, что узел правильно принимает соединения и синхронизируется.</p>
+<p>Это позволит выявить некоторые сценарии сбоя, когда узел продолжает работать, но перестает распознавать новые блоки. Мы предоставляем <code>nodeup</code> для этой цели.</p>
+<p>Клонируйте <a href="https://github.com/hicommonwealth/nodeup">nodeup</a> в каталог <code>/root</code>. Следуйте его инструкциям по установке:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>git clone https://github.com/hicommonwealth/nodeup.git
+</span><span>cd nodeup
+</span><span>apt install -y nodejs npm
+</span><span>npm install -g yarn
+</span><span>yarn
+</span></code></pre>
+<p>Убедитесь, что ваш узел работает с флагом <code>--rpc-cors=&quot;*&quot;</code>, чтобы соединения WebSocket принимались. Обратите внимание, что по умолчанию это не заставит узел принимать соединения из-за пределов локальной машины (для этого требуется <code>--ws-external</code>).</p>
+<p>Тестовый узел:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>node index.js
+</span></code></pre>
+<p>Если это работает, теперь вы можете добавить эти строки в свою конфигурацию monit в <code>/etc/monit/monitrc</code> \ (они предполагают, что nodeup установлен в каталоге <code>/root/nodeup</code>, если нет, отрегулируйте соответствующим образом):</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>check program nodeup with path &quot;/root/nodeup/index.js -u ws://localhost:9944&quot;
+</span><span>  if status &gt; 0 for 10 cycles then exec &quot;/bin/systemctl stop edgeware&quot; and repeat every 10 cycles
+</span></code></pre>
+<p>Перезапустите monit и убедитесь, что новый скрипт работает:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>monit reload
+</span><span>monit status
+</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ethers.js | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/libraries/ethers-js/#vvedenie">Введение </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/libraries/ethers-js/#setup-ethers-js-with-edgeware">Setup Ethers.js with Edgeware </a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/evm-tools-and-resources/libraries/ethers-js/#tutorial-for-using-ethers-js-on-edgeware">Tutorial for using Ethers.js on Edgeware</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Ethers.js</h1>
+
+<h3 id="vvedenie">Введение <a href="introduction" id="introduction"></a></h3>
+<p>The <a href="https://docs.ethers.io">ethers.js</a> library provides a set of tools to interact with Ethereum Nodes with JavaScript, similar to web3.js. Edgeare has an Ethereum-like API available that is fully compatible with Ethereum-style JSON RPC invocations. Therefore, developers can leverage this compatibility and use the ethers.js library to interact with an Edgeware node as if they were doing so on Ethereum. You can read more about ethers.js on this <a href="https://medium.com/l4-media/announcing-ethers-js-a-web3-alternative-6f134fdd06f3">blog post</a>.</p>
+<h3 id="setup-ethers-js-with-edgeware">Setup Ethers.js with Edgeware <a href="setup-ethersjs-with-moonbeam" id="setup-ethersjs-with-moonbeam"></a></h3>
+<p>To get started with the ethers.js library, install it using the following command:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>npm install ethers
+</span></code></pre>
+<p>Once done, the simplest setup to start using the library and its methods is the following:</p>
+<pre style="background-color:#0f1419;color:#bfbab0;"><code><span>const ethers = require(&#39;ethers&#39;);
+</span><span>
+</span><span>// Variables definition
+</span><span>const privKey = &#39;0xPRIVKEY&#39;;
+</span><span>
+</span><span>// Define Provider
+</span><span>const provider = new ethers.providers.StaticJsonRpcProvider(&#39;RPC_URL&#39;, {
+</span><span>    chainId: ChainId,
+</span><span>    name: &#39;NETWORK_NAME&#39;
+</span><span>});
+</span><span>
+</span><span>// Create Wallet
+</span><span>let wallet = new ethers.Wallet(privKey, provider);
+</span></code></pre>
+<p>Different methods are available inside <code>provider</code> and <code>wallet</code>. Depending on which network you want to connect to, you can set the <code>RPC_URL, ChainID, NETWORK_NAME</code>to the following values:</p>
+<p><strong>Edgeware development node:</strong></p>
+<ul>
+<li>RPC_URL:  <a href="http://localhost:9933"><code>http://localhost:9933/</code></a>``</li>
+<li>ChainId: <code>2021</code></li>
+<li>NETWORK_NAME: <code>dev</code></li>
+</ul>
+<p><strong>Beresheet testnet:</strong></p>
+<ul>
+<li>RPC_URL:  <a href="https://beresheet2.edgewa.re/evm"><code>https://beresheet2.edgewa.re/evm</code></a><code>(Alternatively, one can use </code><a href="https://beresheetx.edgewa.re/evm"><code>https://beresheetX.edgewa.re/evm</code></a><code> where X can be any number from 1 to 8.)</code></li>
+<li>ChainId: <code>2022</code></li>
+<li>NETWORK_NAME: <code>Beresheet</code></li>
+</ul>
+<p><strong>Edgeware mainnet:</strong></p>
+<ul>
+<li>RPC_URL: <a href="https://mainnet2.edgewa.re/evm"><code>https://mainnet2.edgewa.re/evm</code></a><code> (Alternatively, one can use </code><a href="https://mainnetx.edgewa.re/evm"><code>https://mainnetX.edgewa.re/evm</code></a><code> where X can be any number from 1 to 20.)</code></li>
+<li>Chain ID: <code>2021</code></li>
+<li>NETWORK_NAME: <code>Edgeware</code></li>
+</ul>
+<h3 id="tutorial-for-using-ethers-js-on-edgeware">Tutorial for using Ethers.js on Edgeware</h3>
+<p>{% content-ref url=&quot;../../tutorials/deploy-an-evm-contract/using-ethers.js.md&quot; %}
+<a href="../../tutorials/deploy-an-evm-contract/using-ethers.js/">using-ethers.js.md</a>
+{% endcontent-ref %}</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

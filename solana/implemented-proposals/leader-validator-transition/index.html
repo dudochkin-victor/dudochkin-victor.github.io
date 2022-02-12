@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Переход от лидера к валидатору | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-validator-transition/#bankfork">Банкфорк</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-validator-transition/#validator">Валидатор</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-validator-transition/#lider-slota">Лидер слота</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-validator-transition/#registrator-poh">Регистратор PoH</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-validator-transition/#registrator-poh-pri-proverke"><small>- Регистратор PoH при проверке</small></a>
+                </div>
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-validator-transition/#registrator-poh-pri-vedenii"><small>- Регистратор PoH при ведении</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/solana/implemented-proposals/leader-validator-transition/#tsikl-proverki">Цикл проверки</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Переход от лидера к валидатору</h1>
+
+<p>Валидатор обычно тратит свое время на проверку блоков. Однако, если стейкер делегирует свою ставку валидатору, он иногда будет выбран в качестве «лидера слота». Как лидер слота, валидатор отвечает за создание блоков в течение назначенного <em>слота</em>. Слот имеет продолжительность некоторого количества предварительно настроенных <em>тиков</em>. Продолжительность этих тиков оценивается с помощью <em>PoH Recorder</em>, описанного далее в этом документе.</p>
+<h2 id="bankfork">Банкфорк</h2>
+<p>BankFork отслеживает изменения состояния банка в конкретном слоте. После регистрации последнего тика состояние замораживается. Любые попытки написать отвергаются.</p>
+<h2 id="validator">Валидатор</h2>
+<p>Валидатор работает с множеством различных одновременных ответвлений состояния банка, пока не сгенерирует хэш PoH с высотой в пределах своего слота лидера.</p>
+<h2 id="lider-slota">Лидер слота</h2>
+<p>Лидер слота строит блоки поверх только одной вилки, той, за которую он проголосовал последним.</p>
+<h2 id="registrator-poh">Регистратор PoH</h2>
+<p>Лидеры слотов и валидаторы используют регистратор PoH как для оценки высоты слота, так и для записи транзакций.</p>
+<h3 id="registrator-poh-pri-proverke">Регистратор PoH при проверке</h3>
+<p>Регистратор PoH действует как простой VDF при проверке. Он сообщает валидатору, когда ему нужно переключиться на роль лидера слота. Каждый раз, когда валидатор голосует за форк, он должен использовать последний [блокхэш] форка (../terminology.md#blockhash) для повторного заполнения VDF. Повторное заполнение решает две проблемы. Во-первых, он синхронизирует свой VDF с ведущим, что позволяет более точно определить, когда начинается его слот лидера. Во-вторых, если предыдущий лидер выходит из строя, все время настенных часов учитывается в потоке PoH следующего лидера. Например, если при запуске лидера отсутствует один блок, создаваемый им блок должен иметь продолжительность PoH, равную двум блокам. Большая продолжительность гарантирует, что следующий лидер не будет пытаться отрезать все транзакции из слота предыдущего лидера.</p>
+<h3 id="registrator-poh-pri-vedenii">Регистратор PoH при ведении</h3>
+<p>Лидер слотов использует PoH Recorder для записи транзакций, своевременно фиксируя свои позиции. Хэш PoH должен быть получен из последнего блока предыдущего лидера. Если это не так, его блок не пройдет проверку PoH и будет отклонен кластером.</p>
+<p>Регистратор PoH также служит для информирования лидера слота, когда его слот закончился. Лидер должен позаботиться о том, чтобы не изменить свой банк, если запись транзакции приведет к созданию высоты PoH за пределами назначенного слота. Следовательно, лидер не должен фиксировать изменения учетной записи до тех пор, пока он не сгенерирует хэш PoH записи. Когда высота PoH выходит за пределы своего слота, любые транзакции в его конвейере могут быть удалены или перенаправлены следующему лидеру. Переадресация предпочтительнее, так как она минимизирует перегрузку сети, позволяя кластеру объявить о более высокой пропускной способности TPS.</p>
+<h2 id="tsikl-proverki">Цикл проверки</h2>
+<p>Регистратор PoH управляет переходом между режимами. После воспроизведения реестра валидатор может работать до тех пор, пока регистратор не укажет, что он должен быть лидером слота. В качестве лидера слота узел может затем выполнять и записывать транзакции.</p>
+<p>Цикл синхронизируется с PoH и выполняет синхронный запуск и останов функции лидера слота. После остановки TVU валидатора должен оказаться в том же состоянии, как если бы другой лидер отправил ему тот же блок. Ниже приведен псевдокод цикла:</p>
+<ol>
+<li>
+<p>Запросите у LeaderScheduler следующий назначенный слот.</p>
+</li>
+<li>
+<p>Проведите TVU по всем разветвлениям. 1. TVU направит голоса тому, что, по его мнению, является «лучшим» форком. 2. После каждого голосования перезапустите регистратор PoH, чтобы он работал до следующего назначенного слота.</p>
+</li>
+<li>
+<p>Когда придет время стать лидером слота, запустите TPU. Укажите на последнюю развилку, за которую голосовал TVU.</p>
+</li>
+<li>
+<p>Производить записи до конца слота. 1. Во время слота TVU не должен голосовать за другие форки. 2. После окончания слота TPU замораживает свой BankFork. После заморозки TVU может возобновить голосование.</p>
+</li>
+<li>
+<p>Перейти к 1.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>

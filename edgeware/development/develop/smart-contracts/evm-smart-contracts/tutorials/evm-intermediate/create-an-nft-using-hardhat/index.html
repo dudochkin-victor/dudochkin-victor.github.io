@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Deploy an NFT on Edgeware using Hardhat | Dudochkin Victor </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="Kepqb6k6uptlwngnHbBVJmqQtwNW8zfHyQBbTXLYAgA" />
+    <meta name="yandex-verification" content="8e8bc73c2566b473" />
+    <style>
+    :root {
+        /* Primary theme color */
+        /* --primary-color: #121A26; */
+        --primary-color: #0f1419;
+        /* Primary theme text color */
+        /* --primary-text-color: #121A26; */
+        --primary-text-color: #0f1419;
+        /* Primary theme link color */
+        --primary-link-color: #053961;
+        /* Secondary color: the background body color */
+        --secondary-color: #F0F0F0;
+        --secondary-text-color: #1C2834;
+        /* Highlight text color of table of content */
+        --toc-highlight-text-color: #053961;
+    }
+</style>
+    
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47MMPLLY44"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-47MMPLLY44');
+    </script>
+    
+
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    
+        ym('87064264', "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/87064264" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/mdl.min.css">
+    <link rel="stylesheet" href="https://dudochkin-victor.github.io/style.css">
+    
+    
+</head>
+
+<body>
+    
+<header class="box-shadow">
+    
+
+<a href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;">
+    <div class="logo">
+        <img src="https://dudochkin-victor.github.io/ferris.png" alt="logo">
+        Dudochkin Victor
+    </div>
+</a>
+
+<nav>
+    <!-- 
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;showcases&#x2F;">Showcases</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;changelog&#x2F;">Changelog</a>
+    
+    <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;dudochkin-victor.github.io&#x2F;about&#x2F;">About</a>
+     -->
+
+    
+        
+        <a class="nav-item subtitle-text" href="&#x2F;solana&#x2F;">Solana</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;edgeware&#x2F;">Edgeware</a>
+        
+        <a class="nav-item subtitle-text" href="&#x2F;blog&#x2F;">Блог</a>
+        
+        <a class="nav-item subtitle-text" href="https:&#x2F;&#x2F;github.com&#x2F;dudochkin-victor">Github</a>
+        
+    
+</nav>
+
+</header>
+
+ 
+    <main>
+        
+        
+        
+        
+        
+        <div class="toc">
+            <div class="toc-sticky">
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/evm-intermediate/create-an-nft-using-hardhat/#setting-up-the-project">Setting up the project</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/evm-intermediate/create-an-nft-using-hardhat/#how-to-write-and-compile-the-contract">How to Write and Compile the Contract</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/evm-intermediate/create-an-nft-using-hardhat/#how-to-test-the-contract">How to Test the Contract</a>
+                </div>
+                
+                
+                <div class="toc-item-child">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/evm-intermediate/create-an-nft-using-hardhat/#how-to-use-console-log-in-hardhat"><small>- How to Use console.log() in Hardhat</small></a>
+                </div>
+                
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/evm-intermediate/create-an-nft-using-hardhat/#how-to-deploy-the-contract">How to Deploy the Contract</a>
+                </div>
+                
+                
+                <div class="toc-item">
+                    <a class="subtext" href="https://dudochkin-victor.github.io/edgeware/development/develop/smart-contracts/evm-smart-contracts/tutorials/evm-intermediate/create-an-nft-using-hardhat/#hardhat-configuration-file">Hardhat Configuration File</a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        
+
+        <div class="content text">
+            
+<h1>Deploy an NFT on Edgeware using Hardhat</h1>
+
+<p>Guided tutorial on how to setup and deploy an <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/">ERC721</a> Non-Fungible Token (NFT) to a local network, as well as Edgeware's testnet (Beresheet), and mainnet network(s) using the <a href="https://hardhat.org">Hardhat Ethereum development</a>.</p>
+<p><img src="../../../../../../../.gitbook/assets/0_ijgax8s5e0mwu2gx.jpg" alt="" /></p>
+<h3 id="setting-up-the-project">Setting up the project</h3>
+<p>Let’s start an npm project first:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>npm init </span><span style="color:#f29668;">--</span><span>yes
+</span></code></pre>
+<p>Then install the Hardhat package:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>npm install </span><span style="color:#f29668;">--</span><span>save</span><span style="color:#f29668;">-</span><span>dev hardhat@</span><span style="color:#f29718;">2.2</span><span style="color:#f29668;">.</span><span style="color:#f29718;">1
+</span></code></pre>
+<p>Now you are ready to create a new Hardhat project:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>npx hardhat
+</span></code></pre>
+<p>Choose <code>Create an empty hardhat.config.js</code></p>
+<p><img src="https://static.slab.com/prod/uploads/9yelyblh/posts/images/a-Rx_k90pwNScSCoH0olMsvj.png" alt="" /></p>
+<p>This will create <code>hardhat.config.js</code> in your root directory with the solidity compiler version specified:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="font-style:italic;color:#5c6773;">/**
+</span><span style="font-style:italic;color:#5c6773;"> * </span><span style="font-style:italic;color:#ff7733;">@type</span><span style="font-style:italic;color:#5c6773;"> import(&#39;Hardhat/config&#39;).HardhatUserConfig
+</span><span style="font-style:italic;color:#5c6773;"> */
+</span><span style="font-style:italic;color:#39bae6;">module</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">exports </span><span style="color:#f29668;">= </span><span>{
+</span><span>  solidity</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;0.7.3&quot;</span><span style="color:#bfbab0cc;">,</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>{% tabs %}
+{% tab title=&quot;Potential Error&quot; %}
+&gt;Error: 'You need to install hardhat locally to use it.' 
+{% endtab %}</p>
+<p>{% tab title=&quot;Solution&quot; %}
+&gt;Run: <strong><code>npm install -save-dev &quot;hardhat@^2.6.5&quot;</code></strong> in your hardhat project's root directory
+{% endtab %}
+{% endtabs %}</p>
+<h3 id="how-to-write-and-compile-the-contract">How to Write and Compile the Contract</h3>
+<p>We will start by writing a simple contract and then we'll compile it.</p>
+<p>{% tabs %}
+{% tab title=&quot;terminal&quot; %}</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span> mkdir contracts </span><span style="color:#f29668;">&amp;&amp; </span><span>cd contracts </span><span style="color:#f29668;">&amp;&amp; </span><span>touch MyEdgNFT</span><span style="color:#f29668;">.</span><span>sol
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>We'll use the open-zeppelin package to write our NFT contract. So first, install the open-zeppelin package:</p>
+<p>{% tabs %}
+{% tab title=&quot;terminal&quot; %}</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>npm install </span><span style="color:#f29668;">--</span><span>save</span><span style="color:#f29668;">-</span><span>dev @openzeppelin</span><span style="color:#f29668;">/</span><span>contracts@</span><span style="color:#f29718;">3.4</span><span style="color:#f29668;">.</span><span style="color:#f29718;">0
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>Here is the contract code we will be compiling:</p>
+<p>{% tabs %}
+{% tab title=&quot;MyEdgNFT.sol&quot; %}</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>pragma solidity </span><span style="color:#f29668;">^</span><span style="color:#f29718;">0.7</span><span style="color:#f29668;">.</span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&quot;@openzeppelin/contracts/token/ERC721/ERC721.sol&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>contract MyEdgNFT is ERC721 {
+</span><span>    </span><span style="color:#ffb454;">constructor</span><span>(string memory name</span><span style="color:#bfbab0cc;">, </span><span>string memory symbol)
+</span><span>        </span><span style="color:#ffb454;">ERC721</span><span>(name</span><span style="color:#bfbab0cc;">, </span><span>symbol)
+</span><span>    {}
+</span><span>}
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>The first thing you need to do in any solidity file is to declare the compiler version. Then we can import the ERC721 contract (NFT contract) from open-zeppelin just like you do in JavaScript.</p>
+<p>Solidity is a contract-oriented language. Just like an object-oriented language, contracts can have members such as functions and variables. In our code, we have only the constructor, which will be called when we deploy our contract.</p>
+<p>Our contract inherits the ERC721 and then passes the <code>name</code> and <code>symbol</code> arguments which are going to be passed to the ERC721 contract. They literally decide the name and symbol of your NFT token.</p>
+<p>We will pass whatever values we want to <code>name</code> and <code>symbol</code> at the point of deployment.</p>
+<p>To compile it, run:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>npx hardhat compile
+</span></code></pre>
+<p>You might get some warnings but we'll ignore them to keep things simple. You should see <code>Compilation finished successfully</code> at the bottom.</p>
+<p>You should also notice that the <code>/arfifacts</code> and <code>/cache</code> directories were generated. You don’t have to worry about them for this post, but it’s good to keep in mind that you can use <code>abi</code> in the artifacts if you want to interact with the contract when you build the frontend.</p>
+<h3 id="how-to-test-the-contract">How to Test the Contract</h3>
+<p>Since smart contracts are mostly financial applications – and they're also hard to change – testing is critical.</p>
+<p>We will use some packages for testing. Install with the command below:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>npm install </span><span style="color:#f29668;">--</span><span>save</span><span style="color:#f29668;">-</span><span>dev @nomiclabs</span><span style="color:#f29668;">/</span><span>hardhat</span><span style="color:#f29668;">-</span><span>waffle ethereum</span><span style="color:#f29668;">-</span><span>waffle chai @nomiclabs</span><span style="color:#f29668;">/</span><span>hardhat</span><span style="color:#f29668;">-</span><span>ethers ethers
+</span></code></pre>
+<p><code>ethereum-waffle</code> is a testing framework for smart contracts. <code>chai</code> is an assertion library. We'll write tests in waffle using Mocha alongside Chai. <code>ethers.js</code> is a JavaScript SDK for interacting with the Ethereum blockchain. The other two packages are plugins for Hardhat.</p>
+<p>Now, let’s make a new directory <code>test</code> in the root directory and make a new file called <code>test.js</code> in it:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>mkdir test </span><span style="color:#f29668;">&amp;&amp; </span><span>cd test </span><span style="color:#f29668;">&amp;&amp; </span><span>touch test</span><span style="color:#f29668;">.</span><span>js
+</span></code></pre>
+<p>Make sure you require <code>@nomiclabs/hardhat-ethers</code> in the <code>hardhat.config.js</code> to make it available everywhere:</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;@nomiclabs/hardhat-ethers&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>Here is a simple test:</p>
+<p>{% tabs %}
+{% tab title=&quot;test.js&quot; %}</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">const </span><span>{ expect } </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&quot;chai&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ffb454;">describe</span><span>(</span><span style="color:#c2d94c;">&quot;MyEdgNFT&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">function </span><span>() {
+</span><span>  </span><span style="color:#ffb454;">it</span><span>(</span><span style="color:#c2d94c;">&quot;Should return the right name and symbol&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#ff7733;">async function </span><span>() {
+</span><span>    </span><span style="color:#ff7733;">const </span><span>MyEdgNFT </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>hre</span><span style="color:#f29668;">.</span><span>ethers</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getContractFactory</span><span>(</span><span style="color:#c2d94c;">&quot;MyEdgNFT&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ff7733;">const </span><span>myEdgNFT </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>MyEdgNFT</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">deploy</span><span>(</span><span style="color:#c2d94c;">&quot;MyEdgNFT&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;ENFT&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>    </span><span style="color:#ff7733;">await </span><span>myEdgNFT</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">deployed</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ffb454;">expect</span><span>(</span><span style="color:#ff7733;">await </span><span>myEdgNFT</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">name</span><span>())</span><span style="color:#f29668;">.</span><span>to</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">equal</span><span>(</span><span style="color:#c2d94c;">&quot;MyEdgNFT&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>    </span><span style="color:#ffb454;">expect</span><span>(</span><span style="color:#ff7733;">await </span><span>myEdgNFT</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">symbol</span><span>())</span><span style="color:#f29668;">.</span><span>to</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">equal</span><span>(</span><span style="color:#c2d94c;">&quot;ENFT&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>  })</span><span style="color:#bfbab0cc;">;
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>This code deploys our contract to the local Hardhat network and then checks if the <code>name</code> and <code>symbol</code> values are what we expect.</p>
+<p>Run the test:</p>
+<p><img src="https://static.slab.com/prod/uploads/9yelyblh/posts/images/4ZJr8Bm04qpaG41lilrJLiTl.png" alt="" /></p>
+<p>Awesome, it passed the test!</p>
+<h4 id="how-to-use-console-log-in-hardhat">How to Use console.log() in Hardhat</h4>
+<p>Now here is the coolest thing you can do with Hardhat. You can use <code>console.log()</code> just like you do in JavaScript, which was not possible before. <code>console.log()</code> alone is more than enough reason to switch to Hardhat.</p>
+<p>Let’s go back to your solidity file and use <code>console.log()</code>.</p>
+<p>{% tabs %}
+{% tab title=&quot;&quot; %}</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>pragma solidity </span><span style="color:#f29668;">^</span><span style="color:#f29718;">0.7</span><span style="color:#f29668;">.</span><span style="color:#f29718;">3</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&quot;@openzeppelin/contracts/token/ERC721/ERC721.sol&quot;</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">import </span><span style="color:#c2d94c;">&quot;hardhat/console.sol&quot;</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span>contract MyEdgNFT is ERC721 {
+</span><span>    </span><span style="color:#ffb454;">constructor</span><span>(string memory name</span><span style="color:#bfbab0cc;">, </span><span>string memory symbol) </span><span style="color:#ffb454;">ERC721</span><span>(name</span><span style="color:#bfbab0cc;">, </span><span>symbol) {
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;name&quot;</span><span style="color:#bfbab0cc;">, </span><span>name)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;symbol&quot;</span><span style="color:#bfbab0cc;">, </span><span>symbol)</span><span style="color:#bfbab0cc;">;
+</span><span>        </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;msg.sender&quot;</span><span style="color:#bfbab0cc;">, </span><span>msg</span><span style="color:#f29668;">.</span><span>sender)</span><span style="color:#bfbab0cc;">; </span><span style="font-style:italic;color:#5c6773;">//msg.sender is the address that initially deploys a contract
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>And run the test again with <code>npx hardhat test</code>. Then the command will compile the contract again, and then run the test. You should be able to see some values logged from the contract.</p>
+<p><img src="https://static.slab.com/prod/uploads/9yelyblh/posts/images/C4NJZKKP1XRcniUmaTM85Z1m.png" alt="" /></p>
+<p>This makes debugging a lot easier for you.</p>
+<p>One caveat is that it supports only these data types:</p>
+<ul>
+<li>uint</li>
+<li>string</li>
+<li>bool</li>
+<li>address</li>
+</ul>
+<p>But other than that, you can use it as if you are writing JavaScript.</p>
+<h3 id="how-to-deploy-the-contract">How to Deploy the Contract</h3>
+<p>All right! Now let’s deploy our contract. We can deploy our contract to one of the testing networks, the Mainnet, or even a mirrored version of the Mainnet in local.</p>
+<p>We'll give a walkthrough here on how to deploy to your local machine.</p>
+<p>Make a new directory called <code>scripts</code> in the root directory and <code>deploy.js</code> in it.</p>
+<p>{% tabs %}
+{% tab title=&quot;terminal&quot; %}</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>mkdir scripts </span><span style="color:#f29668;">&amp;&amp; </span><span>cd scripts </span><span style="color:#f29668;">&amp;&amp; </span><span>touch deploy</span><span style="color:#f29668;">.</span><span>js
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>Here is the deploy script. You deploy along with constructor values:</p>
+<p>{% tabs %}
+{% tab title=&quot;deploy.js&quot; %}</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span style="color:#ff7733;">async function </span><span style="color:#ffb454;">main</span><span>()  {
+</span><span style="color:#ff7733;">const </span><span>MyEdgNFT </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>hre</span><span style="color:#f29668;">.</span><span>ethers</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">getContractFactory</span><span>(</span><span style="color:#c2d94c;">&quot;MyEdgNFT&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">const </span><span>myEdgNFT </span><span style="color:#f29668;">= </span><span style="color:#ff7733;">await </span><span>MyEdgNFT</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">deploy</span><span>(</span><span style="color:#c2d94c;">&quot;MyEdgNFT&quot;</span><span style="color:#bfbab0cc;">, </span><span style="color:#c2d94c;">&quot;ENFT&quot;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span style="color:#ff7733;">await </span><span>myEdgNFT</span><span style="color:#f29668;">.</span><span style="color:#ffb454;">deployed</span><span>()</span><span style="color:#bfbab0cc;">;
+</span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">log</span><span>(</span><span style="color:#c2d94c;">&quot;MyEdgNFT deployed to:&quot;</span><span style="color:#bfbab0cc;">, </span><span>myEdgNFT</span><span style="color:#f29668;">.</span><span>address)</span><span style="color:#bfbab0cc;">;
+</span><span>}
+</span><span style="color:#ffb454;">main</span><span>()
+</span><span style="color:#f29668;">.</span><span style="color:#f07178;">then</span><span>(() </span><span style="color:#ff7733;">=&gt; </span><span>process</span><span style="color:#f29668;">.</span><span style="color:#f07178;">exit</span><span>(</span><span style="color:#f29718;">0</span><span>))
+</span><span style="color:#f29668;">.</span><span style="color:#f07178;">catch</span><span>((</span><span style="color:#f29718;">error</span><span>) </span><span style="color:#ff7733;">=&gt; </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#39bae6;">console</span><span style="color:#f29668;">.</span><span style="color:#f07178;">error</span><span>(error)</span><span style="color:#bfbab0cc;">;
+</span><span>    process</span><span style="color:#f29668;">.</span><span style="color:#f07178;">exit</span><span>(</span><span style="color:#f29718;">1</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>})</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<blockquote>
+<p>You might want to remove <code>console.log()</code> before you deploy. And then run this deploy script with:</p>
+</blockquote>
+<p>{% tabs %}
+{% tab title=&quot;terminal&quot; %}</p>
+<pre data-lang="javascript" style="background-color:#0f1419;color:#bfbab0;" class="language-javascript "><code class="language-javascript" data-lang="javascript"><span>npx hardhat run scripts</span><span style="color:#f29668;">/</span><span>deploy</span><span style="color:#f29668;">.</span><span>js
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>Boom! Now your NFT contract is deployed to the local network.</p>
+<p><img src="https://static.slab.com/prod/uploads/9yelyblh/posts/images/ylQ7Iz4lIlXwvjefoUBsRn9T.png" alt="" /></p>
+<p>You can target any network configured in the <code>hardhat.config.js</code> depending on your needs. You can find more about configuration <a href="https://hardhat.org/config/">here</a>.</p>
+<h2 id="hardhat-configuration-file">Hardhat Configuration File</h2>
+<p>We need to modify our Hardhat configuration file so we can compile and deploy contracts into the Edgeware ecosystem. If you have not yet done so, connect your MetaMask Account to our ecosystem and fund it with the <a href="https://discord.gg/yBDq3FJat9">automated faucet bot on discord</a>. We will use the private key of the account created to deploy the contract. If you don’t know the private key, you can export it from MetaMask.</p>
+<p>Next, we import the private key that we've retrieved from MetaMask and store it in a <code>.json</code> file. This file should be created under the root directory, and named <code>private.json</code>. Because this key is highly sensitive information, it's very important that we are not revealing any information when deploying. To ensure this, we want to create a <code>.gitignore</code> file under our root directory. Then, you can ignore any files by using the format: <code>.filename</code> or any directories by using: <code>directory/</code>. In our case, we are trying to ignore our private key file so it should look like this:Add a caption</p>
+<p><img src="https://static.slab.com/prod/uploads/9yelyblh/posts/images/qYc7URDZvRQQOI3CbLlhSPNC.png" alt="" /></p>
+<p>The private.json file must contain a privateKey entry, for example:</p>
+<p>{% tabs %}
+{% tab title=&quot;private.json&quot; %}</p>
+<pre data-lang="typescript" style="background-color:#0f1419;color:#bfbab0;" class="language-typescript "><code class="language-typescript" data-lang="typescript"><span>{
+</span><span>  </span><span style="color:#c2d94c;">&quot;privateKey&quot;</span><span>: </span><span style="color:#c2d94c;">&quot;YOUR-PRIVATE-KEY-HERE&quot;
+</span><span>}
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>Inside the <code>module.exports</code>, we need to provide the Solidity version (<code>0.8.1</code> according to our contract file), and the network details. Here, we are using test-net (Beresheet) network for the following example :</p>
+<ul>
+<li>Network name: Beresheet</li>
+<li>RPC URL: <a href="https://beresheet2.edgewa.re/evm">https://beresheet2.edgewa.re/evm</a> (Alternatively, one can use <a href="https://beresheetx.edgewa.re/evm">https://beresheetX.edgewa.re/evm</a> where X can be any number from 1 to 8.)</li>
+<li>Chain ID: 2022</li>
+</ul>
+<p>If you want to deploy to a local Edgeware development node, you can use the following network details:</p>
+<ul>
+<li>Network name: dev</li>
+<li>RPC URL: <a href="http://localhost:9933">http://localhost:9933/</a></li>
+<li>Chain ID: 2021</li>
+</ul>
+<p>If you want to deploy on the Edgeware mainnet, you can use the following network details:</p>
+<ul>
+<li>Network name: Edgeware</li>
+<li>RPC URL: <a href="https://mainnet2.edgewa.re/evm">https://mainnet2.edgewa.re/evm</a> (Alternatively, one can use <a href="https://mainnetx.edgewa.re/evm">https://mainnetX.edgewa.re/evm</a> where X can be any number from 1 to 20.)</li>
+<li>Chain ID: 2021</li>
+</ul>
+<p>The Hardhat configuration file should look like this:</p>
+<p>{% tabs %}
+{% tab title=&quot;hardhat.config.js&quot; %}</p>
+<pre data-lang="typescript" style="background-color:#0f1419;color:#bfbab0;" class="language-typescript "><code class="language-typescript" data-lang="typescript"><span style="font-style:italic;color:#5c6773;">// ethers plugin required to interact with the contract
+</span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;@nomiclabs/hardhat-ethers&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#5c6773;">// private key from the pre-funded Beresheet testing account
+</span><span style="color:#ff7733;">const </span><span>{ privateKey } </span><span style="color:#f29668;">= </span><span style="color:#f07178;">require</span><span>(</span><span style="color:#c2d94c;">&#39;./private.json&#39;</span><span>)</span><span style="color:#bfbab0cc;">;
+</span><span>
+</span><span style="font-style:italic;color:#39bae6;">module</span><span style="color:#f29668;">.</span><span style="font-style:italic;color:#39bae6;">exports </span><span style="color:#f29668;">= </span><span>{
+</span><span>  </span><span style="font-style:italic;color:#5c6773;">// latest Solidity version
+</span><span>  solidity</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">&quot;0.8.1&quot;</span><span style="color:#bfbab0cc;">,
+</span><span>
+</span><span>  networks</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>    </span><span style="font-style:italic;color:#5c6773;">// Beresheet network specification
+</span><span>    Beresheet</span><span style="color:#bfbab0cc;">: </span><span>{
+</span><span>      url</span><span style="color:#bfbab0cc;">: </span><span style="color:#c2d94c;">`https://beresheet2.edgewa.re/evm`</span><span style="color:#bfbab0cc;">,
+</span><span>      chainId</span><span style="color:#bfbab0cc;">: </span><span style="color:#f29718;">2022</span><span style="color:#bfbab0cc;">,
+</span><span>      accounts</span><span style="color:#bfbab0cc;">: </span><span>[privateKey]
+</span><span>    }
+</span><span>  }
+</span><span>}</span><span style="color:#bfbab0cc;">;
+</span></code></pre>
+<p>{% endtab %}
+{% endtabs %}</p>
+<p>Great! We are now ready for deployment.</p>
+<p>Hardhat has some other cool features like helpful <a href="https://hardhat.org/hardhat-network/#solidity-stack-traces">stack trace</a>, support for <a href="https://hardhat.org/guides/compile-contracts.html#multiple-solidity-versions">multiple Solidity compiler versions</a>, robust <a href="https://hardhat.org/hardhat-network/guides/mainnet-forking.html#mainnet-forking">Mainnet forking</a>, great <a href="https://hardhat.org/guides/typescript.html#typescript-support">TypeScript support</a>, and contract verification in Ether scan.</p>
+
+
+
+
+
+
+
+
+
+
+<script src="https://giscus.app/client.js"
+    data-repo="dudochkin-victor&#x2F;dudochkin-victor.github.io"
+    data-repo-id="MDEwOlJlcG9zaXRvcnkzNzgwNTYx"
+    data-category="General"
+    data-category-id="DIC_kwDOADmv0c4CAhvj"
+    data-mapping="pathname"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-theme="light"
+    data-lang="en"
+    crossorigin="anonymous"
+    async>
+</script>
+
+
+
+        </div>
+
+        
+        
+    </main>
+
+    
+    <footer>
+        <small class="subtext">
+            <a href="https://angular-rust.github.io">Dudochkin Victor</a> © 2021
+        </small>
+    </footer>
+    
+</body>
+<script>
+    function highlightNav(heading) {
+        let pathname = location.pathname;
+        document.querySelectorAll(".toc a").forEach((item) => {
+            item.classList.remove("active");
+        });
+        document.querySelector(".toc a[href$='" + pathname + "#" + heading + "']").classList.add("active");
+    }
+
+    let currentHeading = "";
+    window.onscroll = function () {
+        let h = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        let elementArr = [];
+
+        h.forEach(item => {
+            if (item.id !== "") {
+                elementArr[item.id] = item.getBoundingClientRect().top;
+            }
+        });
+        elementArr.sort();
+        for (let key in elementArr) {
+            if (!elementArr.hasOwnProperty(key)) {
+                continue;
+            }
+            if (elementArr[key] > 0 && elementArr[key] < 300) {
+                if (currentHeading !== key) {
+                    highlightNav(key);
+                    currentHeading = key;
+                }
+                break;
+            }
+        }
+    }
+</script>
+
+</html>
